@@ -1,0 +1,85 @@
+name: etm_crm
+description: A new Flutter project.
+publish_to: 'none' 
+version: 3.0.1+1
+
+environment:
+  sdk: ">=2.18.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  flutter_native_splash: ^2.1.6
+  cached_network_image: ^3.2.3
+  cached_network_svg_image: 
+  animated_snack_bar: ^0.3.0
+
+  # keyboard_actions: 4.1.0
+  money_formatter: 
+  cupertino_icons: ^1.0.2
+  overlay_support: ^2.0.1
+  image_picker: ^0.8.6+1
+  flutter_svg: ^1.1.1+1
+  internet_file: ^1.2.0
+  fluttertoast: ^8.2.1
+  share_plus: ^6.3.2
+  shimmer: ^3.0.0
+  path_provider: 
+  sizer: ^2.0.15
+  modal_bottom_sheet: ^2.1.2
+  intl:
+
+  # Navigation
+  routemaster: ^1.0.1
+
+  # State managemant
+  provider: ^6.0.3
+
+  # DB
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+
+  # Network
+  dio: ^4.0.6
+  json_annotation: ^4.8.0
+  dart_pusher_channels: ^1.1.0
+
+  sliver_tools: ^0.2.10
+  animate_do: ^3.0.2
+  url_launcher: ^6.1.11
+  scrollable_positioned_list: ^0.3.8
+  flutter_masked_text2: ^0.9.1
+  just_the_tooltip: ^0.0.12
+  
+flutter_native_splash:
+  color: "#FFFFFF"
+  fullscreen: true
+  android: true
+  ios: true
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.1
+  json_serializable: ^6.3.1
+  build_runner: ^2.2.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/vectors/
+    - assets/animations/
+
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins/Poppins-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Poppins/Poppins-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Poppins/Poppins-Bold.ttf
+          weight: 600
+
