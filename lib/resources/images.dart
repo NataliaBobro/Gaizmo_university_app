@@ -5,5 +5,6 @@ class Images {
 
   static const String loader = 'assets/images/loader.png';
   static const String testAva = 'assets/images/test-ava.png';
+  static const String teacher = 'assets/images/teacher.png';
 
 }

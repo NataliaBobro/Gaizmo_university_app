@@ -87,7 +87,7 @@ class _AuthSignUpSchoolState extends State<AuthSignUpSchool> {
                       ),
                       AuthInput(
                         controller: state.email,
-                        title: 'E-mail adress',
+                        title: 'E-mail address',
                         errors: state.validateError?.errors.emailErrors?.first,
                       ),
                       AuthInput(
@@ -187,7 +187,7 @@ class _AuthSignUpSchoolState extends State<AuthSignUpSchool> {
                       const SizedBox(
                         height: 40,
                       ),
-                      AuthButton(
+                      AppButton(
                         title: 'Sign up',
                         onPressed: () {
                           if(!state.isLoading) {

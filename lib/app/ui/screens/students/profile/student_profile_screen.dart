@@ -9,16 +9,16 @@ import 'package:provider/provider.dart';
 import '../../../theme/text_styles.dart';
 
 
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({
+class StudentProfileScreen extends StatefulWidget {
+  const StudentProfileScreen({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
+  State<StudentProfileScreen> createState() => _StudentProfileScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMixin{
+class _StudentProfileScreenState extends State<StudentProfileScreen> with TickerProviderStateMixin{
   late int isActiveTab = 0;
   late TabController _tabController;
 

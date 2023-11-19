@@ -44,6 +44,41 @@ class AuthService {
     return UserDataWithToken.fromJson(data['data']);
   }
 
+  static Future<UserDataWithToken?> registerTeacher(
+      int? selectLang,
+      int? userType,
+      String? firstName,
+      String? lastName,
+      String? surname,
+      int? gender,
+      String? dateBirth,
+      String? phone,
+      String? email,
+      String? password,
+      String? passwordConfirmation,
+      bool? privacy,
+      ) async {
+    final response = await ApiClient().dio.post(
+          '/auth/register/teacher',
+          data: {
+            "language_id": selectLang,
+            "user_type": userType,
+            "first_name": firstName,
+            "last_name": lastName,
+            "surname": surname,
+            "gender": gender,
+            "date_birth": dateBirth,
+            "phone": phone,
+            "email": email,
+            "password": password,
+            "password_confirmation": passwordConfirmation,
+            "privacy": privacy,
+          }
+        );
+    final data = response.data as Map<String, dynamic>;
+    return UserDataWithToken.fromJson(data['data']);
+  }
+
   static Future<UserDataWithToken?> registerSchool(
       int? selectLang,
       int? userType,

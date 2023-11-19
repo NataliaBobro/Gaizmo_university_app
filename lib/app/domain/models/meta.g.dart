@@ -26,6 +26,12 @@ MetaAppData _$MetaAppDataFromJson(Map<String, dynamic> json) => MetaAppData(
       categorySchool: (json['category_school'] as List<dynamic>?)
           ?.map((e) => SchoolCategory.fromJson(e as Map<String, dynamic>))
           .toList(),
+      teacher: (json['teacher'] as List<dynamic>?)
+          ?.map((e) => UserData.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      currency: (json['currency'] as List<dynamic>?)
+          ?.map((e) => Currency.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$MetaAppDataToJson(MetaAppData instance) =>
@@ -33,6 +39,8 @@ Map<String, dynamic> _$MetaAppDataToJson(MetaAppData instance) =>
       'genders': instance.genders,
       'language': instance.language,
       'category_school': instance.categorySchool,
+      'teacher': instance.teacher,
+      'currency': instance.currency,
     };
 
 Gender _$GenderFromJson(Map<String, dynamic> json) => Gender(
@@ -55,6 +63,18 @@ Language _$LanguageFromJson(Map<String, dynamic> json) => Language(
 Map<String, dynamic> _$LanguageToJson(Language instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
+    };
+
+Currency _$CurrencyFromJson(Map<String, dynamic> json) => Currency(
+      id: json['id'] as int,
+      name: json['name'] as String,
+      symbol: json['symbol'] as String?,
+    );
+
+Map<String, dynamic> _$CurrencyToJson(Currency instance) => <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'symbol': instance.symbol,
     };
 
 SchoolCategory _$SchoolCategoryFromJson(Map<String, dynamic> json) =>
@@ -137,6 +157,9 @@ Errors _$ErrorsFromJson(Map<String, dynamic> json) => Errors(
           (json['street'] as List<dynamic>?)?.map((e) => e as String).toList(),
       house:
           (json['house'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      name: (json['name'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      color:
+          (json['color'] as List<dynamic>?)?.map((e) => e as String).toList(),
     )..privacyErrors =
         (json['privacy'] as List<dynamic>?)?.map((e) => e as String).toList();
 
@@ -161,6 +184,8 @@ Map<String, dynamic> _$ErrorsToJson(Errors instance) => <String, dynamic>{
       'school_name': instance.schoolName,
       'street': instance.street,
       'house': instance.house,
+      'name': instance.name,
+      'color': instance.color,
     };
 
 CountryList _$CountryListFromJson(Map<String, dynamic> json) => CountryList(

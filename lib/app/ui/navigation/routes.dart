@@ -1,12 +1,20 @@
+import 'package:etm_crm/app/domain/states/school/school_schedule_state.dart';
+import 'package:etm_crm/app/domain/states/school/school_services_state.dart';
+import 'package:etm_crm/app/ui/screens/auth/widgets/auth_select_login_type.dart';
+import 'package:etm_crm/app/ui/screens/school/profile/school_profile_screen.dart';
+import 'package:etm_crm/app/ui/screens/school/schedule/school_schedule_screen.dart';
+import 'package:etm_crm/app/ui/screens/school/service/school_service_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:routemaster/routemaster.dart' as routemaster;
 import '../../../resources/resources.dart';
 import '../../domain/states/auth_state.dart';
-import '../../domain/states/home_state.dart';
-import '../screens/auth/widgets/auth_select_language_screen.dart';
-import '../screens/students/profile/profile_screen.dart';
+import '../../domain/states/school/school_profile_state.dart';
+import '../../domain/states/student/student_home_state.dart';
+import '../../domain/states/teacher/teacher_home_state.dart';
 import '../screens/splash/splash_screen.dart';
-import '../screens/students/tabbar/tabbar_screen.dart';
+import '../screens/students/profile/student_profile_screen.dart';
+import '../screens/tabbar/tabbar_screen.dart';
+import '../screens/teacher/teacher_profile_screen.dart';
 import 'transition_page.dart';
 
 const _splash = '/';
@@ -16,6 +24,8 @@ const _login = '/login';
 const _register = '/register';
 const _auth = '/auth';
 const _home = '/home';
+const _services = '/services';
+const _schedule = '/schedule';
 
 abstract class AppRoutes {
   static String get tabbar => _tabbar;
@@ -24,6 +34,8 @@ abstract class AppRoutes {
   static String get auth => _auth;
   static String get register => _register;
   static String get home => _home;
+  static String get services => _services;
+  static String get schedule => _schedule;
 }
 
 final splashMap = routemaster.RouteMap(
@@ -39,25 +51,13 @@ final splashMap = routemaster.RouteMap(
 final loggedOutMap = routemaster.RouteMap(
   onUnknownRoute: (_) => const routemaster.Redirect(_auth),
   routes: {
-    // _login: (_) => TransitionPage(
-    //   child: ChangeNotifierProvider(
-    //     create: (context) => AuthState(context),
-    //     child: const LoginScreen(),
-    //   ),
-    // ),
     _auth: (_) => TransitionPage(
       child: ChangeNotifierProvider(
         create: (context) => AuthState(context),
-        child: const AuthSelectLanguageScreen(),
+        child: const AuthSelectLoginType(),
       ),
       popTransition: PageTransition.fadeUpwards,
     ),
-    // _register: (_) => TransitionPage(
-    //   child: ChangeNotifierProvider(
-    //     create: (context) => AuthState(context),
-    //     child: const RegisterScreen(),
-    //   ),
-    // ),
   },
 );
 
@@ -65,33 +65,76 @@ final loggedSchoolInMap = routemaster.RouteMap(
   onUnknownRoute: (_) => const routemaster.Redirect(_tabbar),
   routes: {
     _tabbar: (info) => routemaster.TabPage(
-      paths: const [_home, _home, _home, _home],
+      paths: const [_home, _services, _schedule, _home, _home],
       child: MultiProvider(
         providers: [
           ChangeNotifierProvider(
-            create: (context) => HomeState(context),
+            create: (context) => SchoolProfileState(context),
           ),
         ],
         child: const TabBarScreen(
             icons: [
-              {'icon': Svgs.profile, 'name': 'Profile'},
+              {'icon': Svgs.homeIcon, 'name': 'Profile'},
+              {'icon': Svgs.service, 'name': 'Services'},
               {'icon': Svgs.schedule, 'name': 'Schedule'},
-              {'icon': Svgs.school, 'name': 'Schools'},
-              {'icon': Svgs.myRes, 'name': 'My results'},
+              {'icon': Svgs.profile, 'name': 'Staff'},
+              {'icon': Svgs.statistics, 'name': 'Statistics'},
             ]
         ),
       ),
     ),
     _home: (_) => TransitionPage(
       child: ChangeNotifierProvider(
-        create: (context) => HomeState(context),
-        child: const ProfileScreen(),
+        create: (context) => SchoolProfileState(context),
+        child: const SchoolProfileScreen(),
+      ),
+    ),
+    _services: (_) => TransitionPage(
+      child: ChangeNotifierProvider(
+        create: (context) => SchoolServicesState(context),
+        child: const SchoolServicesScreen(),
+      ),
+    ),
+    _schedule: (_) => TransitionPage(
+      child: ChangeNotifierProvider(
+        create: (context) => SchoolScheduleState(context),
+        child: const SchoolScheduleScreen(),
       ),
     ),
   },
 );
 
 
+
+final loggedTeacherInMap = routemaster.RouteMap(
+  onUnknownRoute: (_) => const routemaster.Redirect(_tabbar),
+  routes: {
+    _tabbar: (info) => routemaster.TabPage(
+          paths: const [_home, _home, _home, _home],
+          child: MultiProvider(
+            providers: [
+              ChangeNotifierProvider(
+                create: (context) => TeacherHomeState(context),
+              ),
+            ],
+            child: const TabBarScreen(
+              icons: [
+                {'icon': Svgs.profile, 'name': 'Profile'},
+                {'icon': Svgs.schedule, 'name': 'Schedule'},
+                {'icon': Svgs.school, 'name': 'Schools'},
+                {'icon': Svgs.myRes, 'name': 'Results'},
+              ]
+            ),
+          ),
+        ),
+    _home: (_) => TransitionPage(
+      child: ChangeNotifierProvider(
+        create: (context) => TeacherHomeState(context),
+        child: const TeacherProfileScreen(),
+      ),
+    ),
+  },
+);
 
 final loggedStudentInMap = routemaster.RouteMap(
   onUnknownRoute: (_) => const routemaster.Redirect(_tabbar),
@@ -101,7 +144,7 @@ final loggedStudentInMap = routemaster.RouteMap(
           child: MultiProvider(
             providers: [
               ChangeNotifierProvider(
-                create: (context) => HomeState(context),
+                create: (context) => StudentHomeState(context),
               ),
             ],
             child: const TabBarScreen(
@@ -116,8 +159,8 @@ final loggedStudentInMap = routemaster.RouteMap(
         ),
     _home: (_) => TransitionPage(
       child: ChangeNotifierProvider(
-        create: (context) => HomeState(context),
-        child: const ProfileScreen(),
+        create: (context) => StudentHomeState(context),
+        child: const StudentProfileScreen(),
       ),
     ),
   },

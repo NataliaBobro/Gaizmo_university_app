@@ -15,7 +15,7 @@ import 'package:sizer/sizer.dart';
 import '../../app.dart';
 import '../../ui/screens/auth/auth_sign_in.dart';
 import '../../ui/screens/auth/auth_sign_up_student.dart';
-import '../../ui/screens/auth/widgets/auth_select_language_screen.dart';
+import '../../ui/screens/auth/auth_sign_up_teacher.dart';
 import '../../ui/screens/auth/widgets/auth_select_login_type.dart';
 import '../../ui/screens/auth/widgets/auth_select_user_type.dart';
 import '../../ui/utils/show_message.dart';
@@ -135,9 +135,6 @@ class AuthState with ChangeNotifier {
     _selectLang = index;
     routemaster.pop();
     notifyListeners();
-    pageOpen(
-        const AuthSelectType()
-    );
   }
 
   void changeGander(index) {
@@ -155,18 +152,20 @@ class AuthState with ChangeNotifier {
     notifyListeners();
   }
 
-  // 1 - Student
-  // 2 - School
-  // 3 - Teacher
+  // 1 - School
+  // 2 - Teacher
+  // 3 - Student
   // 4 - Parent
   Future<void> changeUserType(value) async {
     _userType = value;
     notifyListeners();
-    await context.read<AppState>().getMeta(_selectLang);
+    await context.read<AppState>().getMeta(_selectLang + 1);
     if(value == 1){
-      openSignUpStudent();
-    }else if(value == 2){
       openSignUpSchool();
+    }else if(value == 2){
+      openSignUpTeacher();
+    }else if(value == 3){
+      openSignUpStudent();
     }
   }
 
@@ -232,6 +231,12 @@ class AuthState with ChangeNotifier {
   void openSignUpSchool() {
     pageOpen(
       const AuthSignUpSchool()
+    );
+  }
+
+  void openSignUpTeacher() {
+    pageOpen(
+      const AuthSignUpTeacher()
     );
   }
 
@@ -358,6 +363,8 @@ class AuthState with ChangeNotifier {
       signUpStudent();
     }else if(type == 'school'){
       signUpSchool();
+    } else if(type == 'teacher') {
+      signUpTeacher();
     }
   }
 
@@ -367,7 +374,7 @@ class AuthState with ChangeNotifier {
     notifyListeners();
     try {
       final result = await AuthService.registerStudent(
-          _selectLang,
+          _selectLang + 1,
           _userType,
           _firstName.text,
           _lastName.text,
@@ -381,6 +388,44 @@ class AuthState with ChangeNotifier {
           _controllerNumberCart.text,
           _controllerDateCart.text,
           _controllerCodeCart.text,
+          _isActivePrivacy
+      );
+
+      if(result != null){
+        setToken(result.token, result.user);
+      }
+    } on DioError catch (e) {
+      if(e.response?.statusCode == 422){
+        final data = e.response?.data as Map<String, dynamic>;
+        _validateError = ValidateError.fromJson(data);
+        showMessage('${_validateError?.message}', color: const Color(0xFFFFC700));
+      }else{
+        showMessage(e.message.isEmpty ? e.toString() : e.message);
+      }
+    } catch (e) {
+      showErrorSnackBar(title: 'App request error');
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<void> signUpTeacher() async {
+    _isLoading = true;
+    notifyListeners();
+    try {
+      final result = await AuthService.registerTeacher(
+          _selectLang + 1,
+          _userType,
+          _firstName.text,
+          _lastName.text,
+          _surname.text,
+          _gender,
+          _birthDate,
+          _phone.text,
+          _email.text,
+          _password.text,
+          _confirmPassword.text,
           _isActivePrivacy
       );
 
@@ -439,7 +484,7 @@ class AuthState with ChangeNotifier {
     notifyListeners();
     try {
       final result = await AuthService.registerSchool(
-          _selectLang,
+          _selectLang + 1,
           _userType,
           _phone.text,
           _email.text,

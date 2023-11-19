@@ -1,3 +1,4 @@
+import 'package:etm_crm/app/domain/models/user.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'meta.g.dart';
@@ -22,11 +23,15 @@ class MetaAppData {
   List<Gender>? genders;
   List<Language>? language;
   List<SchoolCategory>? categorySchool;
+  List<UserData>? teacher;
+  List<Currency>? currency;
 
   MetaAppData({
     required this.genders,
     required this.language,
     required this.categorySchool,
+    required this.teacher,
+    required this.currency,
   });
 
   Map<String, dynamic> toJson() => _$MetaAppDataToJson(this);
@@ -64,6 +69,23 @@ class Language {
   Map<String, dynamic> toJson() => _$LanguageToJson(this);
 
   factory Language.fromJson(Map<String, dynamic> json) => _$LanguageFromJson(json);
+}
+
+@JsonSerializable(includeIfNull: true, fieldRename: FieldRename.snake)
+class Currency {
+  int id;
+  String name;
+  String? symbol;
+
+  Currency({
+    required this.id,
+    required this.name,
+    required this.symbol,
+  });
+
+  Map<String, dynamic> toJson() => _$CurrencyToJson(this);
+
+  factory Currency.fromJson(Map<String, dynamic> json) => _$CurrencyFromJson(json);
 }
 
 @JsonSerializable(includeIfNull: true, fieldRename: FieldRename.snake)
@@ -168,6 +190,12 @@ class Errors {
   @JsonKey(name: 'house')
   List<String>? house;
 
+  @JsonKey(name: 'name')
+  List<String>? name;
+
+  @JsonKey(name: 'color')
+  List<String>? color;
+
   Errors({
     this.userTypeErrors,
     this.firstNameErrors,
@@ -188,6 +216,8 @@ class Errors {
     this.schoolName,
     this.street,
     this.house,
+    this.name,
+    this.color,
   });
 
   factory Errors.fromJson(Map<String, dynamic> json) => _$ErrorsFromJson(json);

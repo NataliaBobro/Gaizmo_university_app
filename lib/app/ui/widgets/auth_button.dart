@@ -3,8 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class AuthButton extends StatefulWidget {
-  const AuthButton({
+class AppButton extends StatefulWidget {
+  const AppButton({
     Key? key,
     required this.title,
     required this.onPressed,
@@ -19,10 +19,10 @@ class AuthButton extends StatefulWidget {
 
 
   @override
-  State<AuthButton> createState() => _AuthButtonState();
+  State<AppButton> createState() => _AppButtonState();
 }
 
-class _AuthButtonState extends State<AuthButton> {
+class _AppButtonState extends State<AppButton> {
   @override
   Widget build(BuildContext context) {
     return Padding(

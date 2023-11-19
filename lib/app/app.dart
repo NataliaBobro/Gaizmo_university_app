@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
+import 'package:etm_crm/app/domain/services/user_service.dart';
 import 'package:etm_crm/app/ui/utils/show_message.dart';
 import 'package:etm_crm/app/ui/widgets/snackbars.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
@@ -31,20 +33,30 @@ class AppState extends ChangeNotifier {
   MetaAppData? _metaAppData;
   RouteMap _currentRoute = splashMap;
   UserData? _userData;
+  BuildContext context;
 
-  AppState() {
+  AppState(this.context) {
     _isLoggedIn = token != null && token != '';
-    if(_isLoggedIn){
-      onChangeRoute();
-    }
+    Future.microtask(() async {
+      if(_isLoggedIn){
+        if(_userData == null){
+         await _getUser();
+        }
+        onChangeRoute();
+      }
+    });
   }
 
   bool get isLoggedIn => _isLoggedIn;
   RouteMap get currentRoute => _currentRoute;
   MetaAppData? get metaAppData => _metaAppData;
+  UserData? get userData => _userData;
 
   Future<void> changeLogInState(bool value) async {
     _isLoggedIn = value;
+    if(value == true){
+      _getUser();
+    }
     onChangeRoute();
     notifyListeners();
   }
@@ -52,6 +64,21 @@ class AppState extends ChangeNotifier {
   Future<void> setUser(UserData user) async {
     _userData = user;
     notifyListeners();
+  }
+
+  Future<void> _getUser() async {
+    try {
+      final result = await UserService.getUser(context);
+      if(result != null){
+        _userData = result;
+      }
+    } on DioError catch (e) {
+      showMessage(e.message.isEmpty ? e.toString() : e.message);
+    } catch (e) {
+      showErrorSnackBar(title: 'App request error');
+    } finally {
+      notifyListeners();
+    }
   }
 
   Future<void> getMeta(langId) async {
@@ -73,13 +100,29 @@ class AppState extends ChangeNotifier {
 
   void onChangeRoute({RouteMap? route}) {
     if (route == null) {
-      _currentRoute = _isLoggedIn ? (
-        _userData?.type == 1 ? loggedStudentInMap : loggedStudentInMap
-      ) : loggedOutMap;
+      if(_isLoggedIn){
+        initWhiteTheme();
+        if(_userData?.type == 1){
+          _currentRoute = loggedSchoolInMap;
+        }else if(_userData?.type == 2){
+          _currentRoute = loggedTeacherInMap;
+        }else if(_userData?.type == 3){
+          _currentRoute = loggedStudentInMap;
+        }
+      }else{
+        _currentRoute = loggedOutMap;
+      }
     } else {
       _currentRoute = route;
     }
     notifyListeners();
+  }
+
+  void initWhiteTheme(){
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarBrightness: Brightness.light,
+      statusBarIconBrightness: Brightness.dark,
+    ));
   }
 
 
@@ -101,7 +144,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => AppState(),
+      create: (context) => AppState(context),
       child: Sizer(
         builder: (context, orientaition, child) => OverlaySupport.global(
           child: MaterialApp.router(

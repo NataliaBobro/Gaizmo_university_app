@@ -1,7 +1,7 @@
 name: etm_crm
 description: A new Flutter project.
 publish_to: 'none' 
-version: 3.0.1+1
+version: 1.0.0+1
 
 environment:
   sdk: ">=2.18.0 <3.0.0"
@@ -51,6 +51,7 @@ dependencies:
   scrollable_positioned_list: ^0.3.8
   flutter_masked_text2: ^0.9.1
   just_the_tooltip: ^0.0.12
+  accordion: ^2.6.0
   
 flutter_native_splash:
   color: "#FFFFFF"

@@ -73,8 +73,8 @@ class TabBarScreenState extends State<TabBarScreen> with TickerProviderStateMixi
                       onPressed: () => onTapped(index, pageState),
                       child: SvgPicture.asset(
                         widget.icons[index]['icon']!,
-                        width: 32,
-                        height: 32,
+                        width: 28,
+                        height: 28,
                         fit: BoxFit.contain,
                         color: selectedIndex == index
                             ? const Color(0xFF242424)

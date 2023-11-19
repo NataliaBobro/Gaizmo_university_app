@@ -41,9 +41,19 @@ class _AuthSelectUserTypeState extends State<AuthSelectUserType> {
             ),
             Column(
               children: [
-                AuthButton(
+                AppButton(
                     title: 'I’m student',
                     icon: Svgs.student,
+                    onPressed: () {
+                      read.changeUserType(3);
+                    }
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                AppButton(
+                    title: 'I’m SCHOOL',
+                    icon: Svgs.schoolColor,
                     onPressed: () {
                       read.changeUserType(1);
                     }
@@ -51,19 +61,9 @@ class _AuthSelectUserTypeState extends State<AuthSelectUserType> {
                 const SizedBox(
                   height: 8,
                 ),
-                AuthButton(
-                    title: 'I’m SCHOOL',
-                    icon: Svgs.schoolColor,
-                    onPressed: () {
-                      read.changeUserType(2);
-                    }
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                AuthButton(
-                    title: 'I’m Parent',
-                    icon: Svgs.parent,
+                AppButton(
+                    title: 'I’m Teacher',
+                    icon: Svgs.teacher,
                     onPressed: () {
                       read.changeUserType(2);
                     }

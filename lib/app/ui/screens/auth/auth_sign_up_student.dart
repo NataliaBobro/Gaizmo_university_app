@@ -65,7 +65,7 @@ class _AuthSignUpStudentState extends State<AuthSignUpStudent> {
                     ),
                     AuthInput(
                       controller: state.email,
-                      title: 'E-mail adress',
+                      title: 'E-mail address',
                       errors: state.validateError?.errors.emailErrors?.first,
                     ),
                     AuthInput(
@@ -90,7 +90,7 @@ class _AuthSignUpStudentState extends State<AuthSignUpStudent> {
                     ),
                     AuthInput(
                       controller: state.lastName,
-                      title: 'Last name',
+                      title: 'Middle name',
                       errors: state.validateError?.errors.lastNameErrors?.first,
                     ),
                     AuthInput(
@@ -137,7 +137,7 @@ class _AuthSignUpStudentState extends State<AuthSignUpStudent> {
                     const SizedBox(
                       height: 40,
                     ),
-                    AuthButton(
+                    AppButton(
                       title: 'Sign up',
                       onPressed: () {
                         if(!state.isLoading) {

@@ -73,7 +73,7 @@ class _AuthSignInState extends State<AuthSignIn> {
                 const SizedBox(
                   height: 80,
                 ),
-                AuthButton(
+                AppButton(
                   title: 'Sign in',
                   onPressed: () {
                     if(!state.isLoading) {

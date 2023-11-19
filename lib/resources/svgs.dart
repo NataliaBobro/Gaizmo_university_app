@@ -7,6 +7,9 @@ class Svgs {
   static const String ua = 'assets/vectors/ua.svg';
 
   static const String home = 'assets/vectors/home.svg';
+  static const String homeIcon = 'assets/vectors/home-icon.svg';
+  static const String service = 'assets/vectors/service.svg';
+  static const String statistics = 'assets/vectors/statistics.svg';
   static const String logo = 'assets/vectors/logo.svg';
   static const String openSelect = 'assets/vectors/open-select.svg';
   static const String student = 'assets/vectors/student.svg';
@@ -19,4 +22,13 @@ class Svgs {
   static const String notify = 'assets/vectors/notify.svg';
   static const String heart = 'assets/vectors/heart.svg';
   static const String open = 'assets/vectors/open.svg';
+  static const String share = 'assets/vectors/share.svg';
+  static const String next = 'assets/vectors/next.svg';
+  static const String plus = 'assets/vectors/plus.svg';
+  static const String close = 'assets/vectors/close.svg';
+  static const String search = 'assets/vectors/search.svg';
+  static const String menu = 'assets/vectors/menu.svg';
+  static const String map = 'assets/vectors/map.svg';
+  static const String delete = 'assets/vectors/delete.svg';
+  static const String teacher = 'assets/vectors/teacher.svg';
 }
