@@ -1,5 +1,7 @@
+import 'package:etm_crm/app/domain/states/auth_state.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../theme/text_styles.dart';
 
@@ -11,7 +13,7 @@ class AlreadyAccount extends StatelessWidget {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-          text: 'Already  have an account ? ',
+          text: 'Already  have an account? ',
           style: TextStyles.s14w600.copyWith(
               color: Colors.white
           ),
@@ -23,7 +25,7 @@ class AlreadyAccount extends StatelessWidget {
               ),
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
-
+                  context.read<AuthState>().openSignIn();
                 },
             )
           ]

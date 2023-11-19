@@ -103,11 +103,11 @@ class _AuthSignUpSchoolState extends State<AuthSignUpSchool> {
                         isBottomPadding: false,
                       ),
                       const AuthTitle(
-                        title: 'School info',
+                        title: 'School information',
                       ),
                       AuthInput(
                         controller: state.schoolName,
-                        title: 'Name of school',
+                        title: 'Name of the school',
                         errors: state.validateError?.errors.schoolName?.first,
                       ),
                       SelectInputSearch(

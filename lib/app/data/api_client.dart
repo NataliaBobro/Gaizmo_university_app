@@ -3,8 +3,8 @@ import 'package:dio/dio.dart';
 import 'app_interceptor.dart';
 
 class ApiClient {
-  // static const _baseUrl = 'https://etm-api.lux-center.com.ua/api/v1';
-  static const _baseUrl = 'http://localhost:8888/api/v1';
+  static const _baseUrl = 'https://etm-api.lux-center.com.ua/api/v1';
+  // static const _baseUrl = 'http://localhost:8888/api/v1';
 
   final dio = createDio();
 
@@ -13,7 +13,8 @@ class ApiClient {
       BaseOptions(
         baseUrl: _baseUrl,
         headers: {
-            'Accept' : "application/json"
+            'Accept' : "application/json",
+            'Content-Type' : "application/json",
         }
       ),
     );

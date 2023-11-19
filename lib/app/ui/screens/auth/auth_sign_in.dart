@@ -1,5 +1,6 @@
 import 'package:etm_crm/app/domain/states/auth_state.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -99,7 +100,11 @@ class _AuthSignInState extends State<AuthSignIn> {
                               text: 'Get started!',
                               style: TextStyles.s14w600.copyWith(
                                   color: const Color(0xFFFFC700)
-                              )
+                              ),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  context.read<AuthState>().openSelectUserType();
+                              },
                           )
                         ]
                     ),

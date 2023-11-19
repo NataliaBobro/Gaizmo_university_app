@@ -74,6 +74,7 @@ class AppState extends ChangeNotifier {
       }
     } on DioError catch (e) {
       showMessage(e.message.isEmpty ? e.toString() : e.message);
+      onLogout();
     } catch (e) {
       showErrorSnackBar(title: 'App request error');
     } finally {

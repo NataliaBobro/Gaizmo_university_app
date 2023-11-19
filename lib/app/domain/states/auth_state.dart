@@ -30,7 +30,7 @@ class AuthState with ChangeNotifier {
   ValidateError? _validateError;
   int _selectLang = 0;
   bool get isLoading => _isLoading;
-  final MaskedTextController _phone = MaskedTextController(mask: '+38 (000) 000 00 00');
+  final MaskedTextController _phone = MaskedTextController(mask: '+00 (000) 000 00 00', text: '+38 (0');
   final MaskedTextController _controllerNumberCart = MaskedTextController(
         mask: '0000 0000 0000 0000'
   );
@@ -59,6 +59,8 @@ class AuthState with ChangeNotifier {
   List<dynamic>? _countryList;
   List<dynamic>? _cityList;
 
+  final _phoneFocus = FocusNode();
+
   AuthState(this.context);
 
   ValidateError? get validateError => _validateError;
@@ -78,6 +80,7 @@ class AuthState with ChangeNotifier {
   TextEditingController get controllerNumberCart => _controllerNumberCart;
   TextEditingController get controllerDateCart => _controllerDateCart;
   TextEditingController get controllerCodeCart => _controllerCodeCart;
+  FocusNode get phoneFocus => _phoneFocus;
   int get gender => _gender;
   int get userType => _userType;
   bool get loadingSearch => _loadingSearch;
@@ -282,11 +285,11 @@ class AuthState with ChangeNotifier {
       },
       {
         "name": "Deutsch",
-        "icon": Svgs.en
+        "icon": Svgs.de
       },
       {
         "name": "Español",
-        "icon": Svgs.en
+        "icon": Svgs.es
       },
     ];
   }

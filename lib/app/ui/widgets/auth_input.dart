@@ -3,7 +3,7 @@ import 'package:sizer/sizer.dart';
 
 import '../theme/text_styles.dart';
 
-class AuthInput extends StatelessWidget {
+class AuthInput extends StatefulWidget {
   const AuthInput({
     Key? key,
     required this.title,
@@ -26,6 +26,11 @@ class AuthInput extends StatelessWidget {
   final Widget? bottomLeftWidget;
 
   @override
+  State<AuthInput> createState() => _AuthInputState();
+}
+
+class _AuthInputState extends State<AuthInput> {
+  @override
   Widget build(BuildContext context) {
     final border = OutlineInputBorder(
       borderSide: const BorderSide(
@@ -41,7 +46,7 @@ class AuthInput extends StatelessWidget {
       ),
       alignment: Alignment.centerRight,
       child: Text(
-        '$errors',
+        '${widget.errors}',
         style: TextStyles.s12w400.copyWith(
             color: const Color(0xFFFFC700)
         ),
@@ -52,24 +57,21 @@ class AuthInput extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          title,
+          widget.title,
           style: TextStyles.s14w400.copyWith(
               color: const Color(0xFF848484)
           ),
         ),
         TextField(
-          controller: controller,
-          obscureText: isPass,
+          controller: widget.controller,
+          obscureText: widget.isPass,
           style: TextStyles.s16w400.copyWith(
             color: Colors.white,
           ),
-          onChanged: (val) {
-
-          },
           cursorColor: const Color(0xFF1167C3),
           decoration: InputDecoration(
             constraints: BoxConstraints(
-              maxWidth: maxWidth ?? SizerUtil.width
+              maxWidth: widget.maxWidth ?? SizerUtil.width
             ),
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 0,
@@ -82,32 +84,32 @@ class AuthInput extends StatelessWidget {
             border: border,
             errorBorder: border,
             focusedBorder: border,
-            hintText: hintText,
+            hintText: widget.hintText,
             fillColor: Colors.transparent,
           ),
         ),
         Container(
           height: 1,
-          width: maxWidth ?? double.infinity,
-          color: errors == null ? const Color(0xFF848484) : const Color(0xFFFFC700),
+          width: widget.maxWidth ?? double.infinity,
+          color: widget.errors == null ? const Color(0xFF848484) : const Color(0xFFFFC700),
         ),
-        if(bottomLeftWidget != null) ...[
+        if(widget.bottomLeftWidget != null) ...[
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              bottomLeftWidget!,
-              if(errors != null) ...[
+              widget.bottomLeftWidget!,
+              if(widget.errors != null) ...[
                 errorText,
               ],
             ],
           ),
 
         ] else ...[
-          if(errors != null) ...[
+          if(widget.errors != null) ...[
             errorText,
           ],
         ],
-        if(isBottomPadding) ...[
+        if(widget.isBottomPadding) ...[
           const SizedBox(
             height: 24,
           )

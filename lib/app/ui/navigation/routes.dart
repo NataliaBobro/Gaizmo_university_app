@@ -1,5 +1,6 @@
 import 'package:etm_crm/app/domain/states/school/school_schedule_state.dart';
 import 'package:etm_crm/app/domain/states/school/school_services_state.dart';
+import 'package:etm_crm/app/ui/screens/auth/auth_sign_in.dart';
 import 'package:etm_crm/app/ui/screens/auth/widgets/auth_select_login_type.dart';
 import 'package:etm_crm/app/ui/screens/school/profile/school_profile_screen.dart';
 import 'package:etm_crm/app/ui/screens/school/schedule/school_schedule_screen.dart';
@@ -58,6 +59,13 @@ final loggedOutMap = routemaster.RouteMap(
       ),
       popTransition: PageTransition.fadeUpwards,
     ),
+    _login: (_) => TransitionPage(
+      child: ChangeNotifierProvider(
+        create: (context) => AuthState(context),
+        child: const AuthSignIn(),
+      ),
+      popTransition: PageTransition.fadeUpwards,
+    )
   },
 );
 

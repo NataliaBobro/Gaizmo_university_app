@@ -110,10 +110,13 @@ class _SelectLangButtonState extends State<SelectLangButton> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SvgPicture.asset(
-                  '${state.languageList()[state.selectLang]['icon']}',
-                  width: 24,
-                  fit: BoxFit.cover,
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(100),
+                  child: SvgPicture.asset(
+                    '${state.languageList()[state.selectLang]['icon']}',
+                    width: 24,
+                    fit: BoxFit.cover,
+                  ),
                 ),
                 const SizedBox(
                   width: 8,
