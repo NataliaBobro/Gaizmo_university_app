@@ -57,9 +57,9 @@ class _AddCategoryServiceState extends State<AddCategoryService> {
             height: 40,
           ),
           AppButton(
-            title: 'ADD category',
+            title: state.onEditId != null ? 'Edit category' : 'ADD category',
             onPressed: () {
-              state.addCategory();
+              state.addOrEditCategory();
             },
             horizontalPadding: 17.0,
           ),

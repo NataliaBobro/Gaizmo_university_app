@@ -7,12 +7,14 @@ import 'package:etm_crm/app/domain/states/school/school_services_state.dart';
 import 'package:etm_crm/app/ui/screens/school/service/widgets/services_header.dart';
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
 import 'package:etm_crm/app/ui/widgets/empty_widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../../resources/resources.dart';
+import '../../../utils/show_message.dart';
 
 class SchoolServicesScreen extends StatefulWidget {
   const SchoolServicesScreen({Key? key}) : super(key: key);
@@ -22,6 +24,32 @@ class SchoolServicesScreen extends StatefulWidget {
 }
 
 class _SchoolServicesScreenState extends State<SchoolServicesScreen> {
+  bool viewOnDelete = false;
+  dynamic onConfirmDelete;
+
+
+  void changeViewDelete(servicesCategory){
+    setState(() {
+      viewOnDelete = !viewOnDelete;
+      onConfirmDelete = servicesCategory;
+    });
+  }
+
+  Future<void> deleteService() async {
+    viewOnDelete = false;
+    if(onConfirmDelete is ServicesCategory){
+      ServicesCategory category = onConfirmDelete;
+      if((category.services?.length ?? 0) == 0){
+        context.read<SchoolServicesState>().deleteCategory(onConfirmDelete);
+      }else{
+        showMessage('Remove the services first', color: const Color(0xFFFFC700));
+      }
+    }else{
+      context.read<SchoolServicesState>().deleteService(onConfirmDelete);
+    }
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     final state = context.watch<SchoolServicesState>();
@@ -33,20 +61,26 @@ class _SchoolServicesScreenState extends State<SchoolServicesScreen> {
           child: Column(
             children: [
               const ServicesHeader(),
-              if(state.servicesCategory.isNotEmpty || state.allServices.isNotEmpty) ...[
-                Expanded(
-                  child: ListView(
-                    physics: const ClampingScrollPhysics(),
-                    children: [
-                      EmptyWidget(
-                          isEmpty: false,
-                          onPress: () {
-                            state.openAddService();
-                          }
-                      ),
-                      ...List.generate(
-                          state.servicesCategory.length,
-                          (index) => Accordion(
+              Expanded(
+                child: Stack(
+                  children: [
+                    if(state.servicesCategory.isNotEmpty || state.allServices.isNotEmpty) ...[
+                      ListView(
+                        physics: const ClampingScrollPhysics(),
+                        children: [
+                          EmptyWidget(
+                              isEmpty: false,
+                              onPress: () {
+                                state.openAddOrEditService();
+                              }
+                          ),
+                          Accordion(
+                              onDelete: (index) {
+                                changeViewDelete(state.servicesCategory[index]);
+                              },
+                              onEdit: (index) {
+                                state.onEdit(state.servicesCategory[index]);
+                              },
                               paddingListTop: 0.0,
                               disableScrolling: true,
                               headerBorderWidth: 0,
@@ -65,54 +99,178 @@ class _SchoolServicesScreenState extends State<SchoolServicesScreen> {
                               ),
                               sectionOpeningHapticFeedback: SectionHapticFeedback.heavy,
                               sectionClosingHapticFeedback: SectionHapticFeedback.light,
-                              children: [
-                                AccordionSection(
-                                  isOpen: false,
-                                  headerBackgroundColor:
-                                  Color(int.parse('${state.servicesCategory[index].color}')).withOpacity(.6),
-                                  contentVerticalPadding: 4,
-                                  contentBorderWidth: 0,
-                                  contentHorizontalPadding: 0.0,
-                                  contentBackgroundColor: const Color(0xFFF0F3F6),
-                                  header: Text(
-                                    "${index + 1}. ${state.servicesCategory[index].name}",
-                                    style: TextStyles.s14w600.copyWith(
-                                        color: const Color(0xFF242424)
+                              children: List.generate(
+                                  state.servicesCategory.length, (index) =>
+                                  AccordionSection(
+                                    isOpen: false,
+                                    headerBackgroundColor:
+                                    Color(int.parse('${state.servicesCategory[index].color}')).withOpacity(.6),
+                                    contentVerticalPadding: 4,
+                                    contentBorderWidth: 0,
+                                    contentHorizontalPadding: 0.0,
+                                    contentBackgroundColor: const Color(0xFFF0F3F6),
+                                    header: Text(
+                                      "${index + 1}. ${state.servicesCategory[index].name}",
+                                      style: TextStyles.s14w600.copyWith(
+                                          color: const Color(0xFF242424)
+                                      ),
                                     ),
+                                    onDelete: (index) {
+                                      changeViewDelete(
+                                          state.servicesCategory[index]
+                                      );
+                                    },
+                                    onEdit: (service) {
+                                      state.onEdit(service);
+                                    },
+                                    content: ElementCategoryItem(
+                                      onDelete: (service) {
+                                        changeViewDelete(service);
+                                      },
+                                      onEdit: (service) {
+                                        state.onEdit(service);
+                                      },
+                                      isChild: true,
+                                      item: state.servicesCategory[index].services,
+                                      categoryIndex: index,
+                                    ),
+                                  )
+                              )
+                          ),
+                          if(state.allServices.isNotEmpty) ...[
+                            ...List.generate(
+                              state.allServices.length,
+                                  (index) => ElementCategoryItem(
+                                onDelete: (service) {
+                                  changeViewDelete(service);
+                                },
+                                onEdit: (service) {
+                                  state.onEdit(service);
+                                },
+                                item: [state.allServices[index]],
+                                categoryIndex: state.servicesCategory.length + index,
+                              ),
+                            )
+                          ]
+                        ],
+                      )
+                    ] else ...[
+                      EmptyWidget(
+                          title: 'No services yet :(',
+                          subtitle: 'Click the button below to add services!',
+                          isEmpty: state.servicesCategory.isEmpty && !state.isLoading,
+                          onPress: () {
+                            state.openAddOrEditService();
+                          }
+                      )
+                    ],
+                    if(viewOnDelete) ...[
+                      Positioned(
+                        child: GestureDetector(
+                          onTap: () {
+                            changeViewDelete(null);
+                          },
+                          child: Container(
+                            width: SizerUtil.width,
+                            color: Colors.black.withOpacity(.5),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(20)
                                   ),
-                                  content: ElementCategoryItem(
-                                    item: state.servicesCategory[index].services,
-                                    categoryIndex: index,
-                                    margin: false
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 55,
+                                      vertical: 24
+                                  ),
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 53
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      const Text(
+                                        'Are you sure you want\n to delete the service?',
+                                        style: TextStyles.s14w600,
+                                      ),
+                                      const SizedBox(
+                                        height: 20,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          CupertinoButton(
+                                              padding: EdgeInsets.zero,
+                                              minSize: 0.0,
+                                              onPressed: () {
+                                                deleteService();
+                                              },
+                                              child: Container(
+                                                padding: const EdgeInsets.symmetric(
+                                                    horizontal: 18,
+                                                    vertical: 4
+                                                ),
+                                                decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.circular(50),
+                                                    border: Border.all(
+                                                        width: 1,
+                                                        color: const Color(0xFF242424)
+                                                    )
+                                                ),
+                                                child: Text(
+                                                  'YES',
+                                                  style: TextStyles.s12w600.copyWith(
+                                                      color: const Color(0xFF242424)
+                                                  ),
+                                                ),
+                                              )
+                                          ),
+                                          const SizedBox(
+                                            width: 8,
+                                          ),
+                                          CupertinoButton(
+                                              padding: EdgeInsets.zero,
+                                              minSize: 0.0,
+                                              child: Container(
+                                                padding: const EdgeInsets.symmetric(
+                                                    horizontal: 18,
+                                                    vertical: 4
+                                                ),
+                                                decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.circular(50),
+                                                    color: const Color(0xFFFFC700),
+                                                    border: Border.all(
+                                                      width: 1,
+                                                      color: const Color(0xFFFFC700),
+                                                    )
+                                                ),
+                                                child: Text(
+                                                  'NO',
+                                                  style: TextStyles.s12w600.copyWith(
+                                                      color: Colors.white
+                                                  ),
+                                                ),
+                                              ),
+                                              onPressed: () {
+                                                changeViewDelete(null);
+                                              }
+                                          )
+                                        ],
+                                      )
+                                    ],
                                   ),
                                 )
-                              ]
-                          )
-                      ),
-                      if(state.allServices.isNotEmpty) ...[
-                        ...List.generate(
-                          state.allServices.length,
-                          (index) => ElementCategoryItem(
-                            item: [state.allServices[index]],
-                            categoryIndex: state.servicesCategory.length + index,
+                              ],
+                            ),
                           ),
-                        )
-                      ]
-                    ],
-                  ),
-                )
-              ] else ...[
-                Expanded(
-                  child: EmptyWidget(
-                    title: 'No services yet :(',
-                    subtitle: 'Click the button below to add services!',
-                    isEmpty: state.servicesCategory.isEmpty && !state.isLoading,
-                    onPress: () {
-                      state.openAddService();
-                    }
-                  ),
-                )
-              ]
+                        ),
+                      )
+                    ]
+                  ],
+                ),
+              )
             ],
           ),
         ),
@@ -126,13 +284,17 @@ class ElementCategoryItem extends StatefulWidget {
     Key? key,
     required this.item,
     this.categoryIndex,
-    this.margin = true,
+    this.isChild = false,
+    required this.onDelete,
+    required this.onEdit
 
   }) : super(key: key);
 
   final List<ServicesModel?>? item;
   final int? categoryIndex;
-  final bool margin;
+  final bool isChild;
+  final Function onDelete;
+  final Function onEdit;
 
   @override
   State<ElementCategoryItem> createState() => _ElementCategoryItemState();
@@ -156,9 +318,15 @@ class _ElementCategoryItemState extends State<ElementCategoryItem> {
           color: Colors.transparent,
           width: 0,
         ),
-        paddingListHorizontal: 0.0,
+        onDelete: (index) {
+          widget.onDelete(services[index]);
+        },
+        onEdit: (index) {
+          widget.onEdit(services[index]);
+        },
+        paddingListHorizontal: widget.isChild ? 0 : 16.0,
         flipRightIconIfOpen: false,
-        headerPadding: EdgeInsets.zero,
+        headerPadding: const EdgeInsets.symmetric(horizontal: 13, vertical: 8),
         sectionOpeningHapticFeedback: SectionHapticFeedback.heavy,
         sectionClosingHapticFeedback: SectionHapticFeedback.light,
         children: List.generate(
@@ -170,24 +338,26 @@ class _ElementCategoryItemState extends State<ElementCategoryItem> {
             }
             itemName = '$itemName ${services[index]?.name}';
             return AccordionSection(
+              onDelete: (index) {
+                widget.onDelete(
+                  services[index]
+                );
+              },
+              onEdit: () {
+                widget.onEdit(
+                  services[index]
+                );
+              },
               isOpen: false,
-              headerBackgroundColor: Colors.transparent,
-              // Color(int.parse('${services[index]?.color}')).withOpacity(.6),
-              contentVerticalPadding: 0,
+              headerBackgroundColor:
+              Color(int.parse('${services[index]?.color}')).withOpacity(.6),
               contentBorderWidth: 0,
-              contentHorizontalPadding: widget.margin ? 16 : 0,
+              contentHorizontalPadding: 0,
               contentBackgroundColor: const Color(0xFFF0F3F6),
-              header: DraggableHeader(
-                margin: widget.margin,
-                color: Color(int.parse('${services[index]?.color}')).withOpacity(.6),
-                child: SizedBox(
-                  width: SizerUtil.width - (widget.margin ? 63 : 33),
-                  child: Text(
-                    itemName,
-                    style: TextStyles.s14w600.copyWith(
-                        color: const Color(0xFF242424)
-                    ),
-                  ),
+              header: Text(
+                itemName,
+                style: TextStyles.s14w600.copyWith(
+                    color: const Color(0xFF242424)
                 ),
               ),
               content: ContentService(

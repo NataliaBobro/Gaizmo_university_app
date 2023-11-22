@@ -9,7 +9,12 @@ import '../../../../widgets/select_bottom_sheet_input.dart';
 import 'add_category_service.dart';
 
 class AddServiceScreen extends StatefulWidget {
-  const AddServiceScreen({Key? key}) : super(key: key);
+  const AddServiceScreen({
+    Key? key,
+    this.isEdit = false
+  }) : super(key: key);
+
+  final bool isEdit;
 
   @override
   State<AddServiceScreen> createState() => _AddServiceScreenState();
@@ -18,7 +23,11 @@ class AddServiceScreen extends StatefulWidget {
 class _AddServiceScreenState extends State<AddServiceScreen> {
   @override
   void initState() {
-    context.read<SchoolServicesState>().getMeta();
+    context.read<SchoolServicesState>().getMeta().then((value) {
+      if(widget.isEdit){
+        context.read<SchoolServicesState>().setStateEdit();
+      }
+    });
     super.initState();
   }
   @override

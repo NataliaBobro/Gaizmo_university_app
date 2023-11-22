@@ -124,9 +124,9 @@ class _AuthSignUpTeacherState extends State<AuthSignUpTeacher> {
                       AppButton(
                         title: 'Sign up',
                         onPressed: () {
-                          // if(!state.isLoading) {
+                          if(!state.isLoading) {
                             state.signUp('teacher');
-                          // }
+                          }
                         },
                         horizontalPadding: 16.0,
                       ),

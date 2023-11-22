@@ -191,9 +191,9 @@ class _AddServiceServiceState extends State<AddServiceService> {
             height: 24,
           ),
           AppButton(
-            title: 'ADD service',
+            title: state.onEditId != null ? 'Edit service' : 'ADD service',
             onPressed: () {
-              state.addService();
+              state.addOrEditServiceService();
             },
             horizontalPadding: 17.0,
           ),

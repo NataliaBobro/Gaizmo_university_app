@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:etm_crm/app/domain/models/services.dart';
 import 'package:etm_crm/app/domain/services/meta_service.dart';
@@ -15,8 +17,11 @@ import '../../models/meta.dart';
 class SchoolServicesState with ChangeNotifier {
   BuildContext context;
   bool _isLoading = false;
+  int? _onEditId;
+  dynamic editedService;
 
   bool get isLoading => _isLoading;
+  int? get onEditId => _onEditId;
   ValidateError? _validateError;
   List<ServicesCategory> _servicesCategory = [];
   List<ServicesModel?> _allServices = [];
@@ -143,6 +148,44 @@ class SchoolServicesState with ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> onEdit(dynamic services) async {
+    _onEditId = null;
+    editedService = services;
+    notifyListeners();
+    await Future.microtask(() async {
+      await openAddOrEditService(isEdit: true);
+    });
+  }
+
+  void setStateEdit() {
+    if(editedService is ServicesCategory){
+      ServicesCategory serCat = editedService;
+      _categoryName.text = serCat.name;
+      _selectService = listTypeServices.first;
+      _selectColor = serCat.color;
+      _onEditId = serCat.id;
+    }
+    if(editedService is ServicesModel){
+      ServicesModel servEdit = editedService;
+      _selectService = listTypeServices.last;
+      _serviceName.text = servEdit.name;
+      _selectTeacher = _listTeacher.firstWhere((element) => element['id'] == servEdit.teacher?.id);
+      _selectCurrency = _listCurrency.firstWhere((element) => element['id'] == servEdit.currency?.id);
+      _selectValidityType = _listValidityType.firstWhere((element) => element['name'] == servEdit.validityType);
+      _etm.text = '${servEdit.etm}';
+      _cost.text = '${servEdit.cost}';
+      _visits.text = '${servEdit.numberVisits}';
+      if(servEdit.serviceCategory != null){
+        _selectCategory = listCategory.firstWhere((element) => element['id'] == servEdit.serviceCategory);
+      }
+      _selectColor = servEdit.color;
+      _validity.text = '${servEdit.validity}';
+      _duration.text = '${(servEdit.duration! ~/ 60).toString().padLeft(2, '0')}${servEdit.duration! % 60}';
+      _onEditId = servEdit.id;
+    }
+    notifyListeners();
+  }
+
   Future<void> fetchServices() async {
     _isLoading = true;
     notifyListeners();
@@ -162,13 +205,19 @@ class SchoolServicesState with ChangeNotifier {
     }
   }
 
-  void openAddService() {
-    Navigator.push(
+  Future<void> openAddOrEditService({bool isEdit = false}) async {
+    if(isEdit == false){
+      _onEditId = null;
+      notifyListeners();
+    }
+    await Navigator.push(
         context,
         CupertinoPageRoute(
             builder: (context) => ChangeNotifierProvider.value(
               value: this,
-              child: const AddServiceScreen(),
+              child: AddServiceScreen(
+                  isEdit: isEdit
+              ),
             )
         )
     );
@@ -210,11 +259,17 @@ class SchoolServicesState with ChangeNotifier {
     }
   }
 
-  Future<void> addCategory() async {
+  Future<void> addOrEditCategory() async {
     _isLoading = true;
     notifyListeners();
     try {
-      final result = await ServicesService.addCategory(
+      final result = _onEditId != null ?
+          await ServicesService.editCategory(
+          context,
+          _onEditId,
+          _categoryName.text,
+          _selectColor ?? ''
+      ) : await ServicesService.addCategory(
           context,
           _categoryName.text,
           _selectColor ?? ''
@@ -240,7 +295,7 @@ class SchoolServicesState with ChangeNotifier {
     }
   }
 
-  Future<void> addService() async {
+  Future<void> addOrEditServiceService() async {
     int duration = 0;
     if(_duration.text.isNotEmpty) {
       List<String> parts = _duration.text.split(' : ');
@@ -252,8 +307,9 @@ class SchoolServicesState with ChangeNotifier {
     _isLoading = true;
     notifyListeners();
     try {
-      final result = await ServicesService.addService(
+      final result = await ServicesService.addOrEditService(
           context,
+          _onEditId,
           _serviceName.text,
           _selectColor ?? '',
           _selectBranch?['id'],
@@ -266,7 +322,6 @@ class SchoolServicesState with ChangeNotifier {
           _cost.text,
           _selectCurrency?['id'],
           _etm.text
-
       );
       if(result != null){
         fetchServices();
@@ -282,10 +337,61 @@ class SchoolServicesState with ChangeNotifier {
         showMessage(e.message.isEmpty ? e.toString() : e.message);
       }
     } catch (e) {
-      print(e);
       showErrorSnackBar(title: 'App request error');
     } finally {
       _isLoading = false;
+      notifyListeners();
+    }
+  }
+  
+  Future<void> deleteService(ServicesModel service) async {
+    try {
+      final result = await ServicesService.deleteService(
+          context,
+          service.id,
+      );
+      if(result == true){
+        for(var a = 0; a < servicesCategory.length; a++){
+          final delService = servicesCategory[a].services?.indexOf(service);
+          if(delService != -1){
+            servicesCategory[a].services?.removeAt(delService!);
+            break;
+          }
+        }
+        for(var a = 0; a < allServices.length; a++){
+          if(allServices[a]?.id == service.id){
+            allServices.remove(allServices[a]);
+          }
+        }
+      }
+    } on DioError catch (e) {
+      showMessage(e.message.isEmpty ? e.toString() : e.message);
+    } catch (e) {
+      showErrorSnackBar(title: 'App request error');
+    } finally {
+      notifyListeners();
+    }
+  }
+
+  Future<void> deleteCategory(ServicesCategory category) async {
+    try {
+      final result = await ServicesService.deleteCategory(
+        context,
+        category.id,
+      );
+      if(result == true){
+        for(var a = 0; a < servicesCategory.length; a++){
+          if(servicesCategory[a].id == category.id){
+            servicesCategory.remove(servicesCategory[a]);
+            break;
+          }
+        }
+      }
+    } on DioError catch (e) {
+      showMessage(e.message.isEmpty ? e.toString() : e.message);
+    } catch (e) {
+      showErrorSnackBar(title: 'App request error');
+    } finally {
       notifyListeners();
     }
   }
