@@ -1,4 +1,5 @@
-import 'package:etm_crm/app/ui/screens/school/profile/widgets/setting_language.dart';
+import 'package:etm_crm/app/ui/screens/school/profile/widgets/settings/setting_language.dart';
+import 'package:etm_crm/app/ui/screens/school/profile/widgets/settings/settings_general_info.dart';
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
 import 'package:etm_crm/app/ui/widgets/custom_scroll_physics.dart';
 import 'package:flutter/cupertino.dart';
@@ -42,7 +43,17 @@ class _SettingsTabState extends State<SettingsTab> {
         ),
         SettingsInput(
           title: "General info",
-          onPress: () {}
+          onPress: () async {
+            await Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ChangeNotifierProvider.value(
+                  value: read,
+                  child: const SettingGeneralInfo(),
+                ),
+              ),
+            );
+          }
         ),
         SettingsInput(
             title: "Social accounts",

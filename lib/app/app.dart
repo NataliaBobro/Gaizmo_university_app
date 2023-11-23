@@ -71,6 +71,9 @@ class AppState extends ChangeNotifier {
       final result = await UserService.getUser(context);
       if(result != null){
         _userData = result;
+        if(metaAppData == null){
+          getMeta(result.languageId);
+        }
       }
     } on DioError catch (e) {
       showMessage(e.message.isEmpty ? e.toString() : e.message);
@@ -116,6 +119,11 @@ class AppState extends ChangeNotifier {
     } else {
       _currentRoute = route;
     }
+    notifyListeners();
+  }
+
+  void changeLanguage(id) {
+    _userData?.languageId = id;
     notifyListeners();
   }
 

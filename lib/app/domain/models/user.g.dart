@@ -21,6 +21,7 @@ Map<String, dynamic> _$UserDataWithTokenToJson(UserDataWithToken instance) =>
 UserData _$UserDataFromJson(Map<String, dynamic> json) => UserData(
       id: json['id'] as int,
       type: json['type'] as int,
+      languageId: json['language_id'] as int?,
       firstName: json['first_name'] as String?,
       lastName: json['last_name'] as String?,
       surname: json['surname'] as String?,
@@ -31,11 +32,14 @@ UserData _$UserDataFromJson(Map<String, dynamic> json) => UserData(
       school: json['school'] == null
           ? null
           : School.fromJson(json['school'] as Map<String, dynamic>),
-    );
+    )..workDay = (json['work_day'] as List<dynamic>?)
+        ?.map((e) => WorkDay.fromJson(e as Map<String, dynamic>))
+        .toList();
 
 Map<String, dynamic> _$UserDataToJson(UserData instance) => <String, dynamic>{
       'id': instance.id,
       'type': instance.type,
+      'language_id': instance.languageId,
       'first_name': instance.firstName,
       'last_name': instance.lastName,
       'surname': instance.surname,
@@ -44,16 +48,20 @@ Map<String, dynamic> _$UserDataToJson(UserData instance) => <String, dynamic>{
       'phone': instance.phone,
       'email': instance.email,
       'school': instance.school,
+      'work_day': instance.workDay,
     };
 
 School _$SchoolFromJson(Map<String, dynamic> json) => School(
       id: json['id'] as int,
       categorySchoolId: json['category_school_id'] as int,
       name: json['name'] as String,
+      siteName: json['site_name'] as String?,
       country: json['country'] as String,
       street: json['street'] as String,
       house: json['house'] as String,
       city: json['city'] as String,
+      from: json['from'] as String?,
+      to: json['to'] as String?,
     )..category = json['category'] == null
         ? null
         : Category.fromJson(json['category'] as Map<String, dynamic>);
@@ -62,10 +70,13 @@ Map<String, dynamic> _$SchoolToJson(School instance) => <String, dynamic>{
       'id': instance.id,
       'category_school_id': instance.categorySchoolId,
       'name': instance.name,
+      'site_name': instance.siteName,
       'country': instance.country,
       'street': instance.street,
       'house': instance.house,
       'city': instance.city,
+      'from': instance.from,
+      'to': instance.to,
       'category': instance.category,
     };
 
@@ -81,4 +92,16 @@ Map<String, dynamic> _$CategoryToJson(Category instance) => <String, dynamic>{
       'id': instance.id,
       'define': instance.define,
       'translate': instance.translate,
+    };
+
+WorkDay _$WorkDayFromJson(Map<String, dynamic> json) => WorkDay(
+      id: json['id'] as int,
+      userId: json['user_id'] as int,
+      day: json['day'] as int,
+    );
+
+Map<String, dynamic> _$WorkDayToJson(WorkDay instance) => <String, dynamic>{
+      'id': instance.id,
+      'user_id': instance.userId,
+      'day': instance.day,
     };

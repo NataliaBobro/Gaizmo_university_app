@@ -22,6 +22,7 @@ class UserDataWithToken {
 class UserData {
   int id;
   int type;
+  int? languageId;
   String? firstName;
   String? lastName;
   String? surname;
@@ -30,10 +31,12 @@ class UserData {
   String? phone;
   String? email;
   School? school;
+  List<WorkDay>? workDay;
 
   UserData({
     required this.id,
     required this.type,
+    this.languageId,
     this.firstName,
     this.lastName,
     this.surname,
@@ -54,10 +57,13 @@ class School {
   int id;
   int categorySchoolId;
   String name;
+  String? siteName;
   String country;
   String street;
   String house;
   String city;
+  String? from;
+  String? to;
   Category? category;
 
 
@@ -65,10 +71,13 @@ class School {
     required this.id,
     required this.categorySchoolId,
     required this.name,
+    this.siteName,
     required this.country,
     required this.street,
     required this.house,
     required this.city,
+    this.from,
+    this.to,
   });
 
   Map<String, dynamic> toJson() => _$SchoolToJson(this);
@@ -92,5 +101,23 @@ class Category {
   Map<String, dynamic> toJson() => _$CategoryToJson(this);
 
   factory Category.fromJson(Map<String, dynamic> json) => _$CategoryFromJson(json);
+}
+
+@JsonSerializable(includeIfNull: true, fieldRename: FieldRename.snake)
+class WorkDay {
+  int id;
+  int userId;
+  int day;
+
+
+  WorkDay({
+    required this.id,
+    required this.userId,
+    required this.day,
+  });
+
+  Map<String, dynamic> toJson() => _$WorkDayToJson(this);
+
+  factory WorkDay.fromJson(Map<String, dynamic> json) => _$WorkDayFromJson(json);
 }
 
