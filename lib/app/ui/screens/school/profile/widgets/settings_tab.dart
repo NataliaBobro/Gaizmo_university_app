@@ -1,15 +1,17 @@
-import 'package:etm_crm/app/ui/screens/school/profile/widgets/settings/setting_language.dart';
-import 'package:etm_crm/app/ui/screens/school/profile/widgets/settings/settings_general_info.dart';
+import 'package:etm_crm/app/ui/screens/school/profile/settings/settings_social_accounts.dart';
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
 import 'package:etm_crm/app/ui/widgets/custom_scroll_physics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dialogs/flutter_dialogs.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../../resources/resources.dart';
 import '../../../../../app.dart';
 import '../../../../../domain/states/school/school_profile_state.dart';
+import '../settings/setting_language.dart';
+import '../settings/settings_general_info.dart';
 
 class SettingsTab extends StatefulWidget {
   const SettingsTab({Key? key}) : super(key: key);
@@ -21,7 +23,6 @@ class SettingsTab extends StatefulWidget {
 class _SettingsTabState extends State<SettingsTab> {
   @override
   Widget build(BuildContext context) {
-    final appState = context.read<AppState>();
     final read = context.read<SchoolProfileState>();
     return ListView(
       padding: const EdgeInsets.only(top: 24),
@@ -57,7 +58,17 @@ class _SettingsTabState extends State<SettingsTab> {
         ),
         SettingsInput(
             title: "Social accounts",
-            onPress: () {}
+            onPress: () async {
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ChangeNotifierProvider.value(
+                    value: read,
+                    child: const SettingsSocialAccounts(),
+                  ),
+                ),
+              );
+            }
         ),
         SettingsInput(
             title: "Notifications",
@@ -66,7 +77,7 @@ class _SettingsTabState extends State<SettingsTab> {
         SettingsInput(
             title: "Sign out",
             onPress: () {
-              appState.onLogout();
+              showSignOutDialog();
             }
         ),
         const SizedBox(
@@ -94,6 +105,33 @@ class _SettingsTabState extends State<SettingsTab> {
           height: 40,
         ),
       ],
+    );
+  }
+
+  Future<void> showSignOutDialog() async {
+    await showPlatformDialog(
+      context: context,
+      builder: (context) => BasicDialogAlert(
+        content: const Text(
+            "Do you really want\n to sign up from “ETM”?",
+          style: TextStyles.s17w600,
+        ),
+        actions: <Widget>[
+          BasicDialogAction(
+            title: const Text("Yes"),
+            onPressed: () {
+              Navigator.pop(context);
+              context.read<AppState>().onLogout();
+            },
+          ),
+          BasicDialogAction(
+            title: const Text("No"),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ],
+      ),
     );
   }
 }

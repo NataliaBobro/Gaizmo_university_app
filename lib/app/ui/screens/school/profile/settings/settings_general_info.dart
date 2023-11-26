@@ -1,12 +1,14 @@
-import 'package:etm_crm/app/ui/screens/school/profile/widgets/settings/settings_schedule.dart';
+import 'package:etm_crm/app/ui/screens/school/profile/settings/settings_address.dart';
+import 'package:etm_crm/app/ui/screens/school/profile/settings/settings_schedule.dart';
+import 'package:etm_crm/app/ui/screens/school/profile/settings/settings_select_category.dart';
 import 'package:etm_crm/app/ui/widgets/app_horizontal_field.dart';
 import 'package:etm_crm/app/ui/widgets/center_header.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../../domain/states/school/school_profile_state.dart';
-import '../../../../../widgets/auth_button.dart';
-import '../settings_tab.dart';
+import '../../../../../domain/states/school/school_profile_state.dart';
+import '../../../../widgets/auth_button.dart';
+import '../widgets/settings_tab.dart';
 
 class SettingGeneralInfo extends StatefulWidget {
   const SettingGeneralInfo({Key? key}) : super(key: key);
@@ -89,11 +91,31 @@ class _SettingGeneralInfoState extends State<SettingGeneralInfo> {
                               ),
                               SettingsInput(
                                   title: "School category",
-                                  onPress: () {}
+                                  onPress: () async {
+                                    await Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => ChangeNotifierProvider.value(
+                                          value: read,
+                                          child: const SettingsSelectCategory(),
+                                        ),
+                                      ),
+                                    );
+                                  }
                               ),
                               SettingsInput(
                                   title: "Address",
-                                  onPress: () {}
+                                  onPress: () async {
+                                    await Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => ChangeNotifierProvider.value(
+                                          value: read,
+                                          child: const SettingsAddress(),
+                                        ),
+                                      ),
+                                    );
+                                  }
                               ),
                             ],
                           ),

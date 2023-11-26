@@ -1,6 +1,6 @@
 name: etm_crm
 description: A new Flutter project.
-publish_to: 'none' 
+publish_to: 'none'
 version: 1.0.0+1
 
 environment:
@@ -14,11 +14,11 @@ dependencies:
     path: library/accordion
   flutter_native_splash: ^2.1.6
   cached_network_image: ^3.2.3
-  cached_network_svg_image: 
+  cached_network_svg_image:
   animated_snack_bar: ^0.3.0
 
   # keyboard_actions: 4.1.0
-  money_formatter: 
+  money_formatter:
   cupertino_icons: ^1.0.2
   overlay_support: ^2.0.1
   image_picker: ^0.8.6+1
@@ -27,7 +27,7 @@ dependencies:
   fluttertoast: ^8.2.1
   share_plus: ^6.3.2
   shimmer: ^3.0.0
-  path_provider: 
+  path_provider:
   sizer: ^2.0.15
   modal_bottom_sheet: ^2.1.2
   intl:
@@ -53,8 +53,9 @@ dependencies:
   scrollable_positioned_list: ^0.3.8
   flutter_masked_text2: ^0.9.1
   just_the_tooltip: ^0.0.12
-  flutter_slidable: ^2.0.0
-  
+  flutter_slidable: ^3.0.1
+  flutter_dialogs: ^3.0.0
+
 flutter_native_splash:
   color: "#FFFFFF"
   fullscreen: true

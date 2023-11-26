@@ -30,8 +30,10 @@ class UserData {
   String? dateBirth;
   String? phone;
   String? email;
+  String? avatar;
   School? school;
   List<WorkDay>? workDay;
+  SocialAccounts? socialAccounts;
 
   UserData({
     required this.id,
@@ -44,7 +46,9 @@ class UserData {
     this.dateBirth,
     this.phone,
     this.email,
+    this.avatar,
     this.school,
+    this.socialAccounts,
   });
 
   Map<String, dynamic> toJson() => _$UserDataToJson(this);
@@ -119,5 +123,25 @@ class WorkDay {
   Map<String, dynamic> toJson() => _$WorkDayToJson(this);
 
   factory WorkDay.fromJson(Map<String, dynamic> json) => _$WorkDayFromJson(json);
+}
+
+@JsonSerializable(includeIfNull: true, fieldRename: FieldRename.snake)
+class SocialAccounts {
+  String? instagram;
+  String? facebook;
+  String? linkedin;
+  String? twitter;
+
+
+  SocialAccounts({
+    this.instagram,
+    this.facebook,
+    this.linkedin,
+    this.twitter,
+  });
+
+  Map<String, dynamic> toJson() => _$SocialAccountsToJson(this);
+
+  factory SocialAccounts.fromJson(Map<String, dynamic> json) => _$SocialAccountsFromJson(json);
 }
 

@@ -17,7 +17,9 @@ class SelectInputSearchField extends StatefulWidget {
     this.onSearch,
     this.changeOpen,
     this.selected,
-    this.errors
+    this.errors,
+    this.titleStyle,
+    this.style
   }) : super(key: key);
 
   final String title;
@@ -29,6 +31,8 @@ class SelectInputSearchField extends StatefulWidget {
   final Map<String, dynamic>? selected;
   final String? errors;
   final bool isOpen;
+  final TextStyle? titleStyle;
+  final TextStyle? style;
 
   @override
   State<SelectInputSearchField> createState() => _SelectInputSearchFieldState();
@@ -42,7 +46,7 @@ class _SelectInputSearchFieldState extends State<SelectInputSearchField> {
       children: [
         Text(
           widget.title,
-          style: TextStyles.s14w400.copyWith(
+          style: widget.titleStyle ?? TextStyles.s14w400.copyWith(
               color: const Color(0xFF848484)
           ),
         ),
@@ -54,7 +58,7 @@ class _SelectInputSearchFieldState extends State<SelectInputSearchField> {
                 Expanded(
                   child: Text(
                     widget.selected != null ? widget.selected!['name'] : '',
-                    style: TextStyles.s14w400.copyWith(
+                    style: widget.style ?? TextStyles.s14w400.copyWith(
                         color: Colors.white
                     ),
                   ),

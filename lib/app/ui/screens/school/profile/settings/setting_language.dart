@@ -4,8 +4,9 @@ import 'package:etm_crm/app/ui/widgets/center_header.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../../domain/states/school/school_profile_state.dart';
-import '../../../../../widgets/select_bottom_sheet_input.dart';
+import '../../../../../domain/states/school/school_profile_state.dart';
+import '../../../../widgets/select_bottom_sheet_input.dart';
+
 
 class SettingLanguage extends StatefulWidget {
   const SettingLanguage({Key? key}) : super(key: key);

@@ -40,7 +40,7 @@ class AppState extends ChangeNotifier {
     Future.microtask(() async {
       if(_isLoggedIn){
         if(_userData == null){
-         await _getUser();
+         await getUser();
         }
         onChangeRoute();
       }
@@ -55,7 +55,7 @@ class AppState extends ChangeNotifier {
   Future<void> changeLogInState(bool value) async {
     _isLoggedIn = value;
     if(value == true){
-      _getUser();
+      getUser();
     }
     onChangeRoute();
     notifyListeners();
@@ -66,7 +66,7 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> _getUser() async {
+  Future<void> getUser() async {
     try {
       final result = await UserService.getUser(context);
       if(result != null){

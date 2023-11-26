@@ -29,9 +29,14 @@ UserData _$UserDataFromJson(Map<String, dynamic> json) => UserData(
       dateBirth: json['date_birth'] as String?,
       phone: json['phone'] as String?,
       email: json['email'] as String?,
+      avatar: json['avatar'] as String?,
       school: json['school'] == null
           ? null
           : School.fromJson(json['school'] as Map<String, dynamic>),
+      socialAccounts: json['social_accounts'] == null
+          ? null
+          : SocialAccounts.fromJson(
+              json['social_accounts'] as Map<String, dynamic>),
     )..workDay = (json['work_day'] as List<dynamic>?)
         ?.map((e) => WorkDay.fromJson(e as Map<String, dynamic>))
         .toList();
@@ -47,8 +52,10 @@ Map<String, dynamic> _$UserDataToJson(UserData instance) => <String, dynamic>{
       'date_birth': instance.dateBirth,
       'phone': instance.phone,
       'email': instance.email,
+      'avatar': instance.avatar,
       'school': instance.school,
       'work_day': instance.workDay,
+      'social_accounts': instance.socialAccounts,
     };
 
 School _$SchoolFromJson(Map<String, dynamic> json) => School(
@@ -104,4 +111,20 @@ Map<String, dynamic> _$WorkDayToJson(WorkDay instance) => <String, dynamic>{
       'id': instance.id,
       'user_id': instance.userId,
       'day': instance.day,
+    };
+
+SocialAccounts _$SocialAccountsFromJson(Map<String, dynamic> json) =>
+    SocialAccounts(
+      instagram: json['instagram'] as String?,
+      facebook: json['facebook'] as String?,
+      linkedin: json['linkedin'] as String?,
+      twitter: json['twitter'] as String?,
+    );
+
+Map<String, dynamic> _$SocialAccountsToJson(SocialAccounts instance) =>
+    <String, dynamic>{
+      'instagram': instance.instagram,
+      'facebook': instance.facebook,
+      'linkedin': instance.linkedin,
+      'twitter': instance.twitter,
     };

@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../../../../domain/states/school/school_profile_state.dart';
+import '../../../../../domain/states/school/school_profile_state.dart';
+
 
 class SettingSchedule extends StatefulWidget {
   const SettingSchedule({Key? key}) : super(key: key);

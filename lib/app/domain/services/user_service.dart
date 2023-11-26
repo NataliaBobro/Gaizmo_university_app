@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:etm_crm/app/ui/utils/get_token.dart';
 
@@ -51,6 +53,58 @@ class UserService {
         'phone': phone,
         'email': email,
       },
+      options: Options(
+        headers: {'Authorization': 'Bearer $token'},
+      ),
+    );
+    final data = response.data as Map<String, dynamic>;
+    return data['success'];
+  }
+
+  static Future<bool?> changeSocialAccounts(
+      context,
+      String? instagram,
+      String? facebook,
+      String? linkedin,
+      String? twitter
+      ) async {
+    final token = getToken(context);
+    if(token == null) return null;
+    final response = await ApiClient().dio.post(
+      '/user/change-social-account',
+      data: {
+        'instagram': instagram,
+        'facebook': facebook,
+        'linkedin': linkedin,
+        'twitter': twitter,
+      },
+      options: Options(
+        headers: {'Authorization': 'Bearer $token'},
+      ),
+    );
+    final data = response.data as Map<String, dynamic>;
+    return data['success'];
+  }
+
+  static Future<bool?> uploadAvatar(
+      context,
+      File file
+      ) async {
+    final token = getToken(context);
+    if(token == null) return null;
+
+    FormData formData = FormData();
+
+    formData.files.add(
+      MapEntry(
+        'avatar',
+        await MultipartFile.fromFile(file.path),
+      ),
+    );
+
+    final response = await ApiClient().dio.post(
+      '/user/upload-avatar',
+      data: formData,
       options: Options(
         headers: {'Authorization': 'Bearer $token'},
       ),

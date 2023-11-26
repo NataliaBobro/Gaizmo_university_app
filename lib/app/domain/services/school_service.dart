@@ -29,4 +29,48 @@ class SchoolService {
     return data['success'];
   }
 
+  static Future<bool?> changeCategory(
+      context,
+      int? categoryId,
+      ) async {
+    final token = getToken(context);
+    if(token == null) return null;
+    final response = await ApiClient().dio.post(
+      '/school/settings/change-category',
+      data: {
+        'category_id': categoryId,
+      },
+      options: Options(
+        headers: {'Authorization': 'Bearer $token'},
+      ),
+    );
+    final data = response.data as Map<String, dynamic>;
+    return data['success'];
+  }
+
+  static Future<bool?> changeAddress(
+      context,
+      String? country,
+      String? city,
+      String? street,
+      String? house,
+      ) async {
+    final token = getToken(context);
+    if(token == null) return null;
+    final response = await ApiClient().dio.post(
+      '/school/settings/change-address',
+      data: {
+        'country': country,
+        'city': city,
+        'street': street,
+        'house': house,
+      },
+      options: Options(
+        headers: {'Authorization': 'Bearer $token'},
+      ),
+    );
+    final data = response.data as Map<String, dynamic>;
+    return data['success'];
+  }
+
 }

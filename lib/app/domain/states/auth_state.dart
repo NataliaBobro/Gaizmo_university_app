@@ -185,7 +185,6 @@ class AuthState with ChangeNotifier {
       final result = await AppNinjasService.getCountry(value);
       if(result != null){
         _countryList = result;
-        print(_countryList);
       }
     } on DioError catch (e) {
       showMessage(e.message);
