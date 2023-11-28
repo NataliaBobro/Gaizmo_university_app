@@ -1,6 +1,8 @@
+import 'package:etm_crm/app/domain/states/school/school_schedule_state.dart';
 import 'package:etm_crm/app/ui/screens/school/schedule/widgets/schedule_header.dart';
 import 'package:etm_crm/app/ui/widgets/empty_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SchoolScheduleScreen extends StatefulWidget {
   const SchoolScheduleScreen({Key? key}) : super(key: key);
@@ -12,6 +14,7 @@ class SchoolScheduleScreen extends StatefulWidget {
 class _SchoolScheduleScreenState extends State<SchoolScheduleScreen> {
   @override
   Widget build(BuildContext context) {
+    final state = context.watch<SchoolScheduleState>();
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -26,7 +29,7 @@ class _SchoolScheduleScreenState extends State<SchoolScheduleScreen> {
                   title: 'No classes today :(',
                   subtitle: 'Click the button below to add lessons',
                   onPress: () {
-
+                    state.addLesson();
                   },
                 ),
               )

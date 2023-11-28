@@ -16,7 +16,9 @@ class SelectInputSearch extends StatefulWidget {
     this.isSearch = false,
     this.onSearch,
     this.selected,
-    this.errors
+    this.errors,
+    this.labelStyle,
+    this.style
   }) : super(key: key);
 
   final String title;
@@ -27,6 +29,8 @@ class SelectInputSearch extends StatefulWidget {
   final Map<String, dynamic>? selected;
   final String? errors;
   final bool isSearch;
+  final TextStyle? labelStyle;
+  final TextStyle? style;
 
   @override
   State<SelectInputSearch> createState() => _SelectInputSearchState();
@@ -42,7 +46,7 @@ class _SelectInputSearchState extends State<SelectInputSearch> {
       children: [
         Text(
           widget.title,
-          style: TextStyles.s14w400.copyWith(
+          style: widget.labelStyle ?? TextStyles.s14w400.copyWith(
               color: const Color(0xFF848484)
           ),
         ),
@@ -54,7 +58,7 @@ class _SelectInputSearchState extends State<SelectInputSearch> {
                 Expanded(
                   child: Text(
                     widget.selected != null ? widget.selected!['name'] : '',
-                    style: TextStyles.s14w400.copyWith(
+                    style: widget.style ?? TextStyles.s14w400.copyWith(
                         color: Colors.white
                     ),
                   ),

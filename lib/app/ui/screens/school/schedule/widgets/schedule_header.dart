@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../../../../../../resources/resources.dart';
 
@@ -73,11 +74,12 @@ class ScheduleFilter extends StatefulWidget {
 }
 
 class _ScheduleFilterState extends State<ScheduleFilter> {
+  final ItemScrollController _itemScrollController = ItemScrollController();
   List<Map<String, String>> generateDates() {
     List<Map<String, String>> dateList = [];
     DateTime now = DateTime.now();
 
-    for (int i = 0; i <= 15; i++) {
+    for (int i = -5; i <= 15; i++) {
       DateTime date = now.add(Duration(days: i));
       dateList.add({
         'day': DateFormat('d').format(date),
@@ -100,49 +102,50 @@ class _ScheduleFilterState extends State<ScheduleFilter> {
 
     return SizedBox(
       height: 84,
-      child: ListView(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        scrollDirection: Axis.horizontal,
-        children: List.generate(
-          dates.length,
-          (index) => CupertinoButton(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: Column(
-              children: [
-                Text(
-                  '${dates[index]['name']}',
-                  style: TextStyles.s14w600.copyWith(
-                    color: activeIndex == index ?
-                      const Color(0xFF242424) : const Color(0xFFACACAC)
-                  ),
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                Container(
-                  width: 32,
-                  height: 32,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(100),
-                      color: activeIndex == index ?
-                        const Color(0xFFFFC700) : const Color(0xFFE9EEF2)
-                  ),
-                  child: Center(
-                    child: Text(
-                      '${dates[index]['day']}',
-                      style: TextStyles.s14w600.copyWith(
-                        color: activeIndex == index ? Colors.white : const Color(0xFFACACAC)
-                      ),
+      child: ScrollablePositionedList.builder(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          scrollDirection: Axis.horizontal,
+          itemScrollController: _itemScrollController,
+          itemCount: dates.length,
+          shrinkWrap: true,
+          initialScrollIndex: 5,
+          itemBuilder: (context, index) => CupertinoButton(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Column(
+                children: [
+                  Text(
+                    '${dates[index]['name']}',
+                    style: TextStyles.s14w600.copyWith(
+                        color: activeIndex == index ?
+                        const Color(0xFF242424) : const Color(0xFFACACAC)
                     ),
                   ),
-                )
-              ],
-            ),
-            onPressed: () {
-              state.changeDateFilter(index);
-            }
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Container(
+                    width: 32,
+                    height: 32,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(100),
+                        color: activeIndex == index ?
+                        const Color(0xFFFFC700) : const Color(0xFFE9EEF2)
+                    ),
+                    child: Center(
+                      child: Text(
+                        '${dates[index]['day']}',
+                        style: TextStyles.s14w600.copyWith(
+                            color: activeIndex == index ? Colors.white : const Color(0xFFACACAC)
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              onPressed: () {
+                state.changeDateFilter(index);
+              }
           )
-        ),
       ),
     );
   }

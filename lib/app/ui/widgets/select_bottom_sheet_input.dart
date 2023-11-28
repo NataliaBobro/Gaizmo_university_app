@@ -12,6 +12,7 @@ class SelectBottomSheetInput extends StatefulWidget {
     required this.labelModal,
     this.selected,
     this.placeholder,
+    this.error,
     required this.items,
     required this.onSelect,
     this.horizontalPadding = 24
@@ -20,6 +21,7 @@ class SelectBottomSheetInput extends StatefulWidget {
   final String label;
   final double horizontalPadding;
   final String? placeholder;
+  final String? error;
   final String labelModal;
   final Map<String, dynamic>? selected;
   final Function onSelect;
@@ -72,8 +74,20 @@ class _SelectBottomSheetInputState extends State<SelectBottomSheetInput> {
           Container(
             height: 1,
             width: double.infinity,
-            color: const Color(0xFF848484),
+            color: widget.error != null ? const Color(0xFFFFC700) : const Color(0xFF848484),
           ),
+          if(widget.error != null) ...[
+            Container(
+              padding: const EdgeInsets.only(top: 4),
+              alignment: Alignment.centerRight,
+              child: Text(
+                '${widget.error}',
+                style: TextStyles.s12w400.copyWith(
+                    color: const Color(0xFFFFC700)
+                ),
+              ),
+            )
+          ]
         ],
       ),
     );

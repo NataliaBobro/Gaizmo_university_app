@@ -196,6 +196,24 @@ class Errors {
   @JsonKey(name: 'color')
   List<String>? color;
 
+  @JsonKey(name: 'service')
+  List<String>? service;
+
+  @JsonKey(name: 'school_class')
+  List<String>? schoolClass;
+
+  @JsonKey(name: 'start')
+  List<String>? start;
+
+  @JsonKey(name: 'start_lesson')
+  List<String>? startLesson;
+
+  @JsonKey(name: 'end')
+  List<String>? end;
+
+  @JsonKey(name: 'day')
+  List<String>? day;
+
   Errors({
     this.userTypeErrors,
     this.firstNameErrors,
@@ -218,6 +236,12 @@ class Errors {
     this.house,
     this.name,
     this.color,
+    this.service,
+    this.schoolClass,
+    this.start,
+    this.end,
+    this.day,
+    this.startLesson,
   });
 
   factory Errors.fromJson(Map<String, dynamic> json) => _$ErrorsFromJson(json);
