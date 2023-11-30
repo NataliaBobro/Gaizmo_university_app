@@ -34,4 +34,5 @@ class Svgs {
   static const String delete = 'assets/vectors/delete.svg';
   static const String teacher = 'assets/vectors/teacher.svg';
   static const String paint = 'assets/vectors/paint.svg';
+  static const String etmPlus = 'assets/vectors/etm-plus.svg';
 }

@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import '../../../ui/screens/school/schedule/widgets/add_lesson_screen.dart';
 import '../../../ui/utils/show_message.dart';
 import '../../../ui/widgets/snackbars.dart';
+import '../../models/lesson.dart';
 import '../../models/schedule.dart';
 
 class SchoolScheduleState with ChangeNotifier {
@@ -19,9 +20,10 @@ class SchoolScheduleState with ChangeNotifier {
   Map<String, dynamic>? _selectService;
   Map<String, dynamic>? _selectClass;
   ValidateError? _validateError;
+  LessonsList? _lessonsList;
   List<Map<String, String>> _dayListSelected = [];
-  final List<Map<String, dynamic>> _listServices = [];
-  final List<Map<String, dynamic>> _listClass = [];
+  List<Map<String, dynamic>> _listServices = [];
+  List<Map<String, dynamic>> _listClass = [];
   final MaskedTextController _lessonStart = MaskedTextController(mask: '00 : 00');
   final MaskedTextController _repeatsStart = MaskedTextController(
       mask: '00.00.0000'
@@ -38,6 +40,7 @@ class SchoolScheduleState with ChangeNotifier {
 
   int get filterDateIndex => _filterDateIndex;
   bool get isLoading => _isLoading;
+  LessonsList? get lessonsList => _lessonsList;
   ScheduleMeta? get scheduleMeta => _scheduleMeta;
   Map<String, dynamic>? get selectService => _selectService;
   Map<String, dynamic>? get selectClass => _selectClass;
@@ -52,6 +55,7 @@ class SchoolScheduleState with ChangeNotifier {
   void changeDateFilter(index) {
     _filterDateIndex = index;
     notifyListeners();
+    getLesson();
   }
 
   void clearEndDate() {
@@ -93,6 +97,7 @@ class SchoolScheduleState with ChangeNotifier {
       final result = await ScheduleService.fetchMeta(context);
       if(result != null){
         _scheduleMeta = result;
+        _listServices = [];
         if(result.services != null){
           for(var a = 0; a < (result.services?.length ?? 0); a++){
             _listServices.add({
@@ -101,6 +106,7 @@ class SchoolScheduleState with ChangeNotifier {
             });
           }
         }
+        _listClass = [];
         if(result.schoolClass != null){
           for(var a = 0; a < (result.schoolClass?.length ?? 0); a++){
             _listClass.add({
@@ -124,10 +130,11 @@ class SchoolScheduleState with ChangeNotifier {
     DateTime now = DateTime.now();
     DateTime date = now.add(Duration(days: _filterDateIndex - 5));
     try{
-      final result = await ScheduleService.getLesson(context, date.toString());
-      print(result);
+      _lessonsList = await ScheduleService.getLesson(context, date.toString());
     }catch (e) {
       print(e);
+    } finally {
+      notifyListeners();
     }
   }
 

@@ -14,6 +14,7 @@ class ScheduleHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final state = context.read<SchoolScheduleState>();
     return Container(
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.only(
@@ -41,7 +42,31 @@ class ScheduleHeader extends StatelessWidget {
                 ),
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
+                  CupertinoButton(
+                      padding: const EdgeInsets.only(
+                        left: 12,
+                        right: 4,
+                        top: 20,
+                        bottom: 20,
+                      ),
+                      child: Container(
+                        width: 24,
+                        height: 24,
+                        decoration: BoxDecoration(
+                            color: const Color(0xFFFFC700),
+                            borderRadius: BorderRadius.circular(100)
+                        ),
+                        child: SvgPicture.asset(
+                          Svgs.plus,
+                          width: 24,
+                        ),
+                      ),
+                      onPressed: () {
+                        state.addLesson();
+                      }
+                  ),
                   CupertinoButton(
                     padding: const EdgeInsets.only(
                         top: 20,

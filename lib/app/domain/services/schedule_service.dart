@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:etm_crm/app/ui/utils/get_token.dart';
 
 import '../../data/api_client.dart';
+import '../models/lesson.dart';
 import '../models/schedule.dart';
 
 class ScheduleService {
@@ -20,7 +21,7 @@ class ScheduleService {
     return ScheduleMeta.fromJson(data);
   }
 
-  static Future<bool?> getLesson(
+  static Future<LessonsList?> getLesson(
       context, String date,
       ) async {
     final token = getToken(context);
@@ -35,8 +36,7 @@ class ScheduleService {
       ),
     );
     final data = response.data as Map<String, dynamic>;
-    print(data);
-    return data['success'];
+    return LessonsList.fromJson(data);
   }
 
 

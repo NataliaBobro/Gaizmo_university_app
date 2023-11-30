@@ -58,10 +58,12 @@ ServicesModel _$ServicesModelFromJson(Map<String, dynamic> json) =>
       currency: json['currency'] == null
           ? null
           : Currency.fromJson(json['currency'] as Map<String, dynamic>),
-      etm: json['etm'] as String?,
+      etm: json['etm'] as int?,
       name: json['name'] as String,
       color: json['color'] as String?,
-    );
+    )..school = json['school'] == null
+        ? null
+        : School.fromJson(json['school'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$ServicesModelToJson(ServicesModel instance) =>
     <String, dynamic>{
@@ -78,4 +80,5 @@ Map<String, dynamic> _$ServicesModelToJson(ServicesModel instance) =>
       'color': instance.color,
       'etm': instance.etm,
       'currency': instance.currency,
+      'school': instance.school,
     };

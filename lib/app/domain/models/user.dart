@@ -70,7 +70,6 @@ class School {
   String? to;
   Category? category;
 
-
   School({
     required this.id,
     required this.categorySchoolId,

@@ -50,8 +50,9 @@ class ServicesModel {
   String name;
   String? numberVisits;
   String? color;
-  String? etm;
+  int? etm;
   Currency? currency;
+  School? school;
 
   ServicesModel({
     required this.id,
