@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:etm_crm/app/ui/utils/get_token.dart';
 
@@ -22,14 +24,19 @@ class ScheduleService {
   }
 
   static Future<LessonsList?> getLesson(
-      context, String date,
+      context,
+      String date,
+      FilterSchedule filterSchedule,
       ) async {
     final token = getToken(context);
     if(token == null) return null;
     final response = await ApiClient().dio.get(
       '/school/schedule/lesson',
       queryParameters: {
-        'date': date
+        'date': date,
+        'filter_type': json.encode(filterSchedule.type),
+        'filter_teacher': json.encode(filterSchedule.teacher),
+        'filter_class': json.encode(filterSchedule.selectClass),
       },
       options: Options(
         headers: {'Authorization': 'Bearer $token'},

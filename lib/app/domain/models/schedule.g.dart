@@ -17,12 +17,16 @@ ScheduleMeta _$ScheduleMetaFromJson(Map<String, dynamic> json) => ScheduleMeta(
               ? null
               : SchoolClassModel.fromJson(e as Map<String, dynamic>))
           .toList(),
-    );
+    )..teacher = (json['teacher'] as List<dynamic>?)
+        ?.map((e) =>
+            e == null ? null : UserData.fromJson(e as Map<String, dynamic>))
+        .toList();
 
 Map<String, dynamic> _$ScheduleMetaToJson(ScheduleMeta instance) =>
     <String, dynamic>{
       'services': instance.services,
       'school_class': instance.schoolClass,
+      'teacher': instance.teacher,
     };
 
 SchoolClassModel _$SchoolClassModelFromJson(Map<String, dynamic> json) =>

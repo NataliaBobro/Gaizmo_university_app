@@ -32,7 +32,8 @@ class SchoolScheduleState with ChangeNotifier {
   List<Map<String, String>> _dayListSelected = [];
   List<Map<String, dynamic>> _listServices = [];
   List<Map<String, dynamic>> _listClass = [];
-  MaskedTextController _lessonStart = MaskedTextController(mask: '00 : 00');
+  List<Map<String, dynamic>> _listTeacher = [];
+  final MaskedTextController _lessonStart = MaskedTextController(mask: '00 : 00');
   final MaskedTextController _repeatsStart = MaskedTextController(
       mask: '00.00.0000'
   );
@@ -56,6 +57,7 @@ class SchoolScheduleState with ChangeNotifier {
   Map<String, dynamic>? get selectService => _selectService;
   Map<String, dynamic>? get selectClass => _selectClass;
   List<Map<String, dynamic>> get listTypeServices => _listServices;
+  List<Map<String, dynamic>> get listTeacher => _listTeacher;
   List<Map<String, dynamic>> get listClass => _listClass;
   TextEditingController get lessonStart => _lessonStart;
   TextEditingController get repeatsStart => _repeatsStart;
@@ -71,6 +73,16 @@ class SchoolScheduleState with ChangeNotifier {
 
   void changeFilterType(List<int>value) {
     _filterSchedule.type = value;
+    notifyListeners();
+  }
+
+  void changeFilterTeacher(List<int>value) {
+    _filterSchedule.teacher = value;
+    notifyListeners();
+  }
+
+  void changeFilterClass(List<int>value) {
+    _filterSchedule.selectClass = value;
     notifyListeners();
   }
 
@@ -193,6 +205,14 @@ class SchoolScheduleState with ChangeNotifier {
             });
           }
         }
+        if(result.teacher != null) {
+          for(var a = 0; a < (result.teacher?.length ?? 0); a++){
+            _listTeacher.add({
+              "id": result.teacher?[a]?.id,
+              "name": '${result.teacher?[a]?.firstName} ${result.teacher?[a]?.lastName}',
+            });
+          }
+        }
       }
     } on DioError catch (e) {
       showMessage(e.message.isEmpty ? e.toString() : e.message);
@@ -208,7 +228,11 @@ class SchoolScheduleState with ChangeNotifier {
     DateTime now = DateTime.now();
     DateTime date = now.add(Duration(days: _filterDateIndex - 5));
     try{
-      _lessonsList = await ScheduleService.getLesson(context, date.toString());
+      _lessonsList = await ScheduleService.getLesson(
+          context,
+          date.toString(),
+          filterSchedule
+      );
     }catch (e) {
       if(kDebugMode){
         print(e);

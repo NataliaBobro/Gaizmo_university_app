@@ -1,4 +1,5 @@
 import 'package:etm_crm/app/domain/models/services.dart';
+import 'package:etm_crm/app/domain/models/user.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'schedule.g.dart';
@@ -7,6 +8,7 @@ part 'schedule.g.dart';
 class ScheduleMeta {
   List<ServicesModel?>? services;
   List<SchoolClassModel?>? schoolClass;
+  List<UserData?>? teacher;
 
   ScheduleMeta({
     this.services,

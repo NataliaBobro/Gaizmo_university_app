@@ -7,20 +7,20 @@ import 'package:provider/provider.dart';
 import '../../../../widgets/auth_button.dart';
 import '../../../../widgets/center_header.dart';
 
-class TypeLesson extends StatefulWidget {
-  const TypeLesson({Key? key}) : super(key: key);
+class FilterTeacher extends StatefulWidget {
+  const FilterTeacher({Key? key}) : super(key: key);
 
   @override
-  State<TypeLesson> createState() => _TypeLessonState();
+  State<FilterTeacher> createState() => _FilterTeacherState();
 }
 
-class _TypeLessonState extends State<TypeLesson> {
+class _FilterTeacherState extends State<FilterTeacher> {
   List<int> selected = [];
 
   @override
   void initState() {
     setState(() {
-      selected = context.read<SchoolScheduleState>().filterSchedule.type;
+      selected = context.read<SchoolScheduleState>().filterSchedule.teacher;
     });
     super.initState();
   }
@@ -32,9 +32,9 @@ class _TypeLessonState extends State<TypeLesson> {
   }
 
   void addAll() {
-    final listTypeServices = context.read<SchoolScheduleState>().listTypeServices;
-    for(var a = 0; a < listTypeServices.length; a++){
-      selected.add(listTypeServices[a]['id']);
+    final listTeacher = context.read<SchoolScheduleState>().listTeacher;
+    for(var a = 0; a < listTeacher.length; a++){
+      selected.add(listTeacher[a]['id']);
     }
     setState(() {});
   }
@@ -45,14 +45,14 @@ class _TypeLessonState extends State<TypeLesson> {
   }
 
   void apply() {
-    context.read<SchoolScheduleState>().changeFilterType(selected);
+    context.read<SchoolScheduleState>().changeFilterTeacher(selected);
     Navigator.pop(context);
   }
 
   @override
   Widget build(BuildContext context) {
     final state = context.watch<SchoolScheduleState>();
-    final service = state.listTypeServices;
+    final teachers = state.listTeacher;
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -66,7 +66,7 @@ class _TypeLessonState extends State<TypeLesson> {
                       child: Text(
                         selected.isEmpty ? 'All' : 'Clear',
                         style: TextStyles.s14w600.copyWith(
-                          color: Colors.black
+                            color: Colors.black
                         ),
                       ),
                       onPressed: () {
@@ -82,9 +82,9 @@ class _TypeLessonState extends State<TypeLesson> {
                           height: 24,
                         ),
                         ...List.generate(
-                            service.length,
-                            (index) {
-                              final hasSelected = selected.where((element) => element == service[index]['id']);
+                            teachers.length,
+                                (index) {
+                              final hasSelected = selected.where((element) => element == teachers[index]['id']);
                               return Container(
                                 color: hasSelected.isNotEmpty ? Colors.white : null,
                                 child: CupertinoButton(
@@ -95,7 +95,7 @@ class _TypeLessonState extends State<TypeLesson> {
                                     child: Row(
                                       children: [
                                         Text(
-                                          service[index]['name'],
+                                          teachers[index]['name'],
                                           style: TextStyles.s14w400.copyWith(
                                               color: const Color(0xFF242424)
                                           ),
@@ -103,7 +103,7 @@ class _TypeLessonState extends State<TypeLesson> {
                                       ],
                                     ),
                                     onPressed: () {
-                                      changeFilter(service[index]);
+                                      changeFilter(teachers[index]);
                                     }
                                 ),
                               );
