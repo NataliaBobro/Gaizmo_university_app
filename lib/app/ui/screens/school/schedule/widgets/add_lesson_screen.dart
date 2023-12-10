@@ -1,3 +1,4 @@
+import 'package:etm_crm/app/domain/models/lesson.dart';
 import 'package:etm_crm/app/domain/states/school/school_schedule_state.dart';
 import 'package:etm_crm/app/ui/screens/school/schedule/widgets/select_day_week.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,12 @@ import '../../../../widgets/select_bottom_sheet_input.dart';
 import '../../../../widgets/select_input_search.dart';
 
 class AddLessonScreen extends StatefulWidget {
-  const AddLessonScreen({Key? key}) : super(key: key);
+  const AddLessonScreen({
+    Key? key,
+    this.edit
+  }) : super(key: key);
+
+  final Lesson? edit;
 
   @override
   State<AddLessonScreen> createState() => _AddLessonScreenState();
@@ -22,7 +28,11 @@ class _AddLessonScreenState extends State<AddLessonScreen> {
   @override
   void initState() {
     Future.microtask(() {
-      context.read<SchoolScheduleState>().fetchMeta();
+      context.read<SchoolScheduleState>().fetchMeta().then((value) {
+        if(widget.edit != null){
+          context.read<SchoolScheduleState>().initEditData(widget.edit);
+        }
+      });
     });
     super.initState();
   }
@@ -153,7 +163,7 @@ class _AddLessonScreenState extends State<AddLessonScreen> {
                       height: 16,
                     ),
                     AppButton(
-                      title: 'ADD Lesson',
+                      title: state.editId != null ? 'Edit Lesson' : 'ADD Lesson',
                       onPressed: () {
                         state.addOrEditLesson();
                       },

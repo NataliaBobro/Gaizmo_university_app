@@ -28,7 +28,9 @@ Lesson _$LessonFromJson(Map<String, dynamic> json) => Lesson(
       schoolClass: json['school_class'] == null
           ? null
           : SchoolClass.fromJson(json['school_class'] as Map<String, dynamic>),
-    );
+    )..day = (json['day'] as List<dynamic>?)
+        ?.map((e) => ListDay.fromJson(e as Map<String, dynamic>))
+        .toList();
 
 Map<String, dynamic> _$LessonToJson(Lesson instance) => <String, dynamic>{
       'id': instance.id,
@@ -37,6 +39,7 @@ Map<String, dynamic> _$LessonToJson(Lesson instance) => <String, dynamic>{
       'end': instance.end,
       'service': instance.service,
       'school_class': instance.schoolClass,
+      'day': instance.day,
     };
 
 SchoolClass _$SchoolClassFromJson(Map<String, dynamic> json) => SchoolClass(
@@ -50,4 +53,14 @@ Map<String, dynamic> _$SchoolClassToJson(SchoolClass instance) =>
       'id': instance.id,
       'school_id': instance.schoolId,
       'name': instance.name,
+    };
+
+ListDay _$ListDayFromJson(Map<String, dynamic> json) => ListDay(
+      name: json['name'] as String,
+      define: json['define'] as String,
+    );
+
+Map<String, dynamic> _$ListDayToJson(ListDay instance) => <String, dynamic>{
+      'name': instance.name,
+      'define': instance.define,
     };

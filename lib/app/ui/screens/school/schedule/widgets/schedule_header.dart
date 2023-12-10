@@ -77,7 +77,9 @@ class ScheduleHeader extends StatelessWidget {
                     child: SvgPicture.asset(
                         Svgs.menu
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      state.openFilter();
+                    },
                   )
                 ],
               )

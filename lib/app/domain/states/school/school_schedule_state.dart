@@ -2,10 +2,12 @@ import 'package:dio/dio.dart';
 import 'package:etm_crm/app/domain/models/meta.dart';
 import 'package:etm_crm/app/domain/services/schedule_service.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:provider/provider.dart';
 
+import '../../../ui/screens/school/schedule/filter/schedule_filter_screen.dart';
 import '../../../ui/screens/school/schedule/widgets/add_lesson_screen.dart';
 import '../../../ui/utils/show_message.dart';
 import '../../../ui/widgets/snackbars.dart';
@@ -15,16 +17,22 @@ import '../../models/schedule.dart';
 class SchoolScheduleState with ChangeNotifier {
   BuildContext context;
   int _filterDateIndex = 5;
+  int? _editId;
   bool _isLoading = false;
   ScheduleMeta? _scheduleMeta;
   Map<String, dynamic>? _selectService;
   Map<String, dynamic>? _selectClass;
   ValidateError? _validateError;
   LessonsList? _lessonsList;
+  final FilterSchedule _filterSchedule = FilterSchedule(
+      type: [],
+      teacher: [],
+      selectClass: []
+  );
   List<Map<String, String>> _dayListSelected = [];
   List<Map<String, dynamic>> _listServices = [];
   List<Map<String, dynamic>> _listClass = [];
-  final MaskedTextController _lessonStart = MaskedTextController(mask: '00 : 00');
+  MaskedTextController _lessonStart = MaskedTextController(mask: '00 : 00');
   final MaskedTextController _repeatsStart = MaskedTextController(
       mask: '00.00.0000'
   );
@@ -35,11 +43,14 @@ class SchoolScheduleState with ChangeNotifier {
   SchoolScheduleState(this.context){
     Future.microtask(() async {
       await getLesson();
+      fetchMeta();
     });
   }
 
   int get filterDateIndex => _filterDateIndex;
+  int? get editId => _editId;
   bool get isLoading => _isLoading;
+  FilterSchedule get filterSchedule => _filterSchedule;
   LessonsList? get lessonsList => _lessonsList;
   ScheduleMeta? get scheduleMeta => _scheduleMeta;
   Map<String, dynamic>? get selectService => _selectService;
@@ -58,6 +69,11 @@ class SchoolScheduleState with ChangeNotifier {
     getLesson();
   }
 
+  void changeFilterType(List<int>value) {
+    _filterSchedule.type = value;
+    notifyListeners();
+  }
+
   void clearEndDate() {
     _repeatsEnd.clear();
   }
@@ -72,9 +88,14 @@ class SchoolScheduleState with ChangeNotifier {
     notifyListeners();
   }
   void changeSelectDay(value){
-    _dayListSelected.contains(value) ?
-      _dayListSelected.remove(value) :
-      _dayListSelected.add(value);
+    for(var a = 0; a < _dayListSelected.length; a++){
+      if(value['define'] == _dayListSelected[a]['define']){
+        _dayListSelected.removeAt(a);
+        notifyListeners();
+        return;
+      }
+    }
+    _dayListSelected.add(value);
     notifyListeners();
   }
 
@@ -88,6 +109,63 @@ class SchoolScheduleState with ChangeNotifier {
             )
         )
     );
+  }
+
+  Future<void> openFilter() async {
+    await Navigator.push(
+        context,
+        CupertinoPageRoute(
+            builder: (context) => ChangeNotifierProvider.value(
+              value: this,
+              child: const ScheduleFilterScreen(),
+            )
+        )
+    );
+  }
+
+  Future<void> openEditLesson(Lesson? lesson) async{
+    await Navigator.push(
+        context,
+        CupertinoPageRoute(
+            builder: (context) => ChangeNotifierProvider.value(
+              value: this,
+              child: AddLessonScreen(
+                edit: lesson
+              ),
+            )
+        )
+    );
+  }
+  
+  void initEditData(Lesson? edit) {
+    _editId = edit?.id;
+    _selectService = _listServices.firstWhere((element) => element['id'] == edit?.service?.id);
+    _selectClass = _listClass.firstWhere((element) => element['id'] == edit?.schoolClass?.id);
+    _lessonStart.text = '${edit?.lessonStart}';
+    _repeatsStart.text = '${edit?.start?.replaceAll('-', '')}';
+    _repeatsEnd.text = '${edit?.end?.replaceAll('-', '')}';
+
+
+    final date = DateTime.parse('${edit?.start}');
+    _repeatsStart.text =
+        '${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year}';
+
+    if(edit?.end != null){
+      final dateEnd = DateTime.parse('${edit?.end}');
+      _repeatsEnd.text =
+      '${dateEnd.day.toString().padLeft(2, '0')}.${dateEnd.month.toString().padLeft(2, '0')}.${dateEnd.year}';
+    }
+
+    _dayListSelected = [];
+    if(edit?.day != null){
+      for(var a = 0; a < (edit?.day?.length ?? 0); a++){
+        _dayListSelected.add({
+          'define': '${edit?.day?[a].define}',
+          'name': '${edit?.day?[a].name}',
+        });
+      }
+    }
+    notifyListeners();
   }
 
   Future<void> fetchMeta() async {
@@ -132,7 +210,26 @@ class SchoolScheduleState with ChangeNotifier {
     try{
       _lessonsList = await ScheduleService.getLesson(context, date.toString());
     }catch (e) {
-      print(e);
+      if(kDebugMode){
+        print(e);
+      }
+    } finally {
+      notifyListeners();
+    }
+  }
+
+  Future<void> deleteLesson(int? id) async {
+    DateTime now = DateTime.now();
+    DateTime date = now.add(Duration(days: _filterDateIndex - 5));
+    try{
+      final result = await ScheduleService.deleteLesson(context, id, date.toString());
+      if(result == true){
+        getLesson();
+      }
+    }catch (e) {
+      if(kDebugMode){
+        print(e);
+      }
     } finally {
       notifyListeners();
     }
@@ -141,15 +238,19 @@ class SchoolScheduleState with ChangeNotifier {
   Future<void> addOrEditLesson() async {
     _validateError = null;
     notifyListeners();
+    Map<String, dynamic> data = {
+      'id': _editId,
+      'service': _selectService?['id'],
+      'school_class':  _selectClass?['id'],
+      'start_lesson': _lessonStart.text.replaceAll(' ', ''),
+      'start': _repeatsStart.text,
+      'end': _repeatsEnd.text,
+      'day': _dayListSelected,
+    };
     try {
       final result = await ScheduleService.addLesson(
           context,
-          _selectService?['id'],
-          _selectClass?['id'],
-          _lessonStart.text,
-          _repeatsStart.text,
-          _repeatsEnd.text,
-          _dayListSelected
+          data
       );
       if(result != null){
         clear();

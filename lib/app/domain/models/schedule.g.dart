@@ -38,3 +38,18 @@ Map<String, dynamic> _$SchoolClassModelToJson(SchoolClassModel instance) =>
       'name': instance.name,
       'school_id': instance.schoolId,
     };
+
+FilterSchedule _$FilterScheduleFromJson(Map<String, dynamic> json) =>
+    FilterSchedule(
+      type: (json['type'] as List<dynamic>).map((e) => e as int).toList(),
+      teacher: (json['teacher'] as List<dynamic>).map((e) => e as int).toList(),
+      selectClass:
+          (json['select_class'] as List<dynamic>).map((e) => e as int).toList(),
+    );
+
+Map<String, dynamic> _$FilterScheduleToJson(FilterSchedule instance) =>
+    <String, dynamic>{
+      'type': instance.type,
+      'teacher': instance.teacher,
+      'select_class': instance.selectClass,
+    };

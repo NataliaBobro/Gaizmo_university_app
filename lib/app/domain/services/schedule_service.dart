@@ -39,32 +39,39 @@ class ScheduleService {
     return LessonsList.fromJson(data);
   }
 
+  static Future<bool?> deleteLesson(
+      context, int? id, String date,
+      ) async {
+    final token = getToken(context);
+    if(token == null) return null;
+    final response = await ApiClient().dio.delete(
+      '/school/schedule/delete/$id',
+      queryParameters: {
+        'date': date
+      },
+      options: Options(
+        headers: {'Authorization': 'Bearer $token'},
+      ),
+    );
+    final data = response.data as Map<String, dynamic>;
+    return data['success'];
+  }
+
 
 
   static Future<bool?> addLesson(
       context,
-      int? selectServiceId,
-      int? selectClassId,
-      String? startLesson,
-      String? repeatsStart,
-      String? repeatsEnd,
-      List<Map<String, String>> dayListSelected,
+      Map<String, dynamic> dataBody,
       ) async {
     final token = getToken(context);
     if(token == null) return null;
     final response = await ApiClient().dio.post(
-      '/school/schedule/add-lesson',
+        dataBody['id'] == null ? '/school/schedule/add-lesson' :
+        '/school/schedule/edit-lesson',
       options: Options(
         headers: {'Authorization': 'Bearer $token'},
       ),
-      data: {
-        'service': selectServiceId,
-        'school_class': selectClassId,
-        'start_lesson': startLesson?.replaceAll(' ', ''),
-        'start': repeatsStart,
-        'end': repeatsEnd,
-        'day': dayListSelected,
-      }
+      data: dataBody
     );
     final data = response.data as Map<String, dynamic>;
     return data['success'];

@@ -24,6 +24,7 @@ class Lesson {
   String? end;
   ServicesModel? service;
   SchoolClass? schoolClass;
+  List<ListDay>? day;
 
   Lesson({
     required this.id,
@@ -54,4 +55,19 @@ class SchoolClass {
   Map<String, dynamic> toJson() => _$SchoolClassToJson(this);
 
   factory SchoolClass.fromJson(Map<String, dynamic> json) => _$SchoolClassFromJson(json);
+}
+
+@JsonSerializable(includeIfNull: true, fieldRename: FieldRename.snake)
+class ListDay {
+  String name;
+  String define;
+
+  ListDay({
+    required this.name,
+    required this.define,
+  });
+
+  Map<String, dynamic> toJson() => _$ListDayToJson(this);
+
+  factory ListDay.fromJson(Map<String, dynamic> json) => _$ListDayFromJson(json);
 }

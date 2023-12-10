@@ -8,10 +8,12 @@ import '../../../resources/resources.dart';
 class CenterHeader extends StatelessWidget {
   const CenterHeader({
     Key? key,
-    required this.title
+    required this.title,
+    this.action
   }) : super(key: key);
 
   final String title;
+  final Widget? action;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +59,15 @@ class CenterHeader extends StatelessWidget {
                   Navigator.pop(context);
                 },
               )
-          )
+          ),
+          if(action != null) ...[
+            Positioned(
+              right: 0,
+              top: 0,
+              bottom: 0,
+              child: action!,
+            )
+          ]
         ],
       ),
     );

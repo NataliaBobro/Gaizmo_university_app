@@ -35,4 +35,20 @@ class SchoolClassModel {
   factory SchoolClassModel.fromJson(Map<String, dynamic> json) => _$SchoolClassModelFromJson(json);
 }
 
+@JsonSerializable(includeIfNull: true, fieldRename: FieldRename.snake)
+class FilterSchedule {
+  List<int> type = [];
+  List<int> teacher = [];
+  List<int> selectClass = [];
+
+  FilterSchedule({
+    required this.type,
+    required this.teacher,
+    required this.selectClass,
+  });
+
+  Map<String, dynamic> toJson() => _$FilterScheduleToJson(this);
+  factory FilterSchedule.fromJson(Map<String, dynamic> json) => _$FilterScheduleFromJson(json);
+}
+
 

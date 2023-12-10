@@ -35,29 +35,38 @@ class _SelectDayWeekState extends State<SelectDayWeek> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: List.generate(
               dateList.length,
-                  (index) => CupertinoButton(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: Container(
-                    width: 32,
-                    height: 32,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        color: dayListSelected.contains(dateList[index]) ?
-                        const Color(0xFFFFC700) : Colors.white
-                    ),
-                    child: Center(
-                      child: Text(
-                        '${dateList[index]['define']}',
-                        style: TextStyles.s12w600.copyWith(
-                            color: dayListSelected.contains(dateList[index]) ? Colors.white : Colors.black
+              (index) {
+                bool isSelected = false;
+                for(var a = 0; a < dayListSelected.length; a++){
+                  if(dateList[index]['define'] == dayListSelected[a]['define']){
+                    isSelected = true;
+                    break;
+                  }
+                }
+                return CupertinoButton(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: Container(
+                      width: 32,
+                      height: 32,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: isSelected ?
+                          const Color(0xFFFFC700) : Colors.white
+                      ),
+                      child: Center(
+                        child: Text(
+                          '${dateList[index]['define']}',
+                          style: TextStyles.s12w600.copyWith(
+                              color: isSelected ? Colors.white : Colors.black
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  onPressed: () {
-                    state.changeSelectDay(dateList[index]);
-                  }
-              )
+                    onPressed: () {
+                      state.changeSelectDay(dateList[index]);
+                    }
+                );
+              }
           ),
         ),
 
