@@ -19,6 +19,20 @@ class UserDataWithToken {
 }
 
 @JsonSerializable(includeIfNull: true, fieldRename: FieldRename.snake)
+class ListUserData {
+  List<UserData> users;
+
+  ListUserData({
+    required this.users,
+  });
+
+  Map<String, dynamic> toJson() => _$ListUserDataToJson(this);
+
+  factory ListUserData.fromJson(Map<String, dynamic> json) =>
+      _$ListUserDataFromJson(json);
+}
+
+@JsonSerializable(includeIfNull: true, fieldRename: FieldRename.snake)
 class UserData {
   int id;
   int type;

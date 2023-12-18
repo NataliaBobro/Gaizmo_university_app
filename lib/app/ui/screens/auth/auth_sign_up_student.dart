@@ -54,7 +54,7 @@ class _AuthSignUpStudentState extends State<AuthSignUpStudent> {
                 child: ListView(
                   physics: const BottomBouncingScrollPhysics(),
                   children: [
-                    const AuthTitle(
+                    const AppTitle(
                       title: 'General info *',
                     ),
                     AuthInput(
@@ -80,7 +80,7 @@ class _AuthSignUpStudentState extends State<AuthSignUpStudent> {
                       isPass: true,
                       isBottomPadding: false,
                     ),
-                    const AuthTitle(
+                    const AppTitle(
                       title: 'Personal info *',
                     ),
                     AuthInput(
@@ -119,7 +119,7 @@ class _AuthSignUpStudentState extends State<AuthSignUpStudent> {
                     const SizedBox(
                       height: 16,
                     ),
-                    const AuthTitle(
+                    const AppTitle(
                       title: 'Payment info',
                     ),
                     CartNumber(

@@ -1,10 +1,12 @@
 import 'package:etm_crm/app/domain/states/school/school_schedule_state.dart';
 import 'package:etm_crm/app/domain/states/school/school_services_state.dart';
+import 'package:etm_crm/app/domain/states/school/school_staff_state.dart';
 import 'package:etm_crm/app/ui/screens/auth/auth_sign_in.dart';
 import 'package:etm_crm/app/ui/screens/auth/widgets/auth_select_login_type.dart';
 import 'package:etm_crm/app/ui/screens/school/profile/school_profile_screen.dart';
 import 'package:etm_crm/app/ui/screens/school/schedule/school_schedule_screen.dart';
 import 'package:etm_crm/app/ui/screens/school/service/school_service_screen.dart';
+import 'package:etm_crm/app/ui/screens/school/staff/staff_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:routemaster/routemaster.dart' as routemaster;
 import '../../../resources/resources.dart';
@@ -27,6 +29,7 @@ const _auth = '/auth';
 const _home = '/home';
 const _services = '/services';
 const _schedule = '/schedule';
+const _staff = '/staff';
 
 abstract class AppRoutes {
   static String get tabbar => _tabbar;
@@ -37,6 +40,7 @@ abstract class AppRoutes {
   static String get home => _home;
   static String get services => _services;
   static String get schedule => _schedule;
+  static String get staff => _staff;
 }
 
 final splashMap = routemaster.RouteMap(
@@ -73,7 +77,7 @@ final loggedSchoolInMap = routemaster.RouteMap(
   onUnknownRoute: (_) => const routemaster.Redirect(_tabbar),
   routes: {
     _tabbar: (info) => routemaster.TabPage(
-      paths: const [_home, _services, _schedule, _home, _home],
+      paths: const [_home, _services, _schedule, _staff, _home],
       child: MultiProvider(
         providers: [
           ChangeNotifierProvider(
@@ -107,6 +111,12 @@ final loggedSchoolInMap = routemaster.RouteMap(
       child: ChangeNotifierProvider(
         create: (context) => SchoolScheduleState(context),
         child: const SchoolScheduleScreen(),
+      ),
+    ),
+    _staff: (_) => TransitionPage(
+      child: ChangeNotifierProvider(
+        create: (context) => SchoolStaffState(context),
+        child: const StaffScreen(),
       ),
     ),
   },

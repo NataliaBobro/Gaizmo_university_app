@@ -76,7 +76,7 @@ class _AuthSignUpSchoolState extends State<AuthSignUpSchool> {
                   child: ListView(
                     physics: const BottomBouncingScrollPhysics(),
                     children: [
-                      const AuthTitle(
+                      const AppTitle(
                         title: 'General info *',
                       ),
                       AuthInput(
@@ -102,7 +102,7 @@ class _AuthSignUpSchoolState extends State<AuthSignUpSchool> {
                         isPass: true,
                         isBottomPadding: false,
                       ),
-                      const AuthTitle(
+                      const AppTitle(
                         title: 'School information',
                       ),
                       AuthInput(

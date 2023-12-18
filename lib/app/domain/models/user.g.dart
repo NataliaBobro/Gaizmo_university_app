@@ -18,6 +18,17 @@ Map<String, dynamic> _$UserDataWithTokenToJson(UserDataWithToken instance) =>
       'token': instance.token,
     };
 
+ListUserData _$ListUserDataFromJson(Map<String, dynamic> json) => ListUserData(
+      users: (json['users'] as List<dynamic>)
+          .map((e) => UserData.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$ListUserDataToJson(ListUserData instance) =>
+    <String, dynamic>{
+      'users': instance.users,
+    };
+
 UserData _$UserDataFromJson(Map<String, dynamic> json) => UserData(
       id: json['id'] as int,
       type: json['type'] as int,

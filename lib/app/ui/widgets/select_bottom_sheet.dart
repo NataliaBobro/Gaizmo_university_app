@@ -44,6 +44,7 @@ class SelectBottomSheet extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 onPressed: () {
                   onPress!(index);
+                  Navigator.pop(context);
                 },
                 child: Container(
                   alignment: Alignment.center,

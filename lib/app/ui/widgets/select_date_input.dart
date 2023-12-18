@@ -11,10 +11,14 @@ class SelectDateInput extends StatefulWidget {
     Key? key,
     required this.onChange,
     this.errors,
+    this.hintStyle,
+    this.labelStyle,
   }) : super(key: key);
 
   final Function(int? day, String? mon, int? year) onChange;
   final String? errors;
+  final TextStyle? hintStyle;
+  final TextStyle? labelStyle;
 
   @override
   State<SelectDateInput> createState() => _SelectDateInputState();
@@ -43,7 +47,7 @@ class _SelectDateInputState extends State<SelectDateInput> {
       children: [
         Text(
           'Date of birth',
-          style: TextStyles.s14w400.copyWith(
+          style: widget.labelStyle ?? TextStyles.s14w400.copyWith(
               color: const Color(0xFF848484)
           ),
         ),
@@ -62,7 +66,7 @@ class _SelectDateInputState extends State<SelectDateInput> {
                     ),
                     hint: Text(
                       'Date',
-                      style: TextStyles.s14w400.copyWith(
+                      style: widget.hintStyle ?? TextStyles.s14w400.copyWith(
                           color: Colors.white
                       ),
                     ),
@@ -83,7 +87,7 @@ class _SelectDateInputState extends State<SelectDateInput> {
                         value: e,
                         child: Text(
                           '$e',
-                          style: TextStyles.s14w400.copyWith(
+                          style: widget.hintStyle ?? TextStyles.s14w400.copyWith(
                               color: Colors.white
                           ),
                         ),
@@ -120,7 +124,7 @@ class _SelectDateInputState extends State<SelectDateInput> {
                     ),
                     hint: Text(
                       'Mounth',
-                      style: TextStyles.s14w400.copyWith(
+                      style: widget.hintStyle ?? TextStyles.s14w400.copyWith(
                           color: Colors.white
                       ),
                     ),
@@ -141,7 +145,7 @@ class _SelectDateInputState extends State<SelectDateInput> {
                         value: e,
                         child: Text(
                           e,
-                          style: TextStyles.s14w400.copyWith(
+                          style: widget.hintStyle ?? TextStyles.s14w400.copyWith(
                               color: Colors.white
                           ),
                         ),
@@ -178,7 +182,7 @@ class _SelectDateInputState extends State<SelectDateInput> {
                     ),
                     hint: Text(
                       'Year',
-                      style: TextStyles.s14w400.copyWith(
+                      style: widget.hintStyle ?? TextStyles.s14w400.copyWith(
                           color: Colors.white
                       ),
                     ),
@@ -199,7 +203,7 @@ class _SelectDateInputState extends State<SelectDateInput> {
                         value: e,
                         child: Text(
                           '$e',
-                          style: TextStyles.s14w400.copyWith(
+                          style: widget.hintStyle ?? TextStyles.s14w400.copyWith(
                               color: Colors.white
                           ),
                         ),

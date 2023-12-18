@@ -1,8 +1,8 @@
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
 import 'package:flutter/material.dart';
 
-class AuthTitle extends StatelessWidget {
-  const AuthTitle({
+class AppTitle extends StatelessWidget {
+  const AppTitle({
     Key? key,
     required this.title,
   }) : super(key: key);

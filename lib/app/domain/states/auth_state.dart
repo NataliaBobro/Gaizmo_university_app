@@ -19,7 +19,6 @@ import '../../ui/screens/auth/auth_sign_up_teacher.dart';
 import '../../ui/screens/auth/widgets/auth_select_login_type.dart';
 import '../../ui/screens/auth/widgets/auth_select_user_type.dart';
 import '../../ui/utils/show_message.dart';
-import '../../ui/widgets/select_bottom_sheet.dart';
 import '../../ui/widgets/snackbars.dart';
 import '../models/meta.dart';
 
@@ -327,38 +326,6 @@ class AuthState with ChangeNotifier {
     );
   }
 
-  Future<void> openShowBottomSelect(
-      String title,
-      List<String> list,
-      {
-        Function? onPress
-      }
-      ) async {
-    await showModalBottomSheet(
-      context: context,
-      enableDrag: true,
-      isDismissible: true,
-      useRootNavigator: true,
-      barrierColor: Colors.black.withOpacity(.75),
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
-      ),
-      builder: (_) {
-        final height = (list.length * 48) + 68;
-        return SizedBox(
-          height: height.toDouble(),
-          child: ChangeNotifierProvider.value(
-            value: this,
-            child: SelectBottomSheet(
-                list: list,
-                title: title,
-                onPress: onPress
-            ),
-          ),
-        );
-      },
-    );
-  }
 
   void signUp(type) {
     if(type == 'student'){
