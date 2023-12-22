@@ -1,4 +1,7 @@
 import 'package:etm_crm/app/domain/states/school/school_staff_item_state.dart';
+import 'package:etm_crm/app/ui/screens/school/staff/item/settings/staff_address.dart';
+import 'package:etm_crm/app/ui/screens/school/staff/item/settings/staff_date_birth.dart';
+import 'package:etm_crm/app/ui/screens/school/staff/item/settings/staff_gender.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:provider/provider.dart';
@@ -34,6 +37,7 @@ class _StaffPersonalInfoScreenState extends State<StaffPersonalInfoScreen> {
     fullName.text = '${read.staff?.firstName} ${read.staff?.lastName} ${read.staff?.surname}';
     phone.text = '${read.staff?.phone}';
     email.text = '${read.staff?.email}';
+    about.text = read.staff?.about != null ? '${read.staff?.about}' : '';
   }
 
   void close() {
@@ -50,6 +54,7 @@ class _StaffPersonalInfoScreenState extends State<StaffPersonalInfoScreen> {
   }
   @override
   Widget build(BuildContext context) {
+    final read = context.read<SchoolStaffItemState>();
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -110,49 +115,25 @@ class _StaffPersonalInfoScreenState extends State<StaffPersonalInfoScreen> {
                               SettingsInput(
                                   title: "Date of birth",
                                   onPress: () async {
-                                    // await Navigator.push(
-                                    //   context,
-                                    //   MaterialPageRoute(
-                                    //     builder: (context) => ChangeNotifierProvider.value(
-                                    //       value: read,
-                                    //       child: StaffPersonalInfoScreen(
-                                    //           staff: widget.staff
-                                    //       ),
-                                    //     ),
-                                    //   ),
-                                    // );
+                                    read.openPage(
+                                      const StaffDateBirth()
+                                    );
                                   }
                               ),
                               SettingsInput(
                                   title: "Gender",
                                   onPress: () async {
-                                    // await Navigator.push(
-                                    //   context,
-                                    //   MaterialPageRoute(
-                                    //     builder: (context) => ChangeNotifierProvider.value(
-                                    //       value: read,
-                                    //       child: StaffPersonalInfoScreen(
-                                    //           staff: widget.staff
-                                    //       ),
-                                    //     ),
-                                    //   ),
-                                    // );
+                                    read.openPage(
+                                        const StaffGender()
+                                    );
                                   }
                               ),
                               SettingsInput(
                                   title: "Address",
                                   onPress: () async {
-                                    // await Navigator.push(
-                                    //   context,
-                                    //   MaterialPageRoute(
-                                    //     builder: (context) => ChangeNotifierProvider.value(
-                                    //       value: read,
-                                    //       child: StaffPersonalInfoScreen(
-                                    //           staff: widget.staff
-                                    //       ),
-                                    //     ),
-                                    //   ),
-                                    // );
+                                    read.openPage(
+                                        const StaffAddress()
+                                    );
                                   }
                               ),
                               SettingsInput(
@@ -196,7 +177,7 @@ class _StaffPersonalInfoScreenState extends State<StaffPersonalInfoScreen> {
                               title: 'Save changes',
                               onPressed: () {
                                 context.read<SchoolStaffItemState>().saveGeneralInfo(
-                                    fullName.text, phone.text, email.text
+                                    fullName.text, phone.text, email.text, about.text
                                 );
                               }
                           ),

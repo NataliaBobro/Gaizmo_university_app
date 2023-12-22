@@ -50,6 +50,7 @@ class UserData {
   String? street;
   String? house;
   String? city;
+  String? about;
   List<WorkDay>? workDay;
   SocialAccounts? socialAccounts;
 
@@ -70,6 +71,7 @@ class UserData {
     this.street,
     this.house,
     this.city,
+    this.about,
     this.socialAccounts,
   });
 

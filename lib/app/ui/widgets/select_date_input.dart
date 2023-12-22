@@ -13,10 +13,14 @@ class SelectDateInput extends StatefulWidget {
     this.errors,
     this.hintStyle,
     this.labelStyle,
+    this.value,
+    this.dropdownColor = Colors.black,
   }) : super(key: key);
 
   final Function(int? day, String? mon, int? year) onChange;
   final String? errors;
+  final String? value;
+  final Color dropdownColor;
   final TextStyle? hintStyle;
   final TextStyle? labelStyle;
 
@@ -28,6 +32,26 @@ class _SelectDateInputState extends State<SelectDateInput> {
   int? selectDate;
   int? selectYear;
   String? selectMonths;
+
+  @override
+  void initState() {
+    initData();
+    super.initState();
+  }
+
+  void initData(){
+    if(widget.value != null){
+      try{
+        final dateParse = widget.value?.split('-');
+        selectDate = int.parse('${dateParse?[2]}');
+        selectYear = int.parse('${dateParse?[0]}');
+        selectMonths = months.elementAt(int.parse('${dateParse?[1]}') - 1);
+      } catch (e){
+        print(e);
+      }
+    }
+    setState(() {});
+  }
 
   final List<String> months = List.generate(12, (index) {
     final month = DateTime(2023, index + 1);
@@ -60,6 +84,7 @@ class _SelectDateInputState extends State<SelectDateInput> {
               child: Column(
                 children: [
                   DropdownButtonFormField(
+                    style: widget.hintStyle,
                     icon: SvgPicture.asset(
                       Svgs.openSelect,
                       width: 20,
@@ -70,7 +95,7 @@ class _SelectDateInputState extends State<SelectDateInput> {
                           color: Colors.white
                       ),
                     ),
-                    dropdownColor: Colors.black,
+                    dropdownColor: widget.dropdownColor,
                     decoration: const InputDecoration(
                       contentPadding: EdgeInsets.zero,
                       constraints: BoxConstraints(
@@ -93,6 +118,7 @@ class _SelectDateInputState extends State<SelectDateInput> {
                         ),
                       ),
                     ).toList(),
+                    value: selectDate,
                     onChanged: (value) {
                       setState(() {
                         selectDate = value;
@@ -118,6 +144,7 @@ class _SelectDateInputState extends State<SelectDateInput> {
               child: Column(
                 children: [
                   DropdownButtonFormField(
+                    style: widget.hintStyle,
                     icon: SvgPicture.asset(
                       Svgs.openSelect,
                       width: 20,
@@ -128,7 +155,7 @@ class _SelectDateInputState extends State<SelectDateInput> {
                           color: Colors.white
                       ),
                     ),
-                    dropdownColor: Colors.black,
+                    dropdownColor: widget.dropdownColor,
                     decoration: const InputDecoration(
                       contentPadding: EdgeInsets.zero,
                       constraints: BoxConstraints(
@@ -151,6 +178,7 @@ class _SelectDateInputState extends State<SelectDateInput> {
                         ),
                       ),
                     ).toList(),
+                    value: selectMonths,
                     onChanged: (value) {
                       setState(() {
                         selectMonths = value;
@@ -176,6 +204,7 @@ class _SelectDateInputState extends State<SelectDateInput> {
               child: Column(
                 children: [
                   DropdownButtonFormField(
+                    style: widget.hintStyle,
                     icon: SvgPicture.asset(
                       Svgs.openSelect,
                       width: 20,
@@ -186,7 +215,7 @@ class _SelectDateInputState extends State<SelectDateInput> {
                           color: Colors.white
                       ),
                     ),
-                    dropdownColor: Colors.black,
+                    dropdownColor: widget.dropdownColor,
                     decoration: const InputDecoration(
                       contentPadding: EdgeInsets.zero,
                       constraints: BoxConstraints(
@@ -209,6 +238,7 @@ class _SelectDateInputState extends State<SelectDateInput> {
                         ),
                       ),
                     ).toList(),
+                    value: selectYear,
                     onChanged: (value) {
                       setState(() {
                         selectYear = value;

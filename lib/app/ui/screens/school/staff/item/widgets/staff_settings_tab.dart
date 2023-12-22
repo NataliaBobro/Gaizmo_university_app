@@ -1,6 +1,5 @@
 import 'package:etm_crm/app/domain/models/user.dart';
 import 'package:etm_crm/app/domain/states/school/school_staff_item_state.dart';
-import 'package:etm_crm/app/domain/states/school/school_staff_state.dart';
 import 'package:etm_crm/app/ui/screens/school/staff/item/widgets/staff_personal_info_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +21,6 @@ class StaffSettingsTab extends StatefulWidget {
 class _StaffSettingsTabState extends State<StaffSettingsTab> {
   @override
   Widget build(BuildContext context) {
-    final read = context.watch<SchoolStaffState>();
     return Column(
       children: [
         const SizedBox(
@@ -36,7 +34,7 @@ class _StaffSettingsTabState extends State<StaffSettingsTab> {
                 MaterialPageRoute(
                   builder: (context) => ChangeNotifierProvider(
                     create: (context) => SchoolStaffItemState(context, widget.staff),
-                    child: StaffPersonalInfoScreen(),
+                    child: const StaffPersonalInfoScreen(),
                   ),
                 ),
               );
