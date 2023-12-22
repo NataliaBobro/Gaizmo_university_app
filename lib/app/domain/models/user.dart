@@ -46,6 +46,10 @@ class UserData {
   String? email;
   String? avatar;
   School? school;
+  String? country;
+  String? street;
+  String? house;
+  String? city;
   List<WorkDay>? workDay;
   SocialAccounts? socialAccounts;
 
@@ -62,6 +66,10 @@ class UserData {
     this.email,
     this.avatar,
     this.school,
+    this.country,
+    this.street,
+    this.house,
+    this.city,
     this.socialAccounts,
   });
 

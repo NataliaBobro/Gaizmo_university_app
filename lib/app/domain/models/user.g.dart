@@ -44,6 +44,10 @@ UserData _$UserDataFromJson(Map<String, dynamic> json) => UserData(
       school: json['school'] == null
           ? null
           : School.fromJson(json['school'] as Map<String, dynamic>),
+      country: json['country'] as String?,
+      street: json['street'] as String?,
+      house: json['house'] as String?,
+      city: json['city'] as String?,
       socialAccounts: json['social_accounts'] == null
           ? null
           : SocialAccounts.fromJson(
@@ -65,6 +69,10 @@ Map<String, dynamic> _$UserDataToJson(UserData instance) => <String, dynamic>{
       'email': instance.email,
       'avatar': instance.avatar,
       'school': instance.school,
+      'country': instance.country,
+      'street': instance.street,
+      'house': instance.house,
+      'city': instance.city,
       'work_day': instance.workDay,
       'social_accounts': instance.socialAccounts,
     };

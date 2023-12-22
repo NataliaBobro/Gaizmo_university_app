@@ -24,6 +24,24 @@ class StaffService {
     return data['success'];
   }
 
+  static Future<bool?> saveGeneralInfo(
+      BuildContext context,
+      int? id,
+      Map<String, dynamic> dataStaff
+      ) async {
+    final token = getToken(context);
+    if(token == null) return null;
+    final response = await ApiClient().dio.post(
+        '/school/staff/$id/change-general-info',
+        options: Options(
+          headers: {'Authorization': 'Bearer $token'},
+        ),
+        data: dataStaff
+    );
+    final data = response.data as Map<String, dynamic>;
+    return data['success'];
+  }
+
   static Future<ListUserData?> fetchStaff(
       BuildContext context
       ) async {

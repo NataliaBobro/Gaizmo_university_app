@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:etm_crm/app/domain/services/staff_service.dart';
+import 'package:etm_crm/app/ui/screens/school/staff/item/staff_item_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +35,19 @@ class SchoolStaffState with ChangeNotifier {
             builder: (context) => ChangeNotifierProvider.value(
               value: this,
               child: const AddStaffScreen(),
+            )
+        )
+    );
+  }
+  Future<void> openStaff(UserData? staff) async {
+    await Navigator.push(
+        context,
+        CupertinoPageRoute(
+            builder: (context) => ChangeNotifierProvider.value(
+              value: this,
+              child: StaffItemScreen(
+                  staff: staff
+              ),
             )
         )
     );

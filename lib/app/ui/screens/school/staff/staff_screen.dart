@@ -90,6 +90,7 @@ class StaffItem extends StatefulWidget {
 class _StaffItemState extends State<StaffItem> {
   @override
   Widget build(BuildContext context) {
+    final read = context.read<SchoolStaffState>();
     return Container(
       margin: const EdgeInsets.only(
           bottom: 8
@@ -97,7 +98,11 @@ class _StaffItemState extends State<StaffItem> {
       child: CupertinoButton(
         minSize: 0.0,
         padding: EdgeInsets.zero,
-        onPressed: () {},
+        onPressed: () {
+          read.openStaff(
+              widget.staff
+          );
+        },
         child: Container(
           padding: const EdgeInsets.symmetric(
             horizontal: 16,
