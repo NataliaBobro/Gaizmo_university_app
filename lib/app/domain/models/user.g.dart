@@ -53,9 +53,13 @@ UserData _$UserDataFromJson(Map<String, dynamic> json) => UserData(
           ? null
           : SocialAccounts.fromJson(
               json['social_accounts'] as Map<String, dynamic>),
-    )..workDay = (json['work_day'] as List<dynamic>?)
-        ?.map((e) => WorkDay.fromJson(e as Map<String, dynamic>))
-        .toList();
+    )
+      ..workDay = (json['work_day'] as List<dynamic>?)
+          ?.map((e) => WorkDay.fromJson(e as Map<String, dynamic>))
+          .toList()
+      ..documents = (json['documents'] as List<dynamic>?)
+          ?.map((e) => Documents.fromJson(e as Map<String, dynamic>))
+          .toList();
 
 Map<String, dynamic> _$UserDataToJson(UserData instance) => <String, dynamic>{
       'id': instance.id,
@@ -76,6 +80,7 @@ Map<String, dynamic> _$UserDataToJson(UserData instance) => <String, dynamic>{
       'city': instance.city,
       'about': instance.about,
       'work_day': instance.workDay,
+      'documents': instance.documents,
       'social_accounts': instance.socialAccounts,
     };
 
@@ -148,4 +153,18 @@ Map<String, dynamic> _$SocialAccountsToJson(SocialAccounts instance) =>
       'facebook': instance.facebook,
       'linkedin': instance.linkedin,
       'twitter': instance.twitter,
+    };
+
+Documents _$DocumentsFromJson(Map<String, dynamic> json) => Documents(
+      userId: json['user_id'] as int?,
+      typeId: json['type_id'] as int?,
+      patch: json['patch'] as String?,
+      name: json['name'] as String?,
+    );
+
+Map<String, dynamic> _$DocumentsToJson(Documents instance) => <String, dynamic>{
+      'user_id': instance.userId,
+      'type_id': instance.typeId,
+      'patch': instance.patch,
+      'name': instance.name,
     };

@@ -9,7 +9,7 @@ import '../../services/staff_service.dart';
 
 class SchoolStaffItemState with ChangeNotifier {
   BuildContext context;
-  final UserData? _staff;
+  UserData? _staff;
   ValidateError? _validateError;
 
   SchoolStaffItemState(this.context, this._staff);
@@ -47,6 +47,18 @@ class SchoolStaffItemState with ChangeNotifier {
         back();
       }
     }catch (e){
+      print(e);
+    }
+  }
+
+  Future<void> updateStaff() async {
+    try{
+      final result = await StaffService.getStaff(context, staff?.id);
+      if(result != null){
+        _staff = result;
+        notifyListeners();
+      }
+    }catch(e){
       print(e);
     }
   }

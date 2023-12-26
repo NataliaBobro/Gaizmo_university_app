@@ -52,6 +52,7 @@ class UserData {
   String? city;
   String? about;
   List<WorkDay>? workDay;
+  List<Documents>? documents;
   SocialAccounts? socialAccounts;
 
   UserData({
@@ -166,5 +167,24 @@ class SocialAccounts {
   Map<String, dynamic> toJson() => _$SocialAccountsToJson(this);
 
   factory SocialAccounts.fromJson(Map<String, dynamic> json) => _$SocialAccountsFromJson(json);
+}
+
+@JsonSerializable(includeIfNull: true, fieldRename: FieldRename.snake)
+class Documents {
+  int? userId;
+  int? typeId;
+  String? patch;
+  String? name;
+
+  Documents({
+    this.userId,
+    this.typeId,
+    this.patch,
+    this.name,
+  });
+
+  Map<String, dynamic> toJson() => _$DocumentsToJson(this);
+
+  factory Documents.fromJson(Map<String, dynamic> json) => _$DocumentsFromJson(json);
 }
 

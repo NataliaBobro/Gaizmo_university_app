@@ -1,4 +1,4 @@
-import 'package:etm_crm/app/domain/models/user.dart';
+import 'package:etm_crm/app/domain/states/school/school_staff_item_state.dart';
 import 'package:etm_crm/app/ui/screens/school/staff/item/widgets/staff_avatar.dart';
 import 'package:etm_crm/app/ui/screens/school/staff/item/widgets/staff_documents_tab.dart';
 import 'package:etm_crm/app/ui/screens/school/staff/item/widgets/staff_info.dart';
@@ -6,15 +6,13 @@ import 'package:etm_crm/app/ui/screens/school/staff/item/widgets/staff_personal_
 import 'package:etm_crm/app/ui/screens/school/staff/item/widgets/staff_settings_tab.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../../theme/text_styles.dart';
 
 class StaffItemScreen extends StatefulWidget {
   const StaffItemScreen({
     Key? key,
-    required this.staff
   }) : super(key: key);
-
-  final UserData? staff;
 
   @override
   State<StaffItemScreen> createState() => _StaffItemScreenState();
@@ -46,6 +44,7 @@ class _StaffItemScreenState extends State<StaffItemScreen> with TickerProviderSt
 
   @override
   Widget build(BuildContext context) {
+    final state = context.watch<SchoolStaffItemState>();
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -58,7 +57,7 @@ class _StaffItemScreenState extends State<StaffItemScreen> with TickerProviderSt
                 const StaffHeader(),
                 const StaffAvatar(),
                 StaffInfo(
-                    staff: widget.staff
+                    staff: state.staff
                 ),
                 Container(
                   height: 55,
@@ -140,16 +139,10 @@ class _StaffItemScreenState extends State<StaffItemScreen> with TickerProviderSt
                 Expanded(
                   child: TabBarView(
                       controller: _tabController,
-                      children: [
-                        StaffPersonalInfoTab(
-                            staff: widget.staff
-                        ),
-                        StaffDocumentsTab(
-                            staff: widget.staff
-                        ),
-                        StaffSettingsTab(
-                            staff: widget.staff
-                        ),
+                      children: const [
+                        StaffPersonalInfoTab(),
+                        StaffDocumentsTab(),
+                        StaffSettingsTab(),
                       ]
                   ),
                 )

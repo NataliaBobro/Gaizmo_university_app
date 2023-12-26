@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:etm_crm/app/domain/services/staff_service.dart';
+import 'package:etm_crm/app/domain/states/school/school_staff_item_state.dart';
 import 'package:etm_crm/app/ui/screens/school/staff/item/staff_item_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -43,11 +44,9 @@ class SchoolStaffState with ChangeNotifier {
     await Navigator.push(
         context,
         CupertinoPageRoute(
-            builder: (context) => ChangeNotifierProvider.value(
-              value: this,
-              child: StaffItemScreen(
-                  staff: staff
-              ),
+            builder: (context) => ChangeNotifierProvider(
+              create: (context) => SchoolStaffItemState(context, staff),
+              child: const StaffItemScreen(),
             )
         )
     );
@@ -100,7 +99,7 @@ class SchoolStaffState with ChangeNotifier {
       );
       if(result != null){
         back();
-        // getStaff();
+        getStaff();
       }
     } on DioError catch (e) {
       if(e.response?.statusCode == 422){

@@ -136,38 +136,38 @@ class _StaffPersonalInfoScreenState extends State<StaffPersonalInfoScreen> {
                                     );
                                   }
                               ),
-                              SettingsInput(
-                                  title: "Schedule",
-                                  onPress: () async {
-                                    // await Navigator.push(
-                                    //   context,
-                                    //   MaterialPageRoute(
-                                    //     builder: (context) => ChangeNotifierProvider.value(
-                                    //       value: read,
-                                    //       child: StaffPersonalInfoScreen(
-                                    //           staff: widget.staff
-                                    //       ),
-                                    //     ),
-                                    //   ),
-                                    // );
-                                  }
-                              ),
-                              SettingsInput(
-                                  title: "Salary",
-                                  onPress: () async {
-                                    // await Navigator.push(
-                                    //   context,
-                                    //   MaterialPageRoute(
-                                    //     builder: (context) => ChangeNotifierProvider.value(
-                                    //       value: read,
-                                    //       child: StaffPersonalInfoScreen(
-                                    //           staff: widget.staff
-                                    //       ),
-                                    //     ),
-                                    //   ),
-                                    // );
-                                  }
-                              ),
+                              // SettingsInput(
+                              //     title: "Schedule",
+                              //     onPress: () async {
+                              //       // await Navigator.push(
+                              //       //   context,
+                              //       //   MaterialPageRoute(
+                              //       //     builder: (context) => ChangeNotifierProvider.value(
+                              //       //       value: read,
+                              //       //       child: StaffPersonalInfoScreen(
+                              //       //           staff: widget.staff
+                              //       //       ),
+                              //       //     ),
+                              //       //   ),
+                              //       // );
+                              //     }
+                              // ),
+                              // SettingsInput(
+                              //     title: "Salary",
+                              //     onPress: () async {
+                              //       // await Navigator.push(
+                              //       //   context,
+                              //       //   MaterialPageRoute(
+                              //       //     builder: (context) => ChangeNotifierProvider.value(
+                              //       //       value: read,
+                              //       //       child: StaffPersonalInfoScreen(
+                              //       //           staff: widget.staff
+                              //       //       ),
+                              //       //     ),
+                              //       //   ),
+                              //       // );
+                              //     }
+                              // ),
                             ],
                           ),
                         ),

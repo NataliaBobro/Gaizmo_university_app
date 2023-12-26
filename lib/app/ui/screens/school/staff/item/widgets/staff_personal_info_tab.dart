@@ -1,15 +1,13 @@
-import 'package:etm_crm/app/domain/models/user.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../../../../../domain/states/school/school_staff_item_state.dart';
 import '../../../profile/widgets/general_info_tab.dart';
 
 class StaffPersonalInfoTab extends StatefulWidget {
   const StaffPersonalInfoTab({
     Key? key,
-    required this.staff
   }) : super(key: key);
-
-  final UserData? staff;
 
   @override
   State<StaffPersonalInfoTab> createState() => _StaffPersonalInfoTabState();
@@ -18,6 +16,7 @@ class StaffPersonalInfoTab extends StatefulWidget {
 class _StaffPersonalInfoTabState extends State<StaffPersonalInfoTab> {
   @override
   Widget build(BuildContext context) {
+    final state = context.watch<SchoolStaffItemState>();
     return Column(
       children: [
         SizedBox(
@@ -25,19 +24,19 @@ class _StaffPersonalInfoTabState extends State<StaffPersonalInfoTab> {
         ),
         InfoValue(
             title: "Full name",
-            value: "${widget.staff?.firstName} ${widget.staff?.lastName} ${widget.staff?.surname}"
+            value: "${state.staff?.firstName} ${state.staff?.lastName} ${state.staff?.surname}"
         ),
         InfoValue(
             title: "Date of birth",
-            value: "${widget.staff?.dateBirth}"
+            value: "${state.staff?.dateBirth}"
         ),
         InfoValue(
             title: "Phone number",
-            value: "${widget.staff?.phone}"
+            value: "${state.staff?.phone}"
         ),
         InfoValue(
             title: "E-mail",
-            value: "${widget.staff?.email}"
+            value: "${state.staff?.email}"
         ),
         // InfoValue(
         //     title: "Social links",
@@ -45,7 +44,7 @@ class _StaffPersonalInfoTabState extends State<StaffPersonalInfoTab> {
         // ),
         InfoValue(
             title: "Adress",
-            value: "${widget.staff?.country}, ${widget.staff?.city}"
+            value: "${state.staff?.country}, ${state.staff?.city}"
         ),
       ],
     );

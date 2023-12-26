@@ -113,4 +113,23 @@ class UserService {
     return data['success'];
   }
 
+  static Future<bool?> addDocument(
+      context,
+      int? userId,
+      FormData formData
+      ) async {
+    final token = getToken(context);
+    if(token == null) return null;
+
+    final response = await ApiClient().dio.post(
+      '/user/$userId/download-document',
+      data: formData,
+      options: Options(
+        headers: {'Authorization': 'Bearer $token'},
+      ),
+    );
+    final data = response.data as Map<String, dynamic>;
+    return data['success'];
+  }
+
 }

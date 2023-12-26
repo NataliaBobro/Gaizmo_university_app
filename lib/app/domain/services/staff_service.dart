@@ -110,4 +110,20 @@ class StaffService {
     final data = response.data as Map<String, dynamic>;
     return ListUserData.fromJson(data);
   }
+
+  static Future<UserData?> getStaff(
+      BuildContext context,
+      int? staffId
+      ) async {
+    final token = getToken(context);
+    if(token == null) return null;
+    final response = await ApiClient().dio.get(
+        '/school/staff/fetch/$staffId',
+        options: Options(
+          headers: {'Authorization': 'Bearer $token'},
+        )
+    );
+    final data = response.data as Map<String, dynamic>;
+    return UserData.fromJson(data['user']);
+  }
 }

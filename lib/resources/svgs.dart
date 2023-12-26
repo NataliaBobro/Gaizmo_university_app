@@ -35,4 +35,7 @@ class Svgs {
   static const String teacher = 'assets/vectors/teacher.svg';
   static const String paint = 'assets/vectors/paint.svg';
   static const String etmPlus = 'assets/vectors/etm-plus.svg';
+  static const String img = 'assets/vectors/img.svg';
+  static const String photo = 'assets/vectors/photo.svg';
+  static const String cameraButton = 'assets/vectors/camera-button.svg';
 }
