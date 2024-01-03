@@ -36,6 +36,30 @@ class UserService {
     return data['success'];
   }
 
+  static Future<bool?> changePassword(
+      context,
+      int? userId,
+      String oldPassword,
+      String newPassword,
+      String confirmPassword,
+      ) async {
+    final token = getToken(context);
+    if(token == null) return null;
+    final response = await ApiClient().dio.post(
+      '/user/$userId/change-password',
+      data: {
+        'old_password': oldPassword,
+        'new_password': newPassword,
+        'confirm_password': confirmPassword,
+      },
+      options: Options(
+        headers: {'Authorization': 'Bearer $token'},
+      ),
+    );
+    final data = response.data as Map<String, dynamic>;
+    return data['success'];
+  }
+
   static Future<bool?> changeGeneralInfo(
       context,
       String? name,

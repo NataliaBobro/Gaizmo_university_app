@@ -214,6 +214,15 @@ class Errors {
   @JsonKey(name: 'day')
   List<String>? day;
 
+  @JsonKey(name: 'old_password')
+  List<String>? oldPassword;
+
+  @JsonKey(name: 'confirm_password')
+  List<String>? confirmPassword;
+
+  @JsonKey(name: 'new_password')
+  List<String>? newPassword;
+
   Errors({
     this.userTypeErrors,
     this.firstNameErrors,
@@ -242,6 +251,9 @@ class Errors {
     this.end,
     this.day,
     this.startLesson,
+    this.oldPassword,
+    this.confirmPassword,
+    this.newPassword,
   });
 
   factory Errors.fromJson(Map<String, dynamic> json) => _$ErrorsFromJson(json);

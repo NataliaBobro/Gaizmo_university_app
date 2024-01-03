@@ -8,13 +8,15 @@ class AppField extends StatelessWidget {
     required this.label,
     this.placeholder,
     required this.controller,
-    this.error
+    this.error,
+    this.isPass = false
   }) : super(key: key);
 
   final String label;
   final String? placeholder;
   final TextEditingController controller;
   final String? error;
+  final bool isPass;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +33,7 @@ class AppField extends StatelessWidget {
           height: 6,
         ),
         TextField(
+          obscureText: isPass,
           controller: controller,
           decoration: InputDecoration(
             constraints: const BoxConstraints(
