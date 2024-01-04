@@ -1,6 +1,12 @@
 import 'package:etm_crm/app/ui/widgets/empty_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../../app.dart';
+import '../../../../widgets/add_document/add_document_widget.dart';
+import '../../../../widgets/custom_scroll_physics.dart';
+import '../../../../widgets/document_list.dart';
 
 class DocumentTab extends StatefulWidget {
   const DocumentTab({Key? key}) : super(key: key);
@@ -12,11 +18,43 @@ class DocumentTab extends StatefulWidget {
 class _DocumentTabState extends State<DocumentTab> {
   @override
   Widget build(BuildContext context) {
-    return EmptyWidget(
-        isEmpty: true,
-        title: 'No documets yet :(',
-        subtitle: 'Click the button below to add documents!',
-        onPress: () {}
+    final appState = context.watch<AppState>();
+    final documents = appState.userData?.documents ?? [];
+
+    return Column(
+      children: [
+        Expanded(
+          child: ListView(
+            physics: const BottomBouncingScrollPhysics(),
+            children: [
+              if(documents.isEmpty) ...[
+                const SizedBox(
+                  height: 115,
+                ),
+              ],
+              EmptyWidget(
+                  isEmpty: documents.isEmpty,
+                  title: 'No documets yet :(',
+                  subtitle: 'Click the button below to add documents!',
+                  onPress: () {
+                    appState.openPage(
+                        context,
+                        AddDocumentWidget(
+                            userId: appState.userData?.id
+                        )
+                    ).whenComplete(() {
+                      appState.getUser();
+                    });
+                  }
+              ),
+
+              DocumentList(
+                  documents: documents
+              )
+            ],
+          ),
+        )
+      ],
     );
   }
 }

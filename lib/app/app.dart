@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:etm_crm/app/domain/services/user_service.dart';
 import 'package:etm_crm/app/ui/utils/show_message.dart';
 import 'package:etm_crm/app/ui/widgets/snackbars.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -134,6 +135,17 @@ class AppState extends ChangeNotifier {
     ));
   }
 
+  Future<void> openPage(BuildContext context, Widget page) async {
+    await Navigator.push(
+        context,
+        CupertinoPageRoute(
+            builder: (context) => ChangeNotifierProvider.value(
+              value: this,
+              child: page,
+            )
+        )
+    );
+  }
 
   void onLogout() async {
     notifyListeners();
