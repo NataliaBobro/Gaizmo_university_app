@@ -156,6 +156,7 @@ Map<String, dynamic> _$SocialAccountsToJson(SocialAccounts instance) =>
     };
 
 Documents _$DocumentsFromJson(Map<String, dynamic> json) => Documents(
+      id: json['id'] as int?,
       userId: json['user_id'] as int?,
       typeId: json['type_id'] as int?,
       patch: json['patch'] as String?,
@@ -163,6 +164,7 @@ Documents _$DocumentsFromJson(Map<String, dynamic> json) => Documents(
     );
 
 Map<String, dynamic> _$DocumentsToJson(Documents instance) => <String, dynamic>{
+      'id': instance.id,
       'user_id': instance.userId,
       'type_id': instance.typeId,
       'patch': instance.patch,

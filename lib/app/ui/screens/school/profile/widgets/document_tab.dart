@@ -49,7 +49,7 @@ class _DocumentTabState extends State<DocumentTab> {
               ),
 
               DocumentList(
-                  documents: documents
+                  documents: documents,
               )
             ],
           ),

@@ -156,4 +156,24 @@ class UserService {
     return data['success'];
   }
 
+  static Future<bool?> deleteDocument(
+      context,
+      int? documentId,
+      ) async {
+    final token = getToken(context);
+    if(token == null) return null;
+
+    final response = await ApiClient().dio.delete(
+      '/user/delete-document',
+      data: {
+        "document_id": documentId
+      },
+      options: Options(
+        headers: {'Authorization': 'Bearer $token'},
+      ),
+    );
+    final data = response.data as Map<String, dynamic>;
+    return data['success'];
+  }
+
 }

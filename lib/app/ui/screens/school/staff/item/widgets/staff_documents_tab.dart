@@ -48,7 +48,7 @@ class _StaffDocumentsTabState extends State<StaffDocumentsTab> {
                  }
              ),
              DocumentList(
-                 documents: documents
+                 documents: documents,
              )
            ],
          ),

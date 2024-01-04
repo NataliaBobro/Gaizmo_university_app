@@ -171,12 +171,14 @@ class SocialAccounts {
 
 @JsonSerializable(includeIfNull: true, fieldRename: FieldRename.snake)
 class Documents {
+  int? id;
   int? userId;
   int? typeId;
   String? patch;
   String? name;
 
   Documents({
+    this.id,
     this.userId,
     this.typeId,
     this.patch,
