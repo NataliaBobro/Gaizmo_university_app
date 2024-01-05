@@ -1,4 +1,6 @@
 import 'package:etm_crm/app/app.dart';
+import 'package:etm_crm/app/ui/screens/school/profile/branchs/branch_list.dart';
+import 'package:etm_crm/app/ui/screens/school/profile/widgets/settings_tab.dart';
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
 import 'package:etm_crm/app/ui/widgets/custom_scroll_physics.dart';
 import 'package:flutter/cupertino.dart';
@@ -44,8 +46,17 @@ class _GeneralInfoTabState extends State<GeneralInfoTab> {
                 title: "School category",
                 value: "${school?.school?.category?.translate?.value}"
             ),
+            SettingsInput(
+                title: "Branches",
+                onPress: () async {
+                  appState.openPage(
+                      context,
+                      const BranchList()
+                  );
+                }
+            ),
             const SizedBox(
-              height: 60,
+              height: 25,
             ),
             const Text(
               'Add more info about your school!',
