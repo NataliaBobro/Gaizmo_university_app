@@ -87,10 +87,10 @@ class School {
   int categorySchoolId;
   String name;
   String? siteName;
-  String country;
-  String street;
-  String house;
-  String city;
+  String? country;
+  String? street;
+  String? house;
+  String? city;
   String? from;
   String? to;
   Category? category;

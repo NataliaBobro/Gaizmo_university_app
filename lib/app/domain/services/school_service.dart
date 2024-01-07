@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:etm_crm/app/ui/utils/get_token.dart';
 
 import '../../data/api_client.dart';
+import '../models/user.dart';
 
 class SchoolService {
   static Future<bool?> changeSchoolSchedule(
@@ -71,6 +72,38 @@ class SchoolService {
     );
     final data = response.data as Map<String, dynamic>;
     return data['success'];
+  }
+
+  static Future<bool?> addBranch(
+      context,
+      Map<String, dynamic> map,
+      ) async {
+    final token = getToken(context);
+    if(token == null) return null;
+    final response = await ApiClient().dio.post(
+      '/school/branch/add',
+      data: map,
+      options: Options(
+        headers: {'Authorization': 'Bearer $token'},
+      ),
+    );
+    final data = response.data as Map<String, dynamic>;
+    return data['success'];
+  } 
+  
+  static Future<ListUserData?> fetchBranchList(
+      context,
+      ) async {
+    final token = getToken(context);
+    if(token == null) return null;
+    final response = await ApiClient().dio.get(
+      '/school/branch/list',
+      options: Options(
+        headers: {'Authorization': 'Bearer $token'},
+      ),
+    );
+    final data = response.data as Map<String, dynamic>;
+    return ListUserData.fromJson(data);
   }
 
 }

@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../../../domain/states/school/school_branch_state.dart';
+
 class GeneralInfoTab extends StatefulWidget {
   const GeneralInfoTab({
     Key? key,
@@ -49,9 +51,14 @@ class _GeneralInfoTabState extends State<GeneralInfoTab> {
             SettingsInput(
                 title: "Branches",
                 onPress: () async {
-                  appState.openPage(
+                  await Navigator.push(
                       context,
-                      const BranchList()
+                      CupertinoPageRoute(
+                          builder: (context) => ChangeNotifierProvider(
+                            create: (context) => SchoolBranchState(context),
+                            child: const BranchList(),
+                          )
+                      )
                   );
                 }
             ),

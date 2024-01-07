@@ -1,3 +1,6 @@
+import 'package:dio/dio.dart';
+import 'package:etm_crm/app/domain/models/meta.dart';
+import 'package:etm_crm/app/domain/services/school_service.dart';
 import 'package:etm_crm/app/ui/widgets/add_schedule.dart';
 import 'package:etm_crm/app/ui/widgets/app_horizontal_field.dart';
 import 'package:flutter/material.dart';
@@ -5,8 +8,10 @@ import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../app.dart';
+import '../../../../utils/show_message.dart';
 import '../../../../widgets/auth_button.dart';
 import '../../../../widgets/center_header.dart';
+import '../../../../widgets/select_school_category.dart';
 import '../widgets/settings_tab.dart';
 
 class AddBranch extends StatefulWidget {
@@ -17,6 +22,7 @@ class AddBranch extends StatefulWidget {
 }
 
 class _AddBranchState extends State<AddBranch> {
+  ValidateError? validateError;
   TextEditingController name = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController site = TextEditingController();
@@ -28,6 +34,7 @@ class _AddBranchState extends State<AddBranch> {
   MaskedTextController scheduleTo = MaskedTextController(
       mask: '00 : 00'
   );
+  Map<String, dynamic>? schoolCategory;
 
 
   @override
@@ -52,14 +59,16 @@ class _AddBranchState extends State<AddBranch> {
                           height: 24,
                         ),
                         AppHorizontalField(
-                            label: "Name of school",
-                            controller: name,
-                            changeClear: () {
-                              name.clear();
-                              setState(() {});
-                            }
+                          label: "Name of school",
+                          controller: name,
+                          changeClear: () {
+                            name.clear();
+                            setState(() {});
+                          },
+                          error: validateError?.errors.schoolName?.first,
                         ),
                         AppHorizontalField(
+                            error: validateError?.errors.phoneErrors?.first,
                             label: "Phone number",
                             controller: phone,
                             changeClear: () {
@@ -73,7 +82,8 @@ class _AddBranchState extends State<AddBranch> {
                             changeClear: () {
                               email.clear();
                               setState(() {});
-                            }
+                            },
+                          error: validateError?.errors.emailErrors?.first,
                         ),
                         AppHorizontalField(
                             label: "Site address",
@@ -81,7 +91,7 @@ class _AddBranchState extends State<AddBranch> {
                             changeClear: () {
                               site.clear();
                               setState(() {});
-                            }
+                            },
                         ),
                         SettingsInput(
                             title: "Schedule",
@@ -103,7 +113,16 @@ class _AddBranchState extends State<AddBranch> {
                         SettingsInput(
                             title: "School category",
                             onPress: () async {
-
+                              appState.openPage(
+                                  context,
+                                  SelectSchoolCategory(
+                                    selected: schoolCategory,
+                                    onSelect: (value) {
+                                      schoolCategory = value;
+                                      setState(() {});
+                                    }
+                                  )
+                              );
                             }
                         ),
                       ],
@@ -114,8 +133,7 @@ class _AddBranchState extends State<AddBranch> {
                   child: AppButton(
                       title: 'Save changes',
                       onPressed: () {
-                        // widget.onSelect(selectedDay);
-                        // Navigator.pop(context);
+                        addBranch();
                       }
                   ),
                 )
@@ -124,5 +142,43 @@ class _AddBranchState extends State<AddBranch> {
           )
       ),
     );
+  }
+
+  Future<void> addBranch() async {
+    validateError = null;
+    setState(() {});
+    try{
+      final result = await SchoolService.addBranch(
+          context,
+          {
+            "school_name": name.text,
+            "phone": phone.text,
+            "email": email.text,
+            "site_address": site.text,
+            "work_day": listWorkDay,
+            "schedule_to": scheduleTo.text,
+            "schedule_from": scheduleFrom.text,
+            "school_category": schoolCategory?['id']
+          }
+      );
+      if(result == true){
+        close();
+      }
+    } on DioError catch (e) {
+      if(e.response?.statusCode == 422){
+        final data = e.response?.data as Map<String, dynamic>;
+        validateError = ValidateError.fromJson(data);
+        setState(() {});
+        showMessage('${validateError?.message}', color: const Color(0xFFFFC700));
+      }else{
+        showMessage(e.message.isEmpty ? e.toString() : e.message);
+      }
+    }catch(e){
+      print(e);
+    }
+  }
+
+  void close() {
+    Navigator.pop(context);
   }
 }
