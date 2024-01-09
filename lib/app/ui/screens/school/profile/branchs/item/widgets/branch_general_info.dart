@@ -5,6 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../../../../utils/render_work_day.dart';
+
 class BranchGeneralInfoTab extends StatefulWidget {
   const BranchGeneralInfoTab({
     Key? key,
@@ -49,7 +51,21 @@ class _BranchGeneralInfoTabState extends State<BranchGeneralInfoTab> {
                   title: "Site address",
                   value: "${school?.school?.siteName}"
               ),
-            ]
+            ],
+            Builder(
+              builder: (context) {
+                try{
+                  return InfoValue(
+                      title: "Working hours",
+                      value: "${convertDaysToFormat(school?.workDay ?? [])} "
+                          "${(school?.school?.from)?.replaceAll(" ", "")} - "
+                          "${(school?.school?.to)?.replaceAll(" ", "")}"
+                  );
+                }catch(_){
+                  return Container();
+                }
+              },
+            )
           ],
         )
       ],

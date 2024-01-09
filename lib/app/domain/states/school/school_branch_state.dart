@@ -35,6 +35,25 @@ class SchoolBranchState with ChangeNotifier {
     }
   }
 
+  Future<UserData?> updateBranch(int? branchId) async {
+    try{
+      final result = await SchoolService.fetchBranchItem(context, branchId);
+      if(result != null){
+        UserData? branch = _listUserData?.users.firstWhere((element) => element.id == branchId);
+        if(branch != null){
+          branch = result;
+          notifyListeners();
+          return result;
+        }
+      }
+    }catch(e){
+      print(e);
+    }finally{
+      notifyListeners();
+    }
+    return null;
+  }
+
   Future<void> openPage(BuildContext context, Widget page) async {
     await Navigator.push(
         context,
@@ -46,7 +65,6 @@ class SchoolBranchState with ChangeNotifier {
         )
     );
   }
-
 
   void back(){
     Navigator.pop(context);

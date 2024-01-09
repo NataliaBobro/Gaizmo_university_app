@@ -36,6 +36,22 @@ class UserService {
     return data['success'];
   }
 
+  static Future<bool?> changeLanguageForUser(context, int? userId, int? langId) async {
+    final token = getToken(context);
+    if(token == null) return null;
+    final response = await ApiClient().dio.post(
+      '/user/change-lang/$userId',
+      data: {
+        'lang_id': langId
+      },
+      options: Options(
+        headers: {'Authorization': 'Bearer $token'},
+      ),
+    );
+    final data = response.data as Map<String, dynamic>;
+    return data['success'];
+  }
+
   static Future<bool?> changePassword(
       context,
       int? userId,

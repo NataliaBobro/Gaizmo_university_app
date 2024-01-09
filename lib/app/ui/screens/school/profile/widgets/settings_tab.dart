@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 import '../../../../../../resources/resources.dart';
 import '../../../../../app.dart';
 import '../../../../../domain/states/school/school_profile_state.dart';
-import '../settings/setting_language.dart';
+import '../../../../widgets/settings_language.dart';
 import '../settings/settings_general_info.dart';
 
 class SettingsTab extends StatefulWidget {
@@ -24,6 +24,7 @@ class _SettingsTabState extends State<SettingsTab> {
   @override
   Widget build(BuildContext context) {
     final read = context.read<SchoolProfileState>();
+    final state = context.watch<SchoolProfileState>();
     return ListView(
       padding: const EdgeInsets.only(top: 24),
       physics: const BottomBouncingScrollPhysics(),
@@ -34,12 +35,15 @@ class _SettingsTabState extends State<SettingsTab> {
             await Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => ChangeNotifierProvider.value(
-                  value: read,
-                  child: const SettingLanguage(),
+                builder: (context) => SettingLanguage(
+                    saveLanguage: (val) {
+                      state.changeLanguage(val);
+                    },
+                    selectLanguage: state.selectLanguage != null ?
+                      state.selectLanguage!['id'] : null,
+                  ),
                 ),
-              ),
-            );
+              );
           }
         ),
         SettingsInput(

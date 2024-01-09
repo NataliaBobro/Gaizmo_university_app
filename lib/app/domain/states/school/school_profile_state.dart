@@ -193,6 +193,7 @@ class SchoolProfileState with ChangeNotifier {
 
   void changeLanguage(value) {
     _selectLanguage = value;
+    saveLanguage();
     notifyListeners();
   }
 

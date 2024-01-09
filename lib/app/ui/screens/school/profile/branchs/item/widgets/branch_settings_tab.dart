@@ -1,10 +1,14 @@
 import 'package:etm_crm/app/domain/models/user.dart';
+import 'package:etm_crm/app/domain/services/user_service.dart';
+import 'package:etm_crm/app/domain/states/school/school_branch_state.dart';
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
 import 'package:etm_crm/app/ui/widgets/custom_scroll_physics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 import '../../../../../../../../resources/resources.dart';
+import '../../../../../../widgets/settings_language.dart';
 
 class BranchSettingsTab extends StatefulWidget {
   const BranchSettingsTab({
@@ -21,7 +25,6 @@ class BranchSettingsTab extends StatefulWidget {
 class _BranchSettingsTabState extends State<BranchSettingsTab> {
   @override
   Widget build(BuildContext context) {
-    // final read = context.read<SchoolProfileState>();
     return ListView(
       padding: const EdgeInsets.only(top: 24),
       physics: const BottomBouncingScrollPhysics(),
@@ -29,15 +32,17 @@ class _BranchSettingsTabState extends State<BranchSettingsTab> {
         SettingsInput(
             title: "Language",
             onPress: () async {
-              // await Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => ChangeNotifierProvider.value(
-              //       value: read,
-              //       child: const SettingLanguage(),
-              //     ),
-              //   ),
-              // );
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SettingLanguage(
+                    saveLanguage: (val) {
+                      changeLanguageForUser(val['id']);
+                    },
+                    selectLanguage: widget.branch?.languageId,
+                  )
+                ),
+              );
             }
         ),
         SettingsInput(
@@ -94,6 +99,26 @@ class _BranchSettingsTabState extends State<BranchSettingsTab> {
         ),
       ],
     );
+  }
+
+  Future<void> changeLanguageForUser(val) async {
+      try{
+        final result = await UserService.changeLanguageForUser(
+            context,
+            widget.branch?.id,
+            val
+        );
+        if(result == true){
+          widget.branch?.languageId = val;
+          updateUser();
+        }
+      }catch(e){
+        print(e);
+      }
+  }
+
+  void updateUser() {
+    context.read<SchoolBranchState>().updateBranch(widget.branch?.id);
   }
 }
 

@@ -106,4 +106,20 @@ class SchoolService {
     return ListUserData.fromJson(data);
   }
 
+  static Future<UserData?> fetchBranchItem(
+      context,
+      int? branchId
+      ) async {
+    final token = getToken(context);
+    if(token == null) return null;
+    final response = await ApiClient().dio.get(
+      '/school/branch/item/$branchId',
+      options: Options(
+        headers: {'Authorization': 'Bearer $token'},
+      ),
+    );
+    final data = response.data as Map<String, dynamic>;
+    return UserData.fromJson(data['user']);
+  }
+
 }

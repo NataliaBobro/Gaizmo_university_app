@@ -1,5 +1,6 @@
 import 'package:etm_crm/app/app.dart';
 import 'package:etm_crm/app/domain/models/user.dart';
+import 'package:etm_crm/app/domain/states/school/school_branch_state.dart';
 import 'package:etm_crm/app/ui/widgets/empty_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -23,9 +24,20 @@ class BranchDocumentTab extends StatefulWidget {
 }
 
 class _BranchDocumentTabState extends State<BranchDocumentTab> {
+  List<Documents> documents = [];
+  @override
+  void initState() {
+    initData();
+    super.initState();
+  }
+
+  void initData() {
+    documents = widget.branch?.documents ?? [];
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
-    final documents = widget.branch?.documents ?? [];
     final appState = context.read<AppState>();
 
     return Column(
@@ -49,8 +61,12 @@ class _BranchDocumentTabState extends State<BranchDocumentTab> {
                         AddDocumentWidget(
                             userId: widget.branch?.id
                         )
-                    ).whenComplete(() {
-                      appState.getUser();
+                    ).whenComplete(() async {
+                      final branch = await context.read<SchoolBranchState>().updateBranch(
+                        widget.branch?.id
+                      );
+                      documents = branch?.documents ?? [];
+                      setState(() {});
                     });
                   }
               ),
