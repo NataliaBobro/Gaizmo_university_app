@@ -78,6 +78,7 @@ class UserService {
 
   static Future<bool?> changeGeneralInfo(
       context,
+      int? userId,
       String? name,
       String? phone,
       String? email,
@@ -86,7 +87,7 @@ class UserService {
     final token = getToken(context);
     if(token == null) return null;
     final response = await ApiClient().dio.post(
-      '/user/school/change-general-info',
+      '/user/school/change-general-info/$userId',
       data: {
         'school_name': name,
         'site_name': siteName,
@@ -103,6 +104,7 @@ class UserService {
 
   static Future<bool?> changeSocialAccounts(
       context,
+      int? userId,
       String? instagram,
       String? facebook,
       String? linkedin,
@@ -111,7 +113,7 @@ class UserService {
     final token = getToken(context);
     if(token == null) return null;
     final response = await ApiClient().dio.post(
-      '/user/change-social-account',
+      '/user/change-social-account/$userId',
       data: {
         'instagram': instagram,
         'facebook': facebook,
@@ -126,8 +128,9 @@ class UserService {
     return data['success'];
   }
 
-  static Future<bool?> uploadAvatar(
+  static Future<String?> uploadAvatar(
       context,
+      int? userId,
       File file
       ) async {
     final token = getToken(context);
@@ -143,14 +146,17 @@ class UserService {
     );
 
     final response = await ApiClient().dio.post(
-      '/user/upload-avatar',
+      '/user/upload-avatar/$userId',
       data: formData,
       options: Options(
         headers: {'Authorization': 'Bearer $token'},
       ),
     );
     final data = response.data as Map<String, dynamic>;
-    return data['success'];
+    if(data['success'] == true){
+      return data['avatar'];
+    }
+    return null;
   }
 
   static Future<bool?> addDocument(

@@ -1,8 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dio/dio.dart';
 import 'package:etm_crm/app/domain/models/user.dart';
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+
+import '../../../../../../../domain/services/user_service.dart';
+import '../../../../../../utils/show_message.dart';
+import '../../../../../../widgets/snackbars.dart';
 
 
 class BranchAvatar extends StatefulWidget {
@@ -20,14 +27,14 @@ class BranchAvatar extends StatefulWidget {
 class _BranchAvatarState extends State<BranchAvatar> {
 
   Future<void> _getImage() async {
-    // final picker = ImagePicker();
-    // final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
-    // if (pickedFile != null) {
-    //   setState(() {
-    //     context.read<SchoolProfileState>().uploadAvatar(File(pickedFile.path));
-    //   });
-    // }
+    if (pickedFile != null) {
+      setState(() {
+        uploadAvatar(File(pickedFile.path));
+      });
+    }
   }
 
   @override
@@ -76,5 +83,20 @@ class _BranchAvatarState extends State<BranchAvatar> {
         ),
       ),
     );
+  }
+
+  Future<void> uploadAvatar(File file) async {
+    try {
+      final result = await UserService.uploadAvatar(context, widget.userData?.id, file);
+      if(result != null){
+        widget.userData?.avatar = result;
+      }
+    } on DioError catch (e) {
+      showMessage(e.message);
+    } catch (e) {
+      showErrorSnackBar(title: 'App request error');
+    } finally {
+      setState(() {});
+    }
   }
 }

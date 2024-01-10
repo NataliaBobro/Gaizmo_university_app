@@ -290,9 +290,12 @@ class SchoolProfileState with ChangeNotifier {
   Future<void> saveGeneralInfo() async {
     _isLoading = true;
     notifyListeners();
+
+    final userId = context.read<AppState>().userData?.id;
     try {
       final result = await UserService.changeGeneralInfo(
           context,
+          userId,
           _nameSchool.text,
           _phone.text,
           _email.text,
@@ -321,9 +324,11 @@ class SchoolProfileState with ChangeNotifier {
   Future<void> saveSocialLinks() async {
     _isLoading = true;
     notifyListeners();
+    final userId = context.read<AppState>().userData?.id;
     try {
       final result = await UserService.changeSocialAccounts(
           context,
+          userId,
           _instagramField.text,
           _facebookField.text,
           _linkedinField.text,
@@ -410,8 +415,9 @@ class SchoolProfileState with ChangeNotifier {
   }
 
   Future<void> uploadAvatar(File file) async {
+    final userId = context.read<AppState>().userData?.id;
     try {
-      final result = await UserService.uploadAvatar(context, file);
+      final result = await UserService.uploadAvatar(context, userId, file);
       if(result != null){
        updateUser();
       }

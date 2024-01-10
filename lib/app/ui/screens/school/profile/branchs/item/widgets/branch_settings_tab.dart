@@ -2,13 +2,16 @@ import 'package:etm_crm/app/domain/models/user.dart';
 import 'package:etm_crm/app/domain/services/user_service.dart';
 import 'package:etm_crm/app/domain/states/school/school_branch_state.dart';
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
+import 'package:etm_crm/app/ui/widgets/change_password.dart';
 import 'package:etm_crm/app/ui/widgets/custom_scroll_physics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import '../../../../../../../../resources/resources.dart';
+import '../../../../../../widgets/settings_general_info.dart';
 import '../../../../../../widgets/settings_language.dart';
+import '../../../../../../widgets/settings_social_accounts.dart';
 
 class BranchSettingsTab extends StatefulWidget {
   const BranchSettingsTab({
@@ -48,29 +51,27 @@ class _BranchSettingsTabState extends State<BranchSettingsTab> {
         SettingsInput(
             title: "General info",
             onPress: () async {
-              // await Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => ChangeNotifierProvider.value(
-              //       value: read,
-              //       child: const SettingGeneralInfo(),
-              //     ),
-              //   ),
-              // );
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => SettingGeneralInfo(
+                      userData: widget.branch,
+                    ),
+                  ),
+                );
             }
         ),
         SettingsInput(
             title: "Social accounts",
             onPress: () async {
-              // await Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => ChangeNotifierProvider.value(
-              //       value: read,
-              //       child: const SettingsSocialAccounts(),
-              //     ),
-              //   ),
-              // );
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SettingsSocialAccounts(
+                    user: widget.branch,
+                  ),
+                ),
+              );
             }
         ),
         const SizedBox(
@@ -92,7 +93,16 @@ class _BranchSettingsTabState extends State<BranchSettingsTab> {
         ),
         SettingsInput(
             title: "Password",
-            onPress: () {}
+            onPress: () async {
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ChangePassword(
+                    userId: widget.branch?.id,
+                  ),
+                ),
+              );
+            }
         ),
         const SizedBox(
           height: 40,

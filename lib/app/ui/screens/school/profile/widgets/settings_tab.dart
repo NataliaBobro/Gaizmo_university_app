@@ -1,4 +1,3 @@
-import 'package:etm_crm/app/ui/screens/school/profile/settings/settings_social_accounts.dart';
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
 import 'package:etm_crm/app/ui/widgets/custom_scroll_physics.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,6 +10,7 @@ import '../../../../../../resources/resources.dart';
 import '../../../../../app.dart';
 import '../../../../../domain/states/school/school_profile_state.dart';
 import '../../../../widgets/settings_language.dart';
+import '../../../../widgets/settings_social_accounts.dart';
 import '../settings/settings_general_info.dart';
 
 class SettingsTab extends StatefulWidget {
@@ -66,9 +66,11 @@ class _SettingsTabState extends State<SettingsTab> {
               await Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ChangeNotifierProvider.value(
-                    value: read,
-                    child: const SettingsSocialAccounts(),
+                  builder: (context) => SettingsSocialAccounts(
+                    user: context.read<AppState>().userData,
+                    onSave: (userId, inst, face, twit, link){
+                      state.updateUser();
+                    },
                   ),
                 ),
               );
