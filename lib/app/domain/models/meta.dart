@@ -286,3 +286,35 @@ class Country {
   factory Country.fromJson(Map<String, dynamic> json) => _$CountryFromJson(json);
 }
 
+@JsonSerializable(includeIfNull: true, fieldRename: FieldRename.snake)
+class DocumentTypeList {
+  bool success;
+  List<DocumentType> type;
+
+  DocumentTypeList({
+    required this.success,
+    required this.type,
+  });
+
+  Map<String, dynamic> toJson() => _$DocumentTypeListToJson(this);
+
+  factory DocumentTypeList.fromJson(Map<String, dynamic> json) => _$DocumentTypeListFromJson(json);
+}
+
+@JsonSerializable(includeIfNull: true, fieldRename: FieldRename.snake)
+class DocumentType {
+  int id;
+  String define;
+  String name;
+
+  DocumentType({
+    required this.id,
+    required this.define,
+    required this.name,
+  });
+
+  Map<String, dynamic> toJson() => _$DocumentTypeToJson(this);
+
+  factory DocumentType.fromJson(Map<String, dynamic> json) => _$DocumentTypeFromJson(json);
+}
+

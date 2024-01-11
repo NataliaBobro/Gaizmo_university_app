@@ -27,4 +27,17 @@ class MetaService {
     return MetaAppData.fromJson(data);
   }
 
+  static Future<DocumentTypeList?> fetchTypeDocument(BuildContext context, int? userId) async {
+    final token = getToken(context);
+    if(token == null) return null;
+    final response = await ApiClient().dio.get(
+      '/user/$userId/type-document',
+      options: Options(
+        headers: {'Authorization': 'Bearer $token'},
+      ),
+    );
+    final data = response.data as Map<String, dynamic>;
+    return DocumentTypeList.fromJson(data);
+  }
+
 }

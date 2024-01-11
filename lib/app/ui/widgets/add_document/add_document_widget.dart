@@ -1,3 +1,5 @@
+import 'package:etm_crm/app/domain/models/meta.dart';
+import 'package:etm_crm/app/domain/services/meta_service.dart';
 import 'package:etm_crm/app/domain/services/user_service.dart';
 import 'package:etm_crm/app/ui/widgets/app_field.dart';
 import 'package:etm_crm/app/ui/widgets/select_input.dart';
@@ -30,6 +32,31 @@ class AddDocumentWidget extends StatefulWidget {
 class _AddDocumentWidgetState extends State<AddDocumentWidget> {
   TextEditingController docName = TextEditingController();
   int typeDoc = -1;
+  DocumentTypeList? listType;
+  DocumentType? selectedType;
+  List<String> listTypeData = [];
+
+  @override
+  void initState() {
+   initData();
+    super.initState();
+  }
+
+  Future<void> initData() async {
+    try{
+      final result = await MetaService.fetchTypeDocument(context, widget.userId);
+      if(result != null){
+        listType = result;
+        for(var a = 0; a < result.type.length; a++){
+          listTypeData.add(result.type[a].name);
+        }
+      }
+    }catch(e){
+      print(e);
+    }finally{
+      setState(() {});
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,9 +98,7 @@ class _AddDocumentWidgetState extends State<AddDocumentWidget> {
                                 hintStyle: TextStyles.s14w400.copyWith(
                                     color: const Color(0xFF848484)
                                 ),
-                                items: const [
-                                  'Licence'
-                                ],
+                                items: listTypeData,
                                 selected: typeDoc,
                                 labelStyle: TextStyles.s14w600.copyWith(
                                     color: const Color(0xFF242424)
@@ -81,6 +106,7 @@ class _AddDocumentWidgetState extends State<AddDocumentWidget> {
                                 onSelect: (index) {
                                   setState(() {
                                     typeDoc = index;
+                                    selectedType = listType?.type.elementAt(index - 1);
                                   });
                                 },
                               )
@@ -141,7 +167,7 @@ class _AddDocumentWidgetState extends State<AddDocumentWidget> {
       ),
     );
     formData.fields.add(MapEntry('document_name', docName.text));
-    formData.fields.add(MapEntry('doc_type', '$typeDoc'));
+    formData.fields.add(MapEntry('doc_type', '${selectedType?.id}'));
 
     downloadDocument(formData);
   }

@@ -236,3 +236,30 @@ Country _$CountryFromJson(Map<String, dynamic> json) => Country(
 Map<String, dynamic> _$CountryToJson(Country instance) => <String, dynamic>{
       'name': instance.name,
     };
+
+DocumentTypeList _$DocumentTypeListFromJson(Map<String, dynamic> json) =>
+    DocumentTypeList(
+      success: json['success'] as bool,
+      type: (json['type'] as List<dynamic>)
+          .map((e) => DocumentType.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$DocumentTypeListToJson(DocumentTypeList instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'type': instance.type,
+    };
+
+DocumentType _$DocumentTypeFromJson(Map<String, dynamic> json) => DocumentType(
+      id: json['id'] as int,
+      define: json['define'] as String,
+      name: json['name'] as String,
+    );
+
+Map<String, dynamic> _$DocumentTypeToJson(DocumentType instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'define': instance.define,
+      'name': instance.name,
+    };
