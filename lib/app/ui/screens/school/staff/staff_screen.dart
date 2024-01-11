@@ -31,40 +31,48 @@ class _StaffScreenState extends State<StaffScreen> {
           child: Column(
             children: [
               const StaffHeader(),
-              Expanded(
-                flex: (state.staffList?.users.length ?? 0) == 0 ? 1 : 0,
-                child: EmptyWidget(
-                  isEmpty: (state.staffList?.users.length ?? 0) == 0,
-                  title: 'No any employee yet :(',
-                  subtitle: 'Click the button below to add staff!',
-                  onPress: () {
-                    state.openAddStaff();
-                  },
-                ),
-              ),
-              if((state.staffList?.users.length ?? 0) > 0) ...[
-                const SizedBox(
-                  height: 25,
-                ),
+              if(state.isLoading) ...[
+                const CupertinoActivityIndicator(),
+              ]else ...[
                 Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16
-                    ),
-                    child: Column(
+                  flex: (state.staffList?.users.length ?? 0) == 0 ? 1 : 0,
+                  child: EmptyWidget(
+                    isEmpty: (state.staffList?.users.length ?? 0) == 0,
+                    title: 'No any employee yet :(',
+                    subtitle: 'Click the button below to add staff!',
+                    onPress: () {
+                      state.openAddStaff();
+                    },
+                  ),
+                ),
+                if((state.staffList?.users.length ?? 0) > 0) ...[
+                  const SizedBox(
+                    height: 25,
+                  ),
+                  Expanded(
+                    child: ListView(
                       children: [
-                        ...List.generate(
-                            state.staffList?.users.length ?? 0,
-                                (index) => StaffItem(
-                                index: index,
-                                staff: state.staffList?.users[index]
-                            )
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16
+                          ),
+                          child: Column(
+                            children: [
+                              ...List.generate(
+                                  state.staffList?.users.length ?? 0,
+                                      (index) => StaffItem(
+                                      index: index,
+                                      staff: state.staffList?.users[index]
+                                  )
+                              )
+                            ],
+                          ),
                         )
                       ],
                     ),
-                  ),
-                )
-              ]
+                  )
+                ]
+              ],
             ],
           ),
         ),

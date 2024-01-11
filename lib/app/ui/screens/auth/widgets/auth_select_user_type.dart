@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
@@ -6,6 +7,7 @@ import '../../../../../resources/resources.dart';
 import '../../../../domain/states/auth_state.dart';
 import '../../../theme/app_colors.dart';
 import '../../../theme/text_styles.dart';
+import '../../../widgets/arrow_back.dart';
 import '../../../widgets/auth_button.dart';
 
 class AuthSelectUserType extends StatefulWidget {
@@ -28,8 +30,9 @@ class _AuthSelectUserTypeState extends State<AuthSelectUserType> {
           children: <Widget>[
             Column(
               children: [
+                const ArrowBack(),
                 const SizedBox(
-                  height: 164,
+                  height: 154,
                 ),
                 Center(
                   child: SvgPicture.asset(

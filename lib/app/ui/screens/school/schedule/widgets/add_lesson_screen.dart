@@ -1,7 +1,9 @@
 import 'package:etm_crm/app/domain/models/lesson.dart';
 import 'package:etm_crm/app/domain/states/school/school_schedule_state.dart';
 import 'package:etm_crm/app/ui/screens/school/schedule/widgets/select_day_week.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../theme/text_styles.dart';
@@ -25,6 +27,9 @@ class AddLessonScreen extends StatefulWidget {
 }
 
 class _AddLessonScreenState extends State<AddLessonScreen> {
+  DateTime date = DateTime(2016, 10, 26);
+  DateTime time = DateTime(2016, 5, 10, 08, 00);
+
   @override
   void initState() {
     Future.microtask(() {
@@ -117,17 +122,38 @@ class _AddLessonScreenState extends State<AddLessonScreen> {
                     ),
                     Row(
                       children: [
-                        Container(
-                          constraints: const BoxConstraints(
-                              maxWidth: 150
+                        CupertinoButton(
+                          minSize: 0.0,
+                          padding: EdgeInsets.zero,
+                          child: IgnorePointer(
+                            child: Container(
+                              constraints: const BoxConstraints(
+                                  maxWidth: 150
+                              ),
+                              child: AppField(
+                                label: 'Start',
+                                controller: state.lessonStart,
+                                placeholder: '_ _ : _ _',
+                                error: state.validateError?.errors.startLesson?.first,
+                              ),
+                            ),
                           ),
-                          child: AppField(
-                            label: 'Start',
-                            controller: state.lessonStart,
-                            placeholder: '_ _ : _ _',
-                            error: state.validateError?.errors.startLesson?.first,
-                          ),
-                        ),
+                          onPressed: () {
+                            _showDialog(
+                              CupertinoDatePicker(
+                                initialDateTime: time,
+                                mode: CupertinoDatePickerMode.time,
+                                use24hFormat: true,
+                                onDateTimeChanged: (DateTime newTime) {
+                                  setState(() {
+                                    time = newTime;
+                                    state.changeLessonStart(DateFormat('HH:mm').format(newTime));
+                                  });
+                                },
+                              ),
+                            );
+                          }
+                        )
                       ],
                     ),
                     const SizedBox(
@@ -142,18 +168,60 @@ class _AddLessonScreenState extends State<AddLessonScreen> {
                     const SizedBox(
                       height: 16,
                     ),
-                    AppField(
-                      label: 'Start',
-                      controller: state.repeatsStart,
-                      error: state.validateError?.errors.start?.first,
+                    CupertinoButton(
+                      minSize: 0.0,
+                      padding: EdgeInsets.zero,
+                      child: IgnorePointer(
+                        child: AppField(
+                          label: 'Start',
+                          controller: state.repeatsStart,
+                          error: state.validateError?.errors.start?.first,
+                        ),
+                      ),
+                      onPressed: () {
+                        _showDialog(
+                          CupertinoDatePicker(
+                            initialDateTime: date,
+                            mode: CupertinoDatePickerMode.date,
+                            use24hFormat: true,
+                            onDateTimeChanged: (DateTime newDate) {
+                              setState(() {
+                                date = newDate;
+                                state.changeRepeatsStart(DateFormat('dd.MM.yyyy').format(newDate));
+                              });
+                            },
+                          ),
+                        );
+                      }
                     ),
                     const SizedBox(
                       height: 24,
                     ),
-                    AppField(
-                      label: 'End',
-                      controller: state.repeatsEnd,
-                      error: state.validateError?.errors.end?.first,
+                    CupertinoButton(
+                        minSize: 0.0,
+                        padding: EdgeInsets.zero,
+                        child: IgnorePointer(
+                          child: AppField(
+                            label: 'End',
+                            controller: state.repeatsEnd,
+                            error: state.validateError?.errors.end?.first,
+                          ),
+                        ),
+                        onPressed: () {
+                          _showDialog(
+                            CupertinoDatePicker(
+                              initialDateTime: date,
+                              mode: CupertinoDatePickerMode.date,
+                              use24hFormat: true,
+                              onDateTimeChanged: (DateTime newDate) {
+                                setState(() {
+                                  date = newDate;
+                                  state.changeRepeatsEnd(DateFormat('dd.MM.yyyy').format(newDate));
+                                });
+                              },
+                            ),
+                          );
+                        }
                     ),
                     const SizedBox(
                       height: 24,
@@ -177,6 +245,24 @@ class _AddLessonScreenState extends State<AddLessonScreen> {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  void _showDialog(Widget child) {
+    showCupertinoModalPopup<void>(
+      context: context,
+      builder: (BuildContext context) => Container(
+        height: 216,
+        padding: const EdgeInsets.only(top: 6.0),
+        margin: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+        ),
+        color: CupertinoColors.systemBackground.resolveFrom(context),
+        child: SafeArea(
+          top: false,
+          child: child,
         ),
       ),
     );

@@ -64,105 +64,111 @@ class _SchoolServicesScreenState extends State<SchoolServicesScreen> {
               Expanded(
                 child: Stack(
                   children: [
-                    if(state.servicesCategory.isNotEmpty || state.allServices.isNotEmpty) ...[
-                      ListView(
-                        physics: const ClampingScrollPhysics(),
-                        children: [
-                          EmptyWidget(
-                              isEmpty: false,
-                              onPress: () {
-                                state.openAddOrEditService();
-                              }
-                          ),
-                          Accordion(
-                              onDelete: (index) {
-                                changeViewDelete(state.servicesCategory[index]);
-                              },
-                              onEdit: (index) {
-                                state.onEdit(state.servicesCategory[index]);
-                              },
-                              paddingListTop: 0.0,
-                              disableScrolling: true,
-                              headerBorderWidth: 0,
-                              contentBorderWidth: 3,
-                              scaleWhenAnimating: false,
-                              openAndCloseAnimation: true,
-                              paddingListHorizontal: 16,
-                              rightIcon: SvgPicture.asset(
-                                  Svgs.map
-                              ),
-                              paddingListBottom: 0.0,
-                              flipRightIconIfOpen: false,
-                              headerPadding: const EdgeInsets.symmetric(
-                                  vertical: 8,
-                                  horizontal: 13
-                              ),
-                              sectionOpeningHapticFeedback: SectionHapticFeedback.heavy,
-                              sectionClosingHapticFeedback: SectionHapticFeedback.light,
-                              children: List.generate(
-                                  state.servicesCategory.length, (index) =>
-                                  AccordionSection(
-                                    isOpen: false,
-                                    headerBackgroundColor:
-                                    Color(int.parse('${state.servicesCategory[index].color}')).withOpacity(.6),
-                                    contentVerticalPadding: 4,
-                                    contentBorderWidth: 0,
-                                    contentHorizontalPadding: 0.0,
-                                    contentBackgroundColor: const Color(0xFFF0F3F6),
-                                    header: Text(
-                                      "${index + 1}. ${state.servicesCategory[index].name}",
-                                      style: TextStyles.s14w600.copyWith(
-                                          color: const Color(0xFF242424)
+                    if(state.isLoading) ...[
+                      const Center(
+                        child: CupertinoActivityIndicator(),
+                      )
+                    ] else ...[
+                      if(state.servicesCategory.isNotEmpty || state.allServices.isNotEmpty) ...[
+                        ListView(
+                          physics: const ClampingScrollPhysics(),
+                          children: [
+                            EmptyWidget(
+                                isEmpty: false,
+                                onPress: () {
+                                  state.openAddOrEditService();
+                                }
+                            ),
+                            Accordion(
+                                onDelete: (index) {
+                                  changeViewDelete(state.servicesCategory[index]);
+                                },
+                                onEdit: (index) {
+                                  state.onEdit(state.servicesCategory[index]);
+                                },
+                                paddingListTop: 0.0,
+                                disableScrolling: true,
+                                headerBorderWidth: 0,
+                                contentBorderWidth: 3,
+                                scaleWhenAnimating: false,
+                                openAndCloseAnimation: true,
+                                paddingListHorizontal: 16,
+                                rightIcon: SvgPicture.asset(
+                                    Svgs.map
+                                ),
+                                paddingListBottom: 0.0,
+                                flipRightIconIfOpen: false,
+                                headerPadding: const EdgeInsets.symmetric(
+                                    vertical: 8,
+                                    horizontal: 13
+                                ),
+                                sectionOpeningHapticFeedback: SectionHapticFeedback.heavy,
+                                sectionClosingHapticFeedback: SectionHapticFeedback.light,
+                                children: List.generate(
+                                    state.servicesCategory.length, (index) =>
+                                    AccordionSection(
+                                      isOpen: false,
+                                      headerBackgroundColor:
+                                      Color(int.parse('${state.servicesCategory[index].color}')).withOpacity(.6),
+                                      contentVerticalPadding: 4,
+                                      contentBorderWidth: 0,
+                                      contentHorizontalPadding: 0.0,
+                                      contentBackgroundColor: const Color(0xFFF0F3F6),
+                                      header: Text(
+                                        "${index + 1}. ${state.servicesCategory[index].name}",
+                                        style: TextStyles.s14w600.copyWith(
+                                            color: const Color(0xFF242424)
+                                        ),
                                       ),
-                                    ),
-                                    onDelete: (index) {
-                                      changeViewDelete(
-                                          state.servicesCategory[index]
-                                      );
-                                    },
-                                    onEdit: (service) {
-                                      state.onEdit(service);
-                                    },
-                                    content: ElementCategoryItem(
-                                      onDelete: (service) {
-                                        changeViewDelete(service);
+                                      onDelete: (index) {
+                                        changeViewDelete(
+                                            state.servicesCategory[index]
+                                        );
                                       },
                                       onEdit: (service) {
                                         state.onEdit(service);
                                       },
-                                      isChild: true,
-                                      item: state.servicesCategory[index].services,
-                                      categoryIndex: index,
-                                    ),
-                                  )
+                                      content: ElementCategoryItem(
+                                        onDelete: (service) {
+                                          changeViewDelete(service);
+                                        },
+                                        onEdit: (service) {
+                                          state.onEdit(service);
+                                        },
+                                        isChild: true,
+                                        item: state.servicesCategory[index].services,
+                                        categoryIndex: index,
+                                      ),
+                                    )
+                                )
+                            ),
+                            if(state.allServices.isNotEmpty) ...[
+                              ...List.generate(
+                                state.allServices.length,
+                                    (index) => ElementCategoryItem(
+                                  onDelete: (service) {
+                                    changeViewDelete(service);
+                                  },
+                                  onEdit: (service) {
+                                    state.onEdit(service);
+                                  },
+                                  item: [state.allServices[index]],
+                                  categoryIndex: state.servicesCategory.length + index,
+                                ),
                               )
-                          ),
-                          if(state.allServices.isNotEmpty) ...[
-                            ...List.generate(
-                              state.allServices.length,
-                                  (index) => ElementCategoryItem(
-                                onDelete: (service) {
-                                  changeViewDelete(service);
-                                },
-                                onEdit: (service) {
-                                  state.onEdit(service);
-                                },
-                                item: [state.allServices[index]],
-                                categoryIndex: state.servicesCategory.length + index,
-                              ),
-                            )
-                          ]
-                        ],
-                      )
-                    ] else ...[
-                      EmptyWidget(
-                          title: 'No services yet :(',
-                          subtitle: 'Click the button below to add services!',
-                          isEmpty: state.servicesCategory.isEmpty && !state.isLoading,
-                          onPress: () {
-                            state.openAddOrEditService();
-                          }
-                      )
+                            ]
+                          ],
+                        )
+                      ] else ...[
+                        EmptyWidget(
+                            title: 'No services yet :(',
+                            subtitle: 'Click the button below to add services!',
+                            isEmpty: state.servicesCategory.isEmpty && !state.isLoading,
+                            onPress: () {
+                              state.openAddOrEditService();
+                            }
+                        )
+                      ],
                     ],
                     if(viewOnDelete) ...[
                       Positioned(

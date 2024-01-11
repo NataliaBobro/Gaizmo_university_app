@@ -13,10 +13,11 @@ import '../../../ui/screens/school/service/widgets/add_service_screen.dart';
 import '../../../ui/utils/show_message.dart';
 import '../../../ui/widgets/snackbars.dart';
 import '../../models/meta.dart';
+import '../../models/user.dart';
 
 class SchoolServicesState with ChangeNotifier {
   BuildContext context;
-  bool _isLoading = false;
+  bool _isLoading = true;
   int? _onEditId;
   dynamic editedService;
 
@@ -29,7 +30,7 @@ class SchoolServicesState with ChangeNotifier {
   Map<String, dynamic>? _selectService;
   Map<String, dynamic>? _selectBranch;
   Map<String, dynamic>? _selectCategory;
-  Map<String, dynamic>? _selectTeacher;
+  UserData? _selectTeacher;
   Map<String, dynamic>? _selectValidityType;
   Map<String, dynamic>? _selectCurrency;
   String? _selectColor;
@@ -58,7 +59,7 @@ class SchoolServicesState with ChangeNotifier {
     }
   ];
 
-  List<Map<String, dynamic>> _listTeacher = [];
+  List<UserData>? _listTeacher = [];
   List<Map<String, dynamic>> _listCurrency = [];
   final List<Map<String, dynamic>> _listValidityType = [
     {
@@ -95,13 +96,13 @@ class SchoolServicesState with ChangeNotifier {
     }
     return list;
   }
-  List<Map<String, dynamic>> get listTeacher => _listTeacher;
+  List<UserData>? get listTeacher => _listTeacher;
   List<Map<String, dynamic>> get listValidityType => _listValidityType;
   List<Map<String, dynamic>> get listCurrency => _listCurrency;
   Map<String, dynamic>? get selectService => _selectService;
   Map<String, dynamic>? get selectBranch => _selectBranch;
   Map<String, dynamic>? get selectCategory => _selectCategory;
-  Map<String, dynamic>? get selectTeacher => _selectTeacher;
+  UserData? get selectTeacher => _selectTeacher;
   Map<String, dynamic>? get selectValidityType => _selectValidityType;
   Map<String, dynamic>? get selectCurrency => _selectCurrency;
   TextEditingController get categoryName => _categoryName;
@@ -169,7 +170,7 @@ class SchoolServicesState with ChangeNotifier {
       ServicesModel servEdit = editedService;
       _selectService = listTypeServices.last;
       _serviceName.text = servEdit.name;
-      _selectTeacher = _listTeacher.firstWhere((element) => element['id'] == servEdit.teacher?.id);
+      _selectTeacher = _listTeacher?.firstWhere((element) => element.id == servEdit.teacher?.id);
       _selectCurrency = _listCurrency.firstWhere((element) => element['id'] == servEdit.currency?.id);
       _selectValidityType = _listValidityType.firstWhere((element) => element['name'] == servEdit.validityType);
       _etm.text = '${servEdit.etm}';
@@ -227,15 +228,7 @@ class SchoolServicesState with ChangeNotifier {
     try {
       final result = await MetaService.getAddServiceMeta(context);
       if(result?.teacher != null){
-        _listTeacher = [];
-        for(var a = 0; a < (result?.teacher?.length ?? 0); a++) {
-            _listTeacher.add(
-              {
-                "id": result?.teacher?[a].id,
-                "name": result?.teacher?[a].firstName
-              }
-          );
-        }
+        _listTeacher = result?.teacher;
       }
 
       if(result?.currency != null){
@@ -314,7 +307,7 @@ class SchoolServicesState with ChangeNotifier {
           _selectColor ?? '',
           _selectBranch?['id'],
           _selectCategory?['id'],
-          _selectTeacher?['id'],
+          _selectTeacher?.id,
           _validity.text.isNotEmpty ? int.parse(_validity.text) : 0,
           _selectValidityType?['name'],
           duration,

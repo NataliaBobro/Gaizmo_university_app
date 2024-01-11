@@ -1,12 +1,16 @@
 import 'package:etm_crm/app/ui/widgets/select_color.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../../domain/states/school/school_branch_state.dart';
 import '../../../../../domain/states/school/school_services_state.dart';
 import '../../../../theme/text_styles.dart';
 import '../../../../widgets/app_field.dart';
 import '../../../../widgets/auth_button.dart';
 import '../../../../widgets/select_bottom_sheet_input.dart';
+import '../../../../widgets/tool_tip_on_add.dart';
+import '../../profile/branchs/branch_list.dart';
 
 class AddServiceService extends StatefulWidget {
   const AddServiceService({Key? key}) : super(key: key);
@@ -16,10 +20,21 @@ class AddServiceService extends StatefulWidget {
 }
 
 class _AddServiceServiceState extends State<AddServiceService> {
+  String? openField;
+
+  void changeOpen(value){
+    if(openField == value){
+      openField = null;
+    }else{
+      openField = value;
+    }
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     final state = context.watch<SchoolServicesState>();
-    return Padding(
+    return  Padding(
       padding: const EdgeInsets.symmetric(
           horizontal: 24
       ),
@@ -71,15 +86,36 @@ class _AddServiceServiceState extends State<AddServiceService> {
           const SizedBox(
             height: 24,
           ),
-          SelectBottomSheetInput(
-            label: "Teacher",
-            labelModal: "Teacher",
-            selected: state.selectTeacher,
+          ToolTipOnAdd(
+            title: 'Teacher',
+            titleStyle: TextStyles.s14w600.copyWith(
+                color: const Color(0xFF242424)
+            ),
+            style: TextStyles.s14w400.copyWith(
+                color: Colors.black
+            ),
+            hintText: '',
             items: state.listTeacher,
+            selected: state.selectTeacher,
             onSelect: (value) {
               state.changeSelectTeacher(value);
+              changeOpen(null);
             },
-            horizontalPadding: 0,
+            changeOpen: () {
+              changeOpen('teacher');
+            },
+            isOpen: openField == 'teacher',
+            onAdd: () async {
+              await Navigator.push(
+                  context,
+                  CupertinoPageRoute(
+                      builder: (context) => ChangeNotifierProvider(
+                        create: (context) => SchoolBranchState(context),
+                        child: const BranchList(),
+                      )
+                  )
+              );
+            },
           ),
           const SizedBox(
             height: 40,
@@ -181,11 +217,11 @@ class _AddServiceServiceState extends State<AddServiceService> {
             height: 24,
           ),
           SelectColor(
-            selected: state.selectColor,
-            label: 'Service color',
-            onSelect: (value) {
-              state.selectServiceColor(value);
-            }
+              selected: state.selectColor,
+              label: 'Service color',
+              onSelect: (value) {
+                state.selectServiceColor(value);
+              }
           ),
           const SizedBox(
             height: 24,

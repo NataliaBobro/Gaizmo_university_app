@@ -15,7 +15,7 @@ import '../../models/user.dart';
 
 class SchoolStaffState with ChangeNotifier {
   BuildContext context;
-  bool _isLoading = false;
+  bool _isLoading = true;
   ValidateError? _validateError;
   ListUserData? _staffList;
 
@@ -53,21 +53,24 @@ class SchoolStaffState with ChangeNotifier {
   }
 
   Future<void> getStaff() async{
+    _isLoading = true;
+    notifyListeners();
     try{
       final result = await StaffService.fetchStaff(context);
       if(result != null){
         _staffList = result;
-        notifyListeners();
       }
     }catch (e){
       print(e);
+    }finally{
+      _isLoading = false;
+      notifyListeners();
     }
   }
 
   Future<void> addOrEditStaff(
       String? firstName,
       String? lastName,
-      String? surName,
       int? genderId,
       String? dateBirth,
       String? phone,
@@ -82,7 +85,6 @@ class SchoolStaffState with ChangeNotifier {
     Map<String, dynamic> data = {
       'first_name': firstName,
       'last_name': lastName,
-      'surname': surName,
       'gender': genderId,
       'date_birth': dateBirth,
       'phone': phone,

@@ -21,14 +21,26 @@ class _BranchHeaderState extends State<BranchHeader> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 24),
-            child: Text(
-              'Profile',
-              style: TextStyles.s24w700.copyWith(
-                  color: const Color(0xFF242424)
+          Row(
+            children: [
+              CupertinoButton(
+                  padding: const EdgeInsets.symmetric(horizontal: 24).copyWith(
+                      right: 10
+                  ),
+                  child: SvgPicture.asset(
+                      Svgs.back
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  }
               ),
-            ),
+              Text(
+                'Branch',
+                style: TextStyles.s24w700.copyWith(
+                    color: const Color(0xFF242424)
+                ),
+              ),
+            ],
           ),
           Row(
             children: [

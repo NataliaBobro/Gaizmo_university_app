@@ -104,7 +104,8 @@ class _SelectBottomSheetInputState extends State<SelectBottomSheetInput> {
         borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
       ),
       builder: (context) {
-        final height = (widget.items.length * 48) + 68;
+        final heightItems = (widget.items.length * 48) + 68;
+        final height = heightItems > 300 ? 300 : heightItems;
         return SizedBox(
           height: height.toDouble(),
           child: Container(
@@ -127,30 +128,36 @@ class _SelectBottomSheetInputState extends State<SelectBottomSheetInput> {
                     ),
                   ),
                 ),
-                ...List.generate(
-                    widget.items.length,
-                        (index) => CupertinoButton(
-                      minSize: 0.0,
-                      padding: EdgeInsets.zero,
-                      onPressed: () {
-                        widget.onSelect(widget.items[index]);
-                        Navigator.of(context).pop();
-                      },
-                      child: Container(
-                        alignment: Alignment.center,
-                        width: double.infinity,
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 14
-                        ),
-                        child: Text(
-                          widget.items[index]['name'],
-                          style: TextStyles.s14w400.copyWith(
-                              color: Colors.black
-                          ),
-                        ),
-                      ),
-                    )
-                )
+               Expanded(
+                 child: ListView(
+                   children: [
+                     ...List.generate(
+                         widget.items.length,
+                             (index) => CupertinoButton(
+                           minSize: 0.0,
+                           padding: EdgeInsets.zero,
+                           onPressed: () {
+                             widget.onSelect(widget.items[index]);
+                             Navigator.of(context).pop();
+                           },
+                           child: Container(
+                             alignment: Alignment.center,
+                             width: double.infinity,
+                             padding: const EdgeInsets.symmetric(
+                                 vertical: 14
+                             ),
+                             child: Text(
+                               widget.items[index]['name'],
+                               style: TextStyles.s14w400.copyWith(
+                                   color: Colors.black
+                               ),
+                             ),
+                           ),
+                         )
+                     )
+                   ],
+                 ),
+               )
               ],
             ),
           ),

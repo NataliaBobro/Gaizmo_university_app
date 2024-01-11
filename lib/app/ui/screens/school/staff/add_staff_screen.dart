@@ -28,7 +28,6 @@ class AddStaffScreen extends StatefulWidget {
 class _AddStaffScreenState extends State<AddStaffScreen> {
   final TextEditingController firstName = TextEditingController();
   final TextEditingController lastName = TextEditingController();
-  final TextEditingController surname = TextEditingController();
   final TextEditingController email = TextEditingController();
   final TextEditingController street = TextEditingController();
   final TextEditingController house = TextEditingController();
@@ -186,14 +185,6 @@ class _AddStaffScreenState extends State<AddStaffScreen> {
                     const SizedBox(
                       height: 24,
                     ),
-                    AppField(
-                      error: state.validateError?.errors.surnameErrors?.first,
-                      label: 'Surname',
-                      controller: surname,
-                    ),
-                    const SizedBox(
-                      height: 24,
-                    ),
                     SelectInput(
                         errors: state.validateError?.errors.genderErrors?.first,
                         title: 'Gender',
@@ -343,7 +334,6 @@ class _AddStaffScreenState extends State<AddStaffScreen> {
                         state.addOrEditStaff(
                             firstName.text,
                             lastName.text,
-                            surname.text,
                             gender,
                             dateBirth,
                             phone.text,

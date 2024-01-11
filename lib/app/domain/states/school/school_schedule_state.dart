@@ -18,7 +18,7 @@ class SchoolScheduleState with ChangeNotifier {
   BuildContext context;
   int _filterDateIndex = 5;
   int? _editId;
-  bool _isLoading = false;
+  bool _isLoading = true;
   ScheduleMeta? _scheduleMeta;
   Map<String, dynamic>? _selectService;
   Map<String, dynamic>? _selectClass;
@@ -34,10 +34,10 @@ class SchoolScheduleState with ChangeNotifier {
   List<Map<String, dynamic>> _listClass = [];
   List<Map<String, dynamic>> _listTeacher = [];
   final MaskedTextController _lessonStart = MaskedTextController(mask: '00 : 00');
-  final MaskedTextController _repeatsStart = MaskedTextController(
+  TextEditingController _repeatsStart = MaskedTextController(
       mask: '00.00.0000'
   );
-  final MaskedTextController _repeatsEnd = MaskedTextController(
+  MaskedTextController _repeatsEnd = MaskedTextController(
       mask: '00.00.0000'
   );
 
@@ -69,6 +69,20 @@ class SchoolScheduleState with ChangeNotifier {
     _filterDateIndex = index;
     notifyListeners();
     getLesson();
+  }
+
+  void changeRepeatsStart(value){
+    _repeatsStart.text = value;
+    notifyListeners();
+  }
+
+  void changeRepeatsEnd(value){
+    _repeatsEnd.text = value;
+    notifyListeners();
+  }
+  void changeLessonStart(value){
+    _lessonStart.text = value;
+    notifyListeners();
   }
 
   void changeFilterType(List<int>value) {

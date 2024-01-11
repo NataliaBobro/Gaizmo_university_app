@@ -6,7 +6,9 @@ import 'package:etm_crm/app/ui/screens/school/staff/item/widgets/staff_personal_
 import 'package:etm_crm/app/ui/screens/school/staff/item/widgets/staff_settings_tab.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import '../../../../../../resources/resources.dart';
 import '../../../../theme/text_styles.dart';
 
 class StaffItemScreen extends StatefulWidget {
@@ -169,15 +171,22 @@ class _StaffHeaderState extends State<StaffHeader> {
       color: Colors.white,
       padding: const EdgeInsets.only(top: 16),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 24),
-            child: Text(
-              'Staff',
-              style: TextStyles.s24w700.copyWith(
-                  color: const Color(0xFF242424)
-              ),
+          CupertinoButton(
+            padding: const EdgeInsets.symmetric(horizontal: 24).copyWith(
+              right: 10
+            ),
+            child: SvgPicture.asset(
+              Svgs.back
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            }
+          ),
+          Text(
+            'Staff',
+            style: TextStyles.s24w700.copyWith(
+                color: const Color(0xFF242424)
             ),
           ),
         ],

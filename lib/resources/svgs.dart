@@ -38,4 +38,5 @@ class Svgs {
   static const String img = 'assets/vectors/img.svg';
   static const String photo = 'assets/vectors/photo.svg';
   static const String cameraButton = 'assets/vectors/camera-button.svg';
+  static const String back = 'assets/vectors/back.svg';
 }

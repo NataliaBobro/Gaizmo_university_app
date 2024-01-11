@@ -34,7 +34,7 @@ class _StaffPersonalInfoScreenState extends State<StaffPersonalInfoScreen> {
 
   void initData() {
     final read = context.read<SchoolStaffItemState>();
-    fullName.text = '${read.staff?.firstName} ${read.staff?.lastName} ${read.staff?.surname}';
+    fullName.text = '${read.staff?.firstName} ${read.staff?.lastName}';
     phone.text = '${read.staff?.phone}';
     email.text = '${read.staff?.email}';
     about.text = read.staff?.about != null ? '${read.staff?.about}' : '';
