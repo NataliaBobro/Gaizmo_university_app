@@ -52,7 +52,7 @@ class _AddScheduleState extends State<AddSchedule> {
             color: const Color(0xFFF0F3F6),
             child: Column(
               children: [
-                const CenterHeader(
+                const CenterHeaderWithAction(
                     title: 'Schedule'
                 ),
                 Expanded(

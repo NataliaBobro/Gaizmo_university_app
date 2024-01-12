@@ -30,7 +30,7 @@ class _BranchListState extends State<BranchList> {
             color: const Color(0xFFF0F3F6),
             child: Column(
               children: [
-                const CenterHeader(
+                const CenterHeaderWithAction(
                     title: 'Branches'
                 ),
                 Expanded(
@@ -65,7 +65,15 @@ class _BranchListState extends State<BranchList> {
                         ...List.generate(
                             state.listUserData?.users.length ?? 0,
                             (index) => BranchItemWidget(
-                              branch: state.listUserData?.users[index]
+                              branch: state.listUserData?.users[index],
+                                onPressed: () {
+                                context.read<SchoolBranchState>().openPage(
+                                    context,
+                                    BranchItemScreen(
+                                      branch: state.listUserData?.users[index],
+                                    )
+                                );
+                              }
                             )
                         )
                       ],
@@ -83,10 +91,12 @@ class _BranchListState extends State<BranchList> {
 class BranchItemWidget extends StatefulWidget {
   const BranchItemWidget({
     Key? key,
-    required this.branch
+    required this.branch,
+    required this.onPressed
   }) : super(key: key);
 
   final UserData? branch;
+  final Function onPressed;
 
   @override
   State<BranchItemWidget> createState() => _BranchItemWidgetState();
@@ -101,12 +111,7 @@ class _BranchItemWidgetState extends State<BranchItemWidget> {
         minSize: 0.0,
         padding: EdgeInsets.zero,
         onPressed: () {
-          context.read<SchoolBranchState>().openPage(
-              context,
-              BranchItemScreen(
-                branch: widget.branch,
-              )
-          );
+          widget.onPressed();
         },
         child: Container(
           padding: const EdgeInsets.symmetric(

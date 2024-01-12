@@ -60,7 +60,7 @@ class _TypeLessonState extends State<TypeLesson> {
             color: const Color(0xFFF0F3F6),
             child: Column(
               children: [
-                CenterHeader(
+                CenterHeaderWithAction(
                     title: 'Filter',
                     action: CupertinoButton(
                       child: Text(

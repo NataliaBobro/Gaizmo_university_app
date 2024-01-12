@@ -40,7 +40,7 @@ class _AddServiceScreenState extends State<AddServiceScreen> {
           color: const Color(0xFFF0F3F6),
           child: Column(
             children: [
-              const CenterHeader(
+              const CenterHeaderWithAction(
                   title: 'Add service'
               ),
               Expanded(

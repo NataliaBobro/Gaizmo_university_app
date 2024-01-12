@@ -38,7 +38,7 @@ class _StaffGenderState extends State<StaffGender> {
             color: const Color(0xFFF0F3F6),
             child: Column(
               children: [
-                const CenterHeader(
+                const CenterHeaderWithAction(
                     title: 'Settings'
                 ),
                 Expanded(

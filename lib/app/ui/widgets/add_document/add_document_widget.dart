@@ -67,7 +67,7 @@ class _AddDocumentWidgetState extends State<AddDocumentWidget> {
             color: const Color(0xFFF0F3F6),
             child: Column(
               children: [
-                const CenterHeader(
+                const CenterHeaderWithAction(
                     title: 'Add document'
                 ),
                 Expanded(

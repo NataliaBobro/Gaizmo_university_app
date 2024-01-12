@@ -48,7 +48,7 @@ class _AddBranchState extends State<AddBranch> {
             color: const Color(0xFFF0F3F6),
             child: Column(
               children: [
-                const CenterHeader(
+                const CenterHeaderWithAction(
                     title: 'Add branch'
                 ),
                 Expanded(
