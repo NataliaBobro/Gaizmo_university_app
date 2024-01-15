@@ -263,3 +263,15 @@ Map<String, dynamic> _$DocumentTypeToJson(DocumentType instance) =>
       'define': instance.define,
       'name': instance.name,
     };
+
+FilterDataString _$FilterDataStringFromJson(Map<String, dynamic> json) =>
+    FilterDataString(
+      success: json['success'] as bool,
+      city: (json['city'] as List<dynamic>).map((e) => e as String).toList(),
+    );
+
+Map<String, dynamic> _$FilterDataStringToJson(FilterDataString instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'city': instance.city,
+    };

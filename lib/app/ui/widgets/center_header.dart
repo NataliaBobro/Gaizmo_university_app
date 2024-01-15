@@ -79,7 +79,7 @@ class CenterHeaderWithAction extends StatelessWidget {
   const CenterHeaderWithAction({
     Key? key,
     required this.title,
-    this.action
+    this.action,
   }) : super(key: key);
 
   final String title;
@@ -110,34 +110,9 @@ class CenterHeaderWithAction extends StatelessWidget {
                   color: const Color(0xFF242424)
               ),
             ),
-            Row(
-              children: [
-                CupertinoButton(
-                  padding: const EdgeInsets.only(
-                      top: 20,
-                      bottom: 20,
-                      left: 20,
-                      right: 12
-                  ),
-                  child: SvgPicture.asset(
-                      Svgs.search
-                  ),
-                  onPressed: () {},
-                ),
-                CupertinoButton(
-                  padding: const EdgeInsets.only(
-                      top: 20,
-                      bottom: 20,
-                      left: 12,
-                      right: 24
-                  ),
-                  child: SvgPicture.asset(
-                      Svgs.menu
-                  ),
-                  onPressed: () {},
-                )
-              ],
-            )
+            if(action != null) ...[
+              action!
+            ]
           ],
         ),
       ),

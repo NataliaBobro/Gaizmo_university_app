@@ -318,3 +318,18 @@ class DocumentType {
   factory DocumentType.fromJson(Map<String, dynamic> json) => _$DocumentTypeFromJson(json);
 }
 
+@JsonSerializable(includeIfNull: true, fieldRename: FieldRename.snake)
+class FilterDataString {
+  bool success;
+  List<String> city;
+
+  FilterDataString({
+    required this.success,
+    required this.city,
+  });
+
+  Map<String, dynamic> toJson() => _$FilterDataStringToJson(this);
+
+  factory FilterDataString.fromJson(Map<String, dynamic> json) => _$FilterDataStringFromJson(json);
+}
+
