@@ -1,12 +1,15 @@
-import 'package:etm_crm/app/domain/states/student/StudentSchoolState.dart';
 import 'package:etm_crm/app/ui/screens/students/schools/widgets/student_school_filter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import '../../../../../resources/resources.dart';
+import '../../../../domain/states/student/student_school_item_state.dart';
+import '../../../../domain/states/student/student_school_state.dart';
 import '../../../widgets/center_header.dart';
+import '../../../widgets/header_search_field.dart';
 import '../../school/profile/branchs/branch_list.dart';
+import 'item/student_school_item.dart';
 
 class SchoolList extends StatefulWidget {
   const SchoolList({Key? key}) : super(key: key);
@@ -16,6 +19,9 @@ class SchoolList extends StatefulWidget {
 }
 
 class _SchoolListState extends State<SchoolList> {
+  bool viewSearchField = false;
+  TextEditingController search = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final state = context.watch<StudentSchoolState>();
@@ -29,35 +35,50 @@ class _SchoolListState extends State<SchoolList> {
                 CenterHeaderWithAction(
                   title: 'Schools',
                   action: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisSize: MainAxisSize.max,
                     children: [
-                      CupertinoButton(
-                        padding: const EdgeInsets.only(
-                            top: 20,
-                            bottom: 20,
-                            left: 20,
-                            right: 12
+                      if(!viewSearchField) ...[
+                        CupertinoButton(
+                          padding: const EdgeInsets.only(
+                              top: 20,
+                              bottom: 20,
+                              left: 20,
+                              right: 12
+                          ),
+                          child: SvgPicture.asset(
+                              Svgs.search
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              viewSearchField = true;
+                            });
+                          },
                         ),
-                        child: SvgPicture.asset(
-                            Svgs.search
-                        ),
-                        onPressed: () {},
-                      ),
-                      CupertinoButton(
-                        padding: const EdgeInsets.only(
-                            top: 20,
-                            bottom: 20,
-                            left: 12,
-                            right: 24
-                        ),
-                        child: SvgPicture.asset(
-                            Svgs.menu
-                        ),
-                        onPressed: () {
-                          state.openPage(
-                              StudentSchoolFilter()
-                          );
-                        },
-                      )
+                        CupertinoButton(
+                          padding: const EdgeInsets.only(
+                              top: 20,
+                              bottom: 20,
+                              left: 12,
+                              right: 24
+                          ),
+                          child: SvgPicture.asset(
+                              Svgs.menu
+                          ),
+                          onPressed: () {
+                            state.openPage(
+                                const StudentSchoolFilter()
+                            );
+                          },
+                        )
+                      ] else ...[
+                        HeaderSearchField(
+                          controller: search,
+                          onChanged: (value) {
+                            state.fetchList(search: value);
+                          },
+                        )
+                      ],
                     ],
                   ),
                 ),
@@ -76,8 +97,19 @@ class _SchoolListState extends State<SchoolList> {
                             state.listSchool?.users.length ?? 0,
                                 (index) => BranchItemWidget(
                                 branch: state.listSchool?.users[index],
-                                onPressed: () {
-
+                                onPressed: () async {
+                                  await Navigator.push(
+                                      context,
+                                      CupertinoPageRoute(
+                                          builder: (context) => ChangeNotifierProvider(
+                                            create: (context) => StudentSchoolItemState(
+                                                context,
+                                                state.listSchool!.users[index]
+                                            ),
+                                            child: const StudentSchoolItem(),
+                                          )
+                                      )
+                                  );
                                 }
                             )
                         )

@@ -52,20 +52,23 @@ class _BranchGeneralInfoTabState extends State<BranchGeneralInfoTab> {
                   value: "${school?.school?.siteName}"
               ),
             ],
-            Builder(
-              builder: (context) {
-                try{
-                  return InfoValue(
-                      title: "Working hours",
-                      value: "${convertDaysToFormat(school?.workDay ?? [])} "
-                          "${(school?.school?.from)?.replaceAll(" ", "")} - "
-                          "${(school?.school?.to)?.replaceAll(" ", "")}"
-                  );
-                }catch(_){
-                  return Container();
-                }
-              },
-            )
+            if(school?.workDay != null && school?.school?.from != null
+                  && school?.school?.to != null) ...[
+              Builder(
+                builder: (context) {
+                  try{
+                    return InfoValue(
+                        title: "Working hours",
+                        value: "${convertDaysToFormat(school?.workDay ?? [])} "
+                            "${(school?.school?.from)?.replaceAll(" ", "")} - "
+                            "${(school?.school?.to)?.replaceAll(" ", "")}"
+                    );
+                  }catch(_){
+                    return Container();
+                  }
+                },
+              )
+            ]
           ],
         )
       ],

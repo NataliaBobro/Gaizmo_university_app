@@ -15,10 +15,12 @@ import '../../../../../../widgets/snackbars.dart';
 class BranchAvatar extends StatefulWidget {
   const BranchAvatar({
     Key? key,
-    required this.userData
+    required this.userData,
+    this.hasAdd = true
   }) : super(key: key);
 
   final UserData? userData;
+  final bool hasAdd;
 
   @override
   State<BranchAvatar> createState() => _BranchAvatarState();
@@ -27,6 +29,7 @@ class BranchAvatar extends StatefulWidget {
 class _BranchAvatarState extends State<BranchAvatar> {
 
   Future<void> _getImage() async {
+    if(!widget.hasAdd) return;
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
@@ -61,7 +64,7 @@ class _BranchAvatarState extends State<BranchAvatar> {
           ),
           child: widget.userData?.avatar == null ? Center(
             child: Text(
-              '+Add LOGO',
+              !widget.hasAdd ? "" : '+Add LOGO',
               style: TextStyles.s12w600.copyWith(
                   color: const Color(0xFFACACAC)
               ),

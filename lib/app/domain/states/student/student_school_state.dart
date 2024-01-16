@@ -24,7 +24,7 @@ class StudentSchoolState with ChangeNotifier {
     });
   }
 
-  Future<void> fetchList() async {
+  Future<void> fetchList({String? search}) async {
     _isLoading = true;
     notifyListeners();
 
@@ -37,7 +37,11 @@ class StudentSchoolState with ChangeNotifier {
     }
 
     try{
-      final result = await StudentService.fetchList(context, filterCity);
+      final result = await StudentService.fetchList(
+          context,
+          filterCity,
+          search: search
+      );
       if(result != null){
         _listSchool = result;
       }

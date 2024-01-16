@@ -1,10 +1,10 @@
-import 'package:etm_crm/app/domain/states/student/StudentSchoolState.dart';
 import 'package:etm_crm/app/ui/screens/students/schools/widgets/filter_item.dart';
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../../domain/states/student/student_school_state.dart';
 import '../../../../widgets/auth_button.dart';
 import '../../../../widgets/center_header.dart';
 
@@ -61,8 +61,10 @@ class _StudentSchoolFilterState extends State<StudentSchoolFilter> {
                           title: 'City',
                           value: state.selectedFilterCity,
                           list: listCity,
-                          change: (value) {
-                            state.changeFilterCity(value);
+                          change: (String value) {
+                            if(value.isNotEmpty) {
+                              state.changeFilterCity(value);
+                            }
                           },
                         )
                       ],

@@ -110,9 +110,11 @@ class CenterHeaderWithAction extends StatelessWidget {
                   color: const Color(0xFF242424)
               ),
             ),
-            if(action != null) ...[
-              action!
-            ]
+            Expanded(
+              child: action != null ?
+                action! :
+                Container(),
+            )
           ],
         ),
       ),

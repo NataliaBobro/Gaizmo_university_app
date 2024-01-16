@@ -13,7 +13,7 @@ import 'package:routemaster/routemaster.dart' as routemaster;
 import '../../../resources/resources.dart';
 import '../../domain/states/auth_state.dart';
 import '../../domain/states/school/school_profile_state.dart';
-import '../../domain/states/student/StudentSchoolState.dart';
+import '../../domain/states/student/student_school_state.dart';
 import '../../domain/states/student/student_home_state.dart';
 import '../../domain/states/teacher/teacher_home_state.dart';
 import '../screens/splash/splash_screen.dart';
