@@ -59,6 +59,9 @@ ServicesModel _$ServicesModelFromJson(Map<String, dynamic> json) =>
           ? null
           : Currency.fromJson(json['currency'] as Map<String, dynamic>),
       etm: json['etm'] as int?,
+      lessons: (json['lessons'] as List<dynamic>?)
+          ?.map((e) => Lesson.fromJson(e as Map<String, dynamic>))
+          .toList(),
       name: json['name'] as String,
       color: json['color'] as String?,
     )..school = json['school'] == null
@@ -81,4 +84,41 @@ Map<String, dynamic> _$ServicesModelToJson(ServicesModel instance) =>
       'etm': instance.etm,
       'currency': instance.currency,
       'school': instance.school,
+      'lessons': instance.lessons,
+    };
+
+Lesson _$LessonFromJson(Map<String, dynamic> json) => Lesson(
+      id: json['id'] as int,
+      serviceId: json['service_id'] as int,
+      classId: json['class_id'] as int?,
+      startLesson: json['start_lesson'] as String?,
+      start: json['start'] as String?,
+      end: json['end'] as String?,
+      day: (json['day'] as List<dynamic>?)
+          ?.map((e) => DayItem.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      createdAt: json['created_at'] as String?,
+      updatedAt: json['updated_at'] as String?,
+    );
+
+Map<String, dynamic> _$LessonToJson(Lesson instance) => <String, dynamic>{
+      'id': instance.id,
+      'service_id': instance.serviceId,
+      'class_id': instance.classId,
+      'start_lesson': instance.startLesson,
+      'start': instance.start,
+      'end': instance.end,
+      'day': instance.day,
+      'created_at': instance.createdAt,
+      'updated_at': instance.updatedAt,
+    };
+
+DayItem _$DayItemFromJson(Map<String, dynamic> json) => DayItem(
+      name: json['name'] as String,
+      define: json['define'] as String?,
+    );
+
+Map<String, dynamic> _$DayItemToJson(DayItem instance) => <String, dynamic>{
+      'name': instance.name,
+      'define': instance.define,
     };

@@ -59,4 +59,20 @@ class StudentService {
     return ServicesData.fromJson(data);
   }
 
+  static Future<ServicesModel?> fetchServiceItem(
+      BuildContext context,
+      int? serviceId
+      ) async {
+    final token = getToken(context);
+    if(token == null) return null;
+    final response = await ApiClient().dio.get(
+        '/student/school/$serviceId/fetch-item',
+        options: Options(
+          headers: {'Authorization': 'Bearer $token'},
+        )
+    );
+    final data = response.data as Map<String, dynamic>;
+    return ServicesModel.fromJson(data['service']);
+  }
+
 }

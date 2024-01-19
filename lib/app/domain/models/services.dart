@@ -53,6 +53,7 @@ class ServicesModel {
   int? etm;
   Currency? currency;
   School? school;
+  List<Lesson>? lessons;
 
   ServicesModel({
     required this.id,
@@ -66,6 +67,7 @@ class ServicesModel {
     this.cost,
     this.currency,
     this.etm,
+    this.lessons,
     required this.name,
     required this.color,
   });
@@ -75,4 +77,47 @@ class ServicesModel {
   factory ServicesModel.fromJson(Map<String, dynamic> json) => _$ServicesModelFromJson(json);
 }
 
+@JsonSerializable(includeIfNull: true, fieldRename: FieldRename.snake)
+class Lesson {
+  int id;
+  int serviceId;
+  int? classId;
+  String? startLesson;
+  String? start;
+  String? end;
+  List<DayItem>? day;
+  String? createdAt;
+  String? updatedAt;
+
+  Lesson({
+    required this.id,
+    required this.serviceId,
+    this.classId,
+    this.startLesson,
+    this.start,
+    this.end,
+    this.day,
+    this.createdAt,
+    this.updatedAt,
+  });
+
+  Map<String, dynamic> toJson() => _$LessonToJson(this);
+
+  factory Lesson.fromJson(Map<String, dynamic> json) => _$LessonFromJson(json);
+}
+
+@JsonSerializable(includeIfNull: true, fieldRename: FieldRename.snake)
+class DayItem {
+  String name;
+  String? define;
+
+  DayItem({
+    required this.name,
+    required this.define,
+  });
+
+  Map<String, dynamic> toJson() => _$DayItemToJson(this);
+
+  factory DayItem.fromJson(Map<String, dynamic> json) => _$DayItemFromJson(json);
+}
 
