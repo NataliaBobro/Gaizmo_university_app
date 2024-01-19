@@ -68,7 +68,7 @@ class _SettingsTabState extends State<SettingsTab> {
                 MaterialPageRoute(
                   builder: (context) => SettingsSocialAccounts(
                     user: context.read<AppState>().userData,
-                    onSave: (userId, inst, face, twit, link){
+                    onSave: (){
                       state.updateUser();
                     },
                   ),

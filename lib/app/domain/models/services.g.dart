@@ -42,6 +42,20 @@ Map<String, dynamic> _$ServicesCategoryToJson(ServicesCategory instance) =>
       'services': instance.services,
     };
 
+ListServicesModel _$ListServicesModelFromJson(Map<String, dynamic> json) =>
+    ListServicesModel(
+      services: (json['services'] as List<dynamic>?)
+          ?.map((e) => e == null
+              ? null
+              : ServicesModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$ListServicesModelToJson(ListServicesModel instance) =>
+    <String, dynamic>{
+      'services': instance.services,
+    };
+
 ServicesModel _$ServicesModelFromJson(Map<String, dynamic> json) =>
     ServicesModel(
       id: json['id'] as int,

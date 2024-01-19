@@ -38,6 +38,19 @@ class ServicesCategory {
 }
 
 @JsonSerializable(includeIfNull: true, fieldRename: FieldRename.snake)
+class ListServicesModel {
+  List<ServicesModel?>? services;
+
+  ListServicesModel({
+    required this.services,
+  });
+
+  Map<String, dynamic> toJson() => _$ListServicesModelToJson(this);
+
+  factory ListServicesModel.fromJson(Map<String, dynamic> json) => _$ListServicesModelFromJson(json);
+}
+
+@JsonSerializable(includeIfNull: true, fieldRename: FieldRename.snake)
 class ServicesModel {
   int id;
   int? branchId;

@@ -1,3 +1,4 @@
+import 'package:etm_crm/app/domain/services/favorite_service.dart';
 import 'package:etm_crm/app/domain/states/student/pay_lesson_state.dart';
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
 import 'package:flutter/cupertino.dart';
@@ -48,6 +49,7 @@ class _PayLessonScreenState extends State<PayLessonScreen> {
                         ...List.generate(
                             countsLesson.length,
                             (index) => ButtonPayItemLesson(
+                              id: state.servicesModel?.id,
                               count: countsLesson[index],
                               serviceName: state.servicesModel?.name,
                               price: state.servicesModel?.cost,
@@ -94,6 +96,7 @@ class _PayLessonScreenState extends State<PayLessonScreen> {
 class ButtonPayItemLesson extends StatefulWidget {
   const ButtonPayItemLesson({
     Key? key,
+    required this.id,
     required this.serviceName,
     required this.price,
     required this.onSelect,
@@ -102,6 +105,7 @@ class ButtonPayItemLesson extends StatefulWidget {
   }) : super(key: key);
 
   final String? serviceName;
+  final int? id;
   final int? price;
   final int count;
   final bool onSelect;
@@ -112,6 +116,8 @@ class ButtonPayItemLesson extends StatefulWidget {
 }
 
 class _ButtonPayItemLessonState extends State<ButtonPayItemLesson> {
+  bool hasFavorite = false;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -146,13 +152,17 @@ class _ButtonPayItemLessonState extends State<ButtonPayItemLesson> {
                     ),
                   ),
                   CupertinoButton(
-                    padding: EdgeInsets.zero,
+                    padding: const EdgeInsets.only(
+                      left: 15,
+                      bottom: 0
+                    ),
                     minSize: 0.0,
                     child: SvgPicture.asset(
-                      Svgs.heart
+                      Svgs.heart,
+                      color: hasFavorite ? Colors.red : Colors.black,
                     ),
                     onPressed: () {
-
+                      addFavorite();
                     }
                   )
                 ],
@@ -171,5 +181,17 @@ class _ButtonPayItemLessonState extends State<ButtonPayItemLesson> {
         ),
       ),
     );
+  }
+
+  Future<void> addFavorite()async {
+    try{
+      final result = await FavoriteService.add(context, widget.id);
+      if(result == true){
+        hasFavorite = true;
+        setState(() {});
+      }
+    }catch(e){
+      print(e);
+    }
   }
 }

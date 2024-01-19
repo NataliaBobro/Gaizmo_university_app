@@ -6,10 +6,9 @@ import 'package:etm_crm/app/ui/widgets/change_password.dart';
 import 'package:etm_crm/app/ui/widgets/custom_scroll_physics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import '../../../../../../../../resources/resources.dart';
 import '../../../../../../widgets/settings_general_info.dart';
+import '../../../../../../widgets/settings_input.dart';
 import '../../../../../../widgets/settings_language.dart';
 import '../../../../../../widgets/settings_social_accounts.dart';
 
@@ -131,49 +130,3 @@ class _BranchSettingsTabState extends State<BranchSettingsTab> {
     context.read<SchoolBranchState>().updateBranch(widget.branch?.id);
   }
 }
-
-class SettingsInput extends StatefulWidget {
-  const SettingsInput({
-    Key? key,
-    required this.title,
-    required this.onPress,
-  }) : super(key: key);
-
-  final String title;
-  final Function onPress;
-
-  @override
-  State<SettingsInput> createState() => _SettingsInputState();
-}
-
-class _SettingsInputState extends State<SettingsInput> {
-  @override
-  Widget build(BuildContext context) {
-    return CupertinoButton(
-      minSize: 0.0,
-      padding: const EdgeInsets.symmetric(
-          horizontal: 24,
-          vertical: 18
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            widget.title,
-            style: TextStyles.s14w400.copyWith(
-                color: const Color(0xFF848484)
-            ),
-          ),
-          SvgPicture.asset(
-            Svgs.next,
-            width: 32,
-          )
-        ],
-      ),
-      onPressed: () {
-        widget.onPress();
-      },
-    );
-  }
-}
-

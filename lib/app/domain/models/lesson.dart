@@ -20,6 +20,7 @@ class LessonsList {
 class Lesson {
   int id;
   String? lessonStart;
+  String? startLesson;
   String? start;
   String? end;
   ServicesModel? service;
@@ -29,6 +30,7 @@ class Lesson {
   Lesson({
     required this.id,
     this.lessonStart,
+    this.startLesson,
     this.start,
     this.end,
     this.service,

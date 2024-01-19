@@ -1,7 +1,10 @@
+import 'package:etm_crm/app/domain/states/student/favorite_state.dart';
+import 'package:etm_crm/app/ui/screens/students/favorite/favorite_screen.dart';
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../../../resources/resources.dart';
 
@@ -38,7 +41,9 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                 child: SvgPicture.asset(
                     Svgs.notify
                 ),
-                onPressed: () {}
+                onPressed: () async {
+
+                }
               ),
               CupertinoButton(
                   minSize: 0.0,
@@ -46,7 +51,17 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                   child: SvgPicture.asset(
                       Svgs.heart
                   ),
-                  onPressed: () {}
+                  onPressed: () async {
+                    await Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                            builder: (context) => ChangeNotifierProvider(
+                              create: (context) => FavoriteState(context),
+                              child: const FavoriteScreen(),
+                            )
+                        )
+                    );
+                  }
               ),
             ],
           )

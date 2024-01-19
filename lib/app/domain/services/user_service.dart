@@ -198,4 +198,54 @@ class UserService {
     return data['success'];
   }
 
+  static Future<bool?> changeNotifications(
+      context,
+      bool hasOn,
+      ) async {
+    final token = getToken(context);
+    if(token == null) return null;
+
+    final response = await ApiClient().dio.post(
+      '/user/change-notifications',
+      data: {
+        "notifications": hasOn
+      },
+      options: Options(
+        headers: {'Authorization': 'Bearer $token'},
+      ),
+    );
+    final data = response.data as Map<String, dynamic>;
+    return data['success'];
+  }
+
+  static Future<bool?> changeGeneralInfoStudent(
+      context,
+      int? userId,
+      String? fullName,
+      String? phone,
+      String? email,
+      String? about,
+      String? country,
+      String? city,
+      ) async {
+    final token = getToken(context);
+    if(token == null) return null;
+    final response = await ApiClient().dio.post(
+      '/student/setting/change-general-info/$userId',
+      data: {
+        'full_name': fullName,
+        'phone': phone,
+        'email': email,
+        'about': about,
+        'country': country,
+        'city': city,
+      },
+      options: Options(
+        headers: {'Authorization': 'Bearer $token'},
+      ),
+    );
+    final data = response.data as Map<String, dynamic>;
+    return data['success'];
+  }
+
 }

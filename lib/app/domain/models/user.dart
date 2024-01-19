@@ -54,6 +54,7 @@ class UserData {
   List<WorkDay>? workDay;
   List<Documents>? documents;
   SocialAccounts? socialAccounts;
+  int? notifications;
 
   UserData({
     required this.id,
@@ -74,6 +75,7 @@ class UserData {
     this.city,
     this.about,
     this.socialAccounts,
+    this.notifications
   });
 
   Map<String, dynamic> toJson() => _$UserDataToJson(this);

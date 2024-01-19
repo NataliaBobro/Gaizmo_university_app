@@ -1,12 +1,12 @@
 import 'package:etm_crm/app/domain/models/services.dart';
 import 'package:etm_crm/app/domain/states/student/student_school_item_state.dart';
-import 'package:etm_crm/app/ui/screens/school/profile/branchs/item/widgets/branch_settings_tab.dart';
 import 'package:etm_crm/app/ui/screens/students/schools/item/widgets/service_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../widgets/center_header.dart';
+import '../../../../../widgets/settings_input.dart';
 
 class StudentSchoolServiceList extends StatefulWidget {
   const StudentSchoolServiceList({

@@ -1,17 +1,17 @@
-import 'package:etm_crm/app/domain/states/school/school_schedule_state.dart';
-import 'package:etm_crm/app/ui/screens/school/schedule/filter/filter_class.dart';
-import 'package:etm_crm/app/ui/screens/school/schedule/filter/type_lesson.dart';
+import 'package:etm_crm/app/domain/states/student/student_schedule_state.dart';
+import 'package:etm_crm/app/ui/screens/students/schedule/filter/type_lesson.dart';
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
 import 'package:etm_crm/app/ui/widgets/auth_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../../../widgets/center_header.dart';
 import 'filter_teacher.dart';
 
 class ScheduleFilterScreen extends StatefulWidget {
   const ScheduleFilterScreen({
-    Key? key
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -21,8 +21,8 @@ class ScheduleFilterScreen extends StatefulWidget {
 class _ScheduleFilterScreenState extends State<ScheduleFilterScreen> {
   @override
   Widget build(BuildContext context) {
-    final state = context.watch<SchoolScheduleState>();
-    final read = context.read<SchoolScheduleState>();
+    final state = context.watch<StudentScheduleState>();
+    final read = context.read<StudentScheduleState>();
     final selectedType = state.filterSchedule.type;
     final selectedTeacher = state.filterSchedule.teacher;
     final selectClass = state.filterSchedule.selectClass;
@@ -67,47 +67,6 @@ class _ScheduleFilterScreenState extends State<ScheduleFilterScreen> {
                           height: 24,
                         ),
                         CupertinoButton(
-                          minSize: 0.0,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 24,
-                            vertical: 18
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Type of lesson',
-                                style: TextStyles.s14w400.copyWith(
-                                  color: const Color(0xFF242424)
-                                ),
-                              ),
-                              Container(
-                                constraints: const BoxConstraints(
-                                  maxWidth: 179
-                                ),
-                                child: Text(
-                                  type.isNotEmpty ? type : 'All',
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyles.s14w400.copyWith(
-                                      color: const Color(0xFF848484)
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                CupertinoPageRoute(
-                                    builder: (context) => ChangeNotifierProvider.value(
-                                      value: read,
-                                      child: const TypeLesson(),
-                                    )
-                                )
-                            );
-                          }
-                        ),
-                        CupertinoButton(
                             minSize: 0.0,
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 24,
@@ -149,46 +108,46 @@ class _ScheduleFilterScreenState extends State<ScheduleFilterScreen> {
                             }
                         ),
                         CupertinoButton(
-                            minSize: 0.0,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 24,
-                                vertical: 18
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Class',
+                          minSize: 0.0,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 24,
+                            vertical: 18
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Type of lesson',
+                                style: TextStyles.s14w400.copyWith(
+                                  color: const Color(0xFF242424)
+                                ),
+                              ),
+                              Container(
+                                constraints: const BoxConstraints(
+                                  maxWidth: 179
+                                ),
+                                child: Text(
+                                  type.isNotEmpty ? type : 'All',
+                                  overflow: TextOverflow.ellipsis,
                                   style: TextStyles.s14w400.copyWith(
-                                      color: const Color(0xFF242424)
+                                      color: const Color(0xFF848484)
                                   ),
                                 ),
-                                Container(
-                                  constraints: const BoxConstraints(
-                                      maxWidth: 179
-                                  ),
-                                  child: Text(
-                                    selectedClass.isNotEmpty ? selectedClass : 'All',
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyles.s14w400.copyWith(
-                                        color: const Color(0xFF848484)
-                                    ),
-                                  ),
+                              )
+                            ],
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                CupertinoPageRoute(
+                                    builder: (context) => ChangeNotifierProvider.value(
+                                      value: read,
+                                      child: const TypeLesson(),
+                                    )
                                 )
-                              ],
-                            ),
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  CupertinoPageRoute(
-                                      builder: (context) => ChangeNotifierProvider.value(
-                                        value: read,
-                                        child: const FilterClass(),
-                                      )
-                                  )
-                              );
-                            }
-                        )
+                            );
+                          }
+                        ),
                       ],
                     )
                 ),

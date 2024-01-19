@@ -5,7 +5,7 @@ import 'package:etm_crm/app/ui/screens/students/schools/item/widgets/student_sch
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../school/profile/branchs/item/widgets/branch_settings_tab.dart';
+import '../../../../../widgets/settings_input.dart';
 
 class StudentSchoolServices extends StatefulWidget {
   const StudentSchoolServices({Key? key}) : super(key: key);

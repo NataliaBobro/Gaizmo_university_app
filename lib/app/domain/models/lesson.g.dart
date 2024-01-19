@@ -20,6 +20,7 @@ Map<String, dynamic> _$LessonsListToJson(LessonsList instance) =>
 Lesson _$LessonFromJson(Map<String, dynamic> json) => Lesson(
       id: json['id'] as int,
       lessonStart: json['lesson_start'] as String?,
+      startLesson: json['start_lesson'] as String?,
       start: json['start'] as String?,
       end: json['end'] as String?,
       service: json['service'] == null
@@ -35,6 +36,7 @@ Lesson _$LessonFromJson(Map<String, dynamic> json) => Lesson(
 Map<String, dynamic> _$LessonToJson(Lesson instance) => <String, dynamic>{
       'id': instance.id,
       'lesson_start': instance.lessonStart,
+      'start_lesson': instance.startLesson,
       'start': instance.start,
       'end': instance.end,
       'service': instance.service,

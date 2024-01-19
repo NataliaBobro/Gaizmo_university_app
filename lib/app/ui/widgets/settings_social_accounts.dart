@@ -138,13 +138,7 @@ class _SettingsSocialAccountsState extends State<SettingsSocialAccounts> {
         widget.user?.socialAccounts?.twitter = twitterField.text;
 
         if(widget.onSave != null){
-          widget.onSave!(
-              widget.user?.id,
-              instagramField.text,
-              facebookField.text,
-              linkedinField.text,
-              twitterField.text
-          );
+          widget.onSave!();
         }
         close();
       }

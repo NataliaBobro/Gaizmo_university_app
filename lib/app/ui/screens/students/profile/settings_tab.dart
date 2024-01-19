@@ -1,0 +1,133 @@
+import 'package:etm_crm/app/app.dart';
+import 'package:etm_crm/app/ui/screens/students/profile/widgets/personal_info_student.dart';
+import 'package:etm_crm/app/ui/widgets/notifications_settings.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_dialogs/flutter_dialogs.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../domain/services/user_service.dart';
+import '../../../theme/text_styles.dart';
+import '../../../widgets/custom_scroll_physics.dart';
+import '../../../widgets/settings_input.dart';
+import '../../../widgets/settings_language.dart';
+
+class SettingTab extends StatefulWidget {
+  const SettingTab({Key? key}) : super(key: key);
+
+  @override
+  State<SettingTab> createState() => _SettingTabState();
+}
+
+class _SettingTabState extends State<SettingTab> {
+  @override
+  Widget build(BuildContext context) {
+    final state = context.watch<AppState>();
+
+    return ListView(
+      padding: const EdgeInsets.only(top: 24),
+      physics: const BottomBouncingScrollPhysics(),
+      children: [
+        SettingsInput(
+            title: "Language",
+            onPress: () async {
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => SettingLanguage(
+                      saveLanguage: (val) {
+                        changeLanguageForUser(val['id']);
+                      },
+                      selectLanguage: state.userData?.languageId,
+                    )
+                ),
+              );
+            }
+        ),
+        SettingsInput(
+            title: "Personal info",
+            onPress: () async {
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => PersonalInfoStudent(
+                      student: state.userData
+                    )
+                ),
+              );
+            }
+        ),
+        SettingsInput(
+            title: "Notifications",
+            onPress: () async {
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => NotificationsSettings(
+                        student: state.userData,
+                        onUpdate: () {
+                          state.getUser();
+                        },
+                    )
+                ),
+              );
+            }
+        ),
+        SettingsInput(
+            title: "Sign out",
+            onPress: () {
+              showSignOutDialog();
+            }
+        ),
+
+      ],
+    );
+  }
+
+  Future<void> changeLanguageForUser(val) async {
+    final read = context.read<AppState>().userData;
+    try{
+      final result = await UserService.changeLanguageForUser(
+          context,
+          read?.id,
+          val
+      );
+      if(result == true){
+        read?.languageId = val;
+        updateUser();
+      }
+    }catch(e){
+      print(e);
+    }
+  }
+
+  Future<void> showSignOutDialog() async {
+    await showPlatformDialog(
+      context: context,
+      builder: (context) => BasicDialogAlert(
+        content: const Text(
+          "Do you really want\n to sign up from “ETM”?",
+          style: TextStyles.s17w600,
+        ),
+        actions: <Widget>[
+          BasicDialogAction(
+            title: const Text("Yes"),
+            onPressed: () {
+              Navigator.pop(context);
+              context.read<AppState>().onLogout();
+            },
+          ),
+          BasicDialogAction(
+            title: const Text("No"),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  void updateUser() {
+    context.read<AppState>().getUser();
+  }
+}

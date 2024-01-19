@@ -1,12 +1,14 @@
 import 'package:etm_crm/app/domain/states/school/school_schedule_state.dart';
 import 'package:etm_crm/app/domain/states/school/school_services_state.dart';
 import 'package:etm_crm/app/domain/states/school/school_staff_state.dart';
+import 'package:etm_crm/app/domain/states/student/student_schedule_state.dart';
 import 'package:etm_crm/app/ui/screens/auth/auth_sign_in.dart';
 import 'package:etm_crm/app/ui/screens/auth/widgets/auth_select_login_type.dart';
 import 'package:etm_crm/app/ui/screens/school/profile/school_profile_screen.dart';
 import 'package:etm_crm/app/ui/screens/school/schedule/school_schedule_screen.dart';
 import 'package:etm_crm/app/ui/screens/school/service/school_service_screen.dart';
 import 'package:etm_crm/app/ui/screens/school/staff/staff_screen.dart';
+import 'package:etm_crm/app/ui/screens/students/schedule/student_schedule_screen.dart';
 import 'package:etm_crm/app/ui/screens/students/schools/school_list.dart';
 import 'package:provider/provider.dart';
 import 'package:routemaster/routemaster.dart' as routemaster;
@@ -32,6 +34,7 @@ const _home = '/home';
 const _studentSchool = '/student-school';
 const _services = '/services';
 const _schedule = '/schedule';
+const _studentSchedule = '/student-schedule';
 const _staff = '/staff';
 
 abstract class AppRoutes {
@@ -45,6 +48,7 @@ abstract class AppRoutes {
   static String get schedule => _schedule;
   static String get staff => _staff;
   static String get studentSchool => _studentSchool;
+  static String get studentSchedule => _studentSchedule;
 }
 
 final splashMap = routemaster.RouteMap(
@@ -162,7 +166,7 @@ final loggedStudentInMap = routemaster.RouteMap(
   onUnknownRoute: (_) => const routemaster.Redirect(_tabbar),
   routes: {
     _tabbar: (info) => routemaster.TabPage(
-          paths: const [_home, _home, _studentSchool, _home],
+          paths: const [_home, _studentSchedule, _studentSchool, _home],
           child: MultiProvider(
             providers: [
               ChangeNotifierProvider(
@@ -183,6 +187,12 @@ final loggedStudentInMap = routemaster.RouteMap(
       child: ChangeNotifierProvider(
         create: (context) => StudentHomeState(context),
         child: const StudentProfileScreen(),
+      ),
+    ),
+    _studentSchedule: (_) => TransitionPage(
+      child: ChangeNotifierProvider(
+        create: (context) => StudentScheduleState(context),
+        child: const StudentScheduleScreen(),
       ),
     ),
     _studentSchool: (_) => TransitionPage(
