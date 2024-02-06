@@ -61,11 +61,12 @@ class ServicesModel {
   int? duration;
   int? cost;
   String name;
-  String? numberVisits;
+  int? numberVisits;
   String? color;
   int? etm;
   Currency? currency;
   School? school;
+  int? isFavorites;
   List<Lesson>? lessons;
 
   ServicesModel({
@@ -81,6 +82,7 @@ class ServicesModel {
     this.currency,
     this.etm,
     this.lessons,
+    this.isFavorites,
     required this.name,
     required this.color,
   });

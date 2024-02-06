@@ -67,7 +67,7 @@ ServicesModel _$ServicesModelFromJson(Map<String, dynamic> json) =>
       validity: json['validity'] as int?,
       validityType: json['validity_type'] as String?,
       duration: json['duration'] as int?,
-      numberVisits: json['number_visits'] as String?,
+      numberVisits: json['number_visits'] as int?,
       cost: json['cost'] as int?,
       currency: json['currency'] == null
           ? null
@@ -76,6 +76,7 @@ ServicesModel _$ServicesModelFromJson(Map<String, dynamic> json) =>
       lessons: (json['lessons'] as List<dynamic>?)
           ?.map((e) => Lesson.fromJson(e as Map<String, dynamic>))
           .toList(),
+      isFavorites: json['is_favorites'] as int?,
       name: json['name'] as String,
       color: json['color'] as String?,
     )..school = json['school'] == null
@@ -98,6 +99,7 @@ Map<String, dynamic> _$ServicesModelToJson(ServicesModel instance) =>
       'etm': instance.etm,
       'currency': instance.currency,
       'school': instance.school,
+      'is_favorites': instance.isFavorites,
       'lessons': instance.lessons,
     };
 

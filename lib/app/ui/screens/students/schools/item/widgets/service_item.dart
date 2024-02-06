@@ -1,20 +1,18 @@
 import 'package:etm_crm/app/domain/services/student_service.dart';
-import 'package:etm_crm/app/ui/screens/students/schools/item/widgets/pay_lesson_screen.dart';
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
 import 'package:etm_crm/app/ui/widgets/auth_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../../../../../../domain/models/services.dart';
-import '../../../../../../domain/states/student/pay_lesson_state.dart';
+import '../../../../../../domain/services/pay_service.dart';
 import '../../../../../widgets/button_teacher_students.dart';
 import '../../../../../widgets/center_header.dart';
 
 class ServiceItem extends StatefulWidget {
   const ServiceItem({
     Key? key,
-    required this.serviceId
+    required this.serviceId,
   }) : super(key: key);
 
   final int? serviceId;
@@ -47,6 +45,24 @@ class _ServiceItemState extends State<ServiceItem> {
     }finally{
       setState(() {});
     }
+  }
+
+  Future<void> payService(int? serviceId) async {
+    try{
+      final result = await PayService.payStudentPackageService(
+          context,
+          serviceId
+      );
+      if(result == true) {
+        close();
+      }
+    }catch(e) {
+      print(e);
+    }
+  }
+
+  void close() {
+    Navigator.pop(context);
   }
 
   void renderSchedule(result) {
@@ -161,6 +177,7 @@ class _ServiceItemState extends State<ServiceItem> {
                                   },
                                   children: [
                                     ExpansionPanel(
+                                      canTapOnHeader: true,
                                         backgroundColor: const Color(0xFF242424),
                                         headerBuilder: (BuildContext context, bool isExpanded) {
                                           return Text(
@@ -197,15 +214,7 @@ class _ServiceItemState extends State<ServiceItem> {
                       child: AppButton(
                         title: 'Pay lesson',
                         onPressed: () async {
-                          await Navigator.push(
-                              context,
-                              CupertinoPageRoute(
-                                  builder: (context) => ChangeNotifierProvider(
-                                    create: (context) => PayLessonState(context, servicesModel),
-                                    child: const PayLessonScreen(),
-                                  )
-                              )
-                          );
+                          payService(widget.serviceId);
                         }
                       )
                     )
@@ -279,6 +288,7 @@ class _ScheduleLessonState extends State<ScheduleLesson> {
       },
       children: data.map<ExpansionPanel>((Item item) {
         return ExpansionPanel(
+          canTapOnHeader: true,
           backgroundColor: const Color(0xFF242424),
           headerBuilder: (BuildContext context, bool isExpanded) {
             return Container(

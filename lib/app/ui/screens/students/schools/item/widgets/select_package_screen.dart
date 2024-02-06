@@ -1,5 +1,6 @@
+import 'package:etm_crm/app/domain/models/services.dart';
 import 'package:etm_crm/app/domain/services/favorite_service.dart';
-import 'package:etm_crm/app/domain/states/student/pay_lesson_state.dart';
+import 'package:etm_crm/app/ui/screens/students/schools/item/widgets/service_item.dart';
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,23 +8,28 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../../../resources/resources.dart';
+import '../../../../../../domain/states/student/student_school_item_state.dart';
 import '../../../../../widgets/auth_button.dart';
 import '../../../../../widgets/center_header.dart';
 
-class PayLessonScreen extends StatefulWidget {
-  const PayLessonScreen({Key? key}) : super(key: key);
+class SelectPackageScreen extends StatefulWidget {
+  const SelectPackageScreen({
+    Key? key,
+    required this.package
+  }) : super(key: key);
+
+  final List<ServicesModel?>? package;
 
   @override
-  State<PayLessonScreen> createState() => _PayLessonScreenState();
+  State<SelectPackageScreen> createState() => _SelectPackageScreenState();
 }
 
-class _PayLessonScreenState extends State<PayLessonScreen> {
-  List<int> countsLesson = [50, 10, 1];
+class _SelectPackageScreenState extends State<SelectPackageScreen> {
   int? selected;
 
   @override
   Widget build(BuildContext context) {
-    final state = context.watch<PayLessonState>();
+    final state = context.watch<StudentSchoolItemState>();
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -47,16 +53,13 @@ class _PayLessonScreenState extends State<PayLessonScreen> {
                       ),
                       children: [
                         ...List.generate(
-                            countsLesson.length,
+                            widget.package?.length ?? 0,
                             (index) => ButtonPayItemLesson(
-                              id: state.servicesModel?.id,
-                              count: countsLesson[index],
-                              serviceName: state.servicesModel?.name,
-                              price: state.servicesModel?.cost,
-                              onSelect: selected == index,
+                              package: widget.package?[index],
+                              onSelect: selected == widget.package?[index]?.id,
                               changeSelect: () {
                                 setState(() {
-                                  selected = index;
+                                  selected = widget.package?[index]?.id;
                                 });
                               }
                             )
@@ -73,8 +76,10 @@ class _PayLessonScreenState extends State<PayLessonScreen> {
                             title: 'pay package',
                             onPressed: () async {
                               if(selected != null){
-                                state.payService(
-                                    countsLesson[selected!]
+                                state.openPage(
+                                  ServiceItem(
+                                      serviceId: selected
+                                  )
                                 );
                               }
                             }
@@ -96,18 +101,12 @@ class _PayLessonScreenState extends State<PayLessonScreen> {
 class ButtonPayItemLesson extends StatefulWidget {
   const ButtonPayItemLesson({
     Key? key,
-    required this.id,
-    required this.serviceName,
-    required this.price,
     required this.onSelect,
     required this.changeSelect,
-    required this.count,
+    required this.package,
   }) : super(key: key);
 
-  final String? serviceName;
-  final int? id;
-  final int? price;
-  final int count;
+  final ServicesModel? package;
   final bool onSelect;
   final Function changeSelect;
 
@@ -146,7 +145,7 @@ class _ButtonPayItemLessonState extends State<ButtonPayItemLesson> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "${widget.count} ${widget.serviceName} lessons",
+                    "${widget.package?.numberVisits} ${widget.package?.name} lessons",
                     style: TextStyles.s14w500.copyWith(
                       color: const Color(0xFF242424)
                     ),
@@ -159,10 +158,14 @@ class _ButtonPayItemLessonState extends State<ButtonPayItemLesson> {
                     minSize: 0.0,
                     child: SvgPicture.asset(
                       Svgs.heart,
-                      color: hasFavorite ? Colors.red : Colors.black,
+                      color: (widget.package?.isFavorites ?? 0) > 0 ? Colors.red : Colors.black,
                     ),
                     onPressed: () {
-                      addFavorite();
+                      if((widget.package?.isFavorites ?? 0) > 0){
+                        removeFavorite();
+                      }else{
+                        addFavorite();
+                      }
                     }
                   )
                 ],
@@ -171,7 +174,7 @@ class _ButtonPayItemLessonState extends State<ButtonPayItemLesson> {
                 height: 8,
               ),
               Text(
-                "1 lesson ${widget.price} hrn",
+                "1 lesson ${widget.package?.cost} hrn",
                 style: TextStyles.s12w400.copyWith(
                   color: const Color(0xFF848484)
                 ),
@@ -185,9 +188,23 @@ class _ButtonPayItemLessonState extends State<ButtonPayItemLesson> {
 
   Future<void> addFavorite()async {
     try{
-      final result = await FavoriteService.add(context, widget.id);
+      final result = await FavoriteService.add(context, widget.package?.id);
       if(result == true){
+        widget.package?.isFavorites = 1;
         hasFavorite = true;
+        setState(() {});
+      }
+    }catch(e){
+      print(e);
+    }
+  }
+
+  Future<void> removeFavorite()async {
+    try{
+      final result = await FavoriteService.remove(context, widget.package?.id);
+      if(result == true){
+        widget.package?.isFavorites = 0;
+        hasFavorite = false;
         setState(() {});
       }
     }catch(e){

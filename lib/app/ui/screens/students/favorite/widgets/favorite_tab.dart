@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../domain/states/student/favorite_state.dart';
-import '../../profile/widgets/service_item_content.dart';
+import '../../profile/info/widgets/service_item_content.dart';
 
 class FavoriteTab extends StatefulWidget {
   const FavoriteTab({Key? key}) : super(key: key);

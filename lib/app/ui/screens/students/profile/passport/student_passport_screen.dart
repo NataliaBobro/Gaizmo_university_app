@@ -1,19 +1,25 @@
-
-import 'package:etm_crm/app/ui/screens/students/favorite/widgets/favorite_tab.dart';
-import 'package:etm_crm/app/ui/screens/students/favorite/widgets/pay_tab.dart';
-import 'package:etm_crm/app/ui/widgets/center_header.dart';
+import 'package:etm_crm/app/ui/screens/students/profile/passport/exchange_tab.dart';
+import 'package:etm_crm/app/ui/screens/students/profile/passport/presents_tab.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
-import '../../../theme/text_styles.dart';
+import '../../../../../../resources/resources.dart';
+import '../../../../theme/text_styles.dart';
 
-class FavoriteScreen extends StatefulWidget {
-  const FavoriteScreen({Key? key}) : super(key: key);
+class StudentPassportScreen extends StatefulWidget {
+  const StudentPassportScreen({
+    Key? key,
+    required this.changeTab
+  }) : super(key: key);
+
+  final Function changeTab;
 
   @override
-  State<FavoriteScreen> createState() => _FavoriteScreenState();
+  State<StudentPassportScreen> createState() => _StudentPassportScreenState();
 }
 
-class _FavoriteScreenState extends State<FavoriteScreen> with TickerProviderStateMixin{
+class _StudentPassportScreenState extends State<StudentPassportScreen>  with TickerProviderStateMixin{
   late int isActiveTab = 0;
   late TabController _tabController;
 
@@ -36,7 +42,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> with TickerProviderStat
       isActiveTab = index;
     });
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,14 +54,31 @@ class _FavoriteScreenState extends State<FavoriteScreen> with TickerProviderStat
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const CenterHeader(title: "Favorite lessons"),
+                PassportHeader(
+                  back: () {
+                    widget.changeTab();
+                  }
+                ),
+                ColoredBox(
+                  color: Colors.white,
+                  child: Row(
+                    children: const [
+                      SizedBox(
+                        height: 224,
+                      )
+                    ],
+                  ),
+                ),
                 Container(
                   height: 55,
                   alignment: Alignment.center,
                   width: double.infinity,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(20)
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(20),
+                        bottomRight: Radius.circular(20)
+                      )
                   ),
                   child: TabBar(
                     indicatorSize: TabBarIndicatorSize.label,
@@ -79,7 +102,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> with TickerProviderStat
                         children: [
                           const Tab(
                             height: 24,
-                            text: 'Favorites',
+                            text: 'Exchange',
                             iconMargin: EdgeInsets.zero,
                           ),
                           if(isActiveTab == 0) ...[
@@ -96,7 +119,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> with TickerProviderStat
                         children: [
                           const Tab(
                             height: 19,
-                            text: 'Paid lessons',
+                            text: 'Presents',
                           ),
                           if(isActiveTab == 1) ...[
                             Container(
@@ -114,8 +137,8 @@ class _FavoriteScreenState extends State<FavoriteScreen> with TickerProviderStat
                   child: TabBarView(
                     controller: _tabController,
                     children: const [
-                      FavoriteTab(),
-                      PayTab(),
+                      ExchangeScreen(),
+                      PresentsScreen()
                     ],
                   ),
                 )
@@ -126,3 +149,57 @@ class _FavoriteScreenState extends State<FavoriteScreen> with TickerProviderStat
     );
   }
 }
+
+class PassportHeader extends StatelessWidget {
+  const PassportHeader({
+    Key? key,
+    required this.back,
+  }) : super(key: key);
+
+  final Function back;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.only(
+          bottom: 8
+      ),
+      color: Colors.white,
+      child: Stack(
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(
+                vertical: 16
+            ),
+            alignment: Alignment.center,
+            child: Text(
+              'My ID Passport',
+              style: TextStyles.s24w700.copyWith(
+                  color: const Color(0xFF242424)
+              ),
+            ),
+          ),
+          Positioned(
+              left: 0,
+              top: 0,
+              bottom: 0,
+              child: CupertinoButton(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 16
+                ),
+                child: SvgPicture.asset(
+                  Svgs.back,
+                  width: 32,
+                ),
+                onPressed: () {
+                  back();
+                },
+              )
+          )
+        ],
+      ),
+    );
+  }
+}
+

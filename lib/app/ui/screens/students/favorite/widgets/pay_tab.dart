@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../domain/states/student/favorite_state.dart';
-import '../../profile/widgets/service_item_content.dart';
-import 'favrite_tab.dart';
+import '../../profile/info/widgets/service_item_content.dart';
+import 'favorite_tab.dart';
 
 class PayTab extends StatefulWidget {
   const PayTab({Key? key}) : super(key: key);

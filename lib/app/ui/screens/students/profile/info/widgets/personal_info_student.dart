@@ -6,17 +6,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../domain/services/app_ninjas_service.dart';
-import '../../../../../domain/services/user_service.dart';
-import '../../../../theme/text_styles.dart';
-import '../../../../utils/show_message.dart';
-import '../../../../widgets/app_horizontal_field.dart';
-import '../../../../widgets/auth_button.dart';
-import '../../../../widgets/center_header.dart';
-import '../../../../widgets/select_input_search_field.dart';
-import '../../../../widgets/settings_input.dart';
-import '../../../../widgets/settings_social_accounts.dart';
-import '../../../../widgets/snackbars.dart';
+import '../../../../../../domain/services/app_ninjas_service.dart';
+import '../../../../../../domain/services/user_service.dart';
+import '../../../../../theme/text_styles.dart';
+import '../../../../../utils/show_message.dart';
+import '../../../../../widgets/app_horizontal_field.dart';
+import '../../../../../widgets/auth_button.dart';
+import '../../../../../widgets/center_header.dart';
+import '../../../../../widgets/select_input_search_field.dart';
+import '../../../../../widgets/settings_input.dart';
+import '../../../../../widgets/settings_social_accounts.dart';
+import '../../../../../widgets/snackbars.dart';
+
 
 class PersonalInfoStudent extends StatefulWidget {
   const PersonalInfoStudent({

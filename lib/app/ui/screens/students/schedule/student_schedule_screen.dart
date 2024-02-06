@@ -3,15 +3,17 @@ import 'package:accordion/controllers.dart';
 import 'package:etm_crm/app/domain/models/lesson.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dialogs/flutter_dialogs.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../resources/resources.dart';
+import '../../../../domain/services/visits_lesson_service.dart';
 import '../../../../domain/states/student/student_schedule_state.dart';
 import '../../../theme/text_styles.dart';
 import '../../students/schedule/widgets/schedule_header.dart';
-import '../profile/my_lessons_tab.dart';
+import '../profile/info/my_lessons_tab.dart';
 
 class StudentScheduleScreen extends StatefulWidget {
   const StudentScheduleScreen({Key? key}) : super(key: key);
@@ -90,7 +92,12 @@ class _StudentScheduleScreenState extends State<StudentScheduleScreen> {
                                       Color(int.parse('${lessons[index].service?.color}')).withOpacity(.6),
                                       contentVerticalPadding: 0,
                                       rightIcon: HeaderEtm(
-                                          etm: lessons[index].service?.etm
+                                          lessons: lessons[index],
+                                          visits: () {
+                                            DateTime now = DateTime.now();
+                                            DateTime date = now.add(Duration(days: state.filterDateIndex - 5));
+                                            showVisitsDialog(lessons[index], date);
+                                          }
                                       ),
                                       contentBorderWidth: 0,
                                       contentHorizontalPadding: 0.0,
@@ -122,6 +129,46 @@ class _StudentScheduleScreenState extends State<StudentScheduleScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> showVisitsDialog(Lesson lesson, DateTime date) async {
+    await showPlatformDialog(
+      context: context,
+      builder: (context) => BasicDialogAlert(
+        content: const Text(
+          "Are you sure you attended this lesson?",
+          style: TextStyles.s17w600,
+        ),
+        actions: <Widget>[
+          BasicDialogAction(
+            title: const Text("Yes"),
+            onPressed: () {
+              Navigator.pop(context);
+              visits(lesson, date);
+            },
+          ),
+          BasicDialogAction(
+            title: const Text("No"),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> visits(Lesson lesson, DateTime date) async {
+    try{
+      final result = await VisitsLessonService.visits(context, lesson.id, date);
+      if(result == true){
+        lesson.isVisitsExists = true;
+      }
+    }catch(e){
+      print(e);
+    }finally{
+      setState(() {});
+    }
   }
 }
 
@@ -172,35 +219,57 @@ class HeaderNameLesson extends StatelessWidget {
 class HeaderEtm extends StatelessWidget {
   const HeaderEtm({
     Key? key,
-    required this.etm
+    required this.visits,
+    required this.lessons,
   }) : super(key: key);
 
-  final int? etm;
+  final Lesson lessons;
+  final Function visits;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-          bottom: 27
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SvgPicture.asset(
-            Svgs.etmPlus,
-            width: 24,
-          ),
-          const SizedBox(
-            width: 3,
-          ),
-          Text(
-            '+$etm ETM',
-            style: TextStyles.s10w600.copyWith(
-                color: const Color(0xFF242424)
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SvgPicture.asset(
+              Svgs.etmPlus,
+              width: 24,
             ),
-          )
-        ],
-      ),
+            const SizedBox(
+              width: 3,
+            ),
+            Text(
+              '+${lessons.service?.etm} ETM',
+              style: TextStyles.s10w600.copyWith(
+                  color: const Color(0xFF242424)
+              ),
+            )
+          ],
+        ),
+        CupertinoButton(
+          minSize: 0.0,
+            padding: const EdgeInsets.only(left: 30, top: 3),
+            onPressed: lessons.isVisitsExists == true ? null : () {
+              visits();
+            },
+            child: Container(
+              width: 24,
+              height: 24,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(6),
+                color: lessons.isVisitsExists == true ?
+                const Color(0xFF27AE60) : const Color(0xFFFFC700)
+              ),
+              child: SvgPicture.asset(
+                Svgs.boxCheck
+              ),
+            )
+        )
+      ],
     );
   }
 }

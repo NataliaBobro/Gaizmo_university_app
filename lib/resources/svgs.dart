@@ -39,4 +39,12 @@ class Svgs {
   static const String photo = 'assets/vectors/photo.svg';
   static const String cameraButton = 'assets/vectors/camera-button.svg';
   static const String back = 'assets/vectors/back.svg';
+  static const String replaceCamera = 'assets/vectors/replace-camera.svg';
+  static const String cameraMask = 'assets/vectors/camera-mask.svg';
+  static const String cameraPicture = 'assets/vectors/camera-picture.svg';
+  static const String myIdCard = 'assets/vectors/my-id-card.svg';
+  static const String view = 'assets/vectors/view.svg';
+  static const String repost = 'assets/vectors/repost.svg';
+  static const String char = 'assets/vectors/char.svg';
+  static const String boxCheck = 'assets/vectors/box-check.svg';
 }

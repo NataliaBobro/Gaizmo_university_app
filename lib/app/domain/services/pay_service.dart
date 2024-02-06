@@ -5,18 +5,14 @@ import '../../data/api_client.dart';
 import '../models/services.dart';
 
 class PayService {
-  static Future<bool?> payStudentCountService(
+  static Future<bool?> payStudentPackageService(
       context,
       int? serviceId,
-      int count,
       ) async {
     final token = getToken(context);
     if(token == null) return null;
     final response = await ApiClient().dio.post(
       '/student/school/$serviceId/pay',
-      data: {
-        "count": count
-      },
       options: Options(
         headers: {'Authorization': 'Bearer $token'},
       ),

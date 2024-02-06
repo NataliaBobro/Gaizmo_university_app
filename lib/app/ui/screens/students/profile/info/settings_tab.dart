@@ -1,15 +1,15 @@
 import 'package:etm_crm/app/app.dart';
-import 'package:etm_crm/app/ui/screens/students/profile/widgets/personal_info_student.dart';
+import 'package:etm_crm/app/ui/screens/students/profile/info/widgets/personal_info_student.dart';
 import 'package:etm_crm/app/ui/widgets/notifications_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../domain/services/user_service.dart';
-import '../../../theme/text_styles.dart';
-import '../../../widgets/custom_scroll_physics.dart';
-import '../../../widgets/settings_input.dart';
-import '../../../widgets/settings_language.dart';
+import '../../../../../domain/services/user_service.dart';
+import '../../../../theme/text_styles.dart';
+import '../../../../widgets/custom_scroll_physics.dart';
+import '../../../../widgets/settings_input.dart';
+import '../../../../widgets/settings_language.dart';
 
 class SettingTab extends StatefulWidget {
   const SettingTab({Key? key}) : super(key: key);

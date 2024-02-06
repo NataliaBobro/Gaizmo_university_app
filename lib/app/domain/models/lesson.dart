@@ -26,6 +26,7 @@ class Lesson {
   ServicesModel? service;
   SchoolClass? schoolClass;
   List<ListDay>? day;
+  bool? isVisitsExists;
 
   Lesson({
     required this.id,
@@ -35,6 +36,7 @@ class Lesson {
     this.end,
     this.service,
     this.schoolClass,
+    this.isVisitsExists
   });
 
   Map<String, dynamic> toJson() => _$LessonToJson(this);

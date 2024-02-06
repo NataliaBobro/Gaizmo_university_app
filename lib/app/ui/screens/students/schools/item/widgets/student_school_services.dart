@@ -1,7 +1,6 @@
-import 'package:etm_crm/app/domain/models/services.dart';
 import 'package:etm_crm/app/domain/states/student/student_school_item_state.dart';
-import 'package:etm_crm/app/ui/screens/students/schools/item/widgets/service_item.dart';
-import 'package:etm_crm/app/ui/screens/students/schools/item/widgets/student_school_service_list.dart';
+import 'package:etm_crm/app/ui/screens/students/schools/item/widgets/select_package_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -25,9 +24,16 @@ class _StudentSchoolServicesState extends State<StudentSchoolServices> {
             children: [
               ...List.generate(
                   state.servicesData?.category?.length ?? 0,
-                      (index) => CategoryServiceItem(
-                      item: state.servicesData?.category![index]
-                  )
+                      (index) =>  SettingsInput(
+                          title: "${state.servicesData?.category![index].name}",
+                          onPress: () async {
+                            state.openPage(
+                                SelectPackageScreen(
+                                    package: state.servicesData?.category?[index].services
+                                )
+                            );
+                          }
+                      )
               ),
               ...List.generate(
                   state.servicesData?.allService?.length ?? 0,
@@ -35,9 +41,11 @@ class _StudentSchoolServicesState extends State<StudentSchoolServices> {
                         title: "${state.servicesData?.allService![index]?.name}",
                         onPress: () {
                           state.openPage(
-                              ServiceItem(
-                                  serviceId: state.servicesData?.allService![index]?.id
-                              )
+                            SelectPackageScreen(
+                                package: [
+                                  state.servicesData?.allService?[index]
+                                ]
+                            )
                           );
                         }
                     )
@@ -49,33 +57,3 @@ class _StudentSchoolServicesState extends State<StudentSchoolServices> {
     );
   }
 }
-
-class CategoryServiceItem extends StatefulWidget {
-  const CategoryServiceItem({
-    Key? key,
-    required this.item
-  }) : super(key: key);
-
-  final ServicesCategory? item;
-
-  @override
-  State<CategoryServiceItem> createState() => _CategoryServiceItemState();
-}
-
-class _CategoryServiceItemState extends State<CategoryServiceItem> {
-  @override
-  Widget build(BuildContext context) {
-    final read = context.read<StudentSchoolItemState>();
-    return SettingsInput(
-        title: "${widget.item?.name}",
-        onPress: () async {
-          read.openPage(
-              StudentSchoolServiceList(
-                list: widget.item?.services
-              )
-          );
-        }
-    );
-  }
-}
-

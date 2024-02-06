@@ -3,8 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../../../resources/resources.dart';
-import '../../../school/schedule/school_schedule_screen.dart';
+import '../../../../../../../resources/resources.dart';
+import '../../../../school/schedule/school_schedule_screen.dart';
+
 
 class ServiceItemContent extends StatefulWidget {
   const ServiceItemContent({

@@ -3,7 +3,7 @@ import 'package:etm_crm/app/ui/theme/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../widgets/change_avatar_widget.dart';
+import '../../../../../widgets/change_avatar_widget.dart';
 
 class ProfileAvatar extends StatefulWidget {
   const ProfileAvatar({Key? key}) : super(key: key);

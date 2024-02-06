@@ -29,6 +29,7 @@ Lesson _$LessonFromJson(Map<String, dynamic> json) => Lesson(
       schoolClass: json['school_class'] == null
           ? null
           : SchoolClass.fromJson(json['school_class'] as Map<String, dynamic>),
+      isVisitsExists: json['is_visits_exists'] as bool?,
     )..day = (json['day'] as List<dynamic>?)
         ?.map((e) => ListDay.fromJson(e as Map<String, dynamic>))
         .toList();
@@ -42,6 +43,7 @@ Map<String, dynamic> _$LessonToJson(Lesson instance) => <String, dynamic>{
       'service': instance.service,
       'school_class': instance.schoolClass,
       'day': instance.day,
+      'is_visits_exists': instance.isVisitsExists,
     };
 
 SchoolClass _$SchoolClassFromJson(Map<String, dynamic> json) => SchoolClass(

@@ -4,11 +4,13 @@ import 'package:etm_crm/app/domain/models/lesson.dart';
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dialogs/flutter_dialogs.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../domain/states/student/student_home_state.dart';
-import '../../../widgets/custom_scroll_physics.dart';
-import '../../school/schedule/school_schedule_screen.dart';
+import '../../../../../domain/services/visits_lesson_service.dart';
+import '../../../../../domain/states/student/student_home_state.dart';
+import '../../../../widgets/custom_scroll_physics.dart';
+import '../../../students/schedule/student_schedule_screen.dart';
 
 class MyLessonsTab extends StatefulWidget {
   const MyLessonsTab({Key? key}) : super(key: key);
@@ -71,9 +73,13 @@ class _MyLessonsTabState extends State<MyLessonsTab> {
                         headerBackgroundColor:
                         Color(int.parse('${lessons[index].service?.color}')).withOpacity(.6),
                         contentVerticalPadding: 0,
-                        rightIcon: HeaderEtm(
-                            etm: lessons[index].service?.etm
-                        ),
+                          rightIcon: HeaderEtm(
+                              lessons: lessons[index],
+                              visits: () {
+                                DateTime now = DateTime.now();
+                                showVisitsDialog(lessons[index], now);
+                              }
+                          ),
                         contentBorderWidth: 0,
                         contentHorizontalPadding: 0.0,
                         contentBackgroundColor: const Color(0xFFF0F3F6),
@@ -91,6 +97,46 @@ class _MyLessonsTabState extends State<MyLessonsTab> {
         )
       ],
     );
+  }
+
+  Future<void> showVisitsDialog(Lesson lesson, DateTime date) async {
+    await showPlatformDialog(
+      context: context,
+      builder: (context) => BasicDialogAlert(
+        content: const Text(
+          "Are you sure you attended this lesson?",
+          style: TextStyles.s17w600,
+        ),
+        actions: <Widget>[
+          BasicDialogAction(
+            title: const Text("Yes"),
+            onPressed: () {
+              Navigator.pop(context);
+              visits(lesson, date);
+            },
+          ),
+          BasicDialogAction(
+            title: const Text("No"),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> visits(Lesson lesson, DateTime date) async {
+    try{
+      final result = await VisitsLessonService.visits(context, lesson.id, date);
+      if(result == true){
+        lesson.isVisitsExists = true;
+      }
+    }catch(e){
+      print(e);
+    }finally{
+      setState(() {});
+    }
   }
 }
 

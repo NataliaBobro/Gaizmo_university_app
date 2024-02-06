@@ -1,11 +1,13 @@
 import 'package:etm_crm/app/app.dart';
+import 'package:etm_crm/app/ui/screens/students/profile/info/widgets/my_qr_code.dart';
 import 'package:etm_crm/app/ui/widgets/social_account_info.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../widgets/custom_scroll_physics.dart';
-import '../../../widgets/info_value.dart';
-import '../../../widgets/settings_input.dart';
+import '../../../../widgets/custom_scroll_physics.dart';
+import '../../../../widgets/info_value.dart';
+import '../../../../widgets/settings_input.dart';
 
 class PersonalInfoTab extends StatefulWidget {
   const PersonalInfoTab({Key? key}) : super(key: key);
@@ -46,15 +48,10 @@ class _PersonalInfoTabState extends State<PersonalInfoTab> {
             SettingsInput(
                 title: "QR Code",
                 onPress: () async {
-                  // await Navigator.push(
-                  //     context,
-                  //     CupertinoPageRoute(
-                  //         builder: (context) => ChangeNotifierProvider(
-                  //           create: (context) => SchoolBranchState(context),
-                  //           child: const BranchList(),
-                  //         )
-                  //     )
-                  // );
+                  context.read<AppState>().openPage(
+                      context,
+                      MuQrCode()
+                  );
                 }
             ),
           ],

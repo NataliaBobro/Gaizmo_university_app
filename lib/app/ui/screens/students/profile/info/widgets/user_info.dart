@@ -3,7 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../../../../resources/resources.dart';
+import '../../../../../../../resources/resources.dart';
+
 
 class UserInfo extends StatefulWidget {
   const UserInfo({Key? key}) : super(key: key);

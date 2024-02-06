@@ -1,13 +1,13 @@
-import 'package:etm_crm/app/ui/screens/students/profile/my_lessons_tab.dart';
-import 'package:etm_crm/app/ui/screens/students/profile/personal_info_tab.dart';
-import 'package:etm_crm/app/ui/screens/students/profile/settings_tab.dart';
-import 'package:etm_crm/app/ui/screens/students/profile/widgets/profile_avatar.dart';
-import 'package:etm_crm/app/ui/screens/students/profile/widgets/profile_header.dart';
-import 'package:etm_crm/app/ui/screens/students/profile/widgets/user_info.dart';
+import 'package:etm_crm/app/ui/screens/students/profile/info/my_lessons_tab.dart';
+import 'package:etm_crm/app/ui/screens/students/profile/info/personal_info_tab.dart';
+import 'package:etm_crm/app/ui/screens/students/profile/info/settings_tab.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../theme/text_styles.dart';
+import '../../../../theme/text_styles.dart';
+import '../../../school/profile/widgets/profile_avatar.dart';
+import '../../../school/profile/widgets/profile_header.dart';
+import '../../../teacher/widgets/user_info.dart';
 
 
 class StudentProfileScreen extends StatefulWidget {

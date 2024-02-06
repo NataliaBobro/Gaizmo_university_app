@@ -1,6 +1,21 @@
 import 'package:flutter/rendering.dart';
 
 abstract class TextStyles {
+  static const s8w400 = TextStyle(
+    fontSize: 8.0,
+    fontWeight: FontWeight.w400,
+  );
+
+  static const s8w500 = TextStyle(
+    fontSize: 8.0,
+    fontWeight: FontWeight.w500,
+  );
+
+  static const s8w600 = TextStyle(
+    fontSize: 8.0,
+    fontWeight: FontWeight.w600,
+  );
+
   static const s10w300 = TextStyle(
     fontSize: 10.0,
     fontWeight: FontWeight.w300,
