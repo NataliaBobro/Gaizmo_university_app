@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:etm_crm/app/domain/services/app_ninjas_service.dart';
 import 'package:etm_crm/app/domain/services/auth_service.dart';
 import 'package:etm_crm/app/ui/screens/auth/auth_sign_up_school.dart';
+import 'package:etm_crm/app/ui/screens/auth/new_password.dart';
 import 'package:etm_crm/resources/resources.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:hive/hive.dart';
@@ -16,6 +17,7 @@ import '../../app.dart';
 import '../../ui/screens/auth/auth_sign_in.dart';
 import '../../ui/screens/auth/auth_sign_up_student.dart';
 import '../../ui/screens/auth/auth_sign_up_teacher.dart';
+import '../../ui/screens/auth/confirm_recovery_password.dart';
 import '../../ui/screens/auth/widgets/auth_select_login_type.dart';
 import '../../ui/screens/auth/widgets/auth_select_user_type.dart';
 import '../../ui/utils/show_message.dart';
@@ -39,6 +41,11 @@ class AuthState with ChangeNotifier {
   final MaskedTextController _controllerCodeCart = MaskedTextController(
       mask: '000'
   );
+
+  final MaskedTextController _code = MaskedTextController(
+      mask: '000000'
+  );
+
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
   final TextEditingController _confirmPassword = TextEditingController();
@@ -67,6 +74,7 @@ class AuthState with ChangeNotifier {
   bool get isActivePrivacy => _isActivePrivacy;
   MaskedTextController get phone => _phone;
   TextEditingController get email => _email;
+  TextEditingController get code => _code;
   TextEditingController get password => _password;
   TextEditingController get confirmPassword => _confirmPassword;
   TextEditingController get firstName => _firstName;
@@ -509,6 +517,98 @@ class AuthState with ChangeNotifier {
       }
     } catch (e) {
       showErrorSnackBar(title: 'App request error');
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<void> sendRecoveryCode() async {
+    if(_email.text.isEmpty){
+      return;
+    }
+    _isLoading = true;
+    notifyListeners();
+    try {
+      final result = await AuthService.sendRecoveryCode(
+          _email.text,
+      );
+      if(result == true){
+        pageOpen(
+          const ConfirmPasswordRecovery()
+        );
+      }
+    } on DioError catch (e) {
+      if(e.response?.statusCode == 422){
+        final data = e.response?.data as Map<String, dynamic>;
+        _validateError = ValidateError.fromJson(data);
+        showMessage('${_validateError?.message}', color: const Color(0xFFFFC700));
+      }else{
+        showMessage('Phone or password is incorrect.');
+      }
+    } catch (e) {
+      print(e);
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<void> confirmCode() async {
+    if(_code.text.isEmpty || _code.text.length < 6){
+      return;
+    }
+    _isLoading = true;
+    notifyListeners();
+    try {
+      final result = await AuthService.confirmCode(
+          _email.text,
+          _code.text,
+      );
+      if(result == true){
+        pageOpen(
+          const NewPassword()
+        );
+      }
+  } catch (e) {
+      showMessage('Code incorrect.');
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<void> setNewPass() async {
+    if(_code.text.isEmpty || _code.text.length < 6 ||
+        _password.text.isEmpty ||
+        _confirmPassword.text.isEmpty){
+      return;
+    }
+    _isLoading = true;
+    notifyListeners();
+    try {
+      final result = await AuthService.setNewPassword(
+          _email.text,
+          _code.text,
+          _password.text,
+          _confirmPassword.text,
+      );
+      if(result == true){
+        showMessage('Success', color: Colors.green);
+        pageOpen(
+          const AuthSignIn()
+        );
+      }
+    } on DioError catch (e) {
+      if(e.response?.statusCode == 422){
+        final data = e.response?.data as Map<String, dynamic>;
+        _validateError = ValidateError.fromJson(data);
+        showMessage('${_validateError?.message}', color: const Color(0xFFFFC700));
+      }else{
+        showMessage('Time out');
+      }
+    } catch (e) {
+      showMessage('Code incorrect.');
     } finally {
       _isLoading = false;
       notifyListeners();

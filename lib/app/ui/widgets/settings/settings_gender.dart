@@ -1,35 +1,39 @@
-import 'package:etm_crm/app/domain/states/school/school_staff_item_state.dart';
+import 'package:etm_crm/app/domain/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../../app.dart';
-import '../../../../../theme/text_styles.dart';
-import '../../../../../widgets/auth_button.dart';
-import '../../../../../widgets/center_header.dart';
-import '../../../../../widgets/select_input.dart';
+import '../../../app.dart';
+import '../../../domain/services/staff_service.dart';
+import '../../theme/text_styles.dart';
+import '../auth_button.dart';
+import '../center_header.dart';
+import '../select_input.dart';
 
-class StaffGender extends StatefulWidget {
-  const StaffGender({Key? key}) : super(key: key);
+class SettingsGender extends StatefulWidget {
+  const SettingsGender({
+    Key? key,
+    required this.user
+  }) : super(key: key);
+
+  final UserData? user;
 
   @override
-  State<StaffGender> createState() => _StaffGenderState();
+  State<SettingsGender> createState() => _SettingsGenderState();
 }
 
-class _StaffGenderState extends State<StaffGender> {
+class _SettingsGenderState extends State<SettingsGender> {
   String? value;
   int gender = -1;
 
   @override
   void initState() {
-    final read = context.read<SchoolStaffItemState>();
-    gender = read.staff?.gender ?? -1;
+    gender = widget.user?.gender ?? -1;
     super.initState();
   }
 
 
   @override
   Widget build(BuildContext context) {
-    final read = context.read<SchoolStaffItemState>();
     final listGender = context.watch<AppState>().metaAppData?.genders ?? [];
     return Scaffold(
       backgroundColor: Colors.white,
@@ -81,7 +85,7 @@ class _StaffGenderState extends State<StaffGender> {
                           child: AppButton(
                               title: 'Save changes',
                               onPressed: () {
-                                read.saveGender(gender);
+                                saveGender(gender);
                               }
                           ),
                         )
@@ -93,5 +97,28 @@ class _StaffGenderState extends State<StaffGender> {
           )
       ),
     );
+  }
+
+  Future<void> saveGender(int? gender) async {
+    try{
+      final result = await StaffService.saveGender(
+          context,
+          widget.user?.id,
+          {
+            'gender': gender,
+          }
+      );
+      if(result == true){
+        widget.user?.gender = gender;
+        setState(() {});
+        back();
+      }
+    }catch (e){
+      print(e);
+    }
+  }
+
+  void back() {
+    Navigator.pop(context);
   }
 }

@@ -54,6 +54,10 @@ UserData _$UserDataFromJson(Map<String, dynamic> json) => UserData(
           : SocialAccounts.fromJson(
               json['social_accounts'] as Map<String, dynamic>),
       notifications: json['notifications'] as int?,
+      balanceEtm: json['balance_etm'] as int?,
+      from: json['from'] as String?,
+      to: json['to'] as String?,
+      salary: json['salary'] as int?,
     )
       ..workDay = (json['work_day'] as List<dynamic>?)
           ?.map((e) => WorkDay.fromJson(e as Map<String, dynamic>))
@@ -84,6 +88,10 @@ Map<String, dynamic> _$UserDataToJson(UserData instance) => <String, dynamic>{
       'documents': instance.documents,
       'social_accounts': instance.socialAccounts,
       'notifications': instance.notifications,
+      'balance_etm': instance.balanceEtm,
+      'from': instance.from,
+      'to': instance.to,
+      'salary': instance.salary,
     };
 
 School _$SchoolFromJson(Map<String, dynamic> json) => School(

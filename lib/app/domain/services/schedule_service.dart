@@ -6,6 +6,7 @@ import 'package:etm_crm/app/ui/utils/get_token.dart';
 import '../../data/api_client.dart';
 import '../models/lesson.dart';
 import '../models/schedule.dart';
+import '../models/services.dart';
 
 class ScheduleService {
   static Future<ScheduleMeta?> fetchMeta(
@@ -82,5 +83,21 @@ class ScheduleService {
     );
     final data = response.data as Map<String, dynamic>;
     return data['success'];
+  }
+
+  static Future<ListPayUsers?> fetchPayedUser(
+      context,
+      serviceId
+      ) async {
+    final token = getToken(context);
+    if(token == null) return null;
+    final response = await ApiClient().dio.get(
+      '/student/lesson/pay-users/$serviceId',
+      options: Options(
+        headers: {'Authorization': 'Bearer $token'},
+      ),
+    );
+    final data = response.data as Map<String, dynamic>;
+    return ListPayUsers.fromJson(data);
   }
 }

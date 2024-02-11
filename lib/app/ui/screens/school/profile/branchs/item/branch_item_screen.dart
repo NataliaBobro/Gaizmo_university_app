@@ -1,12 +1,14 @@
 import 'package:etm_crm/app/domain/models/user.dart';
 import 'package:etm_crm/app/ui/screens/school/profile/branchs/item/widgets/branch_avatar.dart';
-import 'package:etm_crm/app/ui/screens/school/profile/branchs/item/widgets/branch_document_tab.dart';
 import 'package:etm_crm/app/ui/screens/school/profile/branchs/item/widgets/branch_general_info.dart';
 import 'package:etm_crm/app/ui/screens/school/profile/branchs/item/widgets/branch_header.dart';
 import 'package:etm_crm/app/ui/screens/school/profile/branchs/item/widgets/branch_info.dart';
 import 'package:etm_crm/app/ui/screens/school/profile/branchs/item/widgets/branch_settings_tab.dart';
+import 'package:etm_crm/app/ui/screens/school/profile/branchs/item/widgets/document_view.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../../../../../domain/states/school/school_branch_state.dart';
 import '../../../../../theme/text_styles.dart';
 
 class BranchItemScreen extends StatefulWidget {
@@ -148,8 +150,15 @@ class _BranchItemScreenState extends State<BranchItemScreen> with TickerProvider
                         tabController: _tabController,
                         branch: widget.branch,
                       ),
-                      BranchDocumentTab(
-                        branch: widget.branch,
+                      DocumentWidget(
+                        user: widget.branch,
+                        onUpdate: () async {
+                          final branch = await context.read<SchoolBranchState>().updateBranch(
+                              widget.branch?.id
+                          );
+                          widget.branch?.documents = branch?.documents ?? [];
+                          setState(() {});
+                        },
                       ),
                       BranchSettingsTab(
                         branch: widget.branch,

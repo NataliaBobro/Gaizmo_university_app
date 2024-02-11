@@ -1,4 +1,5 @@
 import 'package:etm_crm/app/domain/states/auth_state.dart';
+import 'package:etm_crm/app/ui/screens/auth/password_recovery.dart';
 import 'package:etm_crm/app/ui/widgets/arrow_back.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
@@ -71,7 +72,11 @@ class _AuthSignInState extends State<AuthSignIn> {
                                 color: const Color(0xFF848484)
                             ),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            state.pageOpen(
+                              const PasswordRecovery()
+                            );
+                          },
                         )
                     ),
                     const SizedBox(

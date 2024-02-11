@@ -46,6 +46,10 @@ class _ServiceItemContentState extends State<ServiceItemContent> {
             value: '0',
           ),
           ContentRowInfo(
+            title: 'School',
+            value: '${widget.service?.school?.name}'
+          ),
+          ContentRowInfo(
             title: 'Adress',
             value: '${widget.service?.school?.street} '
                 '${widget.service?.school?.house}',

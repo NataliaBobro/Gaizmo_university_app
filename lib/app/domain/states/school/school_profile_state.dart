@@ -31,17 +31,10 @@ class SchoolProfileState with ChangeNotifier {
   final MaskedTextController _phone = MaskedTextController(
       mask: '+00 (000) 000 00 00'
   );
-  final MaskedTextController _scheduleFrom = MaskedTextController(
-      mask: '00 : 00'
-  );
-  final MaskedTextController _scheduleTo = MaskedTextController(
-      mask: '00 : 00'
-  );
   final TextEditingController _email = TextEditingController();
   final TextEditingController _siteAddress = TextEditingController();
   ValidateError? _validateError;
   Map<String, dynamic>? _schoolCategory;
-  List<int> _listWorkDay = [];
   List<dynamic>? _countryList;
   List<dynamic>? _cityList;
   Map<String, dynamic>? _country;
@@ -121,13 +114,10 @@ class SchoolProfileState with ChangeNotifier {
 
   bool get isLoading => _isLoading;
   bool get loadingSearch => _loadingSearch;
-  List<int> get listWorkDay => _listWorkDay;
   ValidateError? get validateError => _validateError;
   TextEditingController get nameSchool => _nameSchool;
   TextEditingController get street => _street;
   TextEditingController get house => _house;
-  TextEditingController get scheduleFrom => _scheduleFrom;
-  TextEditingController get scheduleTo => _scheduleTo;
   TextEditingController get phone => _phone;
   TextEditingController get email => _email;
   TextEditingController get siteAddress => _siteAddress;
@@ -159,17 +149,10 @@ class SchoolProfileState with ChangeNotifier {
   void setFieldSetting() {
     _nameSchool.text = '${context.read<AppState>().userData?.school?.name}';
     _siteAddress.text = '${context.read<AppState>().userData?.school?.siteName}';
-    _scheduleFrom.text = '${context.read<AppState>().userData?.school?.from}';
-    _scheduleTo.text = '${context.read<AppState>().userData?.school?.to}';
 
     _phone.text = '${context.read<AppState>().userData?.phone}';
     _email.text = '${context.read<AppState>().userData?.email}';
 
-    _listWorkDay = [];
-    List<WorkDay>? workDayUser = context.read<AppState>().userData?.workDay;
-    for(var a = 0; a < (workDayUser?.length ?? 0); a++){
-      _listWorkDay.add(workDayUser![a].day);
-    }
     _schoolCategory = {
       'id': context.read<AppState>().userData?.school?.category?.id,
       'name': context.read<AppState>().userData?.school?.category?.translate?.value,
@@ -202,15 +185,6 @@ class SchoolProfileState with ChangeNotifier {
     notifyListeners();
   }
 
-  void changeWorkDay(index){
-    bool contain = _listWorkDay.contains(index);
-    if(contain){
-      _listWorkDay.remove(index);
-    }else{
-      _listWorkDay.add(index);
-    }
-    notifyListeners();
-  }
 
   Future<void> saveLanguage() async {
     _isLoading = true;
@@ -222,7 +196,6 @@ class SchoolProfileState with ChangeNotifier {
       );
       if(result == true){
         setUserLanguage();
-        close();
       }
     } on DioError catch (e) {
       showMessage(e.message.isEmpty ? e.toString() : e.message);
@@ -346,36 +319,6 @@ class SchoolProfileState with ChangeNotifier {
       notifyListeners();
     }
   }
-
-  Future<void> saveSchoolSchedule() async {
-    _isLoading = true;
-    notifyListeners();
-    try {
-      final result = await SchoolService.changeSchoolSchedule(
-          context,
-          _listWorkDay,
-          _scheduleFrom.text.replaceAll(' ', ''),
-          _scheduleTo.text.replaceAll(' ', ''),
-      );
-      if(result == true){
-        close();
-      }
-    } on DioError catch (e) {
-      if(e.response?.statusCode == 422){
-        final data = e.response?.data as Map<String, dynamic>;
-        _validateError = ValidateError.fromJson(data);
-        showMessage('${_validateError?.message}', color: const Color(0xFFFFC700));
-      }else{
-        showMessage(e.message.isEmpty ? e.toString() : e.message);
-      }
-    } catch (e) {
-      showErrorSnackBar(title: 'App request error');
-    } finally {
-      _isLoading = false;
-      notifyListeners();
-    }
-  }
-
 
   Future<void> searchCountry(String? value) async {
     if(_loadingSearch || (value?.length ?? 0) < 2) return;

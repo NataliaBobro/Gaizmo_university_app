@@ -1,22 +1,28 @@
-import 'package:etm_crm/app/domain/states/school/school_staff_item_state.dart';
+import 'package:etm_crm/app/domain/models/user.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import '../../../../../../domain/services/app_ninjas_service.dart';
-import '../../../../../theme/text_styles.dart';
-import '../../../../../widgets/app_field.dart';
-import '../../../../../widgets/auth_button.dart';
-import '../../../../../widgets/center_header.dart';
-import '../../../../../widgets/select_input_search_field.dart';
+import '../../../domain/models/meta.dart';
+import '../../../domain/services/app_ninjas_service.dart';
+import '../../../domain/services/staff_service.dart';
+import '../../theme/text_styles.dart';
+import '../app_field.dart';
+import '../auth_button.dart';
+import '../center_header.dart';
+import '../select_input_search_field.dart';
 
-class StaffAddress extends StatefulWidget {
-  const StaffAddress({Key? key}) : super(key: key);
+class SettingsAddress extends StatefulWidget {
+  const SettingsAddress({
+    Key? key,
+    required this.user
+  }) : super(key: key);
+
+  final UserData? user;
 
   @override
-  State<StaffAddress> createState() => _StaffAddressState();
+  State<SettingsAddress> createState() => _SettingsAddressState();
 }
 
-class _StaffAddressState extends State<StaffAddress> {
+class _SettingsAddressState extends State<SettingsAddress> {
   final TextEditingController street = TextEditingController();
   final TextEditingController house = TextEditingController();
   String? value;
@@ -26,6 +32,7 @@ class _StaffAddressState extends State<StaffAddress> {
   Map<String, dynamic>? country;
   Map<String, dynamic>? city;
   String? openField;
+  ValidateError? validateError;
 
 
   @override
@@ -35,24 +42,23 @@ class _StaffAddressState extends State<StaffAddress> {
   }
 
   void initData() {
-    final read = context.read<SchoolStaffItemState>();
-    if(read.staff?.country != null){
+    if(widget.user?.country != null){
       country = {
-        'name': '${read.staff?.country}',
+        'name': '${widget.user?.country}',
         'id': 1
       };
     }
-    if(read.staff?.city != null){
+    if(widget.user?.city != null){
       city = {
-        'name': '${read.staff?.city}',
+        'name': '${widget.user?.city}',
         'id': 1
       };
     }
-    if(read.staff?.street != null){
-      street.text = '${read.staff?.street}';
+    if(widget.user?.street != null){
+      street.text = '${widget.user?.street}';
     }
-    if(read.staff?.house != null){
-      house.text = '${read.staff?.house}';
+    if(widget.user?.house != null){
+      house.text = '${widget.user?.house}';
     }
   }
 
@@ -134,7 +140,6 @@ class _StaffAddressState extends State<StaffAddress> {
 
   @override
   Widget build(BuildContext context) {
-    final state = context.watch<SchoolStaffItemState>();
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -160,7 +165,7 @@ class _StaffAddressState extends State<StaffAddress> {
                                 height: 24,
                               ),
                               SelectInputSearchField(
-                                errors: state.validateError?.errors.country,
+                                errors: validateError?.errors.country,
                                 title: 'Country',
                                 titleStyle: TextStyles.s14w600.copyWith(
                                     color: const Color(0xFF242424)
@@ -185,7 +190,7 @@ class _StaffAddressState extends State<StaffAddress> {
                                 hintText: '',
                               ),
                               SelectInputSearchField(
-                                errors: state.validateError?.errors.city,
+                                errors: validateError?.errors.city,
                                 title: 'City',
                                 items: cityListData(),
                                 onSearch: (value) {
@@ -227,7 +232,7 @@ class _StaffAddressState extends State<StaffAddress> {
                           child: AppButton(
                               title: 'Save changes',
                               onPressed: () {
-                                state.saveAddress(
+                                saveAddress(
                                   country?['name'],
                                   city?['name'],
                                   street.text,
@@ -268,4 +273,38 @@ class _StaffAddressState extends State<StaffAddress> {
       "iso2": "DE"
     },
   ];
+
+  Future<void> saveAddress(
+      String? country,
+      String? city,
+      String? street,
+      String? house,
+      ) async {
+    try{
+      final result = await StaffService.saveAddress(
+          context,
+          widget.user?.id,
+          {
+            'country': country,
+            'city': city,
+            'street': street,
+            'house': house,
+          }
+      );
+      if(result == true){
+        widget.user?.country = country;
+        widget.user?.city = city;
+        widget.user?.street = street;
+        widget.user?.house = house;
+        setState(() {});
+        back();
+      }
+    }catch (e){
+      print(e);
+    }
+  }
+
+  void back() {
+    Navigator.pop(context);
+  }
 }

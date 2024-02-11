@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import '../../../../../../resources/resources.dart';
 import '../../../../../app.dart';
 import '../../../../../domain/states/school/school_profile_state.dart';
+import '../../../../widgets/change_password.dart';
 import '../../../../widgets/settings_language.dart';
 import '../../../../widgets/settings_social_accounts.dart';
 import '../settings/settings_general_info.dart';
@@ -25,6 +26,7 @@ class _SettingsTabState extends State<SettingsTab> {
   Widget build(BuildContext context) {
     final read = context.read<SchoolProfileState>();
     final state = context.watch<SchoolProfileState>();
+    final appState = context.read<AppState>();
     return ListView(
       padding: const EdgeInsets.only(top: 24),
       physics: const BottomBouncingScrollPhysics(),
@@ -105,7 +107,16 @@ class _SettingsTabState extends State<SettingsTab> {
         ),
         SettingsInput(
             title: "Password",
-            onPress: () {}
+            onPress: () async {
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ChangePassword(
+                    userId: appState.userData?.id,
+                  ),
+                ),
+              );
+            }
         ),
         const SizedBox(
           height: 40,

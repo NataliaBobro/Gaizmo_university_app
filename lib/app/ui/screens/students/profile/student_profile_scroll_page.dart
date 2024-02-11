@@ -75,8 +75,54 @@ class _StudentProfileScrollPageState extends State<StudentProfileScrollPage> {
           child: const IgnorePointer(
             child: PassportView(),
           ),
+        ),
+        Positioned(
+          top: 335,
+          right: 0,
+          left: 0,
+          child:  IgnorePointer(
+            child: DoteIndicator(
+                activeIndex: pageController?.positions.isNotEmpty == true ?
+                  pageController?.page : 0,
+            ),
+          ),
         )
       ],
+    );
+  }
+}
+
+
+class DoteIndicator extends StatefulWidget {
+  const DoteIndicator({
+    Key? key, 
+    required this.activeIndex
+  }) : super(key: key);
+  
+  final double? activeIndex;
+
+  @override
+  State<DoteIndicator> createState() => _DoteIndicatorState();
+}
+
+class _DoteIndicatorState extends State<DoteIndicator> {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: List.generate(
+          2,
+          (index) => Container(
+            margin: const EdgeInsets.symmetric(horizontal: 3),
+            width: 8,
+            height: 8,
+            decoration: BoxDecoration(
+                color: widget.activeIndex?.round() == index ? Colors.grey : Colors.grey.withOpacity(.5),
+                borderRadius: BorderRadius.circular(100)
+            ),
+          )
+      ),
     );
   }
 }

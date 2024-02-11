@@ -68,6 +68,7 @@ class ServicesModel {
   School? school;
   int? isFavorites;
   List<Lesson>? lessons;
+  List<PayUsers>? payUsers;
 
   ServicesModel({
     required this.id,
@@ -85,6 +86,7 @@ class ServicesModel {
     this.isFavorites,
     required this.name,
     required this.color,
+    this.payUsers,
   });
 
   Map<String, dynamic> toJson() => _$ServicesModelToJson(this);
@@ -134,5 +136,33 @@ class DayItem {
   Map<String, dynamic> toJson() => _$DayItemToJson(this);
 
   factory DayItem.fromJson(Map<String, dynamic> json) => _$DayItemFromJson(json);
+}
+
+@JsonSerializable(includeIfNull: true, fieldRename: FieldRename.snake)
+class PayUsers {
+  int id;
+  UserData user;
+
+  PayUsers({
+    required this.id,
+    required this.user,
+  });
+
+  Map<String, dynamic> toJson() => _$PayUsersToJson(this);
+
+  factory PayUsers.fromJson(Map<String, dynamic> json) => _$PayUsersFromJson(json);
+}
+
+@JsonSerializable(includeIfNull: true, fieldRename: FieldRename.snake)
+class ListPayUsers {
+  List<PayUsers> users;
+
+  ListPayUsers({
+    required this.users,
+  });
+
+  Map<String, dynamic> toJson() => _$ListPayUsersToJson(this);
+
+  factory ListPayUsers.fromJson(Map<String, dynamic> json) => _$ListPayUsersFromJson(json);
 }
 

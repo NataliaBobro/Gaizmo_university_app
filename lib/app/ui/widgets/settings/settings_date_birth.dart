@@ -1,26 +1,31 @@
-import 'package:etm_crm/app/domain/states/school/school_staff_item_state.dart';
+import 'package:etm_crm/app/domain/models/user.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
-import '../../../../../theme/text_styles.dart';
-import '../../../../../widgets/auth_button.dart';
-import '../../../../../widgets/center_header.dart';
-import '../../../../../widgets/select_date_input.dart';
+import '../../../domain/services/staff_service.dart';
+import '../../theme/text_styles.dart';
+import '../auth_button.dart';
+import '../center_header.dart';
+import '../select_date_input.dart';
 
-class StaffDateBirth extends StatefulWidget {
-  const StaffDateBirth({Key? key}) : super(key: key);
+class SettingsDateBirth extends StatefulWidget {
+  const SettingsDateBirth({
+    Key? key,
+    required this.user
+  }) : super(key: key);
+
+  final UserData? user;
 
   @override
-  State<StaffDateBirth> createState() => _StaffDateBirthState();
+  State<SettingsDateBirth> createState() => _SettingsDateBirthState();
 }
 
-class _StaffDateBirthState extends State<StaffDateBirth> {
+class _SettingsDateBirthState extends State<SettingsDateBirth> {
   String? value;
 
   @override
   void initState() {
-    final read = context.read<SchoolStaffItemState>();
-    value = read.staff?.dateBirth;
+    value = widget.user?.dateBirth;
     super.initState();
   }
   void changeDateBirth(newDate){
@@ -31,7 +36,6 @@ class _StaffDateBirthState extends State<StaffDateBirth> {
 
   @override
   Widget build(BuildContext context) {
-    final read = context.read<SchoolStaffItemState>();
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -58,7 +62,7 @@ class _StaffDateBirthState extends State<StaffDateBirth> {
                               ),
                               SelectDateInput(
                                 dropdownColor: const Color(0xFFF0F3F6),
-                                value: read.staff?.dateBirth,
+                                value: value,
                                 labelStyle: TextStyles.s14w600.copyWith(
                                   color: const Color(0xFF242424)
                                 ),
@@ -80,7 +84,7 @@ class _StaffDateBirthState extends State<StaffDateBirth> {
                           child: AppButton(
                               title: 'Save changes',
                               onPressed: () {
-                                read.saveDateBirth(value);
+                                saveDateBirth(value);
                               }
                           ),
                         )
@@ -92,5 +96,31 @@ class _StaffDateBirthState extends State<StaffDateBirth> {
           )
       ),
     );
+  }
+
+  Future<void> saveDateBirth(String? value) async {
+    try{
+      final result = await StaffService.saveBirthDate(
+          context,
+          widget.user?.id,
+          {
+            'date_birth': value,
+          }
+      );
+      if(result == true){
+        DateFormat inputFormat = DateFormat('d-MMMM-yyyy', 'en_US');
+        DateTime parsedDate = inputFormat.parse('$value');
+        DateFormat outputFormat = DateFormat('yyyy-MM-d', 'en_US');
+        String formattedDate = outputFormat.format(parsedDate);
+        widget.user?.dateBirth = formattedDate;
+        back();
+      }
+    }catch (e){
+      print(e);
+    }
+  }
+
+  void back() {
+    Navigator.pop(context);
   }
 }

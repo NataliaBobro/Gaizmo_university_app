@@ -9,5 +9,7 @@ class Images {
   static const String testQr = 'assets/images/qr-test.png';
   static const String testExchange = 'assets/images/test-exchange.png';
   static const String testPresents = 'assets/images/test-presents.png';
+  static const String inst = 'assets/images/inst.png';
+
 
 }

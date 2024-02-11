@@ -1,7 +1,4 @@
 import 'package:etm_crm/app/domain/states/school/school_staff_item_state.dart';
-import 'package:etm_crm/app/ui/screens/school/staff/item/settings/staff_address.dart';
-import 'package:etm_crm/app/ui/screens/school/staff/item/settings/staff_date_birth.dart';
-import 'package:etm_crm/app/ui/screens/school/staff/item/settings/staff_gender.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:provider/provider.dart';
@@ -11,6 +8,9 @@ import '../../../../../widgets/app_horizontal_field.dart';
 import '../../../../../widgets/auth_button.dart';
 import '../../../../../widgets/center_header.dart';
 import '../../../profile/widgets/settings_tab.dart';
+import '../../../../../widgets/settings/settings_date_birth.dart';
+import '../../../../../widgets/settings/settings_gender.dart';
+import '../../../../../widgets/settings/settings_address.dart';
 
 class StaffPersonalInfoScreen extends StatefulWidget {
   const StaffPersonalInfoScreen({
@@ -116,7 +116,9 @@ class _StaffPersonalInfoScreenState extends State<StaffPersonalInfoScreen> {
                                   title: "Date of birth",
                                   onPress: () async {
                                     read.openPage(
-                                      const StaffDateBirth()
+                                        SettingsDateBirth(
+                                          user: read.staff,
+                                        )
                                     );
                                   }
                               ),
@@ -124,15 +126,19 @@ class _StaffPersonalInfoScreenState extends State<StaffPersonalInfoScreen> {
                                   title: "Gender",
                                   onPress: () async {
                                     read.openPage(
-                                        const StaffGender()
+                                        SettingsGender(
+                                          user: read.staff,
+                                        )
                                     );
                                   }
                               ),
                               SettingsInput(
                                   title: "Address",
-                                  onPress: () async {
+                                  onPress: ()  {
                                     read.openPage(
-                                        const StaffAddress()
+                                        SettingsAddress(
+                                          user: read.staff,
+                                        )
                                     );
                                   }
                               ),

@@ -1,7 +1,10 @@
 import 'package:etm_crm/app/domain/models/user.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../resources/resources.dart';
 import '../theme/text_styles.dart';
+import '../utils/url_launch.dart';
 
 class SocialAccountInfo extends StatelessWidget {
   const SocialAccountInfo({
@@ -29,6 +32,19 @@ class SocialAccountInfo extends StatelessWidget {
               ),
             ),
           ),
+          if(socialAccounts?.instagram != null) ...[
+            CupertinoButton(
+                padding: EdgeInsets.zero,
+                minSize: 0.0,
+                child: Image.asset(
+                  Images.inst,
+                  width: 16,
+                ),
+                onPressed: () {
+                  launchUrlParse(socialAccounts?.instagram);
+                }
+            )
+          ]
 
         ],
       ),

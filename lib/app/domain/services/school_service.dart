@@ -7,7 +7,7 @@ import '../../data/api_client.dart';
 import '../models/user.dart';
 
 class SchoolService {
-  static Future<bool?> changeSchoolSchedule(
+  static Future<bool?> changeSchedule(
       context,
       List<int>? workDay,
       String? from,

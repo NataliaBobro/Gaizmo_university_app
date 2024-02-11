@@ -3,27 +3,58 @@ import 'package:etm_crm/app/ui/widgets/auth_button.dart';
 import 'package:etm_crm/app/ui/widgets/center_header.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../../../domain/states/school/school_profile_state.dart';
+import '../../../domain/models/user.dart';
+import '../../../domain/services/school_service.dart';
 
 
 class SettingSchedule extends StatefulWidget {
-  const SettingSchedule({Key? key}) : super(key: key);
+  const SettingSchedule({
+    Key? key,
+    required this.user,
+    required this.onUpdate
+  }) : super(key: key);
+
+  final UserData? user;
+  final Function onUpdate;
 
   @override
   State<SettingSchedule> createState() => _SettingScheduleState();
 }
 
 class _SettingScheduleState extends State<SettingSchedule> {
+  final List<int> listWorkDay = [];
+  final MaskedTextController scheduleFrom = MaskedTextController(
+      mask: '00 : 00'
+  );
+  final MaskedTextController scheduleTo = MaskedTextController(
+      mask: '00 : 00'
+  );
   List<String> listDay = [
     'MO', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU',
   ];
 
   @override
+  void initState() {
+    initData();
+    super.initState();
+  }
+
+  void initData(){
+    List<WorkDay>? workDayUser = widget.user?.workDay;
+
+    for(var a = 0; a < (workDayUser?.length ?? 0); a++){
+      listWorkDay.add(workDayUser![a].day);
+    }
+
+    scheduleFrom.text = '${widget.user?.from}';
+    scheduleTo.text = '${widget.user?.to}';
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final state = context.watch<SchoolProfileState>();
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -65,7 +96,7 @@ class _SettingScheduleState extends State<SettingSchedule> {
                                     children: List.generate(
                                         listDay.length,
                                         (index) {
-                                          bool isWork = state.listWorkDay.contains(index);
+                                          bool isWork = listWorkDay.contains(index);
                                           return Container(
                                             padding: EdgeInsets.only(left: index == 0 ? 0 : 16),
                                             child: CupertinoButton(
@@ -90,7 +121,7 @@ class _SettingScheduleState extends State<SettingSchedule> {
                                                   ),
                                                 ),
                                                 onPressed: () {
-                                                  state.changeWorkDay(index);
+                                                  changeWorkDay(index);
                                                 }
                                             ),
                                           );
@@ -126,7 +157,7 @@ class _SettingScheduleState extends State<SettingSchedule> {
                                         ),
                                         Expanded(
                                           child: TextField(
-                                            controller: state.scheduleFrom,
+                                            controller: scheduleFrom,
                                             style: TextStyles.s14w300.copyWith(
                                               color: const Color(0xFF242424),
                                             ),
@@ -157,7 +188,7 @@ class _SettingScheduleState extends State<SettingSchedule> {
                                         ),
                                         Expanded(
                                           child: TextField(
-                                            controller: state.scheduleTo,
+                                            controller: scheduleTo,
                                             style: TextStyles.s14w300.copyWith(
                                               color: const Color(0xFF242424),
                                             ),
@@ -190,7 +221,7 @@ class _SettingScheduleState extends State<SettingSchedule> {
                           child: AppButton(
                               title: 'Save changes',
                               onPressed: () {
-                                state.saveSchoolSchedule();
+                                saveSchedule();
                               }
                           ),
                         )
@@ -202,5 +233,36 @@ class _SettingScheduleState extends State<SettingSchedule> {
           )
       ),
     );
+  }
+
+  void changeWorkDay(index){
+    bool contain = listWorkDay.contains(index);
+    if(contain){
+      listWorkDay.remove(index);
+    }else{
+      listWorkDay.add(index);
+    }
+    setState(() {});
+  }
+
+  Future<void> saveSchedule() async {
+    try {
+      final result = await SchoolService.changeSchedule(
+        context,
+        listWorkDay,
+        scheduleFrom.text.replaceAll(' ', ''),
+        scheduleTo.text.replaceAll(' ', ''),
+      );
+      if(result == true){
+        widget.onUpdate();
+        close();
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void close() {
+    Navigator.pop(context);
   }
 }

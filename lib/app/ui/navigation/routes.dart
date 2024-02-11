@@ -23,7 +23,7 @@ import '../../domain/states/teacher/teacher_home_state.dart';
 import '../screens/splash/splash_screen.dart';
 import '../screens/students/profile/student_profile_scroll_page.dart';
 import '../screens/tabbar/tabbar_screen.dart';
-import '../screens/teacher/teacher_profile_screen.dart';
+import '../screens/teacher/profile/teacher_profile_screen.dart';
 import 'transition_page.dart';
 
 const _splash = '/';

@@ -131,4 +131,51 @@ class AuthService {
     return UserDataWithToken.fromJson(data['data']);
   }
 
+  static Future<bool?> sendRecoveryCode(
+      String? email,
+      ) async {
+    final response = await ApiClient().dio.post(
+        '/auth/send-recovery-code',
+        data: {
+          "email": email,
+        }
+      );
+    final data = response.data as Map<String, dynamic>;
+    return data['success'];
+  }
+
+  static Future<bool?> confirmCode(
+      String? email,
+      String? code,
+      ) async {
+    final response = await ApiClient().dio.post(
+        '/auth/confirm-code',
+        data: {
+          "email": email,
+          "code": code,
+        }
+      );
+    final data = response.data as Map<String, dynamic>;
+    return data['success'];
+  }
+
+  static Future<bool?> setNewPassword(
+      String? email,
+      String? code,
+      String? password,
+      String? confirmPassword,
+      ) async {
+    final response = await ApiClient().dio.post(
+        '/auth/set-new-password',
+        data: {
+          "email": email,
+          "code": code,
+          "password": password,
+          "password_confirmation": confirmPassword,
+        }
+      );
+    final data = response.data as Map<String, dynamic>;
+    return data['success'];
+  }
+
 }

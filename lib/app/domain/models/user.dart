@@ -55,6 +55,10 @@ class UserData {
   List<Documents>? documents;
   SocialAccounts? socialAccounts;
   int? notifications;
+  int? balanceEtm;
+  String? from;
+  String? to;
+  int? salary;
 
   UserData({
     required this.id,
@@ -75,7 +79,11 @@ class UserData {
     this.city,
     this.about,
     this.socialAccounts,
-    this.notifications
+    this.notifications,
+    this.balanceEtm,
+    this.from,
+    this.to,
+    this.salary,
   });
 
   Map<String, dynamic> toJson() => _$UserDataToJson(this);

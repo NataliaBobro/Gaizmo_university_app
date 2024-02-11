@@ -15,7 +15,7 @@ class ProfileAvatar extends StatefulWidget {
 class _ProfileAvatarState extends State<ProfileAvatar> {
   @override
   Widget build(BuildContext context) {
-    final appState = context.read<AppState>();
+    final appState = context.watch<AppState>();
     return Container(
       alignment: Alignment.center,
       color: Colors.white,
@@ -62,7 +62,7 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
                       horizontal: 7
                     ),
                     child: Text(
-                      '150',
+                      '${appState.userData?.balanceEtm}',
                       style: TextStyles.s10w600.copyWith(
                         color: Colors.white
                       ),

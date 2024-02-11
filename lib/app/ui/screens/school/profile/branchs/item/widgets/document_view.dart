@@ -1,6 +1,5 @@
 import 'package:etm_crm/app/app.dart';
 import 'package:etm_crm/app/domain/models/user.dart';
-import 'package:etm_crm/app/domain/states/school/school_branch_state.dart';
 import 'package:etm_crm/app/ui/widgets/empty_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,19 +10,21 @@ import '../../../../../../widgets/custom_scroll_physics.dart';
 import '../../../../../../widgets/document_list.dart';
 
 
-class BranchDocumentTab extends StatefulWidget {
-  const BranchDocumentTab({
+class DocumentWidget extends StatefulWidget {
+  const DocumentWidget({
     Key? key,
-    required this.branch
+    required this.user,
+    required this.onUpdate,
   }) : super(key: key);
 
-  final UserData? branch;
+  final UserData? user;
+  final Function onUpdate;
 
   @override
-  State<BranchDocumentTab> createState() => _BranchDocumentTabState();
+  State<DocumentWidget> createState() => _DocumentWidgetState();
 }
 
-class _BranchDocumentTabState extends State<BranchDocumentTab> {
+class _DocumentWidgetState extends State<DocumentWidget> {
   List<Documents> documents = [];
   @override
   void initState() {
@@ -32,7 +33,7 @@ class _BranchDocumentTabState extends State<BranchDocumentTab> {
   }
 
   void initData() {
-    documents = widget.branch?.documents ?? [];
+    documents = widget.user?.documents ?? [];
     setState(() {});
   }
 
@@ -59,14 +60,10 @@ class _BranchDocumentTabState extends State<BranchDocumentTab> {
                     appState.openPage(
                         context,
                         AddDocumentWidget(
-                            userId: widget.branch?.id
+                            userId: widget.user?.id
                         )
                     ).whenComplete(() async {
-                      final branch = await context.read<SchoolBranchState>().updateBranch(
-                        widget.branch?.id
-                      );
-                      documents = branch?.documents ?? [];
-                      setState(() {});
+                      widget.onUpdate();
                     });
                   }
               ),

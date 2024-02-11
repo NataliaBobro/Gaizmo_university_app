@@ -73,7 +73,7 @@ class _PassportViewState extends State<PassportView> {
                         ),
                       ),
                       Text(
-                        '1000.00 ETM',
+                        '${userData?.balanceEtm} ETM',
                         style: TextStyles.s10w500.copyWith(
                             color: Colors.white
                         ),
@@ -102,7 +102,7 @@ class _PassportViewState extends State<PassportView> {
               ),
               Expanded(child: Container()),
               Text(
-                'Vanessa Smith',
+                '${userData?.firstName} ${userData?.lastName}',
                 style: TextStyles.s8w400.copyWith(
                   color: Colors.white
                 ),

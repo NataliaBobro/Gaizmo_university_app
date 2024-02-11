@@ -1,12 +1,13 @@
+import 'package:etm_crm/app/ui/screens/teacher/profile/my_lessons_tab.dart';
+import 'package:etm_crm/app/ui/screens/teacher/profile/personal_info_tab.dart';
 import 'package:etm_crm/app/ui/screens/teacher/widgets/profile_avatar.dart';
 import 'package:etm_crm/app/ui/screens/teacher/widgets/profile_header.dart';
 import 'package:etm_crm/app/ui/screens/teacher/widgets/user_info.dart';
+import 'package:etm_crm/app/ui/screens/teacher/profile/settings_tab.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../../../app.dart';
-import '../../theme/text_styles.dart';
+import '../../../theme/text_styles.dart';
 
 class TeacherProfileScreen extends StatefulWidget {
   const TeacherProfileScreen({
@@ -43,7 +44,6 @@ class _TeacherProfileScreenState extends State<TeacherProfileScreen> with Ticker
 
   @override
   Widget build(BuildContext context) {
-    final appState = context.read<AppState>();
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -133,11 +133,16 @@ class _TeacherProfileScreenState extends State<TeacherProfileScreen> with Ticker
                     ],
                   ),
                 ),
-                CupertinoButton(
-                    child: const Text('Logout'),
-                    onPressed: () {
-                      appState.onLogout();
-                    }
+
+                Expanded(
+                  child: TabBarView(
+                    controller: _tabController,
+                    children: const [
+                      MyLessonsTab(),
+                      PersonalInfoTab(),
+                      SettingTab()
+                    ],
+                  ),
                 )
               ],
             ),

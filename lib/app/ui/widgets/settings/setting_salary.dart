@@ -1,35 +1,32 @@
 import 'package:etm_crm/app/domain/models/user.dart';
 import 'package:etm_crm/app/domain/services/user_service.dart';
+import 'package:etm_crm/app/ui/widgets/app_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_masked_text2/flutter_masked_text2.dart';
+import '../auth_button.dart';
+import '../center_header.dart';
 
-
-import 'app_radio_input.dart';
-import 'auth_button.dart';
-import 'center_header.dart';
-
-
-class NotificationsSettings extends StatefulWidget {
-  const NotificationsSettings({
+class SettingsSalary extends StatefulWidget {
+  const SettingsSalary({
     Key? key,
-    required this.user,
-    this.onUpdate
+    required this.user
   }) : super(key: key);
 
   final UserData? user;
-  final Function? onUpdate;
 
   @override
-  State<NotificationsSettings> createState() => _NotificationsSettingsState();
+  State<SettingsSalary> createState() => _SettingsSalaryState();
 }
 
-class _NotificationsSettingsState extends State<NotificationsSettings> {
-  bool hasOn = false;
+class _SettingsSalaryState extends State<SettingsSalary> {
+  MaskedTextController salary = MaskedTextController(mask: '0000000');
 
   @override
   void initState() {
-    hasOn = widget.user?.notifications == 1;
+    salary.text = '${widget.user?.salary}';
     super.initState();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +37,7 @@ class _NotificationsSettingsState extends State<NotificationsSettings> {
             color: const Color(0xFFF0F3F6),
             child: Column(
               children: [
-                const CenterHeaderWithAction(
+                const CenterHeader(
                     title: 'Settings'
                 ),
                 Expanded(
@@ -49,17 +46,17 @@ class _NotificationsSettingsState extends State<NotificationsSettings> {
                       children: [
                         Expanded(
                           child: ListView(
-                            padding: const EdgeInsets.all(24),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 24
+                            ),
                             physics: const ClampingScrollPhysics(),
                             children: [
-                              AppRadioInput(
-                                value: hasOn,
-                                label: "Pause all notifications",
-                                onChange: (value) {
-                                  setState(() {
-                                    hasOn = value;
-                                  });
-                                }
+                              const SizedBox(
+                                height: 24,
+                              ),
+                              AppField(
+                                  label: 'Salary',
+                                  controller: salary
                               )
                             ],
                           ),
@@ -69,7 +66,7 @@ class _NotificationsSettingsState extends State<NotificationsSettings> {
                           child: AppButton(
                               title: 'Save changes',
                               onPressed: () {
-                                save();
+                                saveSalary();
                               }
                           ),
                         )
@@ -83,19 +80,25 @@ class _NotificationsSettingsState extends State<NotificationsSettings> {
     );
   }
 
-  Future<void> save() async {
+  Future<void> saveSalary() async {
+    if(salary.text.isEmpty) return;
     try{
-      final result = await UserService.changeNotifications(context, hasOn);
+      final result = await UserService.saveSalary(
+          context,
+          widget.user?.id,
+          int.parse(salary.text)
+      );
       if(result == true){
-        widget.onUpdate!();
-        close();
+        widget.user?.salary = int.parse(salary.text);
+        setState(() {});
+        back();
       }
-    }catch(e){
+    }catch (e){
       print(e);
     }
   }
 
-  void close() {
+  void back() {
     Navigator.pop(context);
   }
 }

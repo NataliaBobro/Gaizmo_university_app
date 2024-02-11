@@ -52,6 +52,22 @@ class UserService {
     return data['success'];
   }
 
+  static Future<bool?> saveSalary(context, int? userId, int? salary) async {
+    final token = getToken(context);
+    if(token == null) return null;
+    final response = await ApiClient().dio.post(
+      '/user/change-salary/$userId',
+      data: {
+        'salary': salary
+      },
+      options: Options(
+        headers: {'Authorization': 'Bearer $token'},
+      ),
+    );
+    final data = response.data as Map<String, dynamic>;
+    return data['success'];
+  }
+
   static Future<bool?> changePassword(
       context,
       int? userId,

@@ -5,8 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../theme/text_styles.dart';
-import '../../../school/profile/widgets/profile_avatar.dart';
-import '../../../school/profile/widgets/profile_header.dart';
+import '../../../students/profile/info/widgets/profile_avatar.dart';
+import '../../../students/profile/info/widgets/profile_header.dart';
 import '../../../teacher/widgets/user_info.dart';
 
 

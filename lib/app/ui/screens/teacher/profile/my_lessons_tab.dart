@@ -2,17 +2,17 @@ import 'package:accordion/accordion.dart';
 import 'package:accordion/controllers.dart';
 import 'package:etm_crm/app/app.dart';
 import 'package:etm_crm/app/domain/models/lesson.dart';
+import 'package:etm_crm/app/domain/states/teacher/teacher_home_state.dart';
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../domain/services/visits_lesson_service.dart';
-import '../../../../../domain/states/student/student_home_state.dart';
-import '../../../../widgets/custom_scroll_physics.dart';
-import '../../../../widgets/schedule/empty_lesson.dart';
-import '../../../../widgets/schedule/shcedule_widgets.dart';
+import '../../../../domain/services/visits_lesson_service.dart';
+import '../../../widgets/custom_scroll_physics.dart';
+import '../../../widgets/schedule/empty_lesson.dart';
+import '../../../widgets/schedule/shcedule_widgets.dart';
 
 class MyLessonsTab extends StatefulWidget {
   const MyLessonsTab({Key? key}) : super(key: key);
@@ -24,7 +24,7 @@ class MyLessonsTab extends StatefulWidget {
 class _MyLessonsTabState extends State<MyLessonsTab> {
   @override
   Widget build(BuildContext context) {
-    final state = context.watch<StudentHomeState>();
+    final state = context.watch<TeacherHomeState>();
     final lessons = state.lessonsListToday?.lessons ?? [];
     return ListView(
       physics: const BottomBouncingScrollPhysics(),
@@ -37,7 +37,9 @@ class _MyLessonsTabState extends State<MyLessonsTab> {
           : Column(
           children: [
             if(lessons.isEmpty) ...[
-              const EmptyLesson(),
+              const EmptyLesson(
+                subtitle: 'Add a service to create a schedule!'
+              ),
             ] else ...[
               Padding(
                 padding: const EdgeInsets.symmetric(
@@ -188,3 +190,4 @@ class MyLessonHeader extends StatelessWidget {
     );
   }
 }
+

@@ -47,4 +47,5 @@ class Svgs {
   static const String repost = 'assets/vectors/repost.svg';
   static const String char = 'assets/vectors/char.svg';
   static const String boxCheck = 'assets/vectors/box-check.svg';
+  static const String inst = 'assets/vectors/inst.svg';
 }
