@@ -620,11 +620,17 @@ class AuthState with ChangeNotifier {
     await Hive.box('settings').clear();
     await Hive.box('settings').put('token', token);
     await setUser(user);
+    await initFirebase();
+
   }
 
   Future<void> setUser(user) async {
     await context.read<AppState>().setUser(user);
     await changeLogInState();
+  }
+
+  Future<void> initFirebase()async {
+    await context.read<AppState>().initFirebase();
   }
 
 

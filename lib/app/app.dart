@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:etm_crm/app/domain/services/user_service.dart';
 import 'package:etm_crm/app/ui/utils/show_message.dart';
 import 'package:etm_crm/app/ui/widgets/snackbars.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,6 +13,7 @@ import 'package:routemaster/routemaster.dart';
 import 'package:sizer/sizer.dart';
 import 'domain/models/meta.dart';
 import 'domain/models/user.dart';
+import 'domain/services/auth_service.dart';
 import 'domain/services/meta_service.dart';
 import 'ui/navigation/route_observer.dart';
 import 'ui/navigation/routes.dart';
@@ -41,7 +43,8 @@ class AppState extends ChangeNotifier {
     Future.microtask(() async {
       if(_isLoggedIn){
         if(_userData == null){
-         await getUser();
+          await getUser();
+          await initFirebase();
         }
         onChangeRoute();
       }
@@ -52,6 +55,7 @@ class AppState extends ChangeNotifier {
   RouteMap get currentRoute => _currentRoute;
   MetaAppData? get metaAppData => _metaAppData;
   UserData? get userData => _userData;
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
 
   Future<void> changeLogInState(bool value) async {
     _isLoggedIn = value;
@@ -145,6 +149,41 @@ class AppState extends ChangeNotifier {
             )
         )
     );
+  }
+
+
+  Future<void> getRequestPermission() async {
+    FirebaseMessaging messaging = FirebaseMessaging.instance;
+    await messaging.requestPermission(
+      alert: true,
+      announcement: false,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: true,
+    );
+  }
+
+  Future<void> initFirebase() async {
+    await getRequestPermission().then((value) {
+      messaging.getToken().then((token) async {
+        if(token != null){
+          await saveDeviceToken(token);
+          debugPrint("Save Device Token: $token");
+        }
+      });
+    });
+  }
+
+  Future<void> saveDeviceToken(String? token) async {
+    try {
+      await AuthService.saveFcmToken(context, token);
+    } on DioError catch (e) {
+      showMessage(e.message.isEmpty ? e.toString() : e.message);
+    } catch (e) {
+      showErrorSnackBar(title: 'Ошибка повторите попытку позже!');
+    }
   }
 
   void onLogout() async {
