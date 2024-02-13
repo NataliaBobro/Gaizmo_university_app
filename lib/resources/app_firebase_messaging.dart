@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import '../app/app.dart';
-import '../app/ui/navigation/routes.dart';
+
 
 class AppFirebaseMessaging{
   static Future<void> init() async {
