@@ -9,13 +9,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:provider/provider.dart';
 
-import '../../../ui/screens/school/service/widgets/add_service_screen.dart';
-import '../../../ui/utils/show_message.dart';
-import '../../../ui/widgets/snackbars.dart';
-import '../../models/meta.dart';
-import '../../models/user.dart';
+import '../../ui/screens/school/service/widgets/add_service_screen.dart';
+import '../../ui/utils/show_message.dart';
+import '../../ui/widgets/snackbars.dart';
+import '../models/meta.dart';
+import '../models/user.dart';
 
-class SchoolServicesState with ChangeNotifier {
+class ServicesState with ChangeNotifier {
   BuildContext context;
   bool _isLoading = true;
   int? _onEditId;
@@ -75,7 +75,7 @@ class SchoolServicesState with ChangeNotifier {
   ];
 
 
-  SchoolServicesState(this.context){
+  ServicesState(this.context){
     Future.microtask(() {
       fetchServices();
     });

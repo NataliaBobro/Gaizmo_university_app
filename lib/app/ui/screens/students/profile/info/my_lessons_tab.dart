@@ -159,7 +159,7 @@ class MyLessonHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final duration = lesson.service?.duration;
-    TimeOfDay startTime = TimeOfDay.fromDateTime(DateTime.parse("2022-01-18 ${lesson.startLesson}"));
+    TimeOfDay startTime = TimeOfDay.fromDateTime(DateTime.parse("2022-01-18 ${lesson.startLesson ?? '00:00'}"));
     TimeOfDay endTime = startTime.replacing(
       hour: startTime.hour + (duration ?? 0) ~/ 60,
       minute: startTime.minute + (duration ?? 0) % 60,

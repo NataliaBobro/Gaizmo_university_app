@@ -8,6 +8,7 @@ import '../../../../theme/text_styles.dart';
 import '../../../../widgets/app_field.dart';
 import '../../../../widgets/auth_button.dart';
 import '../../../../widgets/select_bottom_sheet_input.dart';
+import '../../../../widgets/tool_tip_on_add.dart';
 
 class AddServiceService extends StatefulWidget {
   const AddServiceService({Key? key}) : super(key: key);
@@ -79,6 +80,32 @@ class _AddServiceServiceState extends State<AddServiceService> {
               state.changeCategory(value);
             },
             horizontalPadding: 0,
+          ),
+          const SizedBox(
+            height: 24,
+          ),
+          ToolTipOnAdd(
+            title: 'Teacher',
+            titleStyle: TextStyles.s14w600.copyWith(
+                color: const Color(0xFF242424)
+            ),
+            style: TextStyles.s14w400.copyWith(
+                color: Colors.black
+            ),
+            hintText: '',
+            items: state.listTeacher,
+            selected: state.selectTeacher,
+            onSelect: (value) {
+              state.changeSelectTeacher(value);
+              changeOpen(null);
+            },
+            changeOpen: () {
+              changeOpen('teacher');
+            },
+            isOpen: openField == 'teacher',
+            onAdd: () async {
+
+            },
           ),
           const SizedBox(
             height: 40,

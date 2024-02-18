@@ -16,14 +16,14 @@ import '../../../../../resources/resources.dart';
 import '../../../../domain/states/services_state.dart';
 import '../../../utils/show_message.dart';
 
-class SchoolServicesScreen extends StatefulWidget {
-  const SchoolServicesScreen({Key? key}) : super(key: key);
+class TeacherServicesScreen extends StatefulWidget {
+  const TeacherServicesScreen({Key? key}) : super(key: key);
 
   @override
-  State<SchoolServicesScreen> createState() => _SchoolServicesScreenState();
+  State<TeacherServicesScreen> createState() => _TeacherServicesScreenState();
 }
 
-class _SchoolServicesScreenState extends State<SchoolServicesScreen> {
+class _TeacherServicesScreenState extends State<TeacherServicesScreen> {
   bool viewOnDelete = false;
   dynamic onConfirmDelete;
 

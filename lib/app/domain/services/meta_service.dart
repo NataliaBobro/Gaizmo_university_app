@@ -18,7 +18,7 @@ class MetaService {
     final token = getToken(context);
     if(token == null) return null;
     final response = await ApiClient().dio.get(
-          '/school/services/meta',
+          '/services/meta',
       options: Options(
         headers: {'Authorization': 'Bearer $token'},
       ),

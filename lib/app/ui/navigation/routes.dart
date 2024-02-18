@@ -1,7 +1,7 @@
 import 'package:etm_crm/app/domain/states/school/school_schedule_state.dart';
-import 'package:etm_crm/app/domain/states/school/school_services_state.dart';
 import 'package:etm_crm/app/domain/states/school/school_staff_state.dart';
 import 'package:etm_crm/app/domain/states/student/student_schedule_state.dart';
+import 'package:etm_crm/app/domain/states/teacher/teacher_schedule_state.dart';
 import 'package:etm_crm/app/ui/screens/auth/auth_sign_in.dart';
 import 'package:etm_crm/app/ui/screens/auth/widgets/auth_select_login_type.dart';
 import 'package:etm_crm/app/ui/screens/school/profile/school_profile_screen.dart';
@@ -11,11 +11,13 @@ import 'package:etm_crm/app/ui/screens/school/staff/staff_screen.dart';
 import 'package:etm_crm/app/ui/screens/students/results/my_results_screen.dart';
 import 'package:etm_crm/app/ui/screens/students/schedule/student_schedule_screen.dart';
 import 'package:etm_crm/app/ui/screens/students/schools/school_list.dart';
+import 'package:etm_crm/app/ui/screens/teacher/service/school_service_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:routemaster/routemaster.dart' as routemaster;
 import '../../../resources/resources.dart';
 import '../../domain/states/auth_state.dart';
 import '../../domain/states/school/school_profile_state.dart';
+import '../../domain/states/services_state.dart';
 import '../../domain/states/student/my_results_state.dart';
 import '../../domain/states/student/student_school_state.dart';
 import '../../domain/states/student/student_home_state.dart';
@@ -24,6 +26,7 @@ import '../screens/splash/splash_screen.dart';
 import '../screens/students/profile/student_profile_scroll_page.dart';
 import '../screens/tabbar/tabbar_screen.dart';
 import '../screens/teacher/profile/teacher_profile_screen.dart';
+import '../screens/teacher/schedule/teacher_schedule_screen.dart';
 import 'transition_page.dart';
 
 const _splash = '/';
@@ -35,8 +38,10 @@ const _auth = '/auth';
 const _home = '/home';
 const _studentSchool = '/student-school';
 const _services = '/services';
+const _servicesTeacher = '/services-teacher';
 const _schedule = '/schedule';
 const _studentSchedule = '/student-schedule';
+const _teacherSchedule = '/teacher-schedule';
 const _staff = '/staff';
 const _myResults = '/my-results';
 
@@ -52,7 +57,9 @@ abstract class AppRoutes {
   static String get staff => _staff;
   static String get studentSchool => _studentSchool;
   static String get studentSchedule => _studentSchedule;
+  static String get teacherSchedule => _teacherSchedule;
   static String get myResults => _myResults;
+  static String get servicesTeacher => _servicesTeacher;
 }
 
 final splashMap = routemaster.RouteMap(
@@ -115,7 +122,7 @@ final loggedSchoolInMap = routemaster.RouteMap(
     ),
     _services: (_) => TransitionPage(
       child: ChangeNotifierProvider(
-        create: (context) => SchoolServicesState(context),
+        create: (context) => ServicesState(context),
         child: const SchoolServicesScreen(),
       ),
     ),
@@ -140,7 +147,7 @@ final loggedTeacherInMap = routemaster.RouteMap(
   onUnknownRoute: (_) => const routemaster.Redirect(_tabbar),
   routes: {
     _tabbar: (info) => routemaster.TabPage(
-          paths: const [_home, _home, _home, _home],
+          paths: const [_home, _teacherSchedule, _servicesTeacher, _home],
           child: MultiProvider(
             providers: [
               ChangeNotifierProvider(
@@ -151,7 +158,7 @@ final loggedTeacherInMap = routemaster.RouteMap(
               icons: [
                 {'icon': Svgs.profile, 'name': 'Profile'},
                 {'icon': Svgs.schedule, 'name': 'Schedule'},
-                {'icon': Svgs.school, 'name': 'Schools'},
+                {'icon': Svgs.service, 'name': 'Services'},
                 {'icon': Svgs.myRes, 'name': 'Results'},
               ]
             ),
@@ -161,6 +168,18 @@ final loggedTeacherInMap = routemaster.RouteMap(
       child: ChangeNotifierProvider(
         create: (context) => TeacherHomeState(context),
         child: const TeacherProfileScreen(),
+      ),
+    ),
+    _teacherSchedule: (_) => TransitionPage(
+      child: ChangeNotifierProvider(
+        create: (context) => TeacherScheduleState(context),
+        child: const TeacherScheduleScreen(),
+      ),
+    ),
+    _servicesTeacher: (_) => TransitionPage(
+      child: ChangeNotifierProvider(
+        create: (context) => ServicesState(context),
+        child: const TeacherServicesScreen(),
       ),
     ),
   },

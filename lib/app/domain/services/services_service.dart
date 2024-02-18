@@ -14,7 +14,7 @@ class ServicesService {
     final token = getToken(context);
     if(token == null) return null;
     final response = await ApiClient().dio.post(
-      '/school/services/add-category',
+      '/services/add-category',
       options: Options(
         headers: {'Authorization': 'Bearer $token'},
       ),
@@ -36,7 +36,7 @@ class ServicesService {
     final token = getToken(context);
     if(token == null) return null;
     final response = await ApiClient().dio.post(
-      '/school/services/edit-category',
+      '/services/edit-category',
       options: Options(
         headers: {'Authorization': 'Bearer $token'},
       ),
@@ -69,7 +69,7 @@ class ServicesService {
     final token = getToken(context);
     if(token == null) return null;
     final response = await ApiClient().dio.post(
-      '/school/services/${id != null ? 'edit-service' : 'add-service'}',
+      '/services/${id != null ? 'edit-service' : 'add-service'}',
       options: Options(
         headers: {'Authorization': 'Bearer $token'},
       ),
@@ -100,7 +100,7 @@ class ServicesService {
     final token = getToken(context);
     if(token == null) return null;
     final response = await ApiClient().dio.delete(
-      '/school/services/delete-service/$id',
+      '/services/delete-service/$id',
       options: Options(
         headers: {'Authorization': 'Bearer $token'},
       ),
@@ -116,7 +116,7 @@ class ServicesService {
     final token = getToken(context);
     if(token == null) return null;
     final response = await ApiClient().dio.delete(
-      '/school/services/delete-category/$id',
+      '/services/delete-category/$id',
       options: Options(
         headers: {'Authorization': 'Bearer $token'},
       ),
@@ -131,7 +131,7 @@ class ServicesService {
     final token = getToken(context);
     if(token == null) return null;
     final response = await ApiClient().dio.get(
-      '/school/services/fetch-service',
+      '/services/fetch-service',
       options: Options(
         headers: {'Authorization': 'Bearer $token'},
       )
