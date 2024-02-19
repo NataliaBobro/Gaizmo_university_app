@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:etm_crm/app/domain/models/results.dart';
-import 'package:etm_crm/app/ui/screens/students/results/add/add_result.dart';
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
 import 'package:etm_crm/app/ui/widgets/center_header.dart';
 import 'package:etm_crm/app/ui/widgets/empty_widget.dart';
@@ -12,7 +11,8 @@ import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../../resources/resources.dart';
-import '../../../../domain/states/student/my_results_state.dart';
+import '../../../domain/states/my_results_state.dart';
+import 'add/add_result.dart';
 
 class MyResultsScreen extends StatefulWidget {
   const MyResultsScreen({Key? key}) : super(key: key);

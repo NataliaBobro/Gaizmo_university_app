@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../ui/screens/students/results/add/add_image.dart';
-import '../../models/results.dart';
-import '../../models/schedule.dart';
+import '../../ui/widgets/results/add/add_image.dart';
+import '../models/results.dart';
+import '../models/schedule.dart';
 import 'dart:io';
 
-import '../../services/result_service.dart';
+import '../services/result_service.dart';
 
 
 class MyResultsState with ChangeNotifier {

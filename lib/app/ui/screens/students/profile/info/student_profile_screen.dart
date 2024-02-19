@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../theme/text_styles.dart';
-import '../../../students/profile/info/widgets/profile_avatar.dart';
+import '../../../../widgets/profile/profile_avatar_with_etm.dart';
 import '../../../students/profile/info/widgets/profile_header.dart';
 import '../../../teacher/widgets/user_info.dart';
 
@@ -55,7 +55,7 @@ class _StudentProfileScreenState extends State<StudentProfileScreen> with Ticker
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               const ProfileHeader(),
-              const ProfileAvatar(),
+              const ProfileAvatarWithETM(),
               const UserInfo(),
               Container(
                 height: 55,

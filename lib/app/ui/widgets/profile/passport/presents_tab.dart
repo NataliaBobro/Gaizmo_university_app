@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../../resources/resources.dart';
-import '../../../../theme/text_styles.dart';
-import '../../../../widgets/custom_scroll_physics.dart';
+import '../../../theme/text_styles.dart';
+import '../../custom_scroll_physics.dart';
 
 class PresentsScreen extends StatelessWidget {
   const PresentsScreen({Key? key}) : super(key: key);

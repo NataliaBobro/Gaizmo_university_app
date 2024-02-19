@@ -9,11 +9,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../domain/services/visits_lesson_service.dart';
-import '../../../widgets/custom_scroll_physics.dart';
-import '../../../widgets/schedule/empty_lesson.dart';
-import '../../../widgets/schedule/lesson_header.dart';
-import '../../../widgets/schedule/shcedule_widgets.dart';
+import '../../../../../domain/services/visits_lesson_service.dart';
+import '../../../../widgets/custom_scroll_physics.dart';
+import '../../../../widgets/schedule/empty_lesson.dart';
+import '../../../../widgets/schedule/lesson_header.dart';
+import '../../../../widgets/schedule/shcedule_widgets.dart';
 
 class MyLessonsTab extends StatefulWidget {
   const MyLessonsTab({Key? key}) : super(key: key);

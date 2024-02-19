@@ -7,16 +7,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../utils/show_message.dart';
-import '../../../../widgets/app_horizontal_field.dart';
-import '../../../../widgets/auth_button.dart';
-import '../../../../widgets/center_header.dart';
-import '../../../../widgets/settings/settings_address.dart';
-import '../../../../widgets/settings/settings_date_birth.dart';
-import '../../../../widgets/settings/settings_gender.dart';
-import '../../../../widgets/settings/settings_schedule.dart';
-import '../../../../widgets/settings_input.dart';
-import '../../../../widgets/snackbars.dart';
+import '../../../../../utils/show_message.dart';
+import '../../../../../widgets/app_horizontal_field.dart';
+import '../../../../../widgets/auth_button.dart';
+import '../../../../../widgets/center_header.dart';
+import '../../../../../widgets/settings/settings_address.dart';
+import '../../../../../widgets/settings/settings_date_birth.dart';
+import '../../../../../widgets/settings/settings_gender.dart';
+import '../../../../../widgets/settings/settings_schedule.dart';
+import '../../../../../widgets/settings_input.dart';
+import '../../../../../widgets/snackbars.dart';
 
 
 class PersonalInfoTeacher extends StatefulWidget {

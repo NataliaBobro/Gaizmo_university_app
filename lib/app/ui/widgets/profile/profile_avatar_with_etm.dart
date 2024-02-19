@@ -3,16 +3,16 @@ import 'package:etm_crm/app/ui/theme/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../widgets/change_avatar_widget.dart';
+import '../change_avatar_widget.dart';
 
-class ProfileAvatar extends StatefulWidget {
-  const ProfileAvatar({Key? key}) : super(key: key);
+class ProfileAvatarWithETM extends StatefulWidget {
+  const ProfileAvatarWithETM({Key? key}) : super(key: key);
 
   @override
-  State<ProfileAvatar> createState() => _ProfileAvatarState();
+  State<ProfileAvatarWithETM> createState() => _ProfileAvatarWithETMState();
 }
 
-class _ProfileAvatarState extends State<ProfileAvatar> {
+class _ProfileAvatarWithETMState extends State<ProfileAvatarWithETM> {
   @override
   Widget build(BuildContext context) {
     final appState = context.watch<AppState>();

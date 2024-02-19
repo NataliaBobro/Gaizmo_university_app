@@ -6,16 +6,16 @@ import 'package:sizer/sizer.dart';
 import '../../../../domain/states/student/student_home_state.dart';
 import '../../../widgets/profile/passport/passport_screen.dart';
 import '../../../widgets/profile/passport/widgets/passport_view.dart';
-import 'info/student_profile_screen.dart';
+import 'info/teacher_profile_screen.dart';
 
-class StudentProfileScrollPage extends StatefulWidget {
-  const StudentProfileScrollPage({Key? key}) : super(key: key);
+class TeacherProfileScrollPage extends StatefulWidget {
+  const TeacherProfileScrollPage({Key? key}) : super(key: key);
 
   @override
-  State<StudentProfileScrollPage> createState() => _StudentProfileScrollPageState();
+  State<TeacherProfileScrollPage> createState() => _TeacherProfileScrollPageState();
 }
 
-class _StudentProfileScrollPageState extends State<StudentProfileScrollPage> {
+class _TeacherProfileScrollPageState extends State<TeacherProfileScrollPage> {
   PageController? pageController = PageController();
   double offset = 0;
 
@@ -29,9 +29,9 @@ class _StudentProfileScrollPageState extends State<StudentProfileScrollPage> {
 
   void changeTab(int? index) {
     pageController?.animateTo(
-        0,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.linear,
+      0,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.linear,
     );
   }
 
@@ -57,7 +57,7 @@ class _StudentProfileScrollPageState extends State<StudentProfileScrollPage> {
           children: [
             ChangeNotifierProvider(
               create: (context) => StudentHomeState(context),
-              child: const StudentProfileScreen(),
+              child: const TeacherProfileScreen(),
             ),
             ChangeNotifierProvider(
               create: (context) => StudentPassportState(context),
@@ -82,8 +82,8 @@ class _StudentProfileScrollPageState extends State<StudentProfileScrollPage> {
           left: 0,
           child:  IgnorePointer(
             child: DoteIndicator(
-                activeIndex: pageController?.positions.isNotEmpty == true ?
-                  pageController?.page : 0,
+              activeIndex: pageController?.positions.isNotEmpty == true ?
+              pageController?.page : 0,
             ),
           ),
         )
@@ -95,10 +95,10 @@ class _StudentProfileScrollPageState extends State<StudentProfileScrollPage> {
 
 class DoteIndicator extends StatefulWidget {
   const DoteIndicator({
-    Key? key, 
+    Key? key,
     required this.activeIndex
   }) : super(key: key);
-  
+
   final double? activeIndex;
 
   @override
@@ -113,7 +113,7 @@ class _DoteIndicatorState extends State<DoteIndicator> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: List.generate(
           2,
-          (index) => Container(
+              (index) => Container(
             margin: const EdgeInsets.symmetric(horizontal: 3),
             width: 8,
             height: 8,

@@ -8,7 +8,7 @@ import 'package:sizer/sizer.dart';
 import 'dart:math' as math;
 
 import '../../../../../../../resources/resources.dart';
-import '../../../../../theme/text_styles.dart';
+import '../../../../theme/text_styles.dart';
 
 class PassportView extends StatefulWidget {
   const PassportView({Key? key}) : super(key: key);

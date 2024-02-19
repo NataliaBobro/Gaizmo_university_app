@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../../resources/resources.dart';
-import '../../../../theme/text_styles.dart';
-import '../../../../widgets/custom_scroll_physics.dart';
+import '../../../theme/text_styles.dart';
+import '../../custom_scroll_physics.dart';
 
 class ExchangeScreen extends StatelessWidget {
   const ExchangeScreen({Key? key}) : super(key: key);

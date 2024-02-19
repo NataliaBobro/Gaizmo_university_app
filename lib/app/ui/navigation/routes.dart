@@ -8,9 +8,9 @@ import 'package:etm_crm/app/ui/screens/school/profile/school_profile_screen.dart
 import 'package:etm_crm/app/ui/screens/school/schedule/school_schedule_screen.dart';
 import 'package:etm_crm/app/ui/screens/school/service/school_service_screen.dart';
 import 'package:etm_crm/app/ui/screens/school/staff/staff_screen.dart';
-import 'package:etm_crm/app/ui/screens/students/results/my_results_screen.dart';
 import 'package:etm_crm/app/ui/screens/students/schedule/student_schedule_screen.dart';
 import 'package:etm_crm/app/ui/screens/students/schools/school_list.dart';
+import 'package:etm_crm/app/ui/screens/teacher/profile/teacher_profile_scroll_page.dart';
 import 'package:etm_crm/app/ui/screens/teacher/service/school_service_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:routemaster/routemaster.dart' as routemaster;
@@ -18,15 +18,15 @@ import '../../../resources/resources.dart';
 import '../../domain/states/auth_state.dart';
 import '../../domain/states/school/school_profile_state.dart';
 import '../../domain/states/services_state.dart';
-import '../../domain/states/student/my_results_state.dart';
+import '../../domain/states/my_results_state.dart';
 import '../../domain/states/student/student_school_state.dart';
 import '../../domain/states/student/student_home_state.dart';
 import '../../domain/states/teacher/teacher_home_state.dart';
 import '../screens/splash/splash_screen.dart';
 import '../screens/students/profile/student_profile_scroll_page.dart';
 import '../screens/tabbar/tabbar_screen.dart';
-import '../screens/teacher/profile/teacher_profile_screen.dart';
 import '../screens/teacher/schedule/teacher_schedule_screen.dart';
+import '../widgets/results/my_results_screen.dart';
 import 'transition_page.dart';
 
 const _splash = '/';
@@ -147,7 +147,7 @@ final loggedTeacherInMap = routemaster.RouteMap(
   onUnknownRoute: (_) => const routemaster.Redirect(_tabbar),
   routes: {
     _tabbar: (info) => routemaster.TabPage(
-          paths: const [_home, _teacherSchedule, _servicesTeacher, _home],
+          paths: const [_home, _teacherSchedule, _servicesTeacher, _myResults],
           child: MultiProvider(
             providers: [
               ChangeNotifierProvider(
@@ -164,11 +164,8 @@ final loggedTeacherInMap = routemaster.RouteMap(
             ),
           ),
         ),
-    _home: (_) => TransitionPage(
-      child: ChangeNotifierProvider(
-        create: (context) => TeacherHomeState(context),
-        child: const TeacherProfileScreen(),
-      ),
+    _home: (_) => const TransitionPage(
+      child: TeacherProfileScrollPage(),
     ),
     _teacherSchedule: (_) => TransitionPage(
       child: ChangeNotifierProvider(
@@ -180,6 +177,12 @@ final loggedTeacherInMap = routemaster.RouteMap(
       child: ChangeNotifierProvider(
         create: (context) => ServicesState(context),
         child: const TeacherServicesScreen(),
+      ),
+    ),
+    _myResults: (_) => TransitionPage(
+      child: ChangeNotifierProvider(
+        create: (context) => MyResultsState(context),
+        child: const MyResultsScreen(),
       ),
     ),
   },

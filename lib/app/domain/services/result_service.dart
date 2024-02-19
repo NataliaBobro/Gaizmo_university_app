@@ -13,7 +13,7 @@ class ResultService {
     final token = getToken(context);
     if(token == null) return null;
     final response = await ApiClient().dio.get(
-      '/student/my-result/meta',
+      '/my-result/meta',
       options: Options(
         headers: {'Authorization': 'Bearer $token'},
       ),
@@ -29,7 +29,7 @@ class ResultService {
     final token = getToken(context);
     if(token == null) return null;
     final response = await ApiClient().dio.get(
-      '/student/my-result/list',
+      '/my-result/list',
       queryParameters: {
         'service_id': filterService
       },
@@ -63,7 +63,7 @@ class ResultService {
 
     if(token == null) return null;
     final response = await ApiClient().dio.post(
-      '/student/my-result/add',
+      '/my-result/add',
       data: formData,
       options: Options(
         headers: {'Authorization': 'Bearer $token'},

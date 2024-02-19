@@ -1,31 +1,32 @@
-import 'package:etm_crm/app/ui/screens/teacher/profile/my_lessons_tab.dart';
-import 'package:etm_crm/app/ui/screens/teacher/profile/personal_info_tab.dart';
-import 'package:etm_crm/app/ui/screens/teacher/widgets/profile_avatar.dart';
-import 'package:etm_crm/app/ui/screens/teacher/widgets/profile_header.dart';
-import 'package:etm_crm/app/ui/screens/teacher/widgets/user_info.dart';
-import 'package:etm_crm/app/ui/screens/teacher/profile/settings_tab.dart';
-
+import 'package:etm_crm/app/ui/widgets/profile/passport/presents_tab.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../../theme/text_styles.dart';
+import 'package:flutter_svg/svg.dart';
 
-class TeacherProfileScreen extends StatefulWidget {
-  const TeacherProfileScreen({
+import '../../../../../../resources/resources.dart';
+import '../../../theme/text_styles.dart';
+import 'exchange_tab.dart';
+
+class PassportScreen extends StatefulWidget {
+  const PassportScreen({
     Key? key,
+    required this.changeTab
   }) : super(key: key);
 
+  final Function changeTab;
+
   @override
-  State<TeacherProfileScreen> createState() => _TeacherProfileScreenState();
+  State<PassportScreen> createState() => _PassportScreenState();
 }
 
-class _TeacherProfileScreenState extends State<TeacherProfileScreen> with TickerProviderStateMixin{
+class _PassportScreenState extends State<PassportScreen>  with TickerProviderStateMixin{
   late int isActiveTab = 0;
   late TabController _tabController;
 
   @override
   void initState() {
     _tabController = TabController(
-      length: 3,
+      length: 2,
       vsync: this,
       animationDuration: const Duration(milliseconds: 100),
     );
@@ -53,16 +54,31 @@ class _TeacherProfileScreenState extends State<TeacherProfileScreen> with Ticker
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const ProfileHeader(),
-                const ProfileAvatar(),
-                const UserInfo(),
+                PassportHeader(
+                  back: () {
+                    widget.changeTab();
+                  }
+                ),
+                ColoredBox(
+                  color: Colors.white,
+                  child: Row(
+                    children: const [
+                      SizedBox(
+                        height: 224,
+                      )
+                    ],
+                  ),
+                ),
                 Container(
                   height: 55,
                   alignment: Alignment.center,
                   width: double.infinity,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(20)
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(20),
+                        bottomRight: Radius.circular(20)
+                      )
                   ),
                   child: TabBar(
                     indicatorSize: TabBarIndicatorSize.label,
@@ -86,26 +102,10 @@ class _TeacherProfileScreenState extends State<TeacherProfileScreen> with Ticker
                         children: [
                           const Tab(
                             height: 24,
-                            text: 'My lessons',
+                            text: 'Exchange',
                             iconMargin: EdgeInsets.zero,
                           ),
                           if(isActiveTab == 0) ...[
-                            Container(
-                              height: 4,
-                              width: 40,
-                              color: Color(0xFFFFC700),
-                            )
-                          ]
-                        ],
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Tab(
-                            height: 19,
-                            text: 'Personal info',
-                          ),
-                          if(isActiveTab == 1) ...[
                             Container(
                               height: 4,
                               width: 40,
@@ -119,9 +119,9 @@ class _TeacherProfileScreenState extends State<TeacherProfileScreen> with Ticker
                         children: [
                           const Tab(
                             height: 19,
-                            text: 'Settings',
+                            text: 'Presents',
                           ),
-                          if(isActiveTab == 2) ...[
+                          if(isActiveTab == 1) ...[
                             Container(
                               height: 4,
                               width: 40,
@@ -133,20 +133,71 @@ class _TeacherProfileScreenState extends State<TeacherProfileScreen> with Ticker
                     ],
                   ),
                 ),
-
                 Expanded(
                   child: TabBarView(
                     controller: _tabController,
                     children: const [
-                      MyLessonsTab(),
-                      PersonalInfoTab(),
-                      SettingTab()
+                      ExchangeScreen(),
+                      PresentsScreen()
                     ],
                   ),
                 )
               ],
             ),
           )
+      ),
+    );
+  }
+}
+
+class PassportHeader extends StatelessWidget {
+  const PassportHeader({
+    Key? key,
+    required this.back,
+  }) : super(key: key);
+
+  final Function back;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.only(
+          bottom: 8
+      ),
+      color: Colors.white,
+      child: Stack(
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(
+                vertical: 16
+            ),
+            alignment: Alignment.center,
+            child: Text(
+              'My ID Passport',
+              style: TextStyles.s24w700.copyWith(
+                  color: const Color(0xFF242424)
+              ),
+            ),
+          ),
+          Positioned(
+              left: 0,
+              top: 0,
+              bottom: 0,
+              child: CupertinoButton(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 16
+                ),
+                child: SvgPicture.asset(
+                  Svgs.back,
+                  width: 32,
+                ),
+                onPressed: () {
+                  back();
+                },
+              )
+          )
+        ],
       ),
     );
   }

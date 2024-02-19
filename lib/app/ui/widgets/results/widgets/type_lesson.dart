@@ -1,10 +1,11 @@
-import 'package:etm_crm/app/domain/states/student/my_results_state.dart';
+import 'package:etm_crm/app/domain/states/my_results_state.dart';
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../widgets/center_header.dart';
+import '../../center_header.dart';
+
 
 class TypeLesson extends StatefulWidget {
   const TypeLesson({Key? key}) : super(key: key);

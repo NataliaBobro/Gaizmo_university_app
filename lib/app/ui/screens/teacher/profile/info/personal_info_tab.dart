@@ -4,9 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../widgets/custom_scroll_physics.dart';
-import '../../../widgets/info_value.dart';
-import '../../../widgets/settings_input.dart';
+import '../../../../widgets/custom_scroll_physics.dart';
+import '../../../../widgets/info_value.dart';
+import '../../../../widgets/settings_input.dart';
 
 
 class PersonalInfoTab extends StatefulWidget {

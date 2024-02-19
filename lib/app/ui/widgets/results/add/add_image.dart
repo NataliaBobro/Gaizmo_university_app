@@ -7,8 +7,8 @@ import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../../../resources/resources.dart';
-import '../../../../../domain/states/student/my_results_state.dart';
-import '../../../../widgets/take_photo_result.dart';
+import '../../../../domain/states/my_results_state.dart';
+import '../../take_photo_result.dart';
 
 class AddImage extends StatefulWidget {
   const AddImage({Key? key}) : super(key: key);

@@ -5,8 +5,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../domain/states/student/my_results_state.dart';
-import '../../../students/results/widgets/type_lesson.dart';
+import '../../../../domain/states/my_results_state.dart';
+import '../../../screens/school/schedule/filter/type_lesson.dart';
+
 
 
 class AddResult extends StatefulWidget {

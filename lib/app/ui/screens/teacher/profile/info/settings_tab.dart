@@ -1,16 +1,18 @@
 import 'package:etm_crm/app/app.dart';
-import 'package:etm_crm/app/ui/screens/teacher/profile/widgets/personal_info_teacher.dart';
+import 'package:etm_crm/app/ui/screens/teacher/profile/info/widgets/personal_info_teacher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';
 import 'package:provider/provider.dart';
-import '../../../../domain/services/user_service.dart';
-import '../../../theme/text_styles.dart';
-import '../../../widgets/custom_scroll_physics.dart';
-import '../../../widgets/notifications_settings.dart';
-import '../../../widgets/settings/settings_document.dart';
-import '../../../widgets/settings_input.dart';
-import '../../../widgets/settings_language.dart';
-import '../../../widgets/settings_social_accounts.dart';
+
+import '../../../../../domain/services/user_service.dart';
+import '../../../../theme/text_styles.dart';
+import '../../../../widgets/custom_scroll_physics.dart';
+import '../../../../widgets/notifications_settings.dart';
+import '../../../../widgets/settings/settings_document.dart';
+import '../../../../widgets/settings_input.dart';
+import '../../../../widgets/settings_language.dart';
+import '../../../../widgets/settings_social_accounts.dart';
+
 
 class SettingTab extends StatefulWidget {
   const SettingTab({Key? key}) : super(key: key);
