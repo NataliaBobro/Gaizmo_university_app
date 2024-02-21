@@ -101,7 +101,13 @@ class _ScheduleFilterScreenState extends State<ScheduleFilterScreen> {
                                 CupertinoPageRoute(
                                     builder: (context) => ChangeNotifierProvider.value(
                                       value: read,
-                                      child: const TypeLesson(),
+                                      child: TypeLesson(
+                                        selected: state.filterSchedule.type,
+                                        list: state.listTypeServices,
+                                        onChange: (value) {
+                                          read.changeFilterType(value);
+                                        },
+                                      ),
                                     )
                                 )
                             );

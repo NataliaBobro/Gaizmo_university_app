@@ -1,14 +1,21 @@
-import 'package:etm_crm/app/domain/states/school/school_schedule_state.dart';
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../../../../widgets/auth_button.dart';
 import '../../../../widgets/center_header.dart';
 
 class TypeLesson extends StatefulWidget {
-  const TypeLesson({Key? key}) : super(key: key);
+  const TypeLesson({
+    Key? key,
+    required this.selected,
+    required this.list,
+    required this.onChange,
+  }) : super(key: key);
+
+  final List<int> selected;
+  final List<Map<String, dynamic>> list;
+  final Function onChange;
 
   @override
   State<TypeLesson> createState() => _TypeLessonState();
@@ -20,7 +27,7 @@ class _TypeLessonState extends State<TypeLesson> {
   @override
   void initState() {
     setState(() {
-      selected = context.read<SchoolScheduleState>().filterSchedule.type;
+      selected = widget.selected;
     });
     super.initState();
   }
@@ -32,7 +39,7 @@ class _TypeLessonState extends State<TypeLesson> {
   }
 
   void addAll() {
-    final listTypeServices = context.read<SchoolScheduleState>().listTypeServices;
+    final listTypeServices = widget.list;
     for(var a = 0; a < listTypeServices.length; a++){
       selected.add(listTypeServices[a]['id']);
     }
@@ -45,14 +52,13 @@ class _TypeLessonState extends State<TypeLesson> {
   }
 
   void apply() {
-    context.read<SchoolScheduleState>().changeFilterType(selected);
+    widget.onChange(selected);
     Navigator.pop(context);
   }
 
   @override
   Widget build(BuildContext context) {
-    final state = context.watch<SchoolScheduleState>();
-    final service = state.listTypeServices;
+    final service = widget.list;
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(

@@ -181,7 +181,7 @@ final loggedTeacherInMap = routemaster.RouteMap(
     ),
     _myResults: (_) => TransitionPage(
       child: ChangeNotifierProvider(
-        create: (context) => MyResultsState(context),
+        create: (context) => MyResultsState(context, true),
         child: const MyResultsScreen(),
       ),
     ),
@@ -226,7 +226,7 @@ final loggedStudentInMap = routemaster.RouteMap(
     ),
     _myResults: (_) => TransitionPage(
       child: ChangeNotifierProvider(
-        create: (context) => MyResultsState(context),
+        create: (context) => MyResultsState(context, false),
         child: const MyResultsScreen(),
       ),
     ),

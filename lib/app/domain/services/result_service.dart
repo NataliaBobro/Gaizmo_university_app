@@ -22,7 +22,7 @@ class ResultService {
     return ScheduleMeta.fromJson(data);
   }
 
-  static Future<ResultsModel?> fetchList(
+  static Future<ResultsModel?> fetchMyResultList(
       context,
       int? filterService,
       ) async {
@@ -30,6 +30,25 @@ class ResultService {
     if(token == null) return null;
     final response = await ApiClient().dio.get(
       '/my-result/list',
+      queryParameters: {
+        'service_id': filterService
+      },
+      options: Options(
+        headers: {'Authorization': 'Bearer $token'},
+      ),
+    );
+    final data = response.data as Map<String, dynamic>;
+    return ResultsModel.fromJson(data);
+  }
+
+  static Future<ResultsModel?> fetchMyTaskList(
+      context,
+      int? filterService,
+      ) async {
+    final token = getToken(context);
+    if(token == null) return null;
+    final response = await ApiClient().dio.get(
+      '/my-result/list-task',
       queryParameters: {
         'service_id': filterService
       },

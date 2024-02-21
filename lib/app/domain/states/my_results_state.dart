@@ -15,7 +15,8 @@ class MyResultsState with ChangeNotifier {
   BuildContext context;
   bool _isLoading = false;
   bool _isLoadingAdd = false;
-  ResultsModel? _resultsModel;
+  ResultsModel? _myResultsModel;
+  ResultsModel? _myTaskModel;
   List<Map<String, dynamic>> _listServices = [];
   final FilterSchedule _filterSchedule = FilterSchedule(
       type: [],
@@ -24,20 +25,27 @@ class MyResultsState with ChangeNotifier {
   );
   File? _selectFile;
 
+  bool? _isTeacher = false;
 
-  MyResultsState(this.context){
+
+  MyResultsState(this.context, this._isTeacher){
     Future.microtask(() async {
-      await fetchList();
+      if(_isTeacher == true) {
+        await fetchMyTaskList();
+      }
+      await fetchMyResultList();
       await fetchMetaResults();
     });
   }
 
   bool get isLoading => _isLoading;
   bool get isLoadingAdd => _isLoadingAdd;
-  ResultsModel? get resultsModel => _resultsModel;
+  ResultsModel? get resultsModel => _myResultsModel;
+  ResultsModel? get myTaskModel => _myTaskModel;
   FilterSchedule get filterSchedule => _filterSchedule;
   List<Map<String, dynamic>> get listTypeServices => _listServices;
   File? get selectFile => _selectFile;
+  bool? get isTeacher => _isTeacher;
 
   void changeFile(file) {
     _selectFile = file;
@@ -51,17 +59,37 @@ class MyResultsState with ChangeNotifier {
 
   void onChangeFilter(value)
   {
-    fetchList(filterService: value['id']);
+    if(_isTeacher == true){
+      fetchMyTaskList(filterService: value['id']);
+    }
+    fetchMyResultList(filterService: value['id']);
   }
 
-  Future<void> fetchList({int? filterService})async {
+  Future<void> fetchMyResultList({int? filterService})async {
     _isLoading = true;
     notifyListeners();
 
     try{
-      final result = await ResultService.fetchList(context, filterService);
+      final result = await ResultService.fetchMyResultList(context, filterService);
       if(result != null){
-        _resultsModel = result;
+        _myResultsModel = result;
+      }
+    }catch(e){
+      print(e);
+    }finally{
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<void> fetchMyTaskList({int? filterService})async {
+    _isLoading = true;
+    notifyListeners();
+
+    try{
+      final result = await ResultService.fetchMyTaskList(context, filterService);
+      if(result != null){
+        _myTaskModel = result;
       }
     }catch(e){
       print(e);

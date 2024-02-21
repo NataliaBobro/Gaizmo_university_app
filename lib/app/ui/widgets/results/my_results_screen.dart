@@ -21,13 +21,35 @@ class MyResultsScreen extends StatefulWidget {
   State<MyResultsScreen> createState() => _MyResultsScreenState();
 }
 
-class _MyResultsScreenState extends State<MyResultsScreen> {
+class _MyResultsScreenState extends State<MyResultsScreen> with TickerProviderStateMixin{
+  late int isActiveTab = 0;
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    _tabController = TabController(
+      length: 2,
+      vsync: this,
+      animationDuration: const Duration(milliseconds: 100),
+    );
+
+    _tabController.addListener(() {
+      viewTab(_tabController.index);
+    });
+    super.initState();
+  }
+
+  void viewTab (index) {
+    setState(() {
+      isActiveTab = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    final read = context.read<MyResultsState>();
     final state = context.watch<MyResultsState>();
-
     final results = state.resultsModel?.results ?? [];
+    final task = state.myTaskModel?.results ?? [];
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -36,7 +58,7 @@ class _MyResultsScreenState extends State<MyResultsScreen> {
             color: const Color(0xFFF0F3F6),
             child: Column(
               children: [
-                 CenterHeaderWithAction(
+                CenterHeaderWithAction(
                     title: 'My results',
                     action: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -57,49 +79,89 @@ class _MyResultsScreenState extends State<MyResultsScreen> {
                       ],
                     ),
                 ),
-                Expanded(
-                    child: ListView(
-                      children: [
-                        if(state.isLoading) ...[
-                          const SizedBox(
-                            height: 233,
-                          ),
-                          const CupertinoActivityIndicator()
-                        ] else ...[
-                          if(results.isEmpty) ...[
-                            const SizedBox(
-                              height: 233,
+                if(state.isTeacher == true) ...[
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 50),
+                    height: 55,
+                    alignment: Alignment.center,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20)
+                    ),
+                    child: TabBar(
+                      indicatorSize: TabBarIndicatorSize.label,
+                      indicatorPadding: EdgeInsets.zero,
+                      controller: _tabController,
+                      indicatorColor: Colors.transparent,
+                      indicatorWeight: 0.5,
+                      labelStyle: TextStyles.s14w700,
+                      labelPadding: const EdgeInsets.symmetric(
+                          horizontal: 16
+                      ).copyWith(
+                          bottom: 24
+                      ),
+                      labelColor: const Color(0xFF242424),
+                      unselectedLabelStyle: TextStyles.s14w400,
+                      unselectedLabelColor: const Color(0xFFACACAC),
+                      tabs: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Tab(
+                              height: 24,
+                              text: 'My tasks',
+                              iconMargin: EdgeInsets.zero,
                             ),
-                          ],
-                          EmptyWidget(
-                            isEmpty: results.isEmpty,
-                            title: "No results yet :(",
-                            subtitle: "Click the button below to add result! ",
-                            onPress: () async {
-                              await Navigator.push(
-                                  context,
-                                  CupertinoPageRoute(
-                                      builder: (context) => ChangeNotifierProvider.value(
-                                        value: read,
-                                        child: const AddResult(),
-                                      )
-                                  )
-                              );
-                            },
-                          ),
-                          const SizedBox(
-                            height: 16,
-                          ),
-                          ...List.generate(
-                              results.length,
-                              (index) => ResultItemWidget(
-                                item: results[index]
+                            if(isActiveTab == 0) ...[
+                              Container(
+                                height: 4,
+                                width: 40,
+                                color: const Color(0xFFFFC700),
                               )
-                          )
-                        ],
+                            ]
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Tab(
+                              height: 19,
+                              text: 'Results',
+                            ),
+                            if(isActiveTab == 1) ...[
+                              Container(
+                                height: 4,
+                                width: 40,
+                                color: const Color(0xFFFFC700),
+                              )
+                            ]
+                          ],
+                        )
                       ],
-                    )
-                )
+                    ),
+                  ),
+                  Expanded(
+                    child: TabBarView(
+                      controller: _tabController,
+                      children: [
+                        ResultTab(
+                          hasAdd: false,
+                          list: task
+                        ),
+                        ResultTab(
+                            list: results
+                        ),
+                      ],
+                    ),
+                  )
+                ] else ...[
+                  Expanded(
+                    child: ResultTab(
+                        list: results
+                    ),
+                  )
+                ],
               ],
             ),
           )
@@ -183,6 +245,74 @@ class _MyResultsScreenState extends State<MyResultsScreen> {
 }
 
 
+class ResultTab extends StatefulWidget {
+  const ResultTab({
+    Key? key,
+    required this.list,
+    this.hasAdd = true
+  }) : super(key: key);
+
+  final List<ResultItem> list;
+  final bool hasAdd;
+
+  @override
+  State<ResultTab> createState() => _ResultTabState();
+}
+
+class _ResultTabState extends State<ResultTab> {
+  @override
+  Widget build(BuildContext context) {
+    final read = context.read<MyResultsState>();
+    final state = context.watch<MyResultsState>();
+
+    return  ListView(
+      children: [
+        if(state.isLoading) ...[
+          const SizedBox(
+            height: 233,
+          ),
+          const CupertinoActivityIndicator()
+        ] else ...[
+          if(widget.list.isEmpty) ...[
+            const SizedBox(
+              height: 233,
+            ),
+          ],
+          if(widget.hasAdd) ...[
+            EmptyWidget(
+              isEmpty: widget.list.isEmpty,
+              title: "No results yet :(",
+              subtitle: "Click the button below to add result! ",
+              onPress: () async {
+                await Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                        builder: (context) => ChangeNotifierProvider.value(
+                          value: read,
+                          child: const AddResult(),
+                        )
+                    )
+                );
+              },
+            ),
+          ],
+          const SizedBox(
+            height: 16,
+          ),
+          ...List.generate(
+              widget.list.length,
+                  (index) => ResultItemWidget(
+                  item: widget.list[index]
+              )
+          )
+        ],
+      ],
+    );
+  }
+}
+
+
+
 class ResultItemWidget extends StatelessWidget {
   const ResultItemWidget({
     Key? key,
@@ -232,8 +362,6 @@ class ResultItemWidget extends StatelessWidget {
           cacheKey: "${item.image}",
           imageUrl: "${item.image}",
           width: SizerUtil.width,
-          memCacheWidth: 200,
-          maxWidthDiskCache: 200,
           errorWidget: (context, error, stackTrace) =>
           const SizedBox.shrink(),
           fit: BoxFit.cover,
