@@ -90,7 +90,7 @@ class _StudentScheduleScreenState extends State<StudentScheduleScreen> {
                                         (index) => AccordionSection(
                                       isOpen: false,
                                       headerBackgroundColor:
-                                      Color(int.parse('${lessons[index].service?.color}')).withOpacity(.6),
+                                      Color(int.parse('${lessons[index].services?.first?.color}')).withOpacity(.6),
                                       contentVerticalPadding: 0,
                                       rightIcon: HeaderEtm(
                                           lessons: lessons[index],
@@ -195,14 +195,14 @@ class HeaderNameLesson extends StatelessWidget {
     DateTime parsedTime = inputFormat.parse(timeString);
     String start = outputFormat.format(parsedTime);
 
-    DateTime parseEnd = parsedTime.add(Duration(minutes: lesson?.service?.duration ?? 0));
+    DateTime parseEnd = parsedTime.add(Duration(minutes: lesson?.services?.first?.duration ?? 0));
     String end = outputFormat.format(parseEnd);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          '${lesson?.service?.name}',
+          '${lesson?.services?.first?.name}',
           style: TextStyles.s14w600.copyWith(
               color: const Color(0xFF242424)
           ),

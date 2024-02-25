@@ -178,14 +178,14 @@ class HeaderNameLesson extends StatelessWidget {
     DateTime parsedTime = inputFormat.parse(timeString);
     String start = outputFormat.format(parsedTime);
 
-    DateTime parseEnd = parsedTime.add(Duration(minutes: lesson?.service?.duration ?? 0));
+    DateTime parseEnd = parsedTime.add(Duration(minutes: lesson?.services?.first?.duration ?? 0));
     String end = outputFormat.format(parseEnd);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          '${lesson?.service?.name}',
+          '${lesson?.services?.first?.name}',
           style: TextStyles.s14w600.copyWith(
               color: const Color(0xFF242424)
           ),
@@ -266,15 +266,15 @@ class _LessonItemState extends State<LessonItem> {
       ),
       width: double.infinity,
       decoration: BoxDecoration(
-          color: Color(int.parse('${widget.lesson?.service?.color}')).withOpacity(.4)
+          color: Color(int.parse('${widget.lesson?.services?.first?.color}')).withOpacity(.4)
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ContentRowInfo(
             title: 'Teacher',
-            value: '${widget.lesson?.service?.teacher?.firstName} '
-                '${widget.lesson?.service?.teacher?.lastName}',
+            value: '${widget.lesson?.services?.first?.teacher?.firstName} '
+                '${widget.lesson?.services?.first?.teacher?.lastName}',
           ),
           const ContentRowInfo(
             title: 'Students',
@@ -282,8 +282,8 @@ class _LessonItemState extends State<LessonItem> {
           ),
           ContentRowInfo(
             title: 'Adress',
-            value: '${widget.lesson?.service?.school?.street} '
-                '${widget.lesson?.service?.school?.house}',
+            value: '${widget.lesson?.services?.first?.school?.street} '
+                '${widget.lesson?.services?.first?.school?.house}',
           ),
           ContentRowInfo(
               title: 'Class number',

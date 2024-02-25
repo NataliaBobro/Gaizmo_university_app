@@ -4,6 +4,9 @@ import 'package:etm_crm/app/ui/screens/teacher/schedule/widgets/select_day_week.
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:multi_select_flutter/dialog/multi_select_dialog_field.dart';
+import 'package:multi_select_flutter/util/multi_select_item.dart';
+import 'package:multi_select_flutter/util/multi_select_list_type.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../theme/text_styles.dart';
@@ -11,7 +14,6 @@ import '../../../../widgets/app_field.dart';
 import '../../../../widgets/auth_button.dart';
 import '../../../../widgets/center_header.dart';
 import '../../../../widgets/custom_scroll_physics.dart';
-import '../../../../widgets/select_bottom_sheet_input.dart';
 import '../../../../widgets/select_input_search.dart';
 
 class AddLessonScreen extends StatefulWidget {
@@ -65,17 +67,33 @@ class _AddLessonScreenState extends State<AddLessonScreen> {
                     const SizedBox(
                       height: 24,
                     ),
-                    SelectBottomSheetInput(
-                        label: "Service name",
-                        labelModal: "Service",
-                        selected: state.selectService,
-                        items: state.listTypeServices,
-                        horizontalPadding: 0.0,
-                        onSelect: (value) {
-                          state.selectAddService(value);
-                        },
-                        error: state.validateError?.errors.service?.first,
+                    MultiSelectDialogField(
+                      buttonText: Text(
+                        "Service",
+                        style: TextStyles.s14w600.copyWith(
+                            color: const Color(0xFF242424)
+                        ),
+                      ),
+                      items: state.listTypeServices.map((e) => MultiSelectItem(e, e['name'])).toList(),
+                      listType: MultiSelectListType.CHIP,
+                      onConfirm: (values) {
+                        state.selectAddService(values);
+                      },
                     ),
+                    if(state.validateError?.errors.service?.first != null) ...[
+                      Container(
+                        padding: const EdgeInsets.only(
+                            top: 4
+                        ),
+                        alignment: Alignment.centerRight,
+                        child: Text(
+                          '${state.validateError?.errors.service?.first}',
+                          style: TextStyles.s12w400.copyWith(
+                              color: const Color(0xFFFFC700)
+                          ),
+                        ),
+                      ),
+                    ],
                     const SizedBox(
                       height: 45,
                     ),

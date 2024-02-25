@@ -13,7 +13,7 @@ class MyLessonHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final duration = lesson.service?.duration;
+    final duration = lesson.services?.first?.duration;
     TimeOfDay startTime = TimeOfDay.fromDateTime(DateTime.parse("2022-01-18 ${lesson.startLesson}"));
     TimeOfDay endTime = startTime.replacing(
       hour: startTime.hour + (duration ?? 0) ~/ 60,
@@ -25,7 +25,7 @@ class MyLessonHeader extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          '${lesson.service?.name}',
+          '${lesson.services?.first?.name}',
           style: TextStyles.s14w600.copyWith(
               color: const Color(0xFF242424)
           ),

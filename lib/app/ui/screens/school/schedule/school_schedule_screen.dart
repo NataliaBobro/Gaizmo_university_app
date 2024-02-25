@@ -98,10 +98,10 @@ class _SchoolScheduleScreenState extends State<SchoolScheduleScreen> {
                                         (index) => AccordionSection(
                                       isOpen: false,
                                       headerBackgroundColor:
-                                      Color(int.parse('${state.lessonsList?.lessons?[index].service?.color}')).withOpacity(.6),
+                                      Color(int.parse('${state.lessonsList?.lessons?[index].services?.first?.color}')).withOpacity(.6),
                                       contentVerticalPadding: 0,
                                       rightIcon: HeaderEtm(
-                                          etm: state.lessonsList?.lessons?[index].service?.etm
+                                          etm: state.lessonsList?.lessons?[index].services?.first?.etm
                                       ),
                                       contentBorderWidth: 0,
                                       contentHorizontalPadding: 0.0,
@@ -251,21 +251,21 @@ class HeaderNameLesson extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String timeString = "${lesson?.lessonStart}";
+    String timeString = lesson?.lessonStart ?? '00:00:00';
     DateFormat inputFormat = DateFormat('HH:mm:ss');
     DateFormat outputFormat = DateFormat('HH:mm');
 
     DateTime parsedTime = inputFormat.parse(timeString);
     String start = outputFormat.format(parsedTime);
 
-    DateTime parseEnd = parsedTime.add(Duration(minutes: lesson?.service?.duration ?? 0));
+    DateTime parseEnd = parsedTime.add(Duration(minutes: lesson?.services?.first?.duration ?? 0));
     String end = outputFormat.format(parseEnd);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          '${lesson?.service?.name}',
+          '${lesson?.services?.first?.name}',
           style: TextStyles.s14w600.copyWith(
             color: const Color(0xFF242424)
           ),
@@ -346,15 +346,15 @@ class _LessonItemState extends State<LessonItem> {
       ),
       width: double.infinity,
       decoration: BoxDecoration(
-          color: Color(int.parse('${widget.lesson?.service?.color}')).withOpacity(.4)
+          color: Color(int.parse('${widget.lesson?.services?.first?.color}')).withOpacity(.4)
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ContentRowInfo(
             title: 'Teacher',
-            value: '${widget.lesson?.service?.teacher?.firstName} '
-                '${widget.lesson?.service?.teacher?.lastName}',
+            value: '${widget.lesson?.services?.first?.teacher?.firstName} '
+                '${widget.lesson?.services?.first?.teacher?.lastName}',
           ),
           const ContentRowInfo(
             title: 'Students',
@@ -362,8 +362,8 @@ class _LessonItemState extends State<LessonItem> {
           ),
           ContentRowInfo(
             title: 'Adress',
-            value: '${widget.lesson?.service?.school?.street} '
-                '${widget.lesson?.service?.school?.house}',
+            value: '${widget.lesson?.services?.first?.school?.street} '
+                '${widget.lesson?.services?.first?.school?.house}',
           ),
           ContentRowInfo(
             title: 'Class number',

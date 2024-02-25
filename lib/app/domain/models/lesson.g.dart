@@ -23,9 +23,11 @@ Lesson _$LessonFromJson(Map<String, dynamic> json) => Lesson(
       startLesson: json['start_lesson'] as String?,
       start: json['start'] as String?,
       end: json['end'] as String?,
-      service: json['service'] == null
-          ? null
-          : ServicesModel.fromJson(json['service'] as Map<String, dynamic>),
+      services: (json['services'] as List<dynamic>?)
+          ?.map((e) => e == null
+              ? null
+              : ServicesModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
       schoolClass: json['school_class'] == null
           ? null
           : SchoolClass.fromJson(json['school_class'] as Map<String, dynamic>),
@@ -40,7 +42,7 @@ Map<String, dynamic> _$LessonToJson(Lesson instance) => <String, dynamic>{
       'start_lesson': instance.startLesson,
       'start': instance.start,
       'end': instance.end,
-      'service': instance.service,
+      'services': instance.services,
       'school_class': instance.schoolClass,
       'day': instance.day,
       'is_visits_exists': instance.isVisitsExists,

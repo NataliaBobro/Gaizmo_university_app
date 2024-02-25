@@ -34,7 +34,7 @@ class HeaderEtm extends StatelessWidget {
               width: 3,
             ),
             Text(
-              '+${lessons.service?.etm} ETM',
+              '+${lessons.services?.first?.etm} ETM',
               style: TextStyles.s10w600.copyWith(
                   color: const Color(0xFF242424)
               ),
@@ -90,27 +90,27 @@ class _LessonItemState extends State<LessonItem> {
       ),
       width: double.infinity,
       decoration: BoxDecoration(
-          color: Color(int.parse('${widget.lesson?.service?.color}')).withOpacity(.4)
+          color: Color(int.parse('${widget.lesson?.services?.first?.color}')).withOpacity(.4)
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ContentRowInfo(
             title: 'Teacher',
-            value: '${widget.lesson?.service?.teacher?.firstName} '
-                '${widget.lesson?.service?.teacher?.lastName}',
+            value: '${widget.lesson?.services?.first?.teacher?.firstName} '
+                '${widget.lesson?.services?.first?.teacher?.lastName}',
           ),
           ContentRowInfo(
             title: 'Students',
             content: PreviewListStudent(
-                serviceId: widget.lesson?.service?.id,
-                users: widget.lesson?.service?.payUsers
+                serviceId: widget.lesson?.services?.first?.id,
+                users: widget.lesson?.services?.first?.payUsers
             ),
           ),
           ContentRowInfo(
             title: 'Adress',
-            value: '${widget.lesson?.service?.school?.street} '
-                '${widget.lesson?.service?.school?.house}',
+            value: '${widget.lesson?.services?.first?.school?.street} '
+                '${widget.lesson?.services?.first?.school?.house}',
           ),
           ContentRowInfo(
               title: 'Class number',

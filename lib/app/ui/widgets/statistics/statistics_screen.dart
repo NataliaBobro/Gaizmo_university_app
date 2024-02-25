@@ -4,6 +4,8 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../../../resources/resources.dart';
 import '../../theme/text_styles.dart';
+import '../profile/passport/widgets/passport_view.dart';
+import 'categories_tab.dart';
 
 class StatisticsScreen extends StatefulWidget {
   const StatisticsScreen({Key? key}) : super(key: key);
@@ -52,13 +54,13 @@ class _StatisticsScreenState extends State<StatisticsScreen> with TickerProvider
                       Navigator.pop(context);
                     }
                 ),
-                ColoredBox(
+                Container(
+                  padding: const EdgeInsets.only(bottom: 24),
                   color: Colors.white,
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: const [
-                      SizedBox(
-                        height: 224,
-                      )
+                      PassportView(),
                     ],
                   ),
                 ),
@@ -95,7 +97,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> with TickerProvider
                         children: [
                           const Tab(
                             height: 24,
-                            text: 'Exchange',
+                            text: 'Categories',
                             iconMargin: EdgeInsets.zero,
                           ),
                           if(isActiveTab == 0) ...[
@@ -112,7 +114,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> with TickerProvider
                         children: [
                           const Tab(
                             height: 19,
-                            text: 'Presents',
+                            text: 'Statistic',
                           ),
                           if(isActiveTab == 1) ...[
                             Container(
@@ -130,7 +132,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> with TickerProvider
                   child: TabBarView(
                     controller: _tabController,
                     children: [
-                      Container(),
+                      const CategoriesTab(),
                       Container()
                     ],
                   ),
@@ -166,7 +168,7 @@ class StatisticHeader extends StatelessWidget {
             ),
             alignment: Alignment.center,
             child: Text(
-              'My ID Passport',
+              'Learning Path',
               style: TextStyles.s24w700.copyWith(
                   color: const Color(0xFF242424)
               ),

@@ -23,7 +23,7 @@ class Lesson {
   String? startLesson;
   String? start;
   String? end;
-  ServicesModel? service;
+  List<ServicesModel?>? services;
   SchoolClass? schoolClass;
   List<ListDay>? day;
   bool? isVisitsExists;
@@ -34,7 +34,7 @@ class Lesson {
     this.startLesson,
     this.start,
     this.end,
-    this.service,
+    this.services,
     this.schoolClass,
     this.isVisitsExists
   });

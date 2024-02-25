@@ -36,7 +36,7 @@ class ServicesState with ChangeNotifier {
   String? _selectColor;
   final TextEditingController _categoryName = TextEditingController();
   final TextEditingController _serviceName = TextEditingController();
-  final TextEditingController _visits = TextEditingController();
+  final MaskedTextController _visits = MaskedTextController(mask: '000');
   final MaskedTextController _cost = MaskedTextController(mask: '00000');
   final MaskedTextController _etm = MaskedTextController(mask: '00000');
   final MaskedTextController _validity = MaskedTextController(mask: '00');

@@ -20,7 +20,7 @@ class SchoolScheduleState with ChangeNotifier {
   int? _editId;
   bool _isLoading = true;
   ScheduleMeta? _scheduleMeta;
-  Map<String, dynamic>? _selectService;
+  List<Map<String, dynamic>>? _selectService;
   Map<String, dynamic>? _selectClass;
   ValidateError? _validateError;
   LessonsList? _lessonsList;
@@ -54,7 +54,7 @@ class SchoolScheduleState with ChangeNotifier {
   FilterSchedule get filterSchedule => _filterSchedule;
   LessonsList? get lessonsList => _lessonsList;
   ScheduleMeta? get scheduleMeta => _scheduleMeta;
-  Map<String, dynamic>? get selectService => _selectService;
+  List<Map<String, dynamic>?>? get selectService => _selectService;
   Map<String, dynamic>? get selectClass => _selectClass;
   List<Map<String, dynamic>> get listTypeServices => _listServices;
   List<Map<String, dynamic>> get listTeacher => _listTeacher;
@@ -165,7 +165,7 @@ class SchoolScheduleState with ChangeNotifier {
   
   void initEditData(Lesson? edit) {
     _editId = edit?.id;
-    _selectService = _listServices.firstWhere((element) => element['id'] == edit?.service?.id);
+    // _selectService = _listServices.firstWhere((element) => element['id'] == edit?.service?.id);
     _selectClass = _listClass.firstWhere((element) => element['id'] == edit?.schoolClass?.id);
     _lessonStart.text = '${edit?.lessonStart}';
     _repeatsStart.text = '${edit?.start?.replaceAll('-', '')}';
@@ -278,7 +278,7 @@ class SchoolScheduleState with ChangeNotifier {
     notifyListeners();
     Map<String, dynamic> data = {
       'id': _editId,
-      'service': _selectService?['id'],
+      'service': _selectService,
       'school_class':  _selectClass?['id'],
       'start_lesson': _lessonStart.text.replaceAll(' ', ''),
       'start': _repeatsStart.text,

@@ -1,9 +1,11 @@
 import 'package:etm_crm/app/app.dart';
 import 'package:etm_crm/app/ui/widgets/social_account_info.dart';
+import 'package:etm_crm/app/ui/widgets/statistics/statistics_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../../domain/states/statistics_state.dart';
 import '../../../../widgets/custom_scroll_physics.dart';
 import '../../../../widgets/info_value.dart';
 import '../../../../widgets/settings_input.dart';
@@ -52,7 +54,15 @@ class _PersonalInfoTabState extends State<PersonalInfoTab> {
             SettingsInput(
                 title: "Statistics",
                 onPress: () async {
-
+                  await Navigator.push(
+                      context,
+                      CupertinoPageRoute(
+                          builder: (context) => ChangeNotifierProvider(
+                            create: (context) => StatisticsState(context) ,
+                            child: const StatisticsScreen(),
+                          )
+                      )
+                  );
                 }
             ),
             SettingsInput(
