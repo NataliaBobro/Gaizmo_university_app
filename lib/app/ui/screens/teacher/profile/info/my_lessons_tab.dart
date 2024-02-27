@@ -92,7 +92,8 @@ class _MyLessonsTabState extends State<MyLessonsTab> {
                             lesson: lessons[index]
                         ),
                         content: LessonItem(
-                            lesson: lessons[index]
+                          lesson: lessons[index],
+                          isTeacher: true,
                         ),
                       )
                   )

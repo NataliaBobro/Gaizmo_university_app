@@ -27,6 +27,7 @@ class Lesson {
   SchoolClass? schoolClass;
   List<ListDay>? day;
   bool? isVisitsExists;
+  ZoomMeeting? zoomMeeting;
 
   Lesson({
     required this.id,
@@ -36,7 +37,8 @@ class Lesson {
     this.end,
     this.services,
     this.schoolClass,
-    this.isVisitsExists
+    this.isVisitsExists,
+    this.zoomMeeting,
   });
 
   Map<String, dynamic> toJson() => _$LessonToJson(this);
@@ -74,4 +76,19 @@ class ListDay {
   Map<String, dynamic> toJson() => _$ListDayToJson(this);
 
   factory ListDay.fromJson(Map<String, dynamic> json) => _$ListDayFromJson(json);
+}
+
+@JsonSerializable(includeIfNull: true, fieldRename: FieldRename.snake)
+class ZoomMeeting {
+  String? startUrl;
+  String? joinUrl;
+
+  ZoomMeeting({
+    this.startUrl,
+    this.joinUrl,
+  });
+
+  Map<String, dynamic> toJson() => _$ZoomMeetingToJson(this);
+
+  factory ZoomMeeting.fromJson(Map<String, dynamic> json) => _$ZoomMeetingFromJson(json);
 }

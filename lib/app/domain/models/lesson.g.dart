@@ -32,6 +32,9 @@ Lesson _$LessonFromJson(Map<String, dynamic> json) => Lesson(
           ? null
           : SchoolClass.fromJson(json['school_class'] as Map<String, dynamic>),
       isVisitsExists: json['is_visits_exists'] as bool?,
+      zoomMeeting: json['zoom_meeting'] == null
+          ? null
+          : ZoomMeeting.fromJson(json['zoom_meeting'] as Map<String, dynamic>),
     )..day = (json['day'] as List<dynamic>?)
         ?.map((e) => ListDay.fromJson(e as Map<String, dynamic>))
         .toList();
@@ -46,6 +49,7 @@ Map<String, dynamic> _$LessonToJson(Lesson instance) => <String, dynamic>{
       'school_class': instance.schoolClass,
       'day': instance.day,
       'is_visits_exists': instance.isVisitsExists,
+      'zoom_meeting': instance.zoomMeeting,
     };
 
 SchoolClass _$SchoolClassFromJson(Map<String, dynamic> json) => SchoolClass(
@@ -69,4 +73,15 @@ ListDay _$ListDayFromJson(Map<String, dynamic> json) => ListDay(
 Map<String, dynamic> _$ListDayToJson(ListDay instance) => <String, dynamic>{
       'name': instance.name,
       'define': instance.define,
+    };
+
+ZoomMeeting _$ZoomMeetingFromJson(Map<String, dynamic> json) => ZoomMeeting(
+      startUrl: json['start_url'] as String?,
+      joinUrl: json['join_url'] as String?,
+    );
+
+Map<String, dynamic> _$ZoomMeetingToJson(ZoomMeeting instance) =>
+    <String, dynamic>{
+      'start_url': instance.startUrl,
+      'join_url': instance.joinUrl,
     };

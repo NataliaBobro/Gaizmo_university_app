@@ -115,7 +115,8 @@ class _TeacherScheduleScreenState extends State<TeacherScheduleScreen> {
                                           lesson: state.lessonsList!.lessons![index]
                                       ),
                                       content: LessonItem(
-                                          lesson: state.lessonsList!.lessons![index]
+                                          lesson: state.lessonsList!.lessons![index],
+                                          isTeacher: true,
                                       ),
                                     )
                                 )

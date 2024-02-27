@@ -6,6 +6,7 @@ import '../../../../resources/resources.dart';
 import '../../../domain/models/lesson.dart';
 import '../../screens/students/schedule/widgets/preview_list_student.dart';
 import '../../theme/text_styles.dart';
+import '../../utils/url_launch.dart';
 
 
 class HeaderEtm extends StatelessWidget {
@@ -69,10 +70,12 @@ class HeaderEtm extends StatelessWidget {
 class LessonItem extends StatefulWidget {
   const LessonItem({
     Key? key,
-    required this.lesson
+    required this.lesson,
+    this.isTeacher = false
   }) : super(key: key);
 
   final Lesson? lesson;
+  final bool isTeacher;
 
   @override
   State<LessonItem> createState() => _LessonItemState();
@@ -116,10 +119,26 @@ class _LessonItemState extends State<LessonItem> {
               title: 'Class number',
               value: '${widget.lesson?.schoolClass?.name}'
           ),
-          const ContentRowInfo(
+          if(widget.lesson?.zoomMeeting != null) ...[
+            ContentRowInfo(
               title: 'Lesson links',
-              value: ''
-          ),
+              content: CupertinoButton(
+                minSize: 0.0,
+                padding: EdgeInsets.zero,
+                onPressed: () {
+                  launchUrlParse(
+                      widget.isTeacher ?
+                        widget.lesson?.zoomMeeting?.startUrl :
+                        widget.lesson?.zoomMeeting?.joinUrl
+                  );
+                },
+                child: SvgPicture.asset(
+                  Svgs.zoom,
+                  width: 65,
+                ),
+              ),
+            ),
+          ],
           ContentRowInfo(
             title: 'Description',
             content: CupertinoButton(

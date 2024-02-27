@@ -13,6 +13,7 @@ import 'package:sizer/sizer.dart';
 
 import '../../../../../resources/resources.dart';
 import '../../../theme/text_styles.dart';
+import '../../../utils/url_launch.dart';
 
 class SchoolScheduleScreen extends StatefulWidget {
   const SchoolScheduleScreen({Key? key}) : super(key: key);
@@ -369,10 +370,24 @@ class _LessonItemState extends State<LessonItem> {
             title: 'Class number',
             value: '${widget.lesson?.schoolClass?.name}'
           ),
-          const ContentRowInfo(
-            title: 'Lesson links',
-            value: ''
-          ),
+          if(widget.lesson?.zoomMeeting != null) ...[
+            ContentRowInfo(
+              title: 'Lesson links',
+              content: CupertinoButton(
+                minSize: 0.0,
+                padding: EdgeInsets.zero,
+                onPressed: () {
+                  launchUrlParse(
+                      widget.lesson?.zoomMeeting?.startUrl
+                  );
+                },
+                child: SvgPicture.asset(
+                  Svgs.zoom,
+                  width: 65,
+                ),
+              ),
+            ),
+          ],
           ContentRowInfo(
             title: 'Description',
             content: CupertinoButton(

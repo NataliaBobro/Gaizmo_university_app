@@ -93,7 +93,7 @@ class _TeacherProfileScreenState extends State<TeacherProfileScreen> with Ticker
                             Container(
                               height: 4,
                               width: 40,
-                              color: Color(0xFFFFC700),
+                              color: const Color(0xFFFFC700),
                             )
                           ]
                         ],
