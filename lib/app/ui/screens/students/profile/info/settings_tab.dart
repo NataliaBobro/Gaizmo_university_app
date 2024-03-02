@@ -72,6 +72,19 @@ class _SettingTabState extends State<SettingTab> {
               );
             }
         ),
+        // SettingsInput(
+        //     title: "My cards",
+        //     onPress: () async {
+        //       await Navigator.push(
+        //         context,
+        //         MaterialPageRoute(
+        //             builder: (context) => PaymentCartScreen(
+        //               userId: state.userData?.id,
+        //             )
+        //         ),
+        //       );
+        //     }
+        // ),
         SettingsInput(
             title: "Sign out",
             onPress: () {

@@ -194,6 +194,32 @@ class UserService {
     return data['success'];
   }
 
+  static Future<bool?> addPaymentCard(
+      context,
+      String? number,
+      String? date,
+      String? code,
+      String? fullName
+      ) async {
+    final token = getToken(context);
+    if(token == null) return null;
+
+    final response = await ApiClient().dio.post(
+      '/user/add-payment-cart',
+      data: {
+        "payment_number": number,
+        "payment_date": date,
+        "payment_code": code,
+        "full_name": fullName,
+      },
+      options: Options(
+        headers: {'Authorization': 'Bearer $token'},
+      ),
+    );
+    final data = response.data as Map<String, dynamic>;
+    return data['success'];
+  }
+
   static Future<bool?> deleteDocument(
       context,
       int? documentId,

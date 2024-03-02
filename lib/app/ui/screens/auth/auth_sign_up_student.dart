@@ -10,7 +10,6 @@ import 'package:provider/provider.dart';
 import '../../theme/app_colors.dart';
 import '../../widgets/auth_button.dart';
 import '../../widgets/auth_input.dart';
-import '../../widgets/cart_number.dart';
 import '../../widgets/select_date_input.dart';
 import '../../widgets/select_input.dart';
 import 'auth_sign_up_school.dart';
@@ -115,20 +114,6 @@ class _AuthSignUpStudentState extends State<AuthSignUpStudent> {
                         }
                       },
                       errors: state.validateError?.errors.dateBirthErrors?.first,
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    const AppTitle(
-                      title: 'Payment info',
-                    ),
-                    CartNumber(
-                      controllerNumberCart: state.controllerNumberCart,
-                      controllerDateCart: state.controllerDateCart,
-                      controllerCodeCart: state.controllerCodeCart,
-                      errorsCode: state.validateError?.errors.paymentCodeErrors?.first,
-                      errorsNumber: state.validateError?.errors.paymentNumberErrors?.first,
-                      errorsDate: state.validateError?.errors.paymentDateErrors?.first,
                     ),
                     const SizedBox(
                       height: 40,

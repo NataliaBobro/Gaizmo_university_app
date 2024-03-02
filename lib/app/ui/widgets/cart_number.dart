@@ -1,3 +1,4 @@
+import 'package:etm_crm/app/domain/models/meta.dart';
 import 'package:flutter/material.dart';
 
 import '../theme/text_styles.dart';
@@ -8,17 +9,15 @@ class CartNumber extends StatefulWidget {
     required this.controllerNumberCart,
     required this.controllerDateCart,
     required this.controllerCodeCart,
-    this.errorsCode,
-    this.errorsNumber,
-    this.errorsDate,
+    required this.controllerFullName,
+    this.validateError,
   }) : super(key: key);
 
   final TextEditingController controllerNumberCart;
   final TextEditingController controllerDateCart;
   final TextEditingController controllerCodeCart;
-  final String? errorsCode;
-  final String? errorsNumber;
-  final String? errorsDate;
+  final TextEditingController controllerFullName;
+  final ValidateError? validateError;
 
   @override
   State<CartNumber> createState() => _CartNumberState();
@@ -41,13 +40,13 @@ class _CartNumberState extends State<CartNumber> {
         Text(
           'Card number',
           style: TextStyles.s14w400.copyWith(
-              color: const Color(0xFF848484)
+              color: const Color(0xFF242424)
           ),
         ),
         TextField(
           controller: widget.controllerNumberCart,
           style: TextStyles.s16w400.copyWith(
-            color: Colors.white,
+            color: const Color(0xFF848484),
           ),
           onChanged: (val) {
 
@@ -59,7 +58,7 @@ class _CartNumberState extends State<CartNumber> {
               vertical: 8,
             ),
             hintStyle: TextStyles.s16w400.copyWith(
-              color: Colors.white,
+              color: const Color(0xFF848484),
             ),
             enabledBorder: border,
             border: border,
@@ -72,16 +71,16 @@ class _CartNumberState extends State<CartNumber> {
         Container(
           height: 1,
           width: double.infinity,
-          color: widget.errorsNumber == null ? const Color(0xFF848484) : const Color(0xFFFFC700),
+          color: widget.validateError?.errors.paymentNumberErrors?.first == null ? const Color(0xFF848484) : const Color(0xFFFFC700),
         ),
-        if(widget.errorsNumber != null) ...[
+        if(widget.validateError?.errors.paymentNumberErrors?.first != null) ...[
           Container(
             padding: const EdgeInsets.only(
                 top: 4
             ),
             alignment: Alignment.centerRight,
             child: Text(
-              '${widget.errorsNumber}',
+              '${widget.validateError?.errors.paymentNumberErrors?.first}',
               style: TextStyles.s12w400.copyWith(
                   color: const Color(0xFFFFC700)
               ),
@@ -89,7 +88,7 @@ class _CartNumberState extends State<CartNumber> {
           ),
         ],
         const SizedBox(
-          height: 32,
+          height: 24,
         ),
         Row(
           children: [
@@ -101,13 +100,13 @@ class _CartNumberState extends State<CartNumber> {
                   Text(
                     'Vadility',
                     style: TextStyles.s14w400.copyWith(
-                        color: const Color(0xFF848484)
+                        color: const Color(0xFF242424)
                     ),
                   ),
                   TextField(
                     controller: widget.controllerDateCart,
                     style: TextStyles.s16w400.copyWith(
-                      color: Colors.white,
+                      color: const Color(0xFF848484),
                     ),
                     onChanged: (val) {
 
@@ -119,7 +118,7 @@ class _CartNumberState extends State<CartNumber> {
                         vertical: 8,
                       ),
                       hintStyle: TextStyles.s16w400.copyWith(
-                        color: Colors.white,
+                        color: const Color(0xFF848484),
                       ),
                       enabledBorder: border,
                       border: border,
@@ -132,7 +131,7 @@ class _CartNumberState extends State<CartNumber> {
                   Container(
                     height: 1,
                     width: double.infinity,
-                    color: widget.errorsDate == null ? const Color(0xFF848484) : const Color(0xFFFFC700),
+                    color: widget.validateError?.errors.paymentDateErrors?.first == null ? const Color(0xFF848484) : const Color(0xFFFFC700),
                   ),
                 ],
               ),
@@ -148,13 +147,13 @@ class _CartNumberState extends State<CartNumber> {
                   Text(
                     'CV-code',
                     style: TextStyles.s14w400.copyWith(
-                        color: const Color(0xFF848484)
+                        color: const Color(0xFF242424)
                     ),
                   ),
                   TextField(
                     controller: widget.controllerCodeCart,
                     style: TextStyles.s16w400.copyWith(
-                      color: Colors.white,
+                      color: const Color(0xFF848484),
                     ),
                     onChanged: (val) {
 
@@ -166,7 +165,7 @@ class _CartNumberState extends State<CartNumber> {
                         vertical: 8,
                       ),
                       hintStyle: TextStyles.s16w400.copyWith(
-                        color: Colors.white,
+                        color: const Color(0xFF848484),
                       ),
                       enabledBorder: border,
                       border: border,
@@ -178,13 +177,62 @@ class _CartNumberState extends State<CartNumber> {
                   Container(
                     height: 1,
                     width: double.infinity,
-                    color: widget.errorsCode == null ? const Color(0xFF848484) : const Color(0xFFFFC700),
+                    color: widget.validateError?.errors.paymentCodeErrors?.first == null ? const Color(0xFF848484) : const Color(0xFFFFC700),
                   ),
                 ],
               ),
             ),
           ],
         ),
+        const SizedBox(
+          height: 24,
+        ),
+        Text(
+          'Owner full name',
+          style: TextStyles.s14w400.copyWith(
+              color: const Color(0xFF242424)
+          ),
+        ),
+        TextField(
+          controller: widget.controllerFullName,
+          style: TextStyles.s16w400.copyWith(
+            color: const Color(0xFF848484),
+          ),
+          cursorColor: const Color(0xFF1167C3),
+          decoration: InputDecoration(
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 0,
+              vertical: 8,
+            ),
+            hintStyle: TextStyles.s16w400.copyWith(
+              color: const Color(0xFF848484),
+            ),
+            enabledBorder: border,
+            border: border,
+            errorBorder: border,
+            focusedBorder: border,
+            fillColor: Colors.transparent,
+          ),
+        ),
+        Container(
+          height: 1,
+          width: double.infinity,
+          color: widget.validateError?.errors.fullNameErrors?.first == null ? const Color(0xFF848484) : const Color(0xFFFFC700),
+        ),
+        if(widget.validateError?.errors.fullNameErrors?.first != null) ...[
+          Container(
+            padding: const EdgeInsets.only(
+                top: 4
+            ),
+            alignment: Alignment.centerRight,
+            child: Text(
+              '${widget.validateError?.errors.fullNameErrors?.first}',
+              style: TextStyles.s12w400.copyWith(
+                  color: const Color(0xFFFFC700)
+              ),
+            ),
+          ),
+        ],
       ],
     );
   }

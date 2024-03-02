@@ -7,7 +7,12 @@ import 'package:flutter/material.dart';
 import '../../../theme/text_styles.dart';
 
 class FavoriteScreen extends StatefulWidget {
-  const FavoriteScreen({Key? key}) : super(key: key);
+  const FavoriteScreen({
+    Key? key,
+    this.initTab
+  }) : super(key: key);
+
+  final int? initTab;
 
   @override
   State<FavoriteScreen> createState() => _FavoriteScreenState();
@@ -20,10 +25,15 @@ class _FavoriteScreenState extends State<FavoriteScreen> with TickerProviderStat
   @override
   void initState() {
     _tabController = TabController(
+      initialIndex: widget.initTab ?? 0,
       length: 2,
       vsync: this,
       animationDuration: const Duration(milliseconds: 100),
     );
+
+    if(widget.initTab != null){
+      viewTab(widget.initTab);
+    }
 
     _tabController.addListener(() {
       viewTab(_tabController.index);

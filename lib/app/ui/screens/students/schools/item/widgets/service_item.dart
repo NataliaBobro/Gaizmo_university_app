@@ -3,11 +3,15 @@ import 'package:etm_crm/app/ui/theme/text_styles.dart';
 import 'package:etm_crm/app/ui/widgets/auth_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../../../domain/models/services.dart';
 import '../../../../../../domain/services/pay_service.dart';
+import '../../../../../../domain/states/student/favorite_state.dart';
+import '../../../../../utils/url_launch.dart';
 import '../../../../../widgets/button_teacher_students.dart';
 import '../../../../../widgets/center_header.dart';
+import '../../../favorite/favorite_screen.dart';
 
 class ServiceItem extends StatefulWidget {
   const ServiceItem({
@@ -25,6 +29,7 @@ class _ServiceItemState extends State<ServiceItem> {
   ServicesModel? servicesModel;
   Map<String, List<DayItem>> groupedSchedule = {};
   int? openSection;
+  bool loading = false;
 
   @override
   void initState() {
@@ -33,7 +38,6 @@ class _ServiceItemState extends State<ServiceItem> {
   }
 
   Future<void> fetchService() async {
-
     try{
       final result = await StudentService.fetchServiceItem(context, widget.serviceId);
       if(result != null){
@@ -48,21 +52,50 @@ class _ServiceItemState extends State<ServiceItem> {
   }
 
   Future<void> payService(int? serviceId) async {
-    try{
-      final result = await PayService.payStudentPackageService(
-          context,
-          serviceId
-      );
-      if(result == true) {
-        close();
-      }
-    }catch(e) {
-      print(e);
+    loading = true;
+    setState(() {});
+    final result = await PayService.fetchPaymentLink(
+      context,
+      serviceId,
+    );
+    if(result != null && result['link'] != null){
+      openPayWeb(result['link'], result['order_reference'], serviceId);
     }
+  }
+
+  Future<void> openPayWeb(String? link, orderReference,  serviceId) async {
+    openWebView(context, link).whenComplete(() async {
+        final resStatus = await PayService.fetchPayStatus(
+          context,
+          serviceId,
+          orderReference,
+        );
+
+        if(resStatus != null){
+          loading = false;
+          setState(() {});
+
+          if(resStatus['pay_status'] == true){
+            openPayed();
+          }
+        }
+    });
   }
 
   void close() {
     Navigator.pop(context);
+  }
+
+  Future<void> openPayed() async {
+    await Navigator.push(
+        context,
+        CupertinoPageRoute(
+            builder: (context) => ChangeNotifierProvider(
+              create: (context) => FavoriteState(context),
+              child: const FavoriteScreen(initTab: 1),
+            )
+        )
+    );
   }
 
   void renderSchedule(result) {
@@ -87,143 +120,159 @@ class _ServiceItemState extends State<ServiceItem> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Container(
-          width: double.infinity,
-          color: const Color(0xFF242424),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const ColoredBox(
-                color: Color(0xFFF0F3F6),
-                child: CenterHeader(
-                  title: 'Lesson',
-                ),
-              ),
-              Expanded(
-                child: Stack(
-                  children: [
-                    ListView(
-                      physics: const ClampingScrollPhysics(),
+      body: Stack(
+        children: [
+          SafeArea(
+            child: Container(
+              width: double.infinity,
+              color: const Color(0xFF242424),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const ColoredBox(
+                    color: Color(0xFFF0F3F6),
+                    child: CenterHeader(
+                      title: 'Lesson',
+                    ),
+                  ),
+                  Expanded(
+                    child: Stack(
                       children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 24
-                          ),
-                          decoration: const BoxDecoration(
-                              color: Color(0xFFF0F3F6),
-                              borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(20),
-                                bottomRight: Radius.circular(20),
-                              )
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const SizedBox(
-                                height: 24,
+                        ListView(
+                          physics: const ClampingScrollPhysics(),
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 24
                               ),
-                              Text(
-                                "${servicesModel?.name}",
-                                style: TextStyles.s18w700.copyWith(
-                                    color: const Color(0xFF242424)
-                                ),
+                              decoration: const BoxDecoration(
+                                  color: Color(0xFFF0F3F6),
+                                  borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(20),
+                                    bottomRight: Radius.circular(20),
+                                  )
                               ),
-                              const SizedBox(
-                                height: 8,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const SizedBox(
+                                    height: 24,
+                                  ),
+                                  Text(
+                                    "${servicesModel?.name}",
+                                    style: TextStyles.s18w700.copyWith(
+                                        color: const Color(0xFF242424)
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 8,
+                                  ),
+                                  const SizedBox(
+                                    height: 24,
+                                  ),
+                                  ButtonTeacher(
+                                      teacher: servicesModel?.teacher
+                                  ),
+                                  const SizedBox(
+                                    height: 16,
+                                  ),
+                                  ButtonStudents(
+                                      students: [
+                                        servicesModel?.teacher,
+                                        servicesModel?.teacher,
+                                        servicesModel?.teacher,
+                                        servicesModel?.teacher
+                                      ]
+                                  ),
+                                  const SizedBox(
+                                    height: 8,
+                                  )
+                                ],
                               ),
-                              const SizedBox(
-                                height: 24,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 24,
+                                  vertical: 24
                               ),
-                              ButtonTeacher(
-                                  teacher: servicesModel?.teacher
-                              ),
-                              const SizedBox(
-                                height: 16,
-                              ),
-                              ButtonStudents(
-                                  students: [
-                                    servicesModel?.teacher,
-                                    servicesModel?.teacher,
-                                    servicesModel?.teacher,
-                                    servicesModel?.teacher
-                                  ]
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              )
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 24,
-                              vertical: 24
-                          ),
-                          child: Column(
-                            children: [
-                              ExpansionPanelList(
-                                  dividerColor: const Color(0xFF242424),
-                                  elevation: 1,
-                                  expandedHeaderPadding: EdgeInsets.zero,
-                                  expansionCallback: (int index, bool isExpanded) {
-                                    setState(() {
-                                      if(!isExpanded) {
-                                        openSection = index;
-                                      }else{
-                                        openSection = null;
-                                      }
-                                    });
-                                  },
-                                  children: [
-                                    ExpansionPanel(
-                                      canTapOnHeader: true,
-                                        backgroundColor: const Color(0xFF242424),
-                                        headerBuilder: (BuildContext context, bool isExpanded) {
-                                          return Text(
-                                            'Scedule',
-                                            style: TextStyles.s14w400.copyWith(
-                                                color: Colors.white
+                              child: Column(
+                                children: [
+                                  ExpansionPanelList(
+                                      dividerColor: const Color(0xFF242424),
+                                      elevation: 1,
+                                      expandedHeaderPadding: EdgeInsets.zero,
+                                      expansionCallback: (int index, bool isExpanded) {
+                                        setState(() {
+                                          if(!isExpanded) {
+                                            openSection = index;
+                                          }else{
+                                            openSection = null;
+                                          }
+                                        });
+                                      },
+                                      children: [
+                                        ExpansionPanel(
+                                            canTapOnHeader: true,
+                                            backgroundColor: const Color(0xFF242424),
+                                            headerBuilder: (BuildContext context, bool isExpanded) {
+                                              return Text(
+                                                'Scedule',
+                                                style: TextStyles.s14w400.copyWith(
+                                                    color: Colors.white
+                                                ),
+                                              );
+                                            },
+                                            body: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 16
+                                              ),
+                                              child: ScheduleLesson(
+                                                  key: ValueKey(groupedSchedule.length),
+                                                  schedule: groupedSchedule,
+                                                  lessons: servicesModel?.lessons,
+                                                  duration: servicesModel?.duration
+                                              ),
                                             ),
-                                          );
-                                        },
-                                        body: Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 16
-                                          ),
-                                          child: ScheduleLesson(
-                                              key: ValueKey(groupedSchedule.length),
-                                              schedule: groupedSchedule,
-                                              lessons: servicesModel?.lessons,
-                                              duration: servicesModel?.duration
-                                          ),
-                                        ),
-                                        isExpanded: openSection == 0
-                                    )
-                                  ]
+                                            isExpanded: openSection == 0
+                                        )
+                                      ]
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
+                            )
+                          ],
+                        ),
+                        Positioned(
+                            bottom: 50,
+                            left: 0,
+                            right: 0,
+                            child: AppButton(
+                                title: 'Pay lesson',
+                                onPressed: () async {
+                                  payService(widget.serviceId);
+                                }
+                            )
                         )
                       ],
                     ),
-                    Positioned(
-                      bottom: 50,
-                      left: 0,
-                      right: 0,
-                      child: AppButton(
-                        title: 'Pay lesson',
-                        onPressed: () async {
-                          payService(widget.serviceId);
-                        }
-                      )
-                    )
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
-        ),
+          if(loading)...[
+            Positioned(
+              top: 0,
+              bottom: 0,
+              right: 0,
+              left: 0,
+              child: Container(
+                color: Colors.white.withOpacity(.5),
+                child: const CupertinoActivityIndicator(color: Colors.black, radius: 30,),
+              ),
+            )
+          ]
+        ],
       ),
     );
   }

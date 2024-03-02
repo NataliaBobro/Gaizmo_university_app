@@ -19,10 +19,12 @@ import '../../domain/states/auth_state.dart';
 import '../../domain/states/school/school_profile_state.dart';
 import '../../domain/states/services_state.dart';
 import '../../domain/states/my_results_state.dart';
+import '../../domain/states/student/favorite_state.dart';
 import '../../domain/states/student/student_school_state.dart';
 import '../../domain/states/student/student_home_state.dart';
 import '../../domain/states/teacher/teacher_home_state.dart';
 import '../screens/splash/splash_screen.dart';
+import '../screens/students/favorite/favorite_screen.dart';
 import '../screens/students/profile/student_profile_scroll_page.dart';
 import '../screens/tabbar/tabbar_screen.dart';
 import '../screens/teacher/schedule/teacher_schedule_screen.dart';
@@ -44,6 +46,7 @@ const _studentSchedule = '/student-schedule';
 const _teacherSchedule = '/teacher-schedule';
 const _staff = '/staff';
 const _myResults = '/my-results';
+const _studentFavorite = '/student-favorite';
 
 abstract class AppRoutes {
   static String get tabbar => _tabbar;
@@ -60,6 +63,7 @@ abstract class AppRoutes {
   static String get teacherSchedule => _teacherSchedule;
   static String get myResults => _myResults;
   static String get servicesTeacher => _servicesTeacher;
+  static String get studentFavorite => _studentFavorite;
 }
 
 final splashMap = routemaster.RouteMap(
@@ -228,6 +232,12 @@ final loggedStudentInMap = routemaster.RouteMap(
       child: ChangeNotifierProvider(
         create: (context) => MyResultsState(context, false),
         child: const MyResultsScreen(),
+      ),
+    ),
+    _studentFavorite: (_) => TransitionPage(
+      child: ChangeNotifierProvider(
+        create: (context) => FavoriteState(context),
+        child: const FavoriteScreen(),
       ),
     ),
   },
