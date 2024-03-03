@@ -11,11 +11,13 @@ class TypeLesson extends StatefulWidget {
     required this.selected,
     required this.list,
     required this.onChange,
+    this.isMultipart = true,
   }) : super(key: key);
 
   final List<int> selected;
   final List<Map<String, dynamic>> list;
   final Function onChange;
+  final bool isMultipart;
 
   @override
   State<TypeLesson> createState() => _TypeLessonState();
@@ -33,6 +35,9 @@ class _TypeLessonState extends State<TypeLesson> {
   }
 
   void changeFilter(Map<String, dynamic> value) {
+    if(!widget.isMultipart){
+      selected = [];
+    }
     final hasAdd = selected.where((element) => element == value['id']);
     hasAdd.isNotEmpty ? selected.remove(value['id']) : selected.add(value['id']);
     setState(() {});
@@ -68,16 +73,23 @@ class _TypeLessonState extends State<TypeLesson> {
               children: [
                 CenterHeaderWithAction(
                     title: 'Filter',
-                    action: CupertinoButton(
-                      child: Text(
-                        selected.isEmpty ? 'All' : 'Clear',
-                        style: TextStyles.s14w600.copyWith(
-                          color: Colors.black
-                        ),
-                      ),
-                      onPressed: () {
-                        selected.isEmpty ? addAll() : clear();
-                      },
+                    action: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        if(widget.isMultipart)...[
+                          CupertinoButton(
+                            child: Text(
+                              selected.isEmpty ? 'All' : 'Clear',
+                              style: TextStyles.s14w600.copyWith(
+                                  color: Colors.black
+                              ),
+                            ),
+                            onPressed: () {
+                              selected.isEmpty ? addAll() : clear();
+                            },
+                          )
+                        ]
+                      ],
                     )
                 ),
                 Expanded(

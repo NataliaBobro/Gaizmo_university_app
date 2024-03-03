@@ -160,10 +160,12 @@ class MyLessonHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final duration = lesson.services?.first?.duration;
     TimeOfDay startTime = TimeOfDay.fromDateTime(DateTime.parse("2022-01-18 ${lesson.startLesson ?? '00:00'}"));
+
     TimeOfDay endTime = startTime.replacing(
-      hour: startTime.hour + (duration ?? 0) ~/ 60,
-      minute: startTime.minute + (duration ?? 0) % 60,
+      hour: startTime.hour + ((startTime.minute + (duration ?? 0)) ~/ 60),
+      minute: (startTime.minute + (duration ?? 0)) % 60,
     );
+
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

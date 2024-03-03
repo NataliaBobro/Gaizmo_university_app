@@ -73,10 +73,13 @@ class _AddResultState extends State<AddResult> {
                                     builder: (context) => ChangeNotifierProvider.value(
                                       value: read,
                                       child: TypeLesson(
+                                        isMultipart: false,
                                         selected: state.filterSchedule.type,
                                         list: state.listTypeServices,
                                         onChange: (value){
-                                          state.changeFilterType(value);
+                                          if(value is List<int>){
+                                            state.changeFilterType(value.first);
+                                          }
                                         },
                                       )
                                     )

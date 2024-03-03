@@ -62,12 +62,6 @@ class _StudentScheduleScreenState extends State<StudentScheduleScreen> {
                               height: 24,
                             ),
                             Accordion(
-                                onDelete: (index) {
-
-                                },
-                                onEdit: (index) {
-
-                                },
                                 isFullActionButton: true,
                                 paddingListTop: 0.0,
                                 disableScrolling: true,
