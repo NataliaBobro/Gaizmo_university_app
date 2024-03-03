@@ -5,7 +5,12 @@ import 'package:flutter_svg/svg.dart';
 import '../../../resources/resources.dart';
 
 class ArrowBack extends StatelessWidget {
-  const ArrowBack({Key? key}) : super(key: key);
+  const ArrowBack({
+    Key? key,
+    this.onArrowBack
+  }) : super(key: key);
+
+  final Function? onArrowBack;
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +26,9 @@ class ArrowBack extends StatelessWidget {
               color: const Color(0xFFFFC700),
             ),
             onPressed: () {
+              if(onArrowBack != null){
+                onArrowBack!();
+              }
               Navigator.pop(context);
             }
         )

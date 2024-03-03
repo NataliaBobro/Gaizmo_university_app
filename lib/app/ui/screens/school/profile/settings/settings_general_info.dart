@@ -54,6 +54,7 @@ class _SettingGeneralInfoState extends State<SettingGeneralInfo> {
                                 error: state.validateError?.errors.schoolName?.first,
                               ),
                               AppHorizontalField(
+                                keyboardType: TextInputType.number,
                                 label: 'Phone number',
                                 controller: state.phone,
                                 changeClear: () {

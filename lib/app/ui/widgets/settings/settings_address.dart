@@ -63,7 +63,7 @@ class _SettingsAddressState extends State<SettingsAddress> {
   }
 
   Future<void> searchCountry(String? value) async {
-    if(loadingSearch || (value?.length ?? 0) < 2) return;
+    if((value?.length ?? 0) < 2) return;
     loadingSearch = true;
     setState(() {});
     try {
@@ -80,7 +80,7 @@ class _SettingsAddressState extends State<SettingsAddress> {
   }
 
   Future<void> searchCity(String? value) async {
-    if(loadingSearch || (value?.length ?? 0) < 2) return;
+    if((value?.length ?? 0) < 2) return;
     loadingSearch = true;
     setState(() {});
     try {

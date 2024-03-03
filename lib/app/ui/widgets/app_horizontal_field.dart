@@ -12,6 +12,7 @@ class AppHorizontalField extends StatelessWidget {
     this.placeholder,
     required this.controller,
     this.error,
+    this.keyboardType,
     required this.changeClear
   }) : super(key: key);
 
@@ -20,6 +21,7 @@ class AppHorizontalField extends StatelessWidget {
   final TextEditingController controller;
   final String? error;
   final Function changeClear;
+  final TextInputType? keyboardType;
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +51,7 @@ class AppHorizontalField extends StatelessWidget {
               ),
               Expanded(
                 child: TextField(
+                  keyboardType: keyboardType ?? TextInputType.text,
                   controller: controller,
                   style: TextStyles.s14w400.copyWith(
                     color: const Color(0xFF242424),

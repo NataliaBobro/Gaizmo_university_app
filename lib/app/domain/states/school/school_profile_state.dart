@@ -321,7 +321,7 @@ class SchoolProfileState with ChangeNotifier {
   }
 
   Future<void> searchCountry(String? value) async {
-    if(_loadingSearch || (value?.length ?? 0) < 2) return;
+    if((value?.length ?? 0) < 2) return;
     _loadingSearch = true;
     notifyListeners();
     try {
@@ -339,7 +339,7 @@ class SchoolProfileState with ChangeNotifier {
     }
   }
   Future<void> searchCity(String? value) async {
-    if(_loadingSearch || (value?.length ?? 0) < 2) return;
+    if((value?.length ?? 0) < 2) return;
     _loadingSearch = true;
     notifyListeners();
     try {

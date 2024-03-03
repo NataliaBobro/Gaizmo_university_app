@@ -12,6 +12,7 @@ class AppNinjasService {
         'limit': 5
       }
     );
+
     return response.data;
   }
 

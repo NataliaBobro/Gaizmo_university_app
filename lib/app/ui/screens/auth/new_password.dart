@@ -25,73 +25,88 @@ class _NewPasswordState extends State<NewPassword> {
         body: SafeArea(
           child: Stack(
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      child: Text(
-                        'Password recovery',
-                        style: TextStyles.s24w600.copyWith(
-                            color: Colors.white
-                        ),
-                        textAlign: TextAlign.center,
+              GestureDetector(
+                onTap: () {
+                  FocusScope.of(context).unfocus();
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(
+                        height: 16,
                       ),
-                    ),
-                    const SizedBox(
-                      height: 157,
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      child: RichText(
-                        textAlign: TextAlign.center,
-                        text: TextSpan(
-                            style: TextStyles.s14w600.copyWith(
-                                color: Colors.white,
-                                height: 1.57
-                            ),
-                            text: "New Password Setup"
+                      Container(
+                        alignment: Alignment.center,
+                        child: Text(
+                          'Password recovery',
+                          style: TextStyles.s24w600.copyWith(
+                              color: Colors.white
+                          ),
+                          textAlign: TextAlign.center,
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 24,
-                    ),
-                    AuthInput(
-                      controller: state.password,
-                      title: 'New password',
-                      isPass: true,
-                      errors: state.validateError?.errors.passwordErrors?.first,
-                    ),
-                    AuthInput(
-                      controller: state.confirmPassword,
-                      title: 'Confirm password',
-                      isPass: true,
-                      errors: state.validateError?.errors.confirmPassword?.first,
-                    ),
-                    const SizedBox(
-                      height: 40,
-                    ),
-                    AppButton(
-                      title: 'Continue',
-                      onPressed: () {
-                        state.setNewPass();
-                      },
-                      horizontalPadding: 16.0,
-                    ),
-                  ],
+                     Expanded(
+                       child: ListView(
+                         children: [
+                           const SizedBox(
+                             height: 157,
+                           ),
+                           Container(
+                             alignment: Alignment.center,
+                             child: RichText(
+                               textAlign: TextAlign.center,
+                               text: TextSpan(
+                                   style: TextStyles.s14w600.copyWith(
+                                       color: Colors.white,
+                                       height: 1.57
+                                   ),
+                                   text: "New Password Setup"
+                               ),
+                             ),
+                           ),
+                           const SizedBox(
+                             height: 24,
+                           ),
+                           AuthInput(
+                             controller: state.password,
+                             title: 'New password',
+                             isPass: true,
+                             errors: state.validateError?.errors.passwordErrors?.first,
+                           ),
+                           AuthInput(
+                             controller: state.confirmPassword,
+                             title: 'Confirm password',
+                             isPass: true,
+                             errors: state.validateError?.errors.confirmPassword?.first,
+                           ),
+                           const SizedBox(
+                             height: 40,
+                           ),
+                           AppButton(
+                             title: 'Continue',
+                             onPressed: () {
+                               state.setNewPass();
+                             },
+                             horizontalPadding: 16.0,
+                           ),
+                         ],
+                       ),
+                     )
+                    ],
+                  ),
                 ),
               ),
-              const Positioned(
+              Positioned(
                 top: 16,
                 left: 0,
-                child: ArrowBack(),
+                child: ArrowBack(
+                  onArrowBack: () {
+                    state.clear();
+                  },
+                ),
               )
             ],
           ),

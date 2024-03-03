@@ -25,73 +25,89 @@ class _ConfirmPasswordRecoveryState extends State<ConfirmPasswordRecovery> {
         body: SafeArea(
           child: Stack(
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      child: Text(
-                        'Password recovery',
-                        style: TextStyles.s24w600.copyWith(
-                            color: Colors.white
-                        ),
-                        textAlign: TextAlign.center,
+              GestureDetector(
+                onTap: () {
+                  FocusScope.of(context).unfocus();
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(
+                        height: 16,
                       ),
-                    ),
-                    const SizedBox(
-                      height: 197,
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      child: RichText(
-                        textAlign: TextAlign.center,
-                        text: TextSpan(
-                            style: TextStyles.s14w600.copyWith(
-                                color: Colors.white,
-                                height: 1.57
+                      Container(
+                        alignment: Alignment.center,
+                        child: Text(
+                          'Password recovery',
+                          style: TextStyles.s24w600.copyWith(
+                              color: Colors.white
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Expanded(
+                        child: ListView(
+                          children: [
+                            const SizedBox(
+                              height: 197,
                             ),
-                            text: "Please enter the password\nreset code sent to the email\n",
-                            children: [
-                              TextSpan(
-                                  text: "${state.email.text} ",
-                                  style: TextStyles.s14w400.copyWith(
-                                      color: const Color(0xFFFFC700)
-                                  )
-                              )
-                            ]
+                            Container(
+                              alignment: Alignment.center,
+                              child: RichText(
+                                textAlign: TextAlign.center,
+                                text: TextSpan(
+                                    style: TextStyles.s14w600.copyWith(
+                                        color: Colors.white,
+                                        height: 1.57
+                                    ),
+                                    text: "Please enter the password\nreset code sent to the email\n",
+                                    children: [
+                                      TextSpan(
+                                          text: "${state.email.text} ",
+                                          style: TextStyles.s14w400.copyWith(
+                                              color: const Color(0xFFFFC700)
+                                          )
+                                      )
+                                    ]
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 24,
+                            ),
+                            AuthInput(
+                              keyboardType: TextInputType.number,
+                              controller: state.code,
+                              title: 'Code',
+                            ),
+                            const SizedBox(
+                              height: 40,
+                            ),
+                            AppButton(
+                              title: 'Continue',
+                              onPressed: () {
+                                state.confirmCode();
+                              },
+                              horizontalPadding: 16.0,
+                            ),
+                          ],
                         ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 24,
-                    ),
-                    AuthInput(
-                      controller: state.code,
-                      title: 'Code',
-                    ),
-                    const SizedBox(
-                      height: 40,
-                    ),
-                    AppButton(
-                      title: 'Continue',
-                      onPressed: () {
-                        state.confirmCode();
-                      },
-                      horizontalPadding: 16.0,
-                    ),
-                  ],
+                      )
+                    ],
+                  ),
                 ),
               ),
-              const Positioned(
+              Positioned(
                 top: 16,
                 left: 0,
-                child: ArrowBack(),
+                child: ArrowBack(
+                  onArrowBack: () {
+                    state.clear();
+                  },
+                ),
               )
             ],
           ),

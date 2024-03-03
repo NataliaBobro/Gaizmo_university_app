@@ -19,9 +19,6 @@ class AuthService {
       String? email,
       String? password,
       String? passwordConfirmation,
-      String? paymentNumber,
-      String? paymentDate,
-      String? paymentCode,
       bool? privacy,
       ) async {
     final response = await ApiClient().dio.post(
@@ -38,9 +35,6 @@ class AuthService {
             "email": email,
             "password": password,
             "password_confirmation": passwordConfirmation,
-            "payment_number": paymentNumber,
-            "payment_date": paymentDate,
-            "payment_code": paymentCode,
             "privacy": privacy,
           }
         );

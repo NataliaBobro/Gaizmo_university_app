@@ -1,5 +1,7 @@
+import 'package:etm_crm/app/app.dart';
 import 'package:etm_crm/app/domain/services/student_lesson_service.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../models/lesson.dart';
 
@@ -12,11 +14,16 @@ class StudentHomeState with ChangeNotifier {
 
   StudentHomeState(this.context){
     Future.microtask(() {
+      updateUser();
       fetchLessonToday();
     });
   }
 
   LessonsList? get lessonsListToday => _lessonsListToday;
+
+  void updateUser() {
+    context.read<AppState>().getUser();
+  }
 
   Future<void> fetchLessonToday()async {
     _isLoading = true;

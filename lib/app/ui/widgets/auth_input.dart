@@ -14,6 +14,8 @@ class AuthInput extends StatefulWidget {
     this.maxWidth,
     this.errors,
     this.bottomLeftWidget,
+    this.keyboardType,
+    this.focusNode,
   }) : super(key: key);
 
   final String title;
@@ -24,6 +26,8 @@ class AuthInput extends StatefulWidget {
   final double? maxWidth;
   final String? errors;
   final Widget? bottomLeftWidget;
+  final TextInputType? keyboardType;
+  final FocusNode? focusNode;
 
   @override
   State<AuthInput> createState() => _AuthInputState();
@@ -63,6 +67,8 @@ class _AuthInputState extends State<AuthInput> {
           ),
         ),
         TextField(
+          focusNode: widget.focusNode,
+          keyboardType: widget.keyboardType ?? TextInputType.text,
           controller: widget.controller,
           obscureText: widget.isPass,
           style: TextStyles.s16w400.copyWith(

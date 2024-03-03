@@ -32,19 +32,11 @@ class AuthState with ChangeNotifier {
   int _selectLang = 0;
   bool get isLoading => _isLoading;
   final MaskedTextController _phone = MaskedTextController(mask: '+00 (000) 000 00 00', text: '+38 (0');
-  final MaskedTextController _controllerNumberCart = MaskedTextController(
-        mask: '0000 0000 0000 0000'
-  );
-  final MaskedTextController _controllerDateCart = MaskedTextController(
-        mask: '00/00'
-  );
-  final MaskedTextController _controllerCodeCart = MaskedTextController(
-      mask: '000'
-  );
 
   final MaskedTextController _code = MaskedTextController(
       mask: '000000'
   );
+
 
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
@@ -66,6 +58,10 @@ class AuthState with ChangeNotifier {
   List<dynamic>? _cityList;
 
   final _phoneFocus = FocusNode();
+  final FocusNode _countryFocus = FocusNode();
+  final FocusNode _cityFocus = FocusNode();
+  final FocusNode _streetFocus = FocusNode();
+  final FocusNode _houseFocus = FocusNode();
 
   AuthState(this.context);
 
@@ -84,10 +80,11 @@ class AuthState with ChangeNotifier {
   TextEditingController get lastName => _lastName;
   TextEditingController get surname => _surname;
   String? get birthDate => _birthDate;
-  TextEditingController get controllerNumberCart => _controllerNumberCart;
-  TextEditingController get controllerDateCart => _controllerDateCart;
-  TextEditingController get controllerCodeCart => _controllerCodeCart;
   FocusNode get phoneFocus => _phoneFocus;
+  FocusNode get countryFocus => _countryFocus;
+  FocusNode get cityFocus => _cityFocus;
+  FocusNode get streetFocus => _streetFocus;
+  FocusNode get houseFocus => _houseFocus;
   int get gender => _gender;
   int get userType => _userType;
   bool get loadingSearch => _loadingSearch;
@@ -185,7 +182,7 @@ class AuthState with ChangeNotifier {
   }
 
   Future<void> searchCountry(String? value) async {
-    if(_loadingSearch || (value?.length ?? 0) < 2) return;
+    if((value?.length ?? 0) < 2) return;
     _loadingSearch = true;
     notifyListeners();
     try {
@@ -204,7 +201,7 @@ class AuthState with ChangeNotifier {
   }
 
   Future<void> searchCity(String? value) async {
-    if(_loadingSearch || (value?.length ?? 0) < 2) return;
+    if((value?.length ?? 0) < 2) return;
     _loadingSearch = true;
     notifyListeners();
     try {
@@ -362,9 +359,6 @@ class AuthState with ChangeNotifier {
           _email.text,
           _password.text,
           _confirmPassword.text,
-          _controllerNumberCart.text,
-          _controllerDateCart.text,
-          _controllerCodeCart.text,
           _isActivePrivacy
       );
 
@@ -635,6 +629,17 @@ class AuthState with ChangeNotifier {
 
 
   void clear() {
-
+    _phone.clear();
+    _code.clear();
+    _email.clear();
+    _password.clear();
+    _confirmPassword.clear();
+    _firstName.clear();
+    _lastName.clear();
+    _surname.clear();
+    _schoolName.clear();
+    _street.clear();
+    _house.clear();
+    notifyListeners();
   }
 }

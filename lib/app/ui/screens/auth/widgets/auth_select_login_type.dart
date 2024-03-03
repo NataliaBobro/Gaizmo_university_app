@@ -160,7 +160,7 @@ class SelectLangBottomSheet extends StatelessWidget {
             child: Text(
               'Languages',
               style: TextStyles.s14w400.copyWith(
-                  color: Colors.black
+                  color: const Color(0xFF848484)
               ),
             ),
           ),
@@ -181,11 +181,28 @@ class SelectLangBottomSheet extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(
                       vertical: 14
                   ),
-                  child: Text(
-                    '${state.languageList()[index]['name']}',
-                    style: TextStyles.s14w400.copyWith(
-                        color: Colors.black
-                    ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(100),
+                        child: SvgPicture.asset(
+                          '${state.languageList()[index]['icon']}',
+                          width: 24,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 8,
+                      ),
+                      Text(
+                        '${state.languageList()[index]['name']}',
+                        style: TextStyles.s12w600.copyWith(
+                            color: const Color(0xFF242424)
+                        ),
+                      )
+                    ],
                   ),
                 ),
               )

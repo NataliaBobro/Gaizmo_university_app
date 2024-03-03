@@ -321,7 +321,7 @@ class _PersonalInfoStudentState extends State<PersonalInfoStudent> {
   }
 
   Future<void> searchCountry(String? value) async {
-    if(loadingSearch == true || (value?.length ?? 0) < 2) return;
+    if((value?.length ?? 0) < 2) return;
     loadingSearch = true;
     setState(() {});
     try {
@@ -343,7 +343,7 @@ class _PersonalInfoStudentState extends State<PersonalInfoStudent> {
   }
 
   Future<void> searchCity(String? value) async {
-    if(loadingSearch == true || (value?.length ?? 0) < 2) return;
+    if((value?.length ?? 0) < 2) return;
     loadingSearch = true;
     setState(() {});
     try {
