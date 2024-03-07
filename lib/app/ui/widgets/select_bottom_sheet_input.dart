@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../../resources/resources.dart';
 import '../theme/text_styles.dart';
@@ -141,6 +142,9 @@ class _SelectBottomSheetInputState extends State<SelectBottomSheetInput> {
                              Navigator.of(context).pop();
                            },
                            child: Container(
+                             constraints: BoxConstraints(
+                               maxWidth: SizerUtil.width - 50
+                             ),
                              alignment: Alignment.center,
                              width: double.infinity,
                              padding: const EdgeInsets.symmetric(

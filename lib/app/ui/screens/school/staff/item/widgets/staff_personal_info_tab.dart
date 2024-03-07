@@ -19,12 +19,12 @@ class _StaffPersonalInfoTabState extends State<StaffPersonalInfoTab> {
     final state = context.watch<SchoolStaffItemState>();
     return Column(
       children: [
-        SizedBox(
+        const SizedBox(
           height: 25,
         ),
         InfoValue(
             title: "Full name",
-            value: "${state.staff?.firstName} ${state.staff?.lastName} ${state.staff?.surname}"
+            value: "${state.staff?.firstName} ${state.staff?.lastName}"
         ),
         InfoValue(
             title: "Date of birth",

@@ -29,8 +29,8 @@ class AddLessonScreen extends StatefulWidget {
 }
 
 class _AddLessonScreenState extends State<AddLessonScreen> {
-  DateTime date = DateTime(2016, 10, 26);
-  DateTime time = DateTime(2016, 5, 10, 08, 00);
+  DateTime date = DateTime.now();
+  DateTime time = DateTime.now();
 
   @override
   void initState() {
@@ -202,6 +202,7 @@ class _AddLessonScreenState extends State<AddLessonScreen> {
                             initialDateTime: date,
                             mode: CupertinoDatePickerMode.date,
                             use24hFormat: true,
+                            minimumDate: DateTime.now().add(const Duration(hours: -1)),
                             onDateTimeChanged: (DateTime newDate) {
                               setState(() {
                                 date = newDate;
@@ -231,6 +232,7 @@ class _AddLessonScreenState extends State<AddLessonScreen> {
                               initialDateTime: date,
                               mode: CupertinoDatePickerMode.date,
                               use24hFormat: true,
+                              minimumDate: DateTime.now().add(const Duration(hours: -1)),
                               onDateTimeChanged: (DateTime newDate) {
                                 setState(() {
                                   date = newDate;

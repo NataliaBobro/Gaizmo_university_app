@@ -30,7 +30,7 @@ class _PersonalInfoTabState extends State<PersonalInfoTab> {
             ),
             InfoValue(
                 title: "Full name",
-                value: "${state?.firstName} ${state?.lastName}"
+                value: "${state?.firstName} ${state?.lastName ?? state?.surname}"
             ),
             InfoValue(
                 title: "Phone number",
@@ -50,7 +50,7 @@ class _PersonalInfoTabState extends State<PersonalInfoTab> {
                 onPress: () async {
                   context.read<AppState>().openPage(
                       context,
-                      MuQrCode()
+                      const MuQrCode()
                   );
                 }
             ),

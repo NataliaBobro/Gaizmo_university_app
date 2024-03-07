@@ -225,6 +225,7 @@ class _AddStaffScreenState extends State<AddStaffScreen> {
                       error: state.validateError?.errors.phoneErrors?.first,
                       label: 'Phone number',
                       controller: phone,
+                      placeholder: '+380',
                     ),
                     const SizedBox(
                       height: 24,

@@ -1,6 +1,7 @@
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../../../widgets/auth_button.dart';
 import '../../../../widgets/center_header.dart';
@@ -112,10 +113,15 @@ class _TypeLessonState extends State<TypeLesson> {
                                     ),
                                     child: Row(
                                       children: [
-                                        Text(
-                                          service[index]['name'],
-                                          style: TextStyles.s14w400.copyWith(
-                                              color: const Color(0xFF242424)
+                                        Container(
+                                          constraints: BoxConstraints(
+                                            maxWidth: SizerUtil.width - 50
+                                          ),
+                                          child: Text(
+                                            service[index]['name'],
+                                            style: TextStyles.s14w400.copyWith(
+                                                color: const Color(0xFF242424)
+                                            ),
                                           ),
                                         )
                                       ],

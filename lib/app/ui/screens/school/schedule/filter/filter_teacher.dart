@@ -75,39 +75,43 @@ class _FilterTeacherState extends State<FilterTeacher> {
                     )
                 ),
                 Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                    child: ListView(
                       children: [
-                        const SizedBox(
-                          height: 24,
-                        ),
-                        ...List.generate(
-                            teachers.length,
-                                (index) {
-                              final hasSelected = selected.where((element) => element == teachers[index]['id']);
-                              return Container(
-                                color: hasSelected.isNotEmpty ? Colors.white : null,
-                                child: CupertinoButton(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 24,
-                                        vertical: 18
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const SizedBox(
+                              height: 24,
+                            ),
+                            ...List.generate(
+                                teachers.length,
+                                    (index) {
+                                  final hasSelected = selected.where((element) => element == teachers[index]['id']);
+                                  return Container(
+                                    color: hasSelected.isNotEmpty ? Colors.white : null,
+                                    child: CupertinoButton(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 24,
+                                            vertical: 18
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              teachers[index]['name'],
+                                              style: TextStyles.s14w400.copyWith(
+                                                  color: const Color(0xFF242424)
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        onPressed: () {
+                                          changeFilter(teachers[index]);
+                                        }
                                     ),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          teachers[index]['name'],
-                                          style: TextStyles.s14w400.copyWith(
-                                              color: const Color(0xFF242424)
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    onPressed: () {
-                                      changeFilter(teachers[index]);
-                                    }
-                                ),
-                              );
-                            }
+                                  );
+                                }
+                            )
+                          ],
                         )
                       ],
                     )

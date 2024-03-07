@@ -358,8 +358,8 @@ class SchoolProfileState with ChangeNotifier {
     }
   }
 
-  Future<void> uploadAvatar(File file) async {
-    final userId = context.read<AppState>().userData?.id;
+  Future<void> uploadAvatar(File file, {int? uploadUserId}) async {
+    final userId = uploadUserId ?? context.read<AppState>().userData?.id;
     try {
       final result = await UserService.uploadAvatar(context, userId, file);
       if(result != null){

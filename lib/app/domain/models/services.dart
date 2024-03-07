@@ -97,7 +97,7 @@ class ServicesModel {
 @JsonSerializable(includeIfNull: true, fieldRename: FieldRename.snake)
 class Lesson {
   int id;
-  int serviceId;
+  int? serviceId;
   int? classId;
   String? startLesson;
   String? start;
@@ -108,7 +108,7 @@ class Lesson {
 
   Lesson({
     required this.id,
-    required this.serviceId,
+    this.serviceId,
     this.classId,
     this.startLesson,
     this.start,

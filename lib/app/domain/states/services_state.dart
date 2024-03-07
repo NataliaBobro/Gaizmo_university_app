@@ -170,7 +170,7 @@ class ServicesState with ChangeNotifier {
       ServicesModel servEdit = editedService;
       _selectService = listTypeServices.last;
       _serviceName.text = servEdit.name;
-      _selectTeacher = _listTeacher?.firstWhere((element) => element.id == servEdit.teacher?.id);
+      _selectBranch = _listBranch.firstWhere((element) => element['id'] == (servEdit.branchId ?? 1));
       _selectCurrency = _listCurrency.firstWhere((element) => element['id'] == servEdit.currency?.id);
       _selectValidityType = _listValidityType.firstWhere((element) => element['name'] == servEdit.validityType);
       _etm.text = '${servEdit.etm}';

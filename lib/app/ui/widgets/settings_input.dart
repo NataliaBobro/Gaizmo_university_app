@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../../resources/resources.dart';
 import '../theme/text_styles.dart';
@@ -32,10 +33,15 @@ class _SettingsInputState extends State<SettingsInput> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            widget.title,
-            style: TextStyles.s14w400.copyWith(
-                color: const Color(0xFF848484)
+          Container(
+            constraints: BoxConstraints(
+              maxWidth: SizerUtil.width - 100
+            ),
+            child: Text(
+              widget.title,
+              style: TextStyles.s14w400.copyWith(
+                  color: const Color(0xFF848484)
+              ),
             ),
           ),
           SvgPicture.asset(

@@ -57,7 +57,12 @@ class _StaffItemScreenState extends State<StaffItemScreen> with TickerProviderSt
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 const StaffHeader(),
-                const StaffAvatar(),
+                StaffAvatar(
+                    staff: state.staff,
+                    onUpload: () {
+                      state.updateStaff();
+                    },
+                ),
                 StaffInfo(
                     staff: state.staff
                 ),

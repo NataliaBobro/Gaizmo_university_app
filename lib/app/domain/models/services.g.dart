@@ -109,7 +109,7 @@ Map<String, dynamic> _$ServicesModelToJson(ServicesModel instance) =>
 
 Lesson _$LessonFromJson(Map<String, dynamic> json) => Lesson(
       id: json['id'] as int,
-      serviceId: json['service_id'] as int,
+      serviceId: json['service_id'] as int?,
       classId: json['class_id'] as int?,
       startLesson: json['start_lesson'] as String?,
       start: json['start'] as String?,

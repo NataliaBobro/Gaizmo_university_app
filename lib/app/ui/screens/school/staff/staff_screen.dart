@@ -32,7 +32,11 @@ class _StaffScreenState extends State<StaffScreen> {
             children: [
               const StaffHeader(),
               if(state.isLoading) ...[
-                const CupertinoActivityIndicator(),
+                const Expanded(
+                  child: Center(
+                    child: CupertinoActivityIndicator(),
+                  ),
+                )
               ]else ...[
                 Expanded(
                   flex: (state.staffList?.users.length ?? 0) == 0 ? 1 : 0,

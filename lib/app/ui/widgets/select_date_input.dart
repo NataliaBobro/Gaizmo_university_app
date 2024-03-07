@@ -60,8 +60,8 @@ class _SelectDateInputState extends State<SelectDateInput> {
   final List<int> date = List.generate(31, (index) {
     return index + 1;
   });
-  final List<int> year = List.generate(DateTime.now().year - 1970, (index) {
-    return 1970 + index;
+  final List<int> year = List.generate(DateTime.now().year - 1950, (index) {
+    return 1950 + index;
   });
 
   @override
