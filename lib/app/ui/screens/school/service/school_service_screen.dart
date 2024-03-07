@@ -405,10 +405,12 @@ class _ContentServiceState extends State<ContentService> {
           const SizedBox(
             height: 6,
           ),
-          ContentRowInfo(
-            title: "Teacher",
-            value: "${widget.item?.teacher?.firstName} ${widget.item?.teacher?.lastName}"
-          ),
+          if(widget.item?.teacher != null) ...[
+            ContentRowInfo(
+                title: "Teacher",
+                value: "${widget.item?.teacher?.firstName} ${widget.item?.teacher?.lastName}"
+            ),
+          ],
           const ContentRowInfo(
               title: "Branch",
               value: "All branches"

@@ -186,6 +186,10 @@ class AppState extends ChangeNotifier {
     }
   }
 
+  void pressHome() {
+    routemaster.pop('close');
+  }
+
   void onLogout() async {
     notifyListeners();
     await Hive.box('settings').delete('token');

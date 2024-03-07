@@ -98,11 +98,13 @@ class _LessonItemState extends State<LessonItem> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ContentRowInfo(
-            title: 'Teacher',
-            value: '${widget.lesson?.services?.first?.teacher?.firstName} '
-                '${widget.lesson?.services?.first?.teacher?.lastName}',
-          ),
+          if(widget.lesson?.services?.first?.teacher != null) ...[
+            ContentRowInfo(
+              title: 'Teacher',
+              value: '${widget.lesson?.services?.first?.teacher?.firstName} '
+                  '${widget.lesson?.services?.first?.teacher?.lastName}',
+            )
+          ],
           ContentRowInfo(
             title: 'Students',
             content: PreviewListStudent(

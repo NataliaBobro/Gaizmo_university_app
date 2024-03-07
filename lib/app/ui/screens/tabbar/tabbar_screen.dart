@@ -3,7 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 import 'package:routemaster/routemaster.dart';
+
+import '../../../app.dart';
 
 
 class TabBarScreen extends StatefulWidget {
@@ -30,8 +33,15 @@ class TabBarScreenState extends State<TabBarScreen> with TickerProviderStateMixi
 
   Future<void> onTapped(int index, TabPageState pageState) async {
     pageState.index = index;
+    if(index == 0){
+      onPressHome();
+    }
     HapticFeedback.lightImpact();
     setState(() {});
+  }
+
+  void onPressHome(){
+    context.read<AppState>().pressHome();
   }
 
   @override

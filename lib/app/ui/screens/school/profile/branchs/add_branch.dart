@@ -3,6 +3,7 @@ import 'package:etm_crm/app/domain/models/meta.dart';
 import 'package:etm_crm/app/domain/services/school_service.dart';
 import 'package:etm_crm/app/ui/widgets/add_schedule.dart';
 import 'package:etm_crm/app/ui/widgets/app_horizontal_field.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +16,12 @@ import '../../../../widgets/select_school_category.dart';
 import '../widgets/settings_tab.dart';
 
 class AddBranch extends StatefulWidget {
-  const AddBranch({Key? key}) : super(key: key);
+  const AddBranch({
+    Key? key,
+    required this.onAdd,
+  }) : super(key: key);
+
+  final Function onAdd;
 
   @override
   State<AddBranch> createState() => _AddBranchState();
@@ -40,7 +46,6 @@ class _AddBranchState extends State<AddBranch> {
   @override
   Widget build(BuildContext context) {
     final appState = context.read<AppState>();
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -95,6 +100,7 @@ class _AddBranchState extends State<AddBranch> {
                         ),
                         SettingsInput(
                             title: "Schedule",
+                            info: renderScheduleInfo(),
                             onPress: () async {
                               appState.openPage(
                                   context,
@@ -112,6 +118,7 @@ class _AddBranchState extends State<AddBranch> {
                         ),
                         SettingsInput(
                             title: "School category",
+                            info: schoolCategory != null ? schoolCategory!['name'] : null,
                             onPress: () async {
                               appState.openPage(
                                   context,
@@ -144,6 +151,13 @@ class _AddBranchState extends State<AddBranch> {
     );
   }
 
+  String renderScheduleInfo(){
+    List<String> listDay = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
+    List<String> selectedDays = listWorkDay.map((index) => listDay[index]).toList();
+    String result = selectedDays.join(', ');
+    return '$result ${scheduleFrom.text}-${scheduleTo.text}';
+  }
+
   Future<void> addBranch() async {
     validateError = null;
     setState(() {});
@@ -162,7 +176,7 @@ class _AddBranchState extends State<AddBranch> {
           }
       );
       if(result == true){
-        close();
+        widget.onAdd();
       }
     } on DioError catch (e) {
       if(e.response?.statusCode == 422){
@@ -176,9 +190,5 @@ class _AddBranchState extends State<AddBranch> {
     }catch(e){
       print(e);
     }
-  }
-
-  void close() {
-    Navigator.pop(context);
   }
 }

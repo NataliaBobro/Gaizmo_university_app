@@ -34,9 +34,11 @@ class _BranchListState extends State<BranchList> {
                     title: 'Branches'
                 ),
                 Expanded(
-                    child: ListView(
+                    child: state.isLoading ?
+                      const CupertinoActivityIndicator() :
+                      ListView(
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 24
+                          horizontal: 24
                       ),
                       physics: const ClampingScrollPhysics(),
                       children: [
@@ -55,7 +57,12 @@ class _BranchListState extends State<BranchList> {
                             onPress: () {
                               state.openPage(
                                   context,
-                                  const AddBranch()
+                                  AddBranch(
+                                    onAdd: () {
+                                      state.getBranch();
+                                      Navigator.pop(context);
+                                    },
+                                  )
                               );
                             }
                         ),
@@ -64,16 +71,16 @@ class _BranchListState extends State<BranchList> {
                         ),
                         ...List.generate(
                             state.listUserData?.users.length ?? 0,
-                            (index) => BranchItemWidget(
-                              branch: state.listUserData?.users[index],
+                                (index) => BranchItemWidget(
+                                branch: state.listUserData?.users[index],
                                 onPressed: () {
-                                context.read<SchoolBranchState>().openPage(
-                                    context,
-                                    BranchItemScreen(
-                                      branch: state.listUserData?.users[index],
-                                    )
-                                );
-                              }
+                                  context.read<SchoolBranchState>().openPage(
+                                      context,
+                                      BranchItemScreen(
+                                        branch: state.listUserData?.users[index],
+                                      )
+                                  );
+                                }
                             )
                         )
                       ],
@@ -144,10 +151,15 @@ class _BranchItemWidgetState extends State<BranchItemWidget> {
                   const SizedBox(
                     width: 16,
                   ),
-                  Text(
-                    '${widget.branch?.school?.name}',
-                    style: TextStyles.s14w600.copyWith(
-                      color: const Color(0xFF242424)
+                  Container(
+                    constraints: const BoxConstraints(
+                      maxWidth: 220
+                    ),
+                    child: Text(
+                      '${widget.branch?.school?.name}',
+                      style: TextStyles.s14w600.copyWith(
+                          color: const Color(0xFF242424)
+                      ),
                     ),
                   )
                 ],

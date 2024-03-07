@@ -147,30 +147,31 @@ class SchoolProfileState with ChangeNotifier {
   }
 
   void setFieldSetting() {
-    _nameSchool.text = '${context.read<AppState>().userData?.school?.name}';
-    _siteAddress.text = '${context.read<AppState>().userData?.school?.siteName}';
+    final userData = context.read<AppState>().userData;
+    _nameSchool.text = '${userData?.school?.name}';
+    _siteAddress.text = userData?.school?.siteName != null ? '${userData?.school?.siteName}' : '';
 
-    _phone.text = '${context.read<AppState>().userData?.phone}';
-    _email.text = '${context.read<AppState>().userData?.email}';
+    _phone.text = '${userData?.phone}';
+    _email.text = '${userData?.email}';
 
     _schoolCategory = {
-      'id': context.read<AppState>().userData?.school?.category?.id,
-      'name': context.read<AppState>().userData?.school?.category?.translate?.value,
+      'id': userData?.school?.category?.id,
+      'name': userData?.school?.category?.translate?.value,
     };
     _country = {
       'id': 0,
-      'name': context.read<AppState>().userData?.school?.country,
+      'name': userData?.school?.country,
     };
     _city = {
       'id': 0,
-      'name': context.read<AppState>().userData?.school?.city,
+      'name': userData?.school?.city,
     };
-    _street.text = '${context.read<AppState>().userData?.school?.street}';
-    _house.text = '${context.read<AppState>().userData?.school?.house}';
-    _instagramField.text = '${context.read<AppState>().userData?.socialAccounts?.instagram}';
-    _facebookField.text = '${context.read<AppState>().userData?.socialAccounts?.facebook}';
-    _linkedinField.text = '${context.read<AppState>().userData?.socialAccounts?.linkedin}';
-    _twitterField.text = '${context.read<AppState>().userData?.socialAccounts?.twitter}';
+    _street.text = '${userData?.school?.street}';
+    _house.text = '${userData?.school?.house}';
+    _instagramField.text = '${userData?.socialAccounts?.instagram}';
+    _facebookField.text = '${userData?.socialAccounts?.facebook}';
+    _linkedinField.text = '${userData?.socialAccounts?.linkedin}';
+    _twitterField.text = '${userData?.socialAccounts?.twitter}';
     notifyListeners();
   }
 

@@ -12,6 +12,7 @@ import 'package:dio/dio.dart';
 import 'dart:io';
 import '../../../../resources/resources.dart';
 import '../../theme/text_styles.dart';
+import '../../utils/show_message.dart';
 import '../auth_button.dart';
 import '../center_header.dart';
 import '../take_photo_widget.dart';
@@ -35,6 +36,7 @@ class _AddDocumentWidgetState extends State<AddDocumentWidget> {
   DocumentTypeList? listType;
   DocumentType? selectedType;
   List<String> listTypeData = [];
+  ValidateError? _validateError;
 
   @override
   void initState() {
@@ -181,6 +183,14 @@ class _AddDocumentWidgetState extends State<AddDocumentWidget> {
       );
       if(result == true){
         close();
+      }
+    } on DioError catch (e) {
+      if(e.response?.statusCode == 422){
+        final data = e.response?.data as Map<String, dynamic>;
+        _validateError = ValidateError.fromJson(data);
+        showMessage('${_validateError?.message}', color: const Color(0xFFFFC700));
+      }else{
+        showMessage(e.message.isEmpty ? e.toString() : e.message);
       }
     } catch(e){
       print(e);

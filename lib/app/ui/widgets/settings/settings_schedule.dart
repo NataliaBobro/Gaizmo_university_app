@@ -35,11 +35,35 @@ class _SettingScheduleState extends State<SettingSchedule> {
   List<String> listDay = [
     'MO', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU',
   ];
+  FocusNode scheduleFromFocusNode = FocusNode();
+  FocusNode scheduleToFocusNode = FocusNode();
+  bool isEdited = false;
 
   @override
   void initState() {
     initData();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    scheduleFromFocusNode.dispose();
+    scheduleToFocusNode.dispose();
+    super.dispose();
+  }
+
+  void onScheduleFromChanged() {
+    String from = scheduleFrom.text;
+    if(from.length == 7 && !isEdited){
+      if(context.mounted){
+        FocusScope.of(context).requestFocus(scheduleToFocusNode);
+        isEdited = true;
+        setState(() {});
+      }
+    }
+    if(from.length == 6 && isEdited){
+      isEdited = false;
+    }
   }
 
   void initData(){
@@ -157,6 +181,8 @@ class _SettingScheduleState extends State<SettingSchedule> {
                                         ),
                                         Expanded(
                                           child: TextField(
+                                            focusNode: scheduleFromFocusNode,
+                                            keyboardType: TextInputType.number,
                                             controller: scheduleFrom,
                                             style: TextStyles.s14w300.copyWith(
                                               color: const Color(0xFF242424),
@@ -189,6 +215,8 @@ class _SettingScheduleState extends State<SettingSchedule> {
                                         Expanded(
                                           child: TextField(
                                             controller: scheduleTo,
+                                            focusNode: scheduleToFocusNode,
+                                            keyboardType: TextInputType.number,
                                             style: TextStyles.s14w300.copyWith(
                                               color: const Color(0xFF242424),
                                             ),

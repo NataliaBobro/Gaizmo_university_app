@@ -87,7 +87,7 @@ class _DocumentItemState extends State<DocumentItem> {
         ),
         closedElevation: 0.0,
         closedBuilder: (BuildContext context, VoidCallback openContainer) {
-          return  CupertinoButton(
+          return CupertinoButton(
             padding: EdgeInsets.zero,
             minSize: 0.0,
             onPressed: () {
@@ -96,22 +96,33 @@ class _DocumentItemState extends State<DocumentItem> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(
+                SizedBox(
+                  height: 105,
                   child: CachedNetworkImage(
-                    imageUrl: '${widget.document.patch}',
-                    width: double.infinity,
-                    errorWidget: (context, error, stackTrace) =>
-                    const SizedBox.shrink(),
-                    fit: BoxFit.cover,
+                      imageUrl: '${widget.document.patch}',
+                      width: double.infinity,
+                      height: double.infinity,
+                      errorWidget: (context, error, stackTrace) =>
+                      const SizedBox.shrink(),
+                      fit: BoxFit.cover,
+                      progressIndicatorBuilder: (context, error, stackTrace) =>
+                      const CupertinoActivityIndicator()
                   ),
                 ),
                 const SizedBox(
                   height: 4,
                 ),
-                Text(
-                  widget.document.name != null ?'${widget.document.name}' : '',
-                  style: TextStyles.s12w400.copyWith(
-                      color: Colors.black
+                Container(
+                  constraints: const BoxConstraints(
+                    maxWidth: double.infinity,
+                  ),
+                  child: Text(
+                    widget.document.name != null ?'${widget.document.name}' : '',
+                    style: TextStyles.s12w400.copyWith(
+                        color: Colors.black
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
                   ),
                 )
               ],
@@ -126,12 +137,17 @@ class _DocumentItemState extends State<DocumentItem> {
                   onVerticalDragEnd: (details) {
                     Navigator.pop(context);
                   },
-                  child: CachedNetworkImage(
-                    imageUrl: '${widget.document.patch}',
+                  child: Container(
+                    color: Colors.black,
                     width: double.infinity,
-                    errorWidget: (context, error, stackTrace) =>
-                    const SizedBox.shrink(),
-                    fit: BoxFit.cover,
+                    height: double.infinity,
+                    child: CachedNetworkImage(
+                      imageUrl: '${widget.document.patch}',
+                      width: double.infinity,
+                      errorWidget: (context, error, stackTrace) =>
+                      const SizedBox.shrink(),
+                      fit: BoxFit.contain,
+                    ),
                   ),
                 ),
               ),
@@ -154,17 +170,23 @@ class _DocumentItemState extends State<DocumentItem> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          widget.document.name != null ?'${widget.document.name}' : '',
-                          style: TextStyles.s16w500.copyWith(
-                              color: Colors.black
+                        Container(
+                          constraints: const BoxConstraints(
+                            maxWidth: 300
+                          ),
+                          child: Text(
+                            widget.document.name != null ?'${widget.document.name}' : '',
+                            style: TextStyles.s16w500.copyWith(
+                                color: Colors.black
+                            ),
                           ),
                         ),
                         CupertinoButton(
                             padding: EdgeInsets.zero,
                             minSize: 0.0,
                             child: SvgPicture.asset(
-                                Svgs.delete
+                              Svgs.remove,
+                              color: Colors.black,
                             ),
                             onPressed: () {
                               _showDeleteConfirmationDialog(context);

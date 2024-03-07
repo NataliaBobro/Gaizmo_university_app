@@ -147,7 +147,9 @@ Errors _$ErrorsFromJson(Map<String, dynamic> json) => Errors(
       paymentCodeErrors: (json['payment_code'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
-      schoolCategory: json['school_category'] as String?,
+      schoolCategory: (json['school_category'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
       country: json['country'] as String?,
       city: json['city'] as String?,
       schoolName: (json['school_name'] as List<dynamic>?)
@@ -186,6 +188,9 @@ Errors _$ErrorsFromJson(Map<String, dynamic> json) => Errors(
           .toList(),
       about:
           (json['about'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      siteAddress: (json['site_address'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
     )..privacyErrors =
         (json['privacy'] as List<dynamic>?)?.map((e) => e as String).toList();
 
@@ -206,6 +211,7 @@ Map<String, dynamic> _$ErrorsToJson(Errors instance) => <String, dynamic>{
       'payment_date': instance.paymentDateErrors,
       'payment_code': instance.paymentCodeErrors,
       'school_category': instance.schoolCategory,
+      'site_address': instance.siteAddress,
       'country': instance.country,
       'city': instance.city,
       'school_name': instance.schoolName,

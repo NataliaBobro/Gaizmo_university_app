@@ -176,7 +176,10 @@ class Errors {
   List<String>? paymentCodeErrors;
 
   @JsonKey(name: 'school_category')
-  String? schoolCategory;
+  List<String>? schoolCategory;
+
+  @JsonKey(name: 'site_address')
+  List<String>? siteAddress;
 
   @JsonKey(name: 'country')
   String? country;
@@ -262,6 +265,7 @@ class Errors {
     this.newPassword,
     this.fullNameErrors,
     this.about,
+    this.siteAddress
   });
 
   factory Errors.fromJson(Map<String, dynamic> json) => _$ErrorsFromJson(json);

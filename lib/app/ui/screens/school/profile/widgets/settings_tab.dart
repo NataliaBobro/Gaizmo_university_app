@@ -158,9 +158,11 @@ class SettingsInput extends StatefulWidget {
     Key? key,
     required this.title,
     required this.onPress,
+    this.info,
   }) : super(key: key);
 
   final String title;
+  final String? info;
   final Function onPress;
 
   @override
@@ -185,6 +187,31 @@ class _SettingsInputState extends State<SettingsInput> {
               color: const Color(0xFF848484)
             ),
           ),
+           if(widget.info != null) ...[
+             Expanded(
+               child: Row(
+                 mainAxisSize: MainAxisSize.max,
+                 mainAxisAlignment: MainAxisAlignment.end,
+                 children: [
+                   Container(
+                     alignment: Alignment.centerRight,
+                     constraints: const BoxConstraints(
+                       maxWidth: 180
+                     ),
+                     child: Text(
+                       '${widget.info}',
+                       style: TextStyles.s14w400.copyWith(
+                           color: const Color(0xFF848484)
+                       ),
+                       textAlign: TextAlign.end,
+                       maxLines: 1,
+                       overflow: TextOverflow.ellipsis,
+                     ),
+                   )
+                 ],
+               ),
+             ),
+          ],
           SvgPicture.asset(
             Svgs.next,
             width: 32,

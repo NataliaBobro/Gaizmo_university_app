@@ -144,7 +144,7 @@ class _AuthSignUpSchoolState extends State<AuthSignUpSchool> {
                               errors: state.validateError?.errors.schoolName?.first,
                             ),
                             SelectInputSearch(
-                              errors: state.validateError?.errors.schoolCategory,
+                              errors: state.validateError?.errors.schoolCategory?.first,
                               title: 'School category',
                               items: listSchoolType,
                               selected: state.schoolCategory,

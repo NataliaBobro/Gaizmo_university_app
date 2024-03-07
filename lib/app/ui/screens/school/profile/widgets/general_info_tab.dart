@@ -50,6 +50,7 @@ class _GeneralInfoTabState extends State<GeneralInfoTab> {
             ),
             SettingsInput(
                 title: "Branches",
+                info: school?.parentCount != null? '${school?.parentCount} branches' : null,
                 onPress: () async {
                   await Navigator.push(
                       context,

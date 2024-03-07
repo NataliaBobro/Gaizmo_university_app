@@ -4,6 +4,7 @@ import 'package:etm_crm/app/ui/screens/school/profile/widgets/school_info.dart';
 import 'package:etm_crm/app/ui/screens/school/profile/widgets/settings_tab.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:routemaster/routemaster.dart';
 
 import '../../../theme/text_styles.dart';
 import '../../school/profile/widgets/profile_header.dart';
@@ -22,6 +23,7 @@ class SchoolProfileScreen extends StatefulWidget {
 class _SchoolProfileScreenState extends State<SchoolProfileScreen> with TickerProviderStateMixin{
   late int isActiveTab = 0;
   late TabController _tabController;
+  TabPageState? pageState;
 
   @override
   void initState() {

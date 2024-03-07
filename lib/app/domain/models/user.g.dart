@@ -58,6 +58,7 @@ UserData _$UserDataFromJson(Map<String, dynamic> json) => UserData(
       from: json['from'] as String?,
       to: json['to'] as String?,
       salary: json['salary'] as int?,
+      parentCount: json['parent_count'] as int?,
     )
       ..workDay = (json['work_day'] as List<dynamic>?)
           ?.map((e) => WorkDay.fromJson(e as Map<String, dynamic>))
@@ -92,6 +93,7 @@ Map<String, dynamic> _$UserDataToJson(UserData instance) => <String, dynamic>{
       'from': instance.from,
       'to': instance.to,
       'salary': instance.salary,
+      'parent_count': instance.parentCount,
     };
 
 School _$SchoolFromJson(Map<String, dynamic> json) => School(

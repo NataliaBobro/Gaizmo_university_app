@@ -425,7 +425,7 @@ class AuthState with ChangeNotifier {
       _validateError = ValidateError(
           message: 'Select school category',
           errors: Errors(
-            schoolCategory: 'Select school category'
+            schoolCategory: ['Select school category']
           )
       );
       notifyListeners();
