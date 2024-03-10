@@ -25,6 +25,7 @@ class MetaAppData {
   List<SchoolCategory>? categorySchool;
   List<UserData>? teacher;
   List<Currency>? currency;
+  List<UserData>? branch;
 
   MetaAppData({
     required this.genders,
@@ -32,6 +33,7 @@ class MetaAppData {
     required this.categorySchool,
     required this.teacher,
     required this.currency,
+    this.branch,
   });
 
   Map<String, dynamic> toJson() => _$MetaAppDataToJson(this);

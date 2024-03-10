@@ -14,6 +14,7 @@ import '../../ui/utils/show_message.dart';
 import '../../ui/widgets/snackbars.dart';
 import '../models/meta.dart';
 import '../models/user.dart';
+import 'dart:io';
 
 class ServicesState with ChangeNotifier {
   BuildContext context;
@@ -29,13 +30,15 @@ class ServicesState with ChangeNotifier {
 
   Map<String, dynamic>? _selectService;
   Map<String, dynamic>? _selectBranch;
+  Map<String, dynamic>? _selectTeacher;
   Map<String, dynamic>? _selectCategory;
-  UserData? _selectTeacher;
   Map<String, dynamic>? _selectValidityType;
   Map<String, dynamic>? _selectCurrency;
   String? _selectColor;
+  File? _uploadsFile;
   final TextEditingController _categoryName = TextEditingController();
   final TextEditingController _serviceName = TextEditingController();
+  final TextEditingController _desc = TextEditingController();
   final MaskedTextController _visits = MaskedTextController(mask: '000');
   final MaskedTextController _cost = MaskedTextController(mask: '00000');
   final MaskedTextController _etm = MaskedTextController(mask: '00000');
@@ -52,14 +55,8 @@ class ServicesState with ChangeNotifier {
     }
   ];
 
-  final List<Map<String, dynamic>> _listBranch = [
-    {
-      "id": 1,
-      "name": "All branches"
-    }
-  ];
-
-  List<UserData>? _listTeacher = [];
+  List<UserData>? _listTeacherData = [];
+  List<UserData>? _listBranchData = [];
   List<Map<String, dynamic>> _listCurrency = [];
   final List<Map<String, dynamic>> _listValidityType = [
     {
@@ -85,7 +82,6 @@ class ServicesState with ChangeNotifier {
   List<ServicesCategory> get servicesCategory => _servicesCategory;
   List<ServicesModel?> get allServices => _allServices;
   List<Map<String, dynamic>> get listTypeServices => _listTypeServices;
-  List<Map<String, dynamic>> get listBranch => _listBranch;
   List<Map<String, dynamic>> get listCategory {
     List<Map<String, dynamic>> list = [];
     for(var a = 0; a < _servicesCategory.length; a++){
@@ -96,23 +92,54 @@ class ServicesState with ChangeNotifier {
     }
     return list;
   }
-  List<UserData>? get listTeacher => _listTeacher;
+
+  List<Map<String, dynamic>> get listBranch {
+    List<Map<String, dynamic>> list = [
+      {
+        "id": 0,
+        "name": "All branches"
+      }
+    ];
+    for(var a = 0; a < (_listBranchData?.length ?? 0); a++){
+      list.add({
+        "id": _listBranchData?[a].school?.id,
+        "name": '${_listBranchData?[a].school?.name}'
+      });
+    }
+    return list;
+  }
+
+  List<Map<String, dynamic>> get listTeacher {
+    List<Map<String, dynamic>> list = [];
+    for(var a = 0; a < (_listTeacherData?.length ?? 0); a++){
+      list.add({
+        "id": _listTeacherData?[a].id,
+        "name": '${_listTeacherData?[a].firstName} ${_listTeacherData?[a].lastName}'
+      });
+    }
+    return list;
+  }
+
+  List<UserData>? get listTeacherData => _listTeacherData;
+  List<UserData>? get listBranchData => _listBranchData;
   List<Map<String, dynamic>> get listValidityType => _listValidityType;
   List<Map<String, dynamic>> get listCurrency => _listCurrency;
   Map<String, dynamic>? get selectService => _selectService;
   Map<String, dynamic>? get selectBranch => _selectBranch;
   Map<String, dynamic>? get selectCategory => _selectCategory;
-  UserData? get selectTeacher => _selectTeacher;
+  Map<String, dynamic>? get selectTeacher => _selectTeacher;
   Map<String, dynamic>? get selectValidityType => _selectValidityType;
   Map<String, dynamic>? get selectCurrency => _selectCurrency;
   TextEditingController get categoryName => _categoryName;
   TextEditingController get serviceName => _serviceName;
+  TextEditingController get desc => _desc;
   TextEditingController get validity => _validity;
   TextEditingController get duration => _duration;
   TextEditingController get visits => _visits;
   TextEditingController get cost => _cost;
   TextEditingController get etm => _etm;
   String? get selectColor => _selectColor;
+  File? get uploadsFile => _uploadsFile;
 
   void selectServiceType(value){
     _selectService = value;
@@ -126,6 +153,11 @@ class ServicesState with ChangeNotifier {
 
   void changeCategory(value){
     _selectCategory = value;
+    notifyListeners();
+  }
+
+  void selectImage(value){
+    _uploadsFile = value;
     notifyListeners();
   }
 
@@ -170,7 +202,10 @@ class ServicesState with ChangeNotifier {
       ServicesModel servEdit = editedService;
       _selectService = listTypeServices.last;
       _serviceName.text = servEdit.name;
-      _selectBranch = _listBranch.firstWhere((element) => element['id'] == (servEdit.branchId ?? 1));
+      _desc.text = '${servEdit.desc}';
+
+      _selectBranch = listBranch.firstWhere((element) => element['id'] == (servEdit.branchId ?? 0));
+      _selectTeacher = listTeacher.firstWhere((element) => element['id'] == (servEdit.branchId ?? 0));
       _selectCurrency = _listCurrency.firstWhere((element) => element['id'] == servEdit.currency?.id);
       _selectValidityType = _listValidityType.firstWhere((element) => element['name'] == servEdit.validityType);
       _etm.text = '${servEdit.etm}';
@@ -187,11 +222,11 @@ class ServicesState with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> fetchServices() async {
+  Future<void> fetchServices({String? search}) async {
     _isLoading = true;
     notifyListeners();
     try {
-      final result = await ServicesService.fetchService(context);
+      final result = await ServicesService.fetchService(context, search);
       if(result != null){
         _servicesCategory = result.category ?? [];
         _allServices = result.allService ?? [];
@@ -228,7 +263,11 @@ class ServicesState with ChangeNotifier {
     try {
       final result = await MetaService.getAddServiceMeta(context);
       if(result?.teacher != null){
-        _listTeacher = result?.teacher;
+        _listTeacherData = result?.teacher;
+      }
+
+      if(result?.branch != null){
+        _listBranchData = result?.branch;
       }
 
       if(result?.currency != null){
@@ -304,17 +343,19 @@ class ServicesState with ChangeNotifier {
           context,
           _onEditId,
           _serviceName.text,
+          _desc.text,
           _selectColor ?? '',
           _selectBranch?['id'],
           _selectCategory?['id'],
-          _selectTeacher?.id,
+          _selectTeacher?['id'],
           _validity.text.isNotEmpty ? int.parse(_validity.text) : 0,
           _selectValidityType?['name'],
           duration,
           _visits.text,
           _cost.text,
           _selectCurrency?['id'],
-          _etm.text
+          _etm.text,
+          _uploadsFile
       );
       if(result != null){
         fetchServices();
@@ -407,6 +448,9 @@ class ServicesState with ChangeNotifier {
     _cost.clear();
     _selectCurrency = null;
     _etm.clear();
+    _desc.clear();
+    _visits.clear();
+    _uploadsFile = null;
     notifyListeners();
   }
 }

@@ -409,10 +409,12 @@ class _ContentServiceState extends State<ContentService> {
             title: "Teacher",
             value: "${widget.item?.teacher?.firstName} ${widget.item?.teacher?.lastName}"
           ),
-          const ContentRowInfo(
-              title: "Branch",
-              value: "All branches"
-          ),
+          if(widget.item?.branch != null) ...[
+            ContentRowInfo(
+                title: "Branch",
+                value: '${widget.item?.branch?.name}'
+            ),
+          ],
           const ContentRowInfo(
               title: "Number of students",
               value: "0"

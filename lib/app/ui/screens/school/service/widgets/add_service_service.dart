@@ -8,6 +8,7 @@ import '../../../../../domain/states/services_state.dart';
 import '../../../../theme/text_styles.dart';
 import '../../../../widgets/app_field.dart';
 import '../../../../widgets/auth_button.dart';
+import '../../../../widgets/dropzone.dart';
 import '../../../../widgets/select_bottom_sheet_input.dart';
 
 class AddServiceService extends StatefulWidget {
@@ -58,6 +59,13 @@ class _AddServiceServiceState extends State<AddServiceService> {
             AppField(
                 label: 'Service name *',
                 controller: state.serviceName
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            AppField(
+              label: "Description",
+              controller: state.desc,
             ),
             const SizedBox(
               height: 24,
@@ -204,6 +212,15 @@ class _AddServiceServiceState extends State<AddServiceService> {
                 keyboardType: TextInputType.number,
                 label: 'ETM',
                 controller: state.etm
+            ),
+            const SizedBox(
+              height: 24,
+            ),
+            Dropzone(
+              selectImage: (image){
+                state.selectImage(image);
+              },
+              file: state.uploadsFile,
             ),
             const SizedBox(
               height: 24,

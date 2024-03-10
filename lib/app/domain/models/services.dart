@@ -61,11 +61,14 @@ class ServicesModel {
   int? duration;
   int? cost;
   String name;
+  String? desc;
+  String? image;
   int? numberVisits;
   String? color;
   int? etm;
   Currency? currency;
   School? school;
+  School? branch;
   int? isFavorites;
   List<Lesson>? lessons;
   List<PayUsers>? payUsers;
@@ -87,6 +90,10 @@ class ServicesModel {
     required this.name,
     required this.color,
     this.payUsers,
+    this.school,
+    this.branch,
+    this.desc,
+    this.image
   });
 
   Map<String, dynamic> toJson() => _$ServicesModelToJson(this);

@@ -119,6 +119,8 @@ class _SchoolServicesScreenState extends State<SchoolServicesScreen> {
                                         style: TextStyles.s14w600.copyWith(
                                             color: const Color(0xFF242424)
                                         ),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
                                       ),
                                       onDelete: (index) {
                                         changeViewDelete(
@@ -365,6 +367,8 @@ class _ElementCategoryItemState extends State<ElementCategoryItem> {
                 style: TextStyles.s14w600.copyWith(
                     color: const Color(0xFF242424)
                 ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
               content: ContentService(
                   item: services[index]
@@ -411,10 +415,12 @@ class _ContentServiceState extends State<ContentService> {
                 value: "${widget.item?.teacher?.firstName} ${widget.item?.teacher?.lastName}"
             ),
           ],
-          const ContentRowInfo(
-              title: "Branch",
-              value: "All branches"
-          ),
+          if(widget.item?.branch != null) ...[
+            ContentRowInfo(
+                title: "Branch",
+                value: '${widget.item?.branch?.name}'
+            ),
+          ],
           const ContentRowInfo(
               title: "Number of students",
               value: "0"

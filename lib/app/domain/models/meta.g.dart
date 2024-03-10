@@ -32,6 +32,9 @@ MetaAppData _$MetaAppDataFromJson(Map<String, dynamic> json) => MetaAppData(
       currency: (json['currency'] as List<dynamic>?)
           ?.map((e) => Currency.fromJson(e as Map<String, dynamic>))
           .toList(),
+      branch: (json['branch'] as List<dynamic>?)
+          ?.map((e) => UserData.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$MetaAppDataToJson(MetaAppData instance) =>
@@ -41,6 +44,7 @@ Map<String, dynamic> _$MetaAppDataToJson(MetaAppData instance) =>
       'category_school': instance.categorySchool,
       'teacher': instance.teacher,
       'currency': instance.currency,
+      'branch': instance.branch,
     };
 
 Gender _$GenderFromJson(Map<String, dynamic> json) => Gender(

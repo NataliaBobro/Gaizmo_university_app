@@ -227,6 +227,7 @@ class _AddLessonScreenState extends State<AddLessonScreen> {
                           ),
                         ),
                         onPressed: () {
+
                           _showDialog(
                             CupertinoDatePicker(
                               initialDateTime: date,
@@ -280,9 +281,25 @@ class _AddLessonScreenState extends State<AddLessonScreen> {
           bottom: MediaQuery.of(context).viewInsets.bottom,
         ),
         color: CupertinoColors.systemBackground.resolveFrom(context),
-        child: SafeArea(
-          top: false,
-          child: child,
+        child: Stack(
+          children: [
+            SafeArea(
+              top: false,
+              child: child,
+            ),
+            Positioned(
+              top: 0,
+              right: 0,
+              child: CupertinoButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                minSize: 0.0,
+                padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                child: Text('Done'),
+              ),
+            )
+          ],
         ),
       ),
     );

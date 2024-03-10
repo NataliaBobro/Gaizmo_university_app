@@ -82,9 +82,15 @@ ServicesModel _$ServicesModelFromJson(Map<String, dynamic> json) =>
       payUsers: (json['pay_users'] as List<dynamic>?)
           ?.map((e) => PayUsers.fromJson(e as Map<String, dynamic>))
           .toList(),
-    )..school = json['school'] == null
-        ? null
-        : School.fromJson(json['school'] as Map<String, dynamic>);
+      school: json['school'] == null
+          ? null
+          : School.fromJson(json['school'] as Map<String, dynamic>),
+      branch: json['branch'] == null
+          ? null
+          : School.fromJson(json['branch'] as Map<String, dynamic>),
+      desc: json['desc'] as String?,
+      image: json['image'] as String?,
+    );
 
 Map<String, dynamic> _$ServicesModelToJson(ServicesModel instance) =>
     <String, dynamic>{
@@ -97,11 +103,14 @@ Map<String, dynamic> _$ServicesModelToJson(ServicesModel instance) =>
       'duration': instance.duration,
       'cost': instance.cost,
       'name': instance.name,
+      'desc': instance.desc,
+      'image': instance.image,
       'number_visits': instance.numberVisits,
       'color': instance.color,
       'etm': instance.etm,
       'currency': instance.currency,
       'school': instance.school,
+      'branch': instance.branch,
       'is_favorites': instance.isFavorites,
       'lessons': instance.lessons,
       'pay_users': instance.payUsers,

@@ -136,7 +136,7 @@ class _AddBranchState extends State<AddBranch> {
                     )
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 40),
+                  padding: const EdgeInsets.only(bottom: 20),
                   child: AppButton(
                       title: 'Save changes',
                       onPressed: () {
