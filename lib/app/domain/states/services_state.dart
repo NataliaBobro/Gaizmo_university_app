@@ -30,7 +30,7 @@ class ServicesState with ChangeNotifier {
 
   Map<String, dynamic>? _selectService;
   Map<String, dynamic>? _selectBranch;
-  Map<String, dynamic>? _selectTeacher;
+  UserData? _selectTeacher;
   Map<String, dynamic>? _selectCategory;
   Map<String, dynamic>? _selectValidityType;
   Map<String, dynamic>? _selectCurrency;
@@ -109,17 +109,6 @@ class ServicesState with ChangeNotifier {
     return list;
   }
 
-  List<Map<String, dynamic>> get listTeacher {
-    List<Map<String, dynamic>> list = [];
-    for(var a = 0; a < (_listTeacherData?.length ?? 0); a++){
-      list.add({
-        "id": _listTeacherData?[a].id,
-        "name": '${_listTeacherData?[a].firstName} ${_listTeacherData?[a].lastName}'
-      });
-    }
-    return list;
-  }
-
   List<UserData>? get listTeacherData => _listTeacherData;
   List<UserData>? get listBranchData => _listBranchData;
   List<Map<String, dynamic>> get listValidityType => _listValidityType;
@@ -127,7 +116,7 @@ class ServicesState with ChangeNotifier {
   Map<String, dynamic>? get selectService => _selectService;
   Map<String, dynamic>? get selectBranch => _selectBranch;
   Map<String, dynamic>? get selectCategory => _selectCategory;
-  Map<String, dynamic>? get selectTeacher => _selectTeacher;
+  UserData? get selectTeacher => _selectTeacher;
   Map<String, dynamic>? get selectValidityType => _selectValidityType;
   Map<String, dynamic>? get selectCurrency => _selectCurrency;
   TextEditingController get categoryName => _categoryName;
@@ -205,7 +194,7 @@ class ServicesState with ChangeNotifier {
       _desc.text = '${servEdit.desc}';
 
       _selectBranch = listBranch.firstWhere((element) => element['id'] == (servEdit.branchId ?? 0));
-      _selectTeacher = listTeacher.firstWhere((element) => element['id'] == (servEdit.branchId ?? 0));
+      _selectTeacher = _listTeacherData?.firstWhere((element) => element.id == (servEdit.teacher?.id ?? 0));
       _selectCurrency = _listCurrency.firstWhere((element) => element['id'] == servEdit.currency?.id);
       _selectValidityType = _listValidityType.firstWhere((element) => element['name'] == servEdit.validityType);
       _etm.text = '${servEdit.etm}';
@@ -347,7 +336,7 @@ class ServicesState with ChangeNotifier {
           _selectColor ?? '',
           _selectBranch?['id'],
           _selectCategory?['id'],
-          _selectTeacher?['id'],
+          _selectTeacher?.id,
           _validity.text.isNotEmpty ? int.parse(_validity.text) : 0,
           _selectValidityType?['name'],
           duration,
