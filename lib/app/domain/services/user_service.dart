@@ -240,6 +240,26 @@ class UserService {
     return data['success'];
   }
 
+  static Future<bool?> deleteAccount(
+      context,
+      int? userId,
+      ) async {
+    final token = getToken(context);
+    if(token == null) return null;
+
+    final response = await ApiClient().dio.delete(
+      '/user/delete-account',
+      data: {
+        "user_id": userId
+      },
+      options: Options(
+        headers: {'Authorization': 'Bearer $token'},
+      ),
+    );
+    final data = response.data as Map<String, dynamic>;
+    return data['success'];
+  }
+
   static Future<bool?> changeNotifications(
       context,
       bool hasOn,

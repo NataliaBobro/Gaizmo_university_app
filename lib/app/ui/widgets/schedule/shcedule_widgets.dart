@@ -24,24 +24,26 @@ class HeaderEtm extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            SvgPicture.asset(
-              Svgs.etmPlus,
-              width: 24,
-            ),
-            const SizedBox(
-              width: 3,
-            ),
-            Text(
-              '+${lessons.services?.first?.etm} ETM',
-              style: TextStyles.s10w600.copyWith(
-                  color: const Color(0xFF242424)
+        if(lessons.services?.first?.etm != null && lessons.isVisitsExists == true) ...[
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SvgPicture.asset(
+                Svgs.etmPlus,
+                width: 24,
               ),
-            )
-          ],
-        ),
+              const SizedBox(
+                width: 3,
+              ),
+              Text(
+                '+${lessons.services?.first?.etm} ETM',
+                style: TextStyles.s10w600.copyWith(
+                    color: const Color(0xFF242424)
+                ),
+              )
+            ],
+          ),
+        ],
         CupertinoButton(
             minSize: 0.0,
             padding: const EdgeInsets.only(left: 30, top: 3),
@@ -186,7 +188,7 @@ class ContentRowInfo extends StatelessWidget {
         children: [
           Text(
             '$title',
-            style: TextStyles.s12w400.copyWith(
+            style: TextStyles.s13w400.copyWith(
                 color: const Color(0xFF848484)
             ),
           ),

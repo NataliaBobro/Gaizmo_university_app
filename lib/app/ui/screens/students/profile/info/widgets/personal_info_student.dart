@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:etm_crm/app/app.dart';
 import 'package:etm_crm/app/domain/models/meta.dart';
 import 'package:etm_crm/app/domain/models/user.dart';
+import 'package:etm_crm/app/ui/widgets/modal/delete_account_modal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:provider/provider.dart';
@@ -113,166 +114,175 @@ class _PersonalInfoStudentState extends State<PersonalInfoStudent> {
       body: SafeArea(
           child: ColoredBox(
             color: const Color(0xFFF0F3F6),
-            child: Column(
+            child: Stack(
               children: [
-                const CenterHeaderWithAction(
-                    title: 'Settings'
-                ),
-                Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: ListView(
-                            physics: const ClampingScrollPhysics(),
-                            children: [
-                              const SizedBox(
-                                height: 24,
-                              ),
-                              AppHorizontalField(
-                                label: 'Full name',
-                                controller: fullName,
-                                changeClear: () {
-                                  fullName.clear();
-                                  setState(() {});
-                                },
-                                error: validateError?.errors.fullNameErrors?.first,
-                              ),
-                              AppHorizontalField(
-                                label: 'Phone number',
-                                controller: phone,
-                                changeClear: () {
-                                  phone.clear();
-                                  setState(() {});
-                                },
-                                error: validateError?.errors.phoneErrors?.first,
-                              ),
-                              AppHorizontalField(
-                                label: 'E-mail',
-                                controller: email,
-                                changeClear: () {
-                                  email.clear();
-                                  setState(() {});
-                                },
-                                error: validateError?.errors.emailErrors?.first,
-                              ),
-                              AppHorizontalField(
-                                label: 'About me',
-                                controller: about,
-                                changeClear: () {
-                                  about.clear();
-                                  setState(() {});
-                                },
-                                error: validateError?.errors.about?.first,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 24
-                                ),
-                                child: Column(
-                                  children: [
-                                    SelectInputSearchField(
-                                      titleStyle: TextStyles.s14w400.copyWith(
-                                        color: const Color(0xFF848484)
-                                      ),
-                                      style: TextStyles.s14w400.copyWith(
-                                          color: const Color(0xFF242424)
-                                      ),
-                                      errors: validateError?.errors.country,
-                                      title: 'Country',
-                                      items:  (countryList?.length ?? 0) > 0 ?
-                                      countryList : listDefaultCountry,
-                                      selected: _country,
-                                      onSelect: (value) {
-                                        _country = value;
-                                        changeOpen(null);
-                                      },
-                                      onSearch: (value) {
-                                        searchCountry(value);
-                                      },
-                                      changeOpen: () {
-                                        changeOpen('country');
-                                      },
-                                      isOpen: openField == 'country',
-                                      hintText: '',
-                                    ),
-                                    SelectInputSearchField(
-                                      titleStyle: TextStyles.s14w400.copyWith(
-                                          color: const Color(0xFF848484)
-                                      ),
-                                      style: TextStyles.s14w400.copyWith(
-                                          color: const Color(0xFF242424)
-                                      ),
-                                      errors: validateError?.errors.city,
-                                      title: 'City',
-                                      items: cityList,
-                                      onSearch: (value) {
-                                        searchCity(value);
-                                      },
-                                      selected: _city,
-                                      changeOpen: () {
-                                        changeOpen('city');
-                                      },
-                                      isOpen: openField == 'city',
-                                      onSelect: (index) {
-                                        _city = index;
-                                        changeOpen(null);
-                                      },
-                                      hintText: '',
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SettingsInput(
-                                  title: "Social accounts",
-                                  onPress: () async {
-                                    await Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => SettingsSocialAccounts(
-                                          user: widget.student,
-                                          onSave: (){
-                                            updateUser();
-                                          },
-                                        ),
-                                      ),
-                                    );
-                                  }
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 24
-                                ),
-                                child: Text(
-                                  "Privacy settings",
-                                  style: TextStyles.s14w500.copyWith(
+                Column(
+                  children: [
+                    const CenterHeaderWithAction(
+                        title: 'Settings'
+                    ),
+                    Expanded(
+                      child: ListView(
+                        padding: const EdgeInsets.only(
+                          bottom: 120
+                        ),
+                        physics: const ClampingScrollPhysics(),
+                        children: [
+                          const SizedBox(
+                            height: 24,
+                          ),
+                          AppHorizontalField(
+                            label: 'Full name',
+                            controller: fullName,
+                            changeClear: () {
+                              fullName.clear();
+                              setState(() {});
+                            },
+                            error: validateError?.errors.fullNameErrors?.first,
+                          ),
+                          AppHorizontalField(
+                            label: 'Phone number',
+                            controller: phone,
+                            changeClear: () {
+                              phone.clear();
+                              setState(() {});
+                            },
+                            error: validateError?.errors.phoneErrors?.first,
+                          ),
+                          AppHorizontalField(
+                            label: 'E-mail',
+                            controller: email,
+                            changeClear: () {
+                              email.clear();
+                              setState(() {});
+                            },
+                            error: validateError?.errors.emailErrors?.first,
+                          ),
+                          AppHorizontalField(
+                            label: 'About me',
+                            controller: about,
+                            changeClear: () {
+                              about.clear();
+                              setState(() {});
+                            },
+                            error: validateError?.errors.about?.first,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 24
+                            ),
+                            child: Column(
+                              children: [
+                                SelectInputSearchField(
+                                  titleStyle: TextStyles.s14w400.copyWith(
+                                      color: const Color(0xFF848484)
+                                  ),
+                                  style: TextStyles.s14w400.copyWith(
                                       color: const Color(0xFF242424)
                                   ),
+                                  errors: validateError?.errors.country,
+                                  title: 'Country',
+                                  items:  (countryList?.length ?? 0) > 0 ?
+                                  countryList : listDefaultCountry,
+                                  selected: _country,
+                                  onSelect: (value) {
+                                    _country = value;
+                                    changeOpen(null);
+                                  },
+                                  onSearch: (value) {
+                                    searchCountry(value);
+                                  },
+                                  changeOpen: () {
+                                    changeOpen('country');
+                                  },
+                                  isOpen: openField == 'country',
+                                  hintText: '',
                                 ),
-                              ),
-                              SettingsInput(
-                                  title: "Show in profile",
-                                  onPress: () {
-
-                                  }
-                              ),
-                            ],
+                                SelectInputSearchField(
+                                  titleStyle: TextStyles.s14w400.copyWith(
+                                      color: const Color(0xFF848484)
+                                  ),
+                                  style: TextStyles.s14w400.copyWith(
+                                      color: const Color(0xFF242424)
+                                  ),
+                                  errors: validateError?.errors.city,
+                                  title: 'City',
+                                  items: cityList,
+                                  onSearch: (value) {
+                                    searchCity(value);
+                                  },
+                                  selected: _city,
+                                  changeOpen: () {
+                                    changeOpen('city');
+                                  },
+                                  isOpen: openField == 'city',
+                                  onSelect: (index) {
+                                    _city = index;
+                                    changeOpen(null);
+                                  },
+                                  hintText: '',
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 40),
-                          child: AppButton(
-                              title: 'Save changes',
-                              onPressed: () {
-                                saveGeneralInfo();
+                          SettingsInput(
+                              title: "Social accounts",
+                              onPress: () async {
+                                await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => SettingsSocialAccounts(
+                                      user: widget.student,
+                                      onSave: (){
+                                        updateUser();
+                                      },
+                                    ),
+                                  ),
+                                );
                               }
                           ),
-                        )
-                      ],
-                    )
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 24
+                            ),
+                            child: Text(
+                              "Privacy settings",
+                              style: TextStyles.s14w500.copyWith(
+                                  color: const Color(0xFF242424)
+                              ),
+                            ),
+                          ),
+                          SettingsInput(
+                              title: "Show in profile",
+                              onPress: () {
+
+                              }
+                          ),
+                          SettingsInput(
+                            title: "Delete account",
+                            onPress: () {
+                              showDeleteDialog(context);
+                            }
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+
+                Positioned(
+                  bottom: 40,
+                  right: 0,
+                  left: 0,
+                  child: AppButton(
+                      title: 'Save changes',
+                      onPressed: () {
+                        saveGeneralInfo();
+                      }
+                  ),
                 )
               ],
             ),

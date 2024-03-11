@@ -144,10 +144,15 @@ class _ButtonPayItemLessonState extends State<ButtonPayItemLesson> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    "${widget.package?.numberVisits} ${widget.package?.name} lessons",
-                    style: TextStyles.s14w500.copyWith(
-                      color: const Color(0xFF242424)
+                  Container(
+                    constraints: const BoxConstraints(
+                      maxWidth: 250
+                    ),
+                    child: Text(
+                      "${widget.package?.numberVisits} ${widget.package?.name} lessons",
+                      style: TextStyles.s14w500.copyWith(
+                          color: const Color(0xFF242424)
+                      ),
                     ),
                   ),
                   CupertinoButton(

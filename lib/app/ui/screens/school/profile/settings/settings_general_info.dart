@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../../domain/states/school/school_profile_state.dart';
 import '../../../../widgets/auth_button.dart';
+import '../../../../widgets/modal/delete_account_modal.dart';
 import '../widgets/settings_tab.dart';
 
 class SettingGeneralInfo extends StatefulWidget {
@@ -123,6 +124,12 @@ class _SettingGeneralInfoState extends State<SettingGeneralInfo> {
                                         ),
                                       ),
                                     );
+                                  }
+                              ),
+                              SettingsInput(
+                                  title: "Delete account",
+                                  onPress: () {
+                                    showDeleteDialog(context);
                                   }
                               ),
                             ],

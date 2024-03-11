@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:etm_crm/app/domain/services/student_service.dart';
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
 import 'package:etm_crm/app/ui/widgets/auth_button.dart';
@@ -158,15 +159,41 @@ class _ServiceItemState extends State<ServiceItem> {
                                   const SizedBox(
                                     height: 24,
                                   ),
+                                  Container(
+                                    constraints: const BoxConstraints(
+                                      maxWidth: 200
+                                    ),
+                                    child: Text(
+                                      "${servicesModel?.name}",
+                                      style: TextStyles.s18w700.copyWith(
+                                          color: const Color(0xFF242424)
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 8,
+                                  ),
                                   Text(
-                                    "${servicesModel?.name}",
-                                    style: TextStyles.s18w700.copyWith(
+                                    "${servicesModel?.desc}",
+                                    style: TextStyles.s14w400.copyWith(
                                         color: const Color(0xFF242424)
                                     ),
                                   ),
                                   const SizedBox(
                                     height: 8,
                                   ),
+                                  if(servicesModel?.image != null) ...[
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(4),
+                                      child: CachedNetworkImage(
+                                        imageUrl: '${servicesModel?.image}',
+                                        width: double.infinity,
+                                        errorWidget: (context, error, stackTrace) =>
+                                        const SizedBox.shrink(),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    )
+                                  ],
                                   const SizedBox(
                                     height: 24,
                                   ),
@@ -239,6 +266,9 @@ class _ServiceItemState extends State<ServiceItem> {
                                   ),
                                 ],
                               ),
+                            ),
+                            const SizedBox(
+                              height: 120,
                             )
                           ],
                         ),

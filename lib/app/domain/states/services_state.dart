@@ -191,7 +191,9 @@ class ServicesState with ChangeNotifier {
       ServicesModel servEdit = editedService;
       _selectService = listTypeServices.last;
       _serviceName.text = servEdit.name;
-      _desc.text = '${servEdit.desc}';
+      if(servEdit.desc != null){
+        _desc.text = '${servEdit.desc}';
+      }
 
       _selectBranch = listBranch.firstWhere((element) => element['id'] == (servEdit.branchId ?? 0));
       _selectTeacher = _listTeacherData?.firstWhere((element) => element.id == (servEdit.teacher?.id ?? 0));

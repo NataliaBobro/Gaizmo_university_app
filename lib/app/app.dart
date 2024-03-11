@@ -196,6 +196,23 @@ class AppState extends ChangeNotifier {
     changeLogInState(false);
   }
 
+  void deleteAccount() async {
+    try {
+      final result = await UserService.deleteAccount(context, userData?.id);
+      if(result == true){
+        notifyListeners();
+        await Hive.box('settings').delete('token');
+        changeLogInState(false);
+      }
+    } on DioError catch (e) {
+      showMessage(e.message.isEmpty ? e.toString() : e.message);
+    } catch (e) {
+      showErrorSnackBar(title: 'Ошибка повторите попытку позже!');
+    }
+  }
+
+
+
   @override
   Future<void> dispose() async {
     super.dispose();

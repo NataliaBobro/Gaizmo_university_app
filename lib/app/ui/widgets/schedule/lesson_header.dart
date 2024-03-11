@@ -35,7 +35,7 @@ class MyLessonHeader extends StatelessWidget {
         ),
         Text(
           'Start ${startTime.format(context)} - End ${endTime.format(context)}',
-          style: TextStyles.s12w400.copyWith(
+          style: TextStyles.s13w400.copyWith(
               color: const Color(0xFF848484)
           ),
         ),
