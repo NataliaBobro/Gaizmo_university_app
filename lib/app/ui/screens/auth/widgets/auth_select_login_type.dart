@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../../resources/resources.dart';
 import '../../../theme/app_colors.dart';
+import '../../../widgets/penguin/penguin_animate.dart';
 
 class AuthSelectLoginType extends StatefulWidget {
   const AuthSelectLoginType({Key? key}) : super(key: key);
@@ -16,67 +17,135 @@ class AuthSelectLoginType extends StatefulWidget {
   State<AuthSelectLoginType> createState() => _AuthSelectLoginTypeState();
 }
 
-class _AuthSelectLoginTypeState extends State<AuthSelectLoginType> {
+class _AuthSelectLoginTypeState extends State<AuthSelectLoginType>
+    with TickerProviderStateMixin{
+  final GlobalKey bottomPos = GlobalKey();
+
+  late AnimationController _controller;
+  late Animation<double> _animation;
+  late Animation<double> _animationLogo;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1000),
+    );
+
+    _animation = Tween<double>(
+      begin: -241.0,
+      end: 0.0,
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Curves.easeInOut,
+      ),
+    );
+
+    _animationLogo = Tween<double>(
+      begin: 261.0,
+      end: 164.0,
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Curves.easeInOut,
+      ),
+    );
+    _controller.addListener(() {
+      setState(() {});
+    });
+
+    _controller.forward();
+  }
+
   @override
   Widget build(BuildContext context) {
     final read = context.read<AuthState>();
     return Scaffold(
       backgroundColor: AppColors.registerBg,
-      body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Column(
-              children: [
-                const SizedBox(
-                  height: 164,
+      body: Stack(
+        children: [
+          SafeArea(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Column(
+                  children: [
+                    SizedBox(
+                      height: _animationLogo.value,
+                    ),
+                    Center(
+                      child: SvgPicture.asset(
+                        Svgs.logo,
+                        width: 162,
+                      ),
+                    ),
+                  ],
                 ),
-                Center(
-                  child: SvgPicture.asset(
-                    Svgs.logo,
-                    width: 162,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      const AnimatedPenguinLoginType(),
+                      Stack(
+                        children: [
+                          Container(
+                            height: 241,
+                          ),
+                          Positioned(
+                            bottom: _animation.value,
+                            right: 0,
+                            left: 0,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                AppButton(
+                                    key: bottomPos,
+                                    title: 'Sign in',
+                                    onPressed: () {
+                                      read.openSignIn();
+                                    }
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                AppButton(
+                                    title: 'Sign up',
+                                    onPressed: () {
+                                      read.openSelectUserType();
+                                    }
+                                ),
+                                const SizedBox(
+                                  height: 24,
+                                ),
+                                Text(
+                                  'Get read about ETM app!',
+                                  style: TextStyles.s14w600.copyWith(
+                                      color: Colors.white
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 24,
+                                ),
+                                const SelectLangButton(),
+                                const SizedBox(
+                                  height: 24,
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      )
+                    ],
                   ),
-                ),
+                )
               ],
             ),
-            Column(
-              children: [
-                AppButton(
-                    title: 'Sign in',
-                    onPressed: () {
-                      read.openSignIn();
-                    }
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                AppButton(
-                    title: 'Sign up',
-                    onPressed: () {
-                      read.openSelectUserType();
-                    }
-                ),
-                const SizedBox(
-                  height: 24,
-                ),
-                Text(
-                    'Get read about ETM app!',
-                  style: TextStyles.s14w600.copyWith(
-                    color: Colors.white
-                  ),
-                ),
-                const SizedBox(
-                  height: 24,
-                ),
-                const SelectLangButton(),
-                const SizedBox(
-                  height: 24,
-                ),
-              ],
-            )
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

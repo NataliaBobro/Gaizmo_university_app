@@ -73,6 +73,7 @@ class _SelectPackageScreenState extends State<SelectPackageScreen> {
                         child: IgnorePointer(
                           ignoring: selected == null,
                           child: AppButton(
+                            disabled: selected == null,
                             title: 'pay package',
                             onPressed: () async {
                               if(selected != null){

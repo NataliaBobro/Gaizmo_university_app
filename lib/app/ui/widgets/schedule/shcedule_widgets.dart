@@ -84,6 +84,19 @@ class LessonItem extends StatefulWidget {
 }
 
 class _LessonItemState extends State<LessonItem> {
+  bool viewDesc = false;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  void changeDesc(){
+    setState(() {
+      viewDesc = !viewDesc;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -119,10 +132,12 @@ class _LessonItemState extends State<LessonItem> {
             value: '${widget.lesson?.services?.first?.school?.street} '
                 '${widget.lesson?.services?.first?.school?.house}',
           ),
-          ContentRowInfo(
-              title: 'Class number',
-              value: '${widget.lesson?.schoolClass?.name}'
-          ),
+          if(widget.lesson?.schoolClass != null) ...[
+            ContentRowInfo(
+                title: 'Class number',
+                value: '${widget.lesson?.schoolClass?.name}'
+            )
+          ],
           if(widget.lesson?.zoomMeeting != null) ...[
             ContentRowInfo(
               title: 'Lesson links',
@@ -143,22 +158,35 @@ class _LessonItemState extends State<LessonItem> {
               ),
             ),
           ],
-          ContentRowInfo(
-            title: 'Description',
-            content: CupertinoButton(
-              minSize: 0.0,
-              padding: EdgeInsets.zero,
-              onPressed: () {
-
-              },
-              child: RotatedBox(
-                quarterTurns: 2,
-                child: SvgPicture.asset(
-                    Svgs.open
+          if(widget.lesson?.services?.first?.desc != null) ...[
+            ContentRowInfo(
+              title: 'Description',
+              content: CupertinoButton(
+                minSize: 0.0,
+                padding: EdgeInsets.zero,
+                onPressed: () {
+                  changeDesc();
+                },
+                child: RotatedBox(
+                  quarterTurns: 2,
+                  child: SvgPicture.asset(
+                      Svgs.open
+                  ),
                 ),
               ),
             ),
-          ),
+
+            if(viewDesc) ...[
+              Text(
+                "${widget.lesson?.services?.first?.desc}",
+                style: TextStyles.s13w400.copyWith(
+                    color: const Color(0xFF848484)
+                ),
+                maxLines: 5,
+                overflow: TextOverflow.ellipsis,
+              )
+            ]
+          ]
         ],
       ),
     );

@@ -53,7 +53,8 @@ class _UserInfoState extends State<UserInfo> {
           Container(
             constraints:  BoxConstraints(
               maxWidth: SizerUtil.width - 50,
-              minHeight: 35
+              minHeight: 40,
+              maxHeight: 40
             ),
             child: Text(
               userDesk,

@@ -9,13 +9,15 @@ class AppButton extends StatefulWidget {
     required this.title,
     required this.onPressed,
     this.horizontalPadding = 40.0,
-    this.icon
+    this.icon,
+    this.disabled = false
   }) : super(key: key);
 
   final Function onPressed;
   final String title;
   final String? icon;
   final double horizontalPadding;
+  final bool disabled;
 
 
   @override
@@ -32,7 +34,7 @@ class _AppButtonState extends State<AppButton> {
       child: CupertinoButton(
         minSize: 0.0,
         padding: EdgeInsets.zero,
-        onPressed: () {
+        onPressed: widget.disabled ? null : () {
           widget.onPressed();
         },
         child: Container(
@@ -40,7 +42,9 @@ class _AppButtonState extends State<AppButton> {
           height: 48,
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            color: const Color(0xFFFFC700),
+            color: widget.disabled ?
+              const Color(0xFFB4B0A9) :
+              const Color(0xFFFFC700),
             borderRadius: BorderRadius.circular(40)
           ),
           child: Row(

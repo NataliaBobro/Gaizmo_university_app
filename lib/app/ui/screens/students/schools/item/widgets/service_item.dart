@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:etm_crm/app/domain/models/user.dart';
 import 'package:etm_crm/app/domain/services/student_service.dart';
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
 import 'package:etm_crm/app/ui/widgets/auth_button.dart';
@@ -29,6 +30,7 @@ class ServiceItem extends StatefulWidget {
 class _ServiceItemState extends State<ServiceItem> {
   ServicesModel? servicesModel;
   Map<String, List<DayItem>> groupedSchedule = {};
+  List<UserData?> listUser = [];
   int? openSection;
   bool loading = false;
 
@@ -44,6 +46,11 @@ class _ServiceItemState extends State<ServiceItem> {
       if(result != null){
         servicesModel = result;
         renderSchedule(result);
+        if(servicesModel?.payUsers != null){
+          for(var a = 0; a < (servicesModel?.payUsers?.length ?? 0); a++){
+            listUser.add(servicesModel?.payUsers?[a].user);
+          }
+        }
       }
     }catch(e){
       print(e);
@@ -119,6 +126,7 @@ class _ServiceItemState extends State<ServiceItem> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
@@ -170,19 +178,21 @@ class _ServiceItemState extends State<ServiceItem> {
                                       ),
                                     ),
                                   ),
-                                  const SizedBox(
-                                    height: 8,
-                                  ),
-                                  Text(
-                                    "${servicesModel?.desc}",
-                                    style: TextStyles.s14w400.copyWith(
-                                        color: const Color(0xFF242424)
+                                  if(servicesModel?.desc != null)...[
+                                    const SizedBox(
+                                      height: 8,
                                     ),
-                                  ),
-                                  const SizedBox(
-                                    height: 8,
-                                  ),
+                                    Text(
+                                      "${servicesModel?.desc}",
+                                      style: TextStyles.s14w400.copyWith(
+                                          color: const Color(0xFF242424)
+                                      ),
+                                    )
+                                  ],
                                   if(servicesModel?.image != null) ...[
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
                                     ClipRRect(
                                       borderRadius: BorderRadius.circular(4),
                                       child: CachedNetworkImage(
@@ -197,20 +207,19 @@ class _ServiceItemState extends State<ServiceItem> {
                                   const SizedBox(
                                     height: 24,
                                   ),
-                                  ButtonTeacher(
-                                      teacher: servicesModel?.teacher
-                                  ),
-                                  const SizedBox(
-                                    height: 16,
-                                  ),
-                                  ButtonStudents(
-                                      students: [
-                                        servicesModel?.teacher,
-                                        servicesModel?.teacher,
-                                        servicesModel?.teacher,
-                                        servicesModel?.teacher
-                                      ]
-                                  ),
+                                  if(servicesModel?.teacher != null)...[
+                                    ButtonTeacher(
+                                        teacher: servicesModel?.teacher
+                                    )
+                                  ],
+                                  if(listUser.isNotEmpty) ...[
+                                    const SizedBox(
+                                      height: 16,
+                                    ),
+                                    ButtonStudents(
+                                        students: listUser
+                                    ),
+                                  ],
                                   const SizedBox(
                                     height: 8,
                                   )

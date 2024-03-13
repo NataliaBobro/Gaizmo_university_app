@@ -37,11 +37,11 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Allow access to the camera to take photos and upload images.</string>
+	<string>Allow access to the camera for capturing photos and uploading images of work and avatars.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Allow access to the microphone for recording audio and voice chat.</string>
+	<string>Allow access to the microphone for recording audio for video review of homework assignments.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Allow access to the photo library to select and upload photos.</string>
+	<string>Grant permission to access the photo library to select and upload images of work and avatars.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>
