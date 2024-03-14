@@ -11,9 +11,9 @@ dependencies:
     sdk: flutter
 
   accordion:
-    path: library/accordion
+    path: package/accordion
   flutter_wayforpay_package:
-    path: library/flutter_wayforpay_package
+    path: package/flutter_wayforpay_package
   flutter_native_splash: ^2.1.6
   cached_network_image: ^3.2.3
   cached_network_svg_image:

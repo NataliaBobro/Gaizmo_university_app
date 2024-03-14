@@ -20,7 +20,7 @@ packages:
   accordion:
     dependency: "direct main"
     description:
-      path: "library/accordion"
+      path: "package/accordion"
       relative: true
     source: path
     version: "2.6.0"
@@ -533,7 +533,7 @@ packages:
   flutter_wayforpay_package:
     dependency: "direct main"
     description:
-      path: "library/flutter_wayforpay_package"
+      path: "package/flutter_wayforpay_package"
       relative: true
     source: path
     version: "0.0.2"

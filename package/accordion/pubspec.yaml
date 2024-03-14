@@ -1,0 +1,32 @@
+name: accordion
+description: A stylish and smooth Accordion list where each item can be expanded or collapsed simply by clicking on the header.
+version: 2.6.0
+homepage: https://www.vulcansoft.com
+repository: https://github.com/GotJimmy/accordion
+
+environment:
+  sdk: ">=2.17.0 <4.0.0"
+  flutter: ">=2.2.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  get: ^4.6.5
+  scroll_to_index: ^3.0.1
+
+dev_dependencies:
+  flutter_lints: ^2.0.3
+
+flutter:
+  uses-material-design: true
+
+topics:
+  - lists
+  - sections
+  - expandable
+  - ui
+
+screenshots:
+  - description: 'Accordion example in action'
+    path: example/accordion_demo.gif
+  
