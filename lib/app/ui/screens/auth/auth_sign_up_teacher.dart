@@ -95,11 +95,6 @@ class _AuthSignUpTeacherState extends State<AuthSignUpTeacher> {
                               errors: state.validateError?.errors.firstNameErrors?.first,
                             ),
                             AuthInput(
-                              controller: state.lastName,
-                              title: 'Middle name',
-                              errors: state.validateError?.errors.lastNameErrors?.first,
-                            ),
-                            AuthInput(
                               controller: state.surname,
                               title: 'Surname',
                               errors: state.validateError?.errors.surnameErrors?.first,
