@@ -57,11 +57,10 @@ class _AuthSignInState extends State<AuthSignIn> {
                               height: 157,
                             ),
                             AuthInput(
-                              keyboardType: TextInputType.number,
-                              controller: state.phone,
-                              title: 'Phone number',
-                              hintText: '+380',
-                              errors: state.validateError?.errors.phoneErrors?.first,
+                              keyboardType: TextInputType.emailAddress,
+                              controller: state.email,
+                              title: 'Email',
+                              errors: state.validateError?.errors.emailErrors?.first,
                             ),
                             AuthInput(
                                 controller: state.password,

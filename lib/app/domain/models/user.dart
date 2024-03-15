@@ -5,8 +5,8 @@ part 'user.g.dart';
 
 @JsonSerializable(includeIfNull: true, fieldRename: FieldRename.snake)
 class UserDataWithToken {
-  UserData user;
-  String token;
+  UserData? user;
+  String? token;
 
   UserDataWithToken({
     required this.user,

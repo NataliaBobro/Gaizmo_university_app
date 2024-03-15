@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:etm_crm/app/domain/services/app_ninjas_service.dart';
 import 'package:etm_crm/app/domain/services/auth_service.dart';
 import 'package:etm_crm/app/ui/screens/auth/auth_sign_up_school.dart';
+import 'package:etm_crm/app/ui/screens/auth/confirm_code_screen.dart';
 import 'package:etm_crm/app/ui/screens/auth/new_password.dart';
 import 'package:etm_crm/resources/resources.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
@@ -47,6 +48,7 @@ class AuthState with ChangeNotifier {
   final TextEditingController _schoolName = TextEditingController();
   final TextEditingController _street = TextEditingController();
   final TextEditingController _house = TextEditingController();
+  final TextEditingController _codeRegister = TextEditingController();
   Map<String, dynamic>? _schoolCategory;
   Map<String, dynamic>? _country;
   Map<String, dynamic>? _city;
@@ -71,6 +73,7 @@ class AuthState with ChangeNotifier {
   MaskedTextController get phone => _phone;
   TextEditingController get email => _email;
   TextEditingController get code => _code;
+  TextEditingController get codeRegister => _codeRegister;
   TextEditingController get password => _password;
   TextEditingController get confirmPassword => _confirmPassword;
   TextEditingController get firstName => _firstName;
@@ -332,16 +335,51 @@ class AuthState with ChangeNotifier {
   }
 
 
-  void signUp(type) {
-    if(type == 'student'){
+  Future<void> sendCode({bool open = true}) async {
+    try{
+      final result = await AuthService.sendCode(_email.text);
+      if(result == true){
+        if(open){
+          openWriteCode();
+        }
+      }else{
+        showMessage('Email required', color: const Color(0xFFFFC700));
+        notifyListeners();
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> openWriteCode() async {
+    Future? registerVoid;
+    if(_userType == 3){
+      registerVoid = signUpStudent();
+    }else if(_userType == 1){
+      registerVoid = signUpSchool();
+    } else if(_userType == 2) {
+      registerVoid = signUpTeacher();
+    }
+    await registerVoid!;
+
+  }
+
+  void signUp(code){
+    _codeRegister.text = code;
+    if(_userType == 3){
       signUpStudent();
-    }else if(type == 'school'){
+    }else if(_userType == 1){
       signUpSchool();
-    } else if(type == 'teacher') {
+    } else if(_userType == 2) {
       signUpTeacher();
     }
   }
 
+  void openConfirmCode(){
+    pageOpen(
+      const ConfirmCodeScreen()
+    );
+  }
 
   Future<void> signUpStudent() async {
     _isLoading = true;
@@ -359,11 +397,18 @@ class AuthState with ChangeNotifier {
           _email.text,
           _password.text,
           _confirmPassword.text,
-          _isActivePrivacy
+          _isActivePrivacy,
+          _codeRegister.text
       );
 
-      if(result != null){
+      if(result != null && result.token != null){
         setToken(result.token, result.user);
+      }else{
+        if(_codeRegister.text.isEmpty){
+          openConfirmCode();
+        }else{
+          showMessage('Code invalid', color: const Color(0xFFFFC700));
+        }
       }
     } on DioError catch (e) {
       if(e.response?.statusCode == 422){
@@ -374,6 +419,7 @@ class AuthState with ChangeNotifier {
         showMessage(e.message.isEmpty ? e.toString() : e.message);
       }
     } catch (e) {
+      print(e);
       showErrorSnackBar(title: 'App request error');
     } finally {
       _isLoading = false;
@@ -393,15 +439,21 @@ class AuthState with ChangeNotifier {
           _surname.text,
           _gender,
           _birthDate,
-          _phone.text,
           _email.text,
           _password.text,
           _confirmPassword.text,
-          _isActivePrivacy
+          _isActivePrivacy,
+          _codeRegister.text
       );
 
-      if(result != null){
+      if(result != null && result.token != null){
         setToken(result.token, result.user);
+      }else{
+        if(_codeRegister.text.isEmpty){
+          openConfirmCode();
+        }else{
+          showMessage('Code invalid', color: const Color(0xFFFFC700));
+        }
       }
     } on DioError catch (e) {
       if(e.response?.statusCode == 422){
@@ -467,11 +519,18 @@ class AuthState with ChangeNotifier {
           _city!['name'],
           _street.text,
           _house.text,
-          _isActivePrivacy
+          _isActivePrivacy,
+          _codeRegister.text
       );
 
-      if(result != null){
+      if(result != null && result.token != null){
         setToken(result.token, result.user);
+      }else{
+        if(_codeRegister.text.isEmpty){
+          openConfirmCode();
+        }else{
+          showMessage('Code invalid', color: const Color(0xFFFFC700));
+        }
       }
     } on DioError catch (e) {
       if(e.response?.statusCode == 422){
@@ -495,7 +554,7 @@ class AuthState with ChangeNotifier {
     notifyListeners();
     try {
       final result = await AuthService.login(
-          _phone.text,
+          _email.text,
           _password.text
       );
       if(result != null){
@@ -507,7 +566,7 @@ class AuthState with ChangeNotifier {
         _validateError = ValidateError.fromJson(data);
         showMessage('${_validateError?.message}', color: const Color(0xFFFFC700));
       }else{
-        showMessage('Phone or password is incorrect.');
+        showMessage('Email or password is incorrect.');
       }
     } catch (e) {
       showErrorSnackBar(title: 'App request error');
@@ -629,8 +688,10 @@ class AuthState with ChangeNotifier {
 
 
   void clear() {
+    _validateError = null;
     _phone.clear();
     _code.clear();
+    _codeRegister.clear();
     _email.clear();
     _password.clear();
     _confirmPassword.clear();
@@ -640,6 +701,11 @@ class AuthState with ChangeNotifier {
     _schoolName.clear();
     _street.clear();
     _house.clear();
+    notifyListeners();
+  }
+
+  void clearCode() {
+    _codeRegister.clear();
     notifyListeners();
   }
 }

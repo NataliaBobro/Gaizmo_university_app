@@ -20,6 +20,7 @@ class AuthService {
       String? password,
       String? passwordConfirmation,
       bool? privacy,
+      String? code,
       ) async {
     final response = await ApiClient().dio.post(
           '/auth/register/student',
@@ -36,6 +37,7 @@ class AuthService {
             "password": password,
             "password_confirmation": passwordConfirmation,
             "privacy": privacy,
+            "code": code,
           }
         );
     final data = response.data as Map<String, dynamic>;
@@ -50,11 +52,11 @@ class AuthService {
       String? surname,
       int? gender,
       String? dateBirth,
-      String? phone,
       String? email,
       String? password,
       String? passwordConfirmation,
       bool? privacy,
+      String? code
       ) async {
     final response = await ApiClient().dio.post(
           '/auth/register/teacher',
@@ -66,11 +68,11 @@ class AuthService {
             "surname": surname,
             "gender": gender,
             "date_birth": dateBirth,
-            "phone": phone,
             "email": email,
             "password": password,
             "password_confirmation": passwordConfirmation,
             "privacy": privacy,
+            "code": code,
           }
         );
     final data = response.data as Map<String, dynamic>;
@@ -91,37 +93,52 @@ class AuthService {
       String? street,
       String? house,
       bool? privacy,
+      String? code,
       ) async {
     final response = await ApiClient().dio.post(
-          '/auth/register/school',
-          data: {
-            "language_id": selectLang,
-            "user_type": userType,
-            "phone": phone,
-            "email": email,
-            "password": password,
-            "password_confirmation": passwordConfirmation,
-            "school_name": schoolName,
-            "school_category": schoolCategory,
-            "country": country,
-            "city": city,
-            "street": street,
-            "house": house,
-            "privacy": privacy,
-          }
-        );
+        '/auth/register/school',
+        data: {
+          "language_id": selectLang,
+          "user_type": userType,
+          "phone": phone,
+          "email": email,
+          "password": password,
+          "password_confirmation": passwordConfirmation,
+          "school_name": schoolName,
+          "school_category": schoolCategory,
+          "country": country,
+          "city": city,
+          "street": street,
+          "house": house,
+          "privacy": privacy,
+          "code": code,
+        }
+    );
     final data = response.data as Map<String, dynamic>;
     return UserDataWithToken.fromJson(data['data']);
   }
 
+  static Future<bool?> sendCode(
+      String? email,
+      ) async {
+    final response = await ApiClient().dio.post(
+          '/auth/register/send-code',
+          data: {
+            "email": email,
+          }
+        );
+    final data = response.data as Map<String, dynamic>;
+    return data['success'];
+  }
+
   static Future<UserDataWithToken?> login(
-      String? phone,
+      String? email,
       String? password,
       ) async {
     final response = await ApiClient().dio.post(
           '/auth/login',
           data: {
-            "phone": phone,
+            "email": email,
             "password": password,
           }
         );

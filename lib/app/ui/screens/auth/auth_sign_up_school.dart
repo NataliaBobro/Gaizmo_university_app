@@ -109,7 +109,7 @@ class _AuthSignUpSchoolState extends State<AuthSignUpSchool> {
                           physics: const BottomBouncingScrollPhysics(),
                           children: [
                             const AppTitle(
-                              title: 'General info *',
+                              title: 'General info',
                             ),
                             AuthInput(
                               keyboardType: TextInputType.number,
@@ -221,7 +221,7 @@ class _AuthSignUpSchoolState extends State<AuthSignUpSchool> {
                               title: 'Sign up',
                               onPressed: () {
                                 if(!state.isLoading) {
-                                  state.signUp('school');
+                                  state.sendCode();
                                 }
                               },
                               horizontalPadding: 16.0,

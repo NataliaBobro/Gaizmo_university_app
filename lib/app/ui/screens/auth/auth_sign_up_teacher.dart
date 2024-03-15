@@ -60,7 +60,7 @@ class _AuthSignUpTeacherState extends State<AuthSignUpTeacher> {
                           physics: const BottomBouncingScrollPhysics(),
                           children: [
                             const AppTitle(
-                              title: 'General info *',
+                              title: 'General info',
                             ),
                             AuthInput(
                               keyboardType: TextInputType.number,
@@ -87,7 +87,7 @@ class _AuthSignUpTeacherState extends State<AuthSignUpTeacher> {
                               isBottomPadding: false,
                             ),
                             const AppTitle(
-                              title: 'Personal info *',
+                              title: 'Personal info',
                             ),
                             AuthInput(
                               controller: state.firstName,
@@ -128,7 +128,7 @@ class _AuthSignUpTeacherState extends State<AuthSignUpTeacher> {
                               title: 'Sign up',
                               onPressed: () {
                                 if(!state.isLoading) {
-                                  state.signUp('teacher');
+                                  state.sendCode();
                                 }
                               },
                               horizontalPadding: 16.0,
