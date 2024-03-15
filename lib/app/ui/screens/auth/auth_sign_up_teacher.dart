@@ -1,4 +1,5 @@
 import 'package:etm_crm/app/ui/screens/auth/widgets/already_account.dart';
+import 'package:etm_crm/app/ui/screens/auth/widgets/check_box_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,7 +13,6 @@ import '../../widgets/auth_title.dart';
 import '../../widgets/custom_scroll_physics.dart';
 import '../../widgets/select_date_input.dart';
 import '../../widgets/select_input.dart';
-import 'auth_sign_up_school.dart';
 
 class AuthSignUpTeacher extends StatefulWidget {
   const AuthSignUpTeacher({Key? key}) : super(key: key);

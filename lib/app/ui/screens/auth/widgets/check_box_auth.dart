@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../domain/states/auth_state.dart';
 import '../../../theme/text_styles.dart';
+import '../../../utils/url_launch.dart';
 
 class CheckboxAuth extends StatefulWidget {
   const CheckboxAuth({Key? key}) : super(key: key);
@@ -43,12 +44,38 @@ class _CheckboxAuthState extends State<CheckboxAuth> {
               constraints: const BoxConstraints(
                   maxWidth: 270
               ),
-              child: Text(
-                'I have read and agree to the  privacy policy, '
-                    'terms of service, and community guidlines',
-                style: TextStyles.s10w600.copyWith(
-                    color: error != null ? const Color(0xFFFFC700) : Colors.white,
-                    letterSpacing: 0.0
+              child: RichText(
+                text: TextSpan(
+                  text: 'I have read and agree to the ',
+                    style: TextStyles.s10w600.copyWith(
+                        color: error != null ? const Color(0xFFFFC700) : Colors.white,
+                        letterSpacing: 0.0
+                    ),
+                  children: [
+                    WidgetSpan(
+                      child: CupertinoButton(
+                        onPressed: () {
+                          launchUrlParse('https://app.etmcrm.com.ua/privacy');
+                        },
+                        padding: EdgeInsets.zero,
+                        minSize: 0.0,
+                        child: Text(
+                          'privacy policy',
+                          style: TextStyles.s10w600.copyWith(
+                              color: const Color(0xFFFFC700),
+                              letterSpacing: 0.0
+                          ),
+                        ),
+                      )
+                    ),
+                    TextSpan(
+                      text: ', terms of service, and community guidlines',
+                      style: TextStyles.s10w600.copyWith(
+                          color: error != null ? const Color(0xFFFFC700) : Colors.white,
+                          letterSpacing: 0.0
+                      ),
+                    )
+                  ]
                 ),
               ),
             )
