@@ -23,8 +23,8 @@ class DefaultFirebaseOptions {
       );
     }
     switch (defaultTargetPlatform) {
-      // case TargetPlatform.android:
-      //   return android;
+      case TargetPlatform.android:
+        return android;
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
@@ -48,6 +48,14 @@ class DefaultFirebaseOptions {
         );
     }
   }
+
+  static const FirebaseOptions android = FirebaseOptions(
+    apiKey: 'AIzaSyBZDjnV_LU4up_GWu2Kc_XaY0TFTcCxQTk',
+    appId: '1:711648306470:android:7bdea71a523e01c27acde7',
+    messagingSenderId: '711648306470',
+    projectId: 'etm-a04aa',
+    // storageBucket: 'etm-a04aa.appspot.com',
+  );
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyD9jH4Y17Wc6HHU023iUjmdGpV4RVInNDI',

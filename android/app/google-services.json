@@ -1,43 +1,26 @@
 {
   "project_info": {
-    "project_number": "123426953027",
-    "project_id": "etm-6fd63",
-    "storage_bucket": "etm-6fd63.appspot.com"
+    "project_number": "711648306470",
+    "project_id": "etm-a04aa",
+    "storage_bucket": "etm-a04aa.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:123426953027:android:d490f39e8d66b8e1c5c1f6",
+        "mobilesdk_app_id": "1:711648306470:android:7bdea71a523e01c27acde7",
         "android_client_info": {
-          "package_name": "etm.app"
+          "package_name": "ua.ETM.etm"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "123426953027-e2le835ruhll5ib7donbnjfujc4lgle7.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyC16EYMM9PbaC8V6-lBAP5FfcmCjOuiYS4"
+          "current_key": "AIzaSyBZDjnV_LU4up_GWu2Kc_XaY0TFTcCxQTk"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "123426953027-e2le835ruhll5ib7donbnjfujc4lgle7.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "123426953027-740a1bmh5af7d1v7ajdmn53e47h2k6vk.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "etm.app"
-              }
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }
