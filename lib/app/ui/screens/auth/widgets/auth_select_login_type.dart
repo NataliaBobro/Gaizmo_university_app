@@ -119,21 +119,21 @@ class _AuthSelectLoginTypeState extends State<AuthSelectLoginType>
                                     }
                                 ),
                                 const SizedBox(
-                                  height: 24,
+                                  height: 139,
                                 ),
-                                Text(
-                                  'Get read about ETM app!',
-                                  style: TextStyles.s14w600.copyWith(
-                                      color: Colors.white
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 24,
-                                ),
-                                const SelectLangButton(),
-                                const SizedBox(
-                                  height: 24,
-                                ),
+                                // Text(
+                                //   'Get read about ETM app!',
+                                //   style: TextStyles.s14w600.copyWith(
+                                //       color: Colors.white
+                                //   ),
+                                // ),
+                                // const SizedBox(
+                                //   height: 24,
+                                // ),
+                                // const SelectLangButton(),
+                                // const SizedBox(
+                                //   height: 24,
+                                // ),
                               ],
                             ),
                           )

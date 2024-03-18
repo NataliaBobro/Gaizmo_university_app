@@ -31,23 +31,23 @@ class _SettingsTabState extends State<SettingsTab> {
       padding: const EdgeInsets.only(top: 24),
       physics: const BottomBouncingScrollPhysics(),
       children: [
-        SettingsInput(
-          title: "Language",
-          onPress: () async {
-            await Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => SettingLanguage(
-                    saveLanguage: (val) {
-                      state.changeLanguage(val);
-                    },
-                    selectLanguage: state.selectLanguage != null ?
-                      state.selectLanguage!['id'] : null,
-                  ),
-                ),
-              );
-          }
-        ),
+        // SettingsInput(
+        //   title: "Language",
+        //   onPress: () async {
+        //     await Navigator.push(
+        //       context,
+        //       MaterialPageRoute(
+        //         builder: (context) => SettingLanguage(
+        //             saveLanguage: (val) {
+        //               state.changeLanguage(val);
+        //             },
+        //             selectLanguage: state.selectLanguage != null ?
+        //               state.selectLanguage!['id'] : null,
+        //           ),
+        //         ),
+        //       );
+        //   }
+        // ),
         SettingsInput(
           title: "General info",
           onPress: () async {

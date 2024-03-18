@@ -31,22 +31,22 @@ class _BranchSettingsTabState extends State<BranchSettingsTab> {
       padding: const EdgeInsets.only(top: 24),
       physics: const BottomBouncingScrollPhysics(),
       children: [
-        SettingsInput(
-            title: "Language",
-            onPress: () async {
-              await Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => SettingLanguage(
-                    saveLanguage: (val) {
-                      changeLanguageForUser(val['id']);
-                    },
-                    selectLanguage: widget.branch?.languageId,
-                  )
-                ),
-              );
-            }
-        ),
+        // SettingsInput(
+        //     title: "Language",
+        //     onPress: () async {
+        //       await Navigator.push(
+        //         context,
+        //         MaterialPageRoute(
+        //           builder: (context) => SettingLanguage(
+        //             saveLanguage: (val) {
+        //               changeLanguageForUser(val['id']);
+        //             },
+        //             selectLanguage: widget.branch?.languageId,
+        //           )
+        //         ),
+        //       );
+        //     }
+        // ),
         SettingsInput(
             title: "General info",
             onPress: () async {
