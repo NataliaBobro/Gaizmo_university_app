@@ -60,8 +60,11 @@ class _SchoolProfileScreenState extends State<SchoolProfileScreen> with TickerPr
                 const ProfileAvatar(),
                 const SchoolInfo(),
                 Container(
-                  height: 55,
+                  height: 50,
                   alignment: Alignment.center,
+                  padding: const EdgeInsets.only(
+                    bottom: 24
+                  ),
                   width: double.infinity,
                   decoration: BoxDecoration(
                       color: Colors.white,
@@ -71,67 +74,29 @@ class _SchoolProfileScreenState extends State<SchoolProfileScreen> with TickerPr
                     indicatorSize: TabBarIndicatorSize.label,
                     indicatorPadding: EdgeInsets.zero,
                     controller: _tabController,
-                    indicatorColor: Colors.transparent,
-                    indicatorWeight: 0.5,
                     labelStyle: TextStyles.s14w700,
-                    // isScrollable: true,
+                    indicator: const UnderlineTabIndicator(
+                      borderSide: BorderSide(width: 3.0, color: Color(0xFFFFC700)),
+                      insets: EdgeInsets.only(right: 35.0),
+                    ),
                     labelPadding: const EdgeInsets.symmetric(
                         horizontal: 16
-                    ).copyWith(
-                        bottom: 24
                     ),
                     labelColor: const Color(0xFF242424),
                     unselectedLabelStyle: TextStyles.s14w400,
                     unselectedLabelColor: const Color(0xFFACACAC),
-                    tabs: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Tab(
-                            height: 24,
-                            text: 'General info',
-                            iconMargin: EdgeInsets.zero,
-                          ),
-                          if(isActiveTab == 0) ...[
-                            Container(
-                              height: 4,
-                              width: 40,
-                              color: Color(0xFFFFC700),
-                            )
-                          ]
-                        ],
+                    tabs:  const [
+                      Tab(
+                        text: 'General info',
+                        iconMargin: EdgeInsets.zero,
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Tab(
-                            height: 19,
-                            text: 'Documents',
-                          ),
-                          if(isActiveTab == 1) ...[
-                            Container(
-                              height: 4,
-                              width: 40,
-                              color: const Color(0xFFFFC700),
-                            )
-                          ]
-                        ],
+                      Tab(
+                        text: 'Documents',
+                        iconMargin: EdgeInsets.zero,
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Tab(
-                            height: 19,
-                            text: 'Settings',
-                          ),
-                          if(isActiveTab == 2) ...[
-                            Container(
-                              height: 4,
-                              width: 40,
-                              color: const Color(0xFFFFC700),
-                            )
-                          ]
-                        ],
+                      Tab(
+                        text: 'Settings',
+                        iconMargin: EdgeInsets.zero,
                       ),
                     ],
                   ),

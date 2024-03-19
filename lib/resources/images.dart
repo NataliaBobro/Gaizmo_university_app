@@ -11,6 +11,5 @@ class Images {
   static const String testPresents = 'assets/images/test-presents.png';
   static const String inst = 'assets/images/inst.png';
   static const String penguins = 'assets/images/penguin.png';
-
-
+  static const String indicator = 'assets/images/indicator.png';
 }
