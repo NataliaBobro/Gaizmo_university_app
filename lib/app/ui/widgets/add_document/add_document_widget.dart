@@ -32,6 +32,7 @@ class AddDocumentWidget extends StatefulWidget {
 
 class _AddDocumentWidgetState extends State<AddDocumentWidget> {
   TextEditingController docName = TextEditingController();
+  TextEditingController notes = TextEditingController();
   int typeDoc = -1;
   DocumentTypeList? listType;
   DocumentType? selectedType;
@@ -111,7 +112,16 @@ class _AddDocumentWidgetState extends State<AddDocumentWidget> {
                                     selectedType = listType?.type.elementAt(index - 1);
                                   });
                                 },
-                              )
+                              ),
+                              const SizedBox(
+                                height: 24,
+                              ),
+                              AppField(
+                                keyboardType: TextInputType.multiline,
+                                label: 'Note',
+                                controller: notes,
+                                multiLine: 5
+                              ),
                             ],
                           ),
                         ),
@@ -169,6 +179,7 @@ class _AddDocumentWidgetState extends State<AddDocumentWidget> {
       ),
     );
     formData.fields.add(MapEntry('document_name', docName.text));
+    formData.fields.add(MapEntry('notes', notes.text));
     formData.fields.add(MapEntry('doc_type', '${selectedType?.id}'));
 
     downloadDocument(formData);

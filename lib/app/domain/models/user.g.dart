@@ -175,6 +175,7 @@ Documents _$DocumentsFromJson(Map<String, dynamic> json) => Documents(
       typeId: json['type_id'] as int?,
       patch: json['patch'] as String?,
       name: json['name'] as String?,
+      notes: json['notes'] as String?,
     );
 
 Map<String, dynamic> _$DocumentsToJson(Documents instance) => <String, dynamic>{
@@ -183,4 +184,5 @@ Map<String, dynamic> _$DocumentsToJson(Documents instance) => <String, dynamic>{
       'type_id': instance.typeId,
       'patch': instance.patch,
       'name': instance.name,
+      'notes': instance.notes,
     };

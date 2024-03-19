@@ -188,6 +188,7 @@ class Documents {
   int? typeId;
   String? patch;
   String? name;
+  String? notes;
 
   Documents({
     this.id,
@@ -195,6 +196,7 @@ class Documents {
     this.typeId,
     this.patch,
     this.name,
+    this.notes,
   });
 
   Map<String, dynamic> toJson() => _$DocumentsToJson(this);

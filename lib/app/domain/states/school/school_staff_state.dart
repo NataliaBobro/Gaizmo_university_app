@@ -79,6 +79,7 @@ class SchoolStaffState with ChangeNotifier {
       String? city,
       String? street,
       String? house,
+      String? salary,
       ) async {
     _validateError = null;
     notifyListeners();
@@ -93,6 +94,7 @@ class SchoolStaffState with ChangeNotifier {
       'city': city,
       'street': street,
       'house': house,
+      'salary': salary,
     };
     try {
       final result = await StaffService.addStaff(

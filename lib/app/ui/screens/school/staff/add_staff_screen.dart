@@ -31,6 +31,7 @@ class _AddStaffScreenState extends State<AddStaffScreen> {
   final TextEditingController email = TextEditingController();
   final TextEditingController street = TextEditingController();
   final TextEditingController house = TextEditingController();
+  final MaskedTextController salary = MaskedTextController(mask: '0000');
   final MaskedTextController phone = MaskedTextController(mask: '+00 (000) 000 00 00');
   Map<String, dynamic>? country;
   Map<String, dynamic>? city;
@@ -262,6 +263,11 @@ class _AddStaffScreenState extends State<AddStaffScreen> {
                     //     });
                     //   },
                     // ),
+                    AppField(
+                      label: 'Salary / hourly',
+                      controller: salary,
+                      keyboardType: TextInputType.number,
+                    ),
 
                     const AppTitle(
                       title: 'Address',
@@ -342,7 +348,8 @@ class _AddStaffScreenState extends State<AddStaffScreen> {
                             country?['name'],
                             city?['name'],
                             street.text,
-                            house.text
+                            house.text,
+                            salary.text
                         );
                       },
                       horizontalPadding: 16,

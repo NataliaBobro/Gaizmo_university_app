@@ -25,28 +25,18 @@ class DocumentList extends StatefulWidget {
 class _DocumentListState extends State<DocumentList> {
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      padding: const EdgeInsets.symmetric(
-          horizontal: 12
+
+    return Column(
+      children: List.generate(
+          widget.documents.length,
+          (index) => DocumentItem(
+              document: widget.documents[index],
+              onDelete: () {
+                onDelete(widget.documents[index].id, index);
+                Navigator.pop(context);
+              }
+          )
       ),
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 8,
-          mainAxisSpacing: 24,
-          mainAxisExtent: 123
-      ),
-      itemCount: widget.documents.length,
-      itemBuilder: (context, index) {
-        return DocumentItem(
-          document: widget.documents[index],
-          onDelete: () {
-            onDelete(widget.documents[index].id, index);
-            Navigator.pop(context);
-          }
-        );
-      },
     );
   }
 
@@ -78,6 +68,12 @@ class DocumentItem extends StatefulWidget {
 }
 
 class _DocumentItemState extends State<DocumentItem> {
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return OpenContainer(
@@ -87,21 +83,21 @@ class _DocumentItemState extends State<DocumentItem> {
         ),
         closedElevation: 0.0,
         closedBuilder: (BuildContext context, VoidCallback openContainer) {
-          return CupertinoButton(
-            padding: EdgeInsets.zero,
-            minSize: 0.0,
-            onPressed: () {
-              openContainer();
-            },
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+          return Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 24,
+            ).copyWith(
+                bottom: 16
+            ),
+            height: 96,
+            child: Row(
               children: [
-                SizedBox(
-                  height: 105,
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
                   child: CachedNetworkImage(
                       imageUrl: '${widget.document.patch}',
-                      width: double.infinity,
-                      height: double.infinity,
+                      width: 120,
+                      height: 80,
                       errorWidget: (context, error, stackTrace) =>
                       const SizedBox.shrink(),
                       fit: BoxFit.cover,
@@ -110,19 +106,30 @@ class _DocumentItemState extends State<DocumentItem> {
                   ),
                 ),
                 const SizedBox(
-                  height: 4,
+                  width: 16,
                 ),
-                Container(
-                  constraints: const BoxConstraints(
-                    maxWidth: double.infinity,
-                  ),
-                  child: Text(
-                    widget.document.name != null ?'${widget.document.name}' : '',
-                    style: TextStyles.s12w400.copyWith(
-                        color: Colors.black
-                    ),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.document.name != null ?'${widget.document.name}' : '',
+                        style: TextStyles.s14w500.copyWith(
+                            color: Colors.black,
+                            overflow: TextOverflow.ellipsis
+                        ),
+                        maxLines: 2,
+                      ),
+                      const Spacer(),
+                      Text(
+                        widget.document.notes != null ?'${widget.document.notes}' : '',
+                        style: TextStyles.s12w400.copyWith(
+                            color: Colors.black,
+                            overflow: TextOverflow.ellipsis
+                        ),
+                        maxLines: 2,
+                      ),
+                    ],
                   ),
                 )
               ],
@@ -170,15 +177,14 @@ class _DocumentItemState extends State<DocumentItem> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
-                          constraints: const BoxConstraints(
-                            maxWidth: 300
-                          ),
+                        Expanded(
                           child: Text(
                             widget.document.name != null ?'${widget.document.name}' : '',
-                            style: TextStyles.s16w500.copyWith(
-                                color: Colors.black
+                            style: TextStyles.s24w500.copyWith(
+                                color: Colors.black,
+                                overflow: TextOverflow.ellipsis
                             ),
+                            maxLines: 3,
                           ),
                         ),
                         CupertinoButton(
@@ -195,7 +201,29 @@ class _DocumentItemState extends State<DocumentItem> {
                       ],
                     )
                 ),
-              )
+              ),
+              if(widget.document.notes != null) ...[
+                Positioned(
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  child: Container(
+                      color: Colors.white.withOpacity(.4),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 16,
+                          horizontal: 16
+                      ).copyWith(
+                          top: 60
+                      ),
+                      child: Text(
+                        '${widget.document.notes}',
+                        style: TextStyles.s14w500.copyWith(
+                            color: Colors.black
+                        ),
+                      )
+                  ),
+                )
+              ]
             ],
           );
         }

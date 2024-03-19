@@ -10,7 +10,8 @@ class AppField extends StatelessWidget {
     required this.controller,
     this.error,
     this.keyboardType,
-    this.isPass = false
+    this.isPass = false,
+    this.multiLine = null
   }) : super(key: key);
 
   final String label;
@@ -18,6 +19,7 @@ class AppField extends StatelessWidget {
   final TextEditingController controller;
   final String? error;
   final bool isPass;
+  final int? multiLine;
   final TextInputType? keyboardType;
 
   @override
@@ -38,19 +40,20 @@ class AppField extends StatelessWidget {
           keyboardType: keyboardType ?? TextInputType.text,
           obscureText: isPass,
           controller: controller,
+          maxLines: multiLine ?? 1,
           decoration: InputDecoration(
-            constraints: const BoxConstraints(
-                maxHeight: 28
+            constraints: BoxConstraints(
+                maxHeight: multiLine != null ? 110 : 28
             ),
             hintText: placeholder,
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 0,
-              vertical: 0,
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: multiLine != null ? 8 : 0,
+              vertical: multiLine != null ? 8 : 0,
             ),
             hintStyle: TextStyles.s16w400.copyWith(
               color: Colors.black,
             ),
-            fillColor: Colors.transparent,
+            fillColor: multiLine != null ? Colors.white : Colors.transparent,
           ),
         ),
         Container(
