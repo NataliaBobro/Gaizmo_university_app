@@ -232,7 +232,7 @@ class SelectLangBottomSheet extends StatelessWidget {
                 vertical: 14
             ),
             child: Text(
-              'Languages',
+              getConstant('Languages'),
               style: TextStyles.s14w400.copyWith(
                   color: const Color(0xFF848484)
               ),

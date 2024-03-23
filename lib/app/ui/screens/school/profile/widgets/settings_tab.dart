@@ -1,4 +1,5 @@
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:etm_crm/app/ui/widgets/custom_scroll_physics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -31,25 +32,25 @@ class _SettingsTabState extends State<SettingsTab> {
       padding: const EdgeInsets.only(top: 24),
       physics: const BottomBouncingScrollPhysics(),
       children: [
-        // SettingsInput(
-        //   title: "Language",
-        //   onPress: () async {
-        //     await Navigator.push(
-        //       context,
-        //       MaterialPageRoute(
-        //         builder: (context) => SettingLanguage(
-        //             saveLanguage: (val) {
-        //               state.changeLanguage(val);
-        //             },
-        //             selectLanguage: state.selectLanguage != null ?
-        //               state.selectLanguage!['id'] : null,
-        //           ),
-        //         ),
-        //       );
-        //   }
-        // ),
         SettingsInput(
-          title: "General info",
+          title: getConstant('Language'),
+          onPress: () async {
+            await Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SettingLanguage(
+                    saveLanguage: (val) {
+                      state.changeLanguage(val);
+                    },
+                    selectLanguage: state.selectLanguage != null ?
+                      state.selectLanguage!['id'] : null,
+                  ),
+                ),
+              );
+          }
+        ),
+        SettingsInput(
+          title: getConstant('General_info'),
           onPress: () async {
             await Navigator.push(
               context,
@@ -63,7 +64,7 @@ class _SettingsTabState extends State<SettingsTab> {
           }
         ),
         SettingsInput(
-            title: "Social accounts",
+            title: getConstant('Social_accounts'),
             onPress: () async {
               await Navigator.push(
                 context,
@@ -79,11 +80,11 @@ class _SettingsTabState extends State<SettingsTab> {
             }
         ),
         SettingsInput(
-            title: "Notifications",
+            title: getConstant('Notifications'),
             onPress: () {}
         ),
         SettingsInput(
-            title: "Sign out",
+            title: getConstant('Sign_out'),
             onPress: () {
               showSignOutDialog();
             }
@@ -96,7 +97,7 @@ class _SettingsTabState extends State<SettingsTab> {
             horizontal: 24
           ),
           child: Text(
-            'Privacy settings',
+            getConstant('Privacy_settings'),
             style: TextStyles.s14w600.copyWith(
                 color: const Color(0xFF242424)
             ),
@@ -106,7 +107,7 @@ class _SettingsTabState extends State<SettingsTab> {
           height: 24,
         ),
         SettingsInput(
-            title: "Password",
+            title: getConstant('Password'),
             onPress: () async {
               await Navigator.push(
                 context,

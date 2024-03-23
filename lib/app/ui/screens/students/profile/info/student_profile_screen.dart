@@ -1,9 +1,11 @@
+import 'package:etm_crm/app/app.dart';
 import 'package:etm_crm/app/ui/screens/students/profile/info/my_lessons_tab.dart';
 import 'package:etm_crm/app/ui/screens/students/profile/info/personal_info_tab.dart';
 import 'package:etm_crm/app/ui/screens/students/profile/info/settings_tab.dart';
 import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../theme/text_styles.dart';
 import '../../../../widgets/profile/profile_avatar_with_etm.dart';
@@ -46,8 +48,11 @@ class _StudentProfileScreenState extends State<StudentProfileScreen> with Ticker
 
   @override
   Widget build(BuildContext context) {
+    final appSate = context.watch<AppState>();
+
     return Scaffold(
       backgroundColor: Colors.white,
+      key: ValueKey(appSate.constantsList),
       body: SafeArea(
         child: Container(
           width: double.infinity,

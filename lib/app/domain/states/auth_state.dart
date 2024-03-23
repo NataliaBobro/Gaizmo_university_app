@@ -560,6 +560,9 @@ class AuthState with ChangeNotifier {
       );
       if(result != null){
         setToken(result.token, result.user);
+        if(result.user?.languageId != _selectLang){
+          fetchNewConstant(result.user?.languageId);
+        }
       }
     } on DioError catch (e) {
       if(e.response?.statusCode == 422){
@@ -575,6 +578,10 @@ class AuthState with ChangeNotifier {
       _isLoading = false;
       notifyListeners();
     }
+  }
+
+  void fetchNewConstant(languageId){
+    context.read<AppState>().fetchConstant(languageId: languageId);
   }
 
   Future<void> sendRecoveryCode() async {

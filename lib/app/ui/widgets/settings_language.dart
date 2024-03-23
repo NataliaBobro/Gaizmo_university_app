@@ -78,7 +78,7 @@ class _SettingLanguageState extends State<SettingLanguage> {
                             ),
                           ],
                         ),
-                        if(selectLanguage != null) ...[
+                        if(selectLanguage != null) ...[ 
                           Padding(
                             padding: const EdgeInsets.only(bottom: 40),
                             child: AppButton(

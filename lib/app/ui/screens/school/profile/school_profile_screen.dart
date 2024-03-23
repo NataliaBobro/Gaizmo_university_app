@@ -1,3 +1,4 @@
+import 'package:etm_crm/app/app.dart';
 import 'package:etm_crm/app/ui/screens/school/profile/widgets/document_tab.dart';
 import 'package:etm_crm/app/ui/screens/school/profile/widgets/general_info_tab.dart';
 import 'package:etm_crm/app/ui/screens/school/profile/widgets/school_info.dart';
@@ -5,6 +6,7 @@ import 'package:etm_crm/app/ui/screens/school/profile/widgets/settings_tab.dart'
 import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:routemaster/routemaster.dart';
 
 import '../../../theme/text_styles.dart';
@@ -48,9 +50,11 @@ class _SchoolProfileScreenState extends State<SchoolProfileScreen> with TickerPr
 
   @override
   Widget build(BuildContext context) {
+    final state = context.watch<AppState>();
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
+        key: ValueKey(state.constantsList),
           child: Container(
             width: double.infinity,
             color: const Color(0xFFF0F3F6),

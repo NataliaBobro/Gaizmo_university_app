@@ -46,8 +46,9 @@ class AppState extends ChangeNotifier {
         if(_userData == null){
           await getUser();
           await initFirebase();
+        }else{
+          onChangeRoute();
         }
-        onChangeRoute();
       }else{
         fetchConstant(languageId: 1);
       }
@@ -82,7 +83,9 @@ class AppState extends ChangeNotifier {
         _userData = result;
         if(metaAppData == null){
           getMeta(result.languageId);
-          fetchConstant(languageId: result.languageId ?? 1);
+          fetchConstant(languageId: result.languageId ?? 1).then((value) {
+            onChangeRoute();
+          });
         }
       }
     } on DioError catch (e) {
@@ -156,6 +159,7 @@ class AppState extends ChangeNotifier {
 
   void changeLanguage(id) {
     _userData?.languageId = id;
+    fetchConstant(languageId: id);
     notifyListeners();
   }
 

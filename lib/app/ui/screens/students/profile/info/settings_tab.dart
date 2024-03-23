@@ -108,10 +108,15 @@ class _SettingTabState extends State<SettingTab> {
       if(result == true){
         read?.languageId = val;
         updateUser();
+        fetchNewConstants(val);
       }
     }catch(e){
       print(e);
     }
+  }
+
+  void fetchNewConstants(lang){
+    context.read<AppState>().fetchConstant(languageId: lang);
   }
 
   Future<void> showSignOutDialog() async {
