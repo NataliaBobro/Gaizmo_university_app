@@ -2,6 +2,7 @@ import 'package:etm_crm/app/ui/screens/school/profile/widgets/document_tab.dart'
 import 'package:etm_crm/app/ui/screens/school/profile/widgets/general_info_tab.dart';
 import 'package:etm_crm/app/ui/screens/school/profile/widgets/school_info.dart';
 import 'package:etm_crm/app/ui/screens/school/profile/widgets/settings_tab.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:routemaster/routemaster.dart';
@@ -85,17 +86,17 @@ class _SchoolProfileScreenState extends State<SchoolProfileScreen> with TickerPr
                     labelColor: const Color(0xFF242424),
                     unselectedLabelStyle: TextStyles.s14w400,
                     unselectedLabelColor: const Color(0xFFACACAC),
-                    tabs:  const [
+                    tabs:  [
                       Tab(
-                        text: 'General info',
+                        text: getConstant('General_info'),
                         iconMargin: EdgeInsets.zero,
                       ),
                       Tab(
-                        text: 'Documents',
+                        text: getConstant('Documents'),
                         iconMargin: EdgeInsets.zero,
                       ),
                       Tab(
-                        text: 'Settings',
+                        text: getConstant('Settings'),
                         iconMargin: EdgeInsets.zero,
                       ),
                     ],

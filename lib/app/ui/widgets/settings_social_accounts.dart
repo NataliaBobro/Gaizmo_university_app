@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:etm_crm/app/domain/models/user.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:etm_crm/app/ui/widgets/app_field.dart';
 import 'package:etm_crm/app/ui/widgets/snackbars.dart';
 import 'package:flutter/material.dart';
@@ -58,8 +59,8 @@ class _SettingsSocialAccountsState extends State<SettingsSocialAccounts> {
             color: const Color(0xFFF0F3F6),
             child: Column(
               children: [
-                const CenterHeaderWithAction(
-                    title: 'Settings'
+                CenterHeaderWithAction(
+                    title: getConstant('Settings')
                 ),
                 Expanded(
                   child: ListView(
@@ -75,28 +76,28 @@ class _SettingsSocialAccountsState extends State<SettingsSocialAccounts> {
                               height: 24,
                             ),
                             AppField(
-                              label: 'Instagram link',
+                              label: getConstant('Instagram_link'),
                               controller: instagramField,
                             ),
                             const SizedBox(
                               height: 24,
                             ),
                             AppField(
-                              label: 'Facebook link',
+                              label: getConstant('Facebook_link'),
                               controller: facebookField,
                             ),
                             const SizedBox(
                               height: 24,
                             ),
                             AppField(
-                              label: 'Linkedin link',
+                              label: getConstant('Linkedin_link'),
                               controller: linkedinField,
                             ),
                             const SizedBox(
                               height: 24,
                             ),
                             AppField(
-                              label: 'Twitter link',
+                              label: getConstant('Twitter_link'),
                               controller: twitterField,
                             ),
                           ],
@@ -108,7 +109,7 @@ class _SettingsSocialAccountsState extends State<SettingsSocialAccounts> {
                 Padding(
                   padding: const EdgeInsets.only(bottom: 40),
                   child: AppButton(
-                      title: 'Save changes',
+                      title: getConstant('SAVE_CHANGES'),
                       onPressed: () {
                         saveSocialLinks();
                       }

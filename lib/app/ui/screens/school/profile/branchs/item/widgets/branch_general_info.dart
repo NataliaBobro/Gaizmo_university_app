@@ -1,4 +1,5 @@
 import 'package:etm_crm/app/domain/models/user.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:etm_crm/app/ui/widgets/custom_scroll_physics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -34,20 +35,20 @@ class _BranchGeneralInfoTabState extends State<BranchGeneralInfoTab> {
               height: 24,
             ),
             InfoValue(
-                title: "Phone number",
+                title: getConstant('Phone_number'),
                 value: "${school?.phone}"
             ),
             InfoValue(
-                title: "E-mail",
+                title: getConstant('Email'),
                 value: "${school?.email}"
             ),
             InfoValue(
-                title: "Category",
+                title: getConstant('Category'),
                 value: "${school?.school?.category?.translate?.value}"
             ),
             if(school?.school?.siteName != null) ...[
               InfoValue(
-                  title: "Site address",
+                  title: getConstant('Site_address'),
                   value: "${school?.school?.siteName}"
               ),
             ],
@@ -57,7 +58,7 @@ class _BranchGeneralInfoTabState extends State<BranchGeneralInfoTab> {
                 builder: (context) {
                   try{
                     return InfoValue(
-                        title: "Working hours",
+                        title: getConstant('Working_hours'),
                         value: "${convertDaysToFormat(school?.workDay ?? [])} "
                             "${(school?.school?.from)?.replaceAll(" ", "")} - "
                             "${(school?.school?.to)?.replaceAll(" ", "")}"

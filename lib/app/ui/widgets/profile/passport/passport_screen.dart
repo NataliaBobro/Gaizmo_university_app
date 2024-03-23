@@ -1,3 +1,4 @@
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:etm_crm/app/ui/widgets/profile/passport/presents_tab.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -100,9 +101,9 @@ class _PassportScreenState extends State<PassportScreen>  with TickerProviderSta
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Tab(
+                          Tab(
                             height: 24,
-                            text: 'Exchange',
+                            text: getConstant('Exchange'),
                             iconMargin: EdgeInsets.zero,
                           ),
                           if(isActiveTab == 0) ...[
@@ -117,9 +118,9 @@ class _PassportScreenState extends State<PassportScreen>  with TickerProviderSta
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Tab(
+                          Tab(
                             height: 19,
-                            text: 'Presents',
+                            text: getConstant('Presents'),
                           ),
                           if(isActiveTab == 1) ...[
                             Container(
@@ -173,7 +174,7 @@ class PassportHeader extends StatelessWidget {
             ),
             alignment: Alignment.center,
             child: Text(
-              'My ID Passport',
+              getConstant('My_ID_Passport'),
               style: TextStyles.s24w700.copyWith(
                   color: const Color(0xFF242424)
               ),

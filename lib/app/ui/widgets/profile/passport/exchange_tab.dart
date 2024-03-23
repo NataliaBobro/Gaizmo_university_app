@@ -1,3 +1,4 @@
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -23,7 +24,7 @@ class ExchangeScreen extends StatelessWidget {
                   vertical: 24
               ),
               child: Text(
-                "Today",
+                getConstant('Today'),
                 style: TextStyles.s14w600.copyWith(
                     color: const Color(0xFF242424)
                 ),

@@ -1,5 +1,6 @@
 import 'package:etm_crm/app/app.dart';
 import 'package:etm_crm/app/ui/screens/students/profile/info/widgets/my_qr_code.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:etm_crm/app/ui/widgets/social_account_info.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -29,15 +30,15 @@ class _PersonalInfoTabState extends State<PersonalInfoTab> {
               height: 24,
             ),
             InfoValue(
-                title: "Full name",
+                title: getConstant('Full_name'),
                 value: "${state?.firstName} ${state?.lastName ?? state?.surname}"
             ),
             InfoValue(
-                title: "Phone number",
+                title: getConstant('Phone_number'),
                 value: "${state?.phone}"
             ),
             InfoValue(
-                title: "E-mail",
+                title: getConstant('Email'),
                 value: "${state?.email}"
             ),
             if(state?.socialAccounts != null) ...[
@@ -46,7 +47,7 @@ class _PersonalInfoTabState extends State<PersonalInfoTab> {
               )
             ],
             SettingsInput(
-                title: "QR Code",
+                title: getConstant('QR_Code'),
                 onPress: () async {
                   context.read<AppState>().openPage(
                       context,

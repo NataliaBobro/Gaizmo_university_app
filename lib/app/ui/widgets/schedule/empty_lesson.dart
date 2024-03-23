@@ -1,3 +1,4 @@
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:flutter/material.dart';
 
 import '../../theme/text_styles.dart';
@@ -20,7 +21,7 @@ class EmptyLesson extends StatelessWidget {
           height: 115,
         ),
         Text(
-          title ?? "There is no schedule for today :(",
+          title ?? getConstant('There_is_no_schedule_for_today'),
           style: TextStyles.s14w600.copyWith(
               color: const Color(0xFF242424)
           ),
@@ -29,7 +30,7 @@ class EmptyLesson extends StatelessWidget {
           height: 8,
         ),
         Text(
-          subtitle ?? "Explore the schools to find\nthe lessons for you!",
+          subtitle ?? getConstant('Explore_the_schools_to_find_the_lessons_for_you'),
           style: TextStyles.s12w400.copyWith(
               color: const Color(0xFF242424)
           ),

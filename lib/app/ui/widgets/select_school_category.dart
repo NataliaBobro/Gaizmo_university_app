@@ -1,4 +1,5 @@
 import 'package:etm_crm/app/app.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:etm_crm/app/ui/widgets/select_bottom_sheet_input.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -53,8 +54,8 @@ class _SelectSchoolCategoryState extends State<SelectSchoolCategory> {
             color: const Color(0xFFF0F3F6),
             child: Column(
               children: [
-                const CenterHeaderWithAction(
-                    title: 'School category'
+                CenterHeaderWithAction(
+                    title: getConstant('School_category')
                 ),
                 Expanded(
                     child: Column(
@@ -70,8 +71,8 @@ class _SelectSchoolCategoryState extends State<SelectSchoolCategory> {
                                 height: 24,
                               ),
                               SelectBottomSheetInput(
-                                  label: "Choose category",
-                                  labelModal: "Choose category",
+                                  label: getConstant('Choose_category'),
+                                  labelModal: getConstant('Choose_category'),
                                   selected: selected,
                                   items: listSelected,
                                   horizontalPadding: 0,
@@ -86,7 +87,7 @@ class _SelectSchoolCategoryState extends State<SelectSchoolCategory> {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 40),
                           child: AppButton(
-                              title: 'Save changes',
+                              title: getConstant('SAVE_CHANGES'),
                               onPressed: () {
                                 widget.onSelect(selected);
                                 Navigator.pop(context);

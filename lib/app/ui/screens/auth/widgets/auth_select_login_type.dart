@@ -1,3 +1,4 @@
+import 'package:etm_crm/app/app.dart';
 import 'package:etm_crm/app/domain/states/auth_state.dart';
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
 import 'package:etm_crm/app/ui/widgets/auth_button.dart';
@@ -8,6 +9,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../../resources/resources.dart';
 import '../../../theme/app_colors.dart';
+import '../../../utils/get_constant.dart';
 import '../../../widgets/penguin/penguin_animate.dart';
 
 class AuthSelectLoginType extends StatefulWidget {
@@ -61,7 +63,9 @@ class _AuthSelectLoginTypeState extends State<AuthSelectLoginType>
 
   @override
   Widget build(BuildContext context) {
-    final read = context.read<AuthState>();
+    final state = context.watch<AuthState>();
+    final appState = context.watch<AppState>();
+
     return Scaffold(
       backgroundColor: AppColors.registerBg,
       body: Stack(
@@ -104,22 +108,23 @@ class _AuthSelectLoginTypeState extends State<AuthSelectLoginType>
                               children: [
                                 AppButton(
                                     key: bottomPos,
-                                    title: 'Sign in',
+                                    title: getConstant('SIGN_IN'),
                                     onPressed: () {
-                                      read.openSignIn();
+                                      state.openSignIn();
                                     }
                                 ),
                                 const SizedBox(
                                   height: 8,
                                 ),
                                 AppButton(
-                                    title: 'Sign up',
-                                    onPressed: () {
-                                      read.openSelectUserType();
-                                    }
+                                  key: ValueKey(appState.constantsList),
+                                  title: getConstant('SIGN_UP'),
+                                  onPressed: () {
+                                    state.openSelectUserType();
+                                  }
                                 ),
                                 const SizedBox(
-                                  height: 139,
+                                  height: 65,
                                 ),
                                 // Text(
                                 //   'Get read about ETM app!',
@@ -130,10 +135,10 @@ class _AuthSelectLoginTypeState extends State<AuthSelectLoginType>
                                 // const SizedBox(
                                 //   height: 24,
                                 // ),
-                                // const SelectLangButton(),
-                                // const SizedBox(
-                                //   height: 24,
-                                // ),
+                                const SelectLangButton(),
+                                const SizedBox(
+                                  height: 24,
+                                ),
                               ],
                             ),
                           )

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:etm_crm/app/domain/models/meta.dart';
 import 'package:etm_crm/app/domain/services/user_service.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:etm_crm/app/ui/widgets/app_field.dart';
 import 'package:flutter/material.dart';
 import '../utils/show_message.dart';
@@ -75,8 +76,8 @@ class _ChangePasswordState extends State<ChangePassword> {
             color: const Color(0xFFF0F3F6),
             child: Column(
               children: [
-                const CenterHeaderWithAction(
-                    title: 'Settings'
+                CenterHeaderWithAction(
+                    title: getConstant('Settings')
                 ),
                 Expanded(
                     child: Padding(
@@ -94,7 +95,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                                   height: 24,
                                 ),
                                 AppField(
-                                  label: 'Old password',
+                                  label: getConstant('Old_password'),
                                   controller: oldPassword,
                                   isPass: true,
                                   error: validateError?.errors.oldPassword?.first,
@@ -103,7 +104,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                                   height: 24,
                                 ),
                                 AppField(
-                                  label: 'New password',
+                                  label: getConstant('New_password'),
                                   controller: newPassword,
                                   isPass: true,
                                   error: validateError?.errors.newPassword?.first,
@@ -112,7 +113,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                                   height: 24,
                                 ),
                                 AppField(
-                                  label: 'Confirm password',
+                                  label: getConstant('Confirm_password'),
                                   controller: confirmPassword,
                                   isPass: true,
                                   error: validateError?.errors.confirmPassword?.first,
@@ -127,7 +128,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                 Padding(
                   padding: const EdgeInsets.only(bottom: 40),
                   child: AppButton(
-                      title: 'Save changes',
+                      title: getConstant('SAVE_CHANGES'),
                       onPressed: () {
                         changePassword();
                       }

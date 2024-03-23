@@ -143,6 +143,7 @@ class AuthState with ChangeNotifier {
 
   void changeLang(index) {
     _selectLang = index;
+    context.read<AppState>().fetchConstant(languageId: _selectLang + 1);
     routemaster.pop();
     notifyListeners();
   }
@@ -289,14 +290,14 @@ class AuthState with ChangeNotifier {
         "name": "Українська",
         "icon": Svgs.ua
       },
-      {
-        "name": "Deutsch",
-        "icon": Svgs.de
-      },
-      {
-        "name": "Español",
-        "icon": Svgs.es
-      },
+      // {
+      //   "name": "Deutsch",
+      //   "icon": Svgs.de
+      // },
+      // {
+      //   "name": "Español",
+      //   "icon": Svgs.es
+      // },
     ];
   }
 

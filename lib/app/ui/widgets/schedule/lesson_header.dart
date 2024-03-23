@@ -1,3 +1,4 @@
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:flutter/material.dart';
 
 import '../../../domain/models/lesson.dart';
@@ -34,7 +35,7 @@ class MyLessonHeader extends StatelessWidget {
           height: 8,
         ),
         Text(
-          'Start ${startTime.format(context)} - End ${endTime.format(context)}',
+          '${getConstant('Start')} ${startTime.format(context)} - ${getConstant('End')} ${endTime.format(context)}',
           style: TextStyles.s13w400.copyWith(
               color: const Color(0xFF848484)
           ),

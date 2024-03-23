@@ -1,4 +1,5 @@
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:etm_crm/app/ui/widgets/auth_button.dart';
 import 'package:etm_crm/app/ui/widgets/center_header.dart';
 import 'package:flutter/cupertino.dart';
@@ -29,8 +30,8 @@ class _AddResultState extends State<AddResult> {
             color: const Color(0xFFF0F3F6),
             child: Column(
               children: [
-                const CenterHeader(
-                    title: 'Add result'
+                CenterHeader(
+                    title: getConstant('Add_result')
                 ),
                 Expanded(
                     child: ListView(
@@ -44,7 +45,7 @@ class _AddResultState extends State<AddResult> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                state.filterSchedule.type.isNotEmpty ? 'Type of lesson' : 'Choose type of lesson',
+                                state.filterSchedule.type.isNotEmpty ? getConstant('Type_of_lesson') : getConstant('Choose_type_of_lesson'),
                                 style: TextStyles.s14w400.copyWith(
                                   color: const Color(0xFF242424)
                                 ),
@@ -92,7 +93,7 @@ class _AddResultState extends State<AddResult> {
                 ),
                 if(state.filterSchedule.type.isNotEmpty) ...[
                   AppButton(
-                      title: "Add result",
+                      title: getConstant('Add_result'),
                       onPressed: () async {
                         state.openAddPhoto();
                       }

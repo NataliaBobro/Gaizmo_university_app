@@ -1,4 +1,5 @@
 import 'package:etm_crm/app/app.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:etm_crm/app/ui/widgets/auth_button.dart';
 import 'package:etm_crm/app/ui/widgets/center_header.dart';
 import 'package:etm_crm/app/ui/widgets/select_bottom_sheet_input.dart';
@@ -26,6 +27,7 @@ class _SettingLanguageState extends State<SettingLanguage> {
     List<Map<String, dynamic>> list = [];
     final appStateLanguage = context.read<AppState>().metaAppData?.language;
     for(var a = 0; a < (appStateLanguage?.length ?? 0); a++){
+      if(a > 1) break;
       list.add(
         {
           "id": appStateLanguage?[a].id,
@@ -52,8 +54,8 @@ class _SettingLanguageState extends State<SettingLanguage> {
             color: const Color(0xFFF0F3F6),
             child: Column(
               children: [
-                const CenterHeaderWithAction(
-                    title: 'Settings'
+                CenterHeaderWithAction(
+                    title: getConstant('Settings')
                 ),
                 Expanded(
                     child: Column(
@@ -65,8 +67,8 @@ class _SettingLanguageState extends State<SettingLanguage> {
                               height: 24,
                             ),
                             SelectBottomSheetInput(
-                                label: "Choose language",
-                                labelModal: "Choose language",
+                                label: getConstant('Choose_language'),
+                                labelModal: getConstant('Choose_language'),
                                 selected: selectLanguage,
                                 items: listLanguage,
                                 onSelect: (value) {
@@ -80,7 +82,7 @@ class _SettingLanguageState extends State<SettingLanguage> {
                           Padding(
                             padding: const EdgeInsets.only(bottom: 40),
                             child: AppButton(
-                                title: 'Save changes',
+                                title: getConstant('SAVE_CHANGES'),
                                 onPressed: () {
                                   Navigator.pop(context);
                                   widget.saveLanguage(

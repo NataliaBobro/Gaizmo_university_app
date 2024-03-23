@@ -10,6 +10,7 @@ import 'package:multi_select_flutter/util/multi_select_list_type.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../theme/text_styles.dart';
+import '../../../../utils/get_constant.dart';
 import '../../../../widgets/app_field.dart';
 import '../../../../widgets/auth_button.dart';
 import '../../../../widgets/center_header.dart';
@@ -54,8 +55,8 @@ class _AddLessonScreenState extends State<AddLessonScreen> {
           color: const Color(0xFFF0F3F6),
           child: Column(
             children: [
-              const CenterHeaderWithAction(
-                  title: 'Add lesson'
+              CenterHeaderWithAction(
+                  title: getConstant('Add_lesson')
               ),
               Expanded(
                 child: ListView(
@@ -69,7 +70,7 @@ class _AddLessonScreenState extends State<AddLessonScreen> {
                     ),
                     MultiSelectDialogField(
                       buttonText: Text(
-                        "Service",
+                        getConstant('Service'),
                         style: TextStyles.s14w600.copyWith(
                             color: const Color(0xFF242424)
                         ),
@@ -98,7 +99,7 @@ class _AddLessonScreenState extends State<AddLessonScreen> {
                       height: 45,
                     ),
                     Text(
-                      'Lesson information',
+                      getConstant('Lesson_information'),
                       style: TextStyles.s14w600.copyWith(
                           color: const Color(0xFFFFC700)
                       ),
@@ -108,7 +109,7 @@ class _AddLessonScreenState extends State<AddLessonScreen> {
                     ),
                     SelectInputSearch(
                       errors: state.validateError?.errors.schoolClass?.first,
-                      title: 'Class',
+                      title: getConstant('Class'),
                       labelStyle: TextStyles.s14w600.copyWith(
                           color: const Color(0xFF242424)
                       ),
@@ -130,7 +131,7 @@ class _AddLessonScreenState extends State<AddLessonScreen> {
                       height: 16,
                     ),
                     Text(
-                      'Lesson duration',
+                      getConstant('Lesson_duration'),
                       style: TextStyles.s14w600.copyWith(
                           color: const Color(0xFFFFC700)
                       ),
@@ -149,7 +150,7 @@ class _AddLessonScreenState extends State<AddLessonScreen> {
                                   maxWidth: 150
                               ),
                               child: AppField(
-                                label: 'Start',
+                                label: getConstant('Start'),
                                 controller: state.lessonStart,
                                 placeholder: '_ _ : _ _',
                                 error: state.validateError?.errors.startLesson?.first,
@@ -178,7 +179,7 @@ class _AddLessonScreenState extends State<AddLessonScreen> {
                       height: 40,
                     ),
                     Text(
-                      'Repeats',
+                      getConstant('Repeats'),
                       style: TextStyles.s14w600.copyWith(
                           color: const Color(0xFFFFC700)
                       ),
@@ -191,7 +192,7 @@ class _AddLessonScreenState extends State<AddLessonScreen> {
                       padding: EdgeInsets.zero,
                       child: IgnorePointer(
                         child: AppField(
-                          label: 'Start',
+                          label: getConstant('Start'),
                           controller: state.repeatsStart,
                           error: state.validateError?.errors.start?.first,
                         ),
@@ -220,7 +221,7 @@ class _AddLessonScreenState extends State<AddLessonScreen> {
                         padding: EdgeInsets.zero,
                         child: IgnorePointer(
                           child: AppField(
-                            label: 'End',
+                            label: getConstant('End'),
                             controller: state.repeatsEnd,
                             error: state.validateError?.errors.end?.first,
                           ),
@@ -249,7 +250,7 @@ class _AddLessonScreenState extends State<AddLessonScreen> {
                       height: 16,
                     ),
                     AppButton(
-                      title: state.editId != null ? 'Edit Lesson' : 'ADD Lesson',
+                      title: state.editId != null ? getConstant('EDIT_Lesson') : getConstant('Add_lesson'),
                       onPressed: () {
                         state.addOrEditLesson();
                       },

@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../../../app.dart';
 import '../../../domain/services/staff_service.dart';
 import '../../theme/text_styles.dart';
+import '../../utils/get_constant.dart';
 import '../auth_button.dart';
 import '../center_header.dart';
 import '../select_input.dart';
@@ -42,8 +43,8 @@ class _SettingsGenderState extends State<SettingsGender> {
             color: const Color(0xFFF0F3F6),
             child: Column(
               children: [
-                const CenterHeaderWithAction(
-                    title: 'Settings'
+                CenterHeaderWithAction(
+                    title: getConstant('Settings')
                 ),
                 Expanded(
                     child: Column(
@@ -56,12 +57,12 @@ class _SettingsGenderState extends State<SettingsGender> {
                             ),
                             physics: const ClampingScrollPhysics(),
                             children: [
-                              SizedBox(
+                              const SizedBox(
                                 height: 24,
                               ),
                               SelectInput(
                                 // errors: state.validateError?.errors.genderErrors?.first,
-                                title: 'Choose gender',
+                                title: getConstant('Gender'),
                                 hintText: '',
                                 hintStyle: TextStyles.s14w400.copyWith(
                                     color: const Color(0xFF848484)
@@ -83,7 +84,7 @@ class _SettingsGenderState extends State<SettingsGender> {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 40),
                           child: AppButton(
-                              title: 'Save changes',
+                              title: getConstant('SAVE_CHANGES'),
                               onPressed: () {
                                 saveGender(gender);
                               }

@@ -1,4 +1,5 @@
 import 'package:etm_crm/app/domain/states/auth_state.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:etm_crm/app/ui/widgets/arrow_back.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +42,7 @@ class _ConfirmPasswordRecoveryState extends State<ConfirmPasswordRecovery> {
                       Container(
                         alignment: Alignment.center,
                         child: Text(
-                          'Password recovery',
+                          getConstant('Password_recovery'),
                           style: TextStyles.s24w600.copyWith(
                               color: Colors.white
                           ),
@@ -63,10 +64,10 @@ class _ConfirmPasswordRecoveryState extends State<ConfirmPasswordRecovery> {
                                         color: Colors.white,
                                         height: 1.57
                                     ),
-                                    text: "Please enter the password\nreset code sent to the email\n",
+                                    text: getConstant('Please_enter_the_password_reset_code_sent_to_the_email'),
                                     children: [
                                       TextSpan(
-                                          text: "${state.email.text} ",
+                                          text: " ${state.email.text} ",
                                           style: TextStyles.s14w400.copyWith(
                                               color: const Color(0xFFFFC700)
                                           )
@@ -81,13 +82,13 @@ class _ConfirmPasswordRecoveryState extends State<ConfirmPasswordRecovery> {
                             AuthInput(
                               keyboardType: TextInputType.number,
                               controller: state.code,
-                              title: 'Code',
+                              title: getConstant('Code'),
                             ),
                             const SizedBox(
                               height: 40,
                             ),
                             AppButton(
-                              title: 'Continue',
+                              title: getConstant('CONTINUE'),
                               onPressed: () {
                                 state.confirmCode();
                               },

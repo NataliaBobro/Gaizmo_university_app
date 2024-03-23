@@ -5,6 +5,7 @@ import '../../../domain/models/meta.dart';
 import '../../../domain/services/app_ninjas_service.dart';
 import '../../../domain/services/staff_service.dart';
 import '../../theme/text_styles.dart';
+import '../../utils/get_constant.dart';
 import '../app_field.dart';
 import '../auth_button.dart';
 import '../center_header.dart';
@@ -166,7 +167,7 @@ class _SettingsAddressState extends State<SettingsAddress> {
                               ),
                               SelectInputSearchField(
                                 errors: validateError?.errors.country,
-                                title: 'Country',
+                                title: getConstant('Country'),
                                 titleStyle: TextStyles.s14w600.copyWith(
                                     color: const Color(0xFF242424)
                                 ),
@@ -191,7 +192,7 @@ class _SettingsAddressState extends State<SettingsAddress> {
                               ),
                               SelectInputSearchField(
                                 errors: validateError?.errors.city,
-                                title: 'City',
+                                title: getConstant('City'),
                                 items: cityListData(),
                                 onSearch: (value) {
                                   searchCity(value);
@@ -214,14 +215,14 @@ class _SettingsAddressState extends State<SettingsAddress> {
                                 hintText: '',
                               ),
                               AppField(
-                                label: 'Street',
+                                label: getConstant('Street'),
                                 controller: street,
                               ),
                               const SizedBox(
                                 height: 24,
                               ),
                               AppField(
-                                label: 'House',
+                                label: getConstant('House'),
                                 controller: house,
                               ),
                             ],
@@ -230,7 +231,7 @@ class _SettingsAddressState extends State<SettingsAddress> {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 40),
                           child: AppButton(
-                              title: 'Save changes',
+                              title: getConstant('SAVE_CHANGES'),
                               onPressed: () {
                                 saveAddress(
                                   country?['name'],

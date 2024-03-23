@@ -3,6 +3,7 @@ import 'package:etm_crm/app/ui/screens/school/profile/branchs/item/widgets/branc
 import 'package:etm_crm/app/ui/screens/school/profile/branchs/item/widgets/branch_general_info.dart';
 import 'package:etm_crm/app/ui/screens/school/profile/branchs/item/widgets/branch_info.dart';
 import 'package:etm_crm/app/ui/screens/students/schools/item/widgets/student_school_services.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -90,9 +91,9 @@ class _StudentSchoolItemState extends State<StudentSchoolItem> with TickerProvid
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Tab(
+                          Tab(
                             height: 24,
-                            text: 'Personal info',
+                            text: getConstant('Personal_info'),
                             iconMargin: EdgeInsets.zero,
                           ),
                           if(isActiveTab == 0) ...[
@@ -107,9 +108,9 @@ class _StudentSchoolItemState extends State<StudentSchoolItem> with TickerProvid
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Tab(
+                          Tab(
                             height: 19,
-                            text: 'Services',
+                            text: getConstant('Services'),
                           ),
                           if(isActiveTab == 1) ...[
                             Container(
@@ -161,7 +162,7 @@ class _SchoolHeaderState extends State<SchoolHeader> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "School",
+                getConstant('School'),
                 style: TextStyles.s24w700.copyWith(
                     color: const Color(0xFF242424)
                 ),

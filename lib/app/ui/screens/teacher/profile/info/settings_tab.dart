@@ -1,5 +1,6 @@
 import 'package:etm_crm/app/app.dart';
 import 'package:etm_crm/app/ui/screens/teacher/profile/info/widgets/personal_info_teacher.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';
 import 'package:provider/provider.dart';
@@ -30,22 +31,22 @@ class _SettingTabState extends State<SettingTab> {
       padding: const EdgeInsets.only(top: 24),
       physics: const BottomBouncingScrollPhysics(),
       children: [
-        // SettingsInput(
-        //     title: "Language",
-        //     onPress: () async {
-        //       await Navigator.push(
-        //         context,
-        //         MaterialPageRoute(
-        //             builder: (context) => SettingLanguage(
-        //               saveLanguage: (val) {
-        //                 changeLanguageForUser(val['id']);
-        //               },
-        //               selectLanguage: state.userData?.languageId,
-        //             )
-        //         ),
-        //       );
-        //     }
-        // ),
+        SettingsInput(
+            title: getConstant('Language'),
+            onPress: () async {
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => SettingLanguage(
+                      saveLanguage: (val) {
+                        changeLanguageForUser(val['id']);
+                      },
+                      selectLanguage: state.userData?.languageId,
+                    )
+                ),
+              );
+            }
+        ),
         SettingsInput(
             title: "Personal info",
             onPress: () async {

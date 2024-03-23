@@ -1,5 +1,6 @@
 import 'package:etm_crm/app/app.dart';
 import 'package:etm_crm/app/ui/screens/students/profile/info/widgets/personal_info_student.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:etm_crm/app/ui/widgets/notifications_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';
@@ -27,24 +28,24 @@ class _SettingTabState extends State<SettingTab> {
       padding: const EdgeInsets.only(top: 24),
       physics: const BottomBouncingScrollPhysics(),
       children: [
-        // SettingsInput(
-        //     title: "Language",
-        //     onPress: () async {
-        //       await Navigator.push(
-        //         context,
-        //         MaterialPageRoute(
-        //             builder: (context) => SettingLanguage(
-        //               saveLanguage: (val) {
-        //                 changeLanguageForUser(val['id']);
-        //               },
-        //               selectLanguage: state.userData?.languageId,
-        //             )
-        //         ),
-        //       );
-        //     }
-        // ),
         SettingsInput(
-            title: "Personal info",
+            title: getConstant('Language'),
+            onPress: () async {
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => SettingLanguage(
+                      saveLanguage: (val) {
+                        changeLanguageForUser(val['id']);
+                      },
+                      selectLanguage: state.userData?.languageId,
+                    )
+                ),
+              );
+            }
+        ),
+        SettingsInput(
+            title: getConstant('Personal_info'),
             onPress: () async {
               await Navigator.push(
                 context,
@@ -57,7 +58,7 @@ class _SettingTabState extends State<SettingTab> {
             }
         ),
         SettingsInput(
-            title: "Notifications",
+            title: getConstant('Notifications'),
             onPress: () async {
               await Navigator.push(
                 context,
@@ -86,7 +87,7 @@ class _SettingTabState extends State<SettingTab> {
         //     }
         // ),
         SettingsInput(
-            title: "Sign out",
+            title: getConstant('Sign_out'),
             onPress: () {
               showSignOutDialog();
             }
@@ -117,20 +118,20 @@ class _SettingTabState extends State<SettingTab> {
     await showPlatformDialog(
       context: context,
       builder: (context) => BasicDialogAlert(
-        content: const Text(
-          "Do you really want\n to sign up from “ETM”?",
+        content: Text(
+          getConstant('Do_you_really_want_to_sign_up_from_ETM'),
           style: TextStyles.s17w600,
         ),
         actions: <Widget>[
           BasicDialogAction(
-            title: const Text("Yes"),
+            title: Text(getConstant('Yes')),
             onPressed: () {
               Navigator.pop(context);
               context.read<AppState>().onLogout();
             },
           ),
           BasicDialogAction(
-            title: const Text("No"),
+            title: Text(getConstant('No')),
             onPressed: () {
               Navigator.pop(context);
             },

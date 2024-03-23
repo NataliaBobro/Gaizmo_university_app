@@ -1,3 +1,4 @@
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -115,32 +116,32 @@ class _LessonItemState extends State<LessonItem> {
         children: [
           if(widget.lesson?.services?.first?.teacher != null) ...[
             ContentRowInfo(
-              title: 'Teacher',
+              title: getConstant('Teacher'),
               value: '${widget.lesson?.services?.first?.teacher?.firstName} '
                   '${widget.lesson?.services?.first?.teacher?.lastName}',
             )
           ],
           ContentRowInfo(
-            title: 'Students',
+            title: getConstant('Students'),
             content: PreviewListStudent(
                 serviceId: widget.lesson?.services?.first?.id,
                 users: widget.lesson?.services?.first?.payUsers
             ),
           ),
           ContentRowInfo(
-            title: 'Adress',
+            title: getConstant('Adress'),
             value: '${widget.lesson?.services?.first?.school?.street} '
                 '${widget.lesson?.services?.first?.school?.house}',
           ),
           if(widget.lesson?.schoolClass != null) ...[
             ContentRowInfo(
-                title: 'Class number',
+                title: getConstant('Class_number'),
                 value: '${widget.lesson?.schoolClass?.name}'
             )
           ],
           if(widget.lesson?.zoomMeeting != null) ...[
             ContentRowInfo(
-              title: 'Lesson links',
+              title: getConstant('Lesson_links'),
               content: CupertinoButton(
                 minSize: 0.0,
                 padding: EdgeInsets.zero,
@@ -160,7 +161,7 @@ class _LessonItemState extends State<LessonItem> {
           ],
           if(widget.lesson?.services?.first?.desc != null) ...[
             ContentRowInfo(
-              title: 'Description',
+              title: getConstant('Description'),
               content: CupertinoButton(
                 minSize: 0.0,
                 padding: EdgeInsets.zero,

@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:etm_crm/app/domain/models/results.dart';
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:etm_crm/app/ui/widgets/center_header.dart';
 import 'package:etm_crm/app/ui/widgets/empty_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -59,7 +60,7 @@ class _MyResultsScreenState extends State<MyResultsScreen> with TickerProviderSt
             child: Column(
               children: [
                 CenterHeaderWithAction(
-                    title: 'My results',
+                    title: getConstant('My_results'),
                     action: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
@@ -108,9 +109,9 @@ class _MyResultsScreenState extends State<MyResultsScreen> with TickerProviderSt
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Tab(
+                            Tab(
                               height: 24,
-                              text: 'My tasks',
+                              text: getConstant('My_tasks'),
                               iconMargin: EdgeInsets.zero,
                             ),
                             if(isActiveTab == 0) ...[
@@ -125,9 +126,9 @@ class _MyResultsScreenState extends State<MyResultsScreen> with TickerProviderSt
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Tab(
+                            Tab(
                               height: 19,
-                              text: 'Results',
+                              text: getConstant('Results'),
                             ),
                             if(isActiveTab == 1) ...[
                               Container(
@@ -199,7 +200,7 @@ class _MyResultsScreenState extends State<MyResultsScreen> with TickerProviderSt
                       vertical: 14
                   ),
                   child: Text(
-                    'Results',
+                    getConstant('Results'),
                     style: TextStyles.s14w400.copyWith(
                         color: Colors.black
                     ),
@@ -281,8 +282,8 @@ class _ResultTabState extends State<ResultTab> {
           if(widget.hasAdd) ...[
             EmptyWidget(
               isEmpty: widget.list.isEmpty,
-              title: "No results yet :(",
-              subtitle: "Click the button below to add result! ",
+              title: getConstant('No_results_yet_'),
+              subtitle: getConstant('Click_the_button_below_to_add_result'),
               onPress: () async {
                 await Navigator.push(
                     context,

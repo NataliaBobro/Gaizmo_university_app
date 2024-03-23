@@ -1,3 +1,4 @@
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -45,7 +46,7 @@ class _AuthSelectUserTypeState extends State<AuthSelectUserType> {
             Column(
               children: [
                 AppButton(
-                    title: 'I’m student',
+                    title: getConstant('IM_STUDENT'),
                     icon: Svgs.student,
                     onPressed: () {
                       read.changeUserType(3);
@@ -55,7 +56,7 @@ class _AuthSelectUserTypeState extends State<AuthSelectUserType> {
                   height: 8,
                 ),
                 AppButton(
-                    title: 'I’m SCHOOL',
+                    title: getConstant('School'),
                     icon: Svgs.schoolColor,
                     onPressed: () {
                       read.changeUserType(1);
@@ -65,7 +66,7 @@ class _AuthSelectUserTypeState extends State<AuthSelectUserType> {
                   height: 8,
                 ),
                 AppButton(
-                    title: 'I’m Teacher',
+                    title: getConstant('Teacher'),
                     icon: Svgs.teacher,
                     onPressed: () {
                       read.changeUserType(2);

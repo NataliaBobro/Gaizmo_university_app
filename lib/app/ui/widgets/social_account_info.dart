@@ -1,4 +1,5 @@
 import 'package:etm_crm/app/domain/models/user.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +27,7 @@ class SocialAccountInfo extends StatelessWidget {
           SizedBox(
             width: 125,
             child: Text(
-              'Social links',
+              getConstant('Social_links'),
               style: TextStyles.s14w400.copyWith(
                   color: const Color(0xFF848484)
               ),

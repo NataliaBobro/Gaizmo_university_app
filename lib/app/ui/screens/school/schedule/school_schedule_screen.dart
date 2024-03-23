@@ -3,6 +3,7 @@ import 'package:accordion/controllers.dart';
 import 'package:etm_crm/app/domain/models/lesson.dart';
 import 'package:etm_crm/app/domain/states/school/school_schedule_state.dart';
 import 'package:etm_crm/app/ui/screens/school/schedule/widgets/schedule_header.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:etm_crm/app/ui/widgets/empty_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -54,8 +55,8 @@ class _SchoolScheduleScreenState extends State<SchoolScheduleScreen> {
                   Expanded(
                     child: EmptyWidget(
                       isEmpty: true,
-                      title: 'No classes today :(',
-                      subtitle: 'Click the button below to add lessons',
+                      title: getConstant('No_classes_today'),
+                      subtitle: getConstant('Click_the_button_below_to_add_lessons'),
                       onPress: () {
                         state.addLesson();
                       },
@@ -275,7 +276,7 @@ class HeaderNameLesson extends StatelessWidget {
           height: 8,
         ),
         Text(
-          'Start $start - End $end',
+          '${getConstant('Start')} $start - ${getConstant('End')} $end',
           style: TextStyles.s12w400.copyWith(
             color: const Color(0xFF848484)
           ),
@@ -353,26 +354,26 @@ class _LessonItemState extends State<LessonItem> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ContentRowInfo(
-            title: 'Teacher',
+            title: getConstant('Teacher'),
             value: '${widget.lesson?.services?.first?.teacher?.firstName} '
                 '${widget.lesson?.services?.first?.teacher?.lastName}',
           ),
-          const ContentRowInfo(
-            title: 'Students',
+           ContentRowInfo(
+            title: getConstant('Students'),
             value: '0',
           ),
           ContentRowInfo(
-            title: 'Adress',
+            title: getConstant('Adress'),
             value: '${widget.lesson?.services?.first?.school?.street} '
                 '${widget.lesson?.services?.first?.school?.house}',
           ),
           ContentRowInfo(
-            title: 'Class number',
+            title: getConstant('Class_number'),
             value: '${widget.lesson?.schoolClass?.name}'
           ),
           if(widget.lesson?.zoomMeeting != null) ...[
             ContentRowInfo(
-              title: 'Lesson links',
+              title: getConstant('Lesson_links'),
               content: CupertinoButton(
                 minSize: 0.0,
                 padding: EdgeInsets.zero,
@@ -389,7 +390,7 @@ class _LessonItemState extends State<LessonItem> {
             ),
           ],
           ContentRowInfo(
-            title: 'Description',
+            title: getConstant('Description'),
             content: CupertinoButton(
               minSize: 0.0,
               padding: EdgeInsets.zero,

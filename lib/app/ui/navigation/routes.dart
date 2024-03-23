@@ -12,6 +12,7 @@ import 'package:etm_crm/app/ui/screens/students/schedule/student_schedule_screen
 import 'package:etm_crm/app/ui/screens/students/schools/school_list.dart';
 import 'package:etm_crm/app/ui/screens/teacher/profile/teacher_profile_scroll_page.dart';
 import 'package:etm_crm/app/ui/screens/teacher/service/school_service_screen.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:provider/provider.dart';
 import 'package:routemaster/routemaster.dart' as routemaster;
 import '../../../resources/resources.dart';
@@ -107,13 +108,13 @@ final loggedSchoolInMap = routemaster.RouteMap(
             create: (context) => SchoolProfileState(context),
           ),
         ],
-        child: const TabBarScreen(
+        child: TabBarScreen(
             icons: [
-              {'icon': Svgs.homeIcon, 'name': 'Profile'},
-              {'icon': Svgs.service, 'name': 'Services'},
-              {'icon': Svgs.schedule, 'name': 'Schedule'},
-              {'icon': Svgs.profile, 'name': 'Staff'},
-              {'icon': Svgs.statistics, 'name': 'Statistics'},
+              {'icon': Svgs.homeIcon, 'name': getConstant('Profile')},
+              {'icon': Svgs.service, 'name': getConstant('Services')},
+              {'icon': Svgs.schedule, 'name': getConstant('Schedule')},
+              {'icon': Svgs.profile, 'name': getConstant('Staff')},
+              {'icon': Svgs.statistics, 'name': getConstant('Statistics')},
             ]
         ),
       ),
@@ -158,12 +159,12 @@ final loggedTeacherInMap = routemaster.RouteMap(
                 create: (context) => TeacherHomeState(context),
               ),
             ],
-            child: const TabBarScreen(
+            child: TabBarScreen(
               icons: [
-                {'icon': Svgs.profile, 'name': 'Profile'},
-                {'icon': Svgs.schedule, 'name': 'Schedule'},
-                {'icon': Svgs.service, 'name': 'Services'},
-                {'icon': Svgs.myRes, 'name': 'Results'},
+                {'icon': Svgs.profile, 'name': getConstant('Profile')},
+                {'icon': Svgs.schedule, 'name': getConstant('Schedule')},
+                {'icon': Svgs.service, 'name': getConstant('Services')},
+                {'icon': Svgs.myRes, 'name': getConstant('Results')},
               ]
             ),
           ),
@@ -203,12 +204,12 @@ final loggedStudentInMap = routemaster.RouteMap(
                 create: (context) => StudentHomeState(context),
               ),
             ],
-            child: const TabBarScreen(
+            child: TabBarScreen(
               icons: [
-                {'icon': Svgs.profile, 'name': 'Profile'},
-                {'icon': Svgs.schedule, 'name': 'Schedule'},
-                {'icon': Svgs.school, 'name': 'Schools'},
-                {'icon': Svgs.myRes, 'name': 'My results'},
+                {'icon': Svgs.profile, 'name': getConstant('Profile')},
+                {'icon': Svgs.schedule, 'name': getConstant('Schedule')},
+                {'icon': Svgs.school, 'name': getConstant('Schools')},
+                {'icon': Svgs.myRes, 'name': getConstant('My_results')},
               ]
             ),
           ),

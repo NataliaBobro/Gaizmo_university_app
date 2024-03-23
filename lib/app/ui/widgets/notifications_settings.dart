@@ -1,5 +1,6 @@
 import 'package:etm_crm/app/domain/models/user.dart';
 import 'package:etm_crm/app/domain/services/user_service.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:flutter/material.dart';
 
 
@@ -40,8 +41,8 @@ class _NotificationsSettingsState extends State<NotificationsSettings> {
             color: const Color(0xFFF0F3F6),
             child: Column(
               children: [
-                const CenterHeaderWithAction(
-                    title: 'Settings'
+                CenterHeaderWithAction(
+                    title: getConstant('Settings')
                 ),
                 Expanded(
                     child: Column(
@@ -54,7 +55,7 @@ class _NotificationsSettingsState extends State<NotificationsSettings> {
                             children: [
                               AppRadioInput(
                                 value: hasOn,
-                                label: "Pause all notifications",
+                                label: getConstant('Pause_all_notifications'),
                                 onChange: (value) {
                                   setState(() {
                                     hasOn = value;
@@ -67,7 +68,7 @@ class _NotificationsSettingsState extends State<NotificationsSettings> {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 40),
                           child: AppButton(
-                              title: 'Save changes',
+                              title: getConstant('SAVE_CHANGES'),
                               onPressed: () {
                                 save();
                               }

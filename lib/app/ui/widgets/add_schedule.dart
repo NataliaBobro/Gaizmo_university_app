@@ -1,3 +1,4 @@
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
@@ -57,8 +58,8 @@ class _AddScheduleState extends State<AddSchedule> {
             color: const Color(0xFFF0F3F6),
             child: Column(
               children: [
-                const CenterHeaderWithAction(
-                    title: 'Schedule'
+                CenterHeaderWithAction(
+                    title: getConstant('Schedule')
                 ),
                 Expanded(
                     child: Column(
@@ -78,12 +79,12 @@ class _AddScheduleState extends State<AddSchedule> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Choose working days',
+                                    getConstant('Choose_working_days'),
                                     style: TextStyles.s14w600.copyWith(
                                         color: const Color(0xFF242424)
                                     ),
                                   ),
-                                  const SizedBox(
+                                  const SizedBox( 
                                     height: 8,
                                   ),
                                   Row(
@@ -127,7 +128,7 @@ class _AddScheduleState extends State<AddSchedule> {
                                     height: 24,
                                   ),
                                   Text(
-                                    'Choose working hours',
+                                    getConstant('Choose_working_hours'),
                                     style: TextStyles.s14w600.copyWith(
                                         color: const Color(0xFF242424)
                                     ),
@@ -142,7 +143,7 @@ class _AddScheduleState extends State<AddSchedule> {
                                     child: Row(
                                       children: [
                                         Text(
-                                          'From',
+                                          getConstant('From'),
                                           style: TextStyles.s14w300.copyWith(
                                               color: const Color(0xFF727272)
                                           ),
@@ -196,7 +197,7 @@ class _AddScheduleState extends State<AddSchedule> {
                                           ),
                                         ),
                                         Text(
-                                          'to',
+                                          getConstant('to'),
                                           style: TextStyles.s14w300.copyWith(
                                               color: const Color(0xFF727272)
                                           ),

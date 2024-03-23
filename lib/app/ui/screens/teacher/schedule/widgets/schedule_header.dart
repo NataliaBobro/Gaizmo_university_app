@@ -1,4 +1,5 @@
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -35,7 +36,7 @@ class ScheduleHeader extends StatelessWidget {
                     bottom: 24
                 ),
                 child: Text(
-                  'Schedule',
+                  getConstant('Schedule'),
                   style: TextStyles.s24w700.copyWith(
                       color: const Color(0xFF242424)
                   ),
@@ -141,7 +142,7 @@ class _ScheduleFilterState extends State<ScheduleFilter> {
               child: Column(
                 children: [
                   Text(
-                    '${dates[index]['name']}',
+                    getConstant('${dates[index]['name']}'),
                     style: TextStyles.s14w600.copyWith(
                         color: activeIndex == index ?
                         const Color(0xFF242424) : const Color(0xFFACACAC)

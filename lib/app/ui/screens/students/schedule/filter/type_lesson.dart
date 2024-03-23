@@ -1,5 +1,6 @@
 import 'package:etm_crm/app/domain/states/student/student_schedule_state.dart';
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -61,17 +62,22 @@ class _TypeLessonState extends State<TypeLesson> {
             child: Column(
               children: [
                 CenterHeaderWithAction(
-                    title: 'Filter',
-                    action: CupertinoButton(
-                      child: Text(
-                        selected.isEmpty ? 'All' : 'Clear',
-                        style: TextStyles.s14w600.copyWith(
-                          color: Colors.black
-                        ),
-                      ),
-                      onPressed: () {
-                        selected.isEmpty ? addAll() : clear();
-                      },
+                    title: getConstant('Filter'),
+                    action: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        CupertinoButton(
+                          child: Text(
+                            selected.isEmpty ? getConstant('All') : getConstant('Clear'),
+                            style: TextStyles.s14w600.copyWith(
+                                color: Colors.black
+                            ),
+                          ),
+                          onPressed: () {
+                            selected.isEmpty ? addAll() : clear();
+                          },
+                        )
+                      ],
                     )
                 ),
                 Expanded(
@@ -113,7 +119,7 @@ class _TypeLessonState extends State<TypeLesson> {
                     )
                 ),
                 AppButton(
-                    title: 'Apply filter',
+                    title: getConstant('APPLY_FILTER'),
                     onPressed: () {
                       apply();
                     }

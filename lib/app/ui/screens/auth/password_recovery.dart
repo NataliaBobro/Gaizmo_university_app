@@ -1,4 +1,5 @@
 import 'package:etm_crm/app/domain/states/auth_state.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:etm_crm/app/ui/widgets/arrow_back.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +42,7 @@ class _PasswordRecoveryState extends State<PasswordRecovery> {
                       Container(
                         alignment: Alignment.center,
                         child: Text(
-                          'Password recovery',
+                          getConstant('Password_recovery'),
                           style: TextStyles.s24w600.copyWith(
                               color: Colors.white
                           ),
@@ -55,6 +56,9 @@ class _PasswordRecoveryState extends State<PasswordRecovery> {
                               height: 197,
                             ),
                             Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 50
+                              ),
                               alignment: Alignment.center,
                               child: RichText(
                                 textAlign: TextAlign.center,
@@ -63,18 +67,17 @@ class _PasswordRecoveryState extends State<PasswordRecovery> {
                                         color: Colors.white,
                                         height: 1.57
                                     ),
-                                    text: "Forgot the password?\n"
-                                        "Leave your ",
+                                    text: "${getConstant('Forgot_the_password')}\n"
+                                        "${getConstant('Leave_your')} ",
                                     children: [
                                       TextSpan(
-                                          text: "e-mail address ",
+                                          text: "${getConstant('Email_adress')} ",
                                           style: TextStyles.s14w400.copyWith(
                                               color: const Color(0xFFFFC700)
                                           )
                                       ),
-                                      const TextSpan(
-                                          text: "and\n"
-                                              "we will help you recover it!"
+                                      TextSpan(
+                                          text: getConstant('and_we_will_help_you_recover_it')
                                       )
                                     ]
                                 ),
@@ -85,14 +88,14 @@ class _PasswordRecoveryState extends State<PasswordRecovery> {
                             ),
                             AuthInput(
                               controller: state.email,
-                              title: 'E-mail address',
+                              title: getConstant('Email_adress'),
                               errors: state.validateError?.errors.emailErrors?.first,
                             ),
                             const SizedBox(
                               height: 40,
                             ),
                             AppButton(
-                              title: 'Continue',
+                              title: getConstant('CONTINUE'),
                               onPressed: () {
                                 state.sendRecoveryCode();
                               },

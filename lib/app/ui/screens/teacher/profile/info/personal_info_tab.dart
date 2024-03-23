@@ -1,4 +1,5 @@
 import 'package:etm_crm/app/app.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:etm_crm/app/ui/widgets/social_account_info.dart';
 import 'package:etm_crm/app/ui/widgets/statistics/statistics_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -31,15 +32,15 @@ class _PersonalInfoTabState extends State<PersonalInfoTab> {
               height: 24,
             ),
             InfoValue(
-                title: "Full name",
+                title: getConstant('Full_name'),
                 value: "${state?.firstName} ${state?.lastName}"
             ),
             InfoValue(
-                title: "Phone number",
+                title: getConstant('Phone_number'),
                 value: "${state?.phone}"
             ),
             InfoValue(
-                title: "E-mail",
+                title: getConstant('Email'),
                 value: "${state?.email}"
             ),
             if(state?.socialAccounts != null) ...[
@@ -47,12 +48,12 @@ class _PersonalInfoTabState extends State<PersonalInfoTab> {
                   socialAccounts: state?.socialAccounts
               )
             ],
-            const InfoValue(
-                title: "My salary",
+            InfoValue(
+                title: getConstant('My_salary'),
                 value: "15000 per mounth"
             ),
             SettingsInput(
-                title: "Statistics",
+                title: getConstant('Statistics'),
                 onPress: () async {
                   await Navigator.push(
                       context,
@@ -66,7 +67,7 @@ class _PersonalInfoTabState extends State<PersonalInfoTab> {
                 }
             ),
             SettingsInput(
-                title: "Uniform",
+                title: getConstant('Uniform'),
                 onPress: () async {
 
                 }

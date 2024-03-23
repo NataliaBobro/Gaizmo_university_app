@@ -37,6 +37,7 @@ class AppState extends ChangeNotifier {
   RouteMap _currentRoute = splashMap;
   UserData? _userData;
   BuildContext context;
+  ConstantsList? _constantsList;
 
   AppState(this.context) {
     _isLoggedIn = token != null && token != '';
@@ -47,6 +48,8 @@ class AppState extends ChangeNotifier {
           await initFirebase();
         }
         onChangeRoute();
+      }else{
+        fetchConstant(languageId: 1);
       }
     });
   }
@@ -55,6 +58,7 @@ class AppState extends ChangeNotifier {
   RouteMap get currentRoute => _currentRoute;
   MetaAppData? get metaAppData => _metaAppData;
   UserData? get userData => _userData;
+  ConstantsList? get constantsList => _constantsList;
   FirebaseMessaging messaging = FirebaseMessaging.instance;
 
   Future<void> changeLogInState(bool value) async {
@@ -78,12 +82,35 @@ class AppState extends ChangeNotifier {
         _userData = result;
         if(metaAppData == null){
           getMeta(result.languageId);
+          fetchConstant(languageId: result.languageId ?? 1);
         }
       }
     } on DioError catch (e) {
       showMessage(e.message.isEmpty ? e.toString() : e.message);
       onLogout();
     } catch (e) {
+      showErrorSnackBar(title: 'App request error');
+    } finally {
+      notifyListeners();
+    }
+  }
+
+  Future<void> fetchConstant({int languageId = 1}) async {
+    try {
+      final result = await MetaService.fetchConstant(languageId);
+      if(result != null){
+        _constantsList = result;
+        await Hive.box('constants').clear();
+        for(var a = 0; a < (_constantsList?.data.length ?? 0); a++){
+          final constant = _constantsList?.data[a];
+          await Hive.box('constants').put(constant?.constant, constant?.value);
+        }
+      }
+    } on DioError catch (e) {
+      showMessage(e.message.isEmpty ? e.toString() : e.message);
+      onLogout();
+    } catch (e) {
+      print(e);
       showErrorSnackBar(title: 'App request error');
     } finally {
       notifyListeners();

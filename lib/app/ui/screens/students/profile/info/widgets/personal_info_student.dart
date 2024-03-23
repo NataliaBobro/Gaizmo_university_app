@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:etm_crm/app/app.dart';
 import 'package:etm_crm/app/domain/models/meta.dart';
 import 'package:etm_crm/app/domain/models/user.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:etm_crm/app/ui/widgets/modal/delete_account_modal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
@@ -118,8 +119,8 @@ class _PersonalInfoStudentState extends State<PersonalInfoStudent> {
               children: [
                 Column(
                   children: [
-                    const CenterHeaderWithAction(
-                        title: 'Settings'
+                    CenterHeaderWithAction(
+                        title: getConstant('Settings')
                     ),
                     Expanded(
                       child: ListView(
@@ -132,7 +133,7 @@ class _PersonalInfoStudentState extends State<PersonalInfoStudent> {
                             height: 24,
                           ),
                           AppHorizontalField(
-                            label: 'Full name',
+                            label: getConstant('Full_name'),
                             controller: fullName,
                             changeClear: () {
                               fullName.clear();
@@ -141,7 +142,7 @@ class _PersonalInfoStudentState extends State<PersonalInfoStudent> {
                             error: validateError?.errors.fullNameErrors?.first,
                           ),
                           AppHorizontalField(
-                            label: 'Phone number',
+                            label: getConstant('Phone_number'),
                             controller: phone,
                             changeClear: () {
                               phone.clear();
@@ -150,7 +151,7 @@ class _PersonalInfoStudentState extends State<PersonalInfoStudent> {
                             error: validateError?.errors.phoneErrors?.first,
                           ),
                           AppHorizontalField(
-                            label: 'E-mail',
+                            label: getConstant('Email'),
                             controller: email,
                             changeClear: () {
                               email.clear();
@@ -159,7 +160,7 @@ class _PersonalInfoStudentState extends State<PersonalInfoStudent> {
                             error: validateError?.errors.emailErrors?.first,
                           ),
                           AppHorizontalField(
-                            label: 'About me',
+                            label: getConstant('About_me'),
                             controller: about,
                             changeClear: () {
                               about.clear();
@@ -181,7 +182,7 @@ class _PersonalInfoStudentState extends State<PersonalInfoStudent> {
                                       color: const Color(0xFF242424)
                                   ),
                                   errors: validateError?.errors.country,
-                                  title: 'Country',
+                                  title: getConstant('Country'),
                                   items:  (countryList?.length ?? 0) > 0 ?
                                   countryList : listDefaultCountry,
                                   selected: _country,
@@ -206,7 +207,7 @@ class _PersonalInfoStudentState extends State<PersonalInfoStudent> {
                                       color: const Color(0xFF242424)
                                   ),
                                   errors: validateError?.errors.city,
-                                  title: 'City',
+                                  title: getConstant('City'),
                                   items: cityList,
                                   onSearch: (value) {
                                     searchCity(value);
@@ -226,7 +227,7 @@ class _PersonalInfoStudentState extends State<PersonalInfoStudent> {
                             ),
                           ),
                           SettingsInput(
-                              title: "Social accounts",
+                              title: getConstant('Social_accounts'),
                               onPress: () async {
                                 await Navigator.push(
                                   context,
@@ -249,20 +250,20 @@ class _PersonalInfoStudentState extends State<PersonalInfoStudent> {
                                 horizontal: 24
                             ),
                             child: Text(
-                              "Privacy settings",
+                              getConstant('Privacy_settings'),
                               style: TextStyles.s14w500.copyWith(
                                   color: const Color(0xFF242424)
                               ),
                             ),
                           ),
                           SettingsInput(
-                              title: "Show in profile",
+                              title: getConstant('Show_in_profile'),
                               onPress: () {
 
                               }
                           ),
                           SettingsInput(
-                            title: "Delete account",
+                            title: getConstant('Delete_account'),
                             onPress: () {
                               showDeleteDialog(context);
                             }
@@ -278,7 +279,7 @@ class _PersonalInfoStudentState extends State<PersonalInfoStudent> {
                   right: 0,
                   left: 0,
                   child: AppButton(
-                      title: 'Save changes',
+                      title: getConstant('SAVE_CHANGES'),
                       onPressed: () {
                         saveGeneralInfo();
                       }

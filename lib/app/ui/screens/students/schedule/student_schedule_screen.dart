@@ -1,6 +1,7 @@
 import 'package:accordion/accordion.dart';
 import 'package:accordion/controllers.dart';
 import 'package:etm_crm/app/domain/models/lesson.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';
@@ -12,9 +13,9 @@ import '../../../../domain/services/visits_lesson_service.dart';
 import '../../../../domain/states/student/student_schedule_state.dart';
 import '../../../theme/text_styles.dart';
 import '../../../widgets/schedule/empty_lesson.dart';
+import '../../../widgets/schedule/lesson_header.dart';
 import '../../../widgets/schedule/shcedule_widgets.dart';
 import '../../students/schedule/widgets/schedule_header.dart';
-import '../profile/info/my_lessons_tab.dart';
 
 class StudentScheduleScreen extends StatefulWidget {
   const StudentScheduleScreen({Key? key}) : super(key: key);
@@ -44,12 +45,12 @@ class _StudentScheduleScreenState extends State<StudentScheduleScreen> {
                 )
               ] else ...[
                 if((state.lessonsList?.lessons?.length ?? 0) == 0) ... [
-                  const Padding(
-                    padding: EdgeInsets.only(
+                  Padding(
+                    padding: const EdgeInsets.only(
                       top: 113
                     ),
                     child: EmptyLesson(
-                      title: "No classes today :("
+                      title: getConstant('No_classes_today_')
                     ),
                   )
                 ] else ...[
@@ -130,20 +131,20 @@ class _StudentScheduleScreenState extends State<StudentScheduleScreen> {
     await showPlatformDialog(
       context: context,
       builder: (context) => BasicDialogAlert(
-        content: const Text(
-          "Are you sure you attended this lesson?",
+        content: Text(
+          getConstant('Are_you_sure_you_attended_this_lesson'),
           style: TextStyles.s17w600,
         ),
         actions: <Widget>[
           BasicDialogAction(
-            title: const Text("Yes"),
+            title: Text(getConstant('Yes')),
             onPressed: () {
               Navigator.pop(context);
               visits(lesson, date);
             },
           ),
           BasicDialogAction(
-            title: const Text("No"),
+            title: Text(getConstant('No')),
             onPressed: () {
               Navigator.pop(context);
             },

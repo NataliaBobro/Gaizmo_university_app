@@ -1,3 +1,4 @@
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../../resources/resources.dart';
@@ -15,8 +16,8 @@ class MuQrCode extends StatelessWidget {
             color: const Color(0xFFF0F3F6),
             child: Column(
               children: [
-                const CenterHeader(
-                    title: 'My QR code'
+                 CenterHeader(
+                    title: getConstant('My_QR_code')
                 ),
                 Expanded(
                     child: Column(

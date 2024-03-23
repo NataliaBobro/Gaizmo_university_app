@@ -14,6 +14,17 @@ class MetaService {
     return MetaAppData.fromJson(data);
   }
 
+  static Future<ConstantsList?> fetchConstant(languageId) async {
+    final response = await ApiClient().dio.get(
+      '/fetch-language-constant',
+      queryParameters: {
+        'language_id': languageId
+      }
+    );
+    final data = response.data as Map<String, dynamic>;
+    return ConstantsList.fromJson(data);
+  }
+
   static Future<MetaAppData?> getAddServiceMeta(BuildContext context) async {
     final token = getToken(context);
     if(token == null) return null;

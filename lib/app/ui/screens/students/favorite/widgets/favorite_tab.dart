@@ -2,12 +2,13 @@ import 'package:accordion/accordion.dart';
 import 'package:accordion/controllers.dart';
 import 'package:etm_crm/app/domain/models/services.dart';
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../domain/states/student/favorite_state.dart';
-import '../../profile/info/widgets/service_item_content.dart';
+import '../../../school/service/school_service_screen.dart';
 
 class FavoriteTab extends StatefulWidget {
   const FavoriteTab({Key? key}) : super(key: key);
@@ -64,8 +65,8 @@ class _FavoriteTabState extends State<FavoriteTab> {
                   header: HeaderFavorite(
                     service: services[index]
                   ),
-                  content: ServiceItemContent(
-                      service: services[index]
+                  content: ContentService(
+                    item: services[index],
                   ),
                 )
             )
@@ -98,7 +99,7 @@ class PayButton extends StatelessWidget {
           vertical: 4
         ),
         child: Text(
-          'PAY',
+          getConstant('PAY'),
           style: TextStyles.s14w600.copyWith(
             color: Colors.white,
           ),
@@ -136,7 +137,7 @@ class HeaderFavorite extends StatelessWidget {
           height: 8,
         ),
         Text(
-          '$cost $currency / 1 lesson 100 $currency',
+          '$cost $currency / 1 ${getConstant('lesson')} 100 $currency',
           style: TextStyles.s12w400.copyWith(
               color: const Color(0xFF848484)
           ),

@@ -1,6 +1,7 @@
 import 'package:etm_crm/app/ui/screens/students/profile/info/my_lessons_tab.dart';
 import 'package:etm_crm/app/ui/screens/students/profile/info/personal_info_tab.dart';
 import 'package:etm_crm/app/ui/screens/students/profile/info/settings_tab.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -83,17 +84,17 @@ class _StudentProfileScreenState extends State<StudentProfileScreen> with Ticker
                   labelColor: const Color(0xFF242424),
                   unselectedLabelStyle: TextStyles.s14w400,
                   unselectedLabelColor: const Color(0xFFACACAC),
-                  tabs: const [
+                  tabs: [
                     Tab(
-                      text: 'My lessons',
+                      text: getConstant('My_lessons'),
                       iconMargin: EdgeInsets.zero,
                     ),
                     Tab(
-                      text: 'Personal info',
+                      text: getConstant('Personal_info'),
                       iconMargin: EdgeInsets.zero,
                     ),
                     Tab(
-                      text: 'Settings',
+                      text: getConstant('Settings'),
                       iconMargin: EdgeInsets.zero,
                     ),
                   ],

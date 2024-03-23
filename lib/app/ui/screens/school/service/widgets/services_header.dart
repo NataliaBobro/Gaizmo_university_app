@@ -1,3 +1,4 @@
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -23,7 +24,7 @@ class _ServicesHeaderState extends State<ServicesHeader> {
   Widget build(BuildContext context) {
     final state = context.watch<ServicesState>();
     return CenterHeaderWithAction(
-      title: 'Services',
+      title: getConstant('Services'),
       action: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         mainAxisSize: MainAxisSize.max,

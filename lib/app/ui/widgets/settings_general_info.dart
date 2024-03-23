@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:etm_crm/app/domain/models/meta.dart';
 import 'package:etm_crm/app/domain/models/user.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:etm_crm/app/ui/widgets/app_horizontal_field.dart';
 import 'package:etm_crm/app/ui/widgets/center_header.dart';
 import 'package:etm_crm/app/ui/widgets/snackbars.dart';
@@ -77,7 +78,7 @@ class _SettingGeneralInfoState extends State<SettingGeneralInfo> {
                                 height: 24,
                               ),
                               AppHorizontalField(
-                                label: 'Name of school',
+                                label: getConstant('Name_of_school'),
                                 controller: name,
                                 changeClear: () {
                                   name.clear();
@@ -86,7 +87,7 @@ class _SettingGeneralInfoState extends State<SettingGeneralInfo> {
                                 error: validateError?.errors.schoolName?.first,
                               ),
                               AppHorizontalField(
-                                label: 'Phone number',
+                                label: getConstant('Phone_number'),
                                 controller: phone,
                                 changeClear: () {
                                   phone.clear();
@@ -95,7 +96,7 @@ class _SettingGeneralInfoState extends State<SettingGeneralInfo> {
                                 error: validateError?.errors.phoneErrors?.first,
                               ),
                               AppHorizontalField(
-                                label: 'E-mail',
+                                label: getConstant('Email'),
                                 controller: email,
                                 changeClear: () {
                                   email.clear();
@@ -104,7 +105,7 @@ class _SettingGeneralInfoState extends State<SettingGeneralInfo> {
                                 error: validateError?.errors.emailErrors?.first,
                               ),
                               AppHorizontalField(
-                                label: 'Site address',
+                                label: getConstant('Site_address'),
                                 controller: siteAddress,
                                 changeClear: () {
                                   siteAddress.clear();
@@ -160,7 +161,7 @@ class _SettingGeneralInfoState extends State<SettingGeneralInfo> {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 40),
                           child: AppButton(
-                              title: 'Save changes',
+                              title: getConstant('SAVE_CHANGES'),
                               onPressed: () {
                                 saveGeneralInfo();
                               }

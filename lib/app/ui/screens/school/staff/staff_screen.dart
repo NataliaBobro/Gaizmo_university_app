@@ -1,6 +1,7 @@
 import 'package:etm_crm/app/domain/models/lesson.dart';
 import 'package:etm_crm/app/domain/states/school/school_staff_state.dart';
 import 'package:etm_crm/app/ui/screens/school/staff/widgets/staff_header.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:etm_crm/app/ui/widgets/empty_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -42,8 +43,8 @@ class _StaffScreenState extends State<StaffScreen> {
                   flex: (state.staffList?.users.length ?? 0) == 0 ? 1 : 0,
                   child: EmptyWidget(
                     isEmpty: (state.staffList?.users.length ?? 0) == 0,
-                    title: 'No any employee yet :(',
-                    subtitle: 'Click the button below to add staff!',
+                    title: getConstant('No_any_employee_yet_'),
+                    subtitle: getConstant('Click_the_button_below_to_add_staff'),
                     onPress: () {
                       state.openAddStaff();
                     },

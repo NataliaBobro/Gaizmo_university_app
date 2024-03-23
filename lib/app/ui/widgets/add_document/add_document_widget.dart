@@ -1,6 +1,7 @@
 import 'package:etm_crm/app/domain/models/meta.dart';
 import 'package:etm_crm/app/domain/services/meta_service.dart';
 import 'package:etm_crm/app/domain/services/user_service.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:etm_crm/app/ui/widgets/app_field.dart';
 import 'package:etm_crm/app/ui/widgets/select_input.dart';
 import 'package:flutter/cupertino.dart';
@@ -70,8 +71,8 @@ class _AddDocumentWidgetState extends State<AddDocumentWidget> {
             color: const Color(0xFFF0F3F6),
             child: Column(
               children: [
-                const CenterHeaderWithAction(
-                    title: 'Add document'
+                CenterHeaderWithAction(
+                    title: getConstant('Add_document')
                 ),
                 Expanded(
                     child: Column(
@@ -88,7 +89,7 @@ class _AddDocumentWidgetState extends State<AddDocumentWidget> {
                                 height: 24,
                               ),
                               AppField(
-                                label: 'Document name',
+                                label: getConstant('Document_name'),
                                 controller: docName
                               ),
                               const SizedBox(
@@ -96,7 +97,7 @@ class _AddDocumentWidgetState extends State<AddDocumentWidget> {
                               ),
                               SelectInput(
                                 // errors: state.validateError?.errors.genderErrors?.first,
-                                title: 'Choose type of document',
+                                title: getConstant('Choose_type_of_document'),
                                 hintText: '',
                                 hintStyle: TextStyles.s14w400.copyWith(
                                     color: const Color(0xFF848484)
@@ -118,7 +119,7 @@ class _AddDocumentWidgetState extends State<AddDocumentWidget> {
                               ),
                               AppField(
                                 keyboardType: TextInputType.multiline,
-                                label: 'Note',
+                                label: getConstant('Note'),
                                 controller: notes,
                                 multiLine: 5
                               ),
@@ -126,7 +127,7 @@ class _AddDocumentWidgetState extends State<AddDocumentWidget> {
                           ),
                         ),
                         AppButton(
-                            title: 'ADD DOCUMENT',
+                            title: getConstant('Add_document'),
                             onPressed: () {
                               showBottomAddPhoto();
                             }

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:etm_crm/app/domain/models/meta.dart';
 import 'package:etm_crm/app/domain/services/school_service.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:etm_crm/app/ui/widgets/add_schedule.dart';
 import 'package:etm_crm/app/ui/widgets/app_horizontal_field.dart';
 import 'package:flutter/cupertino.dart';
@@ -53,8 +54,8 @@ class _AddBranchState extends State<AddBranch> {
             color: const Color(0xFFF0F3F6),
             child: Column(
               children: [
-                const CenterHeaderWithAction(
-                    title: 'Add branch'
+                CenterHeaderWithAction(
+                    title: getConstant('Add_branch')
                 ),
                 Expanded(
                     child: ListView(
@@ -64,7 +65,7 @@ class _AddBranchState extends State<AddBranch> {
                           height: 24,
                         ),
                         AppHorizontalField(
-                          label: "Name of school",
+                          label: getConstant('Name_of_school'),
                           controller: name,
                           changeClear: () {
                             name.clear();
@@ -74,7 +75,7 @@ class _AddBranchState extends State<AddBranch> {
                         ),
                         AppHorizontalField(
                             error: validateError?.errors.phoneErrors?.first,
-                            label: "Phone number",
+                            label: getConstant('Phone_number'),
                             controller: phone,
                             changeClear: () {
                               phone.clear();
@@ -82,7 +83,7 @@ class _AddBranchState extends State<AddBranch> {
                             }
                         ),
                         AppHorizontalField(
-                            label: "E-mail",
+                            label: getConstant('Email'),
                             controller: email,
                             changeClear: () {
                               email.clear();
@@ -91,7 +92,7 @@ class _AddBranchState extends State<AddBranch> {
                           error: validateError?.errors.emailErrors?.first,
                         ),
                         AppHorizontalField(
-                            label: "Site address",
+                            label: getConstant('Site_address'),
                             controller: site,
                             changeClear: () {
                               site.clear();
@@ -99,7 +100,7 @@ class _AddBranchState extends State<AddBranch> {
                             },
                         ),
                         SettingsInput(
-                            title: "Schedule",
+                            title: getConstant('Schedule'),
                             info: renderScheduleInfo(),
                             onPress: () async {
                               appState.openPage(
@@ -117,7 +118,7 @@ class _AddBranchState extends State<AddBranch> {
                             }
                         ),
                         SettingsInput(
-                            title: "School category",
+                            title: getConstant('School_category'),
                             info: schoolCategory != null ? schoolCategory!['name'] : null,
                             onPress: () async {
                               appState.openPage(

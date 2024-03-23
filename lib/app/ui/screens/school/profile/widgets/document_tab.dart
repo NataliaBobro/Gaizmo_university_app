@@ -1,3 +1,4 @@
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:etm_crm/app/ui/widgets/empty_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -34,8 +35,8 @@ class _DocumentTabState extends State<DocumentTab> {
               ],
               EmptyWidget(
                   isEmpty: documents.isEmpty,
-                  title: 'No documets yet :(',
-                  subtitle: 'Click the button below to add documents!',
+                  title: getConstant('No_documents_yet'),
+                  subtitle: getConstant('Click_the_button_below_to_add_documents'),
                   onPress: () {
                     appState.openPage(
                         context,

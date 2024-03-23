@@ -1,5 +1,6 @@
 import 'package:etm_crm/app/domain/states/school/school_staff_item_state.dart';
 import 'package:etm_crm/app/ui/screens/school/staff/item/widgets/staff_personal_info_screen.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:etm_crm/app/ui/widgets/change_password.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -25,7 +26,7 @@ class _StaffSettingsTabState extends State<StaffSettingsTab> {
           height: 24,
         ),
         SettingsInput(
-            title: "Personal info",
+            title: getConstant('Personal_info'),
             onPress: () async {
               read.openPage(
                   const StaffPersonalInfoScreen()
@@ -33,7 +34,7 @@ class _StaffSettingsTabState extends State<StaffSettingsTab> {
             }
         ),
         SettingsInput(
-            title: "Category",
+            title: getConstant('Category'),
             onPress: () async {
               // await Navigator.push(
               //   context,
@@ -47,7 +48,7 @@ class _StaffSettingsTabState extends State<StaffSettingsTab> {
             }
         ),
         SettingsInput(
-            title: "Schedule",
+            title: getConstant('Schedule'),
             onPress: () async {
               // await Navigator.push(
               //   context,
@@ -61,7 +62,7 @@ class _StaffSettingsTabState extends State<StaffSettingsTab> {
             }
         ),
         SettingsInput(
-            title: "My social accounts",
+            title: getConstant('My_social_accounts'),
             onPress: () async {
               // await Navigator.push(
               //   context,
@@ -75,7 +76,7 @@ class _StaffSettingsTabState extends State<StaffSettingsTab> {
             }
         ),
         SettingsInput(
-            title: "Password",
+            title: getConstant('Password'),
             onPress: () async {
               read.openPage(
                   ChangePassword(

@@ -4,6 +4,7 @@ import 'package:etm_crm/app/app.dart';
 import 'package:etm_crm/app/domain/models/lesson.dart';
 import 'package:etm_crm/app/domain/states/teacher/teacher_home_state.dart';
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';
@@ -38,8 +39,8 @@ class _MyLessonsTabState extends State<MyLessonsTab> {
           : Column(
           children: [
             if(lessons.isEmpty) ...[
-              const EmptyLesson(
-                subtitle: 'Add a service to create a schedule!'
+              EmptyLesson(
+                subtitle: getConstant('Add_a_service_to_create_a_schedule')
               ),
             ] else ...[
               Padding(
@@ -47,7 +48,7 @@ class _MyLessonsTabState extends State<MyLessonsTab> {
                     vertical: 24
                 ),
                 child: Text(
-                  "Today",
+                  getConstant('Today'),
                   style: TextStyles.s14w600.copyWith(
                       color: const Color(0xFF242424)
                   ),
@@ -109,20 +110,20 @@ class _MyLessonsTabState extends State<MyLessonsTab> {
     await showPlatformDialog(
       context: context,
       builder: (context) => BasicDialogAlert(
-        content: const Text(
-          "Are you sure you attended this lesson?",
+        content: Text(
+          getConstant('Are_you_sure_you_attended_this_lesson'),
           style: TextStyles.s17w600,
         ),
         actions: <Widget>[
           BasicDialogAction(
-            title: const Text("Yes"),
+            title: Text(getConstant('Yes')),
             onPressed: () {
               Navigator.pop(context);
               visits(lesson, date);
             },
           ),
           BasicDialogAction(
-            title: const Text("No"),
+            title: Text(getConstant('No')),
             onPressed: () {
               Navigator.pop(context);
             },

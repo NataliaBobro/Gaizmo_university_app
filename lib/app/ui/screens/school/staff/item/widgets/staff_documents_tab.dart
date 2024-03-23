@@ -1,4 +1,5 @@
 import 'package:etm_crm/app/domain/states/school/school_staff_item_state.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:etm_crm/app/ui/widgets/add_document/add_document_widget.dart';
 import 'package:etm_crm/app/ui/widgets/custom_scroll_physics.dart';
 import 'package:flutter/cupertino.dart';
@@ -35,8 +36,8 @@ class _StaffDocumentsTabState extends State<StaffDocumentsTab> {
              ],
              EmptyWidget(
                  isEmpty: documents.isEmpty,
-                 title: 'No documets yet :(',
-                 subtitle: 'Click the button below to add documents!',
+                 title: getConstant('No_documents_yet'),
+                 subtitle: getConstant('Click_the_button_below_to_add_documents'),
                  onPress: () {
                    state.openPage(
                        AddDocumentWidget(

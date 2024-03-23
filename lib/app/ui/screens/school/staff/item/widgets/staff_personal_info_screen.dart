@@ -1,4 +1,5 @@
 import 'package:etm_crm/app/domain/states/school/school_staff_item_state.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:provider/provider.dart';
@@ -62,8 +63,8 @@ class _StaffPersonalInfoScreenState extends State<StaffPersonalInfoScreen> {
             color: const Color(0xFFF0F3F6),
             child: Column(
               children: [
-                const CenterHeaderWithAction(
-                    title: 'Settings'
+                CenterHeaderWithAction(
+                    title: getConstant('Settings')
                 ),
                 Expanded(
                     child: Column(
@@ -77,7 +78,7 @@ class _StaffPersonalInfoScreenState extends State<StaffPersonalInfoScreen> {
                                 height: 24,
                               ),
                               AppHorizontalField(
-                                label: 'Full name',
+                                label: getConstant('Full_name'),
                                 controller: fullName,
                                 changeClear: () {
                                   fullName.clear();
@@ -86,7 +87,7 @@ class _StaffPersonalInfoScreenState extends State<StaffPersonalInfoScreen> {
                                 // error: state.validateError?.errors.schoolName?.first,
                               ),
                               AppHorizontalField(
-                                label: 'Phone number',
+                                label: getConstant('Phone_number'),
                                 controller: phone,
                                 changeClear: () {
                                   phone.clear();
@@ -95,7 +96,7 @@ class _StaffPersonalInfoScreenState extends State<StaffPersonalInfoScreen> {
                                 // error: state.validateError?.errors.schoolName?.first,
                               ),
                               AppHorizontalField(
-                                label: 'E-mail',
+                                label: getConstant('Email'),
                                 controller: email,
                                 changeClear: () {
                                   email.clear();
@@ -104,7 +105,7 @@ class _StaffPersonalInfoScreenState extends State<StaffPersonalInfoScreen> {
                                 // error: state.validateError?.errors.schoolName?.first,
                               ),
                               AppHorizontalField(
-                                label: 'About me',
+                                label: getConstant('About_me'),
                                 controller: about,
                                 changeClear: () {
                                   about.clear();
@@ -113,7 +114,7 @@ class _StaffPersonalInfoScreenState extends State<StaffPersonalInfoScreen> {
                                 // error: state.validateError?.errors.schoolName?.first,
                               ),
                               SettingsInput(
-                                  title: "Date of birth",
+                                  title: getConstant('Date_of_birth'),
                                   onPress: () async {
                                     read.openPage(
                                         SettingsDateBirth(
@@ -123,7 +124,7 @@ class _StaffPersonalInfoScreenState extends State<StaffPersonalInfoScreen> {
                                   }
                               ),
                               SettingsInput(
-                                  title: "Gender",
+                                  title: getConstant('Gender'),
                                   onPress: () async {
                                     read.openPage(
                                         SettingsGender(
@@ -133,7 +134,7 @@ class _StaffPersonalInfoScreenState extends State<StaffPersonalInfoScreen> {
                                   }
                               ),
                               SettingsInput(
-                                  title: "Address",
+                                  title: getConstant('Adress'),
                                   onPress: ()  {
                                     read.openPage(
                                         SettingsAddress(
@@ -180,7 +181,7 @@ class _StaffPersonalInfoScreenState extends State<StaffPersonalInfoScreen> {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 40),
                           child: AppButton(
-                              title: 'Save changes',
+                              title: getConstant('SAVE_CHANGES'),
                               onPressed: () {
                                 context.read<SchoolStaffItemState>().saveGeneralInfo(
                                     fullName.text, phone.text, email.text, about.text

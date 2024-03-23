@@ -2,6 +2,7 @@ import 'package:etm_crm/app/domain/states/school/school_schedule_state.dart';
 import 'package:etm_crm/app/ui/screens/school/schedule/filter/filter_class.dart';
 import 'package:etm_crm/app/ui/screens/school/schedule/filter/type_lesson.dart';
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:etm_crm/app/ui/widgets/auth_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -56,8 +57,8 @@ class _ScheduleFilterScreenState extends State<ScheduleFilterScreen> {
             color: const Color(0xFFF0F3F6),
             child: Column(
               children: [
-                const CenterHeaderWithAction(
-                    title: 'Filter'
+                CenterHeaderWithAction(
+                    title: getConstant('Filter')
                 ),
                 Expanded(
                     child: Column(
@@ -76,7 +77,7 @@ class _ScheduleFilterScreenState extends State<ScheduleFilterScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Type of lesson',
+                                getConstant('Type_of_lesson'),
                                 style: TextStyles.s14w400.copyWith(
                                   color: const Color(0xFF242424)
                                 ),
@@ -86,7 +87,7 @@ class _ScheduleFilterScreenState extends State<ScheduleFilterScreen> {
                                   maxWidth: 179
                                 ),
                                 child: Text(
-                                  type.isNotEmpty ? type : 'All',
+                                  type.isNotEmpty ? type : getConstant('All'),
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyles.s14w400.copyWith(
                                       color: const Color(0xFF848484)
@@ -123,7 +124,7 @@ class _ScheduleFilterScreenState extends State<ScheduleFilterScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'Teacher',
+                                  getConstant('Teacher'),
                                   style: TextStyles.s14w400.copyWith(
                                       color: const Color(0xFF242424)
                                   ),
@@ -133,7 +134,7 @@ class _ScheduleFilterScreenState extends State<ScheduleFilterScreen> {
                                       maxWidth: 179
                                   ),
                                   child: Text(
-                                    teachers.isNotEmpty ? teachers : 'All',
+                                    teachers.isNotEmpty ? teachers : getConstant('All'),
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyles.s14w400.copyWith(
                                         color: const Color(0xFF848484)
@@ -164,7 +165,7 @@ class _ScheduleFilterScreenState extends State<ScheduleFilterScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'Class',
+                                  getConstant('Class'),
                                   style: TextStyles.s14w400.copyWith(
                                       color: const Color(0xFF242424)
                                   ),
@@ -174,7 +175,7 @@ class _ScheduleFilterScreenState extends State<ScheduleFilterScreen> {
                                       maxWidth: 179
                                   ),
                                   child: Text(
-                                    selectedClass.isNotEmpty ? selectedClass : 'All',
+                                    selectedClass.isNotEmpty ? selectedClass : getConstant('All'),
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyles.s14w400.copyWith(
                                         color: const Color(0xFF848484)
@@ -199,7 +200,7 @@ class _ScheduleFilterScreenState extends State<ScheduleFilterScreen> {
                     )
                 ),
                 AppButton(
-                    title: 'Apply filter',
+                    title: getConstant('APPLY_FILTER'),
                     onPressed: () {
                       state.getLesson();
                       Navigator.pop(context);

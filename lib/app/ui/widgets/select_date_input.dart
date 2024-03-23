@@ -1,3 +1,4 @@
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -70,7 +71,7 @@ class _SelectDateInputState extends State<SelectDateInput> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Date of birth',
+          getConstant('Date_of_birth'),
           style: widget.labelStyle ?? TextStyles.s14w400.copyWith(
               color: const Color(0xFF848484)
           ),

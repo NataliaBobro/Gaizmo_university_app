@@ -3,6 +3,7 @@ import 'package:etm_crm/app/domain/states/auth_state.dart';
 import 'package:etm_crm/app/ui/screens/auth/widgets/already_account.dart';
 import 'package:etm_crm/app/ui/screens/auth/widgets/check_box_auth.dart';
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:etm_crm/app/ui/widgets/auth_title.dart';
 import 'package:etm_crm/app/ui/widgets/custom_scroll_physics.dart';
 import 'package:etm_crm/app/ui/widgets/select_input_search.dart';
@@ -98,7 +99,7 @@ class _AuthSignUpSchoolState extends State<AuthSignUpSchool> {
                       Container(
                         alignment: Alignment.center,
                         child: Text(
-                          'Sign up',
+                          getConstant('SIGN_UP'),
                           style: TextStyles.s24w600.copyWith(
                               color: Colors.white
                           ),
@@ -109,44 +110,44 @@ class _AuthSignUpSchoolState extends State<AuthSignUpSchool> {
                         child: ListView(
                           physics: const BottomBouncingScrollPhysics(),
                           children: [
-                            const AppTitle(
-                              title: 'General info',
+                             AppTitle(
+                              title: getConstant('General_info'),
                             ),
                             AuthInput(
                               keyboardType: TextInputType.number,
                               controller: state.phone,
-                              title: 'Phone number',
+                              title: getConstant('Phone_number'),
                               hintText: '+380',
                               errors: state.validateError?.errors.phoneErrors?.first,
                             ),
                             AuthInput(
                               controller: state.email,
-                              title: 'E-mail address',
+                              title: getConstant('Email_adress'),
                               errors: state.validateError?.errors.emailErrors?.first,
                             ),
                             AuthInput(
                               controller: state.password,
-                              title: 'Password',
+                              title: getConstant('Password'),
                               isPass: true,
                               errors: state.validateError?.errors.passwordErrors?.first,
                             ),
                             AuthInput(
                               controller: state.confirmPassword,
-                              title: 'Confirm password',
+                              title: getConstant('Confirm_password'),
                               isPass: true,
                               isBottomPadding: false,
                             ),
-                            const AppTitle(
-                              title: 'School information',
+                            AppTitle(
+                              title: getConstant('School_information'),
                             ),
                             AuthInput(
                               controller: state.schoolName,
-                              title: 'Name of the school',
+                              title: getConstant('Name_of_the_school'),
                               errors: state.validateError?.errors.schoolName?.first,
                             ),
                             SelectInputSearch(
                               errors: state.validateError?.errors.schoolCategory?.first,
-                              title: 'School category',
+                              title: getConstant('School_category'),
                               items: listSchoolType,
                               selected: state.schoolCategory,
                               onSelect: (value) {
@@ -159,7 +160,7 @@ class _AuthSignUpSchoolState extends State<AuthSignUpSchool> {
                               children: [
                                 SelectInputSearchField(
                                   errors: state.validateError?.errors.country,
-                                  title: 'Country',
+                                  title: getConstant('Country'),
                                   items:  (state.countryList?.length ?? 0) > 0 ?
                                   state.countryList : state.listDefaultCountry,
                                   selected: state.country,
@@ -178,7 +179,7 @@ class _AuthSignUpSchoolState extends State<AuthSignUpSchool> {
                                 ),
                                 SelectInputSearchField(
                                   errors: state.validateError?.errors.city,
-                                  title: 'City',
+                                  title: getConstant('City'),
                                   items: state.cityList,
                                   onSearch: (value) {
                                     state.searchCity(value);
@@ -199,13 +200,13 @@ class _AuthSignUpSchoolState extends State<AuthSignUpSchool> {
                             AuthInput(
                               focusNode: state.streetFocus,
                               controller: state.street,
-                              title: 'Street',
+                              title: getConstant('Street'),
                               errors: state.validateError?.errors.street?.first,
                             ),
                             AuthInput(
                               focusNode: state.houseFocus,
                               controller: state.house,
-                              title: 'House',
+                              title: getConstant('House'),
                               maxWidth: 80,
                               isBottomPadding: false,
                               errors: state.validateError?.errors.house?.first,
@@ -219,7 +220,7 @@ class _AuthSignUpSchoolState extends State<AuthSignUpSchool> {
                               height: 40,
                             ),
                             AppButton(
-                              title: 'Sign up',
+                              title: getConstant('SIGN_UP'),
                               onPressed: () {
                                 if(!state.isLoading) {
                                   state.sendCode();

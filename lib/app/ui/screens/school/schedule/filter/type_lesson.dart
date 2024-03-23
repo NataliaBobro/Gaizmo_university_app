@@ -1,4 +1,5 @@
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
@@ -73,14 +74,14 @@ class _TypeLessonState extends State<TypeLesson> {
             child: Column(
               children: [
                 CenterHeaderWithAction(
-                    title: 'Filter',
+                    title: getConstant('Filter'),
                     action: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         if(widget.isMultipart)...[
                           CupertinoButton(
                             child: Text(
-                              selected.isEmpty ? 'All' : 'Clear',
+                              selected.isEmpty ? getConstant('All') : getConstant('Clear'),
                               style: TextStyles.s14w600.copyWith(
                                   color: Colors.black
                               ),
@@ -94,50 +95,54 @@ class _TypeLessonState extends State<TypeLesson> {
                     )
                 ),
                 Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                    child: ListView(
                       children: [
-                        const SizedBox(
-                          height: 24,
-                        ),
-                        ...List.generate(
-                            service.length,
-                            (index) {
-                              final hasSelected = selected.where((element) => element == service[index]['id']);
-                              return Container(
-                                color: hasSelected.isNotEmpty ? Colors.white : null,
-                                child: CupertinoButton(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 24,
-                                        vertical: 18
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const SizedBox(
+                              height: 24,
+                            ),
+                            ...List.generate(
+                                service.length,
+                                    (index) {
+                                  final hasSelected = selected.where((element) => element == service[index]['id']);
+                                  return Container(
+                                    color: hasSelected.isNotEmpty ? Colors.white : null,
+                                    child: CupertinoButton(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 24,
+                                            vertical: 18
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            Container(
+                                              constraints: BoxConstraints(
+                                                  maxWidth: SizerUtil.width - 50
+                                              ),
+                                              child: Text(
+                                                service[index]['name'],
+                                                style: TextStyles.s14w400.copyWith(
+                                                    color: const Color(0xFF242424)
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        onPressed: () {
+                                          changeFilter(service[index]);
+                                        }
                                     ),
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          constraints: BoxConstraints(
-                                            maxWidth: SizerUtil.width - 50
-                                          ),
-                                          child: Text(
-                                            service[index]['name'],
-                                            style: TextStyles.s14w400.copyWith(
-                                                color: const Color(0xFF242424)
-                                            ),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    onPressed: () {
-                                      changeFilter(service[index]);
-                                    }
-                                ),
-                              );
-                            }
+                                  );
+                                }
+                            )
+                          ],
                         )
                       ],
                     )
                 ),
                 AppButton(
-                    title: 'Apply filter',
+                    title: getConstant('APPLY_FILTER'),
                     onPressed: () {
                       apply();
                     }

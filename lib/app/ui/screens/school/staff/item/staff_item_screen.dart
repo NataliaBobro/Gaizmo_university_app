@@ -4,6 +4,7 @@ import 'package:etm_crm/app/ui/screens/school/staff/item/widgets/staff_documents
 import 'package:etm_crm/app/ui/screens/school/staff/item/widgets/staff_info.dart';
 import 'package:etm_crm/app/ui/screens/school/staff/item/widgets/staff_personal_info_tab.dart';
 import 'package:etm_crm/app/ui/screens/school/staff/item/widgets/staff_settings_tab.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -94,9 +95,9 @@ class _StaffItemScreenState extends State<StaffItemScreen> with TickerProviderSt
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Tab(
+                          Tab(
                             height: 24,
-                            text: 'Personal info',
+                            text: getConstant('Personal_info'),
                             iconMargin: EdgeInsets.zero,
                           ),
                           if(isActiveTab == 0) ...[
@@ -111,9 +112,9 @@ class _StaffItemScreenState extends State<StaffItemScreen> with TickerProviderSt
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Tab(
+                          Tab(
                             height: 19,
-                            text: 'Documents',
+                            text: getConstant('Documents'),
                           ),
                           if(isActiveTab == 1) ...[
                             Container(
@@ -127,9 +128,9 @@ class _StaffItemScreenState extends State<StaffItemScreen> with TickerProviderSt
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Tab(
+                          Tab(
                             height: 19,
-                            text: 'Settings',
+                            text: getConstant('Settings'),
                           ),
                           if(isActiveTab == 2) ...[
                             Container(
@@ -189,7 +190,7 @@ class _StaffHeaderState extends State<StaffHeader> {
             }
           ),
           Text(
-            'Staff',
+            getConstant('Staff'),
             style: TextStyles.s24w700.copyWith(
                 color: const Color(0xFF242424)
             ),

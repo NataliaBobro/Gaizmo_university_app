@@ -1,4 +1,5 @@
 import 'package:etm_crm/app/domain/states/auth_state.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:etm_crm/app/ui/widgets/arrow_back.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +42,7 @@ class _NewPasswordState extends State<NewPassword> {
                       Container(
                         alignment: Alignment.center,
                         child: Text(
-                          'Password recovery',
+                          getConstant('Password_recovery'),
                           style: TextStyles.s24w600.copyWith(
                               color: Colors.white
                           ),
@@ -63,7 +64,7 @@ class _NewPasswordState extends State<NewPassword> {
                                        color: Colors.white,
                                        height: 1.57
                                    ),
-                                   text: "New Password Setup"
+                                   text: getConstant('New_Password_Setup')
                                ),
                              ),
                            ),
@@ -72,13 +73,13 @@ class _NewPasswordState extends State<NewPassword> {
                            ),
                            AuthInput(
                              controller: state.password,
-                             title: 'New password',
+                             title: getConstant('New_password'),
                              isPass: true,
                              errors: state.validateError?.errors.passwordErrors?.first,
                            ),
                            AuthInput(
                              controller: state.confirmPassword,
-                             title: 'Confirm password',
+                             title: getConstant('Confirm_password'),
                              isPass: true,
                              errors: state.validateError?.errors.confirmPassword?.first,
                            ),
@@ -86,7 +87,7 @@ class _NewPasswordState extends State<NewPassword> {
                              height: 40,
                            ),
                            AppButton(
-                             title: 'Continue',
+                             title: getConstant('CONTINUE'),
                              onPressed: () {
                                state.setNewPass();
                              },

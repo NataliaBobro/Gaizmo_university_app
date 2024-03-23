@@ -2,6 +2,7 @@ import 'package:etm_crm/app/domain/models/services.dart';
 import 'package:etm_crm/app/domain/services/favorite_service.dart';
 import 'package:etm_crm/app/ui/screens/students/schools/item/widgets/service_item.dart';
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -39,8 +40,8 @@ class _SelectPackageScreenState extends State<SelectPackageScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const CenterHeader(
-                title: 'Service packages',
+              CenterHeader(
+                title: getConstant('Service_packages'),
               ),
               Expanded(
                 child: Stack(
@@ -74,7 +75,7 @@ class _SelectPackageScreenState extends State<SelectPackageScreen> {
                           ignoring: selected == null,
                           child: AppButton(
                             disabled: selected == null,
-                            title: 'pay package',
+                            title: getConstant('PAY_PACKAGE'),
                             onPressed: () async {
                               if(selected != null){
                                 state.openPage(
@@ -150,7 +151,7 @@ class _ButtonPayItemLessonState extends State<ButtonPayItemLesson> {
                       maxWidth: 250
                     ),
                     child: Text(
-                      "${widget.package?.numberVisits} ${widget.package?.name} lessons",
+                      "${widget.package?.numberVisits} ${widget.package?.name} ${getConstant('lesson')}",
                       style: TextStyles.s14w500.copyWith(
                           color: const Color(0xFF242424)
                       ),
@@ -180,7 +181,7 @@ class _ButtonPayItemLessonState extends State<ButtonPayItemLesson> {
                 height: 8,
               ),
               Text(
-                "1 lesson ${widget.package?.cost} hrn",
+                "1 ${getConstant('lesson')} ${widget.package?.cost} ${widget.package?.currency?.name}",
                 style: TextStyles.s12w400.copyWith(
                   color: const Color(0xFF848484)
                 ),

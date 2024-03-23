@@ -2,6 +2,7 @@ import 'package:etm_crm/app/app.dart';
 import 'package:etm_crm/app/ui/screens/school/profile/branchs/branch_list.dart';
 import 'package:etm_crm/app/ui/screens/school/profile/widgets/settings_tab.dart';
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:etm_crm/app/ui/widgets/custom_scroll_physics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -37,20 +38,22 @@ class _GeneralInfoTabState extends State<GeneralInfoTab> {
               height: 24,
             ),
             InfoValue(
-                title: "Phone number",
+                title: getConstant('Phone_number'),
                 value: "${school?.phone}"
             ),
             InfoValue(
-                title: "E-mail",
+                title: getConstant('Email'),
                 value: "${school?.email}"
             ),
             InfoValue(
-                title: "School category",
+                title: getConstant('School_category'),
                 value: "${school?.school?.category?.translate?.value}"
             ),
             SettingsInput(
-                title: "Branches",
-                info: school?.parentCount != null? '${school?.parentCount} branches' : null,
+                title: getConstant('Branches'),
+                info: school?.parentCount != null && (school?.parentCount ?? 0) > 0?
+                    '${school?.parentCount} ${getConstant('Branches')}'
+                    : null,
                 onPress: () async {
                   await Navigator.push(
                       context,
@@ -66,8 +69,8 @@ class _GeneralInfoTabState extends State<GeneralInfoTab> {
             const SizedBox(
               height: 25,
             ),
-            const Text(
-              'Add more info about your school!',
+            Text(
+              getConstant('Add_more_info_about_your_school'),
               style: TextStyles.s14w400,
             ),
             CupertinoButton(
@@ -79,7 +82,7 @@ class _GeneralInfoTabState extends State<GeneralInfoTab> {
                     top: 8
                 ),
                 child: Text(
-                  'Go to settings!',
+                  getConstant('Go_to_settings'),
                   style: TextStyles.s14w400.copyWith(
                       color: Colors.black,
                       decoration: TextDecoration.underline

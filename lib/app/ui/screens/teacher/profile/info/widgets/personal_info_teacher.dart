@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:etm_crm/app/app.dart';
 import 'package:etm_crm/app/domain/models/meta.dart';
 import 'package:etm_crm/app/domain/models/user.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:etm_crm/app/ui/widgets/settings/setting_salary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
@@ -76,8 +77,8 @@ class _PersonalInfoTeacherState extends State<PersonalInfoTeacher> {
             color: const Color(0xFFF0F3F6),
             child: Column(
               children: [
-                const CenterHeader(
-                    title: 'Settings'
+                CenterHeader(
+                    title: getConstant('Settings')
                 ),
                 Expanded(
                     child: Column(

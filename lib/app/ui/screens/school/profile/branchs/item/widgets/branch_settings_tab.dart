@@ -2,6 +2,7 @@ import 'package:etm_crm/app/domain/models/user.dart';
 import 'package:etm_crm/app/domain/services/user_service.dart';
 import 'package:etm_crm/app/domain/states/school/school_branch_state.dart';
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:etm_crm/app/ui/widgets/change_password.dart';
 import 'package:etm_crm/app/ui/widgets/custom_scroll_physics.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../../../widgets/settings_general_info.dart';
 import '../../../../../../widgets/settings_input.dart';
-import '../../../../../../widgets/settings_language.dart';
 import '../../../../../../widgets/settings_social_accounts.dart';
 
 class BranchSettingsTab extends StatefulWidget {
@@ -48,7 +48,7 @@ class _BranchSettingsTabState extends State<BranchSettingsTab> {
         //     }
         // ),
         SettingsInput(
-            title: "General info",
+            title: getConstant('General_info'),
             onPress: () async {
               await Navigator.push(
                 context,
@@ -61,7 +61,7 @@ class _BranchSettingsTabState extends State<BranchSettingsTab> {
             }
         ),
         SettingsInput(
-            title: "Social accounts",
+            title: getConstant('Social_accounts'),
             onPress: () async {
               await Navigator.push(
                 context,
@@ -81,7 +81,7 @@ class _BranchSettingsTabState extends State<BranchSettingsTab> {
               horizontal: 24
           ),
           child: Text(
-            'Privacy settings',
+            getConstant('Privacy_settings'),
             style: TextStyles.s14w600.copyWith(
                 color: const Color(0xFF242424)
             ),
@@ -91,7 +91,7 @@ class _BranchSettingsTabState extends State<BranchSettingsTab> {
           height: 24,
         ),
         SettingsInput(
-            title: "Password",
+            title: getConstant('Password'),
             onPress: () async {
               await Navigator.push(
                 context,

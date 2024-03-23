@@ -1,4 +1,5 @@
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
@@ -62,7 +63,7 @@ class _ConfirmCodeScreenState extends State<ConfirmCodeScreen> {
                         height: 100,
                       ),
                       Text(
-                        'Verification',
+                        getConstant('Verification'),
                         style: TextStyles.s24w500.copyWith(
                           color: const Color(0xFFFFC700)
                         ),
@@ -73,7 +74,7 @@ class _ConfirmCodeScreenState extends State<ConfirmCodeScreen> {
                       RichText(
                         textAlign: TextAlign.center,
                           text: TextSpan(
-                            text: 'Enter the code sent to the email ',
+                            text: '${getConstant('Enter_the_code_sent_to_the_email')} ',
                             style: TextStyles.s12w500.copyWith(
                                 color: Colors.white,
                             ),
@@ -110,7 +111,7 @@ class _ConfirmCodeScreenState extends State<ConfirmCodeScreen> {
                         height: 170,
                       ),
                       Text(
-                        "Didn't, receive code?",
+                        getConstant('Didnt_receive_code'),
                         style: TextStyles.s14w500.copyWith(
                           color: Colors.white,
                         ),
@@ -122,7 +123,7 @@ class _ConfirmCodeScreenState extends State<ConfirmCodeScreen> {
                           vertical: 8
                         ),
                         child: Text(
-                          'Resend',
+                          getConstant('Resend'),
                           style: TextStyles.s14w500.copyWith(
                             color: const Color(0xFFFFC700),
                             decoration: TextDecoration.underline

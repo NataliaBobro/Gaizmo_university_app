@@ -1,5 +1,6 @@
 import 'package:etm_crm/app/app.dart';
 import 'package:etm_crm/app/domain/states/school/school_staff_state.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:etm_crm/app/ui/widgets/app_field.dart';
 import 'package:etm_crm/app/ui/widgets/auth_button.dart';
 import 'package:flutter/material.dart';
@@ -157,8 +158,8 @@ class _AddStaffScreenState extends State<AddStaffScreen> {
           color: const Color(0xFFF0F3F6),
           child: Column(
             children: [
-              const CenterHeaderWithAction(
-                  title: 'Add staff'
+              CenterHeaderWithAction(
+                  title: getConstant('Add_staff')
               ),
               Expanded(
                 child: ListView(
@@ -167,12 +168,12 @@ class _AddStaffScreenState extends State<AddStaffScreen> {
                   ),
                   physics: const BottomBouncingScrollPhysics(),
                   children: [
-                    const AppTitle(
-                      title: 'Personal info',
+                    AppTitle(
+                      title: getConstant('Personal_info'),
                     ),
                     AppField(
                       error: state.validateError?.errors.firstNameErrors?.first,
-                      label: 'First name',
+                      label: getConstant('First_name'),
                       controller: firstName,
                     ),
                     const SizedBox(
@@ -180,7 +181,7 @@ class _AddStaffScreenState extends State<AddStaffScreen> {
                     ),
                     AppField(
                       error: state.validateError?.errors.lastNameErrors?.first,
-                      label: 'Last name',
+                      label: getConstant('Last_name'),
                       controller: lastName,
                     ),
                     const SizedBox(
@@ -188,7 +189,7 @@ class _AddStaffScreenState extends State<AddStaffScreen> {
                     ),
                     SelectInput(
                         errors: state.validateError?.errors.genderErrors?.first,
-                        title: 'Gender',
+                        title: getConstant('Gender'),
                         hintText: '',
                         hintStyle: TextStyles.s14w400.copyWith(
                             color: const Color(0xFF848484)
@@ -224,7 +225,7 @@ class _AddStaffScreenState extends State<AddStaffScreen> {
                     ),
                     AppField(
                       error: state.validateError?.errors.phoneErrors?.first,
-                      label: 'Phone number',
+                      label: getConstant('Phone_number'),
                       controller: phone,
                       placeholder: '+380',
                     ),
@@ -233,7 +234,7 @@ class _AddStaffScreenState extends State<AddStaffScreen> {
                     ),
                     AppField(
                       error: state.validateError?.errors.emailErrors?.first,
-                      label: 'E-mail adress',
+                      label: getConstant('Email'),
                       controller: email,
                     ),
                     const SizedBox(
@@ -264,17 +265,16 @@ class _AddStaffScreenState extends State<AddStaffScreen> {
                     //   },
                     // ),
                     AppField(
-                      label: 'Salary / hourly',
+                      label: '${getConstant('Salary')} / ${getConstant('hourly')}',
                       controller: salary,
                       keyboardType: TextInputType.number,
                     ),
-
-                    const AppTitle(
-                      title: 'Address',
+                    AppTitle(
+                      title: getConstant('Adress'),
                     ),
                     SelectInputSearchField(
                       errors: state.validateError?.errors.country,
-                      title: 'Country',
+                      title: getConstant('Country'),
                       titleStyle: TextStyles.s14w600.copyWith(
                         color: const Color(0xFF242424)
                       ),
@@ -299,7 +299,7 @@ class _AddStaffScreenState extends State<AddStaffScreen> {
                     ),
                     SelectInputSearchField(
                       errors: state.validateError?.errors.city,
-                      title: 'City',
+                      title: getConstant('City'),
                       items: cityListData(),
                       onSearch: (value) {
                         searchCity(value);
@@ -322,21 +322,21 @@ class _AddStaffScreenState extends State<AddStaffScreen> {
                       hintText: '',
                     ),
                     AppField(
-                      label: 'Street',
+                      label: getConstant('Street'),
                       controller: street,
                     ),
                     const SizedBox(
                       height: 24,
                     ),
                     AppField(
-                      label: 'House',
+                      label: getConstant('House'),
                       controller: house,
                     ),
                     const SizedBox(
                       height: 40,
                     ),
                     AppButton(
-                      title: 'ADD EMPLOYEE',
+                      title: getConstant('ADD_EMPLOYEE'),
                       onPressed: () {
                         state.addOrEditStaff(
                             firstName.text,

@@ -292,3 +292,25 @@ Map<String, dynamic> _$FilterDataStringToJson(FilterDataString instance) =>
       'success': instance.success,
       'city': instance.city,
     };
+
+ConstantsList _$ConstantsListFromJson(Map<String, dynamic> json) =>
+    ConstantsList(
+      data: (json['data'] as List<dynamic>)
+          .map((e) => Constant.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$ConstantsListToJson(ConstantsList instance) =>
+    <String, dynamic>{
+      'data': instance.data,
+    };
+
+Constant _$ConstantFromJson(Map<String, dynamic> json) => Constant(
+      constant: json['constant'] as String,
+      value: json['value'] as String,
+    );
+
+Map<String, dynamic> _$ConstantToJson(Constant instance) => <String, dynamic>{
+      'constant': instance.constant,
+      'value': instance.value,
+    };

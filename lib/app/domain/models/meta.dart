@@ -347,3 +347,29 @@ class FilterDataString {
   factory FilterDataString.fromJson(Map<String, dynamic> json) => _$FilterDataStringFromJson(json);
 }
 
+@JsonSerializable(includeIfNull: true, fieldRename: FieldRename.snake)
+class ConstantsList {
+  List<Constant> data;
+
+  ConstantsList({
+    required this.data,
+  });
+
+  Map<String, dynamic> toJson() => _$ConstantsListToJson(this);
+  factory ConstantsList.fromJson(Map<String, dynamic> json) => _$ConstantsListFromJson(json);
+}
+
+@JsonSerializable(includeIfNull: true, fieldRename: FieldRename.snake)
+class Constant {
+  String constant;
+  String value;
+
+  Constant({
+    required this.constant,
+    required this.value,
+  });
+
+  Map<String, dynamic> toJson() => _$ConstantToJson(this);
+  factory Constant.fromJson(Map<String, dynamic> json) => _$ConstantFromJson(json);
+}
+

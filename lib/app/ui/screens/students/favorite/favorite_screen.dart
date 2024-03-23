@@ -1,6 +1,7 @@
 
 import 'package:etm_crm/app/ui/screens/students/favorite/widgets/favorite_tab.dart';
 import 'package:etm_crm/app/ui/screens/students/favorite/widgets/pay_tab.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:etm_crm/app/ui/widgets/center_header.dart';
 import 'package:flutter/material.dart';
 
@@ -58,7 +59,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> with TickerProviderStat
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const CenterHeader(title: "Favorite lessons"),
+                CenterHeader(title: getConstant('Favorite_lessons')),
                 Container(
                   height: 55,
                   alignment: Alignment.center,
@@ -87,9 +88,9 @@ class _FavoriteScreenState extends State<FavoriteScreen> with TickerProviderStat
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Tab(
+                          Tab(
                             height: 24,
-                            text: 'Favorites',
+                            text: getConstant('Favorites'),
                             iconMargin: EdgeInsets.zero,
                           ),
                           if(isActiveTab == 0) ...[
@@ -104,9 +105,9 @@ class _FavoriteScreenState extends State<FavoriteScreen> with TickerProviderStat
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Tab(
+                          Tab(
                             height: 19,
-                            text: 'Paid lessons',
+                            text: getConstant('Paid_lessons'),
                           ),
                           if(isActiveTab == 1) ...[
                             Container(

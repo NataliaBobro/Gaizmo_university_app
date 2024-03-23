@@ -10,6 +10,7 @@ import 'firebase_options.dart';
 void main() async {
   await Hive.initFlutter();
   await Hive.openBox('settings');
+  await Hive.openBox('constants');
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,

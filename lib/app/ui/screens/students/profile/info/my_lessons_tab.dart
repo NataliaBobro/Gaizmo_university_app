@@ -3,6 +3,7 @@ import 'package:accordion/controllers.dart';
 import 'package:etm_crm/app/app.dart';
 import 'package:etm_crm/app/domain/models/lesson.dart';
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';
@@ -12,6 +13,7 @@ import '../../../../../domain/services/visits_lesson_service.dart';
 import '../../../../../domain/states/student/student_home_state.dart';
 import '../../../../widgets/custom_scroll_physics.dart';
 import '../../../../widgets/schedule/empty_lesson.dart';
+import '../../../../widgets/schedule/lesson_header.dart';
 import '../../../../widgets/schedule/shcedule_widgets.dart';
 
 class MyLessonsTab extends StatefulWidget {
@@ -44,7 +46,7 @@ class _MyLessonsTabState extends State<MyLessonsTab> {
                     vertical: 24
                 ),
                 child: Text(
-                  "Today",
+                  getConstant('Today'),
                   style: TextStyles.s14w600.copyWith(
                       color: const Color(0xFF242424)
                   ),
@@ -105,20 +107,20 @@ class _MyLessonsTabState extends State<MyLessonsTab> {
     await showPlatformDialog(
       context: context,
       builder: (context) => BasicDialogAlert(
-        content: const Text(
-          "Are you sure you attended this lesson?",
+        content: Text(
+          getConstant('Are_you_sure_you_attended_this_lesson'),
           style: TextStyles.s17w600,
         ),
         actions: <Widget>[
           BasicDialogAction(
-            title: const Text("Yes"),
+            title: Text(getConstant('Yes')),
             onPressed: () {
               Navigator.pop(context);
               visits(lesson, date);
             },
           ),
           BasicDialogAction(
-            title: const Text("No"),
+            title: Text(getConstant('No')),
             onPressed: () {
               Navigator.pop(context);
             },
@@ -144,49 +146,5 @@ class _MyLessonsTabState extends State<MyLessonsTab> {
 
   void updateUser() {
     context.read<AppState>().getUser();
-  }
-}
-
-
-class MyLessonHeader extends StatelessWidget {
-  const MyLessonHeader({
-    Key? key,
-    required this.lesson
-  }) : super(key: key);
-
-  final Lesson lesson;
-
-  @override
-  Widget build(BuildContext context) {
-    final duration = lesson.services?.first?.duration;
-    TimeOfDay startTime = TimeOfDay.fromDateTime(DateTime.parse("2022-01-18 ${lesson.startLesson ?? '00:00'}"));
-
-    TimeOfDay endTime = startTime.replacing(
-      hour: startTime.hour + ((startTime.minute + (duration ?? 0)) ~/ 60),
-      minute: (startTime.minute + (duration ?? 0)) % 60,
-    );
-
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          '${lesson.services?.first?.name}',
-          style: TextStyles.s14w600.copyWith(
-            color: const Color(0xFF242424)
-          ),
-        ),
-        const SizedBox(
-          height: 8,
-        ),
-        Text(
-          'Start ${startTime.format(context)} - End ${endTime.format(context)}',
-          style: TextStyles.s12w400.copyWith(
-              color: const Color(0xFF848484)
-          ),
-        ),
-      ],
-    );
   }
 }

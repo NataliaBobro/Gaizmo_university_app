@@ -1,3 +1,4 @@
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../resources/resources.dart';
@@ -22,7 +23,7 @@ class PresentsScreen extends StatelessWidget {
                   vertical: 24
               ),
               child: Text(
-                "Presents",
+                getConstant('Presents'),
                 style: TextStyles.s14w600.copyWith(
                     color: const Color(0xFF242424)
                 ),

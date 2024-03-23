@@ -5,6 +5,7 @@ import 'package:etm_crm/app/ui/screens/school/profile/branchs/item/widgets/branc
 import 'package:etm_crm/app/ui/screens/school/profile/branchs/item/widgets/branch_info.dart';
 import 'package:etm_crm/app/ui/screens/school/profile/branchs/item/widgets/branch_settings_tab.dart';
 import 'package:etm_crm/app/ui/screens/school/profile/branchs/item/widgets/document_view.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -93,9 +94,9 @@ class _BranchItemScreenState extends State<BranchItemScreen> with TickerProvider
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Tab(
+                          Tab(
                             height: 24,
-                            text: 'General info',
+                            text: getConstant('General_info'),
                             iconMargin: EdgeInsets.zero,
                           ),
                           if(isActiveTab == 0) ...[
@@ -110,9 +111,9 @@ class _BranchItemScreenState extends State<BranchItemScreen> with TickerProvider
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Tab(
+                          Tab(
                             height: 19,
-                            text: 'Documents',
+                            text: getConstant('Documents'),
                           ),
                           if(isActiveTab == 1) ...[
                             Container(
@@ -126,9 +127,9 @@ class _BranchItemScreenState extends State<BranchItemScreen> with TickerProvider
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Tab(
+                          Tab(
                             height: 19,
-                            text: 'Settings',
+                            text: getConstant('Settings'),
                           ),
                           if(isActiveTab == 2) ...[
                             Container(

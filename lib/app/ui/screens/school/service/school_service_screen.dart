@@ -5,6 +5,7 @@ import 'package:accordion/controllers.dart';
 import 'package:etm_crm/app/domain/models/services.dart';
 import 'package:etm_crm/app/ui/screens/school/service/widgets/services_header.dart';
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:etm_crm/app/ui/widgets/empty_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -411,31 +412,31 @@ class _ContentServiceState extends State<ContentService> {
           ),
           if(widget.item?.teacher != null) ...[
             ContentRowInfo(
-                title: "Teacher",
+                title: getConstant('Teacher'),
                 value: "${widget.item?.teacher?.firstName} ${widget.item?.teacher?.lastName}"
             ),
           ],
           if(widget.item?.branch != null) ...[
             ContentRowInfo(
-                title: "Branch",
+                title: getConstant('Branch'),
                 value: '${widget.item?.branch?.name}'
             ),
           ],
-          const ContentRowInfo(
-              title: "Number of students",
+          ContentRowInfo(
+              title: getConstant('Number_of_students'),
               value: "0"
           ),
           ContentRowInfo(
-              title: "Validity",
+              title: getConstant('Validity'),
               value: "${widget.item?.validity} ${widget.item?.validityType}"
           ),
           ContentRowInfo(
-              title: "Service duration",
+              title: getConstant('Service_duration'),
               value: (durationHours > 0 ? "$durationHours hour" : '') +
                   (durationMinutes > 0 ? " $durationMinutes minutes" : '')
           ),
           ContentRowInfo(
-              title: "Cost",
+              title: getConstant('Cost'),
               value: "${widget.item?.cost} ${widget.item?.currency?.symbol}"
           ),
           ContentRowInfo(

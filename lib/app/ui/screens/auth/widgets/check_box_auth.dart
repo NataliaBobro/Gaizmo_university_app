@@ -1,3 +1,4 @@
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -46,7 +47,7 @@ class _CheckboxAuthState extends State<CheckboxAuth> {
               ),
               child: RichText(
                 text: TextSpan(
-                  text: 'I have read and agree to the ',
+                  text: '${getConstant('I_have_read_and_agree_to_the')} ',
                     style: TextStyles.s10w600.copyWith(
                         color: error != null ? const Color(0xFFFFC700) : Colors.white,
                         letterSpacing: 0.0
@@ -60,7 +61,7 @@ class _CheckboxAuthState extends State<CheckboxAuth> {
                         padding: EdgeInsets.zero,
                         minSize: 0.0,
                         child: Text(
-                          'privacy policy',
+                          getConstant('privacy_policy'),
                           style: TextStyles.s10w600.copyWith(
                               color: const Color(0xFFFFC700),
                               letterSpacing: 0.0
@@ -69,7 +70,7 @@ class _CheckboxAuthState extends State<CheckboxAuth> {
                       )
                     ),
                     TextSpan(
-                      text: ', terms of service, and community guidlines',
+                      text: ', ${getConstant('terms_of_service')}, ${getConstant('and_community_guidlines')}',
                       style: TextStyles.s10w600.copyWith(
                           color: error != null ? const Color(0xFFFFC700) : Colors.white,
                           letterSpacing: 0.0

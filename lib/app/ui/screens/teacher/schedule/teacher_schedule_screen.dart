@@ -2,6 +2,7 @@ import 'package:accordion/accordion.dart';
 import 'package:accordion/controllers.dart';
 import 'package:etm_crm/app/domain/models/lesson.dart';
 import 'package:etm_crm/app/ui/screens/teacher/schedule/widgets/schedule_header.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:etm_crm/app/ui/widgets/empty_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -54,8 +55,8 @@ class _TeacherScheduleScreenState extends State<TeacherScheduleScreen> {
                   Expanded(
                     child: EmptyWidget(
                       isEmpty: true,
-                      title: 'No classes today :(',
-                      subtitle: 'Click the button below to add lessons',
+                      title: getConstant('No_classes_today'),
+                      subtitle: getConstant('Click_the_button_below_to_add_lessons'),
                       onPress: () {
                         state.addLesson();
                       },

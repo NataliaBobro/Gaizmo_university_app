@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../domain/states/student/favorite_state.dart';
-import '../../profile/info/widgets/service_item_content.dart';
+import '../../../school/service/school_service_screen.dart';
 import 'favorite_tab.dart';
 
 class PayTab extends StatefulWidget {
@@ -61,8 +61,8 @@ class _PayTabState extends State<PayTab> {
                   header: HeaderFavorite(
                       service: services[index]
                   ),
-                  content: ServiceItemContent(
-                      service: services[index]
+                  content: ContentService(
+                      item: services[index]
                   ),
                 )
             )

@@ -1,4 +1,5 @@
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -35,7 +36,7 @@ class _BranchHeaderState extends State<BranchHeader> {
                   }
               ),
               Text(
-                'Branch',
+                getConstant('Branch'),
                 style: TextStyles.s24w700.copyWith(
                     color: const Color(0xFF242424)
                 ),

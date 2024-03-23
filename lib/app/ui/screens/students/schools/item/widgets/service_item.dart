@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:etm_crm/app/domain/models/user.dart';
 import 'package:etm_crm/app/domain/services/student_service.dart';
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:etm_crm/app/ui/widgets/auth_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -138,10 +139,10 @@ class _ServiceItemState extends State<ServiceItem> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const ColoredBox(
-                    color: Color(0xFFF0F3F6),
+                  ColoredBox(
+                    color: const Color(0xFFF0F3F6),
                     child: CenterHeader(
-                      title: 'Lesson',
+                      title: getConstant('lesson'),
                     ),
                   ),
                   Expanded(
@@ -252,7 +253,7 @@ class _ServiceItemState extends State<ServiceItem> {
                                             backgroundColor: const Color(0xFF242424),
                                             headerBuilder: (BuildContext context, bool isExpanded) {
                                               return Text(
-                                                'Scedule',
+                                                getConstant('Schedule'),
                                                 style: TextStyles.s14w400.copyWith(
                                                     color: Colors.white
                                                 ),

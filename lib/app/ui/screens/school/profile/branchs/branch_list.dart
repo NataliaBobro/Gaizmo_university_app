@@ -3,6 +3,7 @@ import 'package:etm_crm/app/domain/models/user.dart';
 import 'package:etm_crm/app/domain/states/school/school_branch_state.dart';
 import 'package:etm_crm/app/ui/screens/school/profile/branchs/add_branch.dart';
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:etm_crm/app/ui/widgets/empty_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -30,8 +31,8 @@ class _BranchListState extends State<BranchList> {
             color: const Color(0xFFF0F3F6),
             child: Column(
               children: [
-                const CenterHeaderWithAction(
-                    title: 'Branches'
+                CenterHeaderWithAction(
+                    title: getConstant('Branches')
                 ),
                 Expanded(
                     child: state.isLoading ?
@@ -52,8 +53,8 @@ class _BranchListState extends State<BranchList> {
                         ],
                         EmptyWidget(
                             isEmpty: state.listUserData?.users.isEmpty ?? true,
-                            title: "No branches yet!",
-                            subtitle: "Click the button below to add branch",
+                            title: getConstant('No_branches_yet'),
+                            subtitle: getConstant('Click_the_button_below_to_add_branch'),
                             onPress: () {
                               state.openPage(
                                   context,

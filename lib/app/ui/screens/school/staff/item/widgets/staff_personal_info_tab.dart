@@ -1,3 +1,4 @@
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -23,19 +24,19 @@ class _StaffPersonalInfoTabState extends State<StaffPersonalInfoTab> {
           height: 25,
         ),
         InfoValue(
-            title: "Full name",
+            title: getConstant('Full_name'),
             value: "${state.staff?.firstName} ${state.staff?.lastName}"
         ),
         InfoValue(
-            title: "Date of birth",
+            title: getConstant('Date_of_birth'),
             value: "${state.staff?.dateBirth}"
         ),
         InfoValue(
-            title: "Phone number",
+            title: getConstant('Phone_number'),
             value: "${state.staff?.phone}"
         ),
         InfoValue(
-            title: "E-mail",
+            title: getConstant('Email'),
             value: "${state.staff?.email}"
         ),
         // InfoValue(
@@ -43,7 +44,7 @@ class _StaffPersonalInfoTabState extends State<StaffPersonalInfoTab> {
         //     value: "${widget.staff?.socialAccounts?.instagram}"
         // ),
         InfoValue(
-            title: "Adress",
+            title: getConstant('Adress'),
             value: "${state.staff?.country}, ${state.staff?.city}"
         ),
       ],

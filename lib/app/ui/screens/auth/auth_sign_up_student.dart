@@ -2,6 +2,7 @@ import 'package:etm_crm/app/domain/states/auth_state.dart';
 import 'package:etm_crm/app/ui/screens/auth/widgets/already_account.dart';
 import 'package:etm_crm/app/ui/screens/auth/widgets/check_box_auth.dart';
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:etm_crm/app/ui/widgets/auth_title.dart';
 import 'package:etm_crm/app/ui/widgets/custom_scroll_physics.dart';
 import 'package:flutter/cupertino.dart';
@@ -49,7 +50,7 @@ class _AuthSignUpStudentState extends State<AuthSignUpStudent> {
                     Container(
                       alignment: Alignment.center,
                       child: Text(
-                        'Sign up',
+                        getConstant('SIGN_UP'),
                         style: TextStyles.s24w600.copyWith(
                             color: Colors.white
                         ),
@@ -60,50 +61,50 @@ class _AuthSignUpStudentState extends State<AuthSignUpStudent> {
                       child: ListView(
                         physics: const BottomBouncingScrollPhysics(),
                         children: [
-                          const AppTitle(
-                            title: 'General info',
+                          AppTitle(
+                            title: getConstant('General_info'),
                           ),
                           AuthInput(
                             keyboardType: TextInputType.number,
                             controller: state.phone,
-                            title: 'Phone number',
+                            title: getConstant('Phone_number'),
                             hintText: '+380',
                             errors: state.validateError?.errors.phoneErrors?.first,
                           ),
                           AuthInput(
                             controller: state.email,
-                            title: 'E-mail address',
+                            title: getConstant('Email_adress'),
                             errors: state.validateError?.errors.emailErrors?.first,
                           ),
                           AuthInput(
                             controller: state.password,
-                            title: 'Password',
+                            title: getConstant('Password'),
                             isPass: true,
                             errors: state.validateError?.errors.passwordErrors?.first,
                           ),
                           AuthInput(
                             controller: state.confirmPassword,
-                            title: 'Confirm password',
+                            title: getConstant('Confirm_password'),
                             isPass: true,
                             isBottomPadding: false,
                           ),
-                          const AppTitle(
-                            title: 'Personal info',
+                          AppTitle(
+                            title: getConstant('Personal_info'),
                           ),
                           AuthInput(
                             controller: state.firstName,
-                            title: 'First name',
+                            title: getConstant('First_name'),
                             errors: state.validateError?.errors.firstNameErrors?.first,
                           ),
                           AuthInput(
                             controller: state.surname,
-                            title: 'Surname',
+                            title: getConstant('Surname'),
                             errors: state.validateError?.errors.surnameErrors?.first,
                           ),
                           SelectInput(
                               errors: state.validateError?.errors.genderErrors?.first,
-                              title: 'Gender',
-                              hintText: 'Choose your gender',
+                              title: getConstant('Gender'),
+                              hintText: getConstant('Choose_your_gender'),
                               items: state.listGender(),
                               selected: state.gender,
                               onSelect: (index) {
@@ -126,7 +127,7 @@ class _AuthSignUpStudentState extends State<AuthSignUpStudent> {
                             height: 40,
                           ),
                           AppButton(
-                            title: 'Sign up',
+                            title: getConstant('SIGN_UP'),
                             onPressed: () {
                               if(!state.isLoading) {
                                 state.sendCode();

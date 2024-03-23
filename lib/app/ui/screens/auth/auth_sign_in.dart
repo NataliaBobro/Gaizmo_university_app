@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 
 import '../../theme/app_colors.dart';
 import '../../theme/text_styles.dart';
+import '../../utils/get_constant.dart';
 import '../../widgets/auth_button.dart';
 import '../../widgets/auth_input.dart';
 
@@ -43,7 +44,7 @@ class _AuthSignInState extends State<AuthSignIn> {
                       Container(
                         alignment: Alignment.center,
                         child: Text(
-                          'Sign in',
+                          getConstant('SIGN_IN'),
                           style: TextStyles.s24w600.copyWith(
                               color: Colors.white
                           ),
@@ -59,12 +60,12 @@ class _AuthSignInState extends State<AuthSignIn> {
                             AuthInput(
                               keyboardType: TextInputType.emailAddress,
                               controller: state.email,
-                              title: 'Email',
+                              title: getConstant('Email'),
                               errors: state.validateError?.errors.emailErrors?.first,
                             ),
                             AuthInput(
                                 controller: state.password,
-                                title: 'Password',
+                                title: getConstant('Password'),
                                 isPass: true,
                                 errors: state.validateError?.errors.passwordErrors?.first,
                                 isBottomPadding: false,
@@ -74,7 +75,7 @@ class _AuthSignInState extends State<AuthSignIn> {
                                       top: 4
                                   ),
                                   child: Text(
-                                    'Forgot the password?',
+                                    getConstant('Forgot_the_password'),
                                     style: TextStyles.s12w400.copyWith(
                                         color: const Color(0xFF848484)
                                     ),
@@ -90,7 +91,7 @@ class _AuthSignInState extends State<AuthSignIn> {
                               height: 80,
                             ),
                             AppButton(
-                              title: 'Sign in',
+                              title: getConstant('SIGN_IN'),
                               onPressed: () {
                                 if(!state.isLoading) {
                                   state.signIn();
@@ -106,13 +107,13 @@ class _AuthSignInState extends State<AuthSignIn> {
                               child: RichText(
                                 textAlign: TextAlign.center,
                                 text: TextSpan(
-                                    text: 'Don’t have an account yet? ',
+                                    text: '${getConstant('Dont_have_an_account_yet')} ',
                                     style: TextStyles.s14w600.copyWith(
                                         color: Colors.white
                                     ),
                                     children: [
                                       TextSpan(
-                                        text: 'Get started!',
+                                        text: getConstant('Get_started'),
                                         style: TextStyles.s14w600.copyWith(
                                             color: const Color(0xFFFFC700)
                                         ),
