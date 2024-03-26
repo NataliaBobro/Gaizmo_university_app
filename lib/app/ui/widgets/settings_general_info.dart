@@ -63,8 +63,8 @@ class _SettingGeneralInfoState extends State<SettingGeneralInfo> {
             color: const Color(0xFFF0F3F6),
             child: Column(
               children: [
-                const CenterHeaderWithAction(
-                    title: 'Settings'
+                CenterHeaderWithAction(
+                    title: getConstant('Settings')
                 ),
                 Expanded(
                     child: Column(
@@ -87,6 +87,7 @@ class _SettingGeneralInfoState extends State<SettingGeneralInfo> {
                                 error: validateError?.errors.schoolName?.first,
                               ),
                               AppHorizontalField(
+                                keyboardType: TextInputType.phone,
                                 label: getConstant('Phone_number'),
                                 controller: phone,
                                 changeClear: () {

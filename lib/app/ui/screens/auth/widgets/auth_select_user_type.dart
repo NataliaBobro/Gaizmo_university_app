@@ -21,72 +21,84 @@ class AuthSelectUserType extends StatefulWidget {
 class _AuthSelectUserTypeState extends State<AuthSelectUserType> {
   @override
   Widget build(BuildContext context) {
+    final state = context.watch<AuthState>();
     final read = context.read<AuthState>();
     return Scaffold(
       backgroundColor: AppColors.registerBg,
       body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Column(
-              children: [
-                const ArrowBack(),
-                const SizedBox(
-                  height: 154,
-                ),
-                Center(
-                  child: SvgPicture.asset(
-                    Svgs.logo,
-                    width: 162,
+        child: GestureDetector(
+          onHorizontalDragUpdate: (details){
+            if(details.delta.dx > 20){
+              state.clear();
+              Navigator.pop(context);
+            }
+          },
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Column(
+                children: [
+                  const SizedBox(
+                    height: 16,
                   ),
-                ),
-              ],
-            ),
-            Column(
-              children: [
-                AppButton(
-                    title: getConstant('IM_STUDENT'),
-                    icon: Svgs.student,
-                    onPressed: () {
-                      read.changeUserType(3);
-                    }
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                AppButton(
-                    title: getConstant('School'),
-                    icon: Svgs.schoolColor,
-                    onPressed: () {
-                      read.changeUserType(1);
-                    }
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                AppButton(
-                    title: getConstant('Teacher'),
-                    icon: Svgs.teacher,
-                    onPressed: () {
-                      read.changeUserType(2);
-                    }
-                ),
-                const SizedBox(
-                  height: 24,
-                ),
-                Text(
-                  '',
-                  style: TextStyles.s14w600.copyWith(
-                      color: Colors.white
+                  const ArrowBack(),
+                  const SizedBox(
+                    height: 138,
                   ),
-                ),
-                const SizedBox(
-                  height: 62,
-                )
-              ],
-            )
-          ],
+                  Center(
+                    child: SvgPicture.asset(
+                      Svgs.logo,
+                      width: 162,
+                    ),
+                  ),
+                ],
+              ),
+              Column(
+                children: [
+                  AppButton(
+                      title: getConstant('IM_STUDENT'),
+                      icon: Svgs.student,
+                      onPressed: () {
+                        read.changeUserType(3);
+                      }
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  AppButton(
+                      title: getConstant('School'),
+                      icon: Svgs.schoolColor,
+                      onPressed: () {
+                        read.changeUserType(1);
+                      }
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  AppButton(
+                      title: getConstant('Teacher'),
+                      icon: Svgs.teacher,
+                      onPressed: () {
+                        read.changeUserType(2);
+                      }
+                  ),
+                  const SizedBox(
+                    height: 24,
+                  ),
+                  Text(
+                    '',
+                    style: TextStyles.s14w600.copyWith(
+                        color: Colors.white
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 62,
+                  )
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

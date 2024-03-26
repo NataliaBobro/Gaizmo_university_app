@@ -1,3 +1,4 @@
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:etm_crm/app/ui/widgets/app_field.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,7 +31,7 @@ class _AddCategoryServiceState extends State<AddCategoryService> {
             height: 40,
           ),
           Text(
-            'Service information',
+            getConstant('Service_information'),
             style: TextStyles.s14w600.copyWith(
                 color: const Color(0xFFFFC700)
             ),
@@ -39,7 +40,7 @@ class _AddCategoryServiceState extends State<AddCategoryService> {
             height: 16,
           ),
           AppField(
-              label: 'Category name *',
+              label: '${getConstant('Category_name')} *',
               controller: state.categoryName,
               error: state.validateError?.errors.name?[0],
           ),
@@ -47,7 +48,7 @@ class _AddCategoryServiceState extends State<AddCategoryService> {
             height: 40,
           ),
           SelectColor(
-              label: "Category color *",
+              label: getConstant('Category_color'),
               selected: state.selectColor,
               onSelect: (value) {
                 state.selectServiceColor(value);
@@ -57,7 +58,7 @@ class _AddCategoryServiceState extends State<AddCategoryService> {
             height: 40,
           ),
           AppButton(
-            title: state.onEditId != null ? 'Edit category' : 'ADD category',
+            title: state.onEditId != null ? getConstant('Edit_category') : getConstant('ADD_category'),
             onPressed: () {
               state.addOrEditCategory();
             },

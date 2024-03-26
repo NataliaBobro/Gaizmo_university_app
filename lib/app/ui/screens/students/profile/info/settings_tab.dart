@@ -92,7 +92,6 @@ class _SettingTabState extends State<SettingTab> {
               showSignOutDialog();
             }
         ),
-
       ],
     );
   }

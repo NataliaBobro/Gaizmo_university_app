@@ -184,10 +184,10 @@ class Errors {
   List<String>? siteAddress;
 
   @JsonKey(name: 'country')
-  String? country;
+  List<String>? country;
 
   @JsonKey(name: 'city')
-  String? city;
+  List<String>? city;
 
   @JsonKey(name: 'school_name')
   List<String>? schoolName;
@@ -371,5 +371,33 @@ class Constant {
 
   Map<String, dynamic> toJson() => _$ConstantToJson(this);
   factory Constant.fromJson(Map<String, dynamic> json) => _$ConstantFromJson(json);
+}
+
+@JsonSerializable(includeIfNull: true, fieldRename: FieldRename.snake)
+class PaymentSettings {
+  List<PaymentSettingsItem> data;
+
+  PaymentSettings({
+    required this.data,
+  });
+
+  Map<String, dynamic> toJson() => _$PaymentSettingsToJson(this);
+  factory PaymentSettings.fromJson(Map<String, dynamic> json) => _$PaymentSettingsFromJson(json);
+}
+
+@JsonSerializable(includeIfNull: true, fieldRename: FieldRename.snake)
+class PaymentSettingsItem {
+  int userId;
+  String type;
+  Map<String, dynamic> credentials;
+
+  PaymentSettingsItem({
+    required this.userId,
+    required this.type,
+    required this.credentials,
+  });
+
+  Map<String, dynamic> toJson() => _$PaymentSettingsItemToJson(this);
+  factory PaymentSettingsItem.fromJson(Map<String, dynamic> json) => _$PaymentSettingsItemFromJson(json);
 }
 

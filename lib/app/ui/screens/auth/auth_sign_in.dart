@@ -32,6 +32,11 @@ class _AuthSignInState extends State<AuthSignIn> {
                 onTap: () {
                   FocusScope.of(context).unfocus();
                 },
+                onHorizontalDragUpdate: (details){
+                  if(details.delta.dx > 20){
+                    Navigator.pop(context);
+                  }
+                },
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: Column(

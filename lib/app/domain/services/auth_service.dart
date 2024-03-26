@@ -21,6 +21,7 @@ class AuthService {
       String? passwordConfirmation,
       bool? privacy,
       String? code,
+      bool? sendCode,
       ) async {
     final response = await ApiClient().dio.post(
           '/auth/register/student',
@@ -38,6 +39,7 @@ class AuthService {
             "password_confirmation": passwordConfirmation,
             "privacy": privacy,
             "code": code,
+            "send_code": sendCode,
           }
         );
     final data = response.data as Map<String, dynamic>;
@@ -53,10 +55,12 @@ class AuthService {
       int? gender,
       String? dateBirth,
       String? email,
+      String? phone,
       String? password,
       String? passwordConfirmation,
       bool? privacy,
-      String? code
+      String? code,
+      bool? sendCode
       ) async {
     final response = await ApiClient().dio.post(
           '/auth/register/teacher',
@@ -69,10 +73,12 @@ class AuthService {
             "gender": gender,
             "date_birth": dateBirth,
             "email": email,
+            "phone": phone,
             "password": password,
             "password_confirmation": passwordConfirmation,
             "privacy": privacy,
             "code": code,
+            "send_code": sendCode,
           }
         );
     final data = response.data as Map<String, dynamic>;
@@ -94,6 +100,7 @@ class AuthService {
       String? house,
       bool? privacy,
       String? code,
+      bool? sendCode,
       ) async {
     final response = await ApiClient().dio.post(
         '/auth/register/school',
@@ -112,6 +119,7 @@ class AuthService {
           "house": house,
           "privacy": privacy,
           "code": code,
+          "send_code": sendCode,
         }
     );
     final data = response.data as Map<String, dynamic>;

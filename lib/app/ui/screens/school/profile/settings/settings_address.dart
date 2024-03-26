@@ -1,3 +1,4 @@
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:etm_crm/app/ui/widgets/app_field.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -38,7 +39,7 @@ class _SettingsAddressState extends State<SettingsAddress> {
             child: Column(
               children: [
                 CenterHeaderWithAction(
-                    title: 'Settings'
+                    title: getConstant('Settings')
                 ),
                 Expanded(
                   child: ListView(
@@ -54,7 +55,7 @@ class _SettingsAddressState extends State<SettingsAddress> {
                               height: 24,
                             ),
                             SelectInputSearchField(
-                              errors: state.validateError?.errors.country,
+                              errors: state.validateError?.errors.country?.first,
                               title: 'Country',
                               titleStyle: TextStyles.s14w600.copyWith(
                                   color: const Color(0xFF242424)
@@ -79,7 +80,7 @@ class _SettingsAddressState extends State<SettingsAddress> {
                               hintText: '',
                             ),
                             SelectInputSearchField(
-                              errors: state.validateError?.errors.city,
+                              errors: state.validateError?.errors.city?.first,
                               title: 'City',
                               titleStyle: TextStyles.s14w600.copyWith(
                                   color: const Color(0xFF242424)

@@ -154,8 +154,9 @@ Errors _$ErrorsFromJson(Map<String, dynamic> json) => Errors(
       schoolCategory: (json['school_category'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
-      country: json['country'] as String?,
-      city: json['city'] as String?,
+      country:
+          (json['country'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      city: (json['city'] as List<dynamic>?)?.map((e) => e as String).toList(),
       schoolName: (json['school_name'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
@@ -313,4 +314,31 @@ Constant _$ConstantFromJson(Map<String, dynamic> json) => Constant(
 Map<String, dynamic> _$ConstantToJson(Constant instance) => <String, dynamic>{
       'constant': instance.constant,
       'value': instance.value,
+    };
+
+PaymentSettings _$PaymentSettingsFromJson(Map<String, dynamic> json) =>
+    PaymentSettings(
+      data: (json['data'] as List<dynamic>)
+          .map((e) => PaymentSettingsItem.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$PaymentSettingsToJson(PaymentSettings instance) =>
+    <String, dynamic>{
+      'data': instance.data,
+    };
+
+PaymentSettingsItem _$PaymentSettingsItemFromJson(Map<String, dynamic> json) =>
+    PaymentSettingsItem(
+      userId: json['user_id'] as int,
+      type: json['type'] as String,
+      credentials: json['credentials'] as Map<String, dynamic>,
+    );
+
+Map<String, dynamic> _$PaymentSettingsItemToJson(
+        PaymentSettingsItem instance) =>
+    <String, dynamic>{
+      'user_id': instance.userId,
+      'type': instance.type,
+      'credentials': instance.credentials,
     };

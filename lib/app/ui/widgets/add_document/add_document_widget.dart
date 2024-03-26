@@ -52,7 +52,8 @@ class _AddDocumentWidgetState extends State<AddDocumentWidget> {
       if(result != null){
         listType = result;
         for(var a = 0; a < result.type.length; a++){
-          listTypeData.add(result.type[a].name);
+          final translate = getConstant(result.type[a].define);
+          listTypeData.add(translate.isNotEmpty ? translate : result.type[a].name);
         }
       }
     }catch(e){

@@ -38,7 +38,7 @@ class AppHorizontalField extends StatelessWidget {
           Row(
             children: [
               SizedBox(
-                width: 115,
+                width: 120,
                 child: Text(
                   label,
                   style: TextStyles.s14w400.copyWith(

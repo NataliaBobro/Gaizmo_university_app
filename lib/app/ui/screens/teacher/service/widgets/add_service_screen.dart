@@ -1,4 +1,5 @@
 import 'package:etm_crm/app/ui/screens/school/service/widgets/add_service_service.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:etm_crm/app/ui/widgets/custom_scroll_physics.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -40,8 +41,8 @@ class _AddServiceScreenState extends State<AddServiceScreen> {
           color: const Color(0xFFF0F3F6),
           child: Column(
             children: [
-              const CenterHeaderWithAction(
-                  title: 'Add service'
+              CenterHeaderWithAction(
+                  title: getConstant('Add_service')
               ),
               Expanded(
                 child: ListView(
@@ -51,8 +52,8 @@ class _AddServiceScreenState extends State<AddServiceScreen> {
                       height: 24,
                     ),
                     SelectBottomSheetInput(
-                      label: "Type of service *",
-                      labelModal: "Type of service",
+                      label: getConstant('Type_of_service'),
+                      labelModal: getConstant('Type_of_service'),
                       selected: state.selectService,
                       items: state.listTypeServices,
                       onSelect: (value) {

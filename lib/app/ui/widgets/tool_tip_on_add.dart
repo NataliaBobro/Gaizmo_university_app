@@ -99,7 +99,7 @@ class _ToolTipOnAddState extends State<ToolTipOnAdd> {
         ],
         if(widget.isOpen) ...[
           SizedBox(
-            height: 326,
+            height: (120 + ((widget.items?.length ?? 0) * 35)).toDouble(),
             child: SelectSearch(
                 items: widget.items ?? [],
                 onSelect: (value) {
@@ -209,6 +209,8 @@ class _SelectSearchState extends State<SelectSearch> {
                         padding: const EdgeInsets.symmetric(
                             vertical: 14,
                             horizontal: 24
+                        ).copyWith(
+                          top: 0
                         ),
                         child: Container(
                           alignment: Alignment.centerLeft,
@@ -227,7 +229,7 @@ class _SelectSearchState extends State<SelectSearch> {
                                 ) : Container(
                                   width: 24,
                                   height: 24,
-                                  color: Colors.white,
+                                  color: Colors.grey.shade200,
                                 ),
                               ),
                               const SizedBox(

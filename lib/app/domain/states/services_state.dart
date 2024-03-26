@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:etm_crm/app/domain/models/services.dart';
 import 'package:etm_crm/app/domain/services/meta_service.dart';
 import 'package:etm_crm/app/domain/services/services_service.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
@@ -47,11 +48,11 @@ class ServicesState with ChangeNotifier {
   final List<Map<String, dynamic>> _listTypeServices = [
     {
       "id": 1,
-      "name": "Category"
+      "name": getConstant('Category')
     },
     {
       "id": 2,
-      "name": "Service"
+      "name": getConstant('Service')
     }
   ];
 

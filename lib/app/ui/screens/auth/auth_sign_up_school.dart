@@ -85,6 +85,12 @@ class _AuthSignUpSchoolState extends State<AuthSignUpSchool> {
                     }
                   }
                 },
+                onHorizontalDragUpdate: (details){
+                  if(details.delta.dx > 30){
+                    state.clear();
+                    Navigator.pop(context);
+                  }
+                },
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: 24
@@ -117,7 +123,6 @@ class _AuthSignUpSchoolState extends State<AuthSignUpSchool> {
                               keyboardType: TextInputType.number,
                               controller: state.phone,
                               title: getConstant('Phone_number'),
-                              hintText: '+380',
                               errors: state.validateError?.errors.phoneErrors?.first,
                             ),
                             AuthInput(
@@ -159,7 +164,7 @@ class _AuthSignUpSchoolState extends State<AuthSignUpSchool> {
                               key: _containerKey,
                               children: [
                                 SelectInputSearchField(
-                                  errors: state.validateError?.errors.country,
+                                  errors: state.validateError?.errors.country?.first,
                                   title: getConstant('Country'),
                                   items:  (state.countryList?.length ?? 0) > 0 ?
                                   state.countryList : state.listDefaultCountry,
@@ -178,7 +183,7 @@ class _AuthSignUpSchoolState extends State<AuthSignUpSchool> {
                                   hintText: '',
                                 ),
                                 SelectInputSearchField(
-                                  errors: state.validateError?.errors.city,
+                                  errors: state.validateError?.errors.city?.first,
                                   title: getConstant('City'),
                                   items: state.cityList,
                                   onSearch: (value) {
@@ -223,7 +228,7 @@ class _AuthSignUpSchoolState extends State<AuthSignUpSchool> {
                               title: getConstant('SIGN_UP'),
                               onPressed: () {
                                 if(!state.isLoading) {
-                                  state.sendCode();
+                                  state.signUpSchool(sendCode: true);
                                 }
                               },
                               horizontalPadding: 16.0,
@@ -240,7 +245,7 @@ class _AuthSignUpSchoolState extends State<AuthSignUpSchool> {
                 ),
               ),
               Positioned(
-                top: 0,
+                top: 16,
                 left: 0,
                 child: ArrowBack(
                   onArrowBack: () {

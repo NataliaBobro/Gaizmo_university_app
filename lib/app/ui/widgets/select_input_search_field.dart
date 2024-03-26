@@ -92,6 +92,9 @@ class _SelectInputSearchFieldState extends State<SelectInputSearchField> {
           ),
         ],
         if(widget.isOpen == true) ...[
+          const SizedBox(
+            height: 14,
+          ),
           SelectSearch(
               items: widget.items,
               onSelect: (value) {
@@ -156,7 +159,7 @@ class _SelectSearchState extends State<SelectSearch> {
                   (index) => CupertinoButton(
                   minSize: 0.0,
                   padding: const EdgeInsets.symmetric(
-                      vertical: 14,
+                      vertical: 12,
                       horizontal: 24
                   ),
                   child: Container(

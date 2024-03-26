@@ -11,6 +11,7 @@ import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:hive/hive.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
@@ -382,7 +383,7 @@ class AuthState with ChangeNotifier {
     );
   }
 
-  Future<void> signUpStudent() async {
+  Future<void> signUpStudent({bool sendCode = false}) async {
     _isLoading = true;
     notifyListeners();
     try {
@@ -394,12 +395,13 @@ class AuthState with ChangeNotifier {
           _surname.text,
           _gender,
           _birthDate,
-          _phone.text,
+          (_phone.text == "+38 (0" ? null : _phone.text),
           _email.text,
           _password.text,
           _confirmPassword.text,
           _isActivePrivacy,
-          _codeRegister.text
+          _codeRegister.text,
+          sendCode
       );
 
       if(result != null && result.token != null){
@@ -428,7 +430,7 @@ class AuthState with ChangeNotifier {
     }
   }
 
-  Future<void> signUpTeacher() async {
+  Future<void> signUpTeacher({bool sendCode = false}) async {
     _isLoading = true;
     notifyListeners();
     try {
@@ -441,10 +443,12 @@ class AuthState with ChangeNotifier {
           _gender,
           _birthDate,
           _email.text,
+          (_phone.text == "+38 (0" ? null : _phone.text),
           _password.text,
           _confirmPassword.text,
           _isActivePrivacy,
-          _codeRegister.text
+          _codeRegister.text,
+          sendCode
       );
 
       if(result != null && result.token != null){
@@ -472,56 +476,27 @@ class AuthState with ChangeNotifier {
     }
   }
 
-  Future<void> signUpSchool() async {
+  Future<void> signUpSchool({bool sendCode = false}) async {
     _validateError = null;
-    if(_schoolCategory == null){
-      _validateError = ValidateError(
-          message: 'Select school category',
-          errors: Errors(
-            schoolCategory: ['Select school category']
-          )
-      );
-      notifyListeners();
-      return;
-    }
-    if(_country == null){
-      _validateError = ValidateError(
-          message: 'Select school category',
-          errors: Errors(
-              country: 'Select country'
-          )
-      );
-      notifyListeners();
-      return;
-    }
-    if(_city == null){
-      _validateError = ValidateError(
-          message: 'Select school category',
-          errors: Errors(
-              city: 'Select city'
-          )
-      );
-      notifyListeners();
-      return;
-    }
     _isLoading = true;
     notifyListeners();
     try {
       final result = await AuthService.registerSchool(
           _selectLang + 1,
           _userType,
-          _phone.text,
+          (_phone.text == "+38 (0" ? null : _phone.text),
           _email.text,
           _password.text,
           _confirmPassword.text,
           _schoolName.text,
-          _schoolCategory!['id'],
-          _country!['name'],
-          _city!['name'],
+          (_schoolCategory != null ? _schoolCategory!['id'] : null),
+          (_country != null ? _country!['name'] : null),
+          (_city != null ? _city!['name'] : null),
           _street.text,
           _house.text,
           _isActivePrivacy,
-          _codeRegister.text
+          _codeRegister.text,
+          sendCode
       );
 
       if(result != null && result.token != null){
@@ -697,7 +672,7 @@ class AuthState with ChangeNotifier {
 
   void clear() {
     _validateError = null;
-    _phone.clear();
+    _phone.setText('+38 (0');
     _code.clear();
     _codeRegister.clear();
     _email.clear();

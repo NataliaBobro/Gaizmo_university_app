@@ -69,6 +69,7 @@ class _SelectInputSearchState extends State<SelectInputSearch> {
               ],
             ),
             onPressed: () {
+              FocusScope.of(context).unfocus();
               tooltipController.showTooltip();
             }
         ),
@@ -151,7 +152,7 @@ class _SelectSearchJustTheTooltipState extends State<SelectSearchJustTheTooltip>
                   (index) => CupertinoButton(
                   minSize: 0.0,
                   padding: const EdgeInsets.symmetric(
-                      vertical: 14,
+                      vertical: 12,
                       horizontal: 24
                   ),
                   child: Container(

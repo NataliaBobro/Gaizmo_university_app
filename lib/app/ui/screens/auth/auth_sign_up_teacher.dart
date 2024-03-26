@@ -35,6 +35,12 @@ class _AuthSignUpTeacherState extends State<AuthSignUpTeacher> {
                 onTap: () {
                   FocusScope.of(context).unfocus();
                 },
+                onHorizontalDragUpdate: (details){
+                  if(details.delta.dx > 30){
+                    state.clear();
+                    Navigator.pop(context);
+                  }
+                },
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: 24
@@ -67,7 +73,6 @@ class _AuthSignUpTeacherState extends State<AuthSignUpTeacher> {
                               keyboardType: TextInputType.number,
                               controller: state.phone,
                               title: getConstant('Phone_number'),
-                              hintText: '+380',
                               errors: state.validateError?.errors.phoneErrors?.first,
                             ),
                             AuthInput(
@@ -129,7 +134,7 @@ class _AuthSignUpTeacherState extends State<AuthSignUpTeacher> {
                               title: getConstant('SIGN_UP'),
                               onPressed: () {
                                 if(!state.isLoading) {
-                                  state.sendCode();
+                                  state.signUpTeacher(sendCode: true);
                                 }
                               },
                               horizontalPadding: 16.0,
@@ -146,7 +151,7 @@ class _AuthSignUpTeacherState extends State<AuthSignUpTeacher> {
                 ),
               ),
               Positioned(
-                top: 0,
+                top: 16,
                 left: 0,
                 child: ArrowBack(
                   onArrowBack: () {

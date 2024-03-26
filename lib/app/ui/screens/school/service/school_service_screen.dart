@@ -164,8 +164,8 @@ class _SchoolServicesScreenState extends State<SchoolServicesScreen> {
                         )
                       ] else ...[
                         EmptyWidget(
-                            title: 'No services yet :(',
-                            subtitle: 'Click the button below to add services!',
+                            title: getConstant('No_services_yet_'),
+                            subtitle: getConstant('Click_the_button_below_to_add_services'),
                             isEmpty: state.servicesCategory.isEmpty && !state.isLoading,
                             onPress: () {
                               state.openAddOrEditService();

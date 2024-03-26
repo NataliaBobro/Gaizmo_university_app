@@ -74,13 +74,15 @@ class _AddBranchState extends State<AddBranch> {
                           error: validateError?.errors.schoolName?.first,
                         ),
                         AppHorizontalField(
-                            error: validateError?.errors.phoneErrors?.first,
-                            label: getConstant('Phone_number'),
-                            controller: phone,
-                            changeClear: () {
-                              phone.clear();
-                              setState(() {});
-                            }
+                          keyboardType: TextInputType.phone,
+                          error: validateError?.errors.phoneErrors?.first,
+                          label: getConstant('Phone_number'),
+
+                          controller: phone,
+                          changeClear: () {
+                            phone.clear();
+                            setState(() {});
+                          }
                         ),
                         AppHorizontalField(
                             label: getConstant('Email'),

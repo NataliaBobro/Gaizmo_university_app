@@ -1,4 +1,5 @@
 import 'package:dotted_border/dotted_border.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -88,7 +89,7 @@ class _DropzoneState extends State<Dropzone> {
                       color: const Color(0xFFFFC700),
                       borderRadius: BorderRadius.circular(12)),
                   child: Text(
-                    'Select image',
+                    getConstant('Select_image'),
                     style: TextStyles.s14w400
                         .copyWith(color: Colors.white),
                   ),

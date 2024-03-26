@@ -273,7 +273,7 @@ class _AddStaffScreenState extends State<AddStaffScreen> {
                       title: getConstant('Adress'),
                     ),
                     SelectInputSearchField(
-                      errors: state.validateError?.errors.country,
+                      errors: state.validateError?.errors.country?.first,
                       title: getConstant('Country'),
                       titleStyle: TextStyles.s14w600.copyWith(
                         color: const Color(0xFF242424)
@@ -298,7 +298,7 @@ class _AddStaffScreenState extends State<AddStaffScreen> {
                       hintText: '',
                     ),
                     SelectInputSearchField(
-                      errors: state.validateError?.errors.city,
+                      errors: state.validateError?.errors.city?.first,
                       title: getConstant('City'),
                       items: cityListData(),
                       onSearch: (value) {

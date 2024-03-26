@@ -12,4 +12,5 @@ class Images {
   static const String inst = 'assets/images/inst.png';
   static const String penguins = 'assets/images/penguin.png';
   static const String indicator = 'assets/images/indicator.png';
+  static const String wayForPay = 'assets/images/WayForPay.png';
 }

@@ -263,6 +263,7 @@ class SchoolProfileState with ChangeNotifier {
 
   Future<void> saveGeneralInfo() async {
     _isLoading = true;
+    _validateError = null;
     notifyListeners();
 
     final userId = context.read<AppState>().userData?.id;

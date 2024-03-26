@@ -181,7 +181,7 @@ class _PersonalInfoStudentState extends State<PersonalInfoStudent> {
                                   style: TextStyles.s14w400.copyWith(
                                       color: const Color(0xFF242424)
                                   ),
-                                  errors: validateError?.errors.country,
+                                  errors: validateError?.errors.country?.first,
                                   title: getConstant('Country'),
                                   items:  (countryList?.length ?? 0) > 0 ?
                                   countryList : listDefaultCountry,
@@ -206,7 +206,7 @@ class _PersonalInfoStudentState extends State<PersonalInfoStudent> {
                                   style: TextStyles.s14w400.copyWith(
                                       color: const Color(0xFF242424)
                                   ),
-                                  errors: validateError?.errors.city,
+                                  errors: validateError?.errors.city?.first,
                                   title: getConstant('City'),
                                   items: cityList,
                                   onSearch: (value) {

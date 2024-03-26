@@ -166,7 +166,7 @@ class _SettingsAddressState extends State<SettingsAddress> {
                                 height: 24,
                               ),
                               SelectInputSearchField(
-                                errors: validateError?.errors.country,
+                                errors: validateError?.errors.country?.first,
                                 title: getConstant('Country'),
                                 titleStyle: TextStyles.s14w600.copyWith(
                                     color: const Color(0xFF242424)
@@ -191,7 +191,7 @@ class _SettingsAddressState extends State<SettingsAddress> {
                                 hintText: '',
                               ),
                               SelectInputSearchField(
-                                errors: validateError?.errors.city,
+                                errors: validateError?.errors.city?.first,
                                 title: getConstant('City'),
                                 items: cityListData(),
                                 onSearch: (value) {

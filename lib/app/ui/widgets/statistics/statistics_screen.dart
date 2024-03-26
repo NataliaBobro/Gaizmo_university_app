@@ -1,3 +1,4 @@
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -95,9 +96,9 @@ class _StatisticsScreenState extends State<StatisticsScreen> with TickerProvider
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Tab(
+                          Tab(
                             height: 24,
-                            text: 'Categories',
+                            text: getConstant('Categories'),
                             iconMargin: EdgeInsets.zero,
                           ),
                           if(isActiveTab == 0) ...[
@@ -112,9 +113,9 @@ class _StatisticsScreenState extends State<StatisticsScreen> with TickerProvider
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Tab(
+                          Tab(
                             height: 19,
-                            text: 'Statistic',
+                            text: getConstant('Statistic'),
                           ),
                           if(isActiveTab == 1) ...[
                             Container(
@@ -168,7 +169,7 @@ class StatisticHeader extends StatelessWidget {
             ),
             alignment: Alignment.center,
             child: Text(
-              'Learning Path',
+              getConstant('Learning_Path'),
               style: TextStyles.s24w700.copyWith(
                   color: const Color(0xFF242424)
               ),

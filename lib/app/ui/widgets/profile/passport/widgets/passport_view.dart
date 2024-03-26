@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:etm_crm/app/app.dart';
 import 'package:etm_crm/app/domain/models/user.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -67,7 +68,7 @@ class _PassportViewState extends State<PassportView> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Current Balance',
+                        getConstant('Current_Balance'),
                         style: TextStyles.s8w500.copyWith(
                             color: const Color(0xFF848484)
                         ),
@@ -88,7 +89,7 @@ class _PassportViewState extends State<PassportView> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Socilal Rating',
+                        getConstant('Socilal_Rating'),
                         style: TextStyles.s8w500.copyWith(
                             color: const Color(0xFF848484)
                         ),
@@ -157,6 +158,7 @@ class UserViewAvatar extends StatelessWidget {
                 cacheKey: "${userData?.avatar}",
                 imageUrl: "${userData?.avatar}",
                 width: 55,
+                height: 55,
                 memCacheWidth: 55,
                 maxWidthDiskCache: 55,
                 errorWidget: (context, error, stackTrace) =>

@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 import '../../../../../../domain/models/services.dart';
 import '../../../../../../domain/services/pay_service.dart';
 import '../../../../../../domain/states/student/favorite_state.dart';
+import '../../../../../utils/show_message.dart';
 import '../../../../../utils/url_launch.dart';
 import '../../../../../widgets/button_teacher_students.dart';
 import '../../../../../widgets/center_header.dart';
@@ -68,7 +69,14 @@ class _ServiceItemState extends State<ServiceItem> {
       serviceId,
     );
     if(result != null && result['link'] != null){
-      openPayWeb(result['link'], result['order_reference'], serviceId);
+      if(result['link'] == false){
+        showMessage('Payment not possible. Please contact your school '
+            'administrator to set up payment details.', color: const Color(0xFFFFC700));
+        loading = false;
+        setState(() {});
+      }else{
+        openPayWeb(result['link'], result['order_reference'], serviceId);
+      }
     }
   }
 

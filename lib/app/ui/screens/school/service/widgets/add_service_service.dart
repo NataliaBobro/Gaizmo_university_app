@@ -1,3 +1,5 @@
+import 'package:etm_crm/app/domain/states/school/school_staff_state.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:etm_crm/app/ui/widgets/select_color.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +13,7 @@ import '../../../../widgets/auth_button.dart';
 import '../../../../widgets/dropzone.dart';
 import '../../../../widgets/select_bottom_sheet_input.dart';
 import '../../../../widgets/tool_tip_on_add.dart';
+import '../../staff/add_staff_screen.dart';
 
 class AddServiceService extends StatefulWidget {
   const AddServiceService({Key? key}) : super(key: key);
@@ -42,6 +45,9 @@ class _AddServiceServiceState extends State<AddServiceService> {
         onTap: () {
           FocusScope.of(context).unfocus();
         },
+        onVerticalDragUpdate: (details){
+          FocusScope.of(context).unfocus();
+        },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -49,7 +55,7 @@ class _AddServiceServiceState extends State<AddServiceService> {
               height: 40,
             ),
             Text(
-              'Service information',
+              getConstant('Service_information'),
               style: TextStyles.s14w600.copyWith(
                   color: const Color(0xFFFFC700)
               ),
@@ -58,22 +64,22 @@ class _AddServiceServiceState extends State<AddServiceService> {
               height: 16,
             ),
             AppField(
-                label: 'Service name *',
+                label: getConstant('Service_name'),
                 controller: state.serviceName
             ),
             const SizedBox(
               height: 16,
             ),
             AppField(
-              label: "Description",
+              label: getConstant('Description'),
               controller: state.desc,
             ),
             const SizedBox(
               height: 24,
             ),
             SelectBottomSheetInput(
-              label: "Branch *",
-              labelModal: "Branch",
+              label: getConstant('Branch'),
+              labelModal: getConstant('Branch'),
               selected: state.selectBranch,
               items: state.listBranch,
               onSelect: (value) {
@@ -85,8 +91,8 @@ class _AddServiceServiceState extends State<AddServiceService> {
               height: 24,
             ),
             SelectBottomSheetInput(
-              label: "Category",
-              labelModal: "Category",
+              label: getConstant('Category'),
+              labelModal: getConstant('Category'),
               selected: state.selectCategory,
               items: state.listCategory,
               onSelect: (value) {
@@ -98,7 +104,7 @@ class _AddServiceServiceState extends State<AddServiceService> {
               height: 24,
             ),
             ToolTipOnAdd(
-              title: 'Teacher',
+              title: getConstant('Teacher'),
               titleStyle: TextStyles.s14w600.copyWith(
                   color: const Color(0xFF242424)
               ),
@@ -117,14 +123,24 @@ class _AddServiceServiceState extends State<AddServiceService> {
               },
               isOpen: openField == 'teacher',
               onAdd: () async {
-
+                await Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                        builder: (context) => ChangeNotifierProvider(
+                          create: (context) => SchoolStaffState(context),
+                          child: const AddStaffScreen(),
+                        )
+                    )
+                ).whenComplete(() {
+                  state.getMeta();
+                });
               },
             ),
             const SizedBox(
               height: 40,
             ),
             Text(
-              'Service details',
+              getConstant('Service_details'), 
               style: TextStyles.s14w600.copyWith(
                   color: const Color(0xFFFFC700)
               ),
@@ -137,7 +153,7 @@ class _AddServiceServiceState extends State<AddServiceService> {
                 Expanded(
                   child: AppField(
                       keyboardType: TextInputType.number,
-                      label: 'Validity',
+                      label: getConstant('Validity'),
                       controller: state.validity
                   ),
                 ),
@@ -166,7 +182,7 @@ class _AddServiceServiceState extends State<AddServiceService> {
               padding: EdgeInsets.zero,
               child: IgnorePointer(
                 child: AppField(
-                  label: 'Service duration',
+                  label: getConstant('Service_duration'),
                   controller: state.duration,
                   placeholder: '_ _ : _ _',
                 ),
@@ -191,14 +207,14 @@ class _AddServiceServiceState extends State<AddServiceService> {
             ),
             AppField(
               keyboardType: TextInputType.number,
-              label: 'Number of visits',
+              label: getConstant('Number_of_visits'),
               controller: state.visits,
             ),
             const SizedBox(
               height: 40,
             ),
             Text(
-              'Payment details',
+              getConstant('Payment_details'),
               style: TextStyles.s14w600.copyWith(
                   color: const Color(0xFFFFC700)
               ),
@@ -211,7 +227,7 @@ class _AddServiceServiceState extends State<AddServiceService> {
                 Expanded(
                   child: AppField(
                       keyboardType: TextInputType.number,
-                      label: 'Cost',
+                      label: getConstant('Cost'),
                       controller: state.cost
                   ),
                 ),
@@ -220,8 +236,8 @@ class _AddServiceServiceState extends State<AddServiceService> {
                 ),
                 Expanded(
                   child: SelectBottomSheetInput(
-                    label: "Currency",
-                    labelModal: "Currency",
+                    label: getConstant('Currency'),
+                    labelModal: getConstant('Currency'),
                     selected: state.selectCurrency,
                     items: state.listCurrency,
                     onSelect: (value) {
@@ -254,7 +270,7 @@ class _AddServiceServiceState extends State<AddServiceService> {
             ),
             SelectColor(
                 selected: state.selectColor,
-                label: 'Service color',
+                label: getConstant('Service_color'),
                 onSelect: (value) {
                   state.selectServiceColor(value);
                 }
@@ -263,7 +279,7 @@ class _AddServiceServiceState extends State<AddServiceService> {
               height: 24,
             ),
             AppButton(
-              title: state.onEditId != null ? 'Edit service' : 'ADD service',
+              title: state.onEditId != null ? getConstant('Edit_service') : getConstant('Add_service'),
               onPressed: () {
                 state.addOrEditServiceService();
               },

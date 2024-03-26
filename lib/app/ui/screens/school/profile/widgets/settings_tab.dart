@@ -1,6 +1,8 @@
+import 'package:etm_crm/app/domain/states/payment_state.dart';
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
 import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:etm_crm/app/ui/widgets/custom_scroll_physics.dart';
+import 'package:etm_crm/app/ui/widgets/payments/payment_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';
@@ -62,6 +64,23 @@ class _SettingsTabState extends State<SettingsTab> {
               ),
             );
           }
+        ),
+        SettingsInput(
+            title: getConstant('Payments'),
+            onPress: () async {
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ChangeNotifierProvider(
+                    create: (context) => PaymentState(
+                        context,
+                        appState.userData?.id
+                    ),
+                    child: const PaymentList(),
+                  ),
+                ),
+              );
+            }
         ),
         SettingsInput(
             title: getConstant('Social_accounts'),

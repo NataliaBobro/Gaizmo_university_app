@@ -35,7 +35,7 @@ class _PersonalInfoTabState extends State<PersonalInfoTab> {
             ),
             InfoValue(
                 title: getConstant('Phone_number'),
-                value: "${state?.phone}"
+                value: state?.phone != null ? "${state?.phone}" : ""
             ),
             InfoValue(
                 title: getConstant('Email'),
