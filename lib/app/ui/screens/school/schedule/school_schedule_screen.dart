@@ -253,7 +253,7 @@ class HeaderNameLesson extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String timeString = lesson?.lessonStart ?? '00:00:00';
+    String timeString = lesson?.startLesson ?? '00:00:00';
     DateFormat inputFormat = DateFormat('HH:mm:ss');
     DateFormat outputFormat = DateFormat('HH:mm');
 
@@ -267,7 +267,7 @@ class HeaderNameLesson extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          '${lesson?.services?.first?.name}',
+          '${lesson?.name}',
           style: TextStyles.s14w600.copyWith(
             color: const Color(0xFF242424)
           ),
@@ -337,6 +337,19 @@ class LessonItem extends StatefulWidget {
 }
 
 class _LessonItemState extends State<LessonItem> {
+  bool viewDesc = false;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  void changeDesc(){
+    setState(() {
+      viewDesc = !viewDesc;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -353,20 +366,24 @@ class _LessonItemState extends State<LessonItem> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ContentRowInfo(
-            title: getConstant('Teacher'),
-            value: '${widget.lesson?.services?.first?.teacher?.firstName} '
-                '${widget.lesson?.services?.first?.teacher?.lastName}',
-          ),
+          if(widget.lesson?.services?.first?.teacher != null) ...[
+            ContentRowInfo(
+              title: getConstant('Teacher'),
+              value: '${widget.lesson?.services?.first?.teacher?.firstName} '
+                  '${widget.lesson?.services?.first?.teacher?.lastName}',
+            )
+          ],
            ContentRowInfo(
             title: getConstant('Students'),
             value: '0',
           ),
-          ContentRowInfo(
-            title: getConstant('Adress'),
-            value: '${widget.lesson?.services?.first?.school?.street} '
-                '${widget.lesson?.services?.first?.school?.house}',
-          ),
+          if(widget.lesson?.services?.first?.school?.street != null) ...[
+            ContentRowInfo(
+              title: getConstant('Adress'),
+              value: '${widget.lesson?.services?.first?.school?.street} '
+                  '${widget.lesson?.services?.first?.school?.house}',
+            )
+          ],
           ContentRowInfo(
             title: getConstant('Class_number'),
             value: '${widget.lesson?.schoolClass?.name}'
@@ -389,22 +406,34 @@ class _LessonItemState extends State<LessonItem> {
               ),
             ),
           ],
-          ContentRowInfo(
-            title: getConstant('Description'),
-            content: CupertinoButton(
-              minSize: 0.0,
-              padding: EdgeInsets.zero,
-              onPressed: () {
-
-              },
-              child: RotatedBox(
-                quarterTurns: 2,
-                child: SvgPicture.asset(
-                    Svgs.open
+          if(widget.lesson?.services?.first?.desc != null) ...[
+            ContentRowInfo(
+              title: getConstant('Description'),
+              content: CupertinoButton(
+                minSize: 0.0,
+                padding: EdgeInsets.zero,
+                onPressed: () {
+                  changeDesc();
+                },
+                child: RotatedBox(
+                  quarterTurns: 2,
+                  child: SvgPicture.asset(
+                      Svgs.open
+                  ),
                 ),
               ),
             ),
-          ),
+            if(viewDesc) ...[
+              Text(
+                "${widget.lesson?.services?.first?.desc}",
+                style: TextStyles.s13w400.copyWith(
+                    color: const Color(0xFF848484)
+                ),
+                maxLines: 5,
+                overflow: TextOverflow.ellipsis,
+              )
+            ]
+          ]
         ],
       ),
     );

@@ -197,7 +197,9 @@ class ServicesState with ChangeNotifier {
       }
 
       _selectBranch = listBranch.firstWhere((element) => element['id'] == (servEdit.branchId ?? 0));
-      _selectTeacher = _listTeacherData?.firstWhere((element) => element.id == (servEdit.teacher?.id ?? 0));
+      if((_listTeacherData?.length ?? 0) > 0){
+        _selectTeacher = _listTeacherData?.firstWhere((element) => element.id == (servEdit.teacher?.id ?? 0));
+      }
       _selectCurrency = _listCurrency.firstWhere((element) => element['id'] == servEdit.currency?.id);
       _selectValidityType = _listValidityType.firstWhere((element) => element['name'] == servEdit.validityType);
       _etm.text = '${servEdit.etm}';

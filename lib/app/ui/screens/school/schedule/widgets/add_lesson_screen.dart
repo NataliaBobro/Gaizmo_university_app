@@ -68,6 +68,13 @@ class _AddLessonScreenState extends State<AddLessonScreen> {
                     const SizedBox(
                       height: 24,
                     ),
+                    AppField(
+                        label: getConstant('Lesson_name'),
+                        controller: state.lessonName
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
                     MultiSelectDialogField(
                       buttonText: Text(
                         "Service",

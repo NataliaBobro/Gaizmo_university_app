@@ -19,6 +19,7 @@ class LessonsList {
 @JsonSerializable(includeIfNull: true, fieldRename: FieldRename.snake)
 class Lesson {
   int id;
+  String? name;
   String? lessonStart;
   String? startLesson;
   String? start;
@@ -31,6 +32,7 @@ class Lesson {
 
   Lesson({
     required this.id,
+    this.name,
     this.lessonStart,
     this.startLesson,
     this.start,

@@ -70,7 +70,7 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
               maxWidthDiskCache: 120,
               errorWidget: (context, error, stackTrace) =>
               const SizedBox.shrink(),
-              fit: BoxFit.cover,
+              fit: BoxFit.contain,
             ),
           ),
         ),

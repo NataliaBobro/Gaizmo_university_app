@@ -34,10 +34,11 @@ class SchoolScheduleState with ChangeNotifier {
   List<Map<String, dynamic>> _listClass = [];
   List<Map<String, dynamic>> _listTeacher = [];
   final MaskedTextController _lessonStart = MaskedTextController(mask: '00 : 00');
-  TextEditingController _repeatsStart = MaskedTextController(
+  final TextEditingController _lessonName = TextEditingController();
+  final TextEditingController _repeatsStart = MaskedTextController(
       mask: '00.00.0000'
   );
-  MaskedTextController _repeatsEnd = MaskedTextController(
+  final MaskedTextController _repeatsEnd = MaskedTextController(
       mask: '00.00.0000'
   );
 
@@ -60,6 +61,7 @@ class SchoolScheduleState with ChangeNotifier {
   List<Map<String, dynamic>> get listTeacher => _listTeacher;
   List<Map<String, dynamic>> get listClass => _listClass;
   TextEditingController get lessonStart => _lessonStart;
+  TextEditingController get lessonName => _lessonName;
   TextEditingController get repeatsStart => _repeatsStart;
   TextEditingController get repeatsEnd => _repeatsEnd;
   List<Map<String, String>> get dayListSelected => _dayListSelected;
@@ -278,6 +280,7 @@ class SchoolScheduleState with ChangeNotifier {
     notifyListeners();
     Map<String, dynamic> data = {
       'id': _editId,
+      'lesson_name': _lessonName.text,
       'service': _selectService,
       'school_class':  _selectClass?['id'],
       'start_lesson': _lessonStart.text.replaceAll(' ', ''),
