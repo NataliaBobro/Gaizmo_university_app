@@ -26,7 +26,7 @@ class MyLessonHeader extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          '${lesson.services?.first?.name}',
+          '${lesson.name}',
           style: TextStyles.s14w600.copyWith(
               color: const Color(0xFF242424)
           ),
