@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:etm_crm/app/ui/theme/text_styles.dart';
 import 'package:etm_crm/app/ui/widgets/auth_button.dart';
 import 'package:etm_crm/app/ui/widgets/center_header.dart';
@@ -6,8 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../domain/models/meta.dart';
 import '../../../domain/models/user.dart';
 import '../../../domain/services/school_service.dart';
+import '../../utils/show_message.dart';
 
 
 class SettingSchedule extends StatefulWidget {
@@ -26,6 +29,7 @@ class SettingSchedule extends StatefulWidget {
 
 class _SettingScheduleState extends State<SettingSchedule> {
   final List<int> listWorkDay = [];
+  ValidateError? _validateError;
   final MaskedTextController scheduleFrom = MaskedTextController(
       mask: '00 : 00'
   );
@@ -274,6 +278,8 @@ class _SettingScheduleState extends State<SettingSchedule> {
   }
 
   Future<void> saveSchedule() async {
+    _validateError = null;
+    setState(() {});
     try {
       final result = await SchoolService.changeSchedule(
         context,
@@ -285,7 +291,15 @@ class _SettingScheduleState extends State<SettingSchedule> {
         widget.onUpdate();
         close();
       }
-    } catch (e) {
+    } on DioError catch (e) {
+      if(e.response?.statusCode == 422){
+        final data = e.response?.data as Map<String, dynamic>;
+        _validateError = ValidateError.fromJson(data);
+        showMessage('${_validateError?.message}', color: const Color(0xFFFFC700));
+      }else{
+        showMessage(e.message.isEmpty ? e.toString() : e.message);
+      }
+    } catch(e){
       print(e);
     }
   }

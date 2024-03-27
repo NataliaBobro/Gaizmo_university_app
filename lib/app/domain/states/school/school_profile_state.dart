@@ -166,8 +166,8 @@ class SchoolProfileState with ChangeNotifier {
       'id': 0,
       'name': userData?.school?.city,
     };
-    _street.text = '${userData?.school?.street}';
-    _house.text = '${userData?.school?.house}';
+    _street.text = userData?.school?.street ?? '';
+    _house.text = userData?.school?.house ?? '';
     _instagramField.text = '${userData?.socialAccounts?.instagram}';
     _facebookField.text = '${userData?.socialAccounts?.facebook}';
     _linkedinField.text = '${userData?.socialAccounts?.linkedin}';

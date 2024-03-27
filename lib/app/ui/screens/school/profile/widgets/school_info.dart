@@ -35,7 +35,9 @@ class _SchoolInfoState extends State<SchoolInfo> {
               maxWidth: 270
             ),
             child: Text(
-              '${school?.house} ${school?.street} ${school?.city}, ${school?.country}',
+              '${school?.house ?? ''} ${school?.street ?? ''} '
+                  '${school?.city != null ? '${school?.city} ,' : ''} '
+                  '${school?.country ?? ''}',
               style: TextStyles.s14w400.copyWith(
                   color: const Color(0xFF242424)
               ),

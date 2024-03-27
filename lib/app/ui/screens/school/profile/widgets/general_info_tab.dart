@@ -37,10 +37,12 @@ class _GeneralInfoTabState extends State<GeneralInfoTab> {
             const SizedBox(
               height: 24,
             ),
-            InfoValue(
-                title: getConstant('Phone_number'),
-                value: "${school?.phone}"
-            ),
+            if(school?.phone != null) ...[
+              InfoValue(
+                  title: getConstant('Phone_number'),
+                  value: school?.phone ?? ''
+              ),
+            ],
             InfoValue(
                 title: getConstant('Email'),
                 value: "${school?.email}"

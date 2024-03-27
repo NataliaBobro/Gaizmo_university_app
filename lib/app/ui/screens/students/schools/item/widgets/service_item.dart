@@ -35,6 +35,7 @@ class _ServiceItemState extends State<ServiceItem> {
   List<UserData?> listUser = [];
   int? openSection;
   bool loading = false;
+  bool loadingService = false;
 
   @override
   void initState() {
@@ -43,6 +44,8 @@ class _ServiceItemState extends State<ServiceItem> {
   }
 
   Future<void> fetchService() async {
+    loadingService = true;
+    setState(() {});
     try{
       final result = await StudentService.fetchServiceItem(context, widget.serviceId);
       if(result != null){
@@ -57,6 +60,7 @@ class _ServiceItemState extends State<ServiceItem> {
     }catch(e){
       print(e);
     }finally{
+      loadingService = false;
       setState(() {});
     }
   }
@@ -154,7 +158,11 @@ class _ServiceItemState extends State<ServiceItem> {
                     ),
                   ),
                   Expanded(
-                    child: Stack(
+                    child: loadingService ?
+                      const Center(
+                        child: CupertinoActivityIndicator(color: Colors.white, radius: 20,),
+                      ) :
+                      Stack(
                       children: [
                         ListView(
                           physics: const ClampingScrollPhysics(),
@@ -178,7 +186,7 @@ class _ServiceItemState extends State<ServiceItem> {
                                   ),
                                   Container(
                                     constraints: const BoxConstraints(
-                                      maxWidth: 200
+                                        maxWidth: 200
                                     ),
                                     child: Text(
                                       "${servicesModel?.name}",
@@ -257,7 +265,7 @@ class _ServiceItemState extends State<ServiceItem> {
                                       },
                                       children: [
                                         ExpansionPanel(
-                                            canTapOnHeader: true,
+                                            canTapOnHeader: false,
                                             backgroundColor: const Color(0xFF242424),
                                             headerBuilder: (BuildContext context, bool isExpanded) {
                                               return Text(

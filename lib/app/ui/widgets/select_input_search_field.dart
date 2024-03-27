@@ -57,7 +57,7 @@ class _SelectInputSearchFieldState extends State<SelectInputSearchField> {
               children: [
                 Expanded(
                   child: Text(
-                    widget.selected != null ? widget.selected!['name'] : '',
+                    widget.selected != null && widget.selected?['name'] != null ? widget.selected!['name'] : '',
                     style: widget.style ?? TextStyles.s14w400.copyWith(
                         color: Colors.white
                     ),
