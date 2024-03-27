@@ -321,6 +321,7 @@ class SchoolScheduleState with ChangeNotifier {
   void clear() {
     _selectService = null;
     _selectClass = null;
+    _lessonName.clear();
     _lessonStart.clear();
     _repeatsStart.clear();
     _repeatsEnd.clear();
