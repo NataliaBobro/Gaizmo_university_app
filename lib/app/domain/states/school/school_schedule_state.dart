@@ -13,6 +13,7 @@ import '../../../ui/utils/show_message.dart';
 import '../../../ui/widgets/snackbars.dart';
 import '../../models/lesson.dart';
 import '../../models/schedule.dart';
+import '../../models/user.dart';
 
 class SchoolScheduleState with ChangeNotifier {
   BuildContext context;
@@ -20,10 +21,12 @@ class SchoolScheduleState with ChangeNotifier {
   int? _editId;
   bool _isLoading = true;
   ScheduleMeta? _scheduleMeta;
-  List<Map<String, dynamic>>? _selectService;
+  List<dynamic>? _selectService;
   Map<String, dynamic>? _selectClass;
   ValidateError? _validateError;
   LessonsList? _lessonsList;
+  UserData? _selectTeacher;
+  List<UserData>? _listTeacherData = [];
   final FilterSchedule _filterSchedule = FilterSchedule(
       type: [],
       teacher: [],
@@ -32,9 +35,12 @@ class SchoolScheduleState with ChangeNotifier {
   List<Map<String, String>> _dayListSelected = [];
   List<Map<String, dynamic>> _listServices = [];
   List<Map<String, dynamic>> _listClass = [];
-  List<Map<String, dynamic>> _listTeacher = [];
+  final List<Map<String, dynamic>> _listTeacher = [];
+  String? _selectColor;
   final MaskedTextController _lessonStart = MaskedTextController(mask: '00 : 00');
+  final MaskedTextController _duration = MaskedTextController(mask: '00 : 00');
   final TextEditingController _lessonName = TextEditingController();
+  List<UserData>? get listTeacherData => _listTeacherData;
   final TextEditingController _repeatsStart = MaskedTextController(
       mask: '00.00.0000'
   );
@@ -55,22 +61,35 @@ class SchoolScheduleState with ChangeNotifier {
   FilterSchedule get filterSchedule => _filterSchedule;
   LessonsList? get lessonsList => _lessonsList;
   ScheduleMeta? get scheduleMeta => _scheduleMeta;
-  List<Map<String, dynamic>?>? get selectService => _selectService;
+  List<dynamic>? get selectService => _selectService;
   Map<String, dynamic>? get selectClass => _selectClass;
   List<Map<String, dynamic>> get listTypeServices => _listServices;
   List<Map<String, dynamic>> get listTeacher => _listTeacher;
   List<Map<String, dynamic>> get listClass => _listClass;
   TextEditingController get lessonStart => _lessonStart;
+  TextEditingController get duration => _duration;
   TextEditingController get lessonName => _lessonName;
   TextEditingController get repeatsStart => _repeatsStart;
   TextEditingController get repeatsEnd => _repeatsEnd;
   List<Map<String, String>> get dayListSelected => _dayListSelected;
   ValidateError? get validateError => _validateError;
+  String? get selectColor => _selectColor;
+  UserData? get selectTeacher => _selectTeacher;
 
   void changeDateFilter(index) {
     _filterDateIndex = index;
     notifyListeners();
     getLesson();
+  }
+
+  void selectServiceColor(value){
+    _selectColor = value;
+    notifyListeners();
+  }
+
+  void changeSelectTeacher(value){
+    _selectTeacher = value;
+    notifyListeners();
   }
 
   void changeRepeatsStart(value){
@@ -167,13 +186,26 @@ class SchoolScheduleState with ChangeNotifier {
   
   void initEditData(Lesson? edit) {
     _editId = edit?.id;
-    // _selectService = _listServices.firstWhere((element) => element['id'] == edit?.service?.id);
-    _selectClass = _listClass.firstWhere((element) => element['id'] == edit?.schoolClass?.id);
-    _lessonStart.text = '${edit?.lessonStart}';
+    _lessonName.text = '${edit?.name}';
+    _selectService = [];
+    for(var a = 0; a < (edit?.services?.length ?? 0); a++){
+      _selectService?.add({
+        "id": edit?.services?[a]?.id,
+        "name": edit?.services?[a]?.name,
+      });
+    }
+    if(edit?.schoolClass?.id != null){
+      _selectClass = _listClass.firstWhere((element) => element['id'] == edit?.schoolClass?.id);
+    }
+    _lessonStart.text = '${edit?.startLesson}';
     _repeatsStart.text = '${edit?.start?.replaceAll('-', '')}';
     _repeatsEnd.text = '${edit?.end?.replaceAll('-', '')}';
 
-
+    if((_listTeacherData?.length ?? 0) > 0){
+      _selectTeacher = _listTeacherData?.firstWhere((element) => element.id == (edit?.teacherId ?? 0));
+    }
+    _duration.text = '${((edit?.duration ?? 0) ~/ 60).toString().padLeft(2, '0')}${(edit?.duration ?? 0) % 60}';
+    _selectColor = edit?.color;
     final date = DateTime.parse('${edit?.start}');
     _repeatsStart.text =
         '${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year}';
@@ -222,12 +254,7 @@ class SchoolScheduleState with ChangeNotifier {
           }
         }
         if(result.teacher != null) {
-          for(var a = 0; a < (result.teacher?.length ?? 0); a++){
-            _listTeacher.add({
-              "id": result.teacher?[a]?.id,
-              "name": '${result.teacher?[a]?.firstName} ${result.teacher?[a]?.lastName}',
-            });
-          }
+          _listTeacherData = result.teacher;
         }
       }
     } on DioError catch (e) {
@@ -278,12 +305,24 @@ class SchoolScheduleState with ChangeNotifier {
   Future<void> addOrEditLesson() async {
     _validateError = null;
     notifyListeners();
+    int duration = 0;
+    if(_duration.text.isNotEmpty) {
+      List<String> parts = _duration.text.split(' : ');
+      if(parts.length < 2) return;
+      int hours = int.parse(parts[0]);
+      int minutes = int.parse(parts[1]);
+      duration = hours * 60 + minutes;
+    }
+
     Map<String, dynamic> data = {
       'id': _editId,
       'lesson_name': _lessonName.text,
+      'teacher_id': _selectTeacher?.id,
+      'color': _selectColor,
       'service': _selectService,
       'school_class':  _selectClass?['id'],
       'start_lesson': _lessonStart.text.replaceAll(' ', ''),
+      'duration': duration,
       'start': _repeatsStart.text,
       'end': _repeatsEnd.text,
       'day': _dayListSelected,

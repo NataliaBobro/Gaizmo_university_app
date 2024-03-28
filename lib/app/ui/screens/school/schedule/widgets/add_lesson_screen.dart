@@ -10,12 +10,15 @@ import 'package:multi_select_flutter/util/multi_select_item.dart';
 import 'package:multi_select_flutter/util/multi_select_list_type.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../../domain/states/school/school_staff_state.dart';
 import '../../../../theme/text_styles.dart';
 import '../../../../widgets/app_field.dart';
 import '../../../../widgets/auth_button.dart';
 import '../../../../widgets/center_header.dart';
 import '../../../../widgets/custom_scroll_physics.dart';
-import '../../../../widgets/select_input_search.dart';
+import '../../../../widgets/select_color.dart';
+import '../../../../widgets/tool_tip_on_add.dart';
+import '../../staff/add_staff_screen.dart';
 
 class AddLessonScreen extends StatefulWidget {
   const AddLessonScreen({
@@ -32,6 +35,16 @@ class AddLessonScreen extends StatefulWidget {
 class _AddLessonScreenState extends State<AddLessonScreen> {
   DateTime date = DateTime.now();
   DateTime time = DateTime.now();
+  String? openField;
+
+  void changeOpen(value){
+    if(openField == value){
+      openField = null;
+    }else{
+      openField = value;
+    }
+    setState(() {});
+  }
 
   @override
   void initState() {
@@ -59,9 +72,13 @@ class _AddLessonScreenState extends State<AddLessonScreen> {
                   title: getConstant('Add_lesson')
               ),
               Expanded(
-                child: ListView(
+                child: state.isLoading ?
+                  const Center(
+                    child: CupertinoActivityIndicator(),
+                  ) :
+                  ListView(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 24
+                      horizontal: 24
                   ),
                   physics: const BottomBouncingScrollPhysics(),
                   children: [
@@ -76,8 +93,15 @@ class _AddLessonScreenState extends State<AddLessonScreen> {
                       height: 16,
                     ),
                     MultiSelectDialogField(
+                      initialValue: state.selectService ?? [],
                       buttonText: Text(
-                        "Service",
+                        getConstant('Service'),
+                        style: TextStyles.s14w600.copyWith(
+                            color: const Color(0xFF242424)
+                        ),
+                      ),
+                      title: Text(
+                        getConstant('Service'),
                         style: TextStyles.s14w600.copyWith(
                             color: const Color(0xFF242424)
                         ),
@@ -103,42 +127,75 @@ class _AddLessonScreenState extends State<AddLessonScreen> {
                       ),
                     ],
                     const SizedBox(
-                      height: 45,
+                      height: 34,
                     ),
-                    Text(
-                      'Lesson information',
-                      style: TextStyles.s14w600.copyWith(
-                          color: const Color(0xFFFFC700)
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    SelectInputSearch(
-                      errors: state.validateError?.errors.schoolClass?.first,
-                      title: 'Class',
-                      labelStyle: TextStyles.s14w600.copyWith(
+                    ToolTipOnAdd(
+                      title: getConstant('Teacher'),
+                      titleStyle: TextStyles.s14w600.copyWith(
                           color: const Color(0xFF242424)
                       ),
                       style: TextStyles.s14w400.copyWith(
                           color: Colors.black
                       ),
-                      isSearch: true,
-                      onSearch: (value) {
-                        print(value);
-                      },
-                      items: state.listClass,
-                      selected: state.selectClass,
-                      onSelect: (value) {
-                        state.changeClass(value);
-                      },
                       hintText: '',
+                      items: state.listTeacherData,
+                      selected: state.selectTeacher,
+                      onSelect: (value) {
+                        state.changeSelectTeacher(value);
+                        changeOpen(null);
+                      },
+                      changeOpen: () {
+                        changeOpen('teacher');
+                      },
+                      isOpen: openField == 'teacher',
+                      onAdd: () async {
+                        await Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                                builder: (context) => ChangeNotifierProvider(
+                                  create: (context) => SchoolStaffState(context),
+                                  child: const AddStaffScreen(),
+                                )
+                            )
+                        ).whenComplete(() {
+                          state.fetchMeta();
+                        });
+                      },
                     ),
+                    // Text(
+                    //   'Lesson information',
+                    //   style: TextStyles.s14w600.copyWith(
+                    //       color: const Color(0xFFFFC700)
+                    //   ),
+                    // ),
+                    // const SizedBox(
+                    //   height: 16,
+                    // ),
+                    // SelectInputSearch(
+                    //   errors: state.validateError?.errors.schoolClass?.first,
+                    //   title: 'Class',
+                    //   labelStyle: TextStyles.s14w600.copyWith(
+                    //       color: const Color(0xFF242424)
+                    //   ),
+                    //   style: TextStyles.s14w400.copyWith(
+                    //       color: Colors.black
+                    //   ),
+                    //   isSearch: true,
+                    //   onSearch: (value) {
+                    //     print(value);
+                    //   },
+                    //   items: state.listClass,
+                    //   selected: state.selectClass,
+                    //   onSelect: (value) {
+                    //     state.changeClass(value);
+                    //   },
+                    //   hintText: '',
+                    // ),
                     const SizedBox(
                       height: 16,
                     ),
                     Text(
-                      'Lesson duration',
+                      getConstant('Lesson_duration'),
                       style: TextStyles.s14w600.copyWith(
                           color: const Color(0xFFFFC700)
                       ),
@@ -149,44 +206,76 @@ class _AddLessonScreenState extends State<AddLessonScreen> {
                     Row(
                       children: [
                         CupertinoButton(
-                          minSize: 0.0,
-                          padding: EdgeInsets.zero,
-                          child: IgnorePointer(
-                            child: Container(
-                              constraints: const BoxConstraints(
-                                  maxWidth: 150
-                              ),
-                              child: AppField(
-                                label: 'Start',
-                                controller: state.lessonStart,
-                                placeholder: '_ _ : _ _',
-                                error: state.validateError?.errors.startLesson?.first,
+                            minSize: 0.0,
+                            padding: EdgeInsets.zero,
+                            child: IgnorePointer(
+                              child: Container(
+                                constraints: const BoxConstraints(
+                                    maxWidth: 150
+                                ),
+                                child: AppField(
+                                  label: getConstant('Start'),
+                                  controller: state.lessonStart,
+                                  placeholder: '_ _ : _ _',
+                                  error: state.validateError?.errors.startLesson?.first,
+                                ),
                               ),
                             ),
-                          ),
-                          onPressed: () {
-                            _showDialog(
-                              CupertinoDatePicker(
-                                initialDateTime: time,
-                                mode: CupertinoDatePickerMode.time,
-                                use24hFormat: true,
-                                onDateTimeChanged: (DateTime newTime) {
-                                  setState(() {
-                                    time = newTime;
-                                    state.changeLessonStart(DateFormat('HH:mm').format(newTime));
-                                  });
-                                },
-                              ),
-                            );
-                          }
-                        )
+                            onPressed: () {
+                              _showDialog(
+                                CupertinoDatePicker(
+                                  initialDateTime: time,
+                                  mode: CupertinoDatePickerMode.time,
+                                  use24hFormat: true,
+                                  onDateTimeChanged: (DateTime newTime) {
+                                    setState(() {
+                                      time = newTime;
+                                      state.changeLessonStart(DateFormat('HH:mm').format(newTime));
+                                    });
+                                  },
+                                ),
+                              );
+                            }
+                        ),
+                        const Spacer(),
+                        CupertinoButton(
+                            minSize: 0.0,
+                            padding: EdgeInsets.zero,
+                            child: IgnorePointer(
+                                child: Container(
+                                  constraints: const BoxConstraints(
+                                      maxWidth: 150
+                                  ),
+                                  child: AppField(
+                                    label: getConstant('duration'),
+                                    controller: state.duration,
+                                    placeholder: '_ _ : _ _',
+                                  ),
+                                )
+                            ),
+                            onPressed: () {
+                              _showDialog(
+                                CupertinoDatePicker(
+                                  initialDateTime: state.duration.text.isNotEmpty ? DateFormat('dd.MM.yyyy HH:mm').parse('01.01.2024 ${(state.duration.text).replaceAll(' ', '')}:00') :
+                                  DateFormat('dd.MM.yyyy HH:mm').parse('01.01.2024 00:00:00'),
+                                  mode: CupertinoDatePickerMode.time,
+                                  use24hFormat: true,
+                                  onDateTimeChanged: (DateTime newTime) {
+                                    setState(() {
+                                      state.duration.text = DateFormat('HH:mm').format(newTime);
+                                    });
+                                  },
+                                ),
+                              );
+                            }
+                        ),
                       ],
                     ),
                     const SizedBox(
-                      height: 40,
+                      height: 24,
                     ),
                     Text(
-                      'Repeats',
+                      getConstant('Repeats'),
                       style: TextStyles.s14w600.copyWith(
                           color: const Color(0xFFFFC700)
                       ),
@@ -195,31 +284,34 @@ class _AddLessonScreenState extends State<AddLessonScreen> {
                       height: 16,
                     ),
                     CupertinoButton(
-                      minSize: 0.0,
-                      padding: EdgeInsets.zero,
-                      child: IgnorePointer(
-                        child: AppField(
-                          label: 'Start',
-                          controller: state.repeatsStart,
-                          error: state.validateError?.errors.start?.first,
-                        ),
-                      ),
-                      onPressed: () {
-                        _showDialog(
-                          CupertinoDatePicker(
-                            initialDateTime: date,
-                            mode: CupertinoDatePickerMode.date,
-                            use24hFormat: true,
-                            minimumDate: DateTime.now().add(const Duration(hours: -1)),
-                            onDateTimeChanged: (DateTime newDate) {
-                              setState(() {
-                                date = newDate;
-                                state.changeRepeatsStart(DateFormat('dd.MM.yyyy').format(newDate));
-                              });
-                            },
+                        minSize: 0.0,
+                        padding: EdgeInsets.zero,
+                        child: IgnorePointer(
+                          child: AppField(
+                            label: getConstant('Start'),
+                            controller: state.repeatsStart,
+                            error: state.validateError?.errors.start?.first,
                           ),
-                        );
-                      }
+                        ),
+                        onPressed: () {
+                          _showDialog(
+                            CupertinoDatePicker(
+                              initialDateTime: state.repeatsEnd.text.isNotEmpty ? null : date,
+                              mode: CupertinoDatePickerMode.date,
+                              use24hFormat: true,
+                              minimumDate: DateTime.now().add(const Duration(hours: -1)),
+                              maximumDate: state.repeatsEnd.text.isNotEmpty ?
+                              DateFormat('dd.MM.yyyy HH:mm').parse('${state.repeatsEnd.text} 23:00')
+                                  : null,
+                              onDateTimeChanged: (DateTime newDate) {
+                                setState(() {
+                                  date = newDate;
+                                  state.changeRepeatsStart(DateFormat('dd.MM.yyyy').format(newDate));
+                                });
+                              },
+                            ),
+                          );
+                        }
                     ),
                     const SizedBox(
                       height: 24,
@@ -229,19 +321,20 @@ class _AddLessonScreenState extends State<AddLessonScreen> {
                         padding: EdgeInsets.zero,
                         child: IgnorePointer(
                           child: AppField(
-                            label: 'End',
+                            label: getConstant('End_Lov'),
                             controller: state.repeatsEnd,
                             error: state.validateError?.errors.end?.first,
                           ),
                         ),
                         onPressed: () {
-
                           _showDialog(
                             CupertinoDatePicker(
                               initialDateTime: date,
                               mode: CupertinoDatePickerMode.date,
                               use24hFormat: true,
-                              minimumDate: DateTime.now().add(const Duration(hours: -1)),
+                              minimumDate: state.repeatsStart.text.isNotEmpty ?
+                              DateFormat('dd.MM.yyyy HH:mm').parse('${state.repeatsStart.text} 00:00')
+                                  : null,
                               onDateTimeChanged: (DateTime newDate) {
                                 setState(() {
                                   date = newDate;
@@ -255,12 +348,22 @@ class _AddLessonScreenState extends State<AddLessonScreen> {
                     const SizedBox(
                       height: 24,
                     ),
+                    SelectColor(
+                        selected: state.selectColor,
+                        label: getConstant('Color'),
+                        onSelect: (value) {
+                          state.selectServiceColor(value);
+                        }
+                    ),
+                    const SizedBox(
+                      height: 24,
+                    ),
                     const SelectDayWeek(),
                     const SizedBox(
                       height: 16,
                     ),
                     AppButton(
-                      title: state.editId != null ? 'Edit Lesson' : 'ADD Lesson',
+                      title: state.editId != null ? getConstant('EDIT_Lesson') : getConstant('Add_lesson'),
                       onPressed: () {
                         state.addOrEditLesson();
                       },

@@ -55,7 +55,6 @@ class ServicesModel {
   int id;
   int? branchId;
   int? serviceCategory;
-  UserData? teacher;
   int? validity;
   String? validityType;
   int? duration;
@@ -77,7 +76,6 @@ class ServicesModel {
     required this.id,
     this.branchId,
     this.serviceCategory,
-    this.teacher,
     this.validity,
     this.validityType,
     this.duration,

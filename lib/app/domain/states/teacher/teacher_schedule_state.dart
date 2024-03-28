@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:etm_crm/app/app.dart';
 import 'package:etm_crm/app/domain/models/meta.dart';
 import 'package:etm_crm/app/domain/services/schedule_service.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,10 +21,12 @@ class TeacherScheduleState with ChangeNotifier {
   int? _editId;
   bool _isLoading = true;
   ScheduleMeta? _scheduleMeta;
-  List<Map<String, dynamic>>? _selectService;
+  List<dynamic>? _selectService;
   Map<String, dynamic>? _selectClass;
   ValidateError? _validateError;
   LessonsList? _lessonsList;
+  String? _selectColor;
+  final TextEditingController _lessonName = TextEditingController();
   final FilterSchedule _filterSchedule = FilterSchedule(
       type: [],
       teacher: [],
@@ -33,6 +36,9 @@ class TeacherScheduleState with ChangeNotifier {
   List<Map<String, dynamic>> _listServices = [];
   List<Map<String, dynamic>> _listClass = [];
   List<Map<String, dynamic>> _listTeacher = [];
+  String? get selectColor => _selectColor;
+  final MaskedTextController _duration = MaskedTextController(mask: '00 : 00');
+  TextEditingController get lessonName => _lessonName;
   final MaskedTextController _lessonStart = MaskedTextController(mask: '00 : 00');
   final TextEditingController _repeatsStart = MaskedTextController(
       mask: '00.00.0000'
@@ -51,10 +57,11 @@ class TeacherScheduleState with ChangeNotifier {
   int get filterDateIndex => _filterDateIndex;
   int? get editId => _editId;
   bool get isLoading => _isLoading;
+  TextEditingController get duration => _duration;
   FilterSchedule get filterSchedule => _filterSchedule;
   LessonsList? get lessonsList => _lessonsList;
   ScheduleMeta? get scheduleMeta => _scheduleMeta;
-  List< Map<String, dynamic>>? get selectService => _selectService;
+  List<dynamic>? get selectService => _selectService;
   Map<String, dynamic>? get selectClass => _selectClass;
   List<Map<String, dynamic>> get listTypeServices => _listServices;
   List<Map<String, dynamic>> get listTeacher => _listTeacher;
@@ -82,6 +89,11 @@ class TeacherScheduleState with ChangeNotifier {
   }
   void changeLessonStart(value){
     _lessonStart.text = value;
+    notifyListeners();
+  }
+
+  void selectServiceColor(value){
+    _selectColor = value;
     notifyListeners();
   }
 
@@ -165,12 +177,24 @@ class TeacherScheduleState with ChangeNotifier {
 
   void initEditData(Lesson? edit) {
     _editId = edit?.id;
-    // _selectService = _listServices.firstWhere((element) => element['id'] == edit?.service?.id);
-    _selectClass = _listClass.firstWhere((element) => element['id'] == edit?.schoolClass?.id);
-    _lessonStart.text = '${edit?.lessonStart}';
+    _lessonName.text = '${edit?.name}';
+    _selectService = [];
+    for(var a = 0; a < (edit?.services?.length ?? 0); a++){
+      _selectService?.add({
+        "id": edit?.services?[a]?.id,
+        "name": edit?.services?[a]?.name,
+      });
+    }
+    if(edit?.schoolClass?.id != null){
+      _selectClass = _listClass.firstWhere((element) => element['id'] == edit?.schoolClass?.id);
+    }
+
+    _lessonStart.text = '${edit?.startLesson}';
     _repeatsStart.text = '${edit?.start?.replaceAll('-', '')}';
     _repeatsEnd.text = '${edit?.end?.replaceAll('-', '')}';
 
+    _duration.text = '${((edit?.duration ?? 0) ~/ 60).toString().padLeft(2, '0')}${(edit?.duration ?? 0) % 60}';
+    _selectColor = edit?.color;
 
     final date = DateTime.parse('${edit?.start}');
     _repeatsStart.text =
@@ -268,9 +292,23 @@ class TeacherScheduleState with ChangeNotifier {
   Future<void> addOrEditLesson() async {
     _validateError = null;
     notifyListeners();
+    int duration = 0;
+    if(_duration.text.isNotEmpty) {
+      List<String> parts = _duration.text.split(' : ');
+      if(parts.length < 2) return;
+      int hours = int.parse(parts[0]);
+      int minutes = int.parse(parts[1]);
+      duration = hours * 60 + minutes;
+    }
+
+    final user = context.read<AppState>().userData;
 
     Map<String, dynamic> data = {
       'id': _editId,
+      'teacher_id': user?.id,
+      'lesson_name': _lessonName.text,
+      'color': _selectColor,
+      'duration': duration,
       'service': _selectService,
       'school_class':  _selectClass?['id'],
       'start_lesson': _lessonStart.text.replaceAll(' ', ''),

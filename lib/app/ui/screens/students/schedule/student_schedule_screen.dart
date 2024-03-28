@@ -85,7 +85,7 @@ class _StudentScheduleScreenState extends State<StudentScheduleScreen> {
                                         (index) => AccordionSection(
                                       isOpen: false,
                                       headerBackgroundColor:
-                                      Color(int.parse('${lessons[index].services?.first?.color}')).withOpacity(.6),
+                                      Color(int.parse('${lessons[index].color}')).withOpacity(.6),
                                       contentVerticalPadding: 0,
                                       rightIcon: HeaderEtm(
                                           lessons: lessons[index],

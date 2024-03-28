@@ -1,19 +1,14 @@
-import 'package:etm_crm/app/domain/states/school/school_staff_state.dart';
 import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:etm_crm/app/ui/widgets/select_color.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-
 import '../../../../../domain/states/services_state.dart';
 import '../../../../theme/text_styles.dart';
 import '../../../../widgets/app_field.dart';
 import '../../../../widgets/auth_button.dart';
 import '../../../../widgets/dropzone.dart';
 import '../../../../widgets/select_bottom_sheet_input.dart';
-import '../../../../widgets/tool_tip_on_add.dart';
-import '../../staff/add_staff_screen.dart';
 
 class AddServiceService extends StatefulWidget {
   const AddServiceService({Key? key}) : super(key: key);
@@ -100,42 +95,42 @@ class _AddServiceServiceState extends State<AddServiceService> {
               },
               horizontalPadding: 0,
             ),
-            const SizedBox(
-              height: 24,
-            ),
-            ToolTipOnAdd(
-              title: getConstant('Teacher'),
-              titleStyle: TextStyles.s14w600.copyWith(
-                  color: const Color(0xFF242424)
-              ),
-              style: TextStyles.s14w400.copyWith(
-                  color: Colors.black
-              ),
-              hintText: '',
-              items: state.listTeacherData,
-              selected: state.selectTeacher,
-              onSelect: (value) {
-                state.changeSelectTeacher(value);
-                changeOpen(null);
-              },
-              changeOpen: () {
-                changeOpen('teacher');
-              },
-              isOpen: openField == 'teacher',
-              onAdd: () async {
-                await Navigator.push(
-                    context,
-                    CupertinoPageRoute(
-                        builder: (context) => ChangeNotifierProvider(
-                          create: (context) => SchoolStaffState(context),
-                          child: const AddStaffScreen(),
-                        )
-                    )
-                ).whenComplete(() {
-                  state.getMeta();
-                });
-              },
-            ),
+            // const SizedBox(
+            //   height: 24,
+            // ),
+            // ToolTipOnAdd(
+            //   title: getConstant('Teacher'),
+            //   titleStyle: TextStyles.s14w600.copyWith(
+            //       color: const Color(0xFF242424)
+            //   ),
+            //   style: TextStyles.s14w400.copyWith(
+            //       color: Colors.black
+            //   ),
+            //   hintText: '',
+            //   items: state.listTeacherData,
+            //   selected: state.selectTeacher,
+            //   onSelect: (value) {
+            //     state.changeSelectTeacher(value);
+            //     changeOpen(null);
+            //   },
+            //   changeOpen: () {
+            //     changeOpen('teacher');
+            //   },
+            //   isOpen: openField == 'teacher',
+            //   onAdd: () async {
+            //     await Navigator.push(
+            //         context,
+            //         CupertinoPageRoute(
+            //             builder: (context) => ChangeNotifierProvider(
+            //               create: (context) => SchoolStaffState(context),
+            //               child: const AddStaffScreen(),
+            //             )
+            //         )
+            //     ).whenComplete(() {
+            //       state.getMeta();
+            //     });
+            //   },
+            // ),
             const SizedBox(
               height: 40,
             ),
@@ -174,34 +169,34 @@ class _AddServiceServiceState extends State<AddServiceService> {
                 ),
               ],
             ),
-            const SizedBox(
-              height: 24,
-            ),
-            CupertinoButton(
-              minSize: 0.0,
-              padding: EdgeInsets.zero,
-              child: IgnorePointer(
-                child: AppField(
-                  label: getConstant('Service_duration'),
-                  controller: state.duration,
-                  placeholder: '_ _ : _ _',
-                ),
-              ),
-              onPressed: () {
-                _showDialog(
-                  CupertinoDatePicker(
-                    initialDateTime: state.duration.text.isNotEmpty ? DateFormat('dd.MM.yyyy HH:mm').parse('01.01.2024 ${(state.duration.text).replaceAll(' ', '')}:00') : null,
-                    mode: CupertinoDatePickerMode.time,
-                    use24hFormat: true,
-                    onDateTimeChanged: (DateTime newTime) {
-                      setState(() {
-                        state.duration.text = DateFormat('HH:mm').format(newTime);
-                      });
-                    },
-                  ),
-                );
-              }
-            ),
+            // const SizedBox(
+            //   height: 24,
+            // ),
+            // CupertinoButton(
+            //   minSize: 0.0,
+            //   padding: EdgeInsets.zero,
+            //   child: IgnorePointer(
+            //     child: AppField(
+            //       label: getConstant('Service_duration'),
+            //       controller: state.duration,
+            //       placeholder: '_ _ : _ _',
+            //     ),
+            //   ),
+            //   onPressed: () {
+            //     _showDialog(
+            //       CupertinoDatePicker(
+            //         initialDateTime: state.duration.text.isNotEmpty ? DateFormat('dd.MM.yyyy HH:mm').parse('01.01.2024 ${(state.duration.text).replaceAll(' ', '')}:00') : null,
+            //         mode: CupertinoDatePickerMode.time,
+            //         use24hFormat: true,
+            //         onDateTimeChanged: (DateTime newTime) {
+            //           setState(() {
+            //             state.duration.text = DateFormat('HH:mm').format(newTime);
+            //           });
+            //         },
+            //       ),
+            //     );
+            //   }
+            // ),
             const SizedBox(
               height: 24,
             ),
@@ -289,24 +284,6 @@ class _AddServiceServiceState extends State<AddServiceService> {
               height: 40,
             ),
           ],
-        ),
-      ),
-    );
-  }
-
-  void _showDialog(Widget child) {
-    showCupertinoModalPopup<void>(
-      context: context,
-      builder: (BuildContext context) => Container(
-        height: 216,
-        padding: const EdgeInsets.only(top: 6.0),
-        margin: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom,
-        ),
-        color: CupertinoColors.systemBackground.resolveFrom(context),
-        child: SafeArea(
-          top: false,
-          child: child,
         ),
       ),
     );

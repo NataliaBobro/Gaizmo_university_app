@@ -396,10 +396,6 @@ class ContentService extends StatefulWidget {
 class _ContentServiceState extends State<ContentService> {
   @override
   Widget build(BuildContext context) {
-    final duration = widget.item?.duration ?? 0;
-    int durationHours = duration ~/ 60;
-    int durationMinutes = duration % 60;
-
     return Container(
       decoration: BoxDecoration(
         color: Color(int.parse('${widget.item?.color}')).withOpacity(.4)
@@ -410,12 +406,6 @@ class _ContentServiceState extends State<ContentService> {
           const SizedBox(
             height: 6,
           ),
-          if(widget.item?.teacher != null) ...[
-            ContentRowInfo(
-                title: getConstant('Teacher'),
-                value: "${widget.item?.teacher?.firstName} ${widget.item?.teacher?.lastName}"
-            ),
-          ],
           if(widget.item?.branch != null) ...[
             ContentRowInfo(
                 title: getConstant('Branch'),
@@ -424,16 +414,11 @@ class _ContentServiceState extends State<ContentService> {
           ],
           ContentRowInfo(
               title: getConstant('Number_of_students'),
-              value: "0"
+              value: '${widget.item?.payUsers?.length ?? 0}'
           ),
           ContentRowInfo(
               title: getConstant('Validity'),
               value: "${widget.item?.validity} ${widget.item?.validityType}"
-          ),
-          ContentRowInfo(
-              title: getConstant('Service_duration'),
-              value: (durationHours > 0 ? "$durationHours hour" : '') +
-                  (durationMinutes > 0 ? " $durationMinutes minutes" : '')
           ),
           ContentRowInfo(
               title: getConstant('Cost'),

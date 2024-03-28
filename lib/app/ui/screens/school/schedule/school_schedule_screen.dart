@@ -100,7 +100,7 @@ class _SchoolScheduleScreenState extends State<SchoolScheduleScreen> {
                                         (index) => AccordionSection(
                                       isOpen: false,
                                       headerBackgroundColor:
-                                      Color(int.parse('${state.lessonsList?.lessons?[index].services?.first?.color}')).withOpacity(.6),
+                                      Color(int.parse('${state.lessonsList?.lessons?[index].color}')).withOpacity(.6),
                                       contentVerticalPadding: 0,
                                       rightIcon: HeaderEtm(
                                           etm: state.lessonsList?.lessons?[index].services?.first?.etm
@@ -260,7 +260,7 @@ class HeaderNameLesson extends StatelessWidget {
     DateTime parsedTime = inputFormat.parse(timeString);
     String start = outputFormat.format(parsedTime);
 
-    DateTime parseEnd = parsedTime.add(Duration(minutes: lesson?.services?.first?.duration ?? 0));
+    DateTime parseEnd = parsedTime.add(Duration(minutes: lesson?.duration ?? 0));
     String end = outputFormat.format(parseEnd);
 
     return Column(
@@ -361,16 +361,16 @@ class _LessonItemState extends State<LessonItem> {
       ),
       width: double.infinity,
       decoration: BoxDecoration(
-          color: Color(int.parse('${widget.lesson?.services?.first?.color}')).withOpacity(.4)
+          color: Color(int.parse('${widget.lesson?.color}')).withOpacity(.4)
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if(widget.lesson?.services?.first?.teacher != null) ...[
+          if(widget.lesson?.teacher != null) ...[
             ContentRowInfo(
               title: getConstant('Teacher'),
-              value: '${widget.lesson?.services?.first?.teacher?.firstName} '
-                  '${widget.lesson?.services?.first?.teacher?.lastName}',
+              value: '${widget.lesson?.teacher?.firstName} '
+                  '${widget.lesson?.teacher?.lastName}',
             )
           ],
            ContentRowInfo(
@@ -384,10 +384,12 @@ class _LessonItemState extends State<LessonItem> {
                   '${widget.lesson?.services?.first?.school?.house}',
             )
           ],
-          ContentRowInfo(
-            title: getConstant('Class_number'),
-            value: '${widget.lesson?.schoolClass?.name}'
-          ),
+          if(widget.lesson?.schoolClass != null) ...[
+            ContentRowInfo(
+                title: getConstant('Class_number'),
+                value: '${widget.lesson?.schoolClass?.name}'
+            )
+          ],
           if(widget.lesson?.zoomMeeting != null) ...[
             ContentRowInfo(
               title: getConstant('Lesson_links'),

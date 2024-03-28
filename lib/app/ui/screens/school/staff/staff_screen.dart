@@ -278,8 +278,8 @@ class _LessonItemState extends State<LessonItem> {
         children: [
           ContentRowInfo(
             title: 'Teacher',
-            value: '${widget.lesson?.services?.first?.teacher?.firstName} '
-                '${widget.lesson?.services?.first?.teacher?.lastName}',
+            value: '${widget.lesson?.teacher?.firstName} '
+                '${widget.lesson?.teacher?.lastName}',
           ),
           const ContentRowInfo(
             title: 'Students',

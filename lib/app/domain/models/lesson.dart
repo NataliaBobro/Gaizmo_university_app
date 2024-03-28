@@ -1,4 +1,5 @@
 import 'package:etm_crm/app/domain/models/services.dart';
+import 'package:etm_crm/app/domain/models/user.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'lesson.g.dart';
@@ -20,6 +21,10 @@ class LessonsList {
 class Lesson {
   int id;
   String? name;
+  int? teacherId;
+  UserData? teacher;
+  String? color;
+  int duration;
   String? lessonStart;
   String? startLesson;
   String? start;
@@ -32,7 +37,11 @@ class Lesson {
 
   Lesson({
     required this.id,
+    required this.duration,
     this.name,
+    this.teacherId,
+    this.teacher,
+    this.color,
     this.lessonStart,
     this.startLesson,
     this.start,

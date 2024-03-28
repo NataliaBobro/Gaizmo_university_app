@@ -1,3 +1,4 @@
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -55,7 +56,7 @@ class _SelectDayWeekState extends State<SelectDayWeek> {
                       ),
                       child: Center(
                         child: Text(
-                          '${dateList[index]['define']}',
+                          getConstant('${dateList[index]['define']}'),
                           style: TextStyles.s12w600.copyWith(
                               color: isSelected ? Colors.white : Colors.black
                           ),
@@ -98,7 +99,7 @@ class _SelectDayWeekState extends State<SelectDayWeek> {
                       ),
                     ),
                     TextSpan(
-                      text: '15.03.2022.\n',
+                      text: '${state.repeatsEnd.text}.\n',
                       style: TextStyles.s12w300.copyWith(
                           color: const Color(0xFF2F80ED)
                       ),

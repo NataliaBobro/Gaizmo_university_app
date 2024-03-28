@@ -18,8 +18,7 @@ ScheduleMeta _$ScheduleMetaFromJson(Map<String, dynamic> json) => ScheduleMeta(
               : SchoolClassModel.fromJson(e as Map<String, dynamic>))
           .toList(),
     )..teacher = (json['teacher'] as List<dynamic>?)
-        ?.map((e) =>
-            e == null ? null : UserData.fromJson(e as Map<String, dynamic>))
+        ?.map((e) => UserData.fromJson(e as Map<String, dynamic>))
         .toList();
 
 Map<String, dynamic> _$ScheduleMetaToJson(ScheduleMeta instance) =>

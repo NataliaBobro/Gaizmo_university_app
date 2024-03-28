@@ -100,7 +100,7 @@ class _TeacherScheduleScreenState extends State<TeacherScheduleScreen> {
                                     (index) => AccordionSection(
                                       isOpen: false,
                                       headerBackgroundColor:
-                                      Color(int.parse('${state.lessonsList?.lessons?[index].services?.first?.color}')).withOpacity(.6),
+                                      Color(int.parse('${state.lessonsList?.lessons?[index].color}')).withOpacity(.6),
                                       contentVerticalPadding: 0,
                                       rightIcon: HeaderEtm(
                                           lessons: state.lessonsList!.lessons![index],

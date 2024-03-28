@@ -109,16 +109,16 @@ class _LessonItemState extends State<LessonItem> {
       ),
       width: double.infinity,
       decoration: BoxDecoration(
-          color: Color(int.parse('${widget.lesson?.services?.first?.color}')).withOpacity(.4)
+          color: Color(int.parse('${widget.lesson?.color}')).withOpacity(.4)
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if(widget.lesson?.services?.first?.teacher != null) ...[
+          if(widget.lesson?.teacher != null) ...[
             ContentRowInfo(
               title: getConstant('Teacher'),
-              value: '${widget.lesson?.services?.first?.teacher?.firstName} '
-                  '${widget.lesson?.services?.first?.teacher?.lastName}',
+              value: '${widget.lesson?.teacher?.firstName} '
+                  '${widget.lesson?.teacher?.lastName}',
             )
           ],
           ContentRowInfo(

@@ -197,9 +197,9 @@ class ServicesState with ChangeNotifier {
       }
 
       _selectBranch = listBranch.firstWhere((element) => element['id'] == (servEdit.branchId ?? 0));
-      if((_listTeacherData?.length ?? 0) > 0){
-        _selectTeacher = _listTeacherData?.firstWhere((element) => element.id == (servEdit.teacher?.id ?? 0));
-      }
+      // if((_listTeacherData?.length ?? 0) > 0){
+      //   _selectTeacher = _listTeacherData?.firstWhere((element) => element.id == (servEdit.teacher?.id ?? 0));
+      // }
       _selectCurrency = _listCurrency.firstWhere((element) => element['id'] == servEdit.currency?.id);
       _selectValidityType = _listValidityType.firstWhere((element) => element['name'] == servEdit.validityType);
       _etm.text = '${servEdit.etm}';
@@ -210,7 +210,7 @@ class ServicesState with ChangeNotifier {
       }
       _selectColor = servEdit.color;
       _validity.text = '${servEdit.validity}';
-      _duration.text = '${(servEdit.duration! ~/ 60).toString().padLeft(2, '0')}${servEdit.duration! % 60}';
+      // _duration.text = '${(servEdit.duration! ~/ 60).toString().padLeft(2, '0')}${servEdit.duration! % 60}';
       _onEditId = servEdit.id;
     }
     notifyListeners();

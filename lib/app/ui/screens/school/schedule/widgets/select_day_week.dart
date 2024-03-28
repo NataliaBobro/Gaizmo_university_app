@@ -1,6 +1,6 @@
 import 'package:etm_crm/app/domain/states/school/school_schedule_state.dart';
+import 'package:etm_crm/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -55,7 +55,7 @@ class _SelectDayWeekState extends State<SelectDayWeek> {
                       ),
                       child: Center(
                         child: Text(
-                          '${dateList[index]['define']}',
+                          getConstant('${dateList[index]['define']}'),
                           style: TextStyles.s12w600.copyWith(
                               color: isSelected ? Colors.white : Colors.black
                           ),
@@ -90,30 +90,30 @@ class _SelectDayWeekState extends State<SelectDayWeek> {
                       ),
                     ),
                   ),
-                  if(state.repeatsEnd.text.isNotEmpty) ...[
-                    TextSpan(
-                      text: 'until ',
-                      style: TextStyles.s12w300.copyWith(
-                          color: const Color(0xFF242424)
-                      ),
-                    ),
-                    TextSpan(
-                      text: '15.03.2022.\n',
-                      style: TextStyles.s12w300.copyWith(
-                          color: const Color(0xFF2F80ED)
-                      ),
-                    ),
-                    TextSpan(
-                      text: 'Delete end date.',
-                      style: TextStyles.s12w300.copyWith(
-                          color: const Color(0xFF2F80ED)
-                      ),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          state.clearEndDate();
-                        },
-                    ),
-                  ]
+                  // if(state.repeatsEnd.text.isNotEmpty) ...[
+                  //   TextSpan(
+                  //     text: 'until ',
+                  //     style: TextStyles.s12w300.copyWith(
+                  //         color: const Color(0xFF242424)
+                  //     ),
+                  //   ),
+                  //   TextSpan(
+                  //     text: '15.03.2022.\n',
+                  //     style: TextStyles.s12w300.copyWith(
+                  //         color: const Color(0xFF2F80ED)
+                  //     ),
+                  //   ),
+                  //   TextSpan(
+                  //     text: 'Delete end date.',
+                  //     style: TextStyles.s12w300.copyWith(
+                  //         color: const Color(0xFF2F80ED)
+                  //     ),
+                  //     recognizer: TapGestureRecognizer()
+                  //       ..onTap = () {
+                  //         state.clearEndDate();
+                  //       },
+                  //   ),
+                  // ]
                 ]
             ),
           ),

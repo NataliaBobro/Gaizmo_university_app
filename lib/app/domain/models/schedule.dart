@@ -8,7 +8,7 @@ part 'schedule.g.dart';
 class ScheduleMeta {
   List<ServicesModel?>? services;
   List<SchoolClassModel?>? schoolClass;
-  List<UserData?>? teacher;
+  List<UserData>? teacher;
 
   ScheduleMeta({
     this.services,

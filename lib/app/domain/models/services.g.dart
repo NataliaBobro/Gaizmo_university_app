@@ -61,9 +61,6 @@ ServicesModel _$ServicesModelFromJson(Map<String, dynamic> json) =>
       id: json['id'] as int,
       branchId: json['branch_id'] as int?,
       serviceCategory: json['service_category'] as int?,
-      teacher: json['teacher'] == null
-          ? null
-          : UserData.fromJson(json['teacher'] as Map<String, dynamic>),
       validity: json['validity'] as int?,
       validityType: json['validity_type'] as String?,
       duration: json['duration'] as int?,
@@ -97,7 +94,6 @@ Map<String, dynamic> _$ServicesModelToJson(ServicesModel instance) =>
       'id': instance.id,
       'branch_id': instance.branchId,
       'service_category': instance.serviceCategory,
-      'teacher': instance.teacher,
       'validity': instance.validity,
       'validity_type': instance.validityType,
       'duration': instance.duration,

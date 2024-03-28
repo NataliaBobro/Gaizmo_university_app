@@ -221,14 +221,6 @@ class _ServiceItemState extends State<ServiceItem> {
                                       ),
                                     )
                                   ],
-                                  const SizedBox(
-                                    height: 24,
-                                  ),
-                                  if(servicesModel?.teacher != null)...[
-                                    ButtonTeacher(
-                                        teacher: servicesModel?.teacher
-                                    )
-                                  ],
                                   if(listUser.isNotEmpty) ...[
                                     const SizedBox(
                                       height: 16,
