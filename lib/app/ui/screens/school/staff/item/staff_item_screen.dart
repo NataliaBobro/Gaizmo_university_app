@@ -1,10 +1,10 @@
-import 'package:etm_crm/app/domain/states/school/school_staff_item_state.dart';
-import 'package:etm_crm/app/ui/screens/school/staff/item/widgets/staff_avatar.dart';
-import 'package:etm_crm/app/ui/screens/school/staff/item/widgets/staff_documents_tab.dart';
-import 'package:etm_crm/app/ui/screens/school/staff/item/widgets/staff_info.dart';
-import 'package:etm_crm/app/ui/screens/school/staff/item/widgets/staff_personal_info_tab.dart';
-import 'package:etm_crm/app/ui/screens/school/staff/item/widgets/staff_settings_tab.dart';
-import 'package:etm_crm/app/ui/utils/get_constant.dart';
+import 'package:european_university_app/app/domain/states/school/school_staff_item_state.dart';
+import 'package:european_university_app/app/ui/screens/school/staff/item/widgets/staff_avatar.dart';
+import 'package:european_university_app/app/ui/screens/school/staff/item/widgets/staff_documents_tab.dart';
+import 'package:european_university_app/app/ui/screens/school/staff/item/widgets/staff_info.dart';
+import 'package:european_university_app/app/ui/screens/school/staff/item/widgets/staff_personal_info_tab.dart';
+import 'package:european_university_app/app/ui/screens/school/staff/item/widgets/staff_settings_tab.dart';
+import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';

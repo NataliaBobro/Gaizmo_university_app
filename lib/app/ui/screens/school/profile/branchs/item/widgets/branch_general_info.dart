@@ -1,6 +1,6 @@
-import 'package:etm_crm/app/domain/models/user.dart';
-import 'package:etm_crm/app/ui/utils/get_constant.dart';
-import 'package:etm_crm/app/ui/widgets/custom_scroll_physics.dart';
+import 'package:european_university_app/app/domain/models/user.dart';
+import 'package:european_university_app/app/ui/utils/get_constant.dart';
+import 'package:european_university_app/app/ui/widgets/custom_scroll_physics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

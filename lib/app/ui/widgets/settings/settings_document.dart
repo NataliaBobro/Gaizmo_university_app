@@ -1,5 +1,5 @@
-import 'package:etm_crm/app/app.dart';
-import 'package:etm_crm/app/domain/models/user.dart';
+import 'package:european_university_app/app/app.dart';
+import 'package:european_university_app/app/domain/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../screens/school/profile/branchs/item/widgets/document_view.dart';

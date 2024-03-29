@@ -1,12 +1,12 @@
 import 'dart:async';
 
 import 'package:dio/dio.dart';
-import 'package:etm_crm/app/domain/services/app_ninjas_service.dart';
-import 'package:etm_crm/app/domain/services/auth_service.dart';
-import 'package:etm_crm/app/ui/screens/auth/auth_sign_up_school.dart';
-import 'package:etm_crm/app/ui/screens/auth/confirm_code_screen.dart';
-import 'package:etm_crm/app/ui/screens/auth/new_password.dart';
-import 'package:etm_crm/resources/resources.dart';
+import 'package:european_university_app/app/domain/services/app_ninjas_service.dart';
+import 'package:european_university_app/app/domain/services/auth_service.dart';
+import 'package:european_university_app/app/ui/screens/auth/auth_sign_up_school.dart';
+import 'package:european_university_app/app/ui/screens/auth/confirm_code_screen.dart';
+import 'package:european_university_app/app/ui/screens/auth/new_password.dart';
+import 'package:european_university_app/resources/resources.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:hive/hive.dart';
 import 'package:flutter/cupertino.dart';

@@ -1,4 +1,4 @@
-import 'package:etm_crm/resources/resources.dart';
+import 'package:european_university_app/resources/resources.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';

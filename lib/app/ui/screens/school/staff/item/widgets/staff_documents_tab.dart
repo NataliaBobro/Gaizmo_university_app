@@ -1,7 +1,7 @@
-import 'package:etm_crm/app/domain/states/school/school_staff_item_state.dart';
-import 'package:etm_crm/app/ui/utils/get_constant.dart';
-import 'package:etm_crm/app/ui/widgets/add_document/add_document_widget.dart';
-import 'package:etm_crm/app/ui/widgets/custom_scroll_physics.dart';
+import 'package:european_university_app/app/domain/states/school/school_staff_item_state.dart';
+import 'package:european_university_app/app/ui/utils/get_constant.dart';
+import 'package:european_university_app/app/ui/widgets/add_document/add_document_widget.dart';
+import 'package:european_university_app/app/ui/widgets/custom_scroll_physics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

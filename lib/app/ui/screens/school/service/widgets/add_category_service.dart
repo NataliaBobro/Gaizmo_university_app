@@ -1,5 +1,5 @@
-import 'package:etm_crm/app/ui/utils/get_constant.dart';
-import 'package:etm_crm/app/ui/widgets/app_field.dart';
+import 'package:european_university_app/app/ui/utils/get_constant.dart';
+import 'package:european_university_app/app/ui/widgets/app_field.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

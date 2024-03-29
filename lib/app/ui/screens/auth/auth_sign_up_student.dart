@@ -1,10 +1,10 @@
-import 'package:etm_crm/app/domain/states/auth_state.dart';
-import 'package:etm_crm/app/ui/screens/auth/widgets/already_account.dart';
-import 'package:etm_crm/app/ui/screens/auth/widgets/check_box_auth.dart';
-import 'package:etm_crm/app/ui/theme/text_styles.dart';
-import 'package:etm_crm/app/ui/utils/get_constant.dart';
-import 'package:etm_crm/app/ui/widgets/auth_title.dart';
-import 'package:etm_crm/app/ui/widgets/custom_scroll_physics.dart';
+import 'package:european_university_app/app/domain/states/auth_state.dart';
+import 'package:european_university_app/app/ui/screens/auth/widgets/already_account.dart';
+import 'package:european_university_app/app/ui/screens/auth/widgets/check_box_auth.dart';
+import 'package:european_university_app/app/ui/theme/text_styles.dart';
+import 'package:european_university_app/app/ui/utils/get_constant.dart';
+import 'package:european_university_app/app/ui/widgets/auth_title.dart';
+import 'package:european_university_app/app/ui/widgets/custom_scroll_physics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

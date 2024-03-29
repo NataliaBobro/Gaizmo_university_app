@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:dio/dio.dart';
-import 'package:etm_crm/app/domain/models/services.dart';
-import 'package:etm_crm/app/domain/services/meta_service.dart';
-import 'package:etm_crm/app/domain/services/services_service.dart';
-import 'package:etm_crm/app/ui/utils/get_constant.dart';
+import 'package:european_university_app/app/domain/models/services.dart';
+import 'package:european_university_app/app/domain/services/meta_service.dart';
+import 'package:european_university_app/app/domain/services/services_service.dart';
+import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';

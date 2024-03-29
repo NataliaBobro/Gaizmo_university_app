@@ -48,8 +48,8 @@ class _SplashScreenState extends State<SplashScreen> {
                 const SizedBox(
                   height: 320,
                 ),
-                SvgPicture.asset(
-                  Svgs.logo,
+                Image.asset(
+                  Images.logo,
                   width: 162,
                 ),
                 const Spacer()

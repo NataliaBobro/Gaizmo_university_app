@@ -1,4 +1,4 @@
-import 'package:etm_crm/app/ui/widgets/center_header.dart';
+import 'package:european_university_app/app/ui/widgets/center_header.dart';
 import 'package:flutter/material.dart';
 
 import '../auth_button.dart';

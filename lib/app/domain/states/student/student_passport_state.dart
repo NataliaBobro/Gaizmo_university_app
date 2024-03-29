@@ -1,4 +1,4 @@
-import 'package:etm_crm/app/app.dart';
+import 'package:european_university_app/app/app.dart';
 import 'package:flutter/material.dart';
 
 class StudentPassportState with ChangeNotifier {

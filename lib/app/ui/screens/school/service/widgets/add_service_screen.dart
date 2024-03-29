@@ -1,5 +1,5 @@
-import 'package:etm_crm/app/ui/screens/school/service/widgets/add_service_service.dart';
-import 'package:etm_crm/app/ui/widgets/custom_scroll_physics.dart';
+import 'package:european_university_app/app/ui/screens/school/service/widgets/add_service_service.dart';
+import 'package:european_university_app/app/ui/widgets/custom_scroll_physics.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

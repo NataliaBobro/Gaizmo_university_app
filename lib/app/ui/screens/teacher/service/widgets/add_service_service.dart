@@ -1,4 +1,4 @@
-import 'package:etm_crm/app/ui/widgets/select_color.dart';
+import 'package:european_university_app/app/ui/widgets/select_color.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

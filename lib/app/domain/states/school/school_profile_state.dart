@@ -1,10 +1,10 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:etm_crm/app/app.dart';
-import 'package:etm_crm/app/domain/models/meta.dart';
-import 'package:etm_crm/app/domain/models/user.dart';
-import 'package:etm_crm/app/domain/services/school_service.dart';
+import 'package:european_university_app/app/app.dart';
+import 'package:european_university_app/app/domain/models/meta.dart';
+import 'package:european_university_app/app/domain/models/user.dart';
+import 'package:european_university_app/app/domain/services/school_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:provider/provider.dart';

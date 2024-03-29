@@ -1,5 +1,5 @@
-import 'package:etm_crm/app/domain/states/student/student_school_item_state.dart';
-import 'package:etm_crm/app/ui/screens/students/schools/item/widgets/select_package_screen.dart';
+import 'package:european_university_app/app/domain/states/student/student_school_item_state.dart';
+import 'package:european_university_app/app/ui/screens/students/schools/item/widgets/select_package_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

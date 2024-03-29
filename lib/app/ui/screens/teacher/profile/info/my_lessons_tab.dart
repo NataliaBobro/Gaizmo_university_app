@@ -1,10 +1,10 @@
 import 'package:accordion/accordion.dart';
 import 'package:accordion/controllers.dart';
-import 'package:etm_crm/app/app.dart';
-import 'package:etm_crm/app/domain/models/lesson.dart';
-import 'package:etm_crm/app/domain/states/teacher/teacher_home_state.dart';
-import 'package:etm_crm/app/ui/theme/text_styles.dart';
-import 'package:etm_crm/app/ui/utils/get_constant.dart';
+import 'package:european_university_app/app/app.dart';
+import 'package:european_university_app/app/domain/models/lesson.dart';
+import 'package:european_university_app/app/domain/states/teacher/teacher_home_state.dart';
+import 'package:european_university_app/app/ui/theme/text_styles.dart';
+import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';

@@ -1,7 +1,7 @@
-import 'package:etm_crm/app/domain/states/school/school_staff_item_state.dart';
-import 'package:etm_crm/app/ui/screens/school/staff/item/widgets/staff_personal_info_screen.dart';
-import 'package:etm_crm/app/ui/utils/get_constant.dart';
-import 'package:etm_crm/app/ui/widgets/change_password.dart';
+import 'package:european_university_app/app/domain/states/school/school_staff_item_state.dart';
+import 'package:european_university_app/app/ui/screens/school/staff/item/widgets/staff_personal_info_screen.dart';
+import 'package:european_university_app/app/ui/utils/get_constant.dart';
+import 'package:european_university_app/app/ui/widgets/change_password.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

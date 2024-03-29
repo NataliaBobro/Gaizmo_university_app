@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:etm_crm/app/ui/utils/get_token.dart';
+import 'package:european_university_app/app/ui/utils/get_token.dart';
 
 import '../../data/api_client.dart';
 import '../models/user.dart';

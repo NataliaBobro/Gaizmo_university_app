@@ -1,4 +1,4 @@
-# etm_crm
+# european_university_app
 
 A new Flutter project.
 

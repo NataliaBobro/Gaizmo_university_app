@@ -1,4 +1,4 @@
-import 'package:etm_crm/app/ui/utils/show_message.dart';
+import 'package:european_university_app/app/ui/utils/show_message.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';

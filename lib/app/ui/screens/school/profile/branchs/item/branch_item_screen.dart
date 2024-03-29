@@ -1,11 +1,11 @@
-import 'package:etm_crm/app/domain/models/user.dart';
-import 'package:etm_crm/app/ui/screens/school/profile/branchs/item/widgets/branch_avatar.dart';
-import 'package:etm_crm/app/ui/screens/school/profile/branchs/item/widgets/branch_general_info.dart';
-import 'package:etm_crm/app/ui/screens/school/profile/branchs/item/widgets/branch_header.dart';
-import 'package:etm_crm/app/ui/screens/school/profile/branchs/item/widgets/branch_info.dart';
-import 'package:etm_crm/app/ui/screens/school/profile/branchs/item/widgets/branch_settings_tab.dart';
-import 'package:etm_crm/app/ui/screens/school/profile/branchs/item/widgets/document_view.dart';
-import 'package:etm_crm/app/ui/utils/get_constant.dart';
+import 'package:european_university_app/app/domain/models/user.dart';
+import 'package:european_university_app/app/ui/screens/school/profile/branchs/item/widgets/branch_avatar.dart';
+import 'package:european_university_app/app/ui/screens/school/profile/branchs/item/widgets/branch_general_info.dart';
+import 'package:european_university_app/app/ui/screens/school/profile/branchs/item/widgets/branch_header.dart';
+import 'package:european_university_app/app/ui/screens/school/profile/branchs/item/widgets/branch_info.dart';
+import 'package:european_university_app/app/ui/screens/school/profile/branchs/item/widgets/branch_settings_tab.dart';
+import 'package:european_university_app/app/ui/screens/school/profile/branchs/item/widgets/document_view.dart';
+import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

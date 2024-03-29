@@ -1,6 +1,6 @@
-import 'package:etm_crm/app/domain/states/auth_state.dart';
-import 'package:etm_crm/app/ui/screens/auth/password_recovery.dart';
-import 'package:etm_crm/app/ui/widgets/arrow_back.dart';
+import 'package:european_university_app/app/domain/states/auth_state.dart';
+import 'package:european_university_app/app/ui/screens/auth/password_recovery.dart';
+import 'package:european_university_app/app/ui/widgets/arrow_back.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';

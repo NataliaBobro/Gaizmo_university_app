@@ -1,8 +1,8 @@
 
-import 'package:etm_crm/app/ui/screens/students/favorite/widgets/favorite_tab.dart';
-import 'package:etm_crm/app/ui/screens/students/favorite/widgets/pay_tab.dart';
-import 'package:etm_crm/app/ui/utils/get_constant.dart';
-import 'package:etm_crm/app/ui/widgets/center_header.dart';
+import 'package:european_university_app/app/ui/screens/students/favorite/widgets/favorite_tab.dart';
+import 'package:european_university_app/app/ui/screens/students/favorite/widgets/pay_tab.dart';
+import 'package:european_university_app/app/ui/utils/get_constant.dart';
+import 'package:european_university_app/app/ui/widgets/center_header.dart';
 import 'package:flutter/material.dart';
 
 import '../../../theme/text_styles.dart';

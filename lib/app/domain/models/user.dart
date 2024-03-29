@@ -1,4 +1,4 @@
-import 'package:etm_crm/app/domain/models/meta.dart';
+import 'package:european_university_app/app/domain/models/meta.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'user.g.dart';

@@ -1,9 +1,9 @@
-import 'package:etm_crm/app/domain/states/school/school_schedule_state.dart';
-import 'package:etm_crm/app/ui/screens/school/schedule/filter/filter_class.dart';
-import 'package:etm_crm/app/ui/screens/school/schedule/filter/type_lesson.dart';
-import 'package:etm_crm/app/ui/theme/text_styles.dart';
-import 'package:etm_crm/app/ui/utils/get_constant.dart';
-import 'package:etm_crm/app/ui/widgets/auth_button.dart';
+import 'package:european_university_app/app/domain/states/school/school_schedule_state.dart';
+import 'package:european_university_app/app/ui/screens/school/schedule/filter/filter_class.dart';
+import 'package:european_university_app/app/ui/screens/school/schedule/filter/type_lesson.dart';
+import 'package:european_university_app/app/ui/theme/text_styles.dart';
+import 'package:european_university_app/app/ui/utils/get_constant.dart';
+import 'package:european_university_app/app/ui/widgets/auth_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

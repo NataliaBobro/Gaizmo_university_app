@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:etm_crm/app/app.dart';
-import 'package:etm_crm/app/domain/models/meta.dart';
-import 'package:etm_crm/app/domain/services/schedule_service.dart';
+import 'package:european_university_app/app/app.dart';
+import 'package:european_university_app/app/domain/models/meta.dart';
+import 'package:european_university_app/app/domain/services/schedule_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

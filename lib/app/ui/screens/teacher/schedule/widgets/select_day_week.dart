@@ -1,4 +1,4 @@
-import 'package:etm_crm/app/ui/utils/get_constant.dart';
+import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';

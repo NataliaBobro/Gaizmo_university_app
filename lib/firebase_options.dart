@@ -63,6 +63,6 @@ class DefaultFirebaseOptions {
     messagingSenderId: '711648306470',
     projectId: 'etm-a04aa',
     storageBucket: 'etm-a04aa.appspot.com',
-    iosBundleId: 'ua.ETM.etm',
+    iosBundleId: 'ua.ETM.europeanuniversity',
   );
 }

@@ -1,4 +1,4 @@
-import 'package:etm_crm/app/ui/utils/get_constant.dart';
+import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -56,7 +56,7 @@ class _CheckboxAuthState extends State<CheckboxAuth> {
                     WidgetSpan(
                       child: CupertinoButton(
                         onPressed: () {
-                          launchUrlParse('https://app.etmcrm.com.ua/privacy');
+                          launchUrlParse('https://european-university.etmcrm.com.ua/privacy');
                         },
                         padding: EdgeInsets.zero,
                         minSize: 0.0,

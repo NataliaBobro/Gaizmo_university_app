@@ -1,4 +1,4 @@
-import 'package:etm_crm/app/domain/services/school_service.dart';
+import 'package:european_university_app/app/domain/services/school_service.dart';
 import 'package:flutter/cupertino.dart';
 
 

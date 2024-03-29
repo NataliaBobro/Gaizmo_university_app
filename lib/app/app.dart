@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:etm_crm/app/domain/services/user_service.dart';
-import 'package:etm_crm/app/ui/utils/show_message.dart';
-import 'package:etm_crm/app/ui/widgets/snackbars.dart';
+import 'package:european_university_app/app/domain/services/user_service.dart';
+import 'package:european_university_app/app/ui/utils/show_message.dart';
+import 'package:european_university_app/app/ui/widgets/snackbars.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

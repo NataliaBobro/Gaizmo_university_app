@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:etm_crm/app/domain/models/user.dart';
-import 'package:etm_crm/app/domain/states/school/school_branch_state.dart';
-import 'package:etm_crm/app/ui/screens/school/profile/branchs/add_branch.dart';
-import 'package:etm_crm/app/ui/theme/text_styles.dart';
-import 'package:etm_crm/app/ui/utils/get_constant.dart';
-import 'package:etm_crm/app/ui/widgets/empty_widget.dart';
+import 'package:european_university_app/app/domain/models/user.dart';
+import 'package:european_university_app/app/domain/states/school/school_branch_state.dart';
+import 'package:european_university_app/app/ui/screens/school/profile/branchs/add_branch.dart';
+import 'package:european_university_app/app/ui/theme/text_styles.dart';
+import 'package:european_university_app/app/ui/utils/get_constant.dart';
+import 'package:european_university_app/app/ui/widgets/empty_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

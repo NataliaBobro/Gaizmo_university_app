@@ -1,5 +1,5 @@
-import 'package:etm_crm/app/app.dart';
-import 'package:etm_crm/app/domain/services/pay_service.dart';
+import 'package:european_university_app/app/app.dart';
+import 'package:european_university_app/app/domain/services/pay_service.dart';
 import 'package:flutter/material.dart';
 
 import '../models/meta.dart';

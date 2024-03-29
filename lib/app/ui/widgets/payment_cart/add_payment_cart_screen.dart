@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:etm_crm/app/domain/models/meta.dart';
-import 'package:etm_crm/app/domain/services/user_service.dart';
-import 'package:etm_crm/app/ui/widgets/cart_number.dart';
-import 'package:etm_crm/app/ui/widgets/center_header.dart';
+import 'package:european_university_app/app/domain/models/meta.dart';
+import 'package:european_university_app/app/domain/services/user_service.dart';
+import 'package:european_university_app/app/ui/widgets/cart_number.dart';
+import 'package:european_university_app/app/ui/widgets/center_header.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';

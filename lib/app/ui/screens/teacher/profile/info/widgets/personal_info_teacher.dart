@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
-import 'package:etm_crm/app/app.dart';
-import 'package:etm_crm/app/domain/models/meta.dart';
-import 'package:etm_crm/app/domain/models/user.dart';
-import 'package:etm_crm/app/ui/utils/get_constant.dart';
-import 'package:etm_crm/app/ui/widgets/settings/setting_salary.dart';
+import 'package:european_university_app/app/app.dart';
+import 'package:european_university_app/app/domain/models/meta.dart';
+import 'package:european_university_app/app/domain/models/user.dart';
+import 'package:european_university_app/app/ui/utils/get_constant.dart';
+import 'package:european_university_app/app/ui/widgets/settings/setting_salary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:provider/provider.dart';

@@ -1,7 +1,7 @@
-import 'package:etm_crm/app/app.dart';
-import 'package:etm_crm/app/ui/screens/students/profile/info/widgets/my_qr_code.dart';
-import 'package:etm_crm/app/ui/utils/get_constant.dart';
-import 'package:etm_crm/app/ui/widgets/social_account_info.dart';
+import 'package:european_university_app/app/app.dart';
+import 'package:european_university_app/app/ui/screens/students/profile/info/widgets/my_qr_code.dart';
+import 'package:european_university_app/app/ui/utils/get_constant.dart';
+import 'package:european_university_app/app/ui/widgets/social_account_info.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

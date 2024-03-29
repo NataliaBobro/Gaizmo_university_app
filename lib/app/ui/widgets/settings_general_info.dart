@@ -1,13 +1,13 @@
 import 'package:dio/dio.dart';
-import 'package:etm_crm/app/domain/models/meta.dart';
-import 'package:etm_crm/app/domain/models/user.dart';
-import 'package:etm_crm/app/ui/utils/get_constant.dart';
-import 'package:etm_crm/app/ui/widgets/app_horizontal_field.dart';
-import 'package:etm_crm/app/ui/widgets/center_header.dart';
-import 'package:etm_crm/app/ui/widgets/snackbars.dart';
+import 'package:european_university_app/app/domain/models/user.dart';
+import 'package:european_university_app/app/ui/utils/get_constant.dart';
+import 'package:european_university_app/app/ui/widgets/app_horizontal_field.dart';
+import 'package:european_university_app/app/ui/widgets/center_header.dart';
+import 'package:european_university_app/app/ui/widgets/snackbars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 
+import '../../domain/models/meta.dart';
 import '../../domain/services/user_service.dart';
 import '../utils/show_message.dart';
 import 'auth_button.dart';

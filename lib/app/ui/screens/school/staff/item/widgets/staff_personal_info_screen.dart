@@ -1,5 +1,5 @@
-import 'package:etm_crm/app/domain/states/school/school_staff_item_state.dart';
-import 'package:etm_crm/app/ui/utils/get_constant.dart';
+import 'package:european_university_app/app/domain/states/school/school_staff_item_state.dart';
+import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:provider/provider.dart';

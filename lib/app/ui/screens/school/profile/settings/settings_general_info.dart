@@ -1,9 +1,9 @@
-import 'package:etm_crm/app/app.dart';
-import 'package:etm_crm/app/ui/screens/school/profile/settings/settings_address.dart';
-import 'package:etm_crm/app/ui/widgets/settings/settings_schedule.dart';
-import 'package:etm_crm/app/ui/screens/school/profile/settings/settings_select_category.dart';
-import 'package:etm_crm/app/ui/widgets/app_horizontal_field.dart';
-import 'package:etm_crm/app/ui/widgets/center_header.dart';
+import 'package:european_university_app/app/app.dart';
+import 'package:european_university_app/app/ui/screens/school/profile/settings/settings_address.dart';
+import 'package:european_university_app/app/ui/widgets/settings/settings_schedule.dart';
+import 'package:european_university_app/app/ui/screens/school/profile/settings/settings_select_category.dart';
+import 'package:european_university_app/app/ui/widgets/app_horizontal_field.dart';
+import 'package:european_university_app/app/ui/widgets/center_header.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
