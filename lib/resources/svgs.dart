@@ -12,7 +12,6 @@ class Svgs {
   static const String homeIcon = 'assets/vectors/home-icon.svg';
   static const String service = 'assets/vectors/service.svg';
   static const String statistics = 'assets/vectors/statistics.svg';
-  static const String logo = 'assets/vectors/logo.svg';
   static const String openSelect = 'assets/vectors/open-select.svg';
   static const String student = 'assets/vectors/student.svg';
   static const String parent = 'assets/vectors/parent.svg';

@@ -1,7 +1,6 @@
 import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../resources/resources.dart';
@@ -47,11 +46,11 @@ class _AuthSelectUserTypeState extends State<AuthSelectUserType> {
                     height: 138,
                   ),
                   Center(
-                    child: SvgPicture.asset(
-                      Svgs.logo,
+                    child: Image.asset(
+                      Images.logo,
                       width: 162,
                     ),
-                  ),
+                  )
                 ],
               ),
               Column(
