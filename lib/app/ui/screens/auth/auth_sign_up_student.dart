@@ -135,7 +135,7 @@ class _AuthSignUpStudentState extends State<AuthSignUpStudent> {
                             title: getConstant('SIGN_UP'),
                             onPressed: () {
                               if(!state.isLoading) {
-                                state.signUpStudent();
+                                state.signUpStudent(sendCode: true);
                               }
                             },
                             horizontalPadding: 16.0,

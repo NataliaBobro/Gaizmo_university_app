@@ -1,7 +1,7 @@
 name: etm_crm
 description: A new Flutter project.
 publish_to: 'none'
-version: 1.0.1+1
+version: 1.0.2+1
 
 environment:
   sdk: ">=2.18.0 <3.0.0"
