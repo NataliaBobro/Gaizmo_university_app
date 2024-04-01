@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:european_university_app/app/domain/models/services.dart';
 import 'package:european_university_app/app/domain/services/meta_service.dart';
 import 'package:european_university_app/app/domain/services/services_service.dart';
+import 'package:european_university_app/app/ui/theme/app_colors.dart';
 import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -309,7 +310,7 @@ class ServicesState with ChangeNotifier {
       if(e.response?.statusCode == 422){
         final data = e.response?.data as Map<String, dynamic>;
         _validateError = ValidateError.fromJson(data);
-        showMessage('${_validateError?.message}', color: const Color(0xFFFFC700));
+        showMessage('${_validateError?.message}', color: AppColors.appButton);
       }else{
         showMessage(e.message.isEmpty ? e.toString() : e.message);
       }
@@ -346,8 +347,8 @@ class ServicesState with ChangeNotifier {
           _selectValidityType?['name'],
           duration,
           _visits.text,
-          _cost.text,
-          _selectCurrency?['id'],
+          // _cost.text,
+          // _selectCurrency?['id'],
           _etm.text,
           _uploadsFile
       );
@@ -360,7 +361,7 @@ class ServicesState with ChangeNotifier {
       if(e.response?.statusCode == 422){
         final data = e.response?.data as Map<String, dynamic>;
         _validateError = ValidateError.fromJson(data);
-        showMessage('${_validateError?.message}', color: const Color(0xFFFFC700));
+        showMessage('${_validateError?.message}', color: AppColors.appButton);
       }else{
         showMessage(e.message.isEmpty ? e.toString() : e.message);
       }

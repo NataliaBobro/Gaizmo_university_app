@@ -2,6 +2,7 @@ import 'package:european_university_app/app/app.dart';
 import 'package:european_university_app/app/ui/screens/students/profile/info/my_lessons_tab.dart';
 import 'package:european_university_app/app/ui/screens/students/profile/info/personal_info_tab.dart';
 import 'package:european_university_app/app/ui/screens/students/profile/info/settings_tab.dart';
+import 'package:european_university_app/app/ui/theme/app_colors.dart';
 import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -80,7 +81,7 @@ class _StudentProfileScreenState extends State<StudentProfileScreen> with Ticker
                   controller: _tabController,
                   labelStyle: TextStyles.s14w700,
                   indicator: const UnderlineTabIndicator(
-                    borderSide: BorderSide(width: 3.0, color: Color(0xFFFFC700)),
+                    borderSide: BorderSide(width: 3.0, color: AppColors.appButton),
                     insets: EdgeInsets.only(right: 35.0),
                   ),
                   labelPadding: const EdgeInsets.symmetric(

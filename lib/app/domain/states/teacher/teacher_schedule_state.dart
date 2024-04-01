@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:european_university_app/app/app.dart';
 import 'package:european_university_app/app/domain/models/meta.dart';
 import 'package:european_university_app/app/domain/services/schedule_service.dart';
+import 'package:european_university_app/app/ui/theme/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -331,7 +332,7 @@ class TeacherScheduleState with ChangeNotifier {
       if(e.response?.statusCode == 422){
         final data = e.response?.data as Map<String, dynamic>;
         _validateError = ValidateError.fromJson(data);
-        showMessage('${_validateError?.message}', color: const Color(0xFFFFC700));
+        showMessage('${_validateError?.message}', color: AppColors.appButton);
       }else{
         showMessage(e.message.isEmpty ? e.toString() : e.message);
       }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../domain/states/services_state.dart';
+import '../../../../theme/app_colors.dart';
 import '../../../../theme/text_styles.dart';
 import '../../../../widgets/app_field.dart';
 import '../../../../widgets/auth_button.dart';
@@ -44,7 +45,7 @@ class _AddServiceServiceState extends State<AddServiceService> {
           Text(
             'Service information',
             style: TextStyles.s14w600.copyWith(
-                color: const Color(0xFFFFC700)
+                color: AppColors.appButton
             ),
           ),
           const SizedBox(
@@ -86,7 +87,7 @@ class _AddServiceServiceState extends State<AddServiceService> {
           Text(
             'Service details',
             style: TextStyles.s14w600.copyWith(
-                color: const Color(0xFFFFC700)
+                color: AppColors.appButton
             ),
           ),
           const SizedBox(
@@ -138,7 +139,7 @@ class _AddServiceServiceState extends State<AddServiceService> {
           Text(
             'Payment details',
             style: TextStyles.s14w600.copyWith(
-                color: const Color(0xFFFFC700)
+                color: AppColors.appButton
             ),
           ),
           const SizedBox(
@@ -173,7 +174,7 @@ class _AddServiceServiceState extends State<AddServiceService> {
             height: 24,
           ),
           AppField(
-              label: 'ETM',
+              label: 'EU',
               controller: state.etm
           ),
           const SizedBox(

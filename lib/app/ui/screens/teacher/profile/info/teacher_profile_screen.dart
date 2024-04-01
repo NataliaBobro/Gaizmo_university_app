@@ -3,6 +3,7 @@ import 'package:european_university_app/app/ui/screens/teacher/profile/info/my_l
 import 'package:european_university_app/app/ui/screens/teacher/profile/info/personal_info_tab.dart';
 import 'package:european_university_app/app/ui/screens/teacher/widgets/profile_header.dart';
 import 'package:european_university_app/app/ui/screens/teacher/widgets/user_info.dart';
+import 'package:european_university_app/app/ui/theme/app_colors.dart';
 import 'package:european_university_app/app/ui/utils/get_constant.dart';
 
 import 'package:flutter/cupertino.dart';
@@ -78,7 +79,7 @@ class _TeacherProfileScreenState extends State<TeacherProfileScreen> with Ticker
                     controller: _tabController,
                     labelStyle: TextStyles.s14w700,
                     indicator: const UnderlineTabIndicator(
-                      borderSide: BorderSide(width: 3.0, color: Color(0xFFFFC700)),
+                      borderSide: BorderSide(width: 3.0, color: AppColors.appButton),
                       insets: EdgeInsets.only(right: 35.0),
                     ),
                     labelPadding: const EdgeInsets.symmetric(

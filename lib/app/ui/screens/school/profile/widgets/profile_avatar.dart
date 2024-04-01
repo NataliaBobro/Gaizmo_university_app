@@ -9,6 +9,8 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../theme/app_colors.dart';
+
 class ProfileAvatar extends StatefulWidget {
   const ProfileAvatar({Key? key}) : super(key: key);
 
@@ -49,7 +51,7 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
               borderRadius: BorderRadius.circular(100),
               border: Border.all(
                   width: 3,
-                  color: const Color(0xFFFFC700)
+                  color: AppColors.appButton
               )
           ),
           child: avatar == null ? Center(

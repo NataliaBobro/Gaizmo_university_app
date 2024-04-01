@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:just_the_tooltip/just_the_tooltip.dart';
 
+import '../theme/app_colors.dart';
 import '../theme/text_styles.dart';
 
 class SelectInputSearch extends StatefulWidget {
@@ -59,7 +60,7 @@ class _SelectInputSearchState extends State<SelectInputSearch> {
                   child: Text(
                     widget.selected != null ? widget.selected!['name'] : '',
                     style: widget.style ?? TextStyles.s14w400.copyWith(
-                        color: Colors.white
+                        color: AppColors.appTitle
                     ),
                   ),
                 ),
@@ -76,7 +77,7 @@ class _SelectInputSearchState extends State<SelectInputSearch> {
         Container(
           height: 1,
           width: double.infinity,
-          color: widget.errors == null ? const Color(0xFF848484) : const Color(0xFFFFC700),
+          color: widget.errors == null ? const Color(0xFF848484) : AppColors.appButton,
         ),
         if(widget.errors != null) ...[
           Container(
@@ -87,7 +88,7 @@ class _SelectInputSearchState extends State<SelectInputSearch> {
             child: Text(
               '${widget.errors}',
               style: TextStyles.s12w400.copyWith(
-                  color: const Color(0xFFFFC700)
+                  color: AppColors.appButton
               ),
             ),
           ),

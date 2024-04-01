@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 
 import '../../../resources/resources.dart';
+import '../theme/app_colors.dart';
 import '../theme/text_styles.dart';
 
 class SelectDateInput extends StatefulWidget {
@@ -93,7 +94,7 @@ class _SelectDateInputState extends State<SelectDateInput> {
                     hint: Text(
                       'Date',
                       style: widget.hintStyle ?? TextStyles.s14w400.copyWith(
-                          color: Colors.white
+                          color: AppColors.appTitle
                       ),
                     ),
                     dropdownColor: widget.dropdownColor,
@@ -114,7 +115,7 @@ class _SelectDateInputState extends State<SelectDateInput> {
                         child: Text(
                           '$e',
                           style: widget.hintStyle ?? TextStyles.s14w400.copyWith(
-                              color: Colors.white
+                              color: AppColors.appTitle
                           ),
                         ),
                       ),
@@ -133,7 +134,7 @@ class _SelectDateInputState extends State<SelectDateInput> {
                     height: 1,
                     width: double.infinity,
                     color: widget.errors == null ?
-                      const Color(0xFF848484) : const Color(0xFFFFC700),
+                      const Color(0xFF848484) : AppColors.appButton,
                   ),
                 ],
               ),
@@ -153,7 +154,7 @@ class _SelectDateInputState extends State<SelectDateInput> {
                     hint: Text(
                       'Mounth',
                       style: widget.hintStyle ?? TextStyles.s14w400.copyWith(
-                          color: Colors.white
+                          color: AppColors.appTitle
                       ),
                     ),
                     dropdownColor: widget.dropdownColor,
@@ -174,7 +175,7 @@ class _SelectDateInputState extends State<SelectDateInput> {
                         child: Text(
                           e,
                           style: widget.hintStyle ?? TextStyles.s14w400.copyWith(
-                              color: Colors.white
+                              color: AppColors.appTitle
                           ),
                         ),
                       ),
@@ -193,7 +194,7 @@ class _SelectDateInputState extends State<SelectDateInput> {
                     height: 1,
                     width: double.infinity,
                     color: widget.errors == null ?
-                    const Color(0xFF848484) : const Color(0xFFFFC700),
+                    const Color(0xFF848484) : AppColors.appButton,
                   ),
                 ],
               ),
@@ -213,7 +214,7 @@ class _SelectDateInputState extends State<SelectDateInput> {
                     hint: Text(
                       'Year',
                       style: widget.hintStyle ?? TextStyles.s14w400.copyWith(
-                          color: Colors.white
+                          color: AppColors.appTitle
                       ),
                     ),
                     dropdownColor: widget.dropdownColor,
@@ -234,7 +235,7 @@ class _SelectDateInputState extends State<SelectDateInput> {
                         child: Text(
                           '$e',
                           style: widget.hintStyle ?? TextStyles.s14w400.copyWith(
-                              color: Colors.white
+                              color: AppColors.appTitle
                           ),
                         ),
                       ),
@@ -253,7 +254,7 @@ class _SelectDateInputState extends State<SelectDateInput> {
                     height: 1,
                     width: double.infinity,
                     color: widget.errors == null ?
-                    const Color(0xFF848484) : const Color(0xFFFFC700),
+                    const Color(0xFF848484) : AppColors.appButton,
                   ),
                 ],
               ),
@@ -269,7 +270,7 @@ class _SelectDateInputState extends State<SelectDateInput> {
             child: Text(
               '${widget.errors}',
               style: TextStyles.s12w400.copyWith(
-                  color: const Color(0xFFFFC700)
+                  color: AppColors.appButton
               ),
             ),
           ),

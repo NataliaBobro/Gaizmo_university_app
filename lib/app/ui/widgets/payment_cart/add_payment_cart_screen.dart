@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:european_university_app/app/domain/models/meta.dart';
 import 'package:european_university_app/app/domain/services/user_service.dart';
+import 'package:european_university_app/app/ui/theme/app_colors.dart';
 import 'package:european_university_app/app/ui/widgets/cart_number.dart';
 import 'package:european_university_app/app/ui/widgets/center_header.dart';
 import 'package:flutter/cupertino.dart';
@@ -132,7 +133,7 @@ class _AddPaymentCartState extends State<AddPaymentCart> {
       if(e.response?.statusCode == 422){
         final data = e.response?.data as Map<String, dynamic>;
         _validateError = ValidateError.fromJson(data);
-        showMessage('${_validateError?.message}', color: const Color(0xFFFFC700));
+        showMessage('${_validateError?.message}', color: AppColors.appButton);
       }else{
         showMessage(e.message.isEmpty ? e.toString() : e.message);
       }

@@ -225,7 +225,7 @@ class PayUserItem extends StatelessWidget {
                       width: 5,
                     ),
                     Text(
-                      '${user?.balanceEtm} ETM',
+                      '${user?.balanceEtm} EU',
                       style: TextStyles.s10w600.copyWith(
                           color: const Color(0xFF242424)
                       ),

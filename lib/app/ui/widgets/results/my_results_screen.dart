@@ -13,6 +13,7 @@ import 'package:sizer/sizer.dart';
 
 import '../../../../../resources/resources.dart';
 import '../../../domain/states/my_results_state.dart';
+import '../../theme/app_colors.dart';
 import 'add/add_result.dart';
 
 class MyResultsScreen extends StatefulWidget {
@@ -118,7 +119,7 @@ class _MyResultsScreenState extends State<MyResultsScreen> with TickerProviderSt
                               Container(
                                 height: 4,
                                 width: 40,
-                                color: const Color(0xFFFFC700),
+                                color: AppColors.appButton,
                               )
                             ]
                           ],
@@ -134,7 +135,7 @@ class _MyResultsScreenState extends State<MyResultsScreen> with TickerProviderSt
                               Container(
                                 height: 4,
                                 width: 40,
-                                color: const Color(0xFFFFC700),
+                                color: AppColors.appButton,
                               )
                             ]
                           ],

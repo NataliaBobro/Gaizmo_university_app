@@ -3,6 +3,7 @@ import 'package:european_university_app/app/ui/theme/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../theme/app_colors.dart';
 import '../change_avatar_widget.dart';
 
 class ProfileAvatarWithETM extends StatefulWidget {
@@ -36,7 +37,7 @@ class _ProfileAvatarWithETMState extends State<ProfileAvatarWithETM> {
             child: Container(
               padding: const EdgeInsets.all(2),
               decoration: BoxDecoration(
-                color: const Color(0xFFFFC700),
+                color: AppColors.appButton,
                 borderRadius: BorderRadius.circular(12)
               ),
               child: Row(
@@ -51,9 +52,9 @@ class _ProfileAvatarWithETMState extends State<ProfileAvatarWithETM> {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Text(
-                      'ETM',
+                      'EU',
                       style: TextStyles.s10w600.copyWith(
-                          color: const Color(0xFFFFC700)
+                          color: AppColors.appButton
                       ),
                     ),
                   ),

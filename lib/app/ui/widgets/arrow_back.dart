@@ -1,3 +1,4 @@
+import 'package:european_university_app/app/ui/theme/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -23,7 +24,7 @@ class ArrowBack extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: SvgPicture.asset(
               Svgs.back,
-              color: const Color(0xFFFFC700),
+              color: AppColors.appButton,
             ),
             onPressed: () {
               if(onArrowBack != null){

@@ -64,8 +64,8 @@ class ServicesService {
       String? validityType,
       int? duration,
       String? numberVisits,
-      String? cost,
-      int? currency,
+      // String? cost,
+      // int? currency,
       String? etm,
       File? image,
       ) async {
@@ -95,8 +95,8 @@ class ServicesService {
       MapEntry('validity_type', '$validityType'),
       MapEntry('duration', '$duration'),
       MapEntry('number_visits', '$numberVisits'),
-      MapEntry('cost', '$cost'),
-      MapEntry('currency', '$currency'),
+      // MapEntry('cost', '$cost'),
+      // MapEntry('currency', '$currency'),
       MapEntry('etm', '$etm'),
     });
 

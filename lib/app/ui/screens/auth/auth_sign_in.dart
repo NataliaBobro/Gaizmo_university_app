@@ -51,7 +51,7 @@ class _AuthSignInState extends State<AuthSignIn> {
                         child: Text(
                           getConstant('SIGN_IN'),
                           style: TextStyles.s24w600.copyWith(
-                              color: Colors.white
+                              color: AppColors.appTitle
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -114,13 +114,13 @@ class _AuthSignInState extends State<AuthSignIn> {
                                 text: TextSpan(
                                     text: '${getConstant('Dont_have_an_account_yet')} ',
                                     style: TextStyles.s14w600.copyWith(
-                                        color: Colors.white
+                                        color: AppColors.appTitle
                                     ),
                                     children: [
                                       TextSpan(
                                         text: getConstant('Get_started'),
                                         style: TextStyles.s14w600.copyWith(
-                                            color: const Color(0xFFFFC700)
+                                            color: AppColors.appButton
                                         ),
                                         recognizer: TapGestureRecognizer()
                                           ..onTap = () {

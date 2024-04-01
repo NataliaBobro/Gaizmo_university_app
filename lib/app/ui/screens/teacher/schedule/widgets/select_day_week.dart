@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../domain/states/teacher/teacher_schedule_state.dart';
+import '../../../../theme/app_colors.dart';
 import '../../../../theme/text_styles.dart';
 
 class SelectDayWeek extends StatefulWidget {
@@ -52,7 +53,7 @@ class _SelectDayWeekState extends State<SelectDayWeek> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(100),
                           color: isSelected ?
-                          const Color(0xFFFFC700) : Colors.white
+                          AppColors.appButton : Colors.white
                       ),
                       child: Center(
                         child: Text(

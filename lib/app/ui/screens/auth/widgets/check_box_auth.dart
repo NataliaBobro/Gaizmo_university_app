@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../domain/states/auth_state.dart';
+import '../../../theme/app_colors.dart';
 import '../../../theme/text_styles.dart';
 import '../../../utils/url_launch.dart';
 
@@ -49,7 +50,7 @@ class _CheckboxAuthState extends State<CheckboxAuth> {
                 text: TextSpan(
                   text: '${getConstant('I_have_read_and_agree_to_the')} ',
                     style: TextStyles.s10w600.copyWith(
-                        color: error != null ? const Color(0xFFFFC700) : Colors.white,
+                        color: error != null ? AppColors.appButton : AppColors.appTitle,
                         letterSpacing: 0.0
                     ),
                   children: [
@@ -63,7 +64,7 @@ class _CheckboxAuthState extends State<CheckboxAuth> {
                         child: Text(
                           getConstant('privacy_policy'),
                           style: TextStyles.s10w600.copyWith(
-                              color: const Color(0xFFFFC700),
+                              color: AppColors.appButton,
                               letterSpacing: 0.0
                           ),
                         ),
@@ -72,7 +73,7 @@ class _CheckboxAuthState extends State<CheckboxAuth> {
                     TextSpan(
                       text: ', ${getConstant('terms_of_service')}, ${getConstant('and_community_guidlines')}',
                       style: TextStyles.s10w600.copyWith(
-                          color: error != null ? const Color(0xFFFFC700) : Colors.white,
+                          color: error != null ? AppColors.appButton : AppColors.appTitle,
                           letterSpacing: 0.0
                       ),
                     )

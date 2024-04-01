@@ -1,3 +1,4 @@
+import 'package:european_university_app/app/ui/theme/app_colors.dart';
 import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:european_university_app/app/ui/widgets/select_color.dart';
 import 'package:flutter/cupertino.dart';
@@ -52,7 +53,7 @@ class _AddServiceServiceState extends State<AddServiceService> {
             Text(
               getConstant('Service_information'),
               style: TextStyles.s14w600.copyWith(
-                  color: const Color(0xFFFFC700)
+                  color: AppColors.appButton
               ),
             ),
             const SizedBox(
@@ -137,7 +138,7 @@ class _AddServiceServiceState extends State<AddServiceService> {
             Text(
               getConstant('Service_details'), 
               style: TextStyles.s14w600.copyWith(
-                  color: const Color(0xFFFFC700)
+                  color: AppColors.appButton
               ),
             ),
             const SizedBox(
@@ -208,47 +209,47 @@ class _AddServiceServiceState extends State<AddServiceService> {
             const SizedBox(
               height: 40,
             ),
-            Text(
-              getConstant('Payment_details'),
-              style: TextStyles.s14w600.copyWith(
-                  color: const Color(0xFFFFC700)
-              ),
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: AppField(
-                      keyboardType: TextInputType.number,
-                      label: getConstant('Cost'),
-                      controller: state.cost
-                  ),
-                ),
-                const SizedBox(
-                  width: 23,
-                ),
-                Expanded(
-                  child: SelectBottomSheetInput(
-                    label: getConstant('Currency'),
-                    labelModal: getConstant('Currency'),
-                    selected: state.selectCurrency,
-                    items: state.listCurrency,
-                    onSelect: (value) {
-                      state.changeCurrency(value);
-                    },
-                    horizontalPadding: 0,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 24,
-            ),
+            // Text(
+            //   getConstant('Payment_details'),
+            //   style: TextStyles.s14w600.copyWith(
+            //       color: AppColors.appButton
+            //   ),
+            // ),
+            // const SizedBox(
+            //   height: 16,
+            // ),
+            // Row(
+            //   children: [
+            //     Expanded(
+            //       child: AppField(
+            //           keyboardType: TextInputType.number,
+            //           label: getConstant('Cost'),
+            //           controller: state.cost
+            //       ),
+            //     ),
+            //     const SizedBox(
+            //       width: 23,
+            //     ),
+            //     Expanded(
+            //       child: SelectBottomSheetInput(
+            //         label: getConstant('Currency'),
+            //         labelModal: getConstant('Currency'),
+            //         selected: state.selectCurrency,
+            //         items: state.listCurrency,
+            //         onSelect: (value) {
+            //           state.changeCurrency(value);
+            //         },
+            //         horizontalPadding: 0,
+            //       ),
+            //     ),
+            //   ],
+            // ),
+            // const SizedBox(
+            //   height: 24,
+            // ),
             AppField(
                 keyboardType: TextInputType.number,
-                label: 'ETM',
+                label: 'EU',
                 controller: state.etm
             ),
             const SizedBox(

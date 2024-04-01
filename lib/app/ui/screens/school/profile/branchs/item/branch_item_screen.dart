@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../../domain/states/school/school_branch_state.dart';
+import '../../../../../theme/app_colors.dart';
 import '../../../../../theme/text_styles.dart';
 
 class BranchItemScreen extends StatefulWidget {
@@ -103,7 +104,7 @@ class _BranchItemScreenState extends State<BranchItemScreen> with TickerProvider
                             Container(
                               height: 4,
                               width: 40,
-                              color: const Color(0xFFFFC700),
+                              color: AppColors.appButton,
                             )
                           ]
                         ],
@@ -119,7 +120,7 @@ class _BranchItemScreenState extends State<BranchItemScreen> with TickerProvider
                             Container(
                               height: 4,
                               width: 40,
-                              color: const Color(0xFFFFC700),
+                              color: AppColors.appButton,
                             )
                           ]
                         ],
@@ -135,7 +136,7 @@ class _BranchItemScreenState extends State<BranchItemScreen> with TickerProvider
                             Container(
                               height: 4,
                               width: 40,
-                              color: const Color(0xFFFFC700),
+                              color: AppColors.appButton,
                             )
                           ]
                         ],

@@ -1,3 +1,4 @@
+import 'package:european_university_app/app/ui/theme/app_colors.dart';
 import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -104,7 +105,7 @@ class _AddScheduleState extends State<AddSchedule> {
                                                     decoration: BoxDecoration(
                                                         borderRadius: BorderRadius.circular(100),
                                                         color: isWork ?
-                                                        const Color(0xFFFFC700) : Colors.white
+                                                        AppColors.appButton : Colors.white
                                                     ),
                                                     child: Center(
                                                       child: Text(

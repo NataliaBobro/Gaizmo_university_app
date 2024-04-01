@@ -75,7 +75,7 @@ class _SelectPackageScreenState extends State<SelectPackageScreen> {
                           ignoring: selected == null,
                           child: AppButton(
                             disabled: selected == null,
-                            title: getConstant('PAY_PACKAGE'),
+                            title: getConstant('Select_package'),
                             onPressed: () async {
                               if(selected != null){
                                 state.openPage(
@@ -134,7 +134,7 @@ class _ButtonPayItemLessonState extends State<ButtonPayItemLesson> {
         child: Container(
           padding: const EdgeInsets.symmetric(
             horizontal: 16,
-            vertical: 8
+            vertical: 16
           ),
           decoration: BoxDecoration(
             color: const Color(0xFFD0E3F2).withOpacity(widget.onSelect ? .4 : 1),
@@ -177,15 +177,6 @@ class _ButtonPayItemLessonState extends State<ButtonPayItemLesson> {
                   )
                 ],
               ),
-              const SizedBox(
-                height: 8,
-              ),
-              Text(
-                "1 ${getConstant('lesson')} ${widget.package?.cost} ${widget.package?.currency?.name}",
-                style: TextStyles.s12w400.copyWith(
-                  color: const Color(0xFF848484)
-                ),
-              )
             ],
           ),
         ),

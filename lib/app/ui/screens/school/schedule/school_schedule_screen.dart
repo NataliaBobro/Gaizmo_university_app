@@ -3,6 +3,7 @@ import 'package:accordion/controllers.dart';
 import 'package:european_university_app/app/domain/models/lesson.dart';
 import 'package:european_university_app/app/domain/states/school/school_schedule_state.dart';
 import 'package:european_university_app/app/ui/screens/school/schedule/widgets/schedule_header.dart';
+import 'package:european_university_app/app/ui/theme/app_colors.dart';
 import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:european_university_app/app/ui/widgets/empty_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -202,10 +203,10 @@ class _SchoolScheduleScreenState extends State<SchoolScheduleScreen> {
                                                     ),
                                                     decoration: BoxDecoration(
                                                         borderRadius: BorderRadius.circular(50),
-                                                        color: const Color(0xFFFFC700),
+                                                        color: AppColors.appButton,
                                                         border: Border.all(
                                                           width: 1,
-                                                          color: const Color(0xFFFFC700),
+                                                          color: AppColors.appButton,
                                                         )
                                                     ),
                                                     child: Text(
@@ -312,7 +313,7 @@ class HeaderEtm extends StatelessWidget {
             width: 3,
           ),
           Text(
-            '+$etm ETM',
+            '+$etm EU',
             style: TextStyles.s10w600.copyWith(
                 color: const Color(0xFF242424)
             ),

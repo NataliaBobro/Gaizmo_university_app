@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:european_university_app/app/domain/models/user.dart';
+import 'package:european_university_app/app/ui/theme/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -60,7 +61,7 @@ class _StaffAvatarState extends State<StaffAvatar> {
               borderRadius: BorderRadius.circular(100),
               border: Border.all(
                   width: 3,
-                  color: const Color(0xFFFFC700)
+                  color: AppColors.appButton
               )
           ),
           child: widget.staff?.avatar == null ? Center(

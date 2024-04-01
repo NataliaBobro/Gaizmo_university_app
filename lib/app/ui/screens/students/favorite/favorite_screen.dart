@@ -1,6 +1,7 @@
 
 import 'package:european_university_app/app/ui/screens/students/favorite/widgets/favorite_tab.dart';
 import 'package:european_university_app/app/ui/screens/students/favorite/widgets/pay_tab.dart';
+import 'package:european_university_app/app/ui/theme/app_colors.dart';
 import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:european_university_app/app/ui/widgets/center_header.dart';
 import 'package:flutter/material.dart';
@@ -97,7 +98,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> with TickerProviderStat
                             Container(
                               height: 4,
                               width: 40,
-                              color: const Color(0xFFFFC700),
+                              color: AppColors.appButton,
                             )
                           ]
                         ],
@@ -113,7 +114,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> with TickerProviderStat
                             Container(
                               height: 4,
                               width: 40,
-                              color: const Color(0xFFFFC700),
+                              color: AppColors.appButton,
                             )
                           ]
                         ],

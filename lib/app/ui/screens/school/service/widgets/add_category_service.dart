@@ -1,3 +1,4 @@
+import 'package:european_university_app/app/ui/theme/app_colors.dart';
 import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:european_university_app/app/ui/widgets/app_field.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,7 @@ class _AddCategoryServiceState extends State<AddCategoryService> {
           Text(
             getConstant('Service_information'),
             style: TextStyles.s14w600.copyWith(
-                color: const Color(0xFFFFC700)
+                color: AppColors.appButton
             ),
           ),
           const SizedBox(

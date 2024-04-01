@@ -36,7 +36,7 @@ class _AuthSelectLoginTypeState extends State<AuthSelectLoginType>
     );
 
     _animation = Tween<double>(
-      begin: -241.0,
+      begin: -150.0,
       end: 0.0,
     ).animate(
       CurvedAnimation(
@@ -46,8 +46,8 @@ class _AuthSelectLoginTypeState extends State<AuthSelectLoginType>
     );
 
     _animationLogo = Tween<double>(
-      begin: 261.0,
-      end: 164.0,
+      begin: 150.0,
+      end: 105.0,
     ).animate(
       CurvedAnimation(
         parent: _controller,
@@ -83,7 +83,7 @@ class _AuthSelectLoginTypeState extends State<AuthSelectLoginType>
                     Center(
                       child: Image.asset(
                         Images.logo,
-                        width: 162,
+                        width: 290,
                       ),
                     )
                   ],

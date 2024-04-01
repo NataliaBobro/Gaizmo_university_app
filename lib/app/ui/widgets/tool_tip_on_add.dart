@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:european_university_app/app/domain/models/user.dart';
+import 'package:european_university_app/app/ui/theme/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -81,7 +82,7 @@ class _ToolTipOnAddState extends State<ToolTipOnAdd> {
         Container(
           height: 1,
           width: double.infinity,
-          color: widget.errors == null ? const Color(0xFF848484) : const Color(0xFFFFC700),
+          color: widget.errors == null ? const Color(0xFF848484) : AppColors.appButton,
         ),
         if(widget.errors != null) ...[
           Container(
@@ -92,7 +93,7 @@ class _ToolTipOnAddState extends State<ToolTipOnAdd> {
             child: Text(
               '${widget.errors}',
               style: TextStyles.s12w400.copyWith(
-                  color: const Color(0xFFFFC700)
+                  color: AppColors.appButton
               ),
             ),
           ),
@@ -187,7 +188,7 @@ class _SelectSearchState extends State<SelectSearch> {
                 width: 32,
                 height: 32,
                 decoration: BoxDecoration(
-                    color: const Color(0xFFFFC700),
+                    color: AppColors.appButton,
                     borderRadius: BorderRadius.circular(100)
                 ),
                 child: SvgPicture.asset(

@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:european_university_app/app/domain/models/user.dart';
+import 'package:european_university_app/app/ui/theme/app_colors.dart';
 import 'package:european_university_app/app/ui/theme/text_styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +60,7 @@ class _BranchAvatarState extends State<BranchAvatar> {
               borderRadius: BorderRadius.circular(100),
               border: Border.all(
                   width: 3,
-                  color: const Color(0xFFFFC700)
+                  color: AppColors.appButton
               )
           ),
           child: widget.userData?.avatar == null ? Center(

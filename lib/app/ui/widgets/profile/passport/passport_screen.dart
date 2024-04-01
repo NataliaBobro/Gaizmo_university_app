@@ -1,3 +1,4 @@
+import 'package:european_university_app/app/ui/theme/app_colors.dart';
 import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:european_university_app/app/ui/widgets/profile/passport/presents_tab.dart';
 import 'package:flutter/cupertino.dart';
@@ -110,7 +111,7 @@ class _PassportScreenState extends State<PassportScreen>  with TickerProviderSta
                             Container(
                               height: 4,
                               width: 40,
-                              color: const Color(0xFFFFC700),
+                              color: AppColors.appButton,
                             )
                           ]
                         ],
@@ -126,7 +127,7 @@ class _PassportScreenState extends State<PassportScreen>  with TickerProviderSta
                             Container(
                               height: 4,
                               width: 40,
-                              color: const Color(0xFFFFC700),
+                              color: AppColors.appButton,
                             )
                           ]
                         ],

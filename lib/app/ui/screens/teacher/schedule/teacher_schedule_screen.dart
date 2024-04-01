@@ -2,6 +2,7 @@ import 'package:accordion/accordion.dart';
 import 'package:accordion/controllers.dart';
 import 'package:european_university_app/app/domain/models/lesson.dart';
 import 'package:european_university_app/app/ui/screens/teacher/schedule/widgets/schedule_header.dart';
+import 'package:european_university_app/app/ui/theme/app_colors.dart';
 import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:european_university_app/app/ui/widgets/empty_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -201,10 +202,10 @@ class _TeacherScheduleScreenState extends State<TeacherScheduleScreen> {
                                                     ),
                                                     decoration: BoxDecoration(
                                                         borderRadius: BorderRadius.circular(50),
-                                                        color: const Color(0xFFFFC700),
+                                                        color: AppColors.appButton,
                                                         border: Border.all(
                                                           width: 1,
-                                                          color: const Color(0xFFFFC700),
+                                                          color: AppColors.appButton,
                                                         )
                                                     ),
                                                     child: Text(

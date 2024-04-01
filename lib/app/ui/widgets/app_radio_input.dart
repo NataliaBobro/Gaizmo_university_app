@@ -1,3 +1,4 @@
+import 'package:european_university_app/app/ui/theme/app_colors.dart';
 import 'package:european_university_app/app/ui/theme/text_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -40,7 +41,7 @@ class _AppRadioInputState extends State<AppRadioInput> {
             ),
             Switch(
               value: hasOn,
-              activeColor: const Color(0xFFFFC700),
+              activeColor: AppColors.appButton,
               onChanged: (bool value) {
                 setState(() {
                   hasOn = value;

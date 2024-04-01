@@ -44,7 +44,7 @@ class _PasswordRecoveryState extends State<PasswordRecovery> {
                         child: Text(
                           getConstant('Password_recovery'),
                           style: TextStyles.s24w600.copyWith(
-                              color: Colors.white
+                              color: AppColors.appTitle
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -64,7 +64,7 @@ class _PasswordRecoveryState extends State<PasswordRecovery> {
                                 textAlign: TextAlign.center,
                                 text: TextSpan(
                                     style: TextStyles.s14w600.copyWith(
-                                        color: Colors.white,
+                                        color: AppColors.appTitle,
                                         height: 1.57
                                     ),
                                     text: "${getConstant('Forgot_the_password')}\n"
@@ -73,7 +73,7 @@ class _PasswordRecoveryState extends State<PasswordRecovery> {
                                       TextSpan(
                                           text: "${getConstant('Email_adress')} ",
                                           style: TextStyles.s14w400.copyWith(
-                                              color: const Color(0xFFFFC700)
+                                              color: AppColors.appButton
                                           )
                                       ),
                                       TextSpan(

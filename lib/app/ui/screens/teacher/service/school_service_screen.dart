@@ -4,6 +4,7 @@ import 'package:accordion/accordion.dart';
 import 'package:accordion/controllers.dart';
 import 'package:european_university_app/app/domain/models/services.dart';
 import 'package:european_university_app/app/ui/screens/school/service/widgets/services_header.dart';
+import 'package:european_university_app/app/ui/theme/app_colors.dart';
 import 'package:european_university_app/app/ui/theme/text_styles.dart';
 import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:european_university_app/app/ui/widgets/empty_widget.dart';
@@ -43,7 +44,7 @@ class _TeacherServicesScreenState extends State<TeacherServicesScreen> {
       if((category.services?.length ?? 0) == 0){
         context.read<ServicesState>().deleteCategory(onConfirmDelete);
       }else{
-        showMessage('Remove the services first', color: const Color(0xFFFFC700));
+        showMessage('Remove the services first', color: AppColors.appButton);
       }
     }else{
       context.read<ServicesState>().deleteService(onConfirmDelete);
@@ -247,10 +248,10 @@ class _TeacherServicesScreenState extends State<TeacherServicesScreen> {
                                                 ),
                                                 decoration: BoxDecoration(
                                                     borderRadius: BorderRadius.circular(50),
-                                                    color: const Color(0xFFFFC700),
+                                                    color: AppColors.appButton,
                                                     border: Border.all(
                                                       width: 1,
-                                                      color: const Color(0xFFFFC700),
+                                                      color: AppColors.appButton,
                                                     )
                                                 ),
                                                 child: Text(

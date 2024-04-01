@@ -1,3 +1,4 @@
+import 'package:european_university_app/app/ui/theme/app_colors.dart';
 import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +38,7 @@ class HeaderEtm extends StatelessWidget {
                 width: 3,
               ),
               Text(
-                '+${lessons.services?.first?.etm} ETM',
+                '+${lessons.services?.first?.etm} EU',
                 style: TextStyles.s10w600.copyWith(
                     color: const Color(0xFF242424)
                 ),
@@ -58,7 +59,7 @@ class HeaderEtm extends StatelessWidget {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(6),
                   color: lessons.isVisitsExists == true ?
-                  const Color(0xFF27AE60) : const Color(0xFFFFC700)
+                  const Color(0xFF27AE60) : AppColors.appButton
               ),
               child: SvgPicture.asset(
                   Svgs.boxCheck

@@ -1,3 +1,4 @@
+import 'package:european_university_app/app/ui/theme/app_colors.dart';
 import 'package:european_university_app/app/ui/theme/text_styles.dart';
 import 'package:european_university_app/app/ui/widgets/auth_button.dart';
 import 'package:flutter/cupertino.dart';
@@ -104,7 +105,7 @@ class _ViewSelectedFileState extends State<ViewSelectedFile> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const CupertinoActivityIndicator(color: Color(0xFFFFC700), radius: 30,),
+                      const CupertinoActivityIndicator(color: AppColors.appButton, radius: 30,),
                       const SizedBox(
                         height: 16,
                       ),

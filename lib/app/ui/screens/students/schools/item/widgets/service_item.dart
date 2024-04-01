@@ -11,8 +11,6 @@ import 'package:provider/provider.dart';
 import '../../../../../../domain/models/services.dart';
 import '../../../../../../domain/services/pay_service.dart';
 import '../../../../../../domain/states/student/favorite_state.dart';
-import '../../../../../utils/show_message.dart';
-import '../../../../../utils/url_launch.dart';
 import '../../../../../widgets/button_teacher_students.dart';
 import '../../../../../widgets/center_header.dart';
 import '../../../favorite/favorite_screen.dart';
@@ -68,39 +66,13 @@ class _ServiceItemState extends State<ServiceItem> {
   Future<void> payService(int? serviceId) async {
     loading = true;
     setState(() {});
-    final result = await PayService.fetchPaymentLink(
+    final result = await PayService.selectService(
       context,
       serviceId,
     );
-    if(result != null && result['link'] != null){
-      if(result['link'] == false){
-        showMessage('Payment not possible. Please contact your school '
-            'administrator to set up payment details.', color: const Color(0xFFFFC700));
-        loading = false;
-        setState(() {});
-      }else{
-        openPayWeb(result['link'], result['order_reference'], serviceId);
-      }
+    if(result != null && result['success'] == true){
+      openPayed();
     }
-  }
-
-  Future<void> openPayWeb(String? link, orderReference,  serviceId) async {
-    openWebView(context, link).whenComplete(() async {
-        final resStatus = await PayService.fetchPayStatus(
-          context,
-          serviceId,
-          orderReference,
-        );
-
-        if(resStatus != null){
-          loading = false;
-          setState(() {});
-
-          if(resStatus['pay_status'] == true){
-            openPayed();
-          }
-        }
-    });
   }
 
   void close() {
@@ -295,7 +267,7 @@ class _ServiceItemState extends State<ServiceItem> {
                             left: 0,
                             right: 0,
                             child: AppButton(
-                                title: 'Pay lesson',
+                                title: getConstant('Select_package'),
                                 onPressed: () async {
                                   payService(widget.serviceId);
                                 }

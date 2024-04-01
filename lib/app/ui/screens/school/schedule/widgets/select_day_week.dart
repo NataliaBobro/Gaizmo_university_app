@@ -1,4 +1,5 @@
 import 'package:european_university_app/app/domain/states/school/school_schedule_state.dart';
+import 'package:european_university_app/app/ui/theme/app_colors.dart';
 import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +52,7 @@ class _SelectDayWeekState extends State<SelectDayWeek> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(100),
                           color: isSelected ?
-                          const Color(0xFFFFC700) : Colors.white
+                          AppColors.appButton : Colors.white
                       ),
                       child: Center(
                         child: Text(

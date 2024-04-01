@@ -43,12 +43,12 @@ class _AuthSelectUserTypeState extends State<AuthSelectUserType> {
                   ),
                   const ArrowBack(),
                   const SizedBox(
-                    height: 138,
+                    height: 57,
                   ),
                   Center(
                     child: Image.asset(
                       Images.logo,
-                      width: 162,
+                      width: 290,
                     ),
                   )
                 ],

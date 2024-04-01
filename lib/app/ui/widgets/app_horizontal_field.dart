@@ -1,3 +1,4 @@
+import 'package:european_university_app/app/ui/theme/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -93,7 +94,7 @@ class AppHorizontalField extends StatelessWidget {
               child: Text(
                 '$error',
                 style: TextStyles.s12w400.copyWith(
-                    color: const Color(0xFFFFC700)
+                    color: AppColors.appButton
                 ),
               ),
             )

@@ -1,4 +1,5 @@
 import 'package:dotted_border/dotted_border.dart';
+import 'package:european_university_app/app/ui/theme/app_colors.dart';
 import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -86,7 +87,7 @@ class _DropzoneState extends State<Dropzone> {
                   padding:
                   const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                   decoration: BoxDecoration(
-                      color: const Color(0xFFFFC700),
+                      color: AppColors.appButton,
                       borderRadius: BorderRadius.circular(12)),
                   child: Text(
                     getConstant('Select_image'),

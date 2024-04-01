@@ -1,0 +1,10 @@
+/* 
+  InfoPlist.strings
+  Runner
+
+  Created by Богдан Стрижевський on 02.04.2024.
+  
+*/
+"NSCameraUsageDescription"="Allow access to the camera for capturing photos and uploading images of work and avatars.";
+"NSMicrophoneUsageDescription"="Allow access to the microphone for recording audio for video review of homework assignments.";
+"NSPhotoLibraryUsageDescription"="Grant permission to access the photo library to select and upload images of work and avatars.";

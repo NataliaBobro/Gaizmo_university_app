@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../domain/states/services_state.dart';
+import '../../../../theme/app_colors.dart';
 import '../../../../theme/text_styles.dart';
 import '../../../../widgets/auth_button.dart';
 import '../../../../widgets/select_color.dart';
@@ -32,7 +33,7 @@ class _AddCategoryServiceState extends State<AddCategoryService> {
           Text(
             'Service information',
             style: TextStyles.s14w600.copyWith(
-                color: const Color(0xFFFFC700)
+                color: AppColors.appButton
             ),
           ),
           const SizedBox(

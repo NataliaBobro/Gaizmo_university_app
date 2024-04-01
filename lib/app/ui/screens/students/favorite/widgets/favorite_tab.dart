@@ -1,6 +1,7 @@
 import 'package:accordion/accordion.dart';
 import 'package:accordion/controllers.dart';
 import 'package:european_university_app/app/domain/models/services.dart';
+import 'package:european_university_app/app/ui/theme/app_colors.dart';
 import 'package:european_university_app/app/ui/theme/text_styles.dart';
 import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
@@ -91,7 +92,7 @@ class PayButton extends StatelessWidget {
       minSize: 0.0,
       child: Container(
         decoration: BoxDecoration(
-          color: const Color(0xFFFFC700),
+          color: AppColors.appButton,
           borderRadius: BorderRadius.circular(50)
         ),
         padding: const EdgeInsets.symmetric(
@@ -121,28 +122,19 @@ class HeaderFavorite extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currency = service?.currency?.name;
-    final cost = service?.cost;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "${service?.name}",
-          style: TextStyles.s14w600.copyWith(
-            color: const Color(0xFF242424)
-          ),
-        ),
-        const SizedBox(
-          height: 8,
-        ),
-        Text(
-          '$cost $currency / 1 ${getConstant('lesson')} 100 $currency',
-          style: TextStyles.s12w400.copyWith(
-              color: const Color(0xFF848484)
-          ),
-        )
-      ],
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "${service?.name}",
+            style: TextStyles.s14w600.copyWith(
+                color: const Color(0xFF242424)
+            ),
+          )
+        ],
+      ),
     );
   }
 }

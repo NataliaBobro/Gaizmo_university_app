@@ -1,6 +1,7 @@
 import 'package:european_university_app/app/domain/models/lesson.dart';
 import 'package:european_university_app/app/domain/states/school/school_schedule_state.dart';
 import 'package:european_university_app/app/ui/screens/school/schedule/widgets/select_day_week.dart';
+import 'package:european_university_app/app/ui/theme/app_colors.dart';
 import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -121,7 +122,7 @@ class _AddLessonScreenState extends State<AddLessonScreen> {
                         child: Text(
                           '${state.validateError?.errors.service?.first}',
                           style: TextStyles.s12w400.copyWith(
-                              color: const Color(0xFFFFC700)
+                              color: AppColors.appButton
                           ),
                         ),
                       ),
@@ -197,7 +198,7 @@ class _AddLessonScreenState extends State<AddLessonScreen> {
                     Text(
                       getConstant('Lesson_duration'),
                       style: TextStyles.s14w600.copyWith(
-                          color: const Color(0xFFFFC700)
+                          color: AppColors.appButton
                       ),
                     ),
                     const SizedBox(
@@ -277,7 +278,7 @@ class _AddLessonScreenState extends State<AddLessonScreen> {
                     Text(
                       getConstant('Repeats'),
                       style: TextStyles.s14w600.copyWith(
-                          color: const Color(0xFFFFC700)
+                          color: AppColors.appButton
                       ),
                     ),
                     const SizedBox(

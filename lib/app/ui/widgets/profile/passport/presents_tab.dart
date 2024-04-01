@@ -97,7 +97,7 @@ class PresentsItem extends StatelessWidget {
               ),
             ),
             Text(
-              '100 ETM',
+              '100 EU',
               style: TextStyles.s10w600.copyWith(
                   color: const Color(0xFF242424)
               ),

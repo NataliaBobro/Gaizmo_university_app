@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:european_university_app/app/ui/theme/app_colors.dart';
 import 'package:european_university_app/app/ui/theme/text_styles.dart';
 import 'package:european_university_app/app/ui/widgets/auth_button.dart';
 import 'package:european_university_app/app/ui/widgets/center_header.dart';
@@ -136,7 +137,7 @@ class _SettingScheduleState extends State<SettingSchedule> {
                                                   decoration: BoxDecoration(
                                                       borderRadius: BorderRadius.circular(100),
                                                       color: isWork ?
-                                                        const Color(0xFFFFC700) : Colors.white
+                                                      AppColors.appButton : Colors.white
                                                   ),
                                                   child: Center(
                                                     child: Text(
@@ -295,7 +296,7 @@ class _SettingScheduleState extends State<SettingSchedule> {
       if(e.response?.statusCode == 422){
         final data = e.response?.data as Map<String, dynamic>;
         _validateError = ValidateError.fromJson(data);
-        showMessage('${_validateError?.message}', color: const Color(0xFFFFC700));
+        showMessage('${_validateError?.message}', color: AppColors.appButton);
       }else{
         showMessage(e.message.isEmpty ? e.toString() : e.message);
       }

@@ -26,7 +26,7 @@ class StudentSchoolItemState with ChangeNotifier {
 
   Future<void> fetchService() async {
     try{
-      final result = await StudentService.fetchService(context, _userSchool.id);
+      final result = await StudentService.fetchService(context, _userSchool.school?.id);
       if(result != null){
         _servicesData = result;
       }

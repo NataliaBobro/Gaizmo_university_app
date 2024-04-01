@@ -1,4 +1,5 @@
 import 'package:european_university_app/app/domain/states/auth_state.dart';
+import 'package:european_university_app/app/ui/theme/app_colors.dart';
 import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -16,13 +17,13 @@ class AlreadyAccount extends StatelessWidget {
       text: TextSpan(
           text: getConstant('Already_have_an_account'),
           style: TextStyles.s14w600.copyWith(
-              color: Colors.white
+              color: AppColors.appTitle
           ),
           children: [
             TextSpan(
               text: ' ${getConstant('Get_started')}',
               style: TextStyles.s14w600.copyWith(
-                  color: const Color(0xFFFFC700)
+                  color: AppColors.appButton
               ),
               recognizer: TapGestureRecognizer()
                 ..onTap = () {

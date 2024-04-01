@@ -24,7 +24,7 @@ class _ConfirmCodeScreenState extends State<ConfirmCodeScreen> {
     final defaultPinTheme = PinTheme(
       width: 56,
       height: 56,
-      textStyle: TextStyle(fontSize: 20, color: const Color(0xFFFFC700), fontWeight: FontWeight.w600),
+      textStyle: const TextStyle(fontSize: 20, color: AppColors.appButton, fontWeight: FontWeight.w600),
       decoration: BoxDecoration(
         border: Border.all(color: Color.fromRGBO(192, 218, 234, 1.0)),
         borderRadius: BorderRadius.circular(20),
@@ -32,7 +32,7 @@ class _ConfirmCodeScreenState extends State<ConfirmCodeScreen> {
     );
 
     final focusedPinTheme = defaultPinTheme.copyDecorationWith(
-      border: Border.all(color: const Color(0xFFFFC700),),
+      border: Border.all(color: AppColors.appButton,),
       borderRadius: BorderRadius.circular(8),
     );
 
@@ -65,7 +65,7 @@ class _ConfirmCodeScreenState extends State<ConfirmCodeScreen> {
                       Text(
                         getConstant('Verification'),
                         style: TextStyles.s24w500.copyWith(
-                          color: const Color(0xFFFFC700)
+                          color: AppColors.appButton
                         ),
                       ),
                       const SizedBox(
@@ -76,13 +76,13 @@ class _ConfirmCodeScreenState extends State<ConfirmCodeScreen> {
                           text: TextSpan(
                             text: '${getConstant('Enter_the_code_sent_to_the_email')} ',
                             style: TextStyles.s12w500.copyWith(
-                                color: Colors.white,
+                                color: AppColors.appTitle,
                             ),
                             children: [
                               TextSpan(
                                 text: state.email.text,
                                 style: TextStyles.s12w500.copyWith(
-                                    color: const Color(0xFFFFC700)
+                                    color: AppColors.appButton
                                 ),
                               )
                             ]
@@ -113,7 +113,7 @@ class _ConfirmCodeScreenState extends State<ConfirmCodeScreen> {
                       Text(
                         getConstant('Didnt_receive_code'),
                         style: TextStyles.s14w500.copyWith(
-                          color: Colors.white,
+                          color: AppColors.appTitle,
                         ),
                       ),
                       CupertinoButton(
@@ -125,7 +125,7 @@ class _ConfirmCodeScreenState extends State<ConfirmCodeScreen> {
                         child: Text(
                           getConstant('Resend'),
                           style: TextStyles.s14w500.copyWith(
-                            color: const Color(0xFFFFC700),
+                            color: AppColors.appButton,
                             decoration: TextDecoration.underline
                           ),
                         ),

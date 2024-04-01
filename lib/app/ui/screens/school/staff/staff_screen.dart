@@ -235,7 +235,7 @@ class HeaderEtm extends StatelessWidget {
             width: 3,
           ),
           Text(
-            '+$etm ETM',
+            '+$etm EU',
             style: TextStyles.s10w600.copyWith(
                 color: const Color(0xFF242424)
             ),

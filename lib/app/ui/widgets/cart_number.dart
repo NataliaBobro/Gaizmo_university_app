@@ -1,4 +1,5 @@
 import 'package:european_university_app/app/domain/models/meta.dart';
+import 'package:european_university_app/app/ui/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 import '../theme/text_styles.dart';
@@ -71,7 +72,7 @@ class _CartNumberState extends State<CartNumber> {
         Container(
           height: 1,
           width: double.infinity,
-          color: widget.validateError?.errors.paymentNumberErrors?.first == null ? const Color(0xFF848484) : const Color(0xFFFFC700),
+          color: widget.validateError?.errors.paymentNumberErrors?.first == null ? const Color(0xFF848484) : AppColors.appButton,
         ),
         if(widget.validateError?.errors.paymentNumberErrors?.first != null) ...[
           Container(
@@ -82,7 +83,7 @@ class _CartNumberState extends State<CartNumber> {
             child: Text(
               '${widget.validateError?.errors.paymentNumberErrors?.first}',
               style: TextStyles.s12w400.copyWith(
-                  color: const Color(0xFFFFC700)
+                  color: AppColors.appButton
               ),
             ),
           ),
@@ -131,7 +132,7 @@ class _CartNumberState extends State<CartNumber> {
                   Container(
                     height: 1,
                     width: double.infinity,
-                    color: widget.validateError?.errors.paymentDateErrors?.first == null ? const Color(0xFF848484) : const Color(0xFFFFC700),
+                    color: widget.validateError?.errors.paymentDateErrors?.first == null ? const Color(0xFF848484) : AppColors.appButton,
                   ),
                 ],
               ),
@@ -177,7 +178,7 @@ class _CartNumberState extends State<CartNumber> {
                   Container(
                     height: 1,
                     width: double.infinity,
-                    color: widget.validateError?.errors.paymentCodeErrors?.first == null ? const Color(0xFF848484) : const Color(0xFFFFC700),
+                    color: widget.validateError?.errors.paymentCodeErrors?.first == null ? const Color(0xFF848484) : AppColors.appButton,
                   ),
                 ],
               ),
@@ -217,7 +218,7 @@ class _CartNumberState extends State<CartNumber> {
         Container(
           height: 1,
           width: double.infinity,
-          color: widget.validateError?.errors.fullNameErrors?.first == null ? const Color(0xFF848484) : const Color(0xFFFFC700),
+          color: widget.validateError?.errors.fullNameErrors?.first == null ? const Color(0xFF848484) : AppColors.appButton,
         ),
         if(widget.validateError?.errors.fullNameErrors?.first != null) ...[
           Container(
@@ -228,7 +229,7 @@ class _CartNumberState extends State<CartNumber> {
             child: Text(
               '${widget.validateError?.errors.fullNameErrors?.first}',
               style: TextStyles.s12w400.copyWith(
-                  color: const Color(0xFFFFC700)
+                  color: AppColors.appButton
               ),
             ),
           ),

@@ -4,6 +4,7 @@ import 'package:european_university_app/app/ui/screens/school/staff/item/widgets
 import 'package:european_university_app/app/ui/screens/school/staff/item/widgets/staff_info.dart';
 import 'package:european_university_app/app/ui/screens/school/staff/item/widgets/staff_personal_info_tab.dart';
 import 'package:european_university_app/app/ui/screens/school/staff/item/widgets/staff_settings_tab.dart';
+import 'package:european_university_app/app/ui/theme/app_colors.dart';
 import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -104,7 +105,7 @@ class _StaffItemScreenState extends State<StaffItemScreen> with TickerProviderSt
                             Container(
                               height: 4,
                               width: 40,
-                              color: const Color(0xFFFFC700),
+                              color: AppColors.appButton,
                             )
                           ]
                         ],
@@ -120,7 +121,7 @@ class _StaffItemScreenState extends State<StaffItemScreen> with TickerProviderSt
                             Container(
                               height: 4,
                               width: 40,
-                              color: const Color(0xFFFFC700),
+                              color: AppColors.appButton,
                             )
                           ]
                         ],
@@ -136,7 +137,7 @@ class _StaffItemScreenState extends State<StaffItemScreen> with TickerProviderSt
                             Container(
                               height: 4,
                               width: 40,
-                              color: const Color(0xFFFFC700),
+                              color: AppColors.appButton,
                             )
                           ]
                         ],

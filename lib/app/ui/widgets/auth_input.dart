@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
+import '../theme/app_colors.dart';
 import '../theme/text_styles.dart';
 
 class AuthInput extends StatefulWidget {
@@ -52,7 +53,7 @@ class _AuthInputState extends State<AuthInput> {
       child: Text(
         '${widget.errors}',
         style: TextStyles.s12w400.copyWith(
-            color: const Color(0xFFFFC700)
+            color: AppColors.appButton
         ),
       ),
     );
@@ -72,7 +73,7 @@ class _AuthInputState extends State<AuthInput> {
           controller: widget.controller,
           obscureText: widget.isPass,
           style: TextStyles.s16w400.copyWith(
-            color: Colors.white,
+            color: AppColors.appTitle,
           ),
           cursorColor: const Color(0xFF1167C3),
           decoration: InputDecoration(
@@ -84,7 +85,7 @@ class _AuthInputState extends State<AuthInput> {
               vertical: 8,
             ),
             hintStyle: TextStyles.s16w400.copyWith(
-              color: Colors.white,
+              color: AppColors.appTitle,
             ),
             enabledBorder: border,
             border: border,
@@ -97,7 +98,9 @@ class _AuthInputState extends State<AuthInput> {
         Container(
           height: 1,
           width: widget.maxWidth ?? double.infinity,
-          color: widget.errors == null ? const Color(0xFF848484) : const Color(0xFFFFC700),
+          color: widget.errors == null ?
+          const Color(0xFF848484) :
+          AppColors.appButton,
         ),
         if(widget.bottomLeftWidget != null) ...[
           Row(

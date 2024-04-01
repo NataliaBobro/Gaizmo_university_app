@@ -1,3 +1,4 @@
+import 'package:european_university_app/app/ui/theme/app_colors.dart';
 import 'package:european_university_app/app/ui/theme/text_styles.dart';
 import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
@@ -56,7 +57,7 @@ class ScheduleHeader extends StatelessWidget {
                         width: 24,
                         height: 24,
                         decoration: BoxDecoration(
-                            color: const Color(0xFFFFC700),
+                            color: AppColors.appButton,
                             borderRadius: BorderRadius.circular(100)
                         ),
                         child: SvgPicture.asset(
@@ -157,7 +158,7 @@ class _ScheduleFilterState extends State<ScheduleFilter> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(100),
                         color: activeIndex == index ?
-                        const Color(0xFFFFC700) : const Color(0xFFE9EEF2)
+                        AppColors.appButton : const Color(0xFFE9EEF2)
                     ),
                     child: Center(
                       child: Text(

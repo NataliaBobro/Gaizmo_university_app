@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../../../resources/resources.dart';
+import '../theme/app_colors.dart';
 
 class EmptyWidget extends StatefulWidget {
   const EmptyWidget({
@@ -53,7 +54,7 @@ class _EmptyWidgetState extends State<EmptyWidget> {
               width: 48,
               height: 48,
               decoration: BoxDecoration(
-                  color: const Color(0xFFFFC700),
+                  color: AppColors.appButton,
                   borderRadius: BorderRadius.circular(100)
               ),
               child: SvgPicture.asset(

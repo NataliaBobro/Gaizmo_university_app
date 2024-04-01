@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:european_university_app/app/domain/models/meta.dart';
 import 'package:european_university_app/app/domain/services/school_service.dart';
+import 'package:european_university_app/app/ui/theme/app_colors.dart';
 import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:european_university_app/app/ui/widgets/add_schedule.dart';
 import 'package:european_university_app/app/ui/widgets/app_horizontal_field.dart';
@@ -186,7 +187,7 @@ class _AddBranchState extends State<AddBranch> {
         final data = e.response?.data as Map<String, dynamic>;
         validateError = ValidateError.fromJson(data);
         setState(() {});
-        showMessage('${validateError?.message}', color: const Color(0xFFFFC700));
+        showMessage('${validateError?.message}', color: AppColors.appButton);
       }else{
         showMessage(e.message.isEmpty ? e.toString() : e.message);
       }

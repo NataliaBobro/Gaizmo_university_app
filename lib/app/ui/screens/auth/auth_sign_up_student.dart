@@ -58,7 +58,7 @@ class _AuthSignUpStudentState extends State<AuthSignUpStudent> {
                       child: Text(
                         getConstant('SIGN_UP'),
                         style: TextStyles.s24w600.copyWith(
-                            color: Colors.white
+                            color: AppColors.appTitle
                         ),
                         textAlign: TextAlign.center,
                       ),

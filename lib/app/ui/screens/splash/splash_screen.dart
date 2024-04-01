@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../resources/resources.dart';
@@ -46,11 +45,11 @@ class _SplashScreenState extends State<SplashScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 const SizedBox(
-                  height: 320,
+                  height: 210,
                 ),
                 Image.asset(
                   Images.logo,
-                  width: 162,
+                  width: 290,
                 ),
                 const Spacer()
               ],

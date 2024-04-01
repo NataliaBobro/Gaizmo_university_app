@@ -107,7 +107,7 @@ class _AuthSignUpSchoolState extends State<AuthSignUpSchool> {
                         child: Text(
                           getConstant('SIGN_UP'),
                           style: TextStyles.s24w600.copyWith(
-                              color: Colors.white
+                              color: AppColors.appTitle
                           ),
                           textAlign: TextAlign.center,
                         ),

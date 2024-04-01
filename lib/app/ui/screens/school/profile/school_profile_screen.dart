@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:routemaster/routemaster.dart';
 
+import '../../../theme/app_colors.dart';
 import '../../../theme/text_styles.dart';
 import '../../school/profile/widgets/profile_header.dart';
 import '../../school/profile/widgets/profile_avatar.dart';
@@ -81,7 +82,7 @@ class _SchoolProfileScreenState extends State<SchoolProfileScreen> with TickerPr
                     controller: _tabController,
                     labelStyle: TextStyles.s14w700,
                     indicator: const UnderlineTabIndicator(
-                      borderSide: BorderSide(width: 3.0, color: Color(0xFFFFC700)),
+                      borderSide: BorderSide(width: 3.0, color: AppColors.appButton),
                       insets: EdgeInsets.only(right: 35.0),
                     ),
                     labelPadding: const EdgeInsets.symmetric(

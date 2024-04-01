@@ -6,31 +6,15 @@ import '../models/meta.dart';
 import '../models/services.dart';
 
 class PayService {
-  static Future<Map<String, dynamic>?> fetchPayStatus(
-      context,
-      serviceId,
-      orderReference,
-      ) async {
-    final token = getToken(context);
-    if(token == null) return null;
-    final response = await ApiClient().dio.get(
-      '/student/school/$serviceId/fetch-payment-status/$orderReference',
-      options: Options(
-        headers: {'Authorization': 'Bearer $token'},
-      ),
-    );
-    final data = response.data as Map<String, dynamic>;
-    return data;
-  }
 
-  static Future<Map<String, dynamic>?> fetchPaymentLink(
+  static Future<Map<String, dynamic>?> selectService(
       context,
       int? serviceId,
       ) async {
     final token = getToken(context);
     if(token == null) return null;
     final response = await ApiClient().dio.get(
-      '/student/school/$serviceId/fetch-payment-link',
+      '/student/school/$serviceId/select-service',
       options: Options(
         headers: {'Authorization': 'Bearer $token'},
       ),

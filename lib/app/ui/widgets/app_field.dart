@@ -1,3 +1,4 @@
+import 'package:european_university_app/app/ui/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 import '../theme/text_styles.dart';
@@ -59,7 +60,7 @@ class AppField extends StatelessWidget {
         Container(
           width: double.infinity,
           height: 1,
-          color: error != null ? const Color(0xFFFFC700) : const Color(0xFF848484),
+          color: error != null ? AppColors.appButton : const Color(0xFF848484),
         ),
         if(error != null) ...[
           Container(
@@ -68,7 +69,7 @@ class AppField extends StatelessWidget {
             child: Text(
               '$error',
               style: TextStyles.s12w400.copyWith(
-                  color: const Color(0xFFFFC700)
+                  color: AppColors.appButton
               ),
             ),
           )

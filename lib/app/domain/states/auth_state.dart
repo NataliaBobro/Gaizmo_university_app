@@ -22,6 +22,7 @@ import '../../ui/screens/auth/auth_sign_up_teacher.dart';
 import '../../ui/screens/auth/confirm_recovery_password.dart';
 import '../../ui/screens/auth/widgets/auth_select_login_type.dart';
 import '../../ui/screens/auth/widgets/auth_select_user_type.dart';
+import '../../ui/theme/app_colors.dart';
 import '../../ui/utils/show_message.dart';
 import '../../ui/widgets/snackbars.dart';
 import '../models/meta.dart';
@@ -345,7 +346,7 @@ class AuthState with ChangeNotifier {
           openWriteCode();
         }
       }else{
-        showMessage('Email required', color: const Color(0xFFFFC700));
+        showMessage('Email required', color: AppColors.appButton);
         notifyListeners();
       }
     } catch (e) {
@@ -410,14 +411,14 @@ class AuthState with ChangeNotifier {
         if(_codeRegister.text.isEmpty){
           openConfirmCode();
         }else{
-          showMessage('Code invalid', color: const Color(0xFFFFC700));
+          showMessage('Code invalid', color: AppColors.appButton);
         }
       }
     } on DioError catch (e) {
       if(e.response?.statusCode == 422){
         final data = e.response?.data as Map<String, dynamic>;
         _validateError = ValidateError.fromJson(data);
-        showMessage('${_validateError?.message}', color: const Color(0xFFFFC700));
+        showMessage('${_validateError?.message}', color: AppColors.appButton);
       }else{
         showMessage(e.message.isEmpty ? e.toString() : e.message);
       }
@@ -457,14 +458,14 @@ class AuthState with ChangeNotifier {
         if(_codeRegister.text.isEmpty){
           openConfirmCode();
         }else{
-          showMessage('Code invalid', color: const Color(0xFFFFC700));
+          showMessage('Code invalid', color: AppColors.appButton);
         }
       }
     } on DioError catch (e) {
       if(e.response?.statusCode == 422){
         final data = e.response?.data as Map<String, dynamic>;
         _validateError = ValidateError.fromJson(data);
-        showMessage('${_validateError?.message}', color: const Color(0xFFFFC700));
+        showMessage('${_validateError?.message}', color: AppColors.appButton);
       }else{
         showMessage(e.message.isEmpty ? e.toString() : e.message);
       }
@@ -505,14 +506,14 @@ class AuthState with ChangeNotifier {
         if(_codeRegister.text.isEmpty){
           openConfirmCode();
         }else{
-          showMessage('Code invalid', color: const Color(0xFFFFC700));
+          showMessage('Code invalid', color: AppColors.appButton);
         }
       }
     } on DioError catch (e) {
       if(e.response?.statusCode == 422){
         final data = e.response?.data as Map<String, dynamic>;
         _validateError = ValidateError.fromJson(data);
-        showMessage('${_validateError?.message}', color: const Color(0xFFFFC700));
+        showMessage('${_validateError?.message}', color: AppColors.appButton);
       }else{
         showMessage(e.message.isEmpty ? e.toString() : e.message);
       }
@@ -543,7 +544,7 @@ class AuthState with ChangeNotifier {
       if(e.response?.statusCode == 422){
         final data = e.response?.data as Map<String, dynamic>;
         _validateError = ValidateError.fromJson(data);
-        showMessage('${_validateError?.message}', color: const Color(0xFFFFC700));
+        showMessage('${_validateError?.message}', color: AppColors.appButton);
       }else{
         showMessage('Email or password is incorrect.');
       }
@@ -578,7 +579,7 @@ class AuthState with ChangeNotifier {
       if(e.response?.statusCode == 422){
         final data = e.response?.data as Map<String, dynamic>;
         _validateError = ValidateError.fromJson(data);
-        showMessage('${_validateError?.message}', color: const Color(0xFFFFC700));
+        showMessage('${_validateError?.message}', color: AppColors.appButton);
       }else{
         showMessage('Phone or password is incorrect.');
       }
@@ -639,7 +640,7 @@ class AuthState with ChangeNotifier {
       if(e.response?.statusCode == 422){
         final data = e.response?.data as Map<String, dynamic>;
         _validateError = ValidateError.fromJson(data);
-        showMessage('${_validateError?.message}', color: const Color(0xFFFFC700));
+        showMessage('${_validateError?.message}', color: AppColors.appButton);
       }else{
         showMessage('Time out');
       }

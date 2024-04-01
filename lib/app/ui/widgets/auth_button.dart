@@ -1,3 +1,4 @@
+import 'package:european_university_app/app/ui/theme/app_colors.dart';
 import 'package:european_university_app/app/ui/theme/text_styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -43,8 +44,8 @@ class _AppButtonState extends State<AppButton> {
           alignment: Alignment.center,
           decoration: BoxDecoration(
             color: widget.disabled ?
-              const Color(0xFFB4B0A9) :
-              const Color(0xFFFFC700),
+              AppColors.appButtonDisable :
+              AppColors.appButton,
             borderRadius: BorderRadius.circular(40)
           ),
           child: Row(
@@ -62,7 +63,7 @@ class _AppButtonState extends State<AppButton> {
               Text(
                 widget.title,
                 style: TextStyles.s14w600.copyWith(
-                    color: Colors.white
+                    color: AppColors.appButtonText
                 ),
               )
             ],

@@ -3,6 +3,7 @@ import 'package:european_university_app/app/ui/screens/school/profile/branchs/it
 import 'package:european_university_app/app/ui/screens/school/profile/branchs/item/widgets/branch_general_info.dart';
 import 'package:european_university_app/app/ui/screens/school/profile/branchs/item/widgets/branch_info.dart';
 import 'package:european_university_app/app/ui/screens/students/schools/item/widgets/student_school_services.dart';
+import 'package:european_university_app/app/ui/theme/app_colors.dart';
 import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -100,7 +101,7 @@ class _StudentSchoolItemState extends State<StudentSchoolItem> with TickerProvid
                             Container(
                               height: 4,
                               width: 40,
-                              color: const Color(0xFFFFC700),
+                              color: AppColors.appButton,
                             )
                           ]
                         ],
@@ -116,7 +117,7 @@ class _StudentSchoolItemState extends State<StudentSchoolItem> with TickerProvid
                             Container(
                               height: 4,
                               width: 40,
-                              color: const Color(0xFFFFC700),
+                              color: AppColors.appButton,
                             )
                           ]
                         ],

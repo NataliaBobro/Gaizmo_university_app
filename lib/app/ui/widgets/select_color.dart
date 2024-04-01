@@ -2,6 +2,8 @@ import 'package:european_university_app/app/ui/theme/text_styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../theme/app_colors.dart';
+
 class SelectColor extends StatefulWidget {
   const SelectColor({
     Key? key,
@@ -40,7 +42,7 @@ class _SelectColorState extends State<SelectColor> {
         Text(
           widget.label,
           style: TextStyles.s14w600.copyWith(
-            color: const Color(0xFFFFC700)
+            color: AppColors.appButton
           ),
         ),
         const SizedBox(

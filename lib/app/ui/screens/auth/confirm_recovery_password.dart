@@ -69,7 +69,7 @@ class _ConfirmPasswordRecoveryState extends State<ConfirmPasswordRecovery> {
                                       TextSpan(
                                           text: " ${state.email.text} ",
                                           style: TextStyles.s14w400.copyWith(
-                                              color: const Color(0xFFFFC700)
+                                              color: AppColors.appButton
                                           )
                                       )
                                     ]

@@ -1,3 +1,4 @@
+import 'package:european_university_app/app/ui/theme/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -75,7 +76,7 @@ class _SelectBottomSheetInputState extends State<SelectBottomSheetInput> {
           Container(
             height: 1,
             width: double.infinity,
-            color: widget.error != null ? const Color(0xFFFFC700) : const Color(0xFF848484),
+            color: widget.error != null ? AppColors.appButton : const Color(0xFF848484),
           ),
           if(widget.error != null) ...[
             Container(
@@ -84,7 +85,7 @@ class _SelectBottomSheetInputState extends State<SelectBottomSheetInput> {
               child: Text(
                 '${widget.error}',
                 style: TextStyles.s12w400.copyWith(
-                    color: const Color(0xFFFFC700)
+                    color: AppColors.appButton
                 ),
               ),
             )

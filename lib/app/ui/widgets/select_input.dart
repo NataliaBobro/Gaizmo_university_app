@@ -1,3 +1,4 @@
+import 'package:european_university_app/app/ui/theme/app_colors.dart';
 import 'package:european_university_app/resources/resources.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +51,7 @@ class SelectInput extends StatelessWidget {
                   child: Text(
                     selected != -1 ? items[selected - 1] : hintText,
                     style: hintStyle ?? TextStyles.s14w400.copyWith(
-                        color: Colors.white
+                        color: AppColors.appTitle
                     ),
                   ),
                 ),
@@ -73,7 +74,7 @@ class SelectInput extends StatelessWidget {
         Container(
           height: 1,
           width: double.infinity,
-          color: errors == null ? const Color(0xFF848484) : const Color(0xFFFFC700),
+          color: errors == null ? const Color(0xFF848484) : AppColors.appButton,
         ),
         if(errors != null) ...[
           Container(
@@ -84,7 +85,7 @@ class SelectInput extends StatelessWidget {
             child: Text(
               '$errors',
               style: TextStyles.s12w400.copyWith(
-                  color: const Color(0xFFFFC700)
+                  color: AppColors.appButton
               ),
             ),
           ),

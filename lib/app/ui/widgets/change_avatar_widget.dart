@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:european_university_app/app/ui/theme/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
@@ -67,7 +68,7 @@ class _ChangeAvatarWidgetState extends State<ChangeAvatarWidget> {
               borderRadius: BorderRadius.circular(100),
               border: Border.all(
                   width: 3,
-                  color: const Color(0xFFFFC700)
+                  color: AppColors.appButton
               )
           ),
           child: widget.avatar == null ? Center(
