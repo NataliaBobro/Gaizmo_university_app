@@ -1,12 +1,10 @@
 import 'package:european_university_app/app/app.dart';
 import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:european_university_app/app/ui/widgets/social_account_info.dart';
-import 'package:european_university_app/app/ui/widgets/statistics/statistics_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../domain/states/statistics_state.dart';
 import '../../../../widgets/custom_scroll_physics.dart';
 import '../../../../widgets/info_value.dart';
 import '../../../../widgets/settings_input.dart';
