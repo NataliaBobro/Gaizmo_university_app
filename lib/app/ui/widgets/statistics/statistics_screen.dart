@@ -7,7 +7,6 @@ import 'package:flutter_svg/svg.dart';
 import '../../../../resources/resources.dart';
 import '../../theme/text_styles.dart';
 import '../profile/passport/widgets/passport_view.dart';
-import 'categories_tab.dart';
 
 class StatisticsScreen extends StatefulWidget {
   const StatisticsScreen({Key? key}) : super(key: key);
@@ -130,15 +129,15 @@ class _StatisticsScreenState extends State<StatisticsScreen> with TickerProvider
                     ],
                   ),
                 ),
-                Expanded(
-                  child: TabBarView(
-                    controller: _tabController,
-                    children: [
-                      const CategoriesTab(),
-                      Container()
-                    ],
-                  ),
-                )
+                // Expanded(
+                //   child: TabBarView(
+                //     controller: _tabController,
+                //     children: [
+                //       const CategoriesTab(),
+                //       Container()
+                //     ],
+                //   ),
+                // )
               ],
             ),
           )

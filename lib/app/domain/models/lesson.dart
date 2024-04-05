@@ -27,11 +27,12 @@ class Lesson {
   int duration;
   String? lessonStart;
   String? startLesson;
+  String? classId;
   String? start;
   String? end;
   List<ServicesModel?>? services;
-  SchoolClass? schoolClass;
   List<ListDay>? day;
+  SchoolClass? schoolClass;
   bool? isVisitsExists;
   ZoomMeeting? zoomMeeting;
 
@@ -44,6 +45,7 @@ class Lesson {
     this.color,
     this.lessonStart,
     this.startLesson,
+    this.classId,
     this.start,
     this.end,
     this.services,

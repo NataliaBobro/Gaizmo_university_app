@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import '../../../../resources/resources.dart';
 import '../../../app.dart';
 import '../../theme/app_colors.dart';
-import '../../widgets/penguin/penguin_animate.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -56,15 +55,6 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
           ),
         ),
-        const Positioned(
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          child: AnimatedPenguinSplash(
-            width: 126,
-          ),
-        )
       ],
     );
   }

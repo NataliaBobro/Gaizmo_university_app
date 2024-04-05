@@ -8,10 +8,10 @@
       "appearances" : [
         {
           "appearance" : "luminosity",
-          "value" : "dark"
+          "value" : "light"
         }
       ],
-      "filename" : "darkbackground.png",
+      "filename" : "background.png",
       "idiom" : "universal"
     }
   ],

@@ -39,6 +39,7 @@ class ServicesState with ChangeNotifier {
   String? _selectColor;
   File? _uploadsFile;
   final TextEditingController _categoryName = TextEditingController();
+  final TextEditingController _sheetId = TextEditingController();
   final TextEditingController _serviceName = TextEditingController();
   final TextEditingController _desc = TextEditingController();
   final MaskedTextController _visits = MaskedTextController(mask: '000');
@@ -122,6 +123,7 @@ class ServicesState with ChangeNotifier {
   Map<String, dynamic>? get selectValidityType => _selectValidityType;
   Map<String, dynamic>? get selectCurrency => _selectCurrency;
   TextEditingController get categoryName => _categoryName;
+  TextEditingController get sheetId => _sheetId;
   TextEditingController get serviceName => _serviceName;
   TextEditingController get desc => _desc;
   TextEditingController get validity => _validity;
@@ -185,6 +187,7 @@ class ServicesState with ChangeNotifier {
     if(editedService is ServicesCategory){
       ServicesCategory serCat = editedService;
       _categoryName.text = serCat.name;
+      _sheetId.text = (serCat.sheetId ?? '');
       _selectService = listTypeServices.first;
       _selectColor = serCat.color;
       _onEditId = serCat.id;
@@ -295,10 +298,12 @@ class ServicesState with ChangeNotifier {
           context,
           _onEditId,
           _categoryName.text,
+          _sheetId.text,
           _selectColor ?? ''
       ) : await ServicesService.addCategory(
           context,
           _categoryName.text,
+          _sheetId.text,
           _selectColor ?? ''
       );
       if(result != null){
@@ -432,6 +437,7 @@ class ServicesState with ChangeNotifier {
   void clear() {
     _validateError = null;
     _categoryName.clear();
+    _sheetId.clear();
     _selectColor = null;
     _serviceName.clear();
     _selectBranch = null;

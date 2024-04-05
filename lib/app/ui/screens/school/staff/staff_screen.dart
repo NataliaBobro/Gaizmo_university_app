@@ -291,8 +291,9 @@ class _LessonItemState extends State<LessonItem> {
                 '${widget.lesson?.services?.first?.school?.house}',
           ),
           ContentRowInfo(
-              title: 'Class number',
-              value: '${widget.lesson?.schoolClass?.name}'
+            title: getConstant('Class_number'),
+            value: '${widget.lesson?.classId} '
+                '${widget.lesson?.classId}',
           ),
           const ContentRowInfo(
               title: 'Lesson links',

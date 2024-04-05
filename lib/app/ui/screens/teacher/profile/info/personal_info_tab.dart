@@ -35,10 +35,12 @@ class _PersonalInfoTabState extends State<PersonalInfoTab> {
                 title: getConstant('Full_name'),
                 value: "${state?.firstName} ${state?.lastName}"
             ),
-            InfoValue(
-                title: getConstant('Phone_number'),
-                value: "${state?.phone}"
-            ),
+            if(state?.phone != null) ...[
+              InfoValue(
+                  title: getConstant('Phone_number'),
+                  value: "${state?.phone}"
+              )
+            ],
             InfoValue(
                 title: getConstant('Email'),
                 value: "${state?.email}"
@@ -50,11 +52,12 @@ class _PersonalInfoTabState extends State<PersonalInfoTab> {
             ],
             InfoValue(
                 title: getConstant('My_salary'),
-                value: "15000 per mounth"
+                value: "${state?.salary ?? 0} ${getConstant('per/hour')}"
             ),
             SettingsInput(
-                title: getConstant('Statistics'),
+                title: getConstant('News'),
                 onPress: () async {
+                  return;
                   await Navigator.push(
                       context,
                       CupertinoPageRoute(

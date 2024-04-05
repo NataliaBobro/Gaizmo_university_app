@@ -10,6 +10,7 @@ class ServicesService {
   static Future<ServicesCategory?> addCategory(
       BuildContext context,
       String? name,
+      String? sheetId,
       String? color
       ) async {
     final token = getToken(context);
@@ -21,6 +22,7 @@ class ServicesService {
       ),
       data: {
         'name': name,
+        'sheetId': sheetId,
         'color': color,
       }
     );
@@ -32,6 +34,7 @@ class ServicesService {
       BuildContext context,
       int? id,
       String? name,
+      String? sheetId,
       String? color
       ) async {
     final token = getToken(context);
@@ -44,6 +47,7 @@ class ServicesService {
       data: {
         'id': id,
         'name': name,
+        'sheetId': sheetId,
         'color': color,
       }
     );

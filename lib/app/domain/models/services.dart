@@ -23,12 +23,14 @@ class ServicesData {
 class ServicesCategory {
   int id;
   String name;
+  String? sheetId;
   String? color;
   List<ServicesModel?>? services;
 
   ServicesCategory({
     required this.id,
     required this.name,
+    required this.sheetId,
     required this.color,
   });
 
@@ -103,8 +105,10 @@ class ServicesModel {
 class Lesson {
   int id;
   int? serviceId;
-  int? classId;
+  String? classId;
   String? startLesson;
+  int? duration;
+  String? type;
   String? start;
   String? end;
   List<DayItem>? day;
@@ -116,6 +120,8 @@ class Lesson {
     this.serviceId,
     this.classId,
     this.startLesson,
+    this.duration,
+    this.type,
     this.start,
     this.end,
     this.day,

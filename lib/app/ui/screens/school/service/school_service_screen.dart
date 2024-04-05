@@ -426,7 +426,7 @@ class _ContentServiceState extends State<ContentService> {
           //     value: "${widget.item?.cost} ${widget.item?.currency?.symbol}"
           // ),
           ContentRowInfo(
-              title: "ETM",
+              title: "EU",
               value: "${widget.item?.etm}"
           ),
         ],

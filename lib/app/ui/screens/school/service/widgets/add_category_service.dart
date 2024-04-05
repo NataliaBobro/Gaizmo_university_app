@@ -48,6 +48,14 @@ class _AddCategoryServiceState extends State<AddCategoryService> {
           const SizedBox(
             height: 40,
           ),
+          AppField(
+            label: '${getConstant('Sheet_id')} *',
+            controller: state.sheetId,
+            error: state.validateError?.errors.name?[0],
+          ),
+          const SizedBox(
+            height: 40,
+          ),
           SelectColor(
               label: getConstant('Category_color'),
               selected: state.selectColor,

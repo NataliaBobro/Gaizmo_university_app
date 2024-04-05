@@ -277,7 +277,7 @@ class HeaderNameLesson extends StatelessWidget {
           height: 8,
         ),
         Text(
-          '${getConstant('Start')} $start - ${getConstant('End')} $end',
+          '$start - $end',
           style: TextStyles.s12w400.copyWith(
             color: const Color(0xFF848484)
           ),
@@ -385,12 +385,11 @@ class _LessonItemState extends State<LessonItem> {
                   '${widget.lesson?.services?.first?.school?.house}',
             )
           ],
-          if(widget.lesson?.schoolClass != null) ...[
-            ContentRowInfo(
-                title: getConstant('Class_number'),
-                value: '${widget.lesson?.schoolClass?.name}'
-            )
-          ],
+          ContentRowInfo(
+            title: getConstant('Class_number'),
+            value: '${widget.lesson?.classId} '
+                '${widget.lesson?.classId}',
+          ),
           if(widget.lesson?.zoomMeeting != null) ...[
             ContentRowInfo(
               title: getConstant('Lesson_links'),

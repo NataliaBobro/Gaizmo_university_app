@@ -93,7 +93,7 @@ class ExchangeItem extends StatelessWidget {
                     width: 8,
                   ),
                   Text(
-                    'ETM/USD',
+                    'EU/USD',
                     style: TextStyles.s8w600.copyWith(
                       color: Colors.black
                     ),

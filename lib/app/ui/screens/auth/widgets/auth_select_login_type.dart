@@ -10,7 +10,6 @@ import 'package:provider/provider.dart';
 import '../../../../../resources/resources.dart';
 import '../../../theme/app_colors.dart';
 import '../../../utils/get_constant.dart';
-import '../../../widgets/penguin/penguin_animate.dart';
 
 class AuthSelectLoginType extends StatefulWidget {
   const AuthSelectLoginType({Key? key}) : super(key: key);
@@ -93,7 +92,6 @@ class _AuthSelectLoginTypeState extends State<AuthSelectLoginType>
                     crossAxisAlignment: CrossAxisAlignment.end,
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      const AnimatedPenguinLoginType(),
                       Stack(
                         children: [
                           Container(

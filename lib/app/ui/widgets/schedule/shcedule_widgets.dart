@@ -26,7 +26,9 @@ class HeaderEtm extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        if(lessons.services?.first?.etm != null && lessons.isVisitsExists == true) ...[
+        if(lessons.services?.first?.etm != null
+            && lessons.isVisitsExists == true
+            && (lessons.services?.first?.etm ?? 0) > 0) ...[
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -119,7 +121,7 @@ class _LessonItemState extends State<LessonItem> {
             ContentRowInfo(
               title: getConstant('Teacher'),
               value: '${widget.lesson?.teacher?.firstName} '
-                  '${widget.lesson?.teacher?.lastName}',
+                  '${widget.lesson?.teacher?.lastName ?? ''}',
             )
           ],
           ContentRowInfo(
@@ -134,12 +136,10 @@ class _LessonItemState extends State<LessonItem> {
             value: '${widget.lesson?.services?.first?.school?.street} '
                 '${widget.lesson?.services?.first?.school?.house}',
           ),
-          if(widget.lesson?.schoolClass != null) ...[
-            ContentRowInfo(
-                title: getConstant('Class_number'),
-                value: '${widget.lesson?.schoolClass?.name}'
-            )
-          ],
+          ContentRowInfo(
+            title: getConstant('Class_number'),
+            value: '${widget.lesson?.classId}'
+          ),
           if(widget.lesson?.zoomMeeting != null) ...[
             ContentRowInfo(
               title: getConstant('Lesson_links'),

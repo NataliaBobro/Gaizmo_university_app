@@ -42,7 +42,7 @@ class _PassportViewState extends State<PassportView> {
                     style: TextStyles.s8w600.copyWith(
                         color: Colors.white
                     ),
-                    text: 'ETM ',
+                    text: 'EU ',
                     children: [
                       TextSpan(
                           text: '|',

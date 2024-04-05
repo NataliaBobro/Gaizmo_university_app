@@ -51,6 +51,8 @@ class _SelectPackageScreenState extends State<SelectPackageScreen> {
                       padding: const EdgeInsets.symmetric(
                         horizontal: 16,
                         vertical: 26
+                      ).copyWith(
+                        bottom: 100
                       ),
                       children: [
                         ...List.generate(
@@ -151,7 +153,7 @@ class _ButtonPayItemLessonState extends State<ButtonPayItemLesson> {
                       maxWidth: 250
                     ),
                     child: Text(
-                      "${widget.package?.numberVisits} ${widget.package?.name} ${getConstant('lesson')}",
+                      "${widget.package?.name}",
                       style: TextStyles.s14w500.copyWith(
                           color: const Color(0xFF242424)
                       ),

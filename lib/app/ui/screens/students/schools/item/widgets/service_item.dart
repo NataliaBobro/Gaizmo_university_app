@@ -414,8 +414,8 @@ class RenderDayTime extends StatelessWidget {
           (index) {
             TimeOfDay startTime = TimeOfDay.fromDateTime(DateTime.parse("2022-01-18 ${lessons?[index].startLesson}"));
             TimeOfDay endTime = startTime.replacing(
-              hour: startTime.hour + ((startTime.minute + duration!) ~/ 60),
-              minute: (startTime.minute + duration!) % 60,
+              hour: startTime.hour + ((startTime.minute + (lessons?[index].duration ?? 0)) ~/ 60),
+              minute: (startTime.minute + (lessons?[index].duration ?? 0)) % 60,
             );
 
             return Container(

@@ -25,7 +25,7 @@ class _CategoriesTabState extends State<CategoriesTab> {
         CharItem(
           value: 80,
           label: "Balance",
-          valueStr: "${userData?.balanceEtm} ETM",
+          valueStr: "${userData?.balanceEtm} EU",
           color: 0xFFC2C4F9,
         ),
         CharItem(

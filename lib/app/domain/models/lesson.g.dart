@@ -28,6 +28,7 @@ Lesson _$LessonFromJson(Map<String, dynamic> json) => Lesson(
       color: json['color'] as String?,
       lessonStart: json['lesson_start'] as String?,
       startLesson: json['start_lesson'] as String?,
+      classId: json['class_id'] as String?,
       start: json['start'] as String?,
       end: json['end'] as String?,
       services: (json['services'] as List<dynamic>?)
@@ -55,11 +56,12 @@ Map<String, dynamic> _$LessonToJson(Lesson instance) => <String, dynamic>{
       'duration': instance.duration,
       'lesson_start': instance.lessonStart,
       'start_lesson': instance.startLesson,
+      'class_id': instance.classId,
       'start': instance.start,
       'end': instance.end,
       'services': instance.services,
-      'school_class': instance.schoolClass,
       'day': instance.day,
+      'school_class': instance.schoolClass,
       'is_visits_exists': instance.isVisitsExists,
       'zoom_meeting': instance.zoomMeeting,
     };

@@ -27,6 +27,7 @@ ServicesCategory _$ServicesCategoryFromJson(Map<String, dynamic> json) =>
     ServicesCategory(
       id: json['id'] as int,
       name: json['name'] as String,
+      sheetId: json['sheet_id'] as String?,
       color: json['color'] as String?,
     )..services = (json['services'] as List<dynamic>?)
         ?.map((e) => e == null
@@ -38,6 +39,7 @@ Map<String, dynamic> _$ServicesCategoryToJson(ServicesCategory instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
+      'sheet_id': instance.sheetId,
       'color': instance.color,
       'services': instance.services,
     };
@@ -115,8 +117,10 @@ Map<String, dynamic> _$ServicesModelToJson(ServicesModel instance) =>
 Lesson _$LessonFromJson(Map<String, dynamic> json) => Lesson(
       id: json['id'] as int,
       serviceId: json['service_id'] as int?,
-      classId: json['class_id'] as int?,
+      classId: json['class_id'] as String?,
       startLesson: json['start_lesson'] as String?,
+      duration: json['duration'] as int?,
+      type: json['type'] as String?,
       start: json['start'] as String?,
       end: json['end'] as String?,
       day: (json['day'] as List<dynamic>?)
@@ -131,6 +135,8 @@ Map<String, dynamic> _$LessonToJson(Lesson instance) => <String, dynamic>{
       'service_id': instance.serviceId,
       'class_id': instance.classId,
       'start_lesson': instance.startLesson,
+      'duration': instance.duration,
+      'type': instance.type,
       'start': instance.start,
       'end': instance.end,
       'day': instance.day,
