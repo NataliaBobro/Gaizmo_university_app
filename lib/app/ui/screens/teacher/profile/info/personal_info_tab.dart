@@ -57,16 +57,15 @@ class _PersonalInfoTabState extends State<PersonalInfoTab> {
             SettingsInput(
                 title: getConstant('News'),
                 onPress: () async {
-                  return;
-                  await Navigator.push(
-                      context,
-                      CupertinoPageRoute(
-                          builder: (context) => ChangeNotifierProvider(
-                            create: (context) => StatisticsState(context) ,
-                            child: const StatisticsScreen(),
-                          )
-                      )
-                  );
+                  // await Navigator.push(
+                  //     context,
+                  //     CupertinoPageRoute(
+                  //         builder: (context) => ChangeNotifierProvider(
+                  //           create: (context) => StatisticsState(context) ,
+                  //           child: const StatisticsScreen(),
+                  //         )
+                  //     )
+                  // );
                 }
             ),
             SettingsInput(
