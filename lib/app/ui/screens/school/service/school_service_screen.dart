@@ -417,10 +417,12 @@ class _ContentServiceState extends State<ContentService> {
               title: getConstant('Number_of_students'),
               value: '${widget.item?.payUsers?.length ?? 0}'
           ),
-          ContentRowInfo(
-              title: getConstant('Validity'),
-              value: "${widget.item?.validity} ${widget.item?.validityType}"
-          ),
+          if(widget.item?.validity != null) ...[
+            ContentRowInfo(
+                title: getConstant('Validity'),
+                value: "${widget.item?.validity} ${widget.item?.validityType}"
+            )
+          ],
           // ContentRowInfo(
           //     title: getConstant('Cost'),
           //     value: "${widget.item?.cost} ${widget.item?.currency?.symbol}"

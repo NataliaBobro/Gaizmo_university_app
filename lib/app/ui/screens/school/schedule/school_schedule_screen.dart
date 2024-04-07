@@ -302,7 +302,7 @@ class HeaderEtm extends StatelessWidget {
       padding: const EdgeInsets.only(
         bottom: 27
       ),
-      child: Row(
+      child: etm != 0 ? Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           SvgPicture.asset(
@@ -319,7 +319,7 @@ class HeaderEtm extends StatelessWidget {
             ),
           )
         ],
-      ),
+      ) : null,
     );
   }
 }
@@ -370,26 +370,26 @@ class _LessonItemState extends State<LessonItem> {
           if(widget.lesson?.teacher != null) ...[
             ContentRowInfo(
               title: getConstant('Teacher'),
-              value: '${widget.lesson?.teacher?.firstName} '
-                  '${widget.lesson?.teacher?.lastName}',
+              value: '${widget.lesson?.teacher?.firstName}',
             )
           ],
            ContentRowInfo(
             title: getConstant('Students'),
-            value: '0',
+            value: '${widget.lesson?.services?.first?.payUsers?.length ?? 0}',
           ),
           if(widget.lesson?.services?.first?.school?.street != null) ...[
             ContentRowInfo(
               title: getConstant('Adress'),
-              value: '${widget.lesson?.services?.first?.school?.street} '
-                  '${widget.lesson?.services?.first?.school?.house}',
+              value: '${widget.lesson?.services?.first?.school?.street ?? ''} '
+                  '${widget.lesson?.services?.first?.school?.house ?? ''}',
             )
           ],
-          ContentRowInfo(
-            title: getConstant('Class_number'),
-            value: '${widget.lesson?.classId} '
-                '${widget.lesson?.classId}',
-          ),
+          if(widget.lesson?.classId != null) ...[
+            ContentRowInfo(
+              title: getConstant('Class_number'),
+              value: '${widget.lesson?.classId}',
+            )
+          ],
           if(widget.lesson?.zoomMeeting != null) ...[
             ContentRowInfo(
               title: getConstant('Lesson_links'),
