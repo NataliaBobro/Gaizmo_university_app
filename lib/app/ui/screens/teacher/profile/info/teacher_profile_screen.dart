@@ -69,9 +69,12 @@ class _TeacherProfileScreenState extends State<TeacherProfileScreen> with Ticker
                       bottom: 24
                   ),
                   width: double.infinity,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(20)
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(20),
+                        bottomRight: Radius.circular(20),
+                      )
                   ),
                   child: TabBar(
                     indicatorSize: TabBarIndicatorSize.label,

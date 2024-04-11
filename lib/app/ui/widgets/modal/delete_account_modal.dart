@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';
-import 'package:provider/provider.dart';
-
-import '../../../app.dart';
 import '../../theme/text_styles.dart';
 
-Future<void> showDeleteDialog(BuildContext context) async {
+Future<void> showDeleteDialog(
+    BuildContext context,
+    Function onDelete
+    ) async {
   await showPlatformDialog(
     context: context,
     builder: (context) => BasicDialogAlert(
@@ -18,7 +18,7 @@ Future<void> showDeleteDialog(BuildContext context) async {
           title: const Text("Yes"),
           onPressed: () {
             Navigator.pop(context);
-            context.read<AppState>().deleteAccount();
+            onDelete();
           },
         ),
         BasicDialogAction(

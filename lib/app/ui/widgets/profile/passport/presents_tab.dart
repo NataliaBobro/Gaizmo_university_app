@@ -37,9 +37,41 @@ class PresentsScreen extends StatelessWidget {
   }
 }
 
-class PresentsItemList extends StatelessWidget {
+class PresentsItemList extends StatefulWidget {
   const PresentsItemList({Key? key}) : super(key: key);
 
+  @override
+  State<PresentsItemList> createState() => _PresentsItemListState();
+}
+
+class _PresentsItemListState extends State<PresentsItemList> {
+
+  final list = [
+    {
+      'image': Images.testPresents,
+      'name': 'T-shirt',
+    },
+    {
+      'image': Images.cap,
+      'name': 'Cap',
+    },
+    {
+      'image': Images.mug,
+      'name': 'Mug',
+    },
+    {
+      'image': Images.note,
+      'name': 'Note',
+    },
+    {
+      'image': Images.testPresents,
+      'name': 'T-shirt',
+    },
+    {
+      'image': Images.cap,
+      'name': 'Cap',
+    }
+  ];
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
@@ -54,23 +86,30 @@ class PresentsItemList extends StatelessWidget {
           mainAxisSpacing: 16,
           mainAxisExtent: 179
       ),
-      itemCount: 10,
+      itemCount: list.length,
       itemBuilder: (context, index) {
-        return const PresentsItem();
+        return PresentsItem(
+          item: list[index]
+        );
       },
     );
   }
 }
 
 class PresentsItem extends StatelessWidget {
-  const PresentsItem({Key? key}) : super(key: key);
+  const PresentsItem({
+    Key? key,
+    required this.item
+  }) : super(key: key);
+
+  final Map<String, String> item;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Container(
-          width: 151,
+          width: double.infinity,
           height: 151,
           decoration: BoxDecoration(
               color: Colors.white,
@@ -78,7 +117,7 @@ class PresentsItem extends StatelessWidget {
           ),
           child: ClipRRect(
             child: Image.asset(
-              Images.testPresents,
+              '${item['image']}',
               width: 151,
               height: 151,
             ),
@@ -91,7 +130,7 @@ class PresentsItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'T-shirt',
+              '${item['name']}',
               style: TextStyles.s10w600.copyWith(
                 color: const Color(0xFF242424)
               ),

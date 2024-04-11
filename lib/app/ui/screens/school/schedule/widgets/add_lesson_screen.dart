@@ -229,10 +229,8 @@ class _AddLessonScreenState extends State<AddLessonScreen> {
                                   mode: CupertinoDatePickerMode.time,
                                   use24hFormat: true,
                                   onDateTimeChanged: (DateTime newTime) {
-                                    setState(() {
-                                      time = newTime;
-                                      state.changeLessonStart(DateFormat('HH:mm').format(newTime));
-                                    });
+                                    time = newTime;
+                                    state.lessonStart.text = DateFormat('HH:mm').format(newTime);
                                   },
                                 ),
                               );
@@ -305,10 +303,8 @@ class _AddLessonScreenState extends State<AddLessonScreen> {
                               DateFormat('dd.MM.yyyy HH:mm').parse('${state.repeatsEnd.text} 23:00')
                                   : null,
                               onDateTimeChanged: (DateTime newDate) {
-                                setState(() {
-                                  date = newDate;
-                                  state.changeRepeatsStart(DateFormat('dd.MM.yyyy').format(newDate));
-                                });
+                                date = newDate;
+                                state.repeatsStart.text = DateFormat('dd.MM.yyyy').format(newDate);
                               },
                             ),
                           );
@@ -337,10 +333,8 @@ class _AddLessonScreenState extends State<AddLessonScreen> {
                               DateFormat('dd.MM.yyyy HH:mm').parse('${state.repeatsStart.text} 00:00')
                                   : null,
                               onDateTimeChanged: (DateTime newDate) {
-                                setState(() {
-                                  date = newDate;
-                                  state.changeRepeatsEnd(DateFormat('dd.MM.yyyy').format(newDate));
-                                });
+                                date = newDate;
+                                state.repeatsEnd.text = DateFormat('dd.MM.yyyy').format(newDate);
                               },
                             ),
                           );

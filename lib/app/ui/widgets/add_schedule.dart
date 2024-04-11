@@ -264,7 +264,7 @@ class _AddScheduleState extends State<AddSchedule> {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 40),
                           child: AppButton(
-                              title: 'Save changes',
+                              title: getConstant('SAVE_CHANGES'),
                               onPressed: () {
                                 widget.onSelect(selectedDay);
                                 Navigator.pop(context);

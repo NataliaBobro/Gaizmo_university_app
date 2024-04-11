@@ -11,6 +11,7 @@ import 'package:sizer/sizer.dart';
 import '../../../domain/models/meta.dart';
 import '../../../domain/models/user.dart';
 import '../../../domain/services/school_service.dart';
+import '../../utils/get_constant.dart';
 import '../../utils/show_message.dart';
 
 
@@ -91,8 +92,8 @@ class _SettingScheduleState extends State<SettingSchedule> {
             color: const Color(0xFFF0F3F6),
             child: Column(
               children: [
-                const CenterHeaderWithAction(
-                    title: 'Settings'
+                CenterHeaderWithAction(
+                    title: getConstant('Settings')
                 ),
                 Expanded(
                     child: Column(
@@ -112,7 +113,7 @@ class _SettingScheduleState extends State<SettingSchedule> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Choose working days',
+                                    getConstant('Choose_working_days'),
                                     style: TextStyles.s14w600.copyWith(
                                         color: const Color(0xFF242424)
                                     ),
@@ -161,7 +162,7 @@ class _SettingScheduleState extends State<SettingSchedule> {
                                     height: 24,
                                   ),
                                   Text(
-                                    'Choose working hours',
+                                    getConstant('Choose_working_hours'),
                                     style: TextStyles.s14w600.copyWith(
                                         color: const Color(0xFF242424)
                                     ),
@@ -176,7 +177,7 @@ class _SettingScheduleState extends State<SettingSchedule> {
                                     child: Row(
                                       children: [
                                         Text(
-                                          'From',
+                                          getConstant('From'),
                                           style: TextStyles.s14w300.copyWith(
                                               color: const Color(0xFF727272)
                                           ),
@@ -209,7 +210,7 @@ class _SettingScheduleState extends State<SettingSchedule> {
                                           ),
                                         ),
                                         Text(
-                                          'to',
+                                          getConstant('to'),
                                           style: TextStyles.s14w300.copyWith(
                                               color: const Color(0xFF727272)
                                           ),
@@ -252,7 +253,7 @@ class _SettingScheduleState extends State<SettingSchedule> {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 40),
                           child: AppButton(
-                              title: 'Save changes',
+                              title: getConstant('SAVE_CHANGES'),
                               onPressed: () {
                                 saveSchedule();
                               }

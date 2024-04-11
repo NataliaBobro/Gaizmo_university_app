@@ -31,7 +31,7 @@ class _ServiceItemState extends State<ServiceItem> {
   ServicesModel? servicesModel;
   Map<String, List<DayItem>> groupedSchedule = {};
   List<UserData?> listUser = [];
-  int? openSection;
+  int? openSection = 0;
   bool loading = false;
   bool loadingService = false;
 
@@ -119,7 +119,7 @@ class _ServiceItemState extends State<ServiceItem> {
           SafeArea(
             child: Container(
               width: double.infinity,
-              color: const Color(0xFF242424),
+              color: const Color(0xFFF0F3F6),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -156,15 +156,10 @@ class _ServiceItemState extends State<ServiceItem> {
                                   const SizedBox(
                                     height: 24,
                                   ),
-                                  Container(
-                                    constraints: const BoxConstraints(
-                                        maxWidth: 200
-                                    ),
-                                    child: Text(
-                                      "${servicesModel?.name}",
-                                      style: TextStyles.s18w700.copyWith(
-                                          color: const Color(0xFF242424)
-                                      ),
+                                  Text(
+                                    "${servicesModel?.name}",
+                                    style: TextStyles.s18w700.copyWith(
+                                        color: const Color(0xFF242424)
                                     ),
                                   ),
                                   if(servicesModel?.desc != null)...[
@@ -172,7 +167,7 @@ class _ServiceItemState extends State<ServiceItem> {
                                       height: 8,
                                     ),
                                     Text(
-                                      "${servicesModel?.desc}",
+                                      servicesModel?.desc ?? '',
                                       style: TextStyles.s14w400.copyWith(
                                           color: const Color(0xFF242424)
                                       ),
@@ -215,8 +210,8 @@ class _ServiceItemState extends State<ServiceItem> {
                               child: Column(
                                 children: [
                                   ExpansionPanelList(
-                                      dividerColor: const Color(0xFF242424),
-                                      elevation: 1,
+                                      dividerColor: Colors.transparent,
+                                      elevation: 0,
                                       expandedHeaderPadding: EdgeInsets.zero,
                                       expansionCallback: (int index, bool isExpanded) {
                                         setState(() {
@@ -230,13 +225,11 @@ class _ServiceItemState extends State<ServiceItem> {
                                       children: [
                                         ExpansionPanel(
                                             canTapOnHeader: false,
-                                            backgroundColor: const Color(0xFF242424),
+                                            backgroundColor: const Color(0xFFF0F3F6),
                                             headerBuilder: (BuildContext context, bool isExpanded) {
                                               return Text(
                                                 getConstant('Schedule'),
-                                                style: TextStyles.s14w400.copyWith(
-                                                    color: Colors.white
-                                                ),
+                                                style: TextStyles.s14w400,
                                               );
                                             },
                                             body: Padding(
@@ -347,8 +340,8 @@ class _ScheduleLessonState extends State<ScheduleLesson> {
   @override
   Widget build(BuildContext context) {
     return ExpansionPanelList(
-      dividerColor: const Color(0xFF242424),
-      elevation: 1,
+      dividerColor: Colors.transparent,
+      elevation: 0,
       expandedHeaderPadding: const EdgeInsets.all(0),
       expansionCallback: (int index, bool isExpanded) {
         setState(() {
@@ -358,7 +351,7 @@ class _ScheduleLessonState extends State<ScheduleLesson> {
       children: data.map<ExpansionPanel>((Item item) {
         return ExpansionPanel(
           canTapOnHeader: true,
-          backgroundColor: const Color(0xFF242424),
+          backgroundColor: const Color(0xFFF0F3F6),
           headerBuilder: (BuildContext context, bool isExpanded) {
             return Container(
               padding: const EdgeInsets.symmetric(
@@ -366,9 +359,7 @@ class _ScheduleLessonState extends State<ScheduleLesson> {
               ),
               child: Text(
                 item.headerValue,
-                style: TextStyles.s14w400.copyWith(
-                    color: Colors.white
-                ),
+                style: TextStyles.s14w400,
               ),
             );
           },
@@ -425,9 +416,7 @@ class RenderDayTime extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: Text(
                 "${startTime.format(context)} - ${endTime.format(context)}",
-                style: TextStyles.s14w400.copyWith(
-                  color: const Color(0xFFABB1B6)
-                ),
+                style: TextStyles.s14w400
               ),
             );
           }

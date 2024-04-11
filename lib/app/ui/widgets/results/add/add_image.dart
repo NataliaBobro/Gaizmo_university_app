@@ -1,5 +1,6 @@
 import 'package:european_university_app/app/ui/theme/app_colors.dart';
 import 'package:european_university_app/app/ui/theme/text_styles.dart';
+import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:european_university_app/app/ui/widgets/auth_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -80,9 +81,13 @@ class _ViewSelectedFileState extends State<ViewSelectedFile> {
                   ),
                 ),
                 AppButton(
-                    title: "Add result",
+                    title: getConstant('Add_result'),
                     onPressed: () {
-                      state.addResult();
+                      state.addResult().then((value) {
+                        Navigator.pop(context);
+                      }).whenComplete(() {
+                        state.fetchMyResultList();
+                      });
                     }
                 ),
                 const SizedBox(

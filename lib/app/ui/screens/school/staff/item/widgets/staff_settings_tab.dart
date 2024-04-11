@@ -5,6 +5,8 @@ import 'package:european_university_app/app/ui/widgets/change_password.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../../../app.dart';
+import '../../../../../widgets/modal/delete_account_modal.dart';
 import '../../../profile/widgets/settings_tab.dart';
 
 class StaffSettingsTab extends StatefulWidget {
@@ -83,6 +85,15 @@ class _StaffSettingsTabState extends State<StaffSettingsTab> {
                       userId: read.staff?.id
                   )
               );
+            }
+        ),
+        SettingsInput(
+            title: getConstant('Delete_account'),
+            onPress: () {
+              showDeleteDialog(context, () {
+                Navigator.pop(context);
+                context.read<AppState>().deleteAccount(userId: read.staff?.id);
+              });
             }
         ),
       ],

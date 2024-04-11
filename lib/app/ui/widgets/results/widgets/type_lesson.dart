@@ -1,5 +1,6 @@
 import 'package:european_university_app/app/domain/states/my_results_state.dart';
 import 'package:european_university_app/app/ui/theme/text_styles.dart';
+import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -42,8 +43,8 @@ class _TypeLessonState extends State<TypeLesson> {
             color: const Color(0xFFF0F3F6),
             child: Column(
               children: [
-                const CenterHeader(
-                    title: 'Add result',
+                CenterHeader(
+                    title: getConstant('Add_result'),
                 ),
                 Expanded(
                     child: Column(

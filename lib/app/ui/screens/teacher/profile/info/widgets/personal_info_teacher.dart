@@ -192,7 +192,7 @@ class _PersonalInfoTeacherState extends State<PersonalInfoTeacher> {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 40),
                           child: AppButton(
-                              title: 'Save changes',
+                              title: getConstant('SAVE_CHANGES'),
                               onPressed: () {
                                 saveGeneralInfo();
                               }

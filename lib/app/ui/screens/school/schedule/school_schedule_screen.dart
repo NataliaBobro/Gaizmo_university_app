@@ -35,6 +35,11 @@ class _SchoolScheduleScreenState extends State<SchoolScheduleScreen> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final state = context.watch<SchoolScheduleState>();
     return Scaffold(

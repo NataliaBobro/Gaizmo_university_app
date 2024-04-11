@@ -100,7 +100,7 @@ class ServicesState with ChangeNotifier {
     List<Map<String, dynamic>> list = [
       {
         "id": 0,
-        "name": "All branches"
+        "name": getConstant('All_branches')
       }
     ];
     for(var a = 0; a < (_listBranchData?.length ?? 0); a++){
@@ -187,6 +187,7 @@ class ServicesState with ChangeNotifier {
     if(editedService is ServicesCategory){
       ServicesCategory serCat = editedService;
       _categoryName.text = serCat.name;
+      _sheetId.text = serCat.sheetId ?? '';
       _sheetId.text = (serCat.sheetId ?? '');
       _selectService = listTypeServices.first;
       _selectColor = serCat.color;
@@ -197,23 +198,29 @@ class ServicesState with ChangeNotifier {
       _selectService = listTypeServices.last;
       _serviceName.text = servEdit.name;
       if(servEdit.desc != null){
-        _desc.text = '${servEdit.desc}';
+        _desc.text = servEdit.desc ?? '';
       }
 
       _selectBranch = listBranch.firstWhere((element) => element['id'] == (servEdit.branchId ?? 0));
       // if((_listTeacherData?.length ?? 0) > 0){
       //   _selectTeacher = _listTeacherData?.firstWhere((element) => element.id == (servEdit.teacher?.id ?? 0));
       // }
-      _selectCurrency = _listCurrency.firstWhere((element) => element['id'] == servEdit.currency?.id);
-      _selectValidityType = _listValidityType.firstWhere((element) => element['name'] == servEdit.validityType);
-      _etm.text = '${servEdit.etm}';
-      _cost.text = '${servEdit.cost}';
-      _visits.text = '${servEdit.numberVisits}';
+      if(servEdit.currency != null){
+        _selectCurrency = _listCurrency.firstWhere((element) => element['id'] == servEdit.currency?.id);
+
+      }
+      if(servEdit.validityType != null) {
+        _selectValidityType = _listValidityType.firstWhere((element) => element['name'] == servEdit.validityType);
+
+      }
+      _etm.text = '${servEdit.etm ?? ''}';
+      _cost.text = '${servEdit.cost ?? ''}';
+      _visits.text = '${servEdit.numberVisits ?? ''}';
       if(servEdit.serviceCategory != null){
         _selectCategory = listCategory.firstWhere((element) => element['id'] == servEdit.serviceCategory);
       }
       _selectColor = servEdit.color;
-      _validity.text = '${servEdit.validity}';
+      _validity.text = '${servEdit.validity ?? ''}';
       // _duration.text = '${(servEdit.duration! ~/ 60).toString().padLeft(2, '0')}${servEdit.duration! % 60}';
       _onEditId = servEdit.id;
     }

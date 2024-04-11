@@ -1,5 +1,6 @@
 import 'package:european_university_app/app/domain/models/user.dart';
 import 'package:european_university_app/app/domain/services/user_service.dart';
+import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:european_university_app/app/ui/widgets/app_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
@@ -64,7 +65,7 @@ class _SettingsSalaryState extends State<SettingsSalary> {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 40),
                           child: AppButton(
-                              title: 'Save changes',
+                              title: getConstant('SAVE_CHANGES'),
                               onPressed: () {
                                 saveSalary();
                               }

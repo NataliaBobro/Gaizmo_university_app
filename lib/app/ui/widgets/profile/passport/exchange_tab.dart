@@ -72,7 +72,7 @@ class ExchangeItem extends StatelessWidget {
       children: [
         Container(
           padding: const EdgeInsets.all(8),
-          width: 151,
+          width: double.infinity,
           height: 151,
           decoration: BoxDecoration(
               color: Colors.white,
@@ -113,7 +113,9 @@ class ExchangeItem extends StatelessWidget {
               bottomRight: Radius.circular(15),
             ),
             child: SvgPicture.asset(
-              Svgs.char
+              Svgs.char,
+              width: 151,
+              fit: BoxFit.cover,
             ),
           ),
         ),

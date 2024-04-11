@@ -149,8 +149,8 @@ class _SettingsTabState extends State<SettingsTab> {
     await showPlatformDialog(
       context: context,
       builder: (context) => BasicDialogAlert(
-        content: const Text(
-            "Do you really want\n to sign up from “ETM”?",
+        content: Text(
+            getConstant('Do_you_really_want_to_sign_up_from_ETM'),
           style: TextStyles.s17w600,
         ),
         actions: <Widget>[

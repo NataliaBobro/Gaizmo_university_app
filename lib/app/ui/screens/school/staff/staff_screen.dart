@@ -114,7 +114,9 @@ class _StaffItemState extends State<StaffItem> {
         onPressed: () {
           read.openStaff(
               widget.staff
-          );
+          ).whenComplete(() {
+            read.getStaff();
+          });
         },
         child: Container(
           padding: const EdgeInsets.symmetric(
@@ -152,7 +154,7 @@ class _StaffItemState extends State<StaffItem> {
                 width: 8,
               ),
               Text(
-                '${widget.staff?.firstName} ${widget.staff?.lastName}',
+                '${widget.staff?.firstName ?? ''} ${widget.staff?.lastName ?? ''}',
                 style: TextStyles.s14w600.copyWith(
                   color: const Color(0xFF242424)
                 ),

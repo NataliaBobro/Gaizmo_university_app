@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:european_university_app/app/app.dart';
 import 'package:european_university_app/app/domain/models/user.dart';
-import 'package:european_university_app/app/ui/theme/app_colors.dart';
 import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -30,7 +29,7 @@ class _PassportViewState extends State<PassportView> {
       width: SizerUtil.width - 48,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
-        color: const Color(0xFF242424)
+        color: const Color(0xFF0379EE)
       ),
       child: Row(
         children: [
@@ -42,19 +41,7 @@ class _PassportViewState extends State<PassportView> {
                     style: TextStyles.s8w600.copyWith(
                         color: Colors.white
                     ),
-                    text: 'EU ',
-                    children: [
-                      TextSpan(
-                          text: '|',
-                          style: TextStyles.s8w600.copyWith(
-                              color: AppColors.appButton
-                          )
-                      ),
-                      const TextSpan(
-                          text: ' Edu Tech Mant'
-                      ),
-
-                    ]
+                    text: 'ЄВРОПЕЙСЬКИЙ УНІВЕРСИТЕТ',
                 ),
               ),
               const SizedBox(
@@ -71,7 +58,7 @@ class _PassportViewState extends State<PassportView> {
                       Text(
                         getConstant('Current_Balance'),
                         style: TextStyles.s8w500.copyWith(
-                            color: const Color(0xFF848484)
+                            color: Colors.white
                         ),
                       ),
                       Text(
@@ -92,7 +79,7 @@ class _PassportViewState extends State<PassportView> {
                       Text(
                         getConstant('Socilal_Rating'),
                         style: TextStyles.s8w500.copyWith(
-                            color: const Color(0xFF848484)
+                            color: Colors.white
                         ),
                       ),
                       SocialRating(
@@ -119,7 +106,7 @@ class _PassportViewState extends State<PassportView> {
               Text(
                 'You are better\nthen 50% users',
                 style: TextStyles.s8w500.copyWith(
-                  color: AppColors.appButton
+                  color: Colors.white
                 ),
               ),
               const SizedBox(
@@ -181,7 +168,7 @@ class BorderPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint = Paint()
-      ..color = AppColors.appButton
+      ..color = Colors.white
       ..style = PaintingStyle.stroke
       ..strokeWidth = 4.0;
 

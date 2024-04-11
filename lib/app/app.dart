@@ -227,17 +227,21 @@ class AppState extends ChangeNotifier {
 
   void onLogout() async {
     notifyListeners();
+    fetchConstant(languageId: 1);
     await Hive.box('settings').delete('token');
     changeLogInState(false);
   }
 
-  void deleteAccount() async {
+  void deleteAccount({int? userId}) async {
+    final id = userId ?? userData?.id;
     try {
-      final result = await UserService.deleteAccount(context, userData?.id);
+      final result = await UserService.deleteAccount(context, id);
       if(result == true){
         notifyListeners();
-        await Hive.box('settings').delete('token');
-        changeLogInState(false);
+        if(userId == null){
+          await Hive.box('settings').delete('token');
+          changeLogInState(false);
+        }
       }
     } on DioError catch (e) {
       showMessage(e.message.isEmpty ? e.toString() : e.message);

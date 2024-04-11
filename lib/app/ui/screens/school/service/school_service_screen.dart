@@ -121,7 +121,7 @@ class _SchoolServicesScreenState extends State<SchoolServicesScreen> {
                                         style: TextStyles.s14w600.copyWith(
                                             color: const Color(0xFF242424)
                                         ),
-                                        maxLines: 1,
+                                        maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
                                       ),
                                       onDelete: (index) {

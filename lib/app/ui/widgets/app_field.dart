@@ -12,7 +12,8 @@ class AppField extends StatelessWidget {
     this.error,
     this.keyboardType,
     this.isPass = false,
-    this.multiLine = null
+    this.multiLine = null,
+    this.hasBorder = true
   }) : super(key: key);
 
   final String label;
@@ -21,6 +22,7 @@ class AppField extends StatelessWidget {
   final String? error;
   final bool isPass;
   final int? multiLine;
+  final bool hasBorder;
   final TextInputType? keyboardType;
 
   @override
@@ -57,11 +59,13 @@ class AppField extends StatelessWidget {
             fillColor: multiLine != null ? Colors.white : Colors.transparent,
           ),
         ),
-        Container(
-          width: double.infinity,
-          height: 1,
-          color: error != null ? AppColors.appButton : const Color(0xFF848484),
-        ),
+        if(hasBorder) ...[
+          Container(
+            width: double.infinity,
+            height: 1,
+            color: error != null ? AppColors.appButton : const Color(0xFF848484),
+          )
+        ],
         if(error != null) ...[
           Container(
             padding: const EdgeInsets.only(top: 4),

@@ -72,65 +72,42 @@ class _PassportScreenState extends State<PassportScreen>  with TickerProviderSta
                   ),
                 ),
                 Container(
-                  height: 55,
+                  height: 50,
                   alignment: Alignment.center,
+                  padding: const EdgeInsets.only(
+                      bottom: 24
+                  ),
                   width: double.infinity,
                   decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(20),
-                        bottomRight: Radius.circular(20)
+                        bottomRight: Radius.circular(20),
                       )
                   ),
                   child: TabBar(
                     indicatorSize: TabBarIndicatorSize.label,
                     indicatorPadding: EdgeInsets.zero,
                     controller: _tabController,
-                    indicatorColor: Colors.transparent,
-                    indicatorWeight: 0.5,
                     labelStyle: TextStyles.s14w700,
-                    // isScrollable: true,
+                    indicator: const UnderlineTabIndicator(
+                      borderSide: BorderSide(width: 3.0, color: AppColors.appButton),
+                      insets: EdgeInsets.only(right: 30.0),
+                    ),
                     labelPadding: const EdgeInsets.symmetric(
                         horizontal: 16
-                    ).copyWith(
-                        bottom: 24
                     ),
                     labelColor: const Color(0xFF242424),
                     unselectedLabelStyle: TextStyles.s14w400,
                     unselectedLabelColor: const Color(0xFFACACAC),
                     tabs: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Tab(
-                            height: 24,
-                            text: getConstant('Exchange'),
-                            iconMargin: EdgeInsets.zero,
-                          ),
-                          if(isActiveTab == 0) ...[
-                            Container(
-                              height: 4,
-                              width: 40,
-                              color: AppColors.appButton,
-                            )
-                          ]
-                        ],
+                      Tab(
+                        text: getConstant('Presents'),
+                        iconMargin: EdgeInsets.zero,
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Tab(
-                            height: 19,
-                            text: getConstant('Presents'),
-                          ),
-                          if(isActiveTab == 1) ...[
-                            Container(
-                              height: 4,
-                              width: 40,
-                              color: AppColors.appButton,
-                            )
-                          ]
-                        ],
+                      Tab(
+                        text: getConstant('Exchange'),
+                        iconMargin: EdgeInsets.zero,
                       ),
                     ],
                   ),
@@ -139,8 +116,8 @@ class _PassportScreenState extends State<PassportScreen>  with TickerProviderSta
                   child: TabBarView(
                     controller: _tabController,
                     children: const [
-                      ExchangeScreen(),
-                      PresentsScreen()
+                      PresentsScreen(),
+                      ExchangeScreen()
                     ],
                   ),
                 )

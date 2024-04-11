@@ -56,7 +56,7 @@ class _SettingsAddressState extends State<SettingsAddress> {
                             ),
                             SelectInputSearchField(
                               errors: state.validateError?.errors.country?.first,
-                              title: 'Country',
+                              title: getConstant('Country'),
                               titleStyle: TextStyles.s14w600.copyWith(
                                   color: const Color(0xFF242424)
                               ),
@@ -81,7 +81,7 @@ class _SettingsAddressState extends State<SettingsAddress> {
                             ),
                             SelectInputSearchField(
                               errors: state.validateError?.errors.city?.first,
-                              title: 'City',
+                              title: getConstant('City'),
                               titleStyle: TextStyles.s14w600.copyWith(
                                   color: const Color(0xFF242424)
                               ),
@@ -104,7 +104,7 @@ class _SettingsAddressState extends State<SettingsAddress> {
                               hintText: '',
                             ),
                             AppField(
-                              label: 'Street',
+                              label: getConstant('Street'),
                               controller: state.street,
                               error: state.validateError?.errors.street?.first,
                             ),
@@ -112,7 +112,7 @@ class _SettingsAddressState extends State<SettingsAddress> {
                               height: 24,
                             ),
                             AppField(
-                              label: 'House',
+                              label: getConstant('House'),
                               controller: state.house,
                               error: state.validateError?.errors.house?.first,
                             ),
@@ -125,7 +125,7 @@ class _SettingsAddressState extends State<SettingsAddress> {
                 Padding(
                   padding: const EdgeInsets.only(bottom: 40),
                   child: AppButton(
-                      title: 'Save changes',
+                      title: getConstant('SAVE_CHANGES'),
                       onPressed: () {
                         state.saveAddress();
                       }

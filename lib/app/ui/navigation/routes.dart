@@ -1,9 +1,13 @@
+import 'package:european_university_app/app/domain/states/chats/ChatsState.dart';
+import 'package:european_university_app/app/domain/states/news/news_state.dart';
 import 'package:european_university_app/app/domain/states/school/school_schedule_state.dart';
 import 'package:european_university_app/app/domain/states/school/school_staff_state.dart';
 import 'package:european_university_app/app/domain/states/student/student_schedule_state.dart';
 import 'package:european_university_app/app/domain/states/teacher/teacher_schedule_state.dart';
 import 'package:european_university_app/app/ui/screens/auth/auth_sign_in.dart';
 import 'package:european_university_app/app/ui/screens/auth/widgets/auth_select_login_type.dart';
+import 'package:european_university_app/app/ui/screens/chats/chats_screen.dart';
+import 'package:european_university_app/app/ui/screens/news/news_screen.dart';
 import 'package:european_university_app/app/ui/screens/school/profile/school_profile_screen.dart';
 import 'package:european_university_app/app/ui/screens/school/schedule/school_schedule_screen.dart';
 import 'package:european_university_app/app/ui/screens/school/service/school_service_screen.dart';
@@ -48,6 +52,8 @@ const _teacherSchedule = '/teacher-schedule';
 const _staff = '/staff';
 const _myResults = '/my-results';
 const _studentFavorite = '/student-favorite';
+const _chats = '/chats';
+const _news = '/news';
 
 abstract class AppRoutes {
   static String get tabbar => _tabbar;
@@ -56,6 +62,7 @@ abstract class AppRoutes {
   static String get auth => _auth;
   static String get register => _register;
   static String get home => _home;
+  static String get news => _news;
   static String get services => _services;
   static String get schedule => _schedule;
   static String get staff => _staff;
@@ -101,7 +108,7 @@ final loggedSchoolInMap = routemaster.RouteMap(
   onUnknownRoute: (_) => const routemaster.Redirect(_tabbar),
   routes: {
     _tabbar: (info) => routemaster.TabPage(
-      paths: const [_home, _services, _schedule, _staff, _home],
+      paths: const [_home, _services, _schedule, _staff, _news],
       child: MultiProvider(
         providers: [
           ChangeNotifierProvider(
@@ -114,7 +121,7 @@ final loggedSchoolInMap = routemaster.RouteMap(
               {'icon': Svgs.service, 'name': getConstant('Services')},
               {'icon': Svgs.schedule, 'name': getConstant('Schedule')},
               {'icon': Svgs.profile, 'name': getConstant('Staff')},
-              {'icon': Svgs.statistics, 'name': getConstant('Statistics')},
+              {'icon': Svgs.statistics, 'name': getConstant('News')},
             ]
         ),
       ),
@@ -141,6 +148,12 @@ final loggedSchoolInMap = routemaster.RouteMap(
       child: ChangeNotifierProvider(
         create: (context) => SchoolStaffState(context),
         child: const StaffScreen(),
+      ),
+    ),
+    _news: (_) => TransitionPage(
+      child: ChangeNotifierProvider(
+        create: (context) => NewsState(context),
+        child: const NewsScreen(),
       ),
     ),
   },
@@ -197,7 +210,7 @@ final loggedStudentInMap = routemaster.RouteMap(
   onUnknownRoute: (_) => const routemaster.Redirect(_tabbar),
   routes: {
     _tabbar: (info) => routemaster.TabPage(
-          paths: const [_home, _studentSchedule, _studentSchool, _myResults],
+          paths: const [_home, _studentSchedule, _studentSchool, _myResults, _chats],
           child: MultiProvider(
             providers: [
               ChangeNotifierProvider(
@@ -210,6 +223,7 @@ final loggedStudentInMap = routemaster.RouteMap(
                 {'icon': Svgs.schedule, 'name': getConstant('Schedule')},
                 {'icon': Svgs.school, 'name': getConstant('Schools')},
                 {'icon': Svgs.myRes, 'name': getConstant('My_results')},
+                {'icon': Svgs.chats, 'name': getConstant('Chats')},
               ]
             ),
           ),
@@ -239,6 +253,12 @@ final loggedStudentInMap = routemaster.RouteMap(
       child: ChangeNotifierProvider(
         create: (context) => FavoriteState(context),
         child: const FavoriteScreen(),
+      ),
+    ),
+    _chats: (_) => TransitionPage(
+      child: ChangeNotifierProvider(
+        create: (context) => ChatsState(context),
+        child: const ChatsScreen(),
       ),
     ),
   },

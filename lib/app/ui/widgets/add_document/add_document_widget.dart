@@ -120,6 +120,7 @@ class _AddDocumentWidgetState extends State<AddDocumentWidget> {
                                 height: 24,
                               ),
                               AppField(
+                                hasBorder: false,
                                 keyboardType: TextInputType.multiline,
                                 label: getConstant('Note'),
                                 controller: notes,

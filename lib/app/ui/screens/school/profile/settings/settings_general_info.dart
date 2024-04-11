@@ -1,5 +1,6 @@
 import 'package:european_university_app/app/app.dart';
 import 'package:european_university_app/app/ui/screens/school/profile/settings/settings_address.dart';
+import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:european_university_app/app/ui/widgets/settings/settings_schedule.dart';
 import 'package:european_university_app/app/ui/screens/school/profile/settings/settings_select_category.dart';
 import 'package:european_university_app/app/ui/widgets/app_horizontal_field.dart';
@@ -32,8 +33,8 @@ class _SettingGeneralInfoState extends State<SettingGeneralInfo> {
             color: const Color(0xFFF0F3F6),
             child: Column(
               children: [
-                const CenterHeaderWithAction(
-                    title: 'Settings'
+                CenterHeaderWithAction(
+                    title: getConstant('Settings')
                 ),
                 Expanded(
                     child: Column(
@@ -47,7 +48,7 @@ class _SettingGeneralInfoState extends State<SettingGeneralInfo> {
                                 height: 24,
                               ),
                               AppHorizontalField(
-                                label: 'Name of school',
+                                label: getConstant('Name_of_school'),
                                 controller: state.nameSchool,
                                 changeClear: () {
                                   state.changeClear(state.nameSchool);
@@ -56,7 +57,7 @@ class _SettingGeneralInfoState extends State<SettingGeneralInfo> {
                               ),
                               AppHorizontalField(
                                 keyboardType: TextInputType.number,
-                                label: 'Phone number',
+                                label: getConstant('Phone_number'),
                                 controller: state.phone,
                                 changeClear: () {
                                   state.changeClear(state.phone);
@@ -64,7 +65,7 @@ class _SettingGeneralInfoState extends State<SettingGeneralInfo> {
                                 error: state.validateError?.errors.phoneErrors?.first,
                               ),
                               AppHorizontalField(
-                                label: 'E-mail',
+                                label: getConstant('Email'),
                                 controller: state.email,
                                 changeClear: () {
                                   state.changeClear(state.email);
@@ -72,7 +73,7 @@ class _SettingGeneralInfoState extends State<SettingGeneralInfo> {
                                 error: state.validateError?.errors.emailErrors?.first,
                               ),
                               AppHorizontalField(
-                                label: 'Site address',
+                                label: getConstant('Site_address'),
                                 controller: state.siteAddress,
                                 changeClear: () {
                                   state.changeClear(state.siteAddress);
@@ -80,7 +81,7 @@ class _SettingGeneralInfoState extends State<SettingGeneralInfo> {
                                 // error: state.validateError?.errors.emailErrors?.first,
                               ),
                               SettingsInput(
-                                  title: "Schedule",
+                                  title: getConstant('Schedule'),
                                   onPress: () async {
                                     await Navigator.push(
                                       context,
@@ -99,7 +100,7 @@ class _SettingGeneralInfoState extends State<SettingGeneralInfo> {
                                   }
                               ),
                               SettingsInput(
-                                  title: "School category",
+                                  title: getConstant('School_category'),
                                   onPress: () async {
                                     await Navigator.push(
                                       context,
@@ -113,7 +114,7 @@ class _SettingGeneralInfoState extends State<SettingGeneralInfo> {
                                   }
                               ),
                               SettingsInput(
-                                  title: "Address",
+                                  title: getConstant('Address'),
                                   onPress: () async {
                                     await Navigator.push(
                                       context,
@@ -127,9 +128,12 @@ class _SettingGeneralInfoState extends State<SettingGeneralInfo> {
                                   }
                               ),
                               SettingsInput(
-                                  title: "Delete account",
+                                  title: getConstant('Delete_account'),
                                   onPress: () {
-                                    showDeleteDialog(context);
+                                    showDeleteDialog(context, () {
+                                      Navigator.pop(context);
+                                      context.read<AppState>().deleteAccount();
+                                    });
                                   }
                               ),
                             ],
@@ -138,7 +142,7 @@ class _SettingGeneralInfoState extends State<SettingGeneralInfo> {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 40),
                           child: AppButton(
-                            title: 'Save changes',
+                            title: getConstant('SAVE_CHANGES'),
                             onPressed: () {
                               state.saveGeneralInfo();
                             }

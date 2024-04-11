@@ -1,8 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="151" height="66" viewBox="0 0 151 66" fill="none">
+<svg width="151" height="66" viewBox="0 0 151 66" fill="none" xmlns="http://www.w3.org/2000/svg">
     <g opacity="0.2" filter="url(#filter0_f_399_172)">
         <path d="M0 44.1031L17.941 18.2474L38.8721 38.6598L51.3312 28.6804L73.7574 50L103 18.2474L125 36.3243L152 6" stroke="#FFC700" stroke-width="2"/>
     </g>
-    <path d="M15.2951 17.3439L-3 43.4031V69H152V5L124.467 35.5631L102.033 17.3439L72.2131 49.3465L49.3443 27.859L36.6393 37.917L15.2951 17.3439Z" fill="#FFC700" fill-opacity="0.2" stroke="#FFC700"/>
+    <path d="M15.2951 17.3439L-3 43.4031V69H152V5L124.467 35.5631L102.033 17.3439L72.2131 49.3465L49.3443 27.859L36.6393 37.917L15.2951 17.3439Z" fill="#0379EE" fill-opacity="0.2" stroke="#0379EE"/>
     <defs>
         <filter id="filter0_f_399_172" x="-5.82153" y="0.334961" width="163.568" height="56.0898" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
             <feFlood flood-opacity="0" result="BackgroundImageFix"/>

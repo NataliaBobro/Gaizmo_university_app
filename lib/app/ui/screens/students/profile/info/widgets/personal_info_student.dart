@@ -52,8 +52,8 @@ class _PersonalInfoStudentState extends State<PersonalInfoStudent> {
   }
 
   void initData() {
-    fullName.text = '${widget.student?.firstName} ${widget.student?.lastName}';
-    phone.text = '${widget.student?.phone}';
+    fullName.text = '${widget.student?.firstName ?? ''} ${widget.student?.lastName ?? ''}';
+    phone.text = widget.student?.phone ?? '';
     email.text = '${widget.student?.email}';
     if(widget.student?.about != null) {
       about.text = '${widget.student?.about}';
@@ -266,7 +266,10 @@ class _PersonalInfoStudentState extends State<PersonalInfoStudent> {
                           SettingsInput(
                             title: getConstant('Delete_account'),
                             onPress: () {
-                              showDeleteDialog(context);
+                              showDeleteDialog(context, () {
+                                Navigator.pop(context);
+                                context.read<AppState>().deleteAccount();
+                              });
                             }
                           ),
                         ],

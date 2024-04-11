@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../../app.dart';
 import '../../../../../domain/states/school/school_profile_state.dart';
+import '../../../../utils/get_constant.dart';
 import '../../../../widgets/auth_button.dart';
 import '../../../../widgets/center_header.dart';
 import '../../../../widgets/select_bottom_sheet_input.dart';
@@ -51,7 +52,7 @@ class _SettingsSelectCategoryState extends State<SettingsSelectCategory> {
                             ),
                             SelectBottomSheetInput(
                                 label: "Choose school category",
-                                labelModal: "School category",
+                                labelModal: getConstant('School_category'),
                                 selected: state.schoolCategory,
                                 items: listSchoolType,
                                 onSelect: (value) {
@@ -65,7 +66,7 @@ class _SettingsSelectCategoryState extends State<SettingsSelectCategory> {
                           Padding(
                             padding: const EdgeInsets.only(bottom: 40),
                             child: AppButton(
-                                title: 'Save changes',
+                                title: getConstant('SAVE_CHANGES'),
                                 onPressed: () {
                                   state.saveCategory();
                                 }

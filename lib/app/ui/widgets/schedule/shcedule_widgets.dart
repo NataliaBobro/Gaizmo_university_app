@@ -63,9 +63,9 @@ class HeaderEtm extends StatelessWidget {
                   color: lessons.isVisitsExists == true ?
                   const Color(0xFF27AE60) : AppColors.appButton
               ),
-              child: SvgPicture.asset(
+              child: lessons.isVisitsExists == true ? SvgPicture.asset(
                   Svgs.boxCheck
-              ),
+              ) : null,
             )
         )
       ],
@@ -133,12 +133,12 @@ class _LessonItemState extends State<LessonItem> {
           ),
           ContentRowInfo(
             title: getConstant('Adress'),
-            value: '${widget.lesson?.services?.first?.school?.street} '
-                '${widget.lesson?.services?.first?.school?.house}',
+            value: '${widget.lesson?.services?.first?.school?.street ?? ''} '
+                '${widget.lesson?.services?.first?.school?.house ?? ''}',
           ),
           ContentRowInfo(
             title: getConstant('Class_number'),
-            value: '${widget.lesson?.classId}'
+            value: widget.lesson?.classId ?? ''
           ),
           if(widget.lesson?.zoomMeeting != null) ...[
             ContentRowInfo(

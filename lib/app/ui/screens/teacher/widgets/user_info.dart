@@ -63,7 +63,7 @@ class _UserInfoState extends State<UserInfo> {
                   color: const Color(0xFF242424)
               ),
               textAlign: TextAlign.center,
-              maxLines: 2,
+              maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
           ),

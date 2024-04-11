@@ -49,4 +49,5 @@ class Svgs {
   static const String boxCheck = 'assets/vectors/box-check.svg';
   static const String inst = 'assets/vectors/inst.svg';
   static const String remove = 'assets/vectors/remove.svg';
+  static const String chats = 'assets/vectors/chats.svg';
 }

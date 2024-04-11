@@ -1,4 +1,6 @@
+import 'package:european_university_app/app/domain/states/progress/ProgressState.dart';
 import 'package:european_university_app/app/domain/states/student/student_passport_state.dart';
+import 'package:european_university_app/app/ui/screens/progress/ProgressScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
@@ -16,7 +18,7 @@ class StudentProfileScrollPage extends StatefulWidget {
 }
 
 class _StudentProfileScrollPageState extends State<StudentProfileScrollPage> {
-  PageController? pageController = PageController();
+  PageController? pageController = PageController(initialPage: 1);
   double offset = 0;
 
   @override
@@ -24,12 +26,13 @@ class _StudentProfileScrollPageState extends State<StudentProfileScrollPage> {
     pageController?.addListener(() {
       changeScroll();
     });
+    print((SizerUtil.width - 40) - (offset / 1.2));
     super.initState();
   }
 
   void changeTab(int? index) {
     pageController?.animateTo(
-        0,
+        1,
         duration: const Duration(milliseconds: 300),
         curve: Curves.linear,
     );
@@ -37,7 +40,7 @@ class _StudentProfileScrollPageState extends State<StudentProfileScrollPage> {
 
   void changeScroll() {
     setState(() {
-      offset = pageController?.offset ?? 0;
+      offset = (pageController?.offset ?? 0) - SizerUtil.width;
     });
   }
 
@@ -56,6 +59,10 @@ class _StudentProfileScrollPageState extends State<StudentProfileScrollPage> {
           controller: pageController,
           children: [
             ChangeNotifierProvider(
+              create: (context) => ProgressState(context),
+              child: const ProgressScreen(),
+            ),
+            ChangeNotifierProvider(
               create: (context) => StudentHomeState(context),
               child: const StudentProfileScreen(),
             ),
@@ -63,7 +70,7 @@ class _StudentProfileScrollPageState extends State<StudentProfileScrollPage> {
               create: (context) => StudentPassportState(context),
               child: PassportScreen(
                   changeTab: () {
-                    changeTab(0);
+                    changeTab(1);
                   }
               ),
             ),
@@ -76,17 +83,19 @@ class _StudentProfileScrollPageState extends State<StudentProfileScrollPage> {
             child: PassportView(),
           ),
         ),
-        Positioned(
-          top: 335,
-          right: 0,
-          left: 0,
-          child:  IgnorePointer(
-            child: DoteIndicator(
+        if(offset >= -(SizerUtil.width / 2)) ...[
+          Positioned(
+            top: 330,
+            right: 0,
+            left: 0,
+            child:  IgnorePointer(
+              child: DoteIndicator(
                 activeIndex: pageController?.positions.isNotEmpty == true ?
-                  pageController?.page : 0,
+                pageController?.page : 0,
+              ),
             ),
-          ),
-        )
+          )
+        ]
       ],
     );
   }
@@ -112,7 +121,7 @@ class _DoteIndicatorState extends State<DoteIndicator> {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: List.generate(
-          2,
+          3,
           (index) => Container(
             margin: const EdgeInsets.symmetric(horizontal: 3),
             width: 8,
