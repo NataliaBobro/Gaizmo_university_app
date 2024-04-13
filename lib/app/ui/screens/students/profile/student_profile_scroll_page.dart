@@ -30,9 +30,9 @@ class _StudentProfileScrollPageState extends State<StudentProfileScrollPage> {
     super.initState();
   }
 
-  void changeTab(int? index) {
+  void changeTab() {
     pageController?.animateTo(
-        1,
+        SizerUtil.width,
         duration: const Duration(milliseconds: 300),
         curve: Curves.linear,
     );
@@ -70,7 +70,7 @@ class _StudentProfileScrollPageState extends State<StudentProfileScrollPage> {
               create: (context) => StudentPassportState(context),
               child: PassportScreen(
                   changeTab: () {
-                    changeTab(1);
+                    changeTab();
                   }
               ),
             ),

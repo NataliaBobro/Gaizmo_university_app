@@ -50,4 +50,6 @@ class Svgs {
   static const String inst = 'assets/vectors/inst.svg';
   static const String remove = 'assets/vectors/remove.svg';
   static const String chats = 'assets/vectors/chats.svg';
+  static const String attach = 'assets/vectors/attach.svg';
+  static const String send = 'assets/vectors/send.svg';
 }

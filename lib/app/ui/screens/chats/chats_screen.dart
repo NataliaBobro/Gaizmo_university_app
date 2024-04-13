@@ -1,4 +1,4 @@
-import 'package:european_university_app/app/ui/widgets/empty_widget.dart';
+import 'package:european_university_app/app/ui/screens/chats/submit_chat_input.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -30,25 +30,25 @@ class _ChatsScreenState extends State<ChatsScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
-                          child: ListView(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 24,
-                              vertical: 24
-                            ),
-                            physics: const ClampingScrollPhysics(),
-                            children: [
-                              const SearchChats(),
-                              const SizedBox(
-                                height: 50,
+                          child: GestureDetector(
+                            onTap: () {
+                              FocusScope.of(context).unfocus();
+                            },
+                            child: ListView(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 24,
+                                  vertical: 24
                               ),
-                              EmptyWidget(
-                                onPress: () {
-
-                                },
-                              )
-                            ],
+                              physics: const ClampingScrollPhysics(),
+                              children: const [
+                                SizedBox(
+                                  height: 50,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
+                        const SubmitChatInput()
                       ],
                     )
                 )

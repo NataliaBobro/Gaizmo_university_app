@@ -1,9 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:european_university_app/app/app.dart';
 import 'package:european_university_app/app/domain/models/results.dart';
+import 'package:european_university_app/app/domain/states/timesheet.dart';
 import 'package:european_university_app/app/ui/theme/text_styles.dart';
 import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:european_university_app/app/ui/widgets/center_header.dart';
 import 'package:european_university_app/app/ui/widgets/empty_widget.dart';
+import 'package:european_university_app/app/ui/widgets/results/timesheet_tab.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -50,6 +53,7 @@ class _MyResultsScreenState extends State<MyResultsScreen> with TickerProviderSt
   @override
   Widget build(BuildContext context) {
     final state = context.watch<MyResultsState>();
+    final appState = context.read<AppState>();
     final results = state.resultsModel?.results ?? [];
     final task = state.myTaskModel?.results ?? [];
 
@@ -81,89 +85,80 @@ class _MyResultsScreenState extends State<MyResultsScreen> with TickerProviderSt
                       ],
                     ),
                 ),
-                if(state.isTeacher == true) ...[
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 50),
-                    height: 55,
-                    alignment: Alignment.center,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20)
+                Container(
+                  height: 50,
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.only(
+                      bottom: 24
+                  ),
+                  width: double.infinity,
+                  decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(20),
+                        bottomRight: Radius.circular(20),
+                      )
+                  ),
+                  child: TabBar(
+                    indicatorSize: TabBarIndicatorSize.label,
+                    indicatorPadding: EdgeInsets.zero,
+                    controller: _tabController,
+                    labelStyle: TextStyles.s14w700,
+                    indicator: const UnderlineTabIndicator(
+                      borderSide: BorderSide(width: 3.0, color: AppColors.appButton),
+                      insets: EdgeInsets.only(right: 35.0),
                     ),
-                    child: TabBar(
-                      indicatorSize: TabBarIndicatorSize.label,
-                      indicatorPadding: EdgeInsets.zero,
-                      controller: _tabController,
-                      indicatorColor: Colors.transparent,
-                      indicatorWeight: 0.5,
-                      labelStyle: TextStyles.s14w700,
-                      labelPadding: const EdgeInsets.symmetric(
-                          horizontal: 16
-                      ).copyWith(
-                          bottom: 24
-                      ),
-                      labelColor: const Color(0xFF242424),
-                      unselectedLabelStyle: TextStyles.s14w400,
-                      unselectedLabelColor: const Color(0xFFACACAC),
-                      tabs: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Tab(
-                              height: 24,
-                              text: getConstant('My_tasks'),
-                              iconMargin: EdgeInsets.zero,
-                            ),
-                            if(isActiveTab == 0) ...[
-                              Container(
-                                height: 4,
-                                width: 40,
-                                color: AppColors.appButton,
-                              )
-                            ]
-                          ],
+                    labelPadding: const EdgeInsets.symmetric(
+                        horizontal: 16
+                    ),
+                    labelColor: const Color(0xFF242424),
+                    unselectedLabelStyle: TextStyles.s14w400,
+                    unselectedLabelColor: const Color(0xFFACACAC),
+                    tabs: [
+                      if(state.isTeacher == true) ...[
+                        Tab(
+                          text: getConstant('My_tasks'),
+                          iconMargin: EdgeInsets.zero,
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Tab(
-                              height: 19,
-                              text: getConstant('Results'),
-                            ),
-                            if(isActiveTab == 1) ...[
-                              Container(
-                                height: 4,
-                                width: 40,
-                                color: AppColors.appButton,
-                              )
-                            ]
-                          ],
+                      ],
+                      Tab(
+                        text: getConstant('Results'),
+                        iconMargin: EdgeInsets.zero,
+                      ),
+                      if(state.isTeacher != true) ...[
+                        Tab(
+                          text: getConstant('Timesheet'),
+                          iconMargin: EdgeInsets.zero,
+                        ),
+                      ],
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: TabBarView(
+                    controller: _tabController,
+                    children: [
+                      if(state.isTeacher == true) ...[
+                        ResultTab(
+                            hasAdd: false,
+                            list: task
                         )
                       ],
-                    ),
-                  ),
-                  Expanded(
-                    child: TabBarView(
-                      controller: _tabController,
-                      children: [
-                        ResultTab(
-                          hasAdd: false,
-                          list: task
-                        ),
-                        ResultTab(
-                            list: results
-                        ),
+                      ResultTab(
+                          list: results
+                      ),
+                      if(state.isTeacher != true) ...[
+                        ChangeNotifierProvider(
+                            create: (context) => TimesheetState(
+                                context,
+                                appState.userData?.id
+                            ),
+                            child: const TimesheetTab(),
+                        )
                       ],
-                    ),
-                  )
-                ] else ...[
-                  Expanded(
-                    child: ResultTab(
-                        list: results
-                    ),
-                  )
-                ],
+                    ],
+                  ),
+                )
               ],
             ),
           )

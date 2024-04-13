@@ -110,7 +110,7 @@ class PresentsItem extends StatelessWidget {
       children: [
         Container(
           width: double.infinity,
-          height: 151,
+          height: 145,
           decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(15)
@@ -135,10 +135,23 @@ class PresentsItem extends StatelessWidget {
                 color: const Color(0xFF242424)
               ),
             ),
-            Text(
-              '100 EU',
-              style: TextStyles.s10w600.copyWith(
-                  color: const Color(0xFF242424)
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    '100 EU',
+                    style: TextStyles.s10w600.copyWith(
+                        color: const Color(0xFF242424)
+                    ),
+                  ),
+                  Text(
+                    '500 UAH',
+                    style: TextStyles.s10w600.copyWith(
+                        color: const Color(0xFF242424)
+                    ),
+                  )
+                ],
               ),
             )
           ],

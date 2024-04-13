@@ -61,32 +61,33 @@ class _PassportViewState extends State<PassportView> {
                             color: Colors.white
                         ),
                       ),
-                      Text(
-                        '${userData?.balanceEtm} EU',
-                        style: TextStyles.s10w500.copyWith(
-                            color: Colors.white
-                        ),
+                      Row(
+                        children: [
+                          Text(
+                            '${userData?.balanceEtm} EU',
+                            style: TextStyles.s10w500.copyWith(
+                                color: Colors.white
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.symmetric(
+                              horizontal: 4
+                            ),
+                            width: 1,
+                            height: 10,
+                            color: Colors.white,
+                          ),
+                          Text(
+                            '25 000 UAH',
+                            style: TextStyles.s10w500.copyWith(
+                                color: Colors.white
+                            ),
+                          ),
+                        ],
                       ),
 
                     ],
                   ),
-                  const SizedBox(
-                    width: 41,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        getConstant('Socilal_Rating'),
-                        style: TextStyles.s8w500.copyWith(
-                            color: Colors.white
-                        ),
-                      ),
-                      SocialRating(
-                        userData: userData
-                      )
-                    ],
-                  )
                 ],
               ),
               Expanded(child: Container()),
@@ -99,23 +100,8 @@ class _PassportViewState extends State<PassportView> {
             ],
           ),
           Expanded(child: Container()),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'You are better\nthen 50% users',
-                style: TextStyles.s8w500.copyWith(
-                  color: Colors.white
-                ),
-              ),
-              const SizedBox(
-                height: 4,
-              ),
-              UserViewAvatar(
-                userData: userData
-              )
-            ],
+          UserViewAvatar(
+              userData: userData
           )
         ],
       ),
@@ -187,63 +173,5 @@ class BorderPainter extends CustomPainter {
   @override
   bool shouldRepaint(CustomPainter oldDelegate) {
     return false;
-  }
-}
-
-
-class SocialRating extends StatelessWidget {
-  const SocialRating({
-    Key? key,
-    required this.userData
-  }) : super(key: key);
-
-  final UserData? userData;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Text(
-          '25',
-          style: TextStyles.s10w500.copyWith(
-            color: Colors.white
-          ),
-        ),
-        const SizedBox(
-          width: 2,
-        ),
-        SvgPicture.asset(
-          Svgs.heart,
-          width: 16,
-          color: const Color(0xFFEB5757),
-        ),
-        const SizedBox(
-          width: 4,
-        ),
-        Text(
-          '100',
-          style: TextStyles.s10w500.copyWith(
-              color: Colors.white
-          ),
-        ),
-        SvgPicture.asset(
-          Svgs.view,
-          width: 16,
-        ),
-        const SizedBox(
-          width: 4,
-        ),
-        Text(
-          '15',
-          style: TextStyles.s10w500.copyWith(
-              color: Colors.white
-          ),
-        ),
-        SvgPicture.asset(
-          Svgs.repost,
-          width: 16,
-        ),
-      ],
-    );
   }
 }

@@ -50,7 +50,7 @@ class _StudentScheduleScreenState extends State<StudentScheduleScreen> {
                       top: 113
                     ),
                     child: EmptyLesson(
-                      title: getConstant('No_classes_today_')
+                      title: getConstant('No_classes_today')
                     ),
                   )
                 ] else ...[
