@@ -20,6 +20,7 @@ class StudentProfileScrollPage extends StatefulWidget {
 class _StudentProfileScrollPageState extends State<StudentProfileScrollPage> {
   PageController? pageController = PageController(initialPage: 1);
   double offset = 0;
+  double offsetScroll = 0;
 
   @override
   void initState() {
@@ -60,7 +61,7 @@ class _StudentProfileScrollPageState extends State<StudentProfileScrollPage> {
           children: [
             ChangeNotifierProvider(
               create: (context) => ProgressState(context),
-              child: const ProgressScreen(),
+              child: ProgressScreen(),
             ),
             ChangeNotifierProvider(
               create: (context) => StudentHomeState(context),
@@ -71,13 +72,18 @@ class _StudentProfileScrollPageState extends State<StudentProfileScrollPage> {
               child: PassportScreen(
                   changeTab: () {
                     changeTab();
-                  }
+                  },
+                  onUpdateScroll: (value) {
+                    setState(() {
+                      offsetScroll = value;
+                    });
+                  },
               ),
             ),
           ],
         ),
         Positioned(
-          top: 124,
+          top: 124 - offsetScroll,
           left: (SizerUtil.width - 40) - (offset / 1.2),
           child: const IgnorePointer(
             child: PassportView(),

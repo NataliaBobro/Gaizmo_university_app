@@ -22,12 +22,14 @@ import 'package:routemaster/routemaster.dart' as routemaster;
 import '../../../resources/resources.dart';
 import '../../domain/states/auth_state.dart';
 import '../../domain/states/school/school_profile_state.dart';
+import '../../domain/states/school/school_shop_state.dart';
 import '../../domain/states/services_state.dart';
 import '../../domain/states/my_results_state.dart';
 import '../../domain/states/student/favorite_state.dart';
 import '../../domain/states/student/student_school_state.dart';
 import '../../domain/states/student/student_home_state.dart';
 import '../../domain/states/teacher/teacher_home_state.dart';
+import '../screens/school/shop/school_shop_screen.dart';
 import '../screens/splash/splash_screen.dart';
 import '../screens/students/favorite/favorite_screen.dart';
 import '../screens/students/profile/student_profile_scroll_page.dart';
@@ -54,6 +56,7 @@ const _myResults = '/my-results';
 const _studentFavorite = '/student-favorite';
 const _chats = '/chats';
 const _news = '/news';
+const _schoolShop = '/school-shop';
 
 abstract class AppRoutes {
   static String get tabbar => _tabbar;
@@ -108,7 +111,7 @@ final loggedSchoolInMap = routemaster.RouteMap(
   onUnknownRoute: (_) => const routemaster.Redirect(_tabbar),
   routes: {
     _tabbar: (info) => routemaster.TabPage(
-      paths: const [_home, _services, _schedule, _staff, _news],
+      paths: const [_home, _services, _schedule, _staff, _news, _schoolShop],
       child: MultiProvider(
         providers: [
           ChangeNotifierProvider(
@@ -122,6 +125,7 @@ final loggedSchoolInMap = routemaster.RouteMap(
               {'icon': Svgs.schedule, 'name': getConstant('Schedule')},
               {'icon': Svgs.profile, 'name': getConstant('Staff')},
               {'icon': Svgs.statistics, 'name': getConstant('News')},
+              {'icon': Svgs.shop, 'name': getConstant('Shop')},
             ]
         ),
       ),
@@ -154,6 +158,12 @@ final loggedSchoolInMap = routemaster.RouteMap(
       child: ChangeNotifierProvider(
         create: (context) => NewsState(context),
         child: const NewsScreen(),
+      ),
+    ),
+    _schoolShop: (_) => TransitionPage(
+      child: ChangeNotifierProvider(
+        create: (context) => SchoolShopState(context),
+        child: const SchoolShopScreen(),
       ),
     ),
   },
