@@ -55,4 +55,6 @@ class Svgs {
   static const String delivery = 'assets/vectors/delivery.svg';
   static const String edit = 'assets/vectors/edit.svg';
   static const String shop = 'assets/vectors/shop.svg';
+  static const String clear = 'assets/vectors/clear.svg';
+  static const String message = 'assets/vectors/message.svg';
 }

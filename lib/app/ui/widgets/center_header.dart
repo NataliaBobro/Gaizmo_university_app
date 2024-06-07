@@ -36,10 +36,17 @@ class CenterHeader extends StatelessWidget {
                 vertical: 16
             ),
             alignment: Alignment.center,
-            child: Text(
-              title,
-              style: TextStyles.s24w700.copyWith(
-                  color: const Color(0xFF242424)
+            child: Container(
+              constraints: BoxConstraints(
+                maxWidth: SizerUtil.width - 90,
+              ),
+              child: Text(
+                title,
+                style: TextStyles.s24w700.copyWith(
+                    color: const Color(0xFF242424),
+                    overflow: TextOverflow.ellipsis
+                ),
+                maxLines: 1,
               ),
             ),
           ),
@@ -49,11 +56,13 @@ class CenterHeader extends StatelessWidget {
               bottom: 0,
               child: CupertinoButton(
                 padding: const EdgeInsets.symmetric(
-                    horizontal: 24,
+                    horizontal: 8,
                     vertical: 16
+                ).copyWith(
+                  right: 24
                 ),
                 child: SvgPicture.asset(
-                  Svgs.close,
+                  Svgs.back,
                   width: 32,
                 ),
                 onPressed: () {

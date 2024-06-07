@@ -2,8 +2,10 @@ import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../../resources/resources.dart';
+import '../../../domain/states/chats/chats_state.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/text_styles.dart';
 
@@ -20,6 +22,7 @@ class _SubmitChatInputState extends State<SubmitChatInput> {
 
   @override
   Widget build(BuildContext context) {
+    final state = context.watch<ChatsState>();
     return Column(
       children: [
         Container(
@@ -80,7 +83,7 @@ class _SubmitChatInputState extends State<SubmitChatInput> {
                           width: 20,
                         ),
                         onPressed: () {
-
+                          state.sendMessage(value, );
                         }),
                   ],
                 ),

@@ -1,4 +1,3 @@
-import 'package:european_university_app/app/domain/states/chats/ChatsState.dart';
 import 'package:european_university_app/app/domain/states/news/news_state.dart';
 import 'package:european_university_app/app/domain/states/school/school_schedule_state.dart';
 import 'package:european_university_app/app/domain/states/school/school_staff_state.dart';
@@ -75,6 +74,7 @@ abstract class AppRoutes {
   static String get myResults => _myResults;
   static String get servicesTeacher => _servicesTeacher;
   static String get studentFavorite => _studentFavorite;
+  static String get chats => _chats;
 }
 
 final splashMap = routemaster.RouteMap(
@@ -265,11 +265,8 @@ final loggedStudentInMap = routemaster.RouteMap(
         child: const FavoriteScreen(),
       ),
     ),
-    _chats: (_) => TransitionPage(
-      child: ChangeNotifierProvider(
-        create: (context) => ChatsState(context),
-        child: const ChatsScreen(),
-      ),
+    _chats: (_) => const TransitionPage(
+      child: ChatsScreen(),
     ),
   },
 );

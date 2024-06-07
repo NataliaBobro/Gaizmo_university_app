@@ -1,7 +1,12 @@
-import 'package:european_university_app/app/ui/screens/chats/submit_chat_input.dart';
+import 'package:european_university_app/app/ui/screens/chats/sceletons/chat_list_sceleton.dart';
+import 'package:european_university_app/app/ui/screens/chats/widgets/empty_message.dart';
+import 'package:european_university_app/app/ui/screens/chats/widgets/list_chats.dart';
+import 'package:european_university_app/app/ui/screens/chats/widgets/search_input.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../../domain/states/chats/chats_state.dart';
 import '../../utils/get_constant.dart';
 import '../../widgets/center_header.dart';
 
@@ -15,6 +20,8 @@ class ChatsScreen extends StatefulWidget {
 class _ChatsScreenState extends State<ChatsScreen> {
   @override
   Widget build(BuildContext context) {
+    final state = context.watch<ChatsState>();
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -35,20 +42,36 @@ class _ChatsScreenState extends State<ChatsScreen> {
                               FocusScope.of(context).unfocus();
                             },
                             child: ListView(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 24,
-                                  vertical: 24
-                              ),
                               physics: const ClampingScrollPhysics(),
-                              children: const [
-                                SizedBox(
-                                  height: 50,
+                              children: [
+                                SearchInput(
+                                  placeholder: getConstant('Search'),
+                                  controller: state.search,
+                                  fetchSearch: (val) {
+                                    state.fetchSearch(val);
+                                  },
+                                  onTap: () {
+                                    state.openClearButton();
+                                  },
+                                  clearTextField: () {
+                                    state.clearTextField();
+                                  },
+                                  openClear: state.openClear,
+                                  closeClearButton: () {
+                                    state.closeClearButton();
+                                  },
                                 ),
+                                if(state.isLoading) ...[
+                                  const ChatListSceleton(),
+                                ] else if(state.users != null) ...[
+                                  const ListSearchUsers()
+                                ] else ...[
+                                  const EmptyMessage()
+                                ]
                               ],
                             ),
                           ),
                         ),
-                        const SubmitChatInput()
                       ],
                     )
                 )

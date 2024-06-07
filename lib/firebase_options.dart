@@ -58,11 +58,11 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyD9jH4Y17Wc6HHU023iUjmdGpV4RVInNDI',
-    appId: '1:711648306470:ios:c2abca1554427d317acde7',
-    messagingSenderId: '711648306470',
-    projectId: 'etm-a04aa',
-    storageBucket: 'etm-a04aa.appspot.com',
+    apiKey: 'AIzaSyD_GQKNke0ChDY99BvAfjY87x-Ev-pTcaU',
+    appId: '1:1011001361196:ios:a12e7d44d9f9b55c32e289',
+    messagingSenderId: '1011001361196',
+    projectId: 'eu-univer',
+    storageBucket: 'eu-univer.appspot.com',
     iosBundleId: 'ua.ETM.europeanuniversity',
   );
 }

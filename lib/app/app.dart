@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:european_university_app/app/domain/services/user_service.dart';
+import 'package:european_university_app/app/domain/states/chats/chats_state.dart';
 import 'package:european_university_app/app/ui/utils/show_message.dart';
 import 'package:european_university_app/app/ui/widgets/snackbars.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -263,8 +264,15 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => AppState(context),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => AppState(context)
+        ),
+        ChangeNotifierProvider(
+            create: (context) => ChatsState(context)
+        )
+      ],
       child: Sizer(
         builder: (context, orientaition, child) => OverlaySupport.global(
           child: MaterialApp.router(
