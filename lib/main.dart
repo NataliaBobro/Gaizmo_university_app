@@ -1,4 +1,3 @@
-import 'package:european_university_app/resources/app_firebase_messaging.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -23,7 +22,6 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  AppFirebaseMessaging.init();
 
   runApp(const App());
 }

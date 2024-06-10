@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:routemaster/routemaster.dart';
 
 import '../../../app.dart';
+import '../../../domain/states/chats/chats_state.dart';
 
 
 class TabBarScreen extends StatefulWidget {
@@ -49,6 +50,7 @@ class TabBarScreenState extends State<TabBarScreen> with TickerProviderStateMixi
     final pageState = TabPage.of(context);
     final selectedIndex = pageState.index;
     final stack = pageState.stacks[selectedIndex];
+    context.watch<ChatsState>();
 
     return Scaffold(
       extendBody: false,

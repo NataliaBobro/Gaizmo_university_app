@@ -1,8 +1,11 @@
+import 'package:european_university_app/app/app.dart';
 import 'package:european_university_app/app/domain/models/user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'dart:io';
 
+import '../../../../resources/app_firebase_messaging.dart';
 import '../../../ui/screens/chats/chat_item_screen.dart';
 import '../../models/chat.dart';
 import '../../services/chat_service.dart';
@@ -20,6 +23,7 @@ class ChatsState with ChangeNotifier {
 
   ChatsState(this.context){
     Future.microtask(() {
+      initFirebase();
       fetchChatList();
     });
   }
@@ -32,6 +36,10 @@ class ChatsState with ChangeNotifier {
   ChatListItem? get chatList => _chatList;
   List<File>? get attachment => _attachment;
   ListMessages? get listMessages => _listMessages;
+
+  void initFirebase() {
+    AppFirebaseMessaging.init();
+  }
 
   Future<void> fetchChatList()async {
       _isLoading = true;
@@ -50,12 +58,14 @@ class ChatsState with ChangeNotifier {
   }
 
   Future<void> openChat(BuildContext context, UserData? user, {int? chatId})async {
+      final authUser = context.read<AppState>().userData;
       openPageChat(context);
       _chat = ChatItem(
         id: chatId,
         name: '${user?.lastName ?? ''} ${user?.firstName}',
         recipients: [
-          user!
+          user!,
+          authUser!
         ]
       );
       notifyListeners();
@@ -106,6 +116,21 @@ class ChatsState with ChangeNotifier {
     }
   }
 
+  void addMessage(value) {
+    final user = context.read<AppState>().userData;
+    _listMessages?.data?.insert(
+        0,
+        Messages(
+            message: value,
+            attachmentFile: attachment,
+            userId: user?.id,
+            createdAt: DateTime.now().toString()
+        )
+    );
+    _chatList?.data.firstWhere((element) => element.id == _chat?.id).lastMessage?.message = value;
+    notifyListeners();
+  }
+
   Future<void> sendMessage(String value) async {
     if (value.length < 2) {
       _users = null;
@@ -115,12 +140,7 @@ class ChatsState with ChangeNotifier {
       _isLoading = true;
       notifyListeners();
     }
-
-    _listMessages?.data?.add(Messages(
-      message: value,
-      attachmentFile: attachment,
-    ));
-    notifyListeners();
+    addMessage(value);
 
     try {
       final result = await ChatService.sendMessage(
@@ -131,7 +151,7 @@ class ChatsState with ChangeNotifier {
           _attachment
       );
       if(result != null){
-        _chat?.messages?.first.attachment = result.attachment;
+        _chat?.lastMessage?.attachment = result.attachment;
       }
     } catch (e) {
       print(e);

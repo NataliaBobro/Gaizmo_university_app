@@ -83,7 +83,8 @@ class _SubmitChatInputState extends State<SubmitChatInput> {
                           width: 20,
                         ),
                         onPressed: () {
-                          state.sendMessage(value, );
+                          message.clear();
+                          state.sendMessage(value);
                         }),
                   ],
                 ),

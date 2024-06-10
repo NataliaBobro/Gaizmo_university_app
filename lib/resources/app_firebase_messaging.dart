@@ -9,7 +9,6 @@ class AppFirebaseMessaging{
   static Future<void> init() async {
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
-      print(message);
       if (message.data['action'] == 'new_message') {
         String chatId = message.data['chat_id'];
           Timer(const Duration(milliseconds: 500), () async {

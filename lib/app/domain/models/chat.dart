@@ -24,14 +24,14 @@ class ChatListItem {
 class ChatItem {
   int? id;
   String? name;
+  Messages? lastMessage;
   List<UserData>? recipients;
-  List<Messages>? messages;
 
   ChatItem({
     this.id,
     this.name,
-    this.recipients,
-    this.messages,
+    this.lastMessage,
+    this.recipients
   });
 
   Map<String, dynamic> toJson() => _$ChatItemToJson(this);
@@ -57,6 +57,7 @@ class Messages {
   int? id;
   int? userId;
   String? message;
+  String? createdAt;
   List<MessageAttachment>? attachment;
 
   @JsonKey(includeFromJson: false)
@@ -67,6 +68,7 @@ class Messages {
     this.userId,
     this.message,
     this.attachment,
+    this.createdAt,
     this.attachmentFile,
   });
 

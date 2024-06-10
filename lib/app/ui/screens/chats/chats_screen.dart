@@ -1,7 +1,7 @@
 import 'package:european_university_app/app/ui/screens/chats/sceletons/chat_list_sceleton.dart';
 import 'package:european_university_app/app/ui/screens/chats/widgets/chat_list.dart';
 import 'package:european_university_app/app/ui/screens/chats/widgets/empty_message.dart';
-import 'package:european_university_app/app/ui/screens/chats/widgets/list_chats.dart';
+import 'package:european_university_app/app/ui/screens/chats/widgets/list_search_users.dart';
 import 'package:european_university_app/app/ui/screens/chats/widgets/search_input.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

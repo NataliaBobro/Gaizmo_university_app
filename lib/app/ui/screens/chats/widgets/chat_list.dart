@@ -94,12 +94,18 @@ class _ChatListState extends State<ChatList> {
                               height: 60,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     '${user?.firstName ?? ''} ${user?.lastName ?? ''}',
                                     style: TextStyles.s14w500.copyWith(
                                         color: AppColors.fgDefault
+                                    ),
+                                  ),
+                                  Text(
+                                    '${state.chatList?.data[index].lastMessage?.message}',
+                                    style: TextStyles.s12w400.copyWith(
+                                        color: AppColors.fgMuted
                                     ),
                                   ),
                                 ],

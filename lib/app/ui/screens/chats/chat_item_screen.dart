@@ -38,7 +38,7 @@ class _ChatItemScreenState extends State<ChatItemScreen> {
                             onTap: () {
                               FocusScope.of(context).unfocus();
                             },
-                            child: MessagesListView(),
+                            child: const MessagesListView(),
                           ),
                         ),
                         const SubmitChatInput()
