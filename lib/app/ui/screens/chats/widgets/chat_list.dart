@@ -1,0 +1,120 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:european_university_app/app/app.dart';
+import 'package:european_university_app/app/ui/theme/text_styles.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../domain/states/chats/chats_state.dart';
+import '../../../theme/app_colors.dart';
+
+class ChatList extends StatefulWidget {
+  const ChatList({super.key});
+
+  @override
+  State<ChatList> createState() => _ChatListState();
+}
+
+class _ChatListState extends State<ChatList> {
+  @override
+  Widget build(BuildContext context) {
+    final state = context.watch<ChatsState>();
+    final appState = context.watch<AppState>();
+    return Column(
+      children: [
+        ...List.generate(
+            state.chatList?.data.length ?? 0,
+            (index) {
+              final user = state.chatList?.data[index].recipients?.firstWhere((element) => element.id != appState.userData?.id);
+
+              return CupertinoButton(
+                minSize: 0.0,
+                padding: EdgeInsets.zero,
+                onPressed: () {
+                  state.openChat(context, user, chatId: state.chatList?.data[index].id);
+                },
+                child: Container(
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                  ).copyWith(
+                      bottom: 8
+                  ),
+                  padding: const EdgeInsets.all(8.0),
+                  decoration: const BoxDecoration(color: Colors.white),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: Column(
+                              children: [
+                                if(user?.avatar != null) ...[
+                                  CachedNetworkImage(
+                                    imageUrl: '${user?.avatar}',
+                                    width: 50,
+                                    height: 70,
+                                    errorWidget: (context, error, stackTrace) =>
+                                    const SizedBox.shrink(),
+                                    fit: BoxFit.cover,
+                                  )
+                                ] else ...[
+                                  Container(
+                                    width: 50,
+                                    height: 70,
+                                    color: AppColors.accentContainerSoft.withOpacity(.05),
+                                    child: Builder(
+                                      builder: (BuildContext context) {
+                                        List<String> nameParts = ('${user?.firstName ?? ''}'
+                                            ' ${user?.lastName ?? ''}').split(' ');
+
+                                        String initials = '';
+                                        for (var part in nameParts) {
+                                          if (part.isNotEmpty) {
+                                            initials += part[0];
+                                          }
+                                        }
+                                        return Center(
+                                          child: Text(
+                                            initials,
+                                            style: TextStyles.s18w500,
+                                          ),
+                                        );
+                                      },
+
+                                    ),
+                                  )
+                                ]
+                              ],
+                            ),
+                          ),
+                          const SizedBox(width: 16),
+                          Expanded(
+                            child: SizedBox(
+                              height: 60,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    '${user?.firstName ?? ''} ${user?.lastName ?? ''}',
+                                    style: TextStyles.s14w500.copyWith(
+                                        color: AppColors.fgDefault
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }
+        )
+      ],
+    );
+  }
+}

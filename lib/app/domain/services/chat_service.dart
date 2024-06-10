@@ -28,24 +28,38 @@ class ChatService {
     return ListUserData.fromJson(data);
   }
 
-  static Future<ChatItem?> fetchChat(
+  static Future<ListMessages?> fetchChat(
       BuildContext context,
-      int? userId
+      int? userId,
+      int? chatId
       ) async {
-
     final token = getToken(context);
     if(token == null) return null;
     final response = await ApiClient().dio.get(
-      '/chats/open',
+      '/chats/fetch-chat-message',
       queryParameters: {
-        'user': userId
+        'user_id': userId,
+        'chat_id': chatId,
       },
       options: Options(
         headers: {'Authorization': 'Bearer $token'},
       ),
     );
     final data = response.data as Map<String, dynamic>;
-    return ChatItem.fromJson(data);
+    return ListMessages.fromJson(data);
+  }
+
+  static Future<ChatListItem?> fetchChatList(BuildContext context,) async {
+    final token = getToken(context);
+    if(token == null) return null;
+    final response = await ApiClient().dio.get(
+      '/chats/list',
+      options: Options(
+        headers: {'Authorization': 'Bearer $token'},
+      ),
+    );
+    final data = response.data as Map<String, dynamic>;
+    return ChatListItem.fromJson(data);
   }
 
   static Future<Messages?> sendMessage(

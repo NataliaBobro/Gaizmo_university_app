@@ -14,20 +14,45 @@ class ChatsState with ChangeNotifier {
   ListUserData? _users;
   bool _openClear = false;
   ChatItem? _chat;
+  ListMessages? _listMessages;
+  ChatListItem? _chatList;
   List<File>? _attachment;
 
-  ChatsState(this.context);
+  ChatsState(this.context){
+    Future.microtask(() {
+      fetchChatList();
+    });
+  }
 
   bool get isLoading => _isLoading;
   TextEditingController get search => _search;
   ListUserData? get users => _users;
   bool get openClear => _openClear;
   ChatItem? get chat => _chat;
+  ChatListItem? get chatList => _chatList;
   List<File>? get attachment => _attachment;
+  ListMessages? get listMessages => _listMessages;
 
-  Future<void> openChat(BuildContext context, UserData? user)async {
+  Future<void> fetchChatList()async {
+      _isLoading = true;
+      notifyListeners();
+      try {
+        final result = await ChatService.fetchChatList(context);
+        if(result != null) {
+          _chatList = result;
+        }
+      } catch (e) {
+        print(e);
+      } finally {
+        _isLoading = false;
+        notifyListeners();
+      }
+  }
+
+  Future<void> openChat(BuildContext context, UserData? user, {int? chatId})async {
       openPageChat(context);
       _chat = ChatItem(
+        id: chatId,
         name: '${user?.lastName ?? ''} ${user?.firstName}',
         recipients: [
           user!
@@ -36,9 +61,9 @@ class ChatsState with ChangeNotifier {
       notifyListeners();
 
       try {
-        final result = await ChatService.fetchChat(context, user.id);
+        final result = await ChatService.fetchChat(context, user.id, chatId);
         if(result != null) {
-          _chat = result;
+          _listMessages = result;
         }
       } catch (e) {
         print(e);
@@ -91,8 +116,8 @@ class ChatsState with ChangeNotifier {
       notifyListeners();
     }
 
-    _chat?.messages?.add(Messages(
-      text: value,
+    _listMessages?.data?.add(Messages(
+      message: value,
       attachmentFile: attachment,
     ));
     notifyListeners();

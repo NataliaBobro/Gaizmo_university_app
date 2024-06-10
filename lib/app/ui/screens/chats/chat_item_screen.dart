@@ -1,4 +1,5 @@
 import 'package:european_university_app/app/ui/screens/chats/submit_chat_input.dart';
+import 'package:european_university_app/app/ui/screens/chats/widgets/messages_block.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -37,18 +38,7 @@ class _ChatItemScreenState extends State<ChatItemScreen> {
                             onTap: () {
                               FocusScope.of(context).unfocus();
                             },
-                            child: ListView(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 24,
-                                  vertical: 24
-                              ),
-                              physics: const ClampingScrollPhysics(),
-                              children: const [
-                                SizedBox(
-                                  height: 50,
-                                ),
-                              ],
-                            ),
+                            child: MessagesListView(),
                           ),
                         ),
                         const SubmitChatInput()

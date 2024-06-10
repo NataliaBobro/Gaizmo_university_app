@@ -1,4 +1,5 @@
 import 'package:european_university_app/app/ui/screens/chats/sceletons/chat_list_sceleton.dart';
+import 'package:european_university_app/app/ui/screens/chats/widgets/chat_list.dart';
 import 'package:european_university_app/app/ui/screens/chats/widgets/empty_message.dart';
 import 'package:european_university_app/app/ui/screens/chats/widgets/list_chats.dart';
 import 'package:european_university_app/app/ui/screens/chats/widgets/search_input.dart';
@@ -66,7 +67,11 @@ class _ChatsScreenState extends State<ChatsScreen> {
                                 ] else if(state.users != null) ...[
                                   const ListSearchUsers()
                                 ] else ...[
-                                  const EmptyMessage()
+                                  if(state.chatList?.data != null) ...[
+                                    const ChatList()
+                                  ]else ...[
+                                    const EmptyMessage()
+                                  ]
                                 ]
                               ],
                             ),

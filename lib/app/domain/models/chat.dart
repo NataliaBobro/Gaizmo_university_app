@@ -5,6 +5,22 @@ import 'dart:io';
 part 'chat.g.dart';
 
 @JsonSerializable(includeIfNull: true, fieldRename: FieldRename.snake)
+class ChatListItem {
+  bool success;
+  List<ChatItem> data;
+
+  ChatListItem({
+    required this.success,
+    required this.data,
+  });
+
+  Map<String, dynamic> toJson() => _$ChatListItemToJson(this);
+
+  factory ChatListItem.fromJson(Map<String, dynamic> json) => _$ChatListItemFromJson(json);
+}
+
+
+@JsonSerializable(includeIfNull: true, fieldRename: FieldRename.snake)
 class ChatItem {
   int? id;
   String? name;
@@ -24,9 +40,23 @@ class ChatItem {
 }
 
 @JsonSerializable(includeIfNull: true, fieldRename: FieldRename.snake)
+class ListMessages {
+  List<Messages>? data;
+
+  ListMessages({
+    this.data,
+  });
+
+  Map<String, dynamic> toJson() => _$ListMessagesToJson(this);
+
+  factory ListMessages.fromJson(Map<String, dynamic> json) => _$ListMessagesFromJson(json);
+}
+
+@JsonSerializable(includeIfNull: true, fieldRename: FieldRename.snake)
 class Messages {
   int? id;
-  String? text;
+  int? userId;
+  String? message;
   List<MessageAttachment>? attachment;
 
   @JsonKey(includeFromJson: false)
@@ -34,7 +64,8 @@ class Messages {
 
   Messages({
     this.id,
-    this.text,
+    this.userId,
+    this.message,
     this.attachment,
     this.attachmentFile,
   });
