@@ -37,6 +37,10 @@ class TabBarScreenState extends State<TabBarScreen> with TickerProviderStateMixi
     if(index == 0){
       onPressHome();
     }
+    if(index == 4){
+      final chatState = context.read<ChatsState>();
+      chatState.updateChatsState();
+    }
     HapticFeedback.lightImpact();
     setState(() {});
   }

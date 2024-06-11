@@ -78,14 +78,18 @@ class _SubmitChatInputState extends State<SubmitChatInput> {
                         minSize: 0.0,
                         padding: const EdgeInsets.only(
                             left: 15, top: 10, bottom: 10, right: 26),
+                        onPressed: value.isNotEmpty ? () {
+                          setState(() {
+                            message.clear();
+                            state.sendMessage(value);
+                            value = '';
+                          });
+                        } : null,
                         child: SvgPicture.asset(
                           Svgs.send,
                           width: 20,
-                        ),
-                        onPressed: () {
-                          message.clear();
-                          state.sendMessage(value);
-                        }),
+                        )
+                      ),
                   ],
                 ),
               )

@@ -28,22 +28,23 @@ class _MessagesListViewState extends State<MessagesListView> {
     return ListView(
       reverse: true,
       padding: const EdgeInsets.symmetric(
-          horizontal: 24,
-          vertical: 24
+          horizontal: 16,
+          vertical: 16
       ),
       physics: const ClampingScrollPhysics(),
       children: [
-        ...List.generate(
-          messages.length,
-              (index) => Builder(
-                builder: (BuildContext context) {
-                  final user = state.chat?.recipients?.firstWhere((element) => element.id == messages[index].userId);
-                  bool isAuthor = appState.userData?.id ==  messages[index].userId;
-
-                  return MessageBlock(messages: messages[index], user: user, isAuthor: isAuthor);
-                },
-              ),
-        )
+        if(state.chat != null) ...[
+          ...List.generate(
+            messages.length,
+            (index) => Builder(
+              builder: (BuildContext context) {
+                final user = state.chat?.recipients?.firstWhere((element) => element.id == messages[index].userId);
+                bool isAuthor = appState.userData?.id == messages[index].userId;
+                return MessageBlock(messages: messages[index], user: user, isAuthor: isAuthor);
+              },
+            ),
+          )
+        ]
       ],
     );
   }
@@ -71,8 +72,8 @@ class _MessageBlockState extends State<MessageBlock> {
   Widget build(BuildContext context) {
     String inputDate = '${widget.messages.createdAt}';
     DateTime parsedDate = DateTime.parse(inputDate);
-    String formattedDate = DateFormat('dd MMMM yyyy', 'en').format(parsedDate);
-    String formattedTime = DateFormat.Hm('en').format(parsedDate);
+    String formattedDate = DateFormat('dd MMMM yyyy', 'uk').format(parsedDate);
+    String formattedTime = DateFormat.Hm('uk').format(parsedDate);
 
     return Column(
       children: [
@@ -114,17 +115,21 @@ class _MessageBlockState extends State<MessageBlock> {
             if (!widget.isAuthor) ...[
               ClipRRect(
                 borderRadius: BorderRadius.circular(100),
-                child: CachedNetworkImage(
+                child: widget.user?.avatar == null ? CachedNetworkImage(
                   imageUrl: '${widget.user?.avatar}',
                   width: 40,
                   height: 40,
                   fit: BoxFit.cover,
                   errorWidget: (context, error, stackTrace) =>
                   const SizedBox.shrink(),
+                ) : Container(
+                  width: 40,
+                  height: 40,
+                  color: AppColors.accentSoft.withOpacity(.2),
                 ),
               ),
               const SizedBox(
-                width: 20,
+                width: 10,
               )
             ],
             Column(
@@ -137,7 +142,7 @@ class _MessageBlockState extends State<MessageBlock> {
                       .copyWith(color: const Color(0xFFA2ADB9)),
                 ),
                 const SizedBox(
-                  height: 15,
+                  height: 8,
                 )
               ],
             )
@@ -166,7 +171,7 @@ class _MessageItemWidgetState extends State<MessageItemWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 15),
+      margin: const EdgeInsets.only(bottom: 4),
       constraints: BoxConstraints(maxWidth: SizerUtil.width - 128),
       decoration: BoxDecoration(
           color: widget.isAuthor

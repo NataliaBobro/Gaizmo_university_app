@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:european_university_app/app/app.dart';
 import 'package:european_university_app/app/domain/models/user.dart';
 import 'package:flutter/cupertino.dart';
@@ -23,7 +25,7 @@ class ChatsState with ChangeNotifier {
 
   ChatsState(this.context){
     Future.microtask(() async {
-      await fetchChatList();
+      fetchChatList();
       initFirebase();
     });
   }
@@ -42,6 +44,9 @@ class ChatsState with ChangeNotifier {
   }
 
   Future<void> fetchChatList()async {
+    final user = context.read<AppState>().userData;
+    if(user?.id == null) return;
+
       _isLoading = true;
       notifyListeners();
       try {
@@ -58,6 +63,7 @@ class ChatsState with ChangeNotifier {
   }
 
   Future<void> openChat(BuildContext context, UserData? user, {int? chatId})async {
+    notifyListeners();
       final authUser = context.read<AppState>().userData;
       openPageChat(context);
       _chat = ChatItem(
@@ -130,7 +136,7 @@ class ChatsState with ChangeNotifier {
     }
 
     if(chatUpdatedId == _chat?.id){
-      AppFirebaseMessaging.setFirebase(false);
+      // AppFirebaseMessaging.setFirebase(false);
 
       _listMessages?.data?.insert(
           0,
@@ -145,6 +151,8 @@ class ChatsState with ChangeNotifier {
     final chat = _chatList?.data.where((element) => element.id == chatUpdatedId);
     if((chat?.length ?? 0) > 0){
       _chatList?.data.where((element) => element.id == chatUpdatedId).first.lastMessage?.message = text;
+    }else{
+      fetchChatList();
     }
     notifyListeners();
   }
@@ -192,6 +200,14 @@ class ChatsState with ChangeNotifier {
       FocusScope.of(context).unfocus();
       notifyListeners();
     }
+  }
+
+  void updateChatsState(){
+    _search.clear();
+    _listMessages = null;
+    _chatList = null;
+    _chat = null;
+    fetchChatList();
   }
 
   void openClearButton() {

@@ -103,7 +103,7 @@ class _ChatListState extends State<ChatList> {
                                     ),
                                   ),
                                   Text(
-                                    '${state.chatList?.data[index].lastMessage?.message}',
+                                    state.chatList?.data[index].lastMessage?.message ?? '',
                                     style: TextStyles.s12w400.copyWith(
                                         color: AppColors.fgMuted
                                     ),

@@ -8,10 +8,9 @@ import '../app/ui/navigation/routes.dart';
 class AppFirebaseMessaging {
   static Future<void> init(ChatsState read) async {
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
-      print('-onMessageOpenedApp----');
-      print(message.data);
       if (message.data['action'] == 'send_message') {
-        String chatId = message.data['chat_id'];
+        int chatId = int.parse(message.data['chat_id']);
+        await addMessageToChat(read, message.data);
         Timer(const Duration(milliseconds: 500), () async {
           await navigateToChat(chatId);
         });
@@ -20,17 +19,14 @@ class AppFirebaseMessaging {
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
       if (message.data['action'] == 'send_message') {
-        int chatId = int.parse(message.data['chat_id']);
-        String text = message.data['message'];
-        int recipientId = int.parse(message.data['recipient_id']);
-        await addMessageToChat(read, chatId, recipientId, text);
+        await addMessageToChat(read, message.data);
       }
     });
 
     RemoteMessage? initialMessage =
     await FirebaseMessaging.instance.getInitialMessage();
     if (initialMessage?.data['action'] == 'send_message') {
-      String chatId = initialMessage?.data['chat_id'];
+      int chatId = int.parse(initialMessage?.data['chat_id']);
       Timer(const Duration(milliseconds: 2000), () async {
         await navigateToChat(chatId);
       });
@@ -48,12 +44,15 @@ class AppFirebaseMessaging {
     );
   }
 
-  static Future<void> addMessageToChat(ChatsState read, int chatId, recipientId, text) async {
+  static Future<void> addMessageToChat(ChatsState read, data) async {
+    int chatId = int.parse(data['chat_id']);
+    String text = data['message'];
+    int recipientId = int.parse(data['recipient_id']);
     read.addMessage(text: text, chatId: chatId, recipientId: recipientId);
   }
 
-  static Future<void> navigateToChat(String chatId) async {
-    routemaster.push(AppRoutes.chats, queryParameters: {"id": chatId});
+  static Future<void> navigateToChat(int chatId) async {
+    routemaster.push(AppRoutes.chats, queryParameters: {"id": '$chatId'});
   }
 
   static Future<void> logout() async {

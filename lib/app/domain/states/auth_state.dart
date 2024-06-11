@@ -26,6 +26,7 @@ import '../../ui/theme/app_colors.dart';
 import '../../ui/utils/show_message.dart';
 import '../../ui/widgets/snackbars.dart';
 import '../models/meta.dart';
+import 'chats/chats_state.dart';
 
 class AuthState with ChangeNotifier {
   BuildContext context;
@@ -407,6 +408,7 @@ class AuthState with ChangeNotifier {
 
       if(result != null && result.token != null){
         setToken(result.token, result.user);
+        updateChats();
       }else{
         if(_codeRegister.text.isEmpty){
           openConfirmCode();
@@ -536,6 +538,7 @@ class AuthState with ChangeNotifier {
       );
       if(result != null){
         setToken(result.token, result.user);
+        updateChats();
         if(result.user?.languageId != _selectLang){
           fetchNewConstant(result.user?.languageId);
         }
@@ -554,6 +557,10 @@ class AuthState with ChangeNotifier {
       _isLoading = false;
       notifyListeners();
     }
+  }
+
+  void updateChats(){
+    context.read<ChatsState>().updateChatsState();
   }
 
   void fetchNewConstant(languageId){

@@ -227,9 +227,9 @@ class AppState extends ChangeNotifier {
   }
 
   void onLogout() async {
-    notifyListeners();
-    fetchConstant(languageId: 1);
+    _userData = null;
     await Hive.box('settings').delete('token');
+    notifyListeners();
     changeLogInState(false);
   }
 
