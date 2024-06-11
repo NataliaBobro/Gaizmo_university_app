@@ -26,6 +26,7 @@ class AppFirebaseMessaging {
     RemoteMessage? initialMessage =
     await FirebaseMessaging.instance.getInitialMessage();
     if (initialMessage?.data['action'] == 'send_message') {
+      await addMessageToChat(read, initialMessage?.data);
       int chatId = int.parse(initialMessage?.data['chat_id']);
       Timer(const Duration(milliseconds: 2000), () async {
         await navigateToChat(chatId);

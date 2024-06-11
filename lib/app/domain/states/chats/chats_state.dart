@@ -63,6 +63,7 @@ class ChatsState with ChangeNotifier {
   }
 
   Future<void> openChat(BuildContext context, UserData? user, {int? chatId})async {
+    _listMessages = null;
     notifyListeners();
       final authUser = context.read<AppState>().userData;
       openPageChat(context);
@@ -80,6 +81,9 @@ class ChatsState with ChangeNotifier {
         final result = await ChatService.fetchChat(context, user.id, chatId);
         if(result != null) {
           _listMessages = result;
+          if(_chat?.id == null){
+            fetchChatList();
+          }
         }
       } catch (e) {
         print(e);
