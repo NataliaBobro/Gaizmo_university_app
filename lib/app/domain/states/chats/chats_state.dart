@@ -22,9 +22,9 @@ class ChatsState with ChangeNotifier {
   List<File>? _attachment;
 
   ChatsState(this.context){
-    Future.microtask(() {
+    Future.microtask(() async {
+      await fetchChatList();
       initFirebase();
-      fetchChatList();
     });
   }
 
@@ -127,7 +127,10 @@ class ChatsState with ChangeNotifier {
             createdAt: DateTime.now().toString()
         )
     );
-    _chatList?.data.firstWhere((element) => element.id == _chat?.id).lastMessage?.message = value;
+    final chat = _chatList?.data.where((element) => element.id == _chat?.id);
+    if((chat?.length ?? 0) > 0){
+      _chatList?.data.where((element) => element.id == _chat?.id).first.lastMessage?.message = value;
+    }
     notifyListeners();
   }
 
@@ -152,6 +155,10 @@ class ChatsState with ChangeNotifier {
       );
       if(result != null){
         _chat?.lastMessage?.attachment = result.attachment;
+        if(_chat?.id == null){
+          fetchChatList();
+          _chat?.id = result.id;
+        }
       }
     } catch (e) {
       print(e);

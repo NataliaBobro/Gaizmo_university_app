@@ -9,6 +9,7 @@ class AppFirebaseMessaging{
   static Future<void> init() async {
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
+      print(message);
       if (message.data['action'] == 'new_message') {
         String chatId = message.data['chat_id'];
           Timer(const Duration(milliseconds: 500), () async {
@@ -18,6 +19,7 @@ class AppFirebaseMessaging{
     });
 
     RemoteMessage? initialMessage = await FirebaseMessaging.instance.getInitialMessage();
+    print(initialMessage?.data);
     if (initialMessage?.data['action'] == 'new_message') {
       String chatId = initialMessage?.data['chat_id'];
       Timer(const Duration(milliseconds: 2000), () async {

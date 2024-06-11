@@ -67,7 +67,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
                                 ] else if(state.users != null) ...[
                                   const ListSearchUsers()
                                 ] else ...[
-                                  if(state.chatList?.data != null) ...[
+                                  if((state.chatList?.data.length ?? 0) > 0) ...[
                                     const ChatList()
                                   ]else ...[
                                     const EmptyMessage()
