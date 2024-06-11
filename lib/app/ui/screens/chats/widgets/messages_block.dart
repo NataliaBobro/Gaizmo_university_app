@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:european_university_app/app/app.dart';
+import 'package:european_university_app/app/ui/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -70,8 +71,8 @@ class _MessageBlockState extends State<MessageBlock> {
   Widget build(BuildContext context) {
     String inputDate = '${widget.messages.createdAt}';
     DateTime parsedDate = DateTime.parse(inputDate);
-    String formattedDate = DateFormat('dd MMMM yyyy', 'ru').format(parsedDate);
-    String formattedTime = DateFormat.Hm('ru').format(parsedDate);
+    String formattedDate = DateFormat('dd MMMM yyyy', 'en').format(parsedDate);
+    String formattedTime = DateFormat.Hm('en').format(parsedDate);
 
     return Column(
       children: [
@@ -81,7 +82,7 @@ class _MessageBlockState extends State<MessageBlock> {
               Expanded(
                 child: Container(
                   height: 2,
-                  color: const Color(0xFF0B0F13),
+                  color: AppColors.accentContainerSoft.withOpacity(.05),
                 ),
               ),
               Padding(
@@ -95,7 +96,7 @@ class _MessageBlockState extends State<MessageBlock> {
               Expanded(
                 child: Container(
                   height: 2,
-                  color: const Color(0xFF0B0F13),
+                  color: AppColors.accentContainerSoft.withOpacity(.05),
                 ),
               ),
             ],
@@ -129,8 +130,7 @@ class _MessageBlockState extends State<MessageBlock> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ...List.generate(
-                    1, (index) => MessageItemWidget(message: widget.messages, isAuthor: widget.isAuthor)),
+                MessageItemWidget(message: widget.messages, isAuthor: widget.isAuthor),
                 Text(
                   formattedTime,
                   style: TextStyles.s16w400
@@ -170,8 +170,8 @@ class _MessageItemWidgetState extends State<MessageItemWidget> {
       constraints: BoxConstraints(maxWidth: SizerUtil.width - 128),
       decoration: BoxDecoration(
           color: widget.isAuthor
-              ? const Color(0xFF0B0F13)
-              : const Color(0xFF1167C3),
+              ? AppColors.accentContainerSoft.withOpacity(.05)
+              : AppColors.accentSoft,
           borderRadius: BorderRadius.only(
               topLeft: widget.isAuthor
                   ? const Radius.circular(10)
@@ -184,7 +184,9 @@ class _MessageItemWidgetState extends State<MessageItemWidget> {
       padding: const EdgeInsets.all(16),
       child: Text(
         '${widget.message.message}',
-        style: TextStyles.s16w400.copyWith(color: Colors.white),
+        style: TextStyles.s16w400.copyWith(
+            color: widget.isAuthor ? AppColors.fgMuted : Colors.white
+        ),
       ),
     );
   }

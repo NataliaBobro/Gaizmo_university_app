@@ -38,7 +38,7 @@ class ChatsState with ChangeNotifier {
   ListMessages? get listMessages => _listMessages;
 
   void initFirebase() {
-    AppFirebaseMessaging.init();
+    AppFirebaseMessaging.init(this);
   }
 
   Future<void> fetchChatList()async {
@@ -116,20 +116,35 @@ class ChatsState with ChangeNotifier {
     }
   }
 
-  void addMessage(value) {
-    final user = context.read<AppState>().userData;
-    _listMessages?.data?.insert(
-        0,
-        Messages(
-            message: value,
-            attachmentFile: attachment,
-            userId: user?.id,
-            createdAt: DateTime.now().toString()
-        )
-    );
-    final chat = _chatList?.data.where((element) => element.id == _chat?.id);
+  void addMessage({String? text, int? chatId, int? recipientId}) {
+    int? chatUpdatedId = _chat?.id;
+    int? recipientUpdateId = recipientId;
+
+    if(recipientId == null){
+      final user = context.read<AppState>().userData;
+      recipientUpdateId = user?.id;
+    }
+
+    if(chatId != null){
+      chatUpdatedId = chatId;
+    }
+
+    if(chatUpdatedId == _chat?.id){
+      AppFirebaseMessaging.setFirebase(false);
+
+      _listMessages?.data?.insert(
+          0,
+          Messages(
+              message: text,
+              attachmentFile: attachment,
+              userId: recipientUpdateId,
+              createdAt: DateTime.now().toString()
+          )
+      );
+    }
+    final chat = _chatList?.data.where((element) => element.id == chatUpdatedId);
     if((chat?.length ?? 0) > 0){
-      _chatList?.data.where((element) => element.id == _chat?.id).first.lastMessage?.message = value;
+      _chatList?.data.where((element) => element.id == chatUpdatedId).first.lastMessage?.message = text;
     }
     notifyListeners();
   }
@@ -143,7 +158,7 @@ class ChatsState with ChangeNotifier {
       _isLoading = true;
       notifyListeners();
     }
-    addMessage(value);
+    addMessage(text: value);
 
     try {
       final result = await ChatService.sendMessage(
