@@ -133,7 +133,7 @@ class _ProductItemBlockState extends State<ProductItemBlock> {
                             color: Colors.amberAccent.withOpacity(.5)
                           ),
                           child: Text(
-                            '${widget.item?.priceEtm ?? ''} ETM / ${widget.item?.priceMoney ?? ''} UAH',
+                            '${widget.item?.priceEtm ?? ''} EU / ${widget.item?.priceMoney ?? ''} UAH',
                             style: TextStyles.s12w400.copyWith(
                                 color: Colors.black,
                                 overflow: TextOverflow.ellipsis
@@ -264,7 +264,7 @@ class _OpenedProductState extends State<OpenedProduct> {
                                         color: Colors.amberAccent.withOpacity(.5)
                                     ),
                                     child: Text(
-                                      '${widget.item?.priceEtm ?? ''} ETM / ${widget.item?.priceMoney ?? ''} UAH',
+                                      '${widget.item?.priceEtm ?? ''} EU / ${widget.item?.priceMoney ?? ''} UAH',
                                       style: TextStyles.s12w400.copyWith(
                                           color: Colors.black,
                                           overflow: TextOverflow.ellipsis
@@ -302,7 +302,7 @@ class _OpenedProductState extends State<OpenedProduct> {
                                       }
                                   ),
                                   Text(
-                                      getConstant('ETM')
+                                      getConstant('EU')
                                   )
                                 ],
                               ),

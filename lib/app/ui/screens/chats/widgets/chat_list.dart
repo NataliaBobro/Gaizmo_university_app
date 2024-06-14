@@ -25,6 +25,7 @@ class _ChatListState extends State<ChatList> {
         ...List.generate(
             state.chatList?.data.length ?? 0,
             (index) {
+              print(state.chatList?.data[index].recipients);
               final user = state.chatList?.data[index].recipients?.firstWhere((element) => element.id != appState.userData?.id);
 
               return CupertinoButton(

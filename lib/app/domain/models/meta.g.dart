@@ -342,3 +342,34 @@ Map<String, dynamic> _$PaymentSettingsItemToJson(
       'type': instance.type,
       'credentials': instance.credentials,
     };
+
+CredWithProductOrder _$CredWithProductOrderFromJson(
+        Map<String, dynamic> json) =>
+    CredWithProductOrder(
+      success: json['success'] as bool,
+      orderReference: json['order_reference'] as String,
+      cred: json['cred'] == null
+          ? null
+          : LiqPayCred.fromJson(json['cred'] as Map<String, dynamic>),
+      product: Products.fromJson(json['product'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$CredWithProductOrderToJson(
+        CredWithProductOrder instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'order_reference': instance.orderReference,
+      'cred': instance.cred,
+      'product': instance.product,
+    };
+
+LiqPayCred _$LiqPayCredFromJson(Map<String, dynamic> json) => LiqPayCred(
+      public: json['public'] as String,
+      secret: json['secret'] as String,
+    );
+
+Map<String, dynamic> _$LiqPayCredToJson(LiqPayCred instance) =>
+    <String, dynamic>{
+      'public': instance.public,
+      'secret': instance.secret,
+    };

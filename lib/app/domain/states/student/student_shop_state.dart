@@ -5,9 +5,11 @@ import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:liqpay/liqpay.dart';
 import 'package:provider/provider.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 import '../../../ui/utils/show_message.dart';
-import '../../../ui/utils/url_launch.dart';
+import '../../models/meta.dart';
 import '../../models/shop.dart';
 
 class StudentShopState with ChangeNotifier {
@@ -81,16 +83,13 @@ class StudentShopState with ChangeNotifier {
     notifyListeners();
     try{
       if(paymentType == 'money'){
-        final result = await ShopService.payProduct(
-            context,
-            productId
-        );
-        if(result != null && result['link'] != null){
-          if(result['link'] == false){
+        final result = await ShopService.fetchLiqPayCred(context, productId);
+        if(result != null){
+          if(result.cred == null){
             showMessage('Payment not possible. Please contact your school '
                 'administrator to set up payment details.', color: const Color(0xFFFFC700));
           }else{
-            openPayWeb(result['link'], result['order_reference'], productId);
+            openPayWeb(result.cred, result.orderReference, result.product);
           }
         }
       }else{
@@ -98,7 +97,6 @@ class StudentShopState with ChangeNotifier {
             context,
             productId
         );
-        print(result);
         if(result != null && result == true){
           openPayed();
         }else{
@@ -113,24 +111,46 @@ class StudentShopState with ChangeNotifier {
     }
   }
 
-  Future<void> openPayWeb(String? link, orderReference,  serviceId) async {
-    openWebView(context, link).whenComplete(() async {
-      final resStatus = await ShopService.fetchPayStatus(
-        context,
-        serviceId,
+  Future<void> openPayWeb(LiqPayCred? cred, orderReference,  Products products) async {
+    final order = LiqPayOrder(
         orderReference,
-      );
+        products.priceMoney?.toDouble() ?? 1,
+        '${products.name}',
+        serverUrl: 'https://european-university.etmcrm.com.ua/api/callback/liqpay',
+        currency: LiqPayCurrency.uah,
+        language: LiqPayLanguage.uk);
+    final url = await LiqPay(
+        '${cred?.public}',
+        '${cred?.secret}'
+    ).checkout(order);
+    if (context.mounted) {
+      Navigator.of(context).push(
+          MaterialPageRoute(
+              maintainState: true,
+              fullscreenDialog: true,
+              builder: (context) => Scaffold(
+                body: SafeArea(
+                  child: WebView(
+                    initialUrl: url,
+                    javascriptMode: JavascriptMode.unrestricted,
+                    onWebViewCreated: (WebViewController webViewController) {
 
-      if(resStatus != null){
-        _isLoading = false;
-        notifyListeners();
-        if(resStatus['pay_status'] == true){
-          openPayed();
-        }else{
-          showMessage(getConstant('Error_pay'));
-        }
-      }
-    });
+                    },
+                    navigationDelegate: (NavigationRequest request) {
+                      print(request);
+                      return NavigationDecision.navigate;
+                    },
+                    onPageFinished: (val) {
+                      print(val);
+                    },
+                  ),
+                ),
+              )
+          )
+      ).whenComplete(() async {
+        openPayed();
+      });
+    }
   }
 
   void openPayed(){

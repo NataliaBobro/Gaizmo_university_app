@@ -78,7 +78,7 @@ class _StudentShopScreenState extends State<StudentShopScreen> {
     return Column(
       children: [
         if(offsetScroll > 100)...[
-          SizedBox(
+          const SizedBox(
             height: 8,
           ),
           SelectBottomSheetInput(

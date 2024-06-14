@@ -13,6 +13,7 @@ class Images {
   static const String penguins = 'assets/images/penguin.png';
   static const String indicator = 'assets/images/indicator.png';
   static const String wayForPay = 'assets/images/WayForPay.png';
+  static const String liqPay = 'assets/images/LiqPay.png';
   static const String logo = 'assets/images/logo.png';
   static const String logoMini = 'assets/images/logo-mini.png';
   static const String cap = 'assets/images/cap.png';

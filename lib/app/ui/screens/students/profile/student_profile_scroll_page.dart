@@ -61,7 +61,7 @@ class _StudentProfileScrollPageState extends State<StudentProfileScrollPage> {
           children: [
             ChangeNotifierProvider(
               create: (context) => ProgressState(context),
-              child: ProgressScreen(),
+              child: const ProgressScreen(),
             ),
             ChangeNotifierProvider(
               create: (context) => StudentHomeState(context),

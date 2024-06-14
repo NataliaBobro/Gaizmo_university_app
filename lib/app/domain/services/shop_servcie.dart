@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:european_university_app/app/domain/models/user.dart';
 import 'package:european_university_app/app/ui/utils/get_token.dart';
 import '../../data/api_client.dart';
+import '../models/meta.dart';
 import '../models/shop.dart';
 
 class ShopService {
@@ -157,6 +158,22 @@ class ShopService {
     );
     final data = response.data as Map<String, dynamic>;
     return data;
+  }
+
+  static Future<CredWithProductOrder?> fetchLiqPayCred(
+      context,
+      productId
+      ) async {
+    final token = getToken(context);
+    if(token == null) return null;
+    final response = await ApiClient().dio.get(
+      '/shop/products/$productId/fetch-school-cred',
+      options: Options(
+        headers: {'Authorization': 'Bearer $token'},
+      ),
+    );
+    final data = response.data as Map<String, dynamic>;
+    return CredWithProductOrder.fromJson(data);
   }
 
   static Future<bool?> payProductEtm(

@@ -12,8 +12,8 @@ dependencies:
 
   accordion:
     path: package/accordion
-  flutter_wayforpay_package:
-    path: package/flutter_wayforpay_package
+  liqpay:
+    path: package/liqpay
   flutter_native_splash: ^2.1.6
   cached_network_image: ^3.2.3
   cached_network_svg_image:
@@ -25,7 +25,6 @@ dependencies:
   overlay_support: ^2.0.1
   image_picker: ^0.8.6+1
   flutter_svg: ^1.1.1+1
-  internet_file: ^1.2.0
   fluttertoast: ^8.2.1
   share_plus: ^6.3.2
   shimmer: ^3.0.0

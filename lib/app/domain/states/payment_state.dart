@@ -22,16 +22,16 @@ class PaymentState with ChangeNotifier {
   PaymentSettings? get paymentSettings => _paymentSettings;
 
 
-  Future<void> checkWayForPayConnectStatus(String account, String secret)async {
+  Future<void> checkPayCredStatusConnectStatus(String public, String secret)async {
     _isLoading = true;
     notifyListeners();
 
     try{
       final result = await PayService.fetchConnectStatus(
           context,
-          'wayforpay',
+          'liqpay',
           {
-            'account': account,
+            'public': public,
             'secret': secret,
           }
       );

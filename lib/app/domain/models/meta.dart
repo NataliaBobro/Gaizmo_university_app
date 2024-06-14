@@ -1,3 +1,4 @@
+import 'package:european_university_app/app/domain/models/shop.dart';
 import 'package:european_university_app/app/domain/models/user.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -399,5 +400,38 @@ class PaymentSettingsItem {
 
   Map<String, dynamic> toJson() => _$PaymentSettingsItemToJson(this);
   factory PaymentSettingsItem.fromJson(Map<String, dynamic> json) => _$PaymentSettingsItemFromJson(json);
+}
+
+
+@JsonSerializable(includeIfNull: true, fieldRename: FieldRename.snake)
+class CredWithProductOrder {
+  bool success;
+  String orderReference;
+  LiqPayCred? cred;
+  Products product;
+
+  CredWithProductOrder({
+    required this.success,
+    required this.orderReference,
+    required this.cred,
+    required this.product
+  });
+
+  Map<String, dynamic> toJson() => _$CredWithProductOrderToJson(this);
+  factory CredWithProductOrder.fromJson(Map<String, dynamic> json) => _$CredWithProductOrderFromJson(json);
+}
+
+@JsonSerializable(includeIfNull: true, fieldRename: FieldRename.snake)
+class LiqPayCred {
+  String public;
+  String secret;
+
+  LiqPayCred({
+    required this.public,
+    required this.secret
+  });
+
+  Map<String, dynamic> toJson() => _$LiqPayCredToJson(this);
+  factory LiqPayCred.fromJson(Map<String, dynamic> json) => _$LiqPayCredFromJson(json);
 }
 

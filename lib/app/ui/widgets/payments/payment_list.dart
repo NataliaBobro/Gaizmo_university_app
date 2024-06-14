@@ -1,5 +1,5 @@
 import 'package:european_university_app/app/domain/states/payment_state.dart';
-import 'package:european_university_app/app/ui/widgets/payments/wayforpay_payment.dart';
+import 'package:european_university_app/app/ui/widgets/payments/liq_pay_payment.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -40,7 +40,7 @@ class _PaymentListState extends State<PaymentList> {
                       ),
                       physics: const ClampingScrollPhysics(),
                       children: const [
-                        WayForPayPreview()
+                        LiqPayPreview()
                       ],
                   ),
                 ),

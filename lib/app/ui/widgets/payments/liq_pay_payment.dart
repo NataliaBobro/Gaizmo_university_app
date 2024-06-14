@@ -11,25 +11,25 @@ import '../auth_button.dart';
 import '../center_header.dart';
 
 
-class WayForPaySettings extends StatefulWidget {
-  const WayForPaySettings({super.key});
+class LiqPaySettings extends StatefulWidget {
+  const LiqPaySettings({super.key});
 
   @override
-  State<WayForPaySettings> createState() => _WayForPaySettingsState();
+  State<LiqPaySettings> createState() => _LiqPaySettingsState();
 }
 
-class _WayForPaySettingsState extends State<WayForPaySettings> {
-  final TextEditingController _merchantAccount = TextEditingController();
-  final TextEditingController _merchantSecretKey = TextEditingController();
+class _LiqPaySettingsState extends State<LiqPaySettings> {
+  final TextEditingController _public = TextEditingController();
+  final TextEditingController _secret = TextEditingController();
 
   @override
   void initState() {
     final read = context.read<PaymentState>();
-    final wayForPay = read.paymentSettings?.data.where((element) => element.type == 'wayforpay');
+    final wayForPay = read.paymentSettings?.data.where((element) => element.type == 'liqpay');
 
     if((wayForPay?.length ?? 0) > 0){
-      _merchantAccount.text = wayForPay?.first.credentials['account'];
-      _merchantSecretKey.text = wayForPay?.first.credentials['secret'];
+      _public.text = wayForPay?.first.credentials['public'];
+      _secret.text = wayForPay?.first.credentials['secret'];
     }
     super.initState();
   }
@@ -45,26 +45,26 @@ class _WayForPaySettingsState extends State<WayForPaySettings> {
             child: Column(
               children: [
                 CenterHeader(
-                    title: getConstant('WayForPay')
+                    title: getConstant('LiqPay')
                 ),
                 Expanded(
                   child: ListView(
                     padding: const EdgeInsets.symmetric(
-                      vertical: 25,
-                      horizontal: 24
+                        vertical: 25,
+                        horizontal: 24
                     ),
                     physics: const ClampingScrollPhysics(),
                     children: [
                       AppField(
-                          label: 'Merchant account',
-                          controller: _merchantAccount,
+                        label: 'Public',
+                        controller: _public,
                       ),
                       const SizedBox(
                         height: 16,
                       ),
                       AppField(
-                          label: 'Merchant secret key',
-                          controller: _merchantSecretKey,
+                        label: 'Secret',
+                        controller: _secret,
                       ),
                     ],
                   ),
@@ -75,8 +75,8 @@ class _WayForPaySettingsState extends State<WayForPaySettings> {
                       title: getConstant('SAVE_CHANGES'),
                       onPressed: () {
                         state.checkPayCredStatusConnectStatus(
-                            _merchantAccount.text,
-                            _merchantSecretKey.text
+                            _public.text,
+                            _secret.text
                         );
                       }
                   ),
@@ -90,23 +90,23 @@ class _WayForPaySettingsState extends State<WayForPaySettings> {
 }
 
 
-class WayForPayPreview extends StatefulWidget {
-  const WayForPayPreview({super.key});
+class LiqPayPreview extends StatefulWidget {
+  const LiqPayPreview({super.key});
 
   @override
-  State<WayForPayPreview> createState() => _WayForPayPreviewState();
+  State<LiqPayPreview> createState() => _LiqPayPreviewState();
 }
 
-class _WayForPayPreviewState extends State<WayForPayPreview> {
+class _LiqPayPreviewState extends State<LiqPayPreview> {
   @override
   Widget build(BuildContext context) {
     final state = context.watch<PaymentState>();
     final read = context.read<PaymentState>();
-    final wayForPay = state.paymentSettings?.data.where((element) => element.type == 'wayforpay');
+    final liqPay = state.paymentSettings?.data.where((element) => element.type == 'liqpay');
 
     return Container(
       margin: const EdgeInsets.only(
-        bottom: 16
+          bottom: 16
       ),
       child: CupertinoButton(
         padding: EdgeInsets.zero,
@@ -117,7 +117,7 @@ class _WayForPayPreviewState extends State<WayForPayPreview> {
             MaterialPageRoute(
               builder: (context) => ChangeNotifierProvider.value(
                 value: read,
-                child: const WayForPaySettings(),
+                child: const LiqPaySettings(),
               ),
             ),
           ).whenComplete(() {
@@ -127,8 +127,8 @@ class _WayForPayPreviewState extends State<WayForPayPreview> {
         child: Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(16)
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16)
           ),
           child: Row(
             children: [
@@ -136,7 +136,7 @@ class _WayForPayPreviewState extends State<WayForPayPreview> {
                 width: 100,
                 height: 80,
                 child: Image.asset(
-                  Images.wayForPay,
+                  Images.liqPay,
                   width: double.infinity,
                 ),
               ),
@@ -148,7 +148,7 @@ class _WayForPayPreviewState extends State<WayForPayPreview> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    if((wayForPay?.length ?? 0) == 0) ...[
+                    if((liqPay?.length ?? 0) == 0) ...[
                       Text(
                         getConstant('Not_connected'),
                         style: TextStyles.s14w400.copyWith(
@@ -158,10 +158,10 @@ class _WayForPayPreviewState extends State<WayForPayPreview> {
                     ] else ...[
                       RichText(
                         text: TextSpan(
-                          text: 'Account:',
+                          text: 'Public:',
                           children: [
                             TextSpan(
-                              text: ' ${wayForPay?.first.credentials['account']}',
+                              text: ' ${liqPay?.first.credentials['public']}',
                               style: TextStyles.s11w400.copyWith(
                                   color: Colors.grey
                               ),
@@ -177,10 +177,10 @@ class _WayForPayPreviewState extends State<WayForPayPreview> {
                       ),
                       RichText(
                         text: TextSpan(
-                          text: 'Secret:',
+                          text: 'Private:',
                           children: [
                             TextSpan(
-                              text: ' ${'*' * (wayForPay?.first.credentials['secret'].toString().length ?? 0)}',
+                              text: ' ${'*' * (liqPay?.first.credentials['secret'].toString().length ?? 0)}',
                               style: TextStyles.s11w400.copyWith(
                                   color: Colors.grey
                               ),
