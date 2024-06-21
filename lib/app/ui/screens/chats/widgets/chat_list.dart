@@ -106,6 +106,7 @@ class _ChatListState extends State<ChatList> {
                                     style: TextStyles.s12w400.copyWith(
                                         color: AppColors.fgMuted
                                     ),
+                                    maxLines: 2,
                                   ),
                                 ],
                               ),

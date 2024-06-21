@@ -154,8 +154,10 @@ class _AIChatState extends State<AIChat> {
                         Text(
                           state.aiChat?.lastMessage?.message ?? '',
                           style: TextStyles.s12w400.copyWith(
-                              color: AppColors.fgMuted
+                              color: AppColors.fgMuted,
+                              overflow: TextOverflow.ellipsis
                           ),
+                          maxLines: 2,
                         ),
                       ],
                     ),

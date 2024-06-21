@@ -186,7 +186,7 @@ class ChatsState with ChangeNotifier {
       chatUpdatedId = chatId;
     }
 
-    if(chatUpdatedId == _chat?.id){
+    if(chatUpdatedId == _chat?.id || chatUpdatedId == null){
       // AppFirebaseMessaging.setFirebase(false);
 
       _listMessages?.data?.insert(
