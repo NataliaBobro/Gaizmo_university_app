@@ -33,7 +33,7 @@ class AuthState with ChangeNotifier {
   bool _isLoading = false;
   bool _isActivePrivacy = false;
   ValidateError? _validateError;
-  int _selectLang = 0;
+  int _selectLang = 1;
   bool get isLoading => _isLoading;
   final MaskedTextController _phone = MaskedTextController(mask: '+00 (000) 000 00 00', text: '+38 (0');
 
@@ -55,7 +55,7 @@ class AuthState with ChangeNotifier {
   Map<String, dynamic>? _schoolCategory;
   Map<String, dynamic>? _country;
   Map<String, dynamic>? _city;
-  String? _birthDate;
+  DateTime? _birthDate = DateTime.now();
   int _gender = -1;
   int _userType = 0;
   bool _loadingSearch = false;
@@ -85,7 +85,7 @@ class AuthState with ChangeNotifier {
   TextEditingController get house => _house;
   TextEditingController get lastName => _lastName;
   TextEditingController get surname => _surname;
-  String? get birthDate => _birthDate;
+  DateTime? get birthDate => _birthDate;
   FocusNode get phoneFocus => _phoneFocus;
   FocusNode get countryFocus => _countryFocus;
   FocusNode get cityFocus => _cityFocus;
@@ -161,7 +161,7 @@ class AuthState with ChangeNotifier {
     notifyListeners();
   }
 
-  void changeDateBirth(value) {
+  void changeDateBirth(DateTime? value) {
     _birthDate = value;
     notifyListeners();
   }

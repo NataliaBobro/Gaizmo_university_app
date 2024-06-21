@@ -1,6 +1,7 @@
 
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:intl/intl.dart';
 
 import '../../data/api_client.dart';
 import '../../ui/utils/get_token.dart';
@@ -14,7 +15,7 @@ class AuthService {
       String? lastName,
       String? surname,
       int? gender,
-      String? dateBirth,
+      DateTime? dateBirth,
       String? phone,
       String? email,
       String? password,
@@ -23,6 +24,12 @@ class AuthService {
       String? code,
       bool? sendCode,
       ) async {
+    String? formattedDate;
+    if(dateBirth != null){
+      formattedDate = DateFormat('d.M.y').format(dateBirth);
+    }
+
+
     final response = await ApiClient().dio.post(
           '/auth/register/student',
           data: {
@@ -32,7 +39,7 @@ class AuthService {
             "last_name": lastName,
             "surname": surname,
             "gender": gender,
-            "date_birth": dateBirth,
+            "date_birth": formattedDate,
             "phone": phone,
             "email": email,
             "password": password,
@@ -53,7 +60,7 @@ class AuthService {
       String? lastName,
       String? surname,
       int? gender,
-      String? dateBirth,
+      DateTime? dateBirth,
       String? email,
       String? phone,
       String? password,
@@ -62,6 +69,12 @@ class AuthService {
       String? code,
       bool? sendCode
       ) async {
+
+    String? formattedDate;
+    if(dateBirth != null){
+      formattedDate = DateFormat('d.M.y').format(dateBirth);
+    }
+
     final response = await ApiClient().dio.post(
           '/auth/register/teacher',
           data: {
@@ -71,7 +84,7 @@ class AuthService {
             "last_name": lastName,
             "surname": surname,
             "gender": gender,
-            "date_birth": dateBirth,
+            "date_birth": formattedDate,
             "email": email,
             "phone": phone,
             "password": password,

@@ -117,10 +117,8 @@ class _AuthSignUpStudentState extends State<AuthSignUpStudent> {
                               }
                           ),
                           SelectDateInput(
-                            onChange: (day, mon, year) {
-                              if(day != null && mon != null && year != null){
-                                state.changeDateBirth('$day.$mon.$year');
-                              }
+                            onChange: (date) {
+                              state.changeDateBirth(date);
                             },
                             errors: state.validateError?.errors.dateBirthErrors?.first,
                           ),

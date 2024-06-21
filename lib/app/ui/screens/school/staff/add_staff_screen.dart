@@ -37,7 +37,7 @@ class _AddStaffScreenState extends State<AddStaffScreen> {
   Map<String, dynamic>? country;
   Map<String, dynamic>? city;
   String? openField;
-  String? dateBirth;
+  DateTime? dateBirth;
   int gender = -1;
 
   bool loadingSearch = false;
@@ -141,7 +141,7 @@ class _AddStaffScreenState extends State<AddStaffScreen> {
     setState(() {});
   }
 
-  void changeDateBirth(String date) {
+  void changeDateBirth(DateTime? date) {
     dateBirth = date;
     setState(() {});
   }
@@ -213,10 +213,8 @@ class _AddStaffScreenState extends State<AddStaffScreen> {
                       hintStyle: TextStyles.s14w400.copyWith(
                           color: const Color(0xFF848484)
                       ),
-                      onChange: (day, mon, year) {
-                        if(day != null && mon != null && year != null){
-                          changeDateBirth('$day.$mon.$year');
-                        }
+                      onChange: (DateTime? date) {
+                        changeDateBirth(date);
                       },
                       // errors: state.validateError?.errors.dateBirthErrors?.first,
                     ),

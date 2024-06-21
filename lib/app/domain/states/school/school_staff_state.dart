@@ -6,6 +6,7 @@ import 'package:european_university_app/app/ui/theme/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../../ui/screens/school/staff/add_staff_screen.dart';
@@ -73,7 +74,7 @@ class SchoolStaffState with ChangeNotifier {
       String? firstName,
       String? lastName,
       int? genderId,
-      String? dateBirth,
+      DateTime? dateBirth,
       String? phone,
       String? email,
       String? country,
@@ -82,13 +83,18 @@ class SchoolStaffState with ChangeNotifier {
       String? house,
       String? salary,
       ) async {
+
+    String? formattedDate;
+    if(dateBirth != null){
+      formattedDate = DateFormat('d.M.y').format(dateBirth);
+    }
     _validateError = null;
     notifyListeners();
     Map<String, dynamic> data = {
       'first_name': firstName,
       'last_name': lastName,
       'gender': genderId,
-      'date_birth': dateBirth,
+      'date_birth': formattedDate,
       'phone': phone,
       'email': email,
       'country': country,

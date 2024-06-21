@@ -120,7 +120,7 @@ class _PersonalInfoStudentState extends State<PersonalInfoStudent> {
               children: [
                 Column(
                   children: [
-                    CenterHeaderWithAction(
+                    CenterHeader(
                         title: getConstant('Settings')
                     ),
                     Expanded(

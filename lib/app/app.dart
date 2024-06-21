@@ -52,7 +52,7 @@ class AppState extends ChangeNotifier {
           onChangeRoute();
         }
       }else{
-        fetchConstant(languageId: 1);
+        fetchConstant(languageId: 2);
       }
     });
   }
@@ -85,7 +85,7 @@ class AppState extends ChangeNotifier {
         _userData = result;
         if(metaAppData == null){
           getMeta(result.languageId);
-          fetchConstant(languageId: result.languageId ?? 1).then((value) {
+          fetchConstant(languageId: result.languageId ?? 2).then((value) {
             onChangeRoute();
           });
         }
@@ -100,7 +100,7 @@ class AppState extends ChangeNotifier {
     }
   }
 
-  Future<void> fetchConstant({int languageId = 1}) async {
+  Future<void> fetchConstant({int languageId = 2}) async {
     try {
       final result = await MetaService.fetchConstant(languageId);
       if(result != null){

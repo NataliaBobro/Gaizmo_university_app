@@ -70,10 +70,8 @@ class _SettingsDateBirthState extends State<SettingsDateBirth> {
                                 hintStyle: TextStyles.s14w400.copyWith(
                                     color: const Color(0xFF242424)
                                 ),
-                                onChange: (day, mon, year) {
-                                  if(day != null && mon != null && year != null){
-                                    changeDateBirth('$day-$mon-$year');
-                                  }
+                                onChange: (DateTime? date) {
+                                  changeDateBirth(date);
                                 },
                                 // errors: state.validateError?.errors.dateBirthErrors?.first,
                               ),
