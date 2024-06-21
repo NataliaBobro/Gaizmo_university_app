@@ -14,7 +14,6 @@ class ChatList extends StatefulWidget {
   @override
   State<ChatList> createState() => _ChatListState();
 }
-
 class _ChatListState extends State<ChatList> {
   @override
   Widget build(BuildContext context) {
