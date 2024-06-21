@@ -38,7 +38,7 @@ class _MessagesListViewState extends State<MessagesListView> {
             messages.length,
             (index) => Builder(
               builder: (BuildContext context) {
-                final user = state.chat?.recipients?.firstWhere((element) => element.id == messages[index].userId);
+                final user = state.chat?.recipients?.firstWhere((element) => element.id == messages[index].userId || element.id == 0);
                 bool isAuthor = appState.userData?.id == messages[index].userId;
                 return MessageBlock(messages: messages[index], user: user, isAuthor: isAuthor);
               },

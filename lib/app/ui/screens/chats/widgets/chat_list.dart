@@ -23,16 +23,14 @@ class _ChatListState extends State<ChatList> {
     return Column(
       children: [
         ...List.generate(
-            state.chatList?.data.length ?? 0,
+            state.chatList?.length ?? 0,
             (index) {
-              print(state.chatList?.data[index].recipients);
-              final user = state.chatList?.data[index].recipients?.firstWhere((element) => element.id != appState.userData?.id);
-
+              final user = state.chatList?[index].recipients?.firstWhere((element) => element.id != appState.userData?.id);
               return CupertinoButton(
                 minSize: 0.0,
                 padding: EdgeInsets.zero,
                 onPressed: () {
-                  state.openChat(context, user, chatId: state.chatList?.data[index].id);
+                  state.openChat(context, user, chatId: state.chatList?[index].id);
                 },
                 child: Container(
                   margin: const EdgeInsets.symmetric(
@@ -104,7 +102,7 @@ class _ChatListState extends State<ChatList> {
                                     ),
                                   ),
                                   Text(
-                                    state.chatList?.data[index].lastMessage?.message ?? '',
+                                    state.chatList?[index].lastMessage?.message ?? '',
                                     style: TextStyles.s12w400.copyWith(
                                         color: AppColors.fgMuted
                                     ),

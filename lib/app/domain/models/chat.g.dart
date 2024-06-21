@@ -22,6 +22,7 @@ Map<String, dynamic> _$ChatListItemToJson(ChatListItem instance) =>
 ChatItem _$ChatItemFromJson(Map<String, dynamic> json) => ChatItem(
       id: json['id'] as int?,
       name: json['name'] as String?,
+      type: json['type'] as String?,
       lastMessage: json['last_message'] == null
           ? null
           : Messages.fromJson(json['last_message'] as Map<String, dynamic>),
@@ -33,6 +34,7 @@ ChatItem _$ChatItemFromJson(Map<String, dynamic> json) => ChatItem(
 Map<String, dynamic> _$ChatItemToJson(ChatItem instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
+      'type': instance.type,
       'last_message': instance.lastMessage,
       'recipients': instance.recipients,
     };

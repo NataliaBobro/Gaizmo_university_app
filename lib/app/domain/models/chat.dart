@@ -24,12 +24,14 @@ class ChatListItem {
 class ChatItem {
   int? id;
   String? name;
+  String? type;
   Messages? lastMessage;
   List<UserData>? recipients;
 
   ChatItem({
     this.id,
     this.name,
+    this.type,
     this.lastMessage,
     this.recipients
   });

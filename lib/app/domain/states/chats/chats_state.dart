@@ -19,8 +19,9 @@ class ChatsState with ChangeNotifier {
   ListUserData? _users;
   bool _openClear = false;
   ChatItem? _chat;
+  ChatItem? _aiChat;
   ListMessages? _listMessages;
-  ChatListItem? _chatList;
+  List<ChatItem>? _chatList;
   List<File>? _attachment;
 
   ChatsState(this.context){
@@ -35,9 +36,11 @@ class ChatsState with ChangeNotifier {
   ListUserData? get users => _users;
   bool get openClear => _openClear;
   ChatItem? get chat => _chat;
-  ChatListItem? get chatList => _chatList;
+  ChatItem? get aiChat => _aiChat;
+  List<ChatItem>? get chatList => _chatList;
   List<File>? get attachment => _attachment;
   ListMessages? get listMessages => _listMessages;
+
 
   void initFirebase() {
     AppFirebaseMessaging.init(this);
@@ -52,7 +55,14 @@ class ChatsState with ChangeNotifier {
       try {
         final result = await ChatService.fetchChatList(context);
         if(result != null) {
-          _chatList = result;
+          _chatList = [];
+          for(var a = 0; a < result.data.length; a++){
+            if(result.data[a].type == 'ai'){
+              _aiChat = result.data[a];
+            }else{
+              _chatList?.add(result.data[a]);
+            }
+          }
         }
       } catch (e) {
         print(e);
@@ -91,6 +101,43 @@ class ChatsState with ChangeNotifier {
         _isLoading = false;
         notifyListeners();
       }
+  }
+
+  Future<void> openChatAssistant(BuildContext context)async {
+    _listMessages = null;
+    notifyListeners();
+    final authUser = context.read<AppState>().userData;
+    final user = UserData(
+        id: 0,
+        type: 4,
+        lastName: 'AI Assistant',
+        gender: null
+    );
+    openPageChat(context);
+    _chat = ChatItem(
+      id: _aiChat?.id,
+      name: user.lastName,
+      recipients: [
+        user,
+        authUser!
+      ]
+    );
+    notifyListeners();
+
+    try {
+      final result = await ChatService.fetchChatAi(context, _aiChat?.id);
+      if(result != null) {
+        _listMessages = result;
+        if(_chat?.id == null){
+          fetchChatList();
+        }
+      }
+    } catch (e) {
+      print(e);
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
   }
 
   Future<void> openPageChat(BuildContext context) async {
@@ -152,9 +199,9 @@ class ChatsState with ChangeNotifier {
           )
       );
     }
-    final chat = _chatList?.data.where((element) => element.id == chatUpdatedId);
+    final chat = _chatList?.where((element) => element.id == chatUpdatedId);
     if((chat?.length ?? 0) > 0){
-      _chatList?.data.where((element) => element.id == chatUpdatedId).first.lastMessage?.message = text;
+      _chatList?.where((element) => element.id == chatUpdatedId).first.lastMessage?.message = text;
     }else{
       fetchChatList();
     }
