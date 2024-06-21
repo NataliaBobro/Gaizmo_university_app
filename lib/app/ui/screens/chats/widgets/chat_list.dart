@@ -19,6 +19,7 @@ class _ChatListState extends State<ChatList> {
   Widget build(BuildContext context) {
     final state = context.watch<ChatsState>();
     final appState = context.watch<AppState>();
+
     return Column(
       children: [
         ...List.generate(
