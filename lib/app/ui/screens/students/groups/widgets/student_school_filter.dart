@@ -1,4 +1,3 @@
-import 'package:european_university_app/app/ui/screens/students/schools/widgets/filter_item.dart';
 import 'package:european_university_app/app/ui/theme/text_styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../../../domain/states/student/student_school_state.dart';
 import '../../../../widgets/auth_button.dart';
 import '../../../../widgets/center_header.dart';
+import 'filter_item.dart';
 
 class StudentSchoolFilter extends StatefulWidget {
   const StudentSchoolFilter({Key? key}) : super(key: key);

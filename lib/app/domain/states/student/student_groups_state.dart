@@ -1,4 +1,3 @@
-import 'package:european_university_app/app/domain/models/user.dart';
 import 'package:european_university_app/app/domain/services/student_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,32 +6,33 @@ import 'package:provider/provider.dart';
 import '../../models/services.dart';
 
 
-class StudentSchoolItemState with ChangeNotifier {
+class StudentGroupsState with ChangeNotifier {
   BuildContext context;
   bool _isLoading = true;
-  UserData _userSchool;
   ServicesData? _servicesData;
 
   bool get isLoading => _isLoading;
-  UserData get userSchool => _userSchool;
   ServicesData? get servicesData => _servicesData;
 
 
-  StudentSchoolItemState(this.context, this._userSchool){
+  StudentGroupsState(this.context){
     Future.microtask(() {
       fetchService();
     });
   }
 
   Future<void> fetchService() async {
+    _isLoading = true;
+    notifyListeners();
     try{
-      final result = await StudentService.fetchService(context, _userSchool.school?.id);
+      final result = await StudentService.fetchService(context);
       if(result != null){
         _servicesData = result;
       }
     }catch(e){
       print(e);
     }finally{
+      _isLoading = false;
       notifyListeners();
     }
   }

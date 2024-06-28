@@ -65,6 +65,7 @@ class _MyResultsScreenState extends State<MyResultsScreen> with TickerProviderSt
             child: Column(
               children: [
                 CenterHeaderWithAction(
+                    withBorder: false,
                     title: getConstant('My_results'),
                     action: Row(
                       mainAxisAlignment: MainAxisAlignment.end,

@@ -12,7 +12,6 @@ import 'package:european_university_app/app/ui/screens/school/schedule/school_sc
 import 'package:european_university_app/app/ui/screens/school/service/school_service_screen.dart';
 import 'package:european_university_app/app/ui/screens/school/staff/staff_screen.dart';
 import 'package:european_university_app/app/ui/screens/students/schedule/student_schedule_screen.dart';
-import 'package:european_university_app/app/ui/screens/students/schools/school_list.dart';
 import 'package:european_university_app/app/ui/screens/teacher/profile/teacher_profile_scroll_page.dart';
 import 'package:european_university_app/app/ui/screens/teacher/service/school_service_screen.dart';
 import 'package:european_university_app/app/ui/utils/get_constant.dart';
@@ -25,12 +24,13 @@ import '../../domain/states/school/school_shop_state.dart';
 import '../../domain/states/services_state.dart';
 import '../../domain/states/my_results_state.dart';
 import '../../domain/states/student/favorite_state.dart';
-import '../../domain/states/student/student_school_state.dart';
+import '../../domain/states/student/student_groups_state.dart';
 import '../../domain/states/student/student_home_state.dart';
 import '../../domain/states/teacher/teacher_home_state.dart';
 import '../screens/school/shop/school_shop_screen.dart';
 import '../screens/splash/splash_screen.dart';
 import '../screens/students/favorite/favorite_screen.dart';
+import '../screens/students/groups/student_groups_list.dart';
 import '../screens/students/profile/student_profile_scroll_page.dart';
 import '../screens/tabbar/tabbar_screen.dart';
 import '../screens/teacher/schedule/teacher_schedule_screen.dart';
@@ -44,7 +44,7 @@ const _login = '/login';
 const _register = '/register';
 const _auth = '/auth';
 const _home = '/home';
-const _studentSchool = '/student-school';
+const _studentGroup = '/student-group';
 const _services = '/services';
 const _servicesTeacher = '/services-teacher';
 const _schedule = '/schedule';
@@ -68,7 +68,7 @@ abstract class AppRoutes {
   static String get services => _services;
   static String get schedule => _schedule;
   static String get staff => _staff;
-  static String get studentSchool => _studentSchool;
+  static String get studentGroup => _studentGroup;
   static String get studentSchedule => _studentSchedule;
   static String get teacherSchedule => _teacherSchedule;
   static String get myResults => _myResults;
@@ -220,7 +220,7 @@ final loggedStudentInMap = routemaster.RouteMap(
   onUnknownRoute: (_) => const routemaster.Redirect(_tabbar),
   routes: {
     _tabbar: (info) => routemaster.TabPage(
-          paths: const [_home, _studentSchedule, _studentSchool, _myResults, _chats],
+          paths: const [_home, _studentSchedule, _studentGroup, _myResults, _news, _chats],
           child: MultiProvider(
             providers: [
               ChangeNotifierProvider(
@@ -231,8 +231,9 @@ final loggedStudentInMap = routemaster.RouteMap(
               icons: [
                 {'icon': Svgs.profile, 'name': getConstant('Profile')},
                 {'icon': Svgs.schedule, 'name': getConstant('Schedule')},
-                {'icon': Svgs.school, 'name': getConstant('Schools')},
+                {'icon': Svgs.school, 'name': getConstant('Groups')},
                 {'icon': Svgs.myRes, 'name': getConstant('My_results')},
+                {'icon': Svgs.statistics, 'name': getConstant('News')},
                 {'icon': Svgs.chats, 'name': getConstant('Chats')},
               ]
             ),
@@ -247,10 +248,10 @@ final loggedStudentInMap = routemaster.RouteMap(
         child: const StudentScheduleScreen(),
       ),
     ),
-    _studentSchool: (_) => TransitionPage(
+    _studentGroup: (_) => TransitionPage(
       child: ChangeNotifierProvider(
-        create: (context) => StudentSchoolState(context),
-        child: const SchoolList(),
+        create: (context) => StudentGroupsState(context),
+        child: const StudentGroupsList(),
       ),
     ),
     _myResults: (_) => TransitionPage(
@@ -267,6 +268,12 @@ final loggedStudentInMap = routemaster.RouteMap(
     ),
     _chats: (_) => const TransitionPage(
       child: ChatsScreen(),
+    ),
+    _news: (_) => TransitionPage(
+      child: ChangeNotifierProvider(
+        create: (context) => NewsState(context),
+        child: const NewsScreen(),
+      ),
     ),
   },
 );

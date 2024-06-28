@@ -1,6 +1,6 @@
 import 'package:european_university_app/app/domain/models/services.dart';
 import 'package:european_university_app/app/domain/services/favorite_service.dart';
-import 'package:european_university_app/app/ui/screens/students/schools/item/widgets/service_item.dart';
+import 'package:european_university_app/app/ui/screens/students/groups/item/widgets/service_item.dart';
 import 'package:european_university_app/app/ui/theme/text_styles.dart';
 import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,7 +9,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../../../resources/resources.dart';
-import '../../../../../../domain/states/student/student_school_item_state.dart';
+import '../../../../../../domain/states/student/student_groups_state.dart';
 import '../../../../../widgets/auth_button.dart';
 import '../../../../../widgets/center_header.dart';
 
@@ -30,7 +30,7 @@ class _SelectPackageScreenState extends State<SelectPackageScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final state = context.watch<StudentSchoolItemState>();
+    final state = context.watch<StudentGroupsState>();
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(

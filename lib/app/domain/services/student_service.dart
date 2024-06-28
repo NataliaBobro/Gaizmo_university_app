@@ -45,12 +45,11 @@ class StudentService {
 
   static Future<ServicesData?> fetchService(
       BuildContext context,
-      int? schoolId
       ) async {
     final token = getToken(context);
     if(token == null) return null;
     final response = await ApiClient().dio.get(
-        '/student/school/$schoolId/category-lesson',
+        '/student/school/group/category-lesson',
         options: Options(
           headers: {'Authorization': 'Bearer $token'},
         )

@@ -20,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
     Future.microtask(() {
       SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-        statusBarBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.light,
         statusBarIconBrightness: Brightness.light,
         statusBarColor: Colors.transparent,
       ));

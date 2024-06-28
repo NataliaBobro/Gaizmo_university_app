@@ -190,7 +190,7 @@ class _MessageItemWidgetState extends State<MessageItemWidget> {
       child: Text(
         '${widget.message.message}',
         style: TextStyles.s16w400.copyWith(
-            color: widget.isAuthor ? AppColors.fgMuted : Colors.white
+            color: widget.isAuthor ? AppColors.fgDefault : Colors.white
         ),
       ),
     );

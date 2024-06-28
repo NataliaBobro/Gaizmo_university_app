@@ -2,6 +2,7 @@ import 'package:animations/animations.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:european_university_app/app/domain/models/news.dart';
 import 'package:european_university_app/app/domain/states/news/news_state.dart';
+import 'package:european_university_app/app/ui/screens/news/widgets/text_with_html.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -76,8 +77,21 @@ class NewsItem extends StatefulWidget {
 }
 
 class _NewsItemState extends State<NewsItem> {
+
+  String? extractImageUrl(String? text) {
+    RegExp regExp = RegExp(r'href="([^"]+)"');
+    Match? match = regExp.firstMatch('$text');
+    return match?.group(1);
+  }
+
+  String removeHtmlTags(String text) {
+    RegExp regExp = RegExp(r'<[^>]*>', multiLine: true, caseSensitive: true);
+    return text.replaceAll(regExp, '').trim();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final image = extractImageUrl(widget.item?.content);
     return OpenContainer(
         closedColor: const Color(0xFFF0F3F6),
         closedShape: const RoundedRectangleBorder(
@@ -105,8 +119,8 @@ class _NewsItemState extends State<NewsItem> {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(8),
-                    child: widget.item?.image != null ? CachedNetworkImage(
-                        imageUrl: '${widget.item?.image}',
+                    child: widget.item?.image != null || image != null ? CachedNetworkImage(
+                        imageUrl: '${image != null ? 'https://e-u.edu.ua/$image' : widget.item?.image}',
                         width: 150,
                         height: 110,
                         errorWidget: (context, error, stackTrace) =>
@@ -135,13 +149,8 @@ class _NewsItemState extends State<NewsItem> {
                           maxLines: 2,
                         ),
                         const Spacer(),
-                        Text(
-                          widget.item?.content != null ?'${widget.item?.content}' : '',
-                          style: TextStyles.s12w400.copyWith(
-                              color: Colors.black,
-                              overflow: TextOverflow.ellipsis
-                          ),
-                          maxLines: 2,
+                        TextWithTagsTitle(
+                          text: removeHtmlTags(widget.item?.content != null ?'${widget.item?.content}' : '')
                         ),
                       ],
                     ),
@@ -195,9 +204,8 @@ class _NewsItemState extends State<NewsItem> {
                                       padding: const EdgeInsets.symmetric(
                                         horizontal: 24
                                       ),
-                                      child: Text(
-                                          widget.item?.content ?? '',
-                                        style: TextStyles.s14w400,
+                                      child: TextWithTags(
+                                        text: widget.item?.content != null ?'${widget.item?.content}' : '',
                                       ),
                                     )
                                   ],

@@ -229,4 +229,17 @@ class AuthService {
     final data = response.data as Map<String, dynamic>;
     return data['success'];
   }
+
+  static Future<bool?> logOut(BuildContext context) async {
+    final token = getToken(context);
+    if (token == null) return null;
+    final response = await ApiClient().dio.post(
+      '/auth/logout',
+      options: Options(
+        headers: {'Authorization': 'Bearer $token'},
+      ),
+    );
+    final data = response.data as Map<String, dynamic>;
+    return data['success'];
+  }
 }

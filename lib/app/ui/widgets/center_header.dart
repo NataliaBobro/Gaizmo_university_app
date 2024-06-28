@@ -89,10 +89,12 @@ class CenterHeaderWithAction extends StatelessWidget {
     Key? key,
     required this.title,
     this.action,
+    this.withBorder = true,
   }) : super(key: key);
 
   final String title;
   final Widget? action;
+  final bool withBorder;
 
   @override
   Widget build(BuildContext context) {
@@ -100,12 +102,12 @@ class CenterHeaderWithAction extends StatelessWidget {
       padding: const EdgeInsets.only(
           bottom: 8
       ),
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.only(
+          borderRadius: withBorder ? const BorderRadius.only(
               bottomLeft: Radius.circular(20),
               bottomRight: Radius.circular(20)
-          )
+          ) : null
       ),
       child: Container(
         width: SizerUtil.width,

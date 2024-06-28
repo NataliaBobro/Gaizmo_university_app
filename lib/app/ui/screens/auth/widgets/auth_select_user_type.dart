@@ -62,16 +62,16 @@ class _AuthSelectUserTypeState extends State<AuthSelectUserType> {
                         read.changeUserType(3);
                       }
                   ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  AppButton(
-                      title: getConstant('School'),
-                      icon: Svgs.schoolColor,
-                      onPressed: () {
-                        read.changeUserType(1);
-                      }
-                  ),
+                  // const SizedBox(
+                  //   height: 8,
+                  // ),
+                  // AppButton(
+                  //     title: getConstant('School'),
+                  //     icon: Svgs.schoolColor,
+                  //     onPressed: () {
+                  //       read.changeUserType(1);
+                  //     }
+                  // ),
                   const SizedBox(
                     height: 8,
                   ),

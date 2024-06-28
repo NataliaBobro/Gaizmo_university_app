@@ -138,6 +138,18 @@ class AppState extends ChangeNotifier {
     }
   }
 
+  Future<void> logOut() async {
+    try {
+      await AuthService.logOut(context);
+    } on DioError catch (e) {
+      showMessage(e.message.isEmpty ? e.toString() : e.message);
+    } catch (e) {
+      showErrorSnackBar(title: 'App request error');
+    } finally {
+      notifyListeners();
+    }
+  }
+
 
   void onChangeRoute({RouteMap? route}) {
     if (route == null) {
@@ -170,7 +182,7 @@ class AppState extends ChangeNotifier {
 
   void initWhiteTheme(){
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarBrightness: Brightness.dark,
+      statusBarBrightness: Brightness.light,
       statusBarIconBrightness: Brightness.light,
     ));
   }
@@ -228,10 +240,13 @@ class AppState extends ChangeNotifier {
 
   void onLogout() async {
     _userData = null;
+    logOut();
     await Hive.box('settings').delete('token');
     notifyListeners();
     changeLogInState(false);
   }
+
+
 
   void deleteAccount({int? userId}) async {
     final id = userId ?? userData?.id;

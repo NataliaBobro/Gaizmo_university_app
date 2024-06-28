@@ -102,8 +102,9 @@ class TabBarScreenState extends State<TabBarScreen> with TickerProviderStateMixi
                     style: TextStyles.s10w600.copyWith(
                       color: selectedIndex == index
                           ? const Color(0xFF242424)
-                          : const Color(0xFFACACAC)
+                          : const Color(0xFFACACAC),
                     ),
+                    textAlign: TextAlign.center,
                   )
                 ],
               ),
