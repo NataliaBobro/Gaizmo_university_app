@@ -4,6 +4,8 @@ import 'package:european_university_app/app/ui/widgets/auth_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+import '../../../../constatns.dart';
 import '../../../theme/text_styles.dart';
 import '../../cupertino_modal_appbar.dart';
 import '../../custom_scroll_physics.dart';
@@ -62,22 +64,29 @@ class _PaymentsState extends State<Payments> {
             horizontalPadding: 24,
             title: getConstant('PAY'),
             onPressed: () {
-              showModalBottomSheet(
-                context: context,
-                isScrollControlled: true,
-                useRootNavigator: true,
-                barrierColor: Colors.black54,
-                shape: const RoundedRectangleBorder(
-                  borderRadius:
-                  BorderRadius.vertical(top: Radius.circular(10.0)),
-                ),
-                builder: (_) {
-                  final deviceHeight = SizerUtil.height;
-                  final screenHeight =
-                      deviceHeight - (deviceHeight / 100 * 8);
-                  return SizedBox(
-                      height: screenHeight, child: const PayModal());
-                },
+              Navigator.of(context).push(
+                  MaterialPageRoute(
+                      maintainState: true,
+                      fullscreenDialog: true,
+                      builder: (context) => Scaffold(
+                        body: SafeArea(
+                          child: WebView(
+                            initialUrl: privatBankPay,
+                            javascriptMode: JavascriptMode.unrestricted,
+                            onWebViewCreated: (WebViewController webViewController) {
+
+                            },
+                            navigationDelegate: (NavigationRequest request) {
+                              print(request);
+                              return NavigationDecision.navigate;
+                            },
+                            onPageFinished: (val) {
+                              print(val);
+                            },
+                          )
+                        ),
+                      )
+                  )
               );
             },
           )

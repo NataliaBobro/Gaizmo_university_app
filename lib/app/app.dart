@@ -112,8 +112,13 @@ class AppState extends ChangeNotifier {
         }
       }
     } on DioError catch (e) {
-      showMessage(e.message.isEmpty ? e.toString() : e.message);
-      onLogout();
+      if(context.mounted){
+        if(Hive.box('settings').get('token', defaultValue: null) != null){
+          onLogout();
+        }else{
+          showMessage(e.message.isEmpty ? e.toString() : e.message);
+        }
+      }
     } catch (e) {
       print(e);
       showErrorSnackBar(title: 'App request error');
