@@ -93,6 +93,7 @@ class _NewsItemState extends State<NewsItem> {
   Widget build(BuildContext context) {
     final image = extractImageUrl(widget.item?.content);
     return OpenContainer(
+        openElevation: 0,
         closedColor: const Color(0xFFF0F3F6),
         closedShape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.zero
@@ -245,11 +246,7 @@ class _HeaderState extends State<Header> {
           bottom: 8
       ),
       decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(20),
-              bottomRight: Radius.circular(20)
-          )
+          color: Colors.white
       ),
       child: Stack(
         children: [

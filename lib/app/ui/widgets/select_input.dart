@@ -1,4 +1,5 @@
 import 'package:european_university_app/app/ui/theme/app_colors.dart';
+import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:european_university_app/resources/resources.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +50,7 @@ class SelectInput extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    selected != -1 ? items[selected - 1] : hintText,
+                    selected != -1 ? getConstant(items[selected - 1]) : hintText,
                     style: hintStyle ?? TextStyles.s14w400.copyWith(
                         color: AppColors.appTitle
                     ),

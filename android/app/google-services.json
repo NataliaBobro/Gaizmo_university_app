@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "711648306470",
-    "project_id": "etm-a04aa",
-    "storage_bucket": "etm-a04aa.appspot.com"
+    "project_number": "1011001361196",
+    "project_id": "eu-univer",
+    "storage_bucket": "eu-univer.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:711648306470:android:7bdea71a523e01c27acde7",
+        "mobilesdk_app_id": "1:1011001361196:android:c677d8ad2c2ecf7832e289",
         "android_client_info": {
           "package_name": "ua.ETM.europeanuniversity"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBZDjnV_LU4up_GWu2Kc_XaY0TFTcCxQTk"
+          "current_key": "AIzaSyBz7CJlcjQnZQ6ic0JT3yTeT72L_v5IAjQ"
         }
       ],
       "services": {

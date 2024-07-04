@@ -49,12 +49,13 @@ class DefaultFirebaseOptions {
     }
   }
 
+
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBZDjnV_LU4up_GWu2Kc_XaY0TFTcCxQTk',
-    appId: '1:711648306470:android:7bdea71a523e01c27acde7',
-    messagingSenderId: '711648306470',
-    projectId: 'etm-a04aa',
-    // storageBucket: 'etm-a04aa.appspot.com',
+    apiKey: 'AIzaSyBz7CJlcjQnZQ6ic0JT3yTeT72L_v5IAjQ',
+    appId: '1:1011001361196:android:c677d8ad2c2ecf7832e289',
+    messagingSenderId: '1011001361196',
+    projectId: 'eu-univer',
+    storageBucket: 'eu-univer.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(

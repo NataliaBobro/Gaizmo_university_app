@@ -50,16 +50,16 @@ class _ChatListState extends State<ChatList> {
                                 if(user?.avatar != null) ...[
                                   CachedNetworkImage(
                                     imageUrl: '${user?.avatar}',
-                                    width: 50,
-                                    height: 70,
+                                    width: 60,
+                                    height: 60,
                                     errorWidget: (context, error, stackTrace) =>
                                     const SizedBox.shrink(),
                                     fit: BoxFit.cover,
                                   )
                                 ] else ...[
                                   Container(
-                                    width: 50,
-                                    height: 70,
+                                    width: 60,
+                                    height: 60,
                                     color: AppColors.accentContainerSoft.withOpacity(.05),
                                     child: Builder(
                                       builder: (BuildContext context) {

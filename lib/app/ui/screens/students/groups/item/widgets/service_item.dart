@@ -358,7 +358,7 @@ class _ScheduleLessonState extends State<ScheduleLesson> {
                   vertical: 17
               ),
               child: Text(
-                item.headerValue,
+                getConstant(item.headerValue),
                 style: TextStyles.s14w400,
               ),
             );

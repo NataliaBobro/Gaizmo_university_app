@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 abstract class AppColors {
   static const scaffoldBg = Color(0xFFF9F9F9);
   static const registerBg = Color(0xFFF0F3F6);
-  static const appButton = Color(0xFF0379EE);
+  static const appButton = Color(0xFF312783);
   static const appButtonDisable = Color(0xFFB4B0A9);
   static const appButtonText = Color(0xFFFFFFFF);
   static const appTitle = Color(0xFF242424);

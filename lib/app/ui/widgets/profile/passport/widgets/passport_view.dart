@@ -9,6 +9,7 @@ import 'package:sizer/sizer.dart';
 import 'dart:math' as math;
 
 import '../../../../../../../resources/resources.dart';
+import '../../../../theme/app_colors.dart';
 import '../../../../theme/text_styles.dart';
 
 class PassportView extends StatefulWidget {
@@ -29,7 +30,7 @@ class _PassportViewState extends State<PassportView> {
       width: SizerUtil.width - 48,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
-        color: const Color(0xFF0379EE)
+        color: AppColors.appButton
       ),
       child: Row(
         children: [

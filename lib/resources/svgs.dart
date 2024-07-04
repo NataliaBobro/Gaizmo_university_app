@@ -9,6 +9,7 @@ class Svgs {
   static const String es = 'assets/vectors/es.svg';
 
   static const String home = 'assets/vectors/home.svg';
+  static const String logoEn = 'assets/vectors/logo-en.svg';
   static const String homeIcon = 'assets/vectors/home-icon.svg';
   static const String service = 'assets/vectors/service.svg';
   static const String statistics = 'assets/vectors/statistics.svg';

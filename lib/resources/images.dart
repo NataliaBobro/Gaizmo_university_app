@@ -15,6 +15,7 @@ class Images {
   static const String wayForPay = 'assets/images/WayForPay.png';
   static const String liqPay = 'assets/images/LiqPay.png';
   static const String logo = 'assets/images/logo.png';
+  static const String logoEn = 'assets/images/logo-en.png';
   static const String logoMini = 'assets/images/logo-mini.png';
   static const String cap = 'assets/images/cap.png';
   static const String mug = 'assets/images/mug.png';

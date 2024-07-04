@@ -31,8 +31,8 @@ class _ChatListSceletonState extends State<ChatListSceleton> {
                           const SkeletonAvatar(
                             style: SkeletonAvatarStyle(
                               shape: BoxShape.rectangle,
-                              width: 50,
-                              height: 70,
+                              width: 60,
+                              height: 60,
                             ),
                           ),
                           const SizedBox(width: 8),

@@ -40,8 +40,9 @@ class _PersonalInfoStudentState extends State<PersonalInfoStudent> {
   TextEditingController fullName = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController about = TextEditingController();
-  Map<String, dynamic>? _country;
-  Map<String, dynamic>? _city;
+  TextEditingController country = TextEditingController();
+  TextEditingController city = TextEditingController();
+
   final MaskedTextController phone = MaskedTextController(
       mask: '+00 (000) 000 00 00'
   );
@@ -55,59 +56,18 @@ class _PersonalInfoStudentState extends State<PersonalInfoStudent> {
     fullName.text = '${widget.student?.firstName ?? ''} ${widget.student?.lastName ?? ''}';
     phone.text = widget.student?.phone ?? '';
     email.text = '${widget.student?.email}';
+    country.text = '${widget.student?.country}';
+    city.text = '${widget.student?.city}';
+
+
     if(widget.student?.about != null) {
       about.text = '${widget.student?.about}';
-    }
-    if(widget.student?.country != null){
-      _country = {
-        "id": "1",
-        "name": widget.student?.country,
-      };
-    }
-    if(widget.student?.city != null){
-      _city = {
-        "id": "1",
-        "name": widget.student?.city,
-      };
     }
   }
 
   String? openField;
 
-  void changeOpen(value){
-    if(openField == value){
-      openField = null;
-    }else{
-      openField = value;
-    }
-    setState(() {});
-  }
 
-  List<Map<String, dynamic>>? countryList = [];
-  final List<Map<String, dynamic>> listDefaultCountry = [
-    {
-      "id": "1",
-      "name": "Ukraine",
-      "iso2": "UA"
-    },
-    {
-      "id": "2",
-      "name": "Poland",
-      "iso2": "PL"
-    },
-    {
-      "id": "3",
-      "name": "Austria",
-      "iso2": "AT"
-    },
-    {
-      "id": "3",
-      "name": "Germany",
-      "iso2": "DE"
-    },
-  ];
-
-  List<Map<String, dynamic>> cityList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -169,63 +129,23 @@ class _PersonalInfoStudentState extends State<PersonalInfoStudent> {
                             },
                             error: validateError?.errors.about?.first,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 24
-                            ),
-                            child: Column(
-                              children: [
-                                SelectInputSearchField(
-                                  titleStyle: TextStyles.s14w400.copyWith(
-                                      color: const Color(0xFF848484)
-                                  ),
-                                  style: TextStyles.s14w400.copyWith(
-                                      color: const Color(0xFF242424)
-                                  ),
-                                  errors: validateError?.errors.country?.first,
-                                  title: getConstant('Country'),
-                                  items:  (countryList?.length ?? 0) > 0 ?
-                                  countryList : listDefaultCountry,
-                                  selected: _country,
-                                  onSelect: (value) {
-                                    _country = value;
-                                    changeOpen(null);
-                                  },
-                                  onSearch: (value) {
-                                    searchCountry(value);
-                                  },
-                                  changeOpen: () {
-                                    changeOpen('country');
-                                  },
-                                  isOpen: openField == 'country',
-                                  hintText: '',
-                                ),
-                                SelectInputSearchField(
-                                  titleStyle: TextStyles.s14w400.copyWith(
-                                      color: const Color(0xFF848484)
-                                  ),
-                                  style: TextStyles.s14w400.copyWith(
-                                      color: const Color(0xFF242424)
-                                  ),
-                                  errors: validateError?.errors.city?.first,
-                                  title: getConstant('City'),
-                                  items: cityList,
-                                  onSearch: (value) {
-                                    searchCity(value);
-                                  },
-                                  selected: _city,
-                                  changeOpen: () {
-                                    changeOpen('city');
-                                  },
-                                  isOpen: openField == 'city',
-                                  onSelect: (index) {
-                                    _city = index;
-                                    changeOpen(null);
-                                  },
-                                  hintText: '',
-                                ),
-                              ],
-                            ),
+                          AppHorizontalField(
+                            label: getConstant('Country'),
+                            controller: country,
+                            changeClear: () {
+                              country.clear();
+                              setState(() {});
+                            },
+                            error: validateError?.errors.country?.first,
+                          ),
+                          AppHorizontalField(
+                            label: getConstant('City'),
+                            controller: city,
+                            changeClear: () {
+                              city.clear();
+                              setState(() {});
+                            },
+                            error: validateError?.errors.city?.first,
                           ),
                           SettingsInput(
                               title: getConstant('Social_accounts'),
@@ -305,8 +225,8 @@ class _PersonalInfoStudentState extends State<PersonalInfoStudent> {
           phone.text,
           email.text,
           about.text,
-          _country?['name'],
-          _city?['name'],
+          country.text,
+          city.text,
       );
       if(result == true){
        updateUser();
@@ -333,48 +253,5 @@ class _PersonalInfoStudentState extends State<PersonalInfoStudent> {
 
   void updateUser() {
     context.read<AppState>().getUser();
-  }
-
-  Future<void> searchCountry(String? value) async {
-    if((value?.length ?? 0) < 2) return;
-    loadingSearch = true;
-    setState(() {});
-    try {
-      final result = await AppNinjasService.getCountry(value);
-      if (result != null) {
-        List<Map<String, dynamic>>? list = [];
-        for(var a = 0; a < result.length; a++){
-          list.add({
-            'name': result[a]['name'],
-            'iso2': result[a]['iso2']
-          });
-        }
-        countryList = list;
-      }
-    } finally {
-      loadingSearch = false;
-      setState(() {});
-    }
-  }
-
-  Future<void> searchCity(String? value) async {
-    if((value?.length ?? 0) < 2) return;
-    loadingSearch = true;
-    setState(() {});
-    try {
-      final result = await AppNinjasService.getCity(value, _country);
-      if(result != null){
-        List<Map<String, dynamic>>? list = [];
-        for(var a = 0; a < result.length; a++){
-          list.add({
-            'name': result[a]['name']
-          });
-        }
-        cityList = list;
-      }
-    } finally {
-      loadingSearch = false;
-      setState(() {});
-    }
   }
 }

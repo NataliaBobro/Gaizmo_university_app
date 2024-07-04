@@ -47,16 +47,16 @@ class _ListSearchUsersState extends State<ListSearchUsers> {
                               if(state.users?.users[index].avatar != null) ...[
                                 CachedNetworkImage(
                                   imageUrl: '${state.users?.users[index].avatar}',
-                                  width: 50,
-                                  height: 70,
+                                  width: 60,
+                                  height: 60,
                                   errorWidget: (context, error, stackTrace) =>
                                   const SizedBox.shrink(),
                                   fit: BoxFit.cover,
                                 )
                               ] else ...[
                                 Container(
-                                  width: 50,
-                                  height: 70,
+                                  width: 60,
+                                  height: 60,
                                   color: AppColors.accentContainerSoft.withOpacity(.05),
                                 )
                               ]

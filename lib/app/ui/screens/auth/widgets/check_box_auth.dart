@@ -38,6 +38,11 @@ class _CheckboxAuthState extends State<CheckboxAuth> {
                   ),
                   color: isActivePrivacy ? const Color(0xFF848484) : null
               ),
+              child: isActivePrivacy ? const Icon(
+                Icons.check,
+                size: 10,
+                color: Colors.white,
+              ) : null,
             ),
             const SizedBox(
               width: 12,

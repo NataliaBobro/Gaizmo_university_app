@@ -81,8 +81,9 @@ class _AuthSelectLoginTypeState extends State<AuthSelectLoginType>
                     ),
                     Center(
                       child: Image.asset(
-                        Images.logo,
+                        state.selectLang == 0 ? Images.logoEn : Images.logo,
                         width: 290,
+                        height: 270,
                       ),
                     )
                   ],
