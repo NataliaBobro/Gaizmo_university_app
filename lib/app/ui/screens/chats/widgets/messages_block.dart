@@ -19,6 +19,7 @@ class MessagesListView extends StatefulWidget {
 }
 
 class _MessagesListViewState extends State<MessagesListView> {
+
   @override
   Widget build(BuildContext context) {
     final state = context.watch<ChatsState>();
@@ -68,6 +69,7 @@ class MessageBlock extends StatefulWidget {
 }
 
 class _MessageBlockState extends State<MessageBlock> {
+
   @override
   Widget build(BuildContext context) {
     String inputDate = '${widget.messages.createdAt}';

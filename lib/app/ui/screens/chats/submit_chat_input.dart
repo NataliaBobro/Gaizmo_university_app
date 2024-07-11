@@ -40,15 +40,18 @@ class _SubmitChatInputState extends State<SubmitChatInput> {
                 physics: const NeverScrollableScrollPhysics(),
                 child: Row(
                   children: [
-                    CupertinoButton(
-                        minSize: 0.0,
-                        padding: const EdgeInsets.only(
-                            left: 26, top: 10, bottom: 10, right: 15),
-                        child: SvgPicture.asset(
-                          Svgs.attach,
-                          width: 20,
-                        ),
-                        onPressed: () {}),
+                    const SizedBox(
+                      width: 16,
+                    ),
+                    // CupertinoButton(
+                    //     minSize: 0.0,
+                    //     padding: const EdgeInsets.only(
+                    //         left: 26, top: 10, bottom: 10, right: 15),
+                    //     child: SvgPicture.asset(
+                    //       Svgs.attach,
+                    //       width: 20,
+                    //     ),
+                    //     onPressed: () {}),
                     Expanded(
                       child: TextField(
                         controller: message,

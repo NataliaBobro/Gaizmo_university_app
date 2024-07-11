@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:european_university_app/app/domain/models/user.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 import '../app/app.dart';
@@ -6,7 +7,7 @@ import '../app/domain/states/chats/chats_state.dart';
 import '../app/ui/navigation/routes.dart';
 
 class AppFirebaseMessaging {
-  static Future<void> init(ChatsState read) async {
+  static Future<void> init(ChatsState read, UserData? userData) async {
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
       if (message.data['action'] == 'send_message') {
         int chatId = int.parse(message.data['chat_id']);
@@ -33,7 +34,7 @@ class AppFirebaseMessaging {
       });
     }
 
-    setFirebase(true);
+    setFirebase(userData?.notifications == 1 ? true : false);
   }
 
   static Future<void> setFirebase(bool onShow) async {

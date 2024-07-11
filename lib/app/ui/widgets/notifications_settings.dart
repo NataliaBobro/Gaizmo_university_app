@@ -4,6 +4,7 @@ import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:flutter/material.dart';
 
 
+import '../../../resources/app_firebase_messaging.dart';
 import 'app_radio_input.dart';
 import 'auth_button.dart';
 import 'center_header.dart';
@@ -85,6 +86,7 @@ class _NotificationsSettingsState extends State<NotificationsSettings> {
   }
 
   Future<void> save() async {
+    AppFirebaseMessaging.setFirebase(hasOn);
     try{
       final result = await UserService.changeNotifications(context, hasOn);
       if(result == true){

@@ -163,8 +163,8 @@ class _TeacherServicesScreenState extends State<TeacherServicesScreen> {
                         )
                       ] else ...[
                         EmptyWidget(
-                            title: 'No services yet :(',
-                            subtitle: 'Click the button below to add services!',
+                            title: getConstant('No_services_yet_'),
+                            subtitle: getConstant('Click_the_button_below_to_add_services'),
                             isEmpty: state.servicesCategory.isEmpty && !state.isLoading,
                             onPress: () {
                               state.openAddOrEditService();
@@ -417,10 +417,12 @@ class _ContentServiceState extends State<ContentService> {
               title: getConstant('Validity'),
               value: "${widget.item?.validity} ${widget.item?.validityType}"
           ),
-          ContentRowInfo(
-              title: getConstant('Cost'),
-              value: "${widget.item?.cost} ${widget.item?.currency?.symbol}"
-          ),
+          if(widget.item?.cost != null) ...[
+            ContentRowInfo(
+                title: getConstant('Cost'),
+                value: "${widget.item?.cost} ${widget.item?.currency?.symbol}"
+            )
+          ],
           ContentRowInfo(
               title: "EU",
               value: "${widget.item?.etm}"

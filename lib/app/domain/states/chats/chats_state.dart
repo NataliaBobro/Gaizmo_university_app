@@ -42,13 +42,13 @@ class ChatsState with ChangeNotifier {
 
 
   void initFirebase() {
-    AppFirebaseMessaging.init(this);
+    final userData = context.read<AppState>().userData;
+    AppFirebaseMessaging.init(this, userData);
   }
 
   Future<void> fetchChatList()async {
     final user = context.read<AppState>().userData;
     if(user?.id == null) return;
-
       _isLoading = true;
       notifyListeners();
       try {

@@ -1,4 +1,5 @@
 import 'package:european_university_app/app/ui/theme/app_colors.dart';
+import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -56,8 +57,8 @@ class _SelectBottomSheetInputState extends State<SelectBottomSheetInput> {
                 children: [
                   Expanded(
                     child: Text(
-                      widget.selected != null ? '${widget.selected?['name']}' :
-                        (widget.placeholder != null ? '${widget.placeholder}' : ''),
+                      getConstant(widget.selected != null ? '${widget.selected?['name']}' :
+                      (widget.placeholder != null ? '${widget.placeholder}' : '')),
                       style: TextStyles.s14w400.copyWith(
                           color: Colors.black
                       ),
@@ -152,7 +153,7 @@ class _SelectBottomSheetInputState extends State<SelectBottomSheetInput> {
                                  vertical: 14
                              ),
                              child: Text(
-                               widget.items[index]['name'],
+                               getConstant(widget.items[index]['name']),
                                style: TextStyles.s14w400.copyWith(
                                    color: Colors.black
                                ),

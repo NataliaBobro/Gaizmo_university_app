@@ -12,6 +12,7 @@ import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:sizer/sizer.dart';
+import '../resources/app_firebase_messaging.dart';
 import 'domain/models/meta.dart';
 import 'domain/models/user.dart';
 import 'domain/services/auth_service.dart';
@@ -19,6 +20,8 @@ import 'domain/services/meta_service.dart';
 import 'ui/navigation/route_observer.dart';
 import 'ui/navigation/routes.dart';
 import 'ui/theme/app_theme.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
 
 final routemaster = RoutemasterDelegate(
   observers: [MyRouteObserver()],
@@ -86,6 +89,7 @@ class AppState extends ChangeNotifier {
           getMeta(result.languageId);
           fetchConstant(languageId: result.languageId ?? 2).then((value) {
             onChangeRoute();
+            AppFirebaseMessaging.setFirebase(_userData?.notifications == 1 ? true : false);
           });
         }
       }
@@ -300,6 +304,15 @@ class App extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             scaffoldMessengerKey: scaffoldMessengerKey,
             theme: AppTheme.appTheme,
+            localizationsDelegates: const [
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: const [
+              Locale('en', 'US'),
+              Locale('uk', 'UA'),
+            ],
 
             /// to disable the system text scale.
             builder: (context, child) {
