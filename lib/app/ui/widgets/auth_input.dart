@@ -17,9 +17,11 @@ class AuthInput extends StatefulWidget {
     this.bottomLeftWidget,
     this.keyboardType,
     this.focusNode,
+    this.required = false,
   }) : super(key: key);
 
   final String title;
+  final bool required;
   final String? hintText;
   final TextEditingController controller;
   final bool isPass;
@@ -62,7 +64,7 @@ class _AuthInputState extends State<AuthInput> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          widget.title,
+          '${widget.title} ${widget.required ? "*" : ""}',
           style: TextStyles.s14w400.copyWith(
               color: const Color(0xFF848484)
           ),

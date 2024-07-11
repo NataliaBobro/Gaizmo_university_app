@@ -320,32 +320,32 @@ class _SelectTypePhotoState extends State<SelectTypePhoto> {
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: [
-              Row(
-                children: List.generate(
-                  _medias.length, (index) =>
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 4),
-                      child: CupertinoButton(
-                        minSize: 0.0,
-                        padding: EdgeInsets.zero,
-                        onPressed: () async{
-                          selectImage(
-                              await _medias[index].file
-                          );
-                        },
-                        child: AssetEntityImage(
-                          _medias[index],
-                          height: 160,
-                          width: 90,
-                          fit: BoxFit.cover,
-                          isOriginal: false,
-                          thumbnailFormat: ThumbnailFormat.jpeg,
-                          thumbnailSize: const ThumbnailSize.square(250),
-                        ),
-                      ),
-                    )
-                ),
-              )
+              // Row(
+              //   children: List.generate(
+              //     _medias.length, (index) =>
+              //       Container(
+              //         margin: const EdgeInsets.symmetric(horizontal: 4),
+              //         child: CupertinoButton(
+              //           minSize: 0.0,
+              //           padding: EdgeInsets.zero,
+              //           onPressed: () async{
+              //             selectImage(
+              //                 await _medias[index].file
+              //             );
+              //           },
+              //           child: AssetEntityImage(
+              //             _medias[index],
+              //             height: 160,
+              //             width: 90,
+              //             fit: BoxFit.cover,
+              //             isOriginal: false,
+              //             thumbnailFormat: ThumbnailFormat.jpeg,
+              //             thumbnailSize: const ThumbnailSize.square(250),
+              //           ),
+              //         ),
+              //       )
+              //   ),
+              // )
             ],
           ),
         ),

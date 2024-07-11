@@ -108,7 +108,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> with TickerProviderStat
                         children: [
                           Tab(
                             height: 19,
-                            text: getConstant('Paid_lessons'),
+                            text: getConstant('Active'),
                           ),
                           if(isActiveTab == 1) ...[
                             Container(

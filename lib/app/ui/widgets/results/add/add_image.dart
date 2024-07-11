@@ -114,12 +114,17 @@ class _ViewSelectedFileState extends State<ViewSelectedFile> {
                       const SizedBox(
                         height: 16,
                       ),
-                      Text(
-                        "Please, wait!\nThe result is loading...",
-                        style: TextStyles.s14w600.copyWith(
-                            color: Colors.white
+                      Container(
+                        constraints: const BoxConstraints(
+                          maxWidth: 240
                         ),
-                        textAlign: TextAlign.center,
+                        child: Text(
+                          getConstant('wait_result'),
+                          style: TextStyles.s14w600.copyWith(
+                              color: Colors.white
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
                       )
                     ],
                   ),

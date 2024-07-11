@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:european_university_app/app/domain/models/services.dart';
 import 'package:european_university_app/app/domain/models/user.dart';
 import 'package:european_university_app/app/domain/services/schedule_service.dart';
+import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -128,8 +129,8 @@ class _ListStudentsState extends State<ListStudents> {
             color: const Color(0xFFF0F3F6),
             child: Column(
               children: [
-                const CenterHeader(
-                    title: 'Students'
+                CenterHeader(
+                    title: getConstant('Students')
                 ),
                 Expanded(
                     child: Column(
@@ -188,6 +189,7 @@ class PayUserItem extends StatelessWidget {
                 CachedNetworkImage(
                   imageUrl: '${user?.avatar}',
                   width: 40,
+                  height: 40,
                   errorWidget: (context, error, stackTrace) =>
                   const SizedBox.shrink(),
                   fit: BoxFit.cover,

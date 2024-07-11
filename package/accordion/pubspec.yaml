@@ -16,6 +16,8 @@ dependencies:
 
 dev_dependencies:
   flutter_lints: ^2.0.3
+  flutter_slidable: ^3.0.1
+  flutter_svg: ^1.1.1+1
 
 flutter:
   uses-material-design: true
@@ -25,8 +27,3 @@ topics:
   - sections
   - expandable
   - ui
-
-screenshots:
-  - description: 'Accordion example in action'
-    path: example/accordion_demo.gif
-  

@@ -9,8 +9,6 @@ import 'package:provider/provider.dart';
 import '../../../../domain/states/my_results_state.dart';
 import '../../../screens/school/schedule/filter/type_lesson.dart';
 
-
-
 class AddResult extends StatefulWidget {
   const AddResult({Key? key}) : super(key: key);
 
@@ -51,18 +49,25 @@ class _AddResultState extends State<AddResult> {
                                 ),
                               ),
                               if(state.filterSchedule.type.isNotEmpty) ...[
-                                Builder(
-                                  builder: (context) {
-                                    final service = state.listTypeServices.firstWhere(
-                                        (element) => element['id'] == state.filterSchedule.type.first
-                                    );
-                                    return Text(
-                                      "${service['name']}",
-                                      style: TextStyles.s14w400.copyWith(
-                                          color: const Color(0xFFACACAC)
-                                      ),
-                                    );
-                                  },
+                                Container(
+                                  constraints: const BoxConstraints(
+                                    maxWidth: 240
+                                  ),
+                                  child: Builder(
+                                    builder: (context) {
+                                      final service = state.listTypeServices.firstWhere(
+                                              (element) => element['id'] == state.filterSchedule.type.first
+                                      );
+                                      return Text(
+                                        "${service['name']}",
+                                        style: TextStyles.s14w400.copyWith(
+                                            color: const Color(0xFFACACAC)
+                                        ),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      );
+                                    },
+                                  ),
                                 )
                               ]
                             ],

@@ -45,7 +45,55 @@ class SocialAccountInfo extends StatelessWidget {
                   launchUrlParse(socialAccounts?.instagram);
                 }
             )
-          ]
+          ],
+          if(socialAccounts?.facebook != null) ...[
+            const SizedBox(
+              width: 8,
+            ),
+            CupertinoButton(
+                padding: EdgeInsets.zero,
+                minSize: 0.0,
+                child: Image.asset(
+                  Images.fa,
+                  width: 16,
+                ),
+                onPressed: () {
+                  launchUrlParse(socialAccounts?.facebook);
+                }
+            )
+          ],
+          if(socialAccounts?.twitter != null) ...[
+            const SizedBox(
+              width: 8,
+            ),
+            CupertinoButton(
+                padding: EdgeInsets.zero,
+                minSize: 0.0,
+                child: Image.asset(
+                  Images.tw,
+                  width: 16,
+                ),
+                onPressed: () {
+                  launchUrlParse(socialAccounts?.twitter);
+                }
+            )
+          ],
+          if(socialAccounts?.linkedin != null) ...[
+            const SizedBox(
+              width: 8,
+            ),
+            CupertinoButton(
+                padding: EdgeInsets.zero,
+                minSize: 0.0,
+                child: Image.asset(
+                  Images.li,
+                  width: 16,
+                ),
+                onPressed: () {
+                  launchUrlParse(socialAccounts?.linkedin);
+                }
+            )
+          ],
 
         ],
       ),

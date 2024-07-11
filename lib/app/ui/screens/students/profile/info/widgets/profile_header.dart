@@ -37,16 +37,16 @@ class _ProfileHeaderState extends State<ProfileHeader> {
           ),
           Row(
             children: [
-              CupertinoButton(
-                minSize: 0.0,
-                padding: const EdgeInsets.only(right: 2, left: 20, top: 4, bottom: 4),
-                child: SvgPicture.asset(
-                    Svgs.notify
-                ),
-                onPressed: () async {
-
-                }
-              ),
+              // CupertinoButton(
+              //   minSize: 0.0,
+              //   padding: const EdgeInsets.only(right: 2, left: 20, top: 4, bottom: 4),
+              //   child: SvgPicture.asset(
+              //       Svgs.notify
+              //   ),
+              //   onPressed: () async {
+              //
+              //   }
+              // ),
               CupertinoButton(
                   minSize: 0.0,
                   padding: const EdgeInsets.only(right: 24, left: 2, top: 4, bottom: 4),

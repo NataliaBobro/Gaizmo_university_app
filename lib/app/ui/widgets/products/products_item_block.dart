@@ -48,6 +48,7 @@ class _ProductItemBlockState extends State<ProductItemBlock> {
             borderRadius: BorderRadius.zero
         ),
         closedElevation: 0.0,
+        openElevation: 0.0,
         closedBuilder: (BuildContext context, VoidCallback openContainer) {
           return Container(
             padding: const EdgeInsets.symmetric(
@@ -285,6 +286,15 @@ class _OpenedProductState extends State<OpenedProduct> {
                             ],
                           ),
                         ),
+
+                        if(widget.hasDeliveryStatus) ...[
+                          Text(
+                              '${widget.item?.createdAt}'
+                          ),
+                          const SizedBox(
+                            height: 40,
+                          )
+                        ],
 
                         if(widget.hasPay)...[
                           Row(

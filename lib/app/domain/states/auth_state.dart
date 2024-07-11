@@ -9,7 +9,6 @@ import 'package:european_university_app/app/ui/screens/auth/new_password.dart';
 import 'package:european_university_app/resources/resources.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:hive/hive.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';

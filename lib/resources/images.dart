@@ -10,6 +10,9 @@ class Images {
   static const String testExchange = 'assets/images/test-exchange.png';
   static const String testPresents = 'assets/images/test-presents.png';
   static const String inst = 'assets/images/inst.png';
+  static const String fa = 'assets/images/fa.png';
+  static const String tw = 'assets/images/tw.png';
+  static const String li = 'assets/images/li.png';
   static const String penguins = 'assets/images/penguin.png';
   static const String indicator = 'assets/images/indicator.png';
   static const String wayForPay = 'assets/images/WayForPay.png';

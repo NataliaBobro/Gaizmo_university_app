@@ -2,7 +2,6 @@ import 'package:european_university_app/app/domain/services/school_service.dart'
 import 'package:flutter/cupertino.dart';
 
 
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/user.dart';

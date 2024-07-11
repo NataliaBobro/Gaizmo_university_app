@@ -3,7 +3,6 @@ import 'package:european_university_app/app/app.dart';
 import 'package:european_university_app/app/domain/models/meta.dart';
 import 'package:european_university_app/app/domain/services/shop_servcie.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:provider/provider.dart';

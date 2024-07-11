@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:european_university_app/app/app.dart';
 import 'package:european_university_app/app/domain/models/user.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'dart:io';
 

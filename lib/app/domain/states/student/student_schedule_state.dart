@@ -113,8 +113,8 @@ class StudentScheduleState with ChangeNotifier {
         if(result.teacher != null) {
           for(var a = 0; a < (result.teacher?.length ?? 0); a++){
             _listTeacher.add({
-              "id": result.teacher?[a]?.id,
-              "name": '${result.teacher?[a]?.firstName} ${result.teacher?[a]?.lastName}',
+              "id": result.teacher?[a].id,
+              "name": '${result.teacher?[a].firstName} ${result.teacher?[a].lastName}',
             });
           }
         }

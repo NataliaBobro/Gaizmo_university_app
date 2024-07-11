@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:european_university_app/resources/resources.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 import 'package:accordion/accordion.dart';
@@ -221,7 +220,7 @@ class AccordionSection extends StatelessWidget with CommonParams {
                             ),
                             child: Center(
                               child: SvgPicture.asset(
-                                  Svgs.paint
+                                  'assets/vectors/paint.svg'
                               ),
                             ),
                           ),
@@ -247,7 +246,7 @@ class AccordionSection extends StatelessWidget with CommonParams {
                             ),
                             child: Center(
                               child: SvgPicture.asset(
-                                  Svgs.delete
+                                  'assets/vectors/delete.svg'
                               ),
                             ),
                           ),

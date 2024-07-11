@@ -4,8 +4,6 @@ import 'package:european_university_app/app/domain/states/school/school_staff_it
 import 'package:european_university_app/app/ui/screens/school/staff/item/staff_item_screen.dart';
 import 'package:european_university_app/app/ui/theme/app_colors.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 

@@ -243,30 +243,52 @@ class _TeacherScheduleScreenState extends State<TeacherScheduleScreen> {
   }
 
   Future<void> showVisitsDialog(Lesson lesson, DateTime date) async {
-    await showPlatformDialog(
-      context: context,
-      builder: (context) => BasicDialogAlert(
-        content: const Text(
-          "Are you sure you attended this lesson?",
-          style: TextStyles.s17w600,
+    DateTime dateNow  = DateTime.now();
+
+    if(dateNow.isBefore(date)){
+      await showPlatformDialog(
+        context: context,
+        builder: (context) => BasicDialogAlert(
+          content: Text(
+            getConstant('wait_day_come_yet'),
+            style: TextStyles.s17w600,
+          ),
+          actions: <Widget>[
+            BasicDialogAction(
+              title: Text(getConstant('Close')),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
         ),
-        actions: <Widget>[
-          BasicDialogAction(
-            title: const Text("Yes"),
-            onPressed: () {
-              Navigator.pop(context);
-              visits(lesson, date);
-            },
+      );
+    }else{
+      await showPlatformDialog(
+        context: context,
+        builder: (context) => BasicDialogAlert(
+          content: Text(
+            getConstant('Are_you_sure_you_attended_this_lesson'),
+            style: TextStyles.s17w600,
           ),
-          BasicDialogAction(
-            title: const Text("No"),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-        ],
-      ),
-    );
+          actions: <Widget>[
+            BasicDialogAction(
+              title: Text(getConstant('Yes')),
+              onPressed: () {
+                Navigator.pop(context);
+                visits(lesson, date);
+              },
+            ),
+            BasicDialogAction(
+              title: Text(getConstant('No')),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      );
+    }
   }
 
   Future<void> visits(Lesson lesson, DateTime date) async {

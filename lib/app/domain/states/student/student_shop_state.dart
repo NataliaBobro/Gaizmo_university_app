@@ -130,18 +130,14 @@ class StudentShopState with ChangeNotifier {
               fullscreenDialog: true,
               builder: (context) => Scaffold(
                 body: SafeArea(
-                  child: WebView(
+                  child:  WebView(
                     initialUrl: url,
                     javascriptMode: JavascriptMode.unrestricted,
                     onWebViewCreated: (WebViewController webViewController) {
 
                     },
                     navigationDelegate: (NavigationRequest request) {
-                      print(request);
                       return NavigationDecision.navigate;
-                    },
-                    onPageFinished: (val) {
-                      print(val);
                     },
                   ),
                 ),

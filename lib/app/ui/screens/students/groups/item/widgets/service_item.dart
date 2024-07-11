@@ -227,9 +227,12 @@ class _ServiceItemState extends State<ServiceItem> {
                                             canTapOnHeader: false,
                                             backgroundColor: const Color(0xFFF0F3F6),
                                             headerBuilder: (BuildContext context, bool isExpanded) {
-                                              return Text(
-                                                getConstant('Schedule'),
-                                                style: TextStyles.s14w400,
+                                              return Padding(
+                                                padding: const EdgeInsets.only(top: 8),
+                                                child: Text(
+                                                  getConstant('Schedule'),
+                                                  style: TextStyles.s14w400,
+                                                ),
                                               );
                                             },
                                             body: Padding(
@@ -357,9 +360,12 @@ class _ScheduleLessonState extends State<ScheduleLesson> {
               padding: const EdgeInsets.symmetric(
                   vertical: 17
               ),
-              child: Text(
-                getConstant(item.headerValue),
-                style: TextStyles.s14w400,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 8),
+                child: Text(
+                  getConstant(item.headerValue),
+                  style: TextStyles.s14w400,
+                ),
               ),
             );
           },

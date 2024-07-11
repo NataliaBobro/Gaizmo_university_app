@@ -242,6 +242,9 @@ class _HeaderState extends State<Header> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      constraints: const BoxConstraints(
+        minHeight: 50
+      ),
       padding: const EdgeInsets.only(
           bottom: 8
       ),
@@ -252,12 +255,13 @@ class _HeaderState extends State<Header> {
         children: [
           Container(
             padding: const EdgeInsets.only(
-                left: 40
+              left: 40,
+              top: 10
             ),
             alignment: Alignment.center,
             child: Text(
               widget.title,
-              style: TextStyles.s18w600.copyWith(
+              style: TextStyles.s20w600.copyWith(
                   color: const Color(0xFF242424)
               ),
             ),

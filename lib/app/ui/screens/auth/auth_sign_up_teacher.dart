@@ -76,17 +76,20 @@ class _AuthSignUpTeacherState extends State<AuthSignUpTeacher> {
                               errors: state.validateError?.errors.phoneErrors?.first,
                             ),
                             AuthInput(
+                              required: true,
                               controller: state.email,
                               title: getConstant('Email_adress'),
                               errors: state.validateError?.errors.emailErrors?.first,
                             ),
                             AuthInput(
+                              required: true,
                               controller: state.password,
                               title: getConstant('Password'),
                               isPass: true,
                               errors: state.validateError?.errors.passwordErrors?.first,
                             ),
                             AuthInput(
+                              required: true,
                               controller: state.confirmPassword,
                               title: getConstant('Confirm_password'),
                               isPass: true,
@@ -96,11 +99,13 @@ class _AuthSignUpTeacherState extends State<AuthSignUpTeacher> {
                               title: getConstant('Personal_info'),
                             ),
                             AuthInput(
+                              required: true,
                               controller: state.firstName,
                               title: getConstant('First_name'),
                               errors: state.validateError?.errors.firstNameErrors?.first,
                             ),
                             AuthInput(
+                              required: true,
                               controller: state.surname,
                               title: getConstant('Surname'),
                               errors: state.validateError?.errors.surnameErrors?.first,

@@ -19,7 +19,6 @@ import 'domain/services/meta_service.dart';
 import 'ui/navigation/route_observer.dart';
 import 'ui/navigation/routes.dart';
 import 'ui/theme/app_theme.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 
 final routemaster = RoutemasterDelegate(
   observers: [MyRouteObserver()],
@@ -297,15 +296,6 @@ class App extends StatelessWidget {
         builder: (context, orientaition, child) => OverlaySupport.global(
           child: MaterialApp.router(
             routerDelegate: routemaster,
-            localizationsDelegates: const [
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: const [
-              Locale('en', 'US'),
-              Locale('uk', 'UA'),
-            ],
             routeInformationParser: const RoutemasterParser(),
             debugShowCheckedModeBanner: false,
             scaffoldMessengerKey: scaffoldMessengerKey,

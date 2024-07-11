@@ -24,6 +24,7 @@ class Products {
   int? priceMoney;
   String? image;
   String? status;
+  String? createdAt;
   String? deliveryStatus;
   int? orderId;
 
@@ -35,6 +36,7 @@ class Products {
     this.priceMoney,
     this.image,
     this.status,
+    this.createdAt,
     this.deliveryStatus,
     this.orderId,
   });
