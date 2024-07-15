@@ -1,4 +1,3 @@
-import 'package:european_university_app/app/ui/screens/teacher/schedule/filter/filter_class.dart';
 import 'package:european_university_app/app/ui/screens/teacher/schedule/filter/type_lesson.dart';
 import 'package:european_university_app/app/ui/theme/text_styles.dart';
 import 'package:european_university_app/app/ui/widgets/auth_button.dart';
@@ -107,47 +106,47 @@ class _ScheduleFilterScreenState extends State<ScheduleFilterScreen> {
                             );
                           }
                         ),
-                        CupertinoButton(
-                            minSize: 0.0,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 24,
-                                vertical: 18
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  getConstant('Class'),
-                                  style: TextStyles.s14w400.copyWith(
-                                      color: const Color(0xFF242424)
-                                  ),
-                                ),
-                                Container(
-                                  constraints: const BoxConstraints(
-                                      maxWidth: 179
-                                  ),
-                                  child: Text(
-                                    selectedClass.isNotEmpty ? selectedClass : getConstant('All'),
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyles.s14w400.copyWith(
-                                        color: const Color(0xFF848484)
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  CupertinoPageRoute(
-                                      builder: (context) => ChangeNotifierProvider.value(
-                                        value: read,
-                                        child: const FilterClass(),
-                                      )
-                                  )
-                              );
-                            }
-                        )
+                        // CupertinoButton(
+                        //     minSize: 0.0,
+                        //     padding: const EdgeInsets.symmetric(
+                        //         horizontal: 24,
+                        //         vertical: 18
+                        //     ),
+                        //     child: Row(
+                        //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //       children: [
+                        //         Text(
+                        //           getConstant('Class'),
+                        //           style: TextStyles.s14w400.copyWith(
+                        //               color: const Color(0xFF242424)
+                        //           ),
+                        //         ),
+                        //         Container(
+                        //           constraints: const BoxConstraints(
+                        //               maxWidth: 179
+                        //           ),
+                        //           child: Text(
+                        //             selectedClass.isNotEmpty ? selectedClass : getConstant('All'),
+                        //             overflow: TextOverflow.ellipsis,
+                        //             style: TextStyles.s14w400.copyWith(
+                        //                 color: const Color(0xFF848484)
+                        //             ),
+                        //           ),
+                        //         )
+                        //       ],
+                        //     ),
+                        //     onPressed: () {
+                        //       Navigator.push(
+                        //           context,
+                        //           CupertinoPageRoute(
+                        //               builder: (context) => ChangeNotifierProvider.value(
+                        //                 value: read,
+                        //                 child: const FilterClass(),
+                        //               )
+                        //           )
+                        //       );
+                        //     }
+                        // )
                       ],
                     )
                 ),

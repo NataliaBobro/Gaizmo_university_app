@@ -58,6 +58,7 @@ class ListMessages {
 class Messages {
   int? id;
   int? userId;
+  int? chatId;
   String? message;
   String? createdAt;
   List<MessageAttachment>? attachment;

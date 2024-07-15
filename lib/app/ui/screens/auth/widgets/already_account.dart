@@ -21,7 +21,7 @@ class AlreadyAccount extends StatelessWidget {
           ),
           children: [
             TextSpan(
-              text: ' ${getConstant('Get_started')}',
+              text: ' ${getConstant('auth')}',
               style: TextStyles.s14w600.copyWith(
                   color: AppColors.appButton
               ),

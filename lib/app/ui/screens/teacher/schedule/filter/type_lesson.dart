@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../domain/states/teacher/teacher_schedule_state.dart';
+import '../../../../utils/get_constant.dart';
 import '../../../../widgets/auth_button.dart';
 import '../../../../widgets/center_header.dart';
 
@@ -61,13 +62,13 @@ class _TypeLessonState extends State<TypeLesson> {
             child: Column(
               children: [
                 CenterHeaderWithAction(
-                    title: 'Filter',
+                    title: getConstant('Filter'),
                     action: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         CupertinoButton(
                           child: Text(
-                            selected.isEmpty ? 'All' : 'Clear',
+                            selected.isEmpty ? getConstant('All') : getConstant('Clear'),
                             style: TextStyles.s14w600.copyWith(
                                 color: Colors.black
                             ),
@@ -97,15 +98,11 @@ class _TypeLessonState extends State<TypeLesson> {
                                         horizontal: 24,
                                         vertical: 18
                                     ),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          service[index]['name'],
-                                          style: TextStyles.s14w400.copyWith(
-                                              color: const Color(0xFF242424)
-                                          ),
-                                        )
-                                      ],
+                                    child: Text(
+                                      service[index]['name'],
+                                      style: TextStyles.s14w400.copyWith(
+                                          color: const Color(0xFF242424)
+                                      ),
                                     ),
                                     onPressed: () {
                                       changeFilter(service[index]);
@@ -118,7 +115,7 @@ class _TypeLessonState extends State<TypeLesson> {
                     )
                 ),
                 AppButton(
-                    title: 'Apply filter',
+                    title: getConstant('APPLY_FILTER'),
                     onPressed: () {
                       apply();
                     }

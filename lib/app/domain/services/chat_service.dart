@@ -51,15 +51,11 @@ class ChatService {
 
   static Future<ListMessages?> fetchChatAi(
       BuildContext context,
-      int? chatId
       ) async {
     final token = getToken(context);
     if(token == null) return null;
     final response = await ApiClient().dio.get(
       '/chats/fetch-chat-message-ai',
-      queryParameters: {
-        'chat_id': chatId,
-      },
       options: Options(
         headers: {'Authorization': 'Bearer $token'},
       ),

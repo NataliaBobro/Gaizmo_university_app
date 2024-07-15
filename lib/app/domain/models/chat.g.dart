@@ -58,11 +58,12 @@ Messages _$MessagesFromJson(Map<String, dynamic> json) => Messages(
           ?.map((e) => MessageAttachment.fromJson(e as Map<String, dynamic>))
           .toList(),
       createdAt: json['created_at'] as String?,
-    );
+    )..chatId = json['chat_id'] as int?;
 
 Map<String, dynamic> _$MessagesToJson(Messages instance) => <String, dynamic>{
       'id': instance.id,
       'user_id': instance.userId,
+      'chat_id': instance.chatId,
       'message': instance.message,
       'created_at': instance.createdAt,
       'attachment': instance.attachment,

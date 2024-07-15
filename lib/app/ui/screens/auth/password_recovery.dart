@@ -71,7 +71,7 @@ class _PasswordRecoveryState extends State<PasswordRecovery> {
                                         "${getConstant('Leave_your')} ",
                                     children: [
                                       TextSpan(
-                                          text: "${getConstant('Email_adress')} ",
+                                          text: "${getConstant('Email_adressy')} ",
                                           style: TextStyles.s14w400.copyWith(
                                               color: AppColors.appButton
                                           )

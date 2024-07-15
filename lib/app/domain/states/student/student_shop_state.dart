@@ -2,6 +2,7 @@ import 'package:european_university_app/app/app.dart';
 import 'package:european_university_app/app/domain/models/user.dart';
 import 'package:european_university_app/app/domain/services/shop_servcie.dart';
 import 'package:european_university_app/app/ui/utils/get_constant.dart';
+import 'package:european_university_app/app/ui/widgets/center_header.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -130,15 +131,22 @@ class StudentShopState with ChangeNotifier {
               fullscreenDialog: true,
               builder: (context) => Scaffold(
                 body: SafeArea(
-                  child:  WebView(
-                    initialUrl: url,
-                    javascriptMode: JavascriptMode.unrestricted,
-                    onWebViewCreated: (WebViewController webViewController) {
+                  child:  Column(
+                    children: [
+                      CenterHeader(title: getConstant('Shop')),
+                      Expanded(
+                        child: WebView(
+                          initialUrl: url,
+                          javascriptMode: JavascriptMode.unrestricted,
+                          onWebViewCreated: (WebViewController webViewController) {
 
-                    },
-                    navigationDelegate: (NavigationRequest request) {
-                      return NavigationDecision.navigate;
-                    },
+                          },
+                          navigationDelegate: (NavigationRequest request) {
+                            return NavigationDecision.navigate;
+                          },
+                        ),
+                      )
+                    ],
                   ),
                 ),
               )

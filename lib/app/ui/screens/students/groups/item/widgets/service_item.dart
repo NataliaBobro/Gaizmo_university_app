@@ -228,7 +228,7 @@ class _ServiceItemState extends State<ServiceItem> {
                                             backgroundColor: const Color(0xFFF0F3F6),
                                             headerBuilder: (BuildContext context, bool isExpanded) {
                                               return Padding(
-                                                padding: const EdgeInsets.only(top: 8),
+                                                padding: const EdgeInsets.only(top: 16),
                                                 child: Text(
                                                   getConstant('Schedule'),
                                                   style: TextStyles.s14w400,
@@ -361,7 +361,7 @@ class _ScheduleLessonState extends State<ScheduleLesson> {
                   vertical: 17
               ),
               child: Padding(
-                padding: const EdgeInsets.only(top: 8),
+                padding: const EdgeInsets.only(top: 10),
                 child: Text(
                   getConstant(item.headerValue),
                   style: TextStyles.s14w400,

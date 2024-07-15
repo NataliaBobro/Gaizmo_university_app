@@ -88,7 +88,7 @@ class _StudentProfileScreenState extends State<StudentProfileScreen> with Ticker
                     insets: EdgeInsets.only(right: 35.0),
                   ),
                   labelPadding: const EdgeInsets.symmetric(
-                      horizontal: 16
+                      horizontal: 0
                   ),
                   labelColor: const Color(0xFF242424),
                   unselectedLabelStyle: TextStyles.s14w400,

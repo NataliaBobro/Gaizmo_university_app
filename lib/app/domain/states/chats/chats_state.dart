@@ -107,14 +107,14 @@ class ChatsState with ChangeNotifier {
     notifyListeners();
     final authUser = context.read<AppState>().userData;
     final user = UserData(
-        id: 0,
+        id: 255,
         type: 4,
         lastName: 'AI Assistant',
         gender: null
     );
     openPageChat(context);
     _chat = ChatItem(
-      id: _aiChat?.id,
+      id: 0,
       name: user.lastName,
       recipients: [
         user,
@@ -124,12 +124,9 @@ class ChatsState with ChangeNotifier {
     notifyListeners();
 
     try {
-      final result = await ChatService.fetchChatAi(context, _aiChat?.id);
+      final result = await ChatService.fetchChatAi(context);
       if(result != null) {
         _listMessages = result;
-        if(_chat?.id == null){
-          fetchChatList();
-        }
       }
     } catch (e) {
       print(e);
@@ -172,8 +169,7 @@ class ChatsState with ChangeNotifier {
     }
   }
 
-  void addMessage({String? text, int? chatId, int? recipientId}) {
-    int? chatUpdatedId = _chat?.id;
+  void addMessage({String? text, int? chatId, int? recipientId, String? type}) {
     int? recipientUpdateId = recipientId;
 
     if(recipientId == null){
@@ -181,13 +177,14 @@ class ChatsState with ChangeNotifier {
       recipientUpdateId = user?.id;
     }
 
-    if(chatId != null){
-      chatUpdatedId = chatId;
+    if(type == 'ai'){
+      _aiChat?.id = chatId;
     }
 
-    if(chatUpdatedId == _chat?.id || chatUpdatedId == null){
-      // AppFirebaseMessaging.setFirebase(false);
+    print(chatId);
+    print(_chat?.id);
 
+    if(chatId == _chat?.id || _chat?.id == null){
       _listMessages?.data?.insert(
           0,
           Messages(
@@ -198,9 +195,9 @@ class ChatsState with ChangeNotifier {
           )
       );
     }
-    final chat = _chatList?.where((element) => element.id == chatUpdatedId);
+    final chat = _chatList?.where((element) => element.id == chatId);
     if((chat?.length ?? 0) > 0){
-      _chatList?.where((element) => element.id == chatUpdatedId).first.lastMessage?.message = text;
+      _chatList?.where((element) => element.id == chatId).first.lastMessage?.message = text;
     }else{
       fetchChatList();
     }
@@ -216,8 +213,7 @@ class ChatsState with ChangeNotifier {
       _isLoading = true;
       notifyListeners();
     }
-    addMessage(text: value);
-
+    addMessage(text: value, chatId: _chat?.id);
     try {
       final result = await ChatService.sendMessage(
           context,
@@ -228,10 +224,8 @@ class ChatsState with ChangeNotifier {
       );
       if(result != null){
         _chat?.lastMessage?.attachment = result.attachment;
-        if(_chat?.id == null){
-          fetchChatList();
-          _chat?.id = result.id;
-        }
+        _chat?.id = result.chatId;
+        notifyListeners();
       }
     } catch (e) {
       print(e);

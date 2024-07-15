@@ -10,7 +10,9 @@ class AppFirebaseMessaging {
   static Future<void> init(ChatsState read, UserData? userData) async {
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
       if (message.data['action'] == 'send_message') {
+        print('--------init---------111');
         int chatId = int.parse(message.data['chat_id']);
+        print(chatId);
         await addMessageToChat(read, message.data);
         Timer(const Duration(milliseconds: 500), () async {
           await navigateToChat(chatId);
@@ -20,6 +22,8 @@ class AppFirebaseMessaging {
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
       if (message.data['action'] == 'send_message') {
+        print('--------init---------222');
+        print(message.data);
         await addMessageToChat(read, message.data);
       }
     });
@@ -27,6 +31,8 @@ class AppFirebaseMessaging {
     RemoteMessage? initialMessage =
     await FirebaseMessaging.instance.getInitialMessage();
     if (initialMessage?.data['action'] == 'send_message') {
+      print('--------init---------333');
+      print(initialMessage?.data);
       await addMessageToChat(read, initialMessage?.data);
       int chatId = int.parse(initialMessage?.data['chat_id']);
       Timer(const Duration(milliseconds: 2000), () async {
@@ -50,7 +56,7 @@ class AppFirebaseMessaging {
     int chatId = int.parse(data['chat_id']);
     String text = data['message'];
     int recipientId = int.parse(data['recipient_id']);
-    read.addMessage(text: text, chatId: chatId, recipientId: recipientId);
+    read.addMessage(text: text, chatId: chatId, recipientId: recipientId, type: data['type']);
   }
 
   static Future<void> navigateToChat(int chatId) async {

@@ -63,6 +63,7 @@ class _AddResultState extends State<AddResult> {
                                         style: TextStyles.s14w400.copyWith(
                                             color: const Color(0xFFACACAC)
                                         ),
+                                        textAlign: TextAlign.end,
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
                                       );
