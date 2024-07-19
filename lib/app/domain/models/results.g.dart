@@ -20,7 +20,7 @@ Map<String, dynamic> _$ResultsModelToJson(ResultsModel instance) =>
     };
 
 ResultItem _$ResultItemFromJson(Map<String, dynamic> json) => ResultItem(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       image: json['image'] as String?,
       createdAt: json['created_at'] as String?,
       user: json['user'] == null

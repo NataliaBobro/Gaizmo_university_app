@@ -48,7 +48,7 @@ Map<String, dynamic> _$MetaAppDataToJson(MetaAppData instance) =>
     };
 
 Gender _$GenderFromJson(Map<String, dynamic> json) => Gender(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       name: json['name'] as String,
       define: json['define'] as String,
     );
@@ -60,7 +60,7 @@ Map<String, dynamic> _$GenderToJson(Gender instance) => <String, dynamic>{
     };
 
 Language _$LanguageFromJson(Map<String, dynamic> json) => Language(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       name: json['name'] as String,
     );
 
@@ -70,7 +70,7 @@ Map<String, dynamic> _$LanguageToJson(Language instance) => <String, dynamic>{
     };
 
 Currency _$CurrencyFromJson(Map<String, dynamic> json) => Currency(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       name: json['name'] as String,
       symbol: json['symbol'] as String?,
     );
@@ -83,7 +83,7 @@ Map<String, dynamic> _$CurrencyToJson(Currency instance) => <String, dynamic>{
 
 SchoolCategory _$SchoolCategoryFromJson(Map<String, dynamic> json) =>
     SchoolCategory(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       translate: json['translate'] == null
           ? null
           : Translate.fromJson(json['translate'] as Map<String, dynamic>),
@@ -270,7 +270,7 @@ Map<String, dynamic> _$DocumentTypeListToJson(DocumentTypeList instance) =>
     };
 
 DocumentType _$DocumentTypeFromJson(Map<String, dynamic> json) => DocumentType(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       define: json['define'] as String,
       name: json['name'] as String,
     );
@@ -330,7 +330,7 @@ Map<String, dynamic> _$PaymentSettingsToJson(PaymentSettings instance) =>
 
 PaymentSettingsItem _$PaymentSettingsItemFromJson(Map<String, dynamic> json) =>
     PaymentSettingsItem(
-      userId: json['user_id'] as int,
+      userId: (json['user_id'] as num).toInt(),
       type: json['type'] as String,
       credentials: json['credentials'] as Map<String, dynamic>,
     );

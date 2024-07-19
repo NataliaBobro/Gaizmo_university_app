@@ -30,7 +30,7 @@ class _UserInfoState extends State<UserInfo> {
     }
 
     return Container(
-      height: 85,
+      height: 90,
       width: double.infinity,
       color: Colors.white,
       child: Column(

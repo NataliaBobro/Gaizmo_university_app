@@ -20,7 +20,7 @@ Map<String, dynamic> _$ChatListItemToJson(ChatListItem instance) =>
     };
 
 ChatItem _$ChatItemFromJson(Map<String, dynamic> json) => ChatItem(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       name: json['name'] as String?,
       type: json['type'] as String?,
       lastMessage: json['last_message'] == null
@@ -51,14 +51,14 @@ Map<String, dynamic> _$ListMessagesToJson(ListMessages instance) =>
     };
 
 Messages _$MessagesFromJson(Map<String, dynamic> json) => Messages(
-      id: json['id'] as int?,
-      userId: json['user_id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
+      userId: (json['user_id'] as num?)?.toInt(),
       message: json['message'] as String?,
       attachment: (json['attachment'] as List<dynamic>?)
           ?.map((e) => MessageAttachment.fromJson(e as Map<String, dynamic>))
           .toList(),
       createdAt: json['created_at'] as String?,
-    )..chatId = json['chat_id'] as int?;
+    )..chatId = (json['chat_id'] as num?)?.toInt();
 
 Map<String, dynamic> _$MessagesToJson(Messages instance) => <String, dynamic>{
       'id': instance.id,
@@ -71,7 +71,7 @@ Map<String, dynamic> _$MessagesToJson(Messages instance) => <String, dynamic>{
 
 MessageAttachment _$MessageAttachmentFromJson(Map<String, dynamic> json) =>
     MessageAttachment(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       patch: json['patch'] as String?,
     );
 

@@ -56,6 +56,7 @@ class UserData {
   SocialAccounts? socialAccounts;
   int? notifications;
   int? balanceEtm;
+  int? balance;
   String? from;
   String? to;
   int? salary;
@@ -82,6 +83,7 @@ class UserData {
     this.socialAccounts,
     this.notifications,
     this.balanceEtm,
+    this.balance,
     this.from,
     this.to,
     this.salary,

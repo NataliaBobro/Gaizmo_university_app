@@ -87,8 +87,10 @@ class StudentShopState with ChangeNotifier {
         final result = await ShopService.fetchLiqPayCred(context, productId);
         if(result != null){
           if(result.cred == null){
-            showMessage('Payment not possible. Please contact your school '
-                'administrator to set up payment details.', color: const Color(0xFFFFC700));
+            showMessage(
+                getConstant('Payment_not_possible._Please_contact_your_school_administrator_to_set_up_payment_details.'),
+                color: const Color(0xFFFFC700)
+            );
           }else{
             openPayWeb(result.cred, result.orderReference, result.product);
           }

@@ -22,10 +22,10 @@ Map<String, dynamic> _$TimesheetModelToJson(TimesheetModel instance) =>
 
 TimesheetItem _$TimesheetItemFromJson(Map<String, dynamic> json) =>
     TimesheetItem(
-      id: json['id'] as int?,
-      userId: json['user_id'] as int?,
-      lessonId: json['lesson_id'] as int?,
-      rating: json['rating'] as int?,
+      id: (json['id'] as num?)?.toInt(),
+      userId: (json['user_id'] as num?)?.toInt(),
+      lessonId: (json['lesson_id'] as num?)?.toInt(),
+      rating: (json['rating'] as num?)?.toInt(),
       lesson: json['lesson'] == null
           ? null
           : Lesson.fromJson(json['lesson'] as Map<String, dynamic>),

@@ -18,16 +18,16 @@ Map<String, dynamic> _$ListProductsToJson(ListProducts instance) =>
     };
 
 Products _$ProductsFromJson(Map<String, dynamic> json) => Products(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       name: json['name'] as String?,
       desc: json['desc'] as String?,
-      priceEtm: json['price_etm'] as int?,
-      priceMoney: json['price_money'] as int?,
+      priceEtm: (json['price_etm'] as num?)?.toInt(),
+      priceMoney: (json['price_money'] as num?)?.toInt(),
       image: json['image'] as String?,
       status: json['status'] as String?,
       createdAt: json['created_at'] as String?,
       deliveryStatus: json['delivery_status'] as String?,
-      orderId: json['order_id'] as int?,
+      orderId: (json['order_id'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$ProductsToJson(Products instance) => <String, dynamic>{

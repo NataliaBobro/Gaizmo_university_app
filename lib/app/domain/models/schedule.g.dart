@@ -30,9 +30,9 @@ Map<String, dynamic> _$ScheduleMetaToJson(ScheduleMeta instance) =>
 
 SchoolClassModel _$SchoolClassModelFromJson(Map<String, dynamic> json) =>
     SchoolClassModel(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       name: json['name'] as String?,
-      schoolId: json['school_id'] as int?,
+      schoolId: (json['school_id'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$SchoolClassModelToJson(SchoolClassModel instance) =>
@@ -44,10 +44,15 @@ Map<String, dynamic> _$SchoolClassModelToJson(SchoolClassModel instance) =>
 
 FilterSchedule _$FilterScheduleFromJson(Map<String, dynamic> json) =>
     FilterSchedule(
-      type: (json['type'] as List<dynamic>).map((e) => e as int).toList(),
-      teacher: (json['teacher'] as List<dynamic>).map((e) => e as int).toList(),
-      selectClass:
-          (json['select_class'] as List<dynamic>).map((e) => e as int).toList(),
+      type: (json['type'] as List<dynamic>)
+          .map((e) => (e as num).toInt())
+          .toList(),
+      teacher: (json['teacher'] as List<dynamic>)
+          .map((e) => (e as num).toInt())
+          .toList(),
+      selectClass: (json['select_class'] as List<dynamic>)
+          .map((e) => (e as num).toInt())
+          .toList(),
     );
 
 Map<String, dynamic> _$FilterScheduleToJson(FilterSchedule instance) =>

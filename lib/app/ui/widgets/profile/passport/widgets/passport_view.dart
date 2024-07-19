@@ -79,7 +79,7 @@ class _PassportViewState extends State<PassportView> {
                             color: Colors.white,
                           ),
                           Text(
-                            '25 000 UAH',
+                            '${userData?.balance} UAH',
                             style: TextStyles.s10w500.copyWith(
                                 color: Colors.white
                             ),

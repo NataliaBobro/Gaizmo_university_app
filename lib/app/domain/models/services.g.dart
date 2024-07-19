@@ -25,7 +25,7 @@ Map<String, dynamic> _$ServicesDataToJson(ServicesData instance) =>
 
 ServicesCategory _$ServicesCategoryFromJson(Map<String, dynamic> json) =>
     ServicesCategory(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       name: json['name'] as String,
       sheetId: json['sheet_id'] as String?,
       color: json['color'] as String?,
@@ -60,22 +60,22 @@ Map<String, dynamic> _$ListServicesModelToJson(ListServicesModel instance) =>
 
 ServicesModel _$ServicesModelFromJson(Map<String, dynamic> json) =>
     ServicesModel(
-      id: json['id'] as int,
-      branchId: json['branch_id'] as int?,
-      serviceCategory: json['service_category'] as int?,
-      validity: json['validity'] as int?,
+      id: (json['id'] as num).toInt(),
+      branchId: (json['branch_id'] as num?)?.toInt(),
+      serviceCategory: (json['service_category'] as num?)?.toInt(),
+      validity: (json['validity'] as num?)?.toInt(),
       validityType: json['validity_type'] as String?,
-      duration: json['duration'] as int?,
-      numberVisits: json['number_visits'] as int?,
-      cost: json['cost'] as int?,
+      duration: (json['duration'] as num?)?.toInt(),
+      numberVisits: (json['number_visits'] as num?)?.toInt(),
+      cost: (json['cost'] as num?)?.toInt(),
       currency: json['currency'] == null
           ? null
           : Currency.fromJson(json['currency'] as Map<String, dynamic>),
-      etm: json['etm'] as int?,
+      etm: (json['etm'] as num?)?.toInt(),
       lessons: (json['lessons'] as List<dynamic>?)
           ?.map((e) => Lesson.fromJson(e as Map<String, dynamic>))
           .toList(),
-      isFavorites: json['is_favorites'] as int?,
+      isFavorites: (json['is_favorites'] as num?)?.toInt(),
       name: json['name'] as String,
       color: json['color'] as String?,
       payUsers: (json['pay_users'] as List<dynamic>?)
@@ -115,11 +115,11 @@ Map<String, dynamic> _$ServicesModelToJson(ServicesModel instance) =>
     };
 
 Lesson _$LessonFromJson(Map<String, dynamic> json) => Lesson(
-      id: json['id'] as int,
-      serviceId: json['service_id'] as int?,
+      id: (json['id'] as num).toInt(),
+      serviceId: (json['service_id'] as num?)?.toInt(),
       classId: json['class_id'] as String?,
       startLesson: json['start_lesson'] as String?,
-      duration: json['duration'] as int?,
+      duration: (json['duration'] as num?)?.toInt(),
       type: json['type'] as String?,
       start: json['start'] as String?,
       end: json['end'] as String?,
@@ -155,7 +155,7 @@ Map<String, dynamic> _$DayItemToJson(DayItem instance) => <String, dynamic>{
     };
 
 PayUsers _$PayUsersFromJson(Map<String, dynamic> json) => PayUsers(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       user: UserData.fromJson(json['user'] as Map<String, dynamic>),
     );
 

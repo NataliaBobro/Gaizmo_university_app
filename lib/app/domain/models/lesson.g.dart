@@ -18,10 +18,10 @@ Map<String, dynamic> _$LessonsListToJson(LessonsList instance) =>
     };
 
 Lesson _$LessonFromJson(Map<String, dynamic> json) => Lesson(
-      id: json['id'] as int,
-      duration: json['duration'] as int,
+      id: (json['id'] as num).toInt(),
+      duration: (json['duration'] as num).toInt(),
       name: json['name'] as String?,
-      teacherId: json['teacher_id'] as int?,
+      teacherId: (json['teacher_id'] as num?)?.toInt(),
       teacher: json['teacher'] == null
           ? null
           : UserData.fromJson(json['teacher'] as Map<String, dynamic>),
@@ -67,8 +67,8 @@ Map<String, dynamic> _$LessonToJson(Lesson instance) => <String, dynamic>{
     };
 
 SchoolClass _$SchoolClassFromJson(Map<String, dynamic> json) => SchoolClass(
-      id: json['id'] as int,
-      schoolId: json['school_id'] as int?,
+      id: (json['id'] as num).toInt(),
+      schoolId: (json['school_id'] as num?)?.toInt(),
       name: json['name'] as String?,
     );
 

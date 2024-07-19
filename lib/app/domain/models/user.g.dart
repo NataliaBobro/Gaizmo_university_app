@@ -32,13 +32,13 @@ Map<String, dynamic> _$ListUserDataToJson(ListUserData instance) =>
     };
 
 UserData _$UserDataFromJson(Map<String, dynamic> json) => UserData(
-      id: json['id'] as int,
-      type: json['type'] as int,
-      languageId: json['language_id'] as int?,
+      id: (json['id'] as num).toInt(),
+      type: (json['type'] as num).toInt(),
+      languageId: (json['language_id'] as num?)?.toInt(),
       firstName: json['first_name'] as String?,
       lastName: json['last_name'] as String?,
       surname: json['surname'] as String?,
-      gender: json['gender'] as int?,
+      gender: (json['gender'] as num?)?.toInt(),
       dateBirth: json['date_birth'] as String?,
       phone: json['phone'] as String?,
       email: json['email'] as String?,
@@ -55,12 +55,13 @@ UserData _$UserDataFromJson(Map<String, dynamic> json) => UserData(
           ? null
           : SocialAccounts.fromJson(
               json['social_accounts'] as Map<String, dynamic>),
-      notifications: json['notifications'] as int?,
-      balanceEtm: json['balance_etm'] as int?,
+      notifications: (json['notifications'] as num?)?.toInt(),
+      balanceEtm: (json['balance_etm'] as num?)?.toInt(),
+      balance: (json['balance'] as num?)?.toInt(),
       from: json['from'] as String?,
       to: json['to'] as String?,
-      salary: json['salary'] as int?,
-      parentCount: json['parent_count'] as int?,
+      salary: (json['salary'] as num?)?.toInt(),
+      parentCount: (json['parent_count'] as num?)?.toInt(),
     )
       ..workDay = (json['work_day'] as List<dynamic>?)
           ?.map((e) => WorkDay.fromJson(e as Map<String, dynamic>))
@@ -92,6 +93,7 @@ Map<String, dynamic> _$UserDataToJson(UserData instance) => <String, dynamic>{
       'social_accounts': instance.socialAccounts,
       'notifications': instance.notifications,
       'balance_etm': instance.balanceEtm,
+      'balance': instance.balance,
       'from': instance.from,
       'to': instance.to,
       'salary': instance.salary,
@@ -99,8 +101,8 @@ Map<String, dynamic> _$UserDataToJson(UserData instance) => <String, dynamic>{
     };
 
 School _$SchoolFromJson(Map<String, dynamic> json) => School(
-      id: json['id'] as int,
-      categorySchoolId: json['category_school_id'] as int,
+      id: (json['id'] as num).toInt(),
+      categorySchoolId: (json['category_school_id'] as num).toInt(),
       name: json['name'] as String,
       siteName: json['site_name'] as String?,
       country: json['country'] as String?,
@@ -128,7 +130,7 @@ Map<String, dynamic> _$SchoolToJson(School instance) => <String, dynamic>{
     };
 
 Category _$CategoryFromJson(Map<String, dynamic> json) => Category(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       define: json['define'] as String,
       translate: json['translate'] == null
           ? null
@@ -142,9 +144,9 @@ Map<String, dynamic> _$CategoryToJson(Category instance) => <String, dynamic>{
     };
 
 WorkDay _$WorkDayFromJson(Map<String, dynamic> json) => WorkDay(
-      id: json['id'] as int,
-      userId: json['user_id'] as int,
-      day: json['day'] as int,
+      id: (json['id'] as num).toInt(),
+      userId: (json['user_id'] as num).toInt(),
+      day: (json['day'] as num).toInt(),
     );
 
 Map<String, dynamic> _$WorkDayToJson(WorkDay instance) => <String, dynamic>{
@@ -170,9 +172,9 @@ Map<String, dynamic> _$SocialAccountsToJson(SocialAccounts instance) =>
     };
 
 Documents _$DocumentsFromJson(Map<String, dynamic> json) => Documents(
-      id: json['id'] as int?,
-      userId: json['user_id'] as int?,
-      typeId: json['type_id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
+      userId: (json['user_id'] as num?)?.toInt(),
+      typeId: (json['type_id'] as num?)?.toInt(),
       patch: json['patch'] as String?,
       name: json['name'] as String?,
       notes: json['notes'] as String?,

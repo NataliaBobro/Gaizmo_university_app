@@ -3,6 +3,7 @@ import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:european_university_app/app/ui/widgets/auth_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import '../../../../constatns.dart';
@@ -45,6 +46,7 @@ class Payments extends StatefulWidget {
 class _PaymentsState extends State<Payments> {
   @override
   Widget build(BuildContext context) {
+    final userData = context.watch<AppState>().userData;
     return Container(
       padding: const EdgeInsets.only(
         top: 16
@@ -52,7 +54,7 @@ class _PaymentsState extends State<Payments> {
       child: Column(
         children: [
           Text(
-            '${getConstant('Current_debt')}: -25 000 UAH',
+            '${getConstant('Current_debt')}: ${userData?.balance ?? 0} UAH',
             style: TextStyles.s14w600.copyWith(
                 color: const Color(0xFF242424)
             ),
