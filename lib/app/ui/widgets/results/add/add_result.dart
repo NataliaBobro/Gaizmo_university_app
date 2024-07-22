@@ -48,10 +48,13 @@ class _AddResultState extends State<AddResult> {
                                   color: const Color(0xFF242424)
                                 ),
                               ),
+                              const SizedBox(
+                                width: 8,
+                              ),
                               if(state.filterSchedule.type.isNotEmpty) ...[
                                 Container(
                                   constraints: const BoxConstraints(
-                                    maxWidth: 240
+                                    maxWidth: 220
                                   ),
                                   child: Builder(
                                     builder: (context) {

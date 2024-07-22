@@ -215,10 +215,10 @@ class _ServiceItemState extends State<ServiceItem> {
                                       expandedHeaderPadding: EdgeInsets.zero,
                                       expansionCallback: (int index, bool isExpanded) {
                                         setState(() {
-                                          if(!isExpanded) {
-                                            openSection = index;
-                                          }else{
+                                          if(openSection == index) {
                                             openSection = null;
+                                          }else{
+                                            openSection = index;
                                           }
                                         });
                                       },
@@ -348,7 +348,7 @@ class _ScheduleLessonState extends State<ScheduleLesson> {
       expandedHeaderPadding: const EdgeInsets.all(0),
       expansionCallback: (int index, bool isExpanded) {
         setState(() {
-          data[index].isExpanded = !isExpanded;
+          data[index].isExpanded = isExpanded;
         });
       },
       children: data.map<ExpansionPanel>((Item item) {

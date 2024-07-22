@@ -28,7 +28,7 @@ class _PayTabState extends State<PayTab> {
         ),
         Accordion(
             onDelete: (index) {
-              state.deleteFavorite(services[index]);
+              state.deleteFavorite(context, services[index]);
             },
             isFullActionButton: true,
             paddingListTop: 0.0,

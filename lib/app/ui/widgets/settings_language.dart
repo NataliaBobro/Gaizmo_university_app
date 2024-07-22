@@ -54,8 +54,8 @@ class _SettingLanguageState extends State<SettingLanguage> {
             color: const Color(0xFFF0F3F6),
             child: Column(
               children: [
-                CenterHeaderWithAction(
-                    title: getConstant('Settings')
+                CenterHeader(
+                    title: getConstant('Language')
                 ),
                 Expanded(
                     child: Column(

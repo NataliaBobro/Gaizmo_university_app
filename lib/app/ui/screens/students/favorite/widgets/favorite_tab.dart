@@ -24,14 +24,14 @@ class _FavoriteTabState extends State<FavoriteTab> {
     final state = context.watch<FavoriteState>();
     final services = state.favoriteLessons?.services ?? [];
 
-    return Column(
+    return ListView(
       children: [
         const SizedBox(
           height: 24,
         ),
         Accordion(
             onDelete: (index) {
-              state.deleteFavorite(services[index]);
+              state.deleteFavorite(context, services[index]);
             },
             isFullActionButton: true,
             paddingListTop: 0.0,
@@ -64,7 +64,7 @@ class _FavoriteTabState extends State<FavoriteTab> {
                   contentHorizontalPadding: 0.0,
                   contentBackgroundColor: const Color(0xFFF0F3F6),
                   header: HeaderFavorite(
-                    service: services[index]
+                      service: services[index]
                   ),
                   content: ContentService(
                     item: services[index],

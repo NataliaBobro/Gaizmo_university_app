@@ -79,7 +79,7 @@ class _PersonalInfoStudentState extends State<PersonalInfoStudent> {
                 Column(
                   children: [
                     CenterHeader(
-                        title: getConstant('Settings')
+                        title: getConstant('Personal_info')
                     ),
                     Expanded(
                       child: ListView(

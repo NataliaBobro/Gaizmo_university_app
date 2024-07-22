@@ -2,9 +2,6 @@ import 'package:european_university_app/app/ui/theme/text_styles.dart';
 import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
-import '../../../../../../resources/resources.dart';
 
 class ProfileHeader extends StatefulWidget {
   const ProfileHeader({Key? key}) : super(key: key);
@@ -31,26 +28,26 @@ class _ProfileHeaderState extends State<ProfileHeader> {
               ),
             ),
           ),
-          Row(
-            children: [
-              CupertinoButton(
-                  minSize: 0.0,
-                  padding: const EdgeInsets.only(right: 2, left: 20, top: 4, bottom: 4),
-                  child: SvgPicture.asset(
-                      Svgs.notify
-                  ),
-                  onPressed: () {}
-              ),
-              CupertinoButton(
-                  minSize: 0.0,
-                  padding: const EdgeInsets.only(right: 24, left: 2, top: 4, bottom: 4),
-                  child: SvgPicture.asset(
-                      Svgs.heart
-                  ),
-                  onPressed: () {}
-              ),
-            ],
-          )
+          // Row(
+          //   children: [
+          //     CupertinoButton(
+          //         minSize: 0.0,
+          //         padding: const EdgeInsets.only(right: 2, left: 20, top: 4, bottom: 4),
+          //         child: SvgPicture.asset(
+          //             Svgs.notify
+          //         ),
+          //         onPressed: () {}
+          //     ),
+          //     CupertinoButton(
+          //         minSize: 0.0,
+          //         padding: const EdgeInsets.only(right: 24, left: 2, top: 4, bottom: 4),
+          //         child: SvgPicture.asset(
+          //             Svgs.heart
+          //         ),
+          //         onPressed: () {}
+          //     ),
+          //   ],
+          // )
         ],
       ),
     );

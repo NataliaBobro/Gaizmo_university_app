@@ -6,16 +6,17 @@ import '../../../utils/get_constant.dart';
 import '../../custom_scroll_physics.dart';
 import '../../products/products_item_block.dart';
 import '../../sceleton_loaders.dart';
-import '../../select_bottom_sheet_input.dart';
 
 class StudentShopScreen extends StatefulWidget {
   const StudentShopScreen({
     Key? key,
+    required this.onChangeTab,
     required this.onUpdateScroll,
     required this.initOffset,
   }) : super(key: key);
 
   final Function onUpdateScroll;
+  final Function onChangeTab;
   final double? initOffset;
 
 
@@ -77,23 +78,6 @@ class _StudentShopScreenState extends State<StudentShopScreen> {
     final state = context.watch<StudentShopState>();
     return Column(
       children: [
-        if(offsetScroll > 100)...[
-          const SizedBox(
-            height: 8,
-          ),
-          SelectBottomSheetInput(
-              label: getConstant('Select_school'),
-              labelModal: getConstant('Select_school'),
-              selected: state.filterSchool,
-              items: listSchool,
-              onSelect: (value) {
-                state.changeFilter(value);
-              }
-          ),
-          const SizedBox(
-            height: 8,
-          ),
-        ],
         Expanded(
           child: ListView(
             controller: controller,
@@ -117,7 +101,9 @@ class _StudentShopScreenState extends State<StudentShopScreen> {
                           hasEdit: false,
                           hasPay: true,
                           onPayProduct: (type) {
-                            state.payProduct(state.listProducts?.data[index].id, type);
+                            state.payProduct(state.listProducts?.data[index].id, type).whenComplete(() {
+                              widget.onChangeTab();
+                            });
                           },
                         )
                     ),

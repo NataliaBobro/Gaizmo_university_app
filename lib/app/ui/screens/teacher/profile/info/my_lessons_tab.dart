@@ -11,7 +11,6 @@ import 'package:flutter_dialogs/flutter_dialogs.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../domain/services/visits_lesson_service.dart';
-import '../../../../widgets/custom_scroll_physics.dart';
 import '../../../../widgets/schedule/empty_lesson.dart';
 import '../../../../widgets/schedule/lesson_header.dart';
 import '../../../../widgets/schedule/shcedule_widgets.dart';
@@ -28,19 +27,45 @@ class _MyLessonsTabState extends State<MyLessonsTab> {
   Widget build(BuildContext context) {
     final state = context.watch<TeacherHomeState>();
     final lessons = state.lessonsListToday?.lessons ?? [];
-    return ListView(
-      physics: const BottomBouncingScrollPhysics(),
-      children: [
+
+    return CustomScrollView(
+      physics: const AlwaysScrollableScrollPhysics(),
+      slivers: [
+        CupertinoSliverRefreshControl(
+          refreshTriggerPullDistance: 100,
+          onRefresh: () => context.read<TeacherHomeState>().fetchLessonToday(),
+          builder: (context,
+              refreshState,
+              pulledExtent,
+              refreshTriggerPullDistance,
+              refreshIndicatorExtent) {
+            return Padding(
+              padding: const EdgeInsets.only(top: 24),
+              child: CupertinoSliverRefreshControl
+                  .buildRefreshIndicator(
+                context,
+                refreshState,
+                pulledExtent,
+                refreshTriggerPullDistance,
+                refreshIndicatorExtent,
+              ),
+            );
+          },
+        ),
+
         state.isLoading ?
-          const Padding(
-            padding: EdgeInsets.only(top: 100),
-            child: CupertinoActivityIndicator(),
-          )
-          : Column(
+        const SliverToBoxAdapter(
+          child: Padding(
+          padding: EdgeInsets.only(top: 100),
+          child: CupertinoActivityIndicator(),
+        ),
+        ) :
+        SliverToBoxAdapter(
+          child: Column(
           children: [
             if(lessons.isEmpty) ...[
               EmptyLesson(
-                subtitle: getConstant('Add_a_service_to_create_a_schedule')
+                  subtitle: getConstant('Add_a_service_to_create_a_schedule')
               ),
             ] else ...[
               Padding(
@@ -74,18 +99,18 @@ class _MyLessonsTabState extends State<MyLessonsTab> {
                   sectionClosingHapticFeedback: SectionHapticFeedback.light,
                   children: List.generate(
                       lessons.length,
-                        (index) => AccordionSection(
+                          (index) => AccordionSection(
                         isOpen: false,
                         headerBackgroundColor:
                         Color(int.parse('${lessons[index].color}')).withOpacity(.6),
                         contentVerticalPadding: 0,
-                          rightIcon: HeaderEtm(
-                              lessons: lessons[index],
-                              visits: () {
-                                DateTime now = DateTime.now();
-                                showVisitsDialog(lessons[index], now);
-                              }
-                          ),
+                        rightIcon: HeaderEtm(
+                            lessons: lessons[index],
+                            visits: () {
+                              DateTime now = DateTime.now();
+                              showVisitsDialog(lessons[index], now);
+                            }
+                        ),
                         contentBorderWidth: 0,
                         contentHorizontalPadding: 0.0,
                         contentBackgroundColor: const Color(0xFFF0F3F6),
@@ -101,9 +126,11 @@ class _MyLessonsTabState extends State<MyLessonsTab> {
               )
             ]
           ],
+        ),
         )
       ],
     );
+
   }
 
   Future<void> showVisitsDialog(Lesson lesson, DateTime date) async {

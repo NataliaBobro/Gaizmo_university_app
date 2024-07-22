@@ -21,7 +21,7 @@ import '../../../../widgets/select_color.dart';
 class AddLessonScreen extends StatefulWidget {
   const AddLessonScreen({
     Key? key,
-    this.edit
+    this.edit,
   }) : super(key: key);
 
   final Lesson? edit;
@@ -83,6 +83,7 @@ class _AddLessonScreenState extends State<AddLessonScreen> {
 
 
                     MultiSelectDialogField(
+                      backgroundColor: Colors.white,
                       cancelText: Text(
                           getConstant('Close')
                       ),

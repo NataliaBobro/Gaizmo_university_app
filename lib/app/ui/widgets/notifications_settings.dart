@@ -42,8 +42,8 @@ class _NotificationsSettingsState extends State<NotificationsSettings> {
             color: const Color(0xFFF0F3F6),
             child: Column(
               children: [
-                CenterHeaderWithAction(
-                    title: getConstant('Settings')
+                CenterHeader(
+                    title: getConstant('Notifications')
                 ),
                 Expanded(
                     child: Column(

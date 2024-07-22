@@ -133,6 +133,12 @@ class _PassportScreenState extends State<PassportScreen>  with TickerProviderSta
                       ChangeNotifierProvider(
                         create: (context) => StudentShopState(context),
                         child: StudentShopScreen(
+                          onChangeTab: () {
+                            _tabController.animateTo(
+                                1,
+                                duration: const Duration(milliseconds: 500)
+                            );
+                          },
                           onUpdateScroll: (offset) {
                             if(widget.onUpdateScroll != null){
                               offsetScroll = offset;

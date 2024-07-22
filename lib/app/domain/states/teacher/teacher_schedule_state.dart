@@ -115,6 +115,7 @@ class TeacherScheduleState with ChangeNotifier {
 
   void clearEndDate() {
     _repeatsEnd.clear();
+    notifyListeners();
   }
 
 

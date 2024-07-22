@@ -40,6 +40,7 @@ class _AppRadioInputState extends State<AppRadioInput> {
               ),
             ),
             Switch(
+              inactiveThumbColor: Colors.grey,
               value: hasOn,
               activeColor: AppColors.appButton,
               onChanged: (bool value) {

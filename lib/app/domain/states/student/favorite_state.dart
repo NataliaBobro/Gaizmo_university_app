@@ -1,5 +1,7 @@
 import 'package:european_university_app/app/domain/services/favorite_service.dart';
 import 'package:european_university_app/app/domain/services/pay_service.dart';
+import 'package:european_university_app/app/ui/utils/get_constant.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/services.dart';
@@ -51,7 +53,7 @@ class FavoriteState with ChangeNotifier {
     }
   }
 
-  Future<void> deleteFavorite(ServicesModel? service) async {
+  Future<void> deleteFavoriteConfirm(ServicesModel? service) async {
     try{
       final result = await FavoriteService.delete(context, service?.id);
       if(result != null) {
@@ -62,5 +64,33 @@ class FavoriteState with ChangeNotifier {
     }finally{
       notifyListeners();
     }
+  }
+
+  void deleteFavorite(BuildContext context, ServicesModel? service) {
+    showCupertinoDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return CupertinoAlertDialog(
+          title: Text(getConstant('Delete Confirmation')),
+          content: Text(getConstant('Are you sure you want to delete?')),
+          actions: <Widget>[
+            CupertinoDialogAction(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(getConstant('Close')),
+            ),
+            CupertinoDialogAction(
+              isDestructiveAction: true,
+              onPressed: () {
+                Navigator.of(context).pop();
+                deleteFavoriteConfirm(service);
+              },
+              child: Text(getConstant('Delete')),
+            ),
+          ],
+        );
+      },
+    );
   }
 }

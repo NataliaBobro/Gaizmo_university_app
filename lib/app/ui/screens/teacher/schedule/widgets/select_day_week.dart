@@ -78,7 +78,7 @@ class _SelectDayWeekState extends State<SelectDayWeek> {
         if(dayListSelected.isNotEmpty) ...[
           RichText(
             text: TextSpan(
-                text: 'It takes place every week on ',
+                text: '${getConstant('It takes place every week on')} ',
                 style: TextStyles.s12w300.copyWith(
                     color: const Color(0xFF242424)
                 ),
@@ -86,7 +86,7 @@ class _SelectDayWeekState extends State<SelectDayWeek> {
                   ...List.generate(
                     dayListSelected.length,
                         (index) => TextSpan(
-                      text: '${dayListSelected[index]['name']} ',
+                      text: '${getConstant(dayListSelected[index]['name']!)} ',
                       style: TextStyles.s12w300.copyWith(
                           color: const Color(0xFF242424)
                       ),
@@ -94,7 +94,7 @@ class _SelectDayWeekState extends State<SelectDayWeek> {
                   ),
                   if(state.repeatsEnd.text.isNotEmpty) ...[
                     TextSpan(
-                      text: 'until ',
+                      text: '${getConstant('until')} ',
                       style: TextStyles.s12w300.copyWith(
                           color: const Color(0xFF242424)
                       ),
@@ -106,7 +106,7 @@ class _SelectDayWeekState extends State<SelectDayWeek> {
                       ),
                     ),
                     TextSpan(
-                      text: 'Delete end date.',
+                      text: '${getConstant('Delete end date')}.',
                       style: TextStyles.s12w300.copyWith(
                           color: const Color(0xFF2F80ED)
                       ),
