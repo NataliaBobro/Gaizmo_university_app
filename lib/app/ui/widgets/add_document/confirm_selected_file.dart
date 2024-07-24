@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:european_university_app/app/ui/theme/text_styles.dart';
+import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -72,7 +73,7 @@ class _ConfirmSelectedFileState extends State<ConfirmSelectedFile> {
                           vertical: 18
                       ),
                       child: Text(
-                        'Take another photo',
+                        getConstant('Take another photo'),
                         style: TextStyles.s12w600.copyWith(
                             color: Colors.white
                         ),
@@ -88,7 +89,7 @@ class _ConfirmSelectedFileState extends State<ConfirmSelectedFile> {
                           vertical: 18
                       ),
                       child: Text(
-                        'Add this photo',
+                        getConstant('Add this photo'),
                         style: TextStyles.s12w600.copyWith(
                             color: Colors.white
                         ),

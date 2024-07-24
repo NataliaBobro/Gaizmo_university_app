@@ -69,7 +69,7 @@ class _AddLessonScreenState extends State<AddLessonScreen> {
           color: const Color(0xFFF0F3F6),
           child: Column(
             children: [
-              CenterHeaderWithAction(
+              CenterHeader(
                   title: getConstant('Add_lesson')
               ),
               Expanded(
@@ -94,6 +94,7 @@ class _AddLessonScreenState extends State<AddLessonScreen> {
                       height: 16,
                     ),
                     MultiSelectDialogField(
+                      backgroundColor: Colors.white,
                       initialValue: state.selectService ?? [],
                       buttonText: Text(
                         getConstant('Service'),
@@ -107,6 +108,8 @@ class _AddLessonScreenState extends State<AddLessonScreen> {
                             color: const Color(0xFF242424)
                         ),
                       ),
+                      cancelText: Text(getConstant('Close')),
+                      confirmText: Text(getConstant('Confirm')),
                       items: state.listTypeServices.map((e) => MultiSelectItem(e, e['name'])).toList(),
                       listType: MultiSelectListType.CHIP,
                       onConfirm: (values) {

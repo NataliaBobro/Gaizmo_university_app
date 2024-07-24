@@ -27,7 +27,7 @@ class _StaffInfoState extends State<StaffInfo> {
       child: Column(
         children: [
           Text(
-            '${widget.staff?.firstName} ${widget.staff?.lastName}',
+            '${widget.staff?.firstName ?? ''} ${widget.staff?.lastName ?? ''}',
             style: TextStyles.s18w700.copyWith(
                 color: const Color(0xFF242424)
             ),

@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:european_university_app/app/domain/models/user.dart';
 import 'package:european_university_app/app/ui/theme/app_colors.dart';
+import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -100,7 +101,8 @@ class _ToolTipOnAddState extends State<ToolTipOnAdd> {
         ],
         if(widget.isOpen) ...[
           SizedBox(
-            height: (120 + ((widget.items?.length ?? 0) * 35)).toDouble(),
+            height: (120 + (((widget.items?.length  ?? 0) > 5 ? 5 :
+              widget.items?.length ?? 0) * 35)).toDouble(),
             child: SelectSearch(
                 items: widget.items ?? [],
                 onSelect: (value) {
@@ -338,7 +340,7 @@ class _SearchFieldState extends State<SearchField> {
         decoration: InputDecoration(
             contentPadding: EdgeInsets.zero,
             fillColor: Colors.transparent,
-            hintText: 'Search',
+            hintText: getConstant('Search'),
             hintStyle: TextStyles.s14w400.copyWith(
                 color: const Color(0xFFACACAC)
             )

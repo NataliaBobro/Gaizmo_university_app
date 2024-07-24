@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:european_university_app/app/domain/models/user.dart';
 import 'package:european_university_app/app/ui/theme/app_colors.dart';
+import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -66,7 +67,7 @@ class _StaffAvatarState extends State<StaffAvatar> {
           ),
           child: widget.staff?.avatar == null ? Center(
             child: Text(
-              '+Add LOGO',
+              getConstant('+Add LOGO'),
               style: TextStyles.s12w600.copyWith(
                   color: const Color(0xFFACACAC)
               ),

@@ -25,19 +25,19 @@ class _StaffPersonalInfoTabState extends State<StaffPersonalInfoTab> {
         ),
         InfoValue(
             title: getConstant('Full_name'),
-            value: "${state.staff?.firstName} ${state.staff?.lastName}"
+            value: "${state.staff?.firstName ?? ''} ${state.staff?.lastName ?? ''}"
         ),
         InfoValue(
             title: getConstant('Date_of_birth'),
-            value: "${state.staff?.dateBirth}"
+            value: state.staff?.dateBirth ?? ''
         ),
         InfoValue(
             title: getConstant('Phone_number'),
-            value: "${state.staff?.phone}"
+            value: state.staff?.phone ?? ''
         ),
         InfoValue(
             title: getConstant('Email'),
-            value: "${state.staff?.email}"
+            value: state.staff?.email ?? ''
         ),
         // InfoValue(
         //     title: "Social links",
@@ -45,7 +45,7 @@ class _StaffPersonalInfoTabState extends State<StaffPersonalInfoTab> {
         // ),
         InfoValue(
             title: getConstant('Adress'),
-            value: "${state.staff?.country}, ${state.staff?.city}"
+            value: "${state.staff?.country ?? ''} ${state.staff?.city ?? ''}"
         ),
       ],
     );

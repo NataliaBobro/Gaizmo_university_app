@@ -1,6 +1,7 @@
 import 'package:animations/animations.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:european_university_app/app/domain/models/user.dart';
+import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -235,14 +236,14 @@ class _DocumentItemState extends State<DocumentItem> {
       context: context,
       builder: (BuildContext context) {
         return CupertinoAlertDialog(
-          title: const Text('Delete Confirmation'),
-          content: const Text('Are you sure you want to delete this document?'),
+          title: Text(getConstant('Delete Confirmation')),
+          content: Text(getConstant('Are you sure you want to delete?')),
           actions: <Widget>[
             CupertinoDialogAction(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: const Text('Cancel'),
+              child: Text(getConstant('Close')),
             ),
             CupertinoDialogAction(
               isDestructiveAction: true,
@@ -250,7 +251,7 @@ class _DocumentItemState extends State<DocumentItem> {
                 Navigator.of(context).pop();
                 widget.onDelete();
               },
-              child: const Text('Delete'),
+              child: Text(getConstant('Delete')),
             ),
           ],
         );

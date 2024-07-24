@@ -49,7 +49,7 @@ class _GeneralInfoTabState extends State<GeneralInfoTab> {
             ),
             InfoValue(
                 title: getConstant('School_category'),
-                value: "${school?.school?.category?.translate?.value}"
+                value: getConstant('${school?.school?.category?.define}')
             ),
             SettingsInput(
                 title: getConstant('Branches'),

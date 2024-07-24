@@ -54,6 +54,7 @@ class _AddDocumentWidgetState extends State<AddDocumentWidget> {
         listType = result;
         for(var a = 0; a < result.type.length; a++){
           final translate = getConstant(result.type[a].define);
+          print(translate);
           listTypeData.add(translate.isNotEmpty ? translate : result.type[a].name);
         }
       }
@@ -73,7 +74,7 @@ class _AddDocumentWidgetState extends State<AddDocumentWidget> {
             color: const Color(0xFFF0F3F6),
             child: Column(
               children: [
-                CenterHeaderWithAction(
+                CenterHeader(
                     title: getConstant('Add_document')
                 ),
                 Expanded(
@@ -373,7 +374,7 @@ class _SelectTypePhotoState extends State<SelectTypePhoto> {
                       width: 10,
                     ),
                     Text(
-                      'Choose from gallery',
+                      getConstant('Choose from gallery'),
                       style: TextStyles.s12w600.copyWith(
                         color: Colors.black
                       ),
@@ -397,7 +398,7 @@ class _SelectTypePhotoState extends State<SelectTypePhoto> {
                       width: 12,
                     ),
                     Text(
-                      'Make a photo',
+                      getConstant('Make a photo'),
                       style: TextStyles.s12w600.copyWith(
                           color: Colors.black
                       ),

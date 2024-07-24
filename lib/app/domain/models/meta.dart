@@ -94,10 +94,12 @@ class Currency {
 @JsonSerializable(includeIfNull: true, fieldRename: FieldRename.snake)
 class SchoolCategory {
   int id;
+  String define;
   Translate? translate;
 
   SchoolCategory({
     required this.id,
+    required this.define,
     required this.translate,
   });
 

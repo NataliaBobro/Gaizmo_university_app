@@ -31,7 +31,7 @@ class _BranchListState extends State<BranchList> {
             color: const Color(0xFFF0F3F6),
             child: Column(
               children: [
-                CenterHeaderWithAction(
+                CenterHeader(
                     title: getConstant('Branches')
                 ),
                 Expanded(
@@ -189,7 +189,7 @@ class _BranchItemWidgetState extends State<BranchItemWidget> {
                     },
                   ),
                   Text(
-                    '${widget.branch?.school?.category?.translate?.value}',
+                    getConstant('${widget.branch?.school?.category?.define}'),
                     style: TextStyles.s12w400.copyWith(
                         color: const Color(0xFF848484)
                     ),

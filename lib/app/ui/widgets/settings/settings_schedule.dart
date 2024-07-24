@@ -92,8 +92,8 @@ class _SettingScheduleState extends State<SettingSchedule> {
             color: const Color(0xFFF0F3F6),
             child: Column(
               children: [
-                CenterHeaderWithAction(
-                    title: getConstant('Settings')
+                CenterHeader(
+                    title: getConstant('Schedule')
                 ),
                 Expanded(
                     child: Column(
@@ -142,7 +142,7 @@ class _SettingScheduleState extends State<SettingSchedule> {
                                                   ),
                                                   child: Center(
                                                     child: Text(
-                                                      listDay[index],
+                                                      getConstant(listDay[index]),
                                                       style: TextStyles.s12w600.copyWith(
                                                           color: isWork ?
                                                             Colors.white : Colors.black

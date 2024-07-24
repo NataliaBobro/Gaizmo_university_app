@@ -23,5 +23,5 @@ class Images {
   static const String cap = 'assets/images/cap.png';
   static const String mug = 'assets/images/mug.png';
   static const String note = 'assets/images/note.png';
-  static const String ai = 'assets/images/ai.png';
+  static const String ai = 'assets/images/ai.jpg';
 }

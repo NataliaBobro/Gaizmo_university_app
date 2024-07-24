@@ -57,7 +57,7 @@ class _SelectBottomSheetInputState extends State<SelectBottomSheetInput> {
                 children: [
                   Expanded(
                     child: Text(
-                      getConstant(widget.selected != null ? '${widget.selected?['name']}' :
+                      getConstant(widget.selected != null ? getConstant(widget.selected?['name']) :
                       (widget.placeholder != null ? '${widget.placeholder}' : '')),
                       style: TextStyles.s14w400.copyWith(
                           color: Colors.black

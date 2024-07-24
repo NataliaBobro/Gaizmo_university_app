@@ -55,7 +55,7 @@ class _AddBranchState extends State<AddBranch> {
             color: const Color(0xFFF0F3F6),
             child: Column(
               children: [
-                CenterHeaderWithAction(
+                CenterHeader(
                     title: getConstant('Add_branch')
                 ),
                 Expanded(
@@ -156,10 +156,10 @@ class _AddBranchState extends State<AddBranch> {
   }
 
   String renderScheduleInfo(){
-    List<String> listDay = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
-    List<String> selectedDays = listWorkDay.map((index) => listDay[index]).toList();
+    List<String> listDay = ['MO', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'];
+    List<String> selectedDays = listWorkDay.map((index) => getConstant(listDay[index])).toList();
     String result = selectedDays.join(', ');
-    return '$result ${scheduleFrom.text}-${scheduleTo.text}';
+    return '$result ${scheduleTo.text.isNotEmpty ? '${scheduleFrom.text}-${scheduleTo.text}' : ''}';
   }
 
   Future<void> addBranch() async {

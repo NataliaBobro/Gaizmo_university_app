@@ -109,7 +109,7 @@ class _AddScheduleState extends State<AddSchedule> {
                                                     ),
                                                     child: Center(
                                                       child: Text(
-                                                        listDay[index],
+                                                        getConstant(listDay[index]),
                                                         style: TextStyles.s12w600.copyWith(
                                                             color: isWork ?
                                                             Colors.white : Colors.black

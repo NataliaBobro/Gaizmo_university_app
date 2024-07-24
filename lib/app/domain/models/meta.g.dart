@@ -84,6 +84,7 @@ Map<String, dynamic> _$CurrencyToJson(Currency instance) => <String, dynamic>{
 SchoolCategory _$SchoolCategoryFromJson(Map<String, dynamic> json) =>
     SchoolCategory(
       id: (json['id'] as num).toInt(),
+      define: json['define'] as String,
       translate: json['translate'] == null
           ? null
           : Translate.fromJson(json['translate'] as Map<String, dynamic>),
@@ -92,6 +93,7 @@ SchoolCategory _$SchoolCategoryFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$SchoolCategoryToJson(SchoolCategory instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'define': instance.define,
       'translate': instance.translate,
     };
 

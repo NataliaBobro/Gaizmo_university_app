@@ -29,7 +29,9 @@ class TimesheetState with ChangeNotifier {
       print(e);
     }finally{
       _isLoading = false;
-      notifyListeners();
+      if(context.mounted){
+        notifyListeners();
+      }
     }
   }
 }

@@ -201,9 +201,10 @@ class _SchoolServicesScreenState extends State<SchoolServicesScreen> {
                                   ),
                                   child: Column(
                                     children: [
-                                      const Text(
-                                        'Are you sure you want\n to delete the service?',
+                                      Text(
+                                        getConstant('Are you sure you want to delete the service?'),
                                         style: TextStyles.s14w600,
+                                        textAlign: TextAlign.center,
                                       ),
                                       const SizedBox(
                                         height: 20,
@@ -230,7 +231,7 @@ class _SchoolServicesScreenState extends State<SchoolServicesScreen> {
                                                     )
                                                 ),
                                                 child: Text(
-                                                  'YES',
+                                                  getConstant('Yes'),
                                                   style: TextStyles.s12w600.copyWith(
                                                       color: const Color(0xFF242424)
                                                   ),
@@ -257,7 +258,7 @@ class _SchoolServicesScreenState extends State<SchoolServicesScreen> {
                                                     )
                                                 ),
                                                 child: Text(
-                                                  'NO',
+                                                  getConstant('No'),
                                                   style: TextStyles.s12w600.copyWith(
                                                       color: Colors.white
                                                   ),
@@ -420,7 +421,7 @@ class _ContentServiceState extends State<ContentService> {
           if(widget.item?.validity != null) ...[
             ContentRowInfo(
                 title: getConstant('Validity'),
-                value: "${widget.item?.validity} ${widget.item?.validityType}"
+                value: "${widget.item?.validity} ${getConstant('${widget.item?.validityType}')}"
             )
           ],
           // ContentRowInfo(

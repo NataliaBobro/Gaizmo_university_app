@@ -91,13 +91,17 @@ class StudentScheduleState with ChangeNotifier {
       }
     } finally {
       _isLoading = false;
-      notifyListeners();
+      if(context.mounted){
+        notifyListeners();
+      }
     }
   }
 
   Future<void> fetchMeta() async {
     _isLoading = true;
-    notifyListeners();
+   if(context.mounted){
+     notifyListeners();
+   }
     try {
       final result = await StudentLessonService.fetchMeta(context);
       if(result != null){
@@ -123,7 +127,9 @@ class StudentScheduleState with ChangeNotifier {
       print(e);
     } finally {
       _isLoading = false;
-      notifyListeners();
+     if(context.mounted){
+       notifyListeners();
+     }
     }
   }
 

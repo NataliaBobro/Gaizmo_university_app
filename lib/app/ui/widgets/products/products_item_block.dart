@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../../../resources/resources.dart';
 import '../../theme/text_styles.dart';
@@ -237,26 +238,31 @@ class _OpenedProductState extends State<OpenedProduct> {
                             ),
                             physics: const ClampingScrollPhysics(),
                             children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(8),
-                                child: widget.item?.image != null ? CachedNetworkImage(
-                                    imageUrl: '${widget.item?.image}',
-                                    width: double.infinity,
-                                    errorWidget: (context, error, stackTrace) =>
-                                    const SizedBox.shrink(),
-                                    fit: BoxFit.cover,
-                                    progressIndicatorBuilder: (context, error, stackTrace) =>
-                                    const CupertinoActivityIndicator()
-                                ) : const SizedBox(
-                                  width: double.infinity,
-                                  height: 0,
-                                ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(8),
+                                    child: widget.item?.image != null ? CachedNetworkImage(
+                                        imageUrl: '${widget.item?.image}',
+                                        width: SizerUtil.width - 100,
+                                        errorWidget: (context, error, stackTrace) =>
+                                        const SizedBox.shrink(),
+                                        fit: BoxFit.contain,
+                                        progressIndicatorBuilder: (context, error, stackTrace) =>
+                                        const CupertinoActivityIndicator()
+                                    ) : const SizedBox(
+                                      width: double.infinity,
+                                      height: 0,
+                                    ),
+                                  ),
+                                ],
                               ),
                               const SizedBox(
                                 height: 8,
                               ),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Container(
                                     padding: const EdgeInsets.all(4),

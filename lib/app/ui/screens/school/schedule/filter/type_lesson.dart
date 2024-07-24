@@ -73,8 +73,8 @@ class _TypeLessonState extends State<TypeLesson> {
             color: const Color(0xFFF0F3F6),
             child: Column(
               children: [
-                CenterHeaderWithAction(
-                    title: getConstant('Filter'),
+                CenterHeader(
+                    title: getConstant('Type_of_lesson'),
                     action: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [

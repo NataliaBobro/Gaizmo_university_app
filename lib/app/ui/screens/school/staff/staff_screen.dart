@@ -6,6 +6,7 @@ import 'package:european_university_app/app/ui/widgets/empty_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -132,7 +133,7 @@ class _StaffItemState extends State<StaffItem> {
               Text(
                 '${widget.index + 1}.',
                 style: TextStyles.s14w600.copyWith(
-                  color: Colors.black
+                    color: Colors.black
                 ),
               ),
               const SizedBox(
@@ -153,12 +154,17 @@ class _StaffItemState extends State<StaffItem> {
               const SizedBox(
                 width: 8,
               ),
-              Text(
-                '${widget.staff?.firstName ?? ''} ${widget.staff?.lastName ?? ''}',
-                style: TextStyles.s14w600.copyWith(
-                  color: const Color(0xFF242424)
-                ),
-              )
+             Container(
+               constraints: const BoxConstraints(
+                 maxWidth: 200
+               ),
+               child: Text(
+                 '${widget.staff?.firstName ?? ''} ${widget.staff?.lastName ?? ''}',
+                 style: TextStyles.s14w600.copyWith(
+                     color: const Color(0xFF242424)
+                 ),
+               ),
+             )
             ],
           ),
         ),

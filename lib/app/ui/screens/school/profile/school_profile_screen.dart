@@ -69,7 +69,9 @@ class _SchoolProfileScreenState extends State<SchoolProfileScreen> with TickerPr
                   height: 50,
                   alignment: Alignment.center,
                   padding: const EdgeInsets.only(
-                    bottom: 24
+                    bottom: 24,
+                    left: 16,
+                    right: 16
                   ),
                   width: double.infinity,
                   decoration: const BoxDecoration(
@@ -89,7 +91,7 @@ class _SchoolProfileScreenState extends State<SchoolProfileScreen> with TickerPr
                       insets: EdgeInsets.only(right: 35.0),
                     ),
                     labelPadding: const EdgeInsets.symmetric(
-                        horizontal: 16
+                        horizontal: 0
                     ),
                     labelColor: const Color(0xFF242424),
                     unselectedLabelStyle: TextStyles.s14w400,

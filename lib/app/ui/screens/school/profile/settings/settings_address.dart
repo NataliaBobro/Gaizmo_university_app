@@ -4,10 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../domain/states/school/school_profile_state.dart';
-import '../../../../theme/text_styles.dart';
 import '../../../../widgets/auth_button.dart';
 import '../../../../widgets/center_header.dart';
-import '../../../../widgets/select_input_search_field.dart';
 
 class SettingsAddress extends StatefulWidget {
   const SettingsAddress({Key? key}) : super(key: key);
@@ -38,8 +36,8 @@ class _SettingsAddressState extends State<SettingsAddress> {
             color: const Color(0xFFF0F3F6),
             child: Column(
               children: [
-                CenterHeaderWithAction(
-                    title: getConstant('Settings')
+                CenterHeader(
+                    title: getConstant('Address')
                 ),
                 Expanded(
                   child: ListView(
@@ -54,54 +52,21 @@ class _SettingsAddressState extends State<SettingsAddress> {
                             const SizedBox(
                               height: 24,
                             ),
-                            SelectInputSearchField(
-                              errors: state.validateError?.errors.country?.first,
-                              title: getConstant('Country'),
-                              titleStyle: TextStyles.s14w600.copyWith(
-                                  color: const Color(0xFF242424)
-                              ),
-                              style: TextStyles.s14w400.copyWith(
-                                  color: const Color(0xFF242424)
-                              ),
-                              items:  (state.countryList?.length ?? 0) > 0 ?
-                              state.countryList : state.listDefaultCountry,
-                              selected: state.country,
-                              onSelect: (value) {
-                                state.changeCountry(value);
-                                changeOpen(null);
-                              },
-                              onSearch: (value) {
-                                state.searchCountry(value);
-                              },
-                              changeOpen: () {
-                                changeOpen('country');
-                              },
-                              isOpen: openField == 'country',
-                              hintText: '',
+                            AppField(
+                              label: getConstant('Country'),
+                              controller: state.country,
+                              error: state.validateError?.errors.country?.first,
                             ),
-                            SelectInputSearchField(
-                              errors: state.validateError?.errors.city?.first,
-                              title: getConstant('City'),
-                              titleStyle: TextStyles.s14w600.copyWith(
-                                  color: const Color(0xFF242424)
-                              ),
-                              style: TextStyles.s14w400.copyWith(
-                                  color: const Color(0xFF242424)
-                              ),
-                              items: state.cityList,
-                              onSearch: (value) {
-                                state.searchCity(value);
-                              },
-                              selected: state.city,
-                              changeOpen: () {
-                                changeOpen('city');
-                              },
-                              isOpen: openField == 'city',
-                              onSelect: (index) {
-                                state.changeCity(index);
-                                changeOpen(null);
-                              },
-                              hintText: '',
+                            const SizedBox(
+                              height: 24,
+                            ),
+                            AppField(
+                              label: getConstant('City'),
+                              controller: state.city,
+                              error: state.validateError?.errors.city?.first,
+                            ),
+                            const SizedBox(
+                              height: 24,
                             ),
                             AppField(
                               label: getConstant('Street'),

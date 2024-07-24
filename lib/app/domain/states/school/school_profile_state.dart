@@ -12,7 +12,6 @@ import 'package:provider/provider.dart';
 
 import '../../../ui/utils/show_message.dart';
 import '../../../ui/widgets/snackbars.dart';
-import '../../services/app_ninjas_service.dart';
 import '../../services/user_service.dart';
 
 class SchoolProfileState with ChangeNotifier {
@@ -28,6 +27,8 @@ class SchoolProfileState with ChangeNotifier {
 
   final TextEditingController _nameSchool = TextEditingController();
   final TextEditingController _street = TextEditingController();
+  final TextEditingController _country = TextEditingController();
+  final TextEditingController _city = TextEditingController();
   final TextEditingController _house = TextEditingController();
   final MaskedTextController _phone = MaskedTextController(
       mask: '+00 (000) 000 00 00'
@@ -36,32 +37,6 @@ class SchoolProfileState with ChangeNotifier {
   final TextEditingController _siteAddress = TextEditingController();
   ValidateError? _validateError;
   Map<String, dynamic>? _schoolCategory;
-  List<dynamic>? _countryList;
-  List<dynamic>? _cityList;
-  Map<String, dynamic>? _country;
-  Map<String, dynamic>? _city;
-  final List<Map<String, dynamic>> _listDefaultCountry = [
-    {
-      "id": "1",
-      "name": "Ukraine",
-      "iso2": "UA"
-    },
-    {
-      "id": "2",
-      "name": "Poland",
-      "iso2": "PL"
-    },
-    {
-      "id": "3",
-      "name": "Austria",
-      "iso2": "AT"
-    },
-    {
-      "id": "3",
-      "name": "Germany",
-      "iso2": "DE"
-    },
-  ];
 
 
   SchoolProfileState(this.context){
@@ -77,26 +52,6 @@ class SchoolProfileState with ChangeNotifier {
       "id": activeLang?.id,
       "name": activeLang?.name
     };
-  }
-  List<Map<String, dynamic>>? get countryList {
-    List<Map<String, dynamic>>? list = [];
-    for(var a = 0; a < (_countryList?.length ?? 0); a++){
-      list.add({
-        'name': _countryList![a]['name'],
-        'iso2': _countryList![a]['iso2']
-      });
-    }
-    return list;
-  }
-
-  List<Map<String, dynamic>>? get cityList {
-    List<Map<String, dynamic>>? list = [];
-    for(var a = 0; a < (_cityList?.length ?? 0); a++){
-      list.add({
-        'name': _cityList![a]['name']
-      });
-    }
-    return list;
   }
 
   List<Map<String, dynamic>> get listLanguage {
@@ -121,11 +76,10 @@ class SchoolProfileState with ChangeNotifier {
   TextEditingController get house => _house;
   TextEditingController get phone => _phone;
   TextEditingController get email => _email;
+  TextEditingController get city => _city;
+  TextEditingController get country => _country;
   TextEditingController get siteAddress => _siteAddress;
   Map<String, dynamic>? get schoolCategory => _schoolCategory;
-  List<Map<String, dynamic>> get listDefaultCountry => _listDefaultCountry;
-  Map<String, dynamic>? get country => _country;
-  Map<String, dynamic>? get city => _city;
 
   TextEditingController get instagramField => _instagramField;
   TextEditingController get facebookField => _facebookField;
@@ -135,16 +89,6 @@ class SchoolProfileState with ChangeNotifier {
 
   void changeClear(TextEditingController controller){
     controller.clear();
-  }
-
-  void changeCountry(value) {
-    _country = value;
-    notifyListeners();
-  }
-
-  void changeCity(value) {
-    _city = value;
-    notifyListeners();
   }
 
   void setFieldSetting() {
@@ -159,14 +103,8 @@ class SchoolProfileState with ChangeNotifier {
       'id': userData?.school?.category?.id,
       'name': userData?.school?.category?.translate?.value,
     };
-    _country = {
-      'id': 0,
-      'name': userData?.school?.country,
-    };
-    _city = {
-      'id': 0,
-      'name': userData?.school?.city,
-    };
+    _country.text = userData?.school?.country ?? '';
+    _city.text = userData?.school?.city ?? '';
     _street.text = userData?.school?.street ?? '';
     _house.text = userData?.school?.house ?? '';
     _instagramField.text = '${userData?.socialAccounts?.instagram}';
@@ -237,8 +175,8 @@ class SchoolProfileState with ChangeNotifier {
     try {
       final result = await SchoolService.changeAddress(
           context,
-          _country?['name'],
-          _city?['name'],
+          _country.text,
+          _city.text,
           _street.text,
           _house.text,
       );
@@ -319,43 +257,6 @@ class SchoolProfileState with ChangeNotifier {
       showErrorSnackBar(title: 'App request error');
     } finally {
       _isLoading = false;
-      notifyListeners();
-    }
-  }
-
-  Future<void> searchCountry(String? value) async {
-    if((value?.length ?? 0) < 2) return;
-    _loadingSearch = true;
-    notifyListeners();
-    try {
-      final result = await AppNinjasService.getCountry(value);
-      if(result != null){
-        _countryList = result;
-      }
-    } on DioError catch (e) {
-      showMessage(e.message);
-    } catch (e) {
-      showErrorSnackBar(title: 'App request error');
-    } finally {
-      _loadingSearch = false;
-      notifyListeners();
-    }
-  }
-  Future<void> searchCity(String? value) async {
-    if((value?.length ?? 0) < 2) return;
-    _loadingSearch = true;
-    notifyListeners();
-    try {
-      final result = await AppNinjasService.getCity(value, _country);
-      if(result != null){
-        _cityList = result;
-      }
-    } on DioError catch (e) {
-      showMessage(e.message);
-    } catch (e) {
-      showErrorSnackBar(title: 'App request error');
-    } finally {
-      _loadingSearch = false;
       notifyListeners();
     }
   }

@@ -33,7 +33,7 @@ class _SettingGeneralInfoState extends State<SettingGeneralInfo> {
             color: const Color(0xFFF0F3F6),
             child: Column(
               children: [
-                CenterHeaderWithAction(
+                CenterHeader(
                     title: getConstant('Settings')
                 ),
                 Expanded(

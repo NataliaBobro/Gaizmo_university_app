@@ -26,7 +26,7 @@ class _SettingsSelectCategoryState extends State<SettingsSelectCategory> {
       for(var a = 0; a < cat.length; a++){
         listSchoolType.add({
           "id":   cat[a].id,
-          "name": cat[a].translate?.value,
+          "name": getConstant(cat[a].define),
         });
       }
     }
@@ -38,8 +38,8 @@ class _SettingsSelectCategoryState extends State<SettingsSelectCategory> {
             color: const Color(0xFFF0F3F6),
             child: Column(
               children: [
-                const CenterHeaderWithAction(
-                    title: 'Settings'
+                CenterHeader(
+                    title: getConstant('School_category')
                 ),
                 Expanded(
                     child: Column(
@@ -51,7 +51,7 @@ class _SettingsSelectCategoryState extends State<SettingsSelectCategory> {
                               height: 24,
                             ),
                             SelectBottomSheetInput(
-                                label: "Choose school category",
+                                label: getConstant('School_category'),
                                 labelModal: getConstant('School_category'),
                                 selected: state.schoolCategory,
                                 items: listSchoolType,
