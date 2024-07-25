@@ -85,7 +85,7 @@ class _StaffItemScreenState extends State<StaffItemScreen> with TickerProviderSt
                     labelStyle: TextStyles.s14w700,
                     // isScrollable: true,
                     labelPadding: const EdgeInsets.symmetric(
-                        horizontal: 16
+                        horizontal: 0
                     ).copyWith(
                         bottom: 24
                     ),

@@ -6,6 +6,7 @@ import 'package:european_university_app/app/domain/services/auth_service.dart';
 import 'package:european_university_app/app/ui/screens/auth/auth_sign_up_school.dart';
 import 'package:european_university_app/app/ui/screens/auth/confirm_code_screen.dart';
 import 'package:european_university_app/app/ui/screens/auth/new_password.dart';
+import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:european_university_app/resources/resources.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:hive/hive.dart';
@@ -548,7 +549,7 @@ class AuthState with ChangeNotifier {
         _validateError = ValidateError.fromJson(data);
         showMessage('${_validateError?.message}', color: AppColors.appButton);
       }else{
-        showMessage('Email or password is incorrect.');
+        showMessage(getConstant('Email or password is incorrect.'));
       }
     } catch (e) {
       showErrorSnackBar(title: 'App request error');

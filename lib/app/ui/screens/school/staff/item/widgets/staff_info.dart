@@ -41,7 +41,7 @@ class _StaffInfoState extends State<StaffInfo> {
             ),
             child: Text(
               '${widget.staff?.school?.name ?? ''} '
-                  '${widget.staff?.city ?? ''}, '
+                  '${widget.staff?.city ?? ''} '
                   '${widget.staff?.country ?? ''}',
               style: TextStyles.s14w400.copyWith(
                   color: const Color(0xFF242424)

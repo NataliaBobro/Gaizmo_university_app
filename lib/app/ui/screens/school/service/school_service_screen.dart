@@ -360,8 +360,8 @@ class _ElementCategoryItemState extends State<ElementCategoryItem> {
                 );
               },
               isOpen: false,
-              headerBackgroundColor:
-              Color(int.parse('${services[index]?.color}')).withOpacity(.6),
+              headerBackgroundColor:services[index]?.color != null ?
+              Color(int.parse('${services[index]?.color}')).withOpacity(.6) : Colors.greenAccent,
               contentBorderWidth: 0,
               contentHorizontalPadding: 0,
               contentBackgroundColor: const Color(0xFFF0F3F6),
@@ -400,7 +400,9 @@ class _ContentServiceState extends State<ContentService> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Color(int.parse('${widget.item?.color}')).withOpacity(.4)
+        color: widget.item?.color != null ?
+          Color(int.parse('${widget.item?.color}')).withOpacity(.4) :
+          Colors.greenAccent
       ),
       width: double.infinity,
       child: Column(

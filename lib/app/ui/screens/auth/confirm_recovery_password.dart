@@ -44,7 +44,7 @@ class _ConfirmPasswordRecoveryState extends State<ConfirmPasswordRecovery> {
                         child: Text(
                           getConstant('Password_recovery'),
                           style: TextStyles.s24w600.copyWith(
-                              color: Colors.white
+                              color: AppColors.appTitle
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -61,7 +61,7 @@ class _ConfirmPasswordRecoveryState extends State<ConfirmPasswordRecovery> {
                                 textAlign: TextAlign.center,
                                 text: TextSpan(
                                     style: TextStyles.s14w600.copyWith(
-                                        color: Colors.white,
+                                        color: AppColors.appTitle,
                                         height: 1.57
                                     ),
                                     text: getConstant('Please_enter_the_password_reset_code_sent_to_the_email'),

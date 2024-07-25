@@ -498,7 +498,7 @@ class _HeaderState extends State<Header> {
       context: context,
       builder: (context) => BasicDialogAlert(
         content: Text(
-          getConstant('Change_delivery_status_to_successful'),
+          '${getConstant('Change_delivery_status_to_successful')}?',
           style: TextStyles.s17w600,
         ),
         actions: <Widget>[
@@ -533,14 +533,14 @@ class _HeaderState extends State<Header> {
         ),
         actions: <Widget>[
           BasicDialogAction(
-            title: const Text("Yes"),
+            title: Text(getConstant('Yes')),
             onPressed: () {
               Navigator.pop(context);
               onDelete();
             },
           ),
           BasicDialogAction(
-            title: const Text("No"),
+            title: Text(getConstant('No')),
             onPressed: () {
               Navigator.pop(context);
             },

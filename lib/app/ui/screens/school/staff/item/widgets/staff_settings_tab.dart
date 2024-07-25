@@ -2,6 +2,7 @@ import 'package:european_university_app/app/domain/states/school/school_staff_it
 import 'package:european_university_app/app/ui/screens/school/staff/item/widgets/staff_personal_info_screen.dart';
 import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:european_university_app/app/ui/widgets/change_password.dart';
+import 'package:european_university_app/app/ui/widgets/custom_scroll_physics.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -22,7 +23,8 @@ class _StaffSettingsTabState extends State<StaffSettingsTab> {
   @override
   Widget build(BuildContext context) {
     final read = context.read<SchoolStaffItemState>();
-    return Column(
+    return ListView(
+      physics: const BottomBouncingScrollPhysics(),
       children: [
         const SizedBox(
           height: 24,
