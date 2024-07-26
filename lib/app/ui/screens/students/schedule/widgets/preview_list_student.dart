@@ -52,9 +52,9 @@ class PreviewListStudent extends StatelessWidget {
                     left: index * 20,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(100),
-                      child: users![index].user.avatar != null ?
+                      child: users![index].user?.avatar != null ?
                       CachedNetworkImage(
-                        imageUrl: '${users![index].user.avatar}',
+                        imageUrl: '${users![index].user?.avatar}',
                         width: 24,
                         errorWidget: (context, error, stackTrace) =>
                         const SizedBox.shrink(),

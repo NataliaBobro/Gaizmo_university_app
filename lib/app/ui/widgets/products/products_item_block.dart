@@ -10,6 +10,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../resources/resources.dart';
+import '../../theme/app_colors.dart';
 import '../../theme/text_styles.dart';
 
 class ProductItemBlock extends StatefulWidget {
@@ -119,7 +120,6 @@ class _ProductItemBlockState extends State<ProductItemBlock> {
                             ]
                           ],
                         ),
-                        const Spacer(),
                         Text(
                           widget.item?.desc ?? '',
                           style: TextStyles.s12w400.copyWith(
@@ -128,16 +128,17 @@ class _ProductItemBlockState extends State<ProductItemBlock> {
                           ),
                           maxLines: 2,
                         ),
+                        const Spacer(),
                         Container(
                           padding: const EdgeInsets.all(4),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(16),
-                            color: Colors.amberAccent.withOpacity(.5)
+                            color: AppColors.appButton
                           ),
                           child: Text(
                             '${widget.item?.priceEtm ?? ''} EU / ${widget.item?.priceMoney ?? ''} UAH',
                             style: TextStyles.s12w400.copyWith(
-                                color: Colors.black,
+                                color: Colors.white,
                                 overflow: TextOverflow.ellipsis
                             ),
                           ),
@@ -268,12 +269,12 @@ class _OpenedProductState extends State<OpenedProduct> {
                                     padding: const EdgeInsets.all(4),
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(16),
-                                        color: Colors.amberAccent.withOpacity(.5)
+                                        color: AppColors.appButton
                                     ),
                                     child: Text(
                                       '${widget.item?.priceEtm ?? ''} EU / ${widget.item?.priceMoney ?? ''} UAH',
                                       style: TextStyles.s12w400.copyWith(
-                                          color: Colors.black,
+                                          color: Colors.white,
                                           overflow: TextOverflow.ellipsis
                                       ),
                                     ),

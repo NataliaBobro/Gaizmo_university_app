@@ -156,7 +156,9 @@ Map<String, dynamic> _$DayItemToJson(DayItem instance) => <String, dynamic>{
 
 PayUsers _$PayUsersFromJson(Map<String, dynamic> json) => PayUsers(
       id: (json['id'] as num).toInt(),
-      user: UserData.fromJson(json['user'] as Map<String, dynamic>),
+      user: json['user'] == null
+          ? null
+          : UserData.fromJson(json['user'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$PayUsersToJson(PayUsers instance) => <String, dynamic>{

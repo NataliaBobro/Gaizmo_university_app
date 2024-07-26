@@ -57,6 +57,7 @@ class AppHorizontalField extends StatelessWidget {
                   style: TextStyles.s14w400.copyWith(
                     color: const Color(0xFF242424),
                   ),
+                  autocorrect: false,
                   decoration: InputDecoration(
                     constraints: const BoxConstraints(
                         maxHeight: 28

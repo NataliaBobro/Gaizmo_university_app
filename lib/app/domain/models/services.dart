@@ -152,11 +152,11 @@ class DayItem {
 @JsonSerializable(includeIfNull: true, fieldRename: FieldRename.snake)
 class PayUsers {
   int id;
-  UserData user;
+  UserData? user;
 
   PayUsers({
     required this.id,
-    required this.user,
+    this.user
   });
 
   Map<String, dynamic> toJson() => _$PayUsersToJson(this);
