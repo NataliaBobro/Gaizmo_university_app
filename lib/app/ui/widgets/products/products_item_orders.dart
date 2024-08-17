@@ -13,8 +13,8 @@ import '../../../../resources/resources.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/text_styles.dart';
 
-class ProductItemBlock extends StatefulWidget {
-  const ProductItemBlock({
+class ProductItemOrders extends StatefulWidget {
+  const ProductItemOrders({
     super.key,
     required this.item,
     this.hasEdit = false,
@@ -38,10 +38,10 @@ class ProductItemBlock extends StatefulWidget {
   final Function? onPayProduct;
 
   @override
-  State<ProductItemBlock> createState() => _ProductItemBlockState();
+  State<ProductItemOrders> createState() => _ProductItemOrdersState();
 }
 
-class _ProductItemBlockState extends State<ProductItemBlock> {
+class _ProductItemOrdersState extends State<ProductItemOrders> {
   @override
   Widget build(BuildContext context) {
     return OpenContainer(
@@ -117,49 +117,43 @@ class _ProductItemBlockState extends State<ProductItemBlock> {
                           maxLines: 2,
                         ),
                         const Spacer(),
+
                         Row(
                           children: [
-                            SvgPicture.asset(
-                              Svgs.cache,
-                              width: 24,
-                            ),
-                            const SizedBox(
-                              width: 6,
-                            ),
-                            Text(
-                              '${widget.item?.priceEtm ?? ''} EU / ${widget.item?.priceMoney ?? ''} UAH',
-                              style: TextStyles.s12w400.copyWith(
-                                  color: AppColors.fNeutral800,
-                                  overflow: TextOverflow.ellipsis
-                              ),
-                            )
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 6,
-                        ),
-                        CupertinoButton(
-                            padding: EdgeInsets.zero,
-                            minSize: 0.0,
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 8,
-                                  vertical: 8
-                              ),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  color: AppColors.appButton
-                              ),
-                              child: Text(
-                                getConstant('Order'),
-                                style: TextStyles.s14w600.copyWith(
-                                    color: Colors.white
+                            if(widget.hasDeliveryStatus) ...[
+                              if(widget.item?.deliveryStatus == 'SUCCESS' ) ...[
+                                SvgPicture.asset(
+                                  Svgs.check,
+                                  width: 16,
+                                  key: ValueKey(widget.item?.deliveryStatus),
                                 ),
-                              ),
-                            ),
-                            onPressed: () {
-                              openContainer();
-                            }
+                                const SizedBox(
+                                  width: 6,
+                                ),
+                                Text(
+                                  getConstant('Received'),
+                                  style: TextStyles.s14w400.copyWith(
+                                      color: AppColors.greenText
+                                  ),
+                                )
+                              ] else ...[
+                                SvgPicture.asset(
+                                  Svgs.delivery,
+                                  width: 16,
+                                  key: ValueKey(widget.item?.deliveryStatus)
+                                ),
+                                const SizedBox(
+                                  width: 6,
+                                ),
+                                Text(
+                                  getConstant('Sent'),
+                                  style: TextStyles.s14w400.copyWith(
+                                      color: AppColors.yellow
+                                  ),
+                                )
+                              ]
+                            ]
+                          ],
                         )
                       ],
                     ),
@@ -428,15 +422,15 @@ class _HeaderState extends State<Header> {
         children: [
           Container(
             padding: const EdgeInsets.only(
-              left: 40,
-              right: 90
+                left: 40,
+                right: 90
             ),
             alignment: Alignment.center,
             child: Text(
               widget.title,
               style: TextStyles.s18w600.copyWith(
-                color: const Color(0xFF242424),
-                overflow: TextOverflow.ellipsis
+                  color: const Color(0xFF242424),
+                  overflow: TextOverflow.ellipsis
               ),
               maxLines: 2,
             ),
@@ -479,10 +473,10 @@ class _HeaderState extends State<Header> {
                       ),
                       onPressed: () {
                         onDeleteProduct(
-                        () {
-                          Navigator.pop(context);
-                          widget.onDeleteProduct();
-                        });
+                                () {
+                              Navigator.pop(context);
+                              widget.onDeleteProduct();
+                            });
                       },
                     )
                   ],

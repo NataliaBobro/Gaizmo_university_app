@@ -11,6 +11,7 @@ import '../../../../../../resources/resources.dart';
 import '../../../../domain/states/order_state.dart';
 import '../../../../domain/states/student/student_shop_state.dart';
 import '../../../theme/text_styles.dart';
+import 'bonuses_tab.dart';
 import 'exchange_tab.dart';
 
 class PassportScreen extends StatefulWidget {
@@ -35,7 +36,7 @@ class _PassportScreenState extends State<PassportScreen>  with TickerProviderSta
   @override
   void initState() {
     _tabController = TabController(
-      length: 3,
+      length: 4,
       vsync: this,
       animationDuration: const Duration(milliseconds: 100),
     );
@@ -104,7 +105,7 @@ class _PassportScreenState extends State<PassportScreen>  with TickerProviderSta
                         insets: EdgeInsets.only(right: 30.0),
                       ),
                       labelPadding: const EdgeInsets.symmetric(
-                          horizontal: 16
+                          horizontal: 0
                       ),
                       labelColor: const Color(0xFF242424),
                       unselectedLabelStyle: TextStyles.s14w400,
@@ -120,6 +121,10 @@ class _PassportScreenState extends State<PassportScreen>  with TickerProviderSta
                         ),
                         Tab(
                           text: getConstant('Exchange'),
+                          iconMargin: EdgeInsets.zero,
+                        ),
+                        Tab(
+                          text: getConstant('Bonuses'),
                           iconMargin: EdgeInsets.zero,
                         ),
                       ],
@@ -152,7 +157,8 @@ class _PassportScreenState extends State<PassportScreen>  with TickerProviderSta
                         create: (context) => OrderState(context),
                         child: const StudentOrdersScreen(),
                       ),
-                      const ExchangeScreen()
+                      const ExchangeScreen(),
+                      const BonusesScreen()
                     ],
                   ),
                 )

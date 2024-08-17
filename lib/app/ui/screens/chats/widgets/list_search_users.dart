@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:european_university_app/app/ui/theme/text_styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../domain/states/chats/chats_state.dart';
@@ -35,29 +36,52 @@ class _ListSearchUsersState extends State<ListSearchUsers> {
                     bottom: 8
                 ),
                 padding: const EdgeInsets.all(8.0),
-                decoration: const BoxDecoration(color: Colors.white),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20)
+                ),
                 child: Column(
                   children: [
                     Row(
                       children: [
                         ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(20),
                           child: Column(
                             children: [
                               if(state.users?.users[index].avatar != null) ...[
-                                CachedNetworkImage(
-                                  imageUrl: '${state.users?.users[index].avatar}',
-                                  width: 60,
-                                  height: 60,
-                                  errorWidget: (context, error, stackTrace) =>
-                                  const SizedBox.shrink(),
-                                  fit: BoxFit.cover,
+                                Container(
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                        width: 1,
+                                        color: const Color(0xFF7D838A)
+                                    ),
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: AppColors.accentContainerSoft.withOpacity(.05),
+                                  ),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(20),
+                                    child: CachedNetworkImage(
+                                      imageUrl: '${state.users?.users[index].avatar}',
+                                      width: 60,
+                                      height: 65,
+                                      errorWidget: (context, error, stackTrace) =>
+                                      const SizedBox.shrink(),
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
                                 )
                               ] else ...[
                                 Container(
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                        width: 1,
+                                        color: const Color(0xFF7D838A)
+                                    ),
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: AppColors.accentContainerSoft.withOpacity(.05),
+                                  ),
                                   width: 60,
-                                  height: 60,
-                                  color: AppColors.accentContainerSoft.withOpacity(.05),
+                                  height: 65,
                                 )
                               ]
                             ],
@@ -66,7 +90,7 @@ class _ListSearchUsersState extends State<ListSearchUsers> {
                         const SizedBox(width: 16),
                         Expanded(
                           child: SizedBox(
-                            height: 60,
+                            height: 55,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.start,

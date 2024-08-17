@@ -106,6 +106,7 @@ class _AuthSelectLoginTypeState extends State<AuthSelectLoginType>
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 AppButton(
+                                    buttonColor: AppColors.appButtonPrimary,
                                     key: bottomPos,
                                     title: getConstant('SIGN_IN'),
                                     onPressed: () {
@@ -123,7 +124,7 @@ class _AuthSelectLoginTypeState extends State<AuthSelectLoginType>
                                   }
                                 ),
                                 const SizedBox(
-                                  height: 65,
+                                  height: 25,
                                 ),
                                 // Text(
                                 //   'Get read about ETM app!',
@@ -166,46 +167,61 @@ class _SelectLangButtonState extends State<SelectLangButton> {
   @override
   Widget build(BuildContext context) {
     final state = context.watch<AuthState>();
+    final appState = context.watch<AppState>();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 40),
-      child: CupertinoButton(
-          padding: EdgeInsets.zero,
-          minSize: 0.0,
-          child: Container(
-            padding: const EdgeInsets.symmetric(
-                vertical: 12
-            ),
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(40)
-            ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(100),
-                  child: SvgPicture.asset(
-                    '${state.languageList()[state.selectLang]['icon']}',
-                    width: 24,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                const SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  '${state.languageList()[state.selectLang]['name']}',
-                  style: TextStyles.s12w600.copyWith(
-                      color: const Color(0xFF242424)
-                  ),
-                )
-              ],
+      child: Column(
+        key: ValueKey(appState.userData?.languageId),
+        children: [
+          Text(
+            getConstant('Choose your language'),
+            style: TextStyles.s14w600.copyWith(
+              color: AppColors.fgDefault
             ),
           ),
-          onPressed: () {
-            state.openShowBottomSelectLang();
-          }
+          const SizedBox(
+            height: 8,
+          ),
+          CupertinoButton(
+              padding: EdgeInsets.zero,
+              minSize: 0.0,
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                    vertical: 12
+                ),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(40)
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(100),
+                      child: SvgPicture.asset(
+                        '${state.languageList()[state.selectLang]['icon']}',
+                        width: 24,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 8,
+                    ),
+                    Text(
+                      '${state.languageList()[state.selectLang]['name']}',
+                      style: TextStyles.s12w600.copyWith(
+                          color: const Color(0xFF242424)
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              onPressed: () {
+                state.openShowBottomSelectLang();
+              }
+          )
+        ],
       ),
     );
   }

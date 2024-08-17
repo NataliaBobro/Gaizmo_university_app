@@ -1,3 +1,4 @@
+import 'package:european_university_app/app/ui/widgets/products/products_item_orders.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -7,7 +8,6 @@ import '../../../../domain/models/shop.dart';
 import '../../../../domain/states/order_state.dart';
 import '../../../theme/text_styles.dart';
 import '../../../widgets/custom_scroll_physics.dart';
-import '../../../widgets/products/products_item_block.dart';
 import '../../../widgets/sceleton_loaders.dart';
 
 class SchoolOrdersScreen extends StatelessWidget {
@@ -29,7 +29,7 @@ class SchoolOrdersScreen extends StatelessWidget {
             ] else ...[
               ...List.generate(
                 state.listProducts?.data.length ?? 0,
-                    (index) => ProductItemBlock(
+                    (index) => ProductItemOrders(
                     item: state.listProducts?.data[index],
                     hasEdit: false,
                     hasPay: false,

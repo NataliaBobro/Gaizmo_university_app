@@ -119,20 +119,34 @@ class _AIChatState extends State<AIChat> {
         padding: const EdgeInsets.all(8.0),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(12)
+          borderRadius: BorderRadius.circular(20)
         ),
         child: Column(
           children: [
             Row(
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(20),
                   child: Column(
                     children: [
-                      Image.asset(
-                        Images.ai,
-                        width: 50,
-                        height: 70,
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                              width: 1,
+                              color: const Color(0xFF7D838A)
+                          ),
+                          borderRadius: BorderRadius.circular(20),
+                          color: AppColors.accentContainerSoft.withOpacity(.05),
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Image.asset(
+                            Images.ai,
+                            width: 60,
+                            height: 65,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                       )
                     ],
                   ),
@@ -140,13 +154,13 @@ class _AIChatState extends State<AIChat> {
                 const SizedBox(width: 16),
                 Expanded(
                   child: SizedBox(
-                    height: 60,
+                    height: 50,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'EU Assistant',
+                          'EU AI Assistant',
                           style: TextStyles.s14w500.copyWith(
                               color: AppColors.fgDefault
                           ),

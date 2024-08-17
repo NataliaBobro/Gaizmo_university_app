@@ -123,26 +123,25 @@ class UserViewAvatar extends StatelessWidget {
     return userData?.avatar != null ? ClipRRect(
       borderRadius: BorderRadius.circular(100),
       child: Container(
+        padding: EdgeInsets.all(4),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(100),
+          color: Colors.white
         ),
           child: Stack(
             children: [
-              CachedNetworkImage(
-                key: Key("${userData?.avatar}"),
-                cacheKey: "${userData?.avatar}",
-                imageUrl: "${userData?.avatar}",
-                width: 55,
-                height: 55,
-                memCacheWidth: 55,
-                maxWidthDiskCache: 55,
-                errorWidget: (context, error, stackTrace) =>
-                const SizedBox.shrink(),
-                fit: BoxFit.cover,
-              ),
-              CustomPaint(
-                size: const Size(56, 56),
-                painter: BorderPainter(),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(100),
+                child: CachedNetworkImage(
+                  key: Key("${userData?.avatar}"),
+                  cacheKey: "${userData?.avatar}",
+                  imageUrl: "${userData?.avatar}",
+                  width: 140,
+                  height: 140,
+                  errorWidget: (context, error, stackTrace) =>
+                  const SizedBox.shrink(),
+                  fit: BoxFit.cover,
+                ),
               ),
             ],
           )

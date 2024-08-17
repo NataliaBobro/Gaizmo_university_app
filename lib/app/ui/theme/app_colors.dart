@@ -4,6 +4,7 @@ abstract class AppColors {
   static const scaffoldBg = Color(0xFFF9F9F9);
   static const registerBg = Color(0xFFF0F3F6);
   static const appButton = Color(0xFF312783);
+  static final appButtonPrimary = const Color(0xFF0379EE).withOpacity(.7);
   static const appButtonDisable = Color(0xFFB4B0A9);
   static const appButtonText = Color(0xFFFFFFFF);
   static const appTitle = Color(0xFF242424);
@@ -32,7 +33,7 @@ abstract class AppColors {
   static const purpleLight = Color(0xFFE9EEFF);
   static const yellowLight = Color(0xFFFFF5D1);
   static const greenLight = Color(0xFFF0F8F2);
-  static const greenText = Color(0xFF54B876);
+  static const greenText = Color(0xFF4CD964);
   static const greyText = Color(0xFFABB4BD);
   static const greyBorder = Color(0xFFBDBDBD);
   static const cardGrey = Color(0xFFE0E0E0);
@@ -55,7 +56,7 @@ abstract class AppColors {
   static const lightWhite = Color(0xFFF2F2F2);
   static const lightWhite20 = Color(0xFFF8F9FB);
   static const dividerGrey = Color(0xFFE0E0E0);
-  static const yellow = Color(0xFFFFCF2B);
+  static const yellow = Color(0xFFE9D100);
   static const grayBorder = Color(0xFFC1C6D0);
   static const bgBottomSheet = Color(0xFFF2F2F6);
   static const grey700 = Color(0xFF9499A4);
@@ -95,5 +96,6 @@ abstract class AppColors {
   static const fNeutral100 = Color(0xFFF8F9FB);
   static const fNeutral900 = Color(0xFF191919);
   static const fNeutral700 = Color(0xFF9499A4);
+  static const fNeutral800 = Color(0xFF7C7C7C);
   static const fBlue2 = Color(0xFF007AFF);
 }

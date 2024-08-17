@@ -45,11 +45,15 @@ class StudentService {
 
   static Future<ServicesData?> fetchService(
       BuildContext context,
+      String? search
       ) async {
     final token = getToken(context);
     if(token == null) return null;
     final response = await ApiClient().dio.get(
         '/student/school/group/category-lesson',
+        queryParameters: {
+          'search': search
+        },
         options: Options(
           headers: {'Authorization': 'Bearer $token'},
         )

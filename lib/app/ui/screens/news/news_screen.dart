@@ -6,6 +6,7 @@ import 'package:european_university_app/app/ui/screens/news/widgets/text_with_ht
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:skeletons/skeletons.dart';
 
@@ -92,6 +93,11 @@ class _NewsItemState extends State<NewsItem> {
   @override
   Widget build(BuildContext context) {
     final image = extractImageUrl(widget.item?.content);
+    String? date = widget.item?.publishedAt;
+    if(date != null){
+      DateTime dateTime = DateTime.parse('${widget.item?.publishedAt}');
+      date = DateFormat('dd.MM.yyyy').format(dateTime);
+    }
     return OpenContainer(
         openElevation: 0,
         closedColor: const Color(0xFFF0F3F6),
@@ -106,7 +112,7 @@ class _NewsItemState extends State<NewsItem> {
             ).copyWith(
               bottom: 16
             ),
-            height: 140,
+            height: 150,
             child: Container(
               padding: const EdgeInsets.symmetric(
                 horizontal: 8,
@@ -114,15 +120,15 @@ class _NewsItemState extends State<NewsItem> {
               ),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(8)
+                borderRadius: BorderRadius.circular(20)
               ),
               child: Row(
                 children: [
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(20),
                     child: widget.item?.image != null || image != null ? CachedNetworkImage(
                         imageUrl: '${image != null ? 'https://e-u.edu.ua/$image' : widget.item?.image}',
-                        width: 150,
+                        width: 120,
                         height: 110,
                         errorWidget: (context, error, stackTrace) =>
                         const SizedBox.shrink(),
@@ -130,7 +136,7 @@ class _NewsItemState extends State<NewsItem> {
                         progressIndicatorBuilder: (context, error, stackTrace) =>
                         const CupertinoActivityIndicator()
                     ) : const SizedBox(
-                      width: 150,
+                      width: 120,
                       height: 110,
                     ),
                   ),
@@ -143,16 +149,45 @@ class _NewsItemState extends State<NewsItem> {
                       children: [
                         Text(
                           widget.item?.title != null ?'${widget.item?.title}' : '',
-                          style: TextStyles.s14w500.copyWith(
+                          style: TextStyles.s12w500.copyWith(
                               color: Colors.black,
                               overflow: TextOverflow.ellipsis
                           ),
                           maxLines: 2,
                         ),
                         const Spacer(),
-                        TextWithTagsTitle(
-                          text: removeHtmlTags(widget.item?.content != null ?'${widget.item?.content}' : '')
+                        Container(
+                          constraints: const BoxConstraints(
+                            minHeight: 40
+                          ),
+                          child: TextWithTagsTitle(
+                              text: removeHtmlTags(widget.item?.content != null ?'${widget.item?.content}' : '')
+                          ),
                         ),
+                        const Spacer(),
+                        if(date != null) ...[
+                          Row(
+                            children: [
+                              Row(
+                                children: [
+                                  SvgPicture.asset(
+                                    Svgs.calendarGray,
+                                    width: 18,
+                                  ),
+                                  const SizedBox(
+                                    width: 4,
+                                  ),
+                                  Text(
+                                      date,
+                                    style: TextStyles.s14w400.copyWith(
+                                      color: const Color(0xFF7D838A)
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ],
+                          )
+                        ]
                       ],
                     ),
                   )

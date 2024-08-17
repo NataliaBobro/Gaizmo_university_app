@@ -12,14 +12,17 @@ import '../../../../../../../resources/resources.dart';
 import '../../../../../../domain/states/student/student_groups_state.dart';
 import '../../../../../widgets/auth_button.dart';
 import '../../../../../widgets/center_header.dart';
+import '../../../../chats/widgets/search_input.dart';
 
 class SelectPackageScreen extends StatefulWidget {
   const SelectPackageScreen({
     Key? key,
-    required this.package
+    required this.index,
+    this.isAllService = false
   }) : super(key: key);
 
-  final List<ServicesModel?>? package;
+  final int index;
+  final bool? isAllService;
 
   @override
   State<SelectPackageScreen> createState() => _SelectPackageScreenState();
@@ -27,10 +30,15 @@ class SelectPackageScreen extends StatefulWidget {
 
 class _SelectPackageScreenState extends State<SelectPackageScreen> {
   int? selected;
+  List<ServicesModel?>? package;
 
   @override
   Widget build(BuildContext context) {
     final state = context.watch<StudentGroupsState>();
+    package = widget.isAllService == true ?
+      [state.servicesData?.allService?[widget.index]] :
+      state.servicesData?.category?[widget.index].services;
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -42,6 +50,26 @@ class _SelectPackageScreenState extends State<SelectPackageScreen> {
             children: [
               CenterHeader(
                 title: getConstant('Service_packages'),
+                onBack: () {
+                  state.closeClearButton();
+                },
+              ),
+              SearchInput(
+                placeholder: getConstant('Search'),
+                controller: state.search,
+                fetchSearch: (val) {
+                  state.fetchService(search: val);
+                },
+                onTap: () {
+                  state.openClearButton();
+                },
+                clearTextField: () {
+                  state.clearTextField();
+                },
+                openClear: state.openClear,
+                closeClearButton: () {
+                  state.closeClearButton();
+                },
               ),
               Expanded(
                 child: Stack(
@@ -49,20 +77,19 @@ class _SelectPackageScreenState extends State<SelectPackageScreen> {
                     ListView(
                       physics: const ClampingScrollPhysics(),
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 26
+                        horizontal: 16
                       ).copyWith(
                         bottom: 100
                       ),
                       children: [
                         ...List.generate(
-                            widget.package?.length ?? 0,
+                            package?.length ?? 0,
                             (index) => ButtonPayItemLesson(
-                              package: widget.package?[index],
-                              onSelect: selected == widget.package?[index]?.id,
+                              package: package?[index],
+                              onSelect: selected == package?[index]?.id,
                               changeSelect: () {
                                 setState(() {
-                                  selected = widget.package?[index]?.id;
+                                  selected = package?[index]?.id;
                                 });
                               }
                             )

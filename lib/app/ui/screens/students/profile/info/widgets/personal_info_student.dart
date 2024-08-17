@@ -12,6 +12,7 @@ import 'package:provider/provider.dart';
 import '../../../../../../domain/services/user_service.dart';
 import '../../../../../theme/text_styles.dart';
 import '../../../../../utils/show_message.dart';
+import '../../../../../widgets/about_me_settings.dart';
 import '../../../../../widgets/app_horizontal_field.dart';
 import '../../../../../widgets/auth_button.dart';
 import '../../../../../widgets/center_header.dart';
@@ -118,23 +119,40 @@ class _PersonalInfoStudentState extends State<PersonalInfoStudent> {
                             },
                             error: validateError?.errors.emailErrors?.first,
                           ),
-                          AppHorizontalField(
-                            label: getConstant('About_me'),
-                            controller: about,
-                            changeClear: () {
-                              about.clear();
-                              setState(() {});
-                            },
-                            error: validateError?.errors.about?.first,
-                          ),
-                          AppHorizontalField(
-                            label: getConstant('Country'),
-                            controller: country,
-                            changeClear: () {
-                              country.clear();
-                              setState(() {});
-                            },
-                            error: validateError?.errors.country?.first,
+                          // AppHorizontalField(
+                          //   label: getConstant('About_me'),
+                          //   controller: about,
+                          //   changeClear: () {
+                          //     about.clear();
+                          //     setState(() {});
+                          //   },
+                          //   error: validateError?.errors.about?.first,
+                          // ),
+                          SettingsInput(
+                              value: Text(
+                                about.text,
+                                maxLines: 1,
+                                style: TextStyles.s16w400.copyWith(
+                                    color: AppColors.fgDefault,
+                                    overflow: TextOverflow.ellipsis
+                                ),
+                              ),
+                              title: getConstant('About_me'),
+                              onPress: () async {
+                                await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => AboutMeSettings(
+                                      user: widget.student,
+                                      onSave: (aboutNew){
+                                       setState(() {
+                                         about.text = aboutNew;
+                                       });
+                                      },
+                                    ),
+                                  ),
+                                );
+                              }
                           ),
                           AppHorizontalField(
                             label: getConstant('City'),

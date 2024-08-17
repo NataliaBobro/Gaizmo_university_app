@@ -46,55 +46,59 @@ class _SearchInputState extends State<SearchInput> {
         child: Row(
           children: [
             Expanded(
-              child: TextField(
-                controller: widget.controller,
-                autofocus: widget.autofocus,
-                inputFormatters: [
-                  EmojiInputFormatter(),
-                  NonAsianInputFormatter(),
-                ],
-                autocorrect: false,
-                style: TextStyles.s16w400.copyWith(
-                  color: AppColors.fgDefault,
-                ),
-                onChanged: (val) {
-                  widget.fetchSearch(val);
-                },
-                onTap: () {
-                  widget.onTap();
-                },
-                textCapitalization: TextCapitalization.sentences,
-                decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 14,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: TextField(
+                  controller: widget.controller,
+                  autofocus: widget.autofocus,
+                  inputFormatters: [
+                    EmojiInputFormatter(),
+                    NonAsianInputFormatter(),
+                  ],
+                  autocorrect: false,
+                  style: TextStyles.s16w400.copyWith(
+                    color: AppColors.fgDefault,
                   ),
-                  hintStyle: TextStyles.s16w400.copyWith(
-                    color: const Color(0xFF828282),
-                  ),
-                  hintText: widget.placeholder,
-                  fillColor: AppColors.accentContainerSoft.withOpacity(.05),
-                  suffixIcon:
-                      widget.openClear && widget.controller.text.isNotEmpty
-                          ? CupertinoButton(
-                              onPressed: () {
-                                widget.clearTextField();
-                              },
-                              minSize: 0.0,
-                              padding: const EdgeInsets.symmetric(vertical: 10),
-                              child: SvgPicture.asset(
-                                Svgs.clear,
-                                width: 20,
-                                height: 20,
-                              ),
-                            )
-                          : null,
-                  prefixIcon: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: SvgPicture.asset(
-                      Svgs.search,
-                      width: 18,
-                      height: 18,
+                  onChanged: (val) {
+                    widget.fetchSearch(val);
+                  },
+                  onTap: () {
+                    widget.onTap();
+                  },
+                  textCapitalization: TextCapitalization.sentences,
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 14,
+                    ),
+                    hintStyle: TextStyles.s16w400.copyWith(
+                      color: const Color(0xFF828282),
+                    ),
+                    hintText: widget.placeholder,
+                    fillColor: const Color(0xFFE5EAF7),
+                    suffixIcon:
+                    widget.openClear && widget.controller.text.isNotEmpty
+                        ? CupertinoButton(
+                      onPressed: () {
+                        widget.clearTextField();
+                      },
+                      minSize: 0.0,
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: SvgPicture.asset(
+                        Svgs.clear,
+                        width: 20,
+                        height: 20,
+                      ),
+                    )
+                        : null,
+                    prefixIcon: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: SvgPicture.asset(
+                        Svgs.search,
+                        width: 16,
+                        height: 16,
+                        color: const Color(0xFF44464A),
+                      ),
                     ),
                   ),
                 ),

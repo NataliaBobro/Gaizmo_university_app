@@ -54,8 +54,15 @@ class Svgs {
   static const String attach = 'assets/vectors/attach.svg';
   static const String send = 'assets/vectors/send.svg';
   static const String delivery = 'assets/vectors/delivery.svg';
+  static const String check = 'assets/vectors/check.svg';
   static const String edit = 'assets/vectors/edit.svg';
   static const String shop = 'assets/vectors/shop.svg';
   static const String clear = 'assets/vectors/clear.svg';
   static const String message = 'assets/vectors/message.svg';
+  static const String cache = 'assets/vectors/cache.svg';
+  static const String payCache = 'assets/vectors/pay-cache.svg';
+  static const String present = 'assets/vectors/present.svg';
+  static const String profesor = 'assets/vectors/profesor.svg';
+  static const String calendar = 'assets/vectors/calendar.svg';
+  static const String calendarGray = 'assets/vectors/calendar-gray.svg';
 }

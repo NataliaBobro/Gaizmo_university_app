@@ -12,7 +12,7 @@ class AppField extends StatelessWidget {
     this.error,
     this.keyboardType,
     this.isPass = false,
-    this.multiLine = null,
+    this.multiLine,
     this.hasBorder = true
   }) : super(key: key);
 
@@ -44,6 +44,7 @@ class AppField extends StatelessWidget {
           obscureText: isPass,
           controller: controller,
           maxLines: multiLine ?? 1,
+          maxLength: multiLine ?? 200,
           decoration: InputDecoration(
             constraints: BoxConstraints(
                 maxHeight: multiLine != null ? 110 : 28

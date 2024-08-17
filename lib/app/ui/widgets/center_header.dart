@@ -10,11 +10,13 @@ class CenterHeader extends StatelessWidget {
   const CenterHeader({
     Key? key,
     required this.title,
-    this.action
+    this.action,
+    this.onBack
   }) : super(key: key);
 
   final String title;
   final Widget? action;
+  final Function? onBack;
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +68,9 @@ class CenterHeader extends StatelessWidget {
                   width: 32,
                 ),
                 onPressed: () {
+                  if(onBack != null){
+                    onBack!();
+                  }
                   Navigator.pop(context);
                 },
               )

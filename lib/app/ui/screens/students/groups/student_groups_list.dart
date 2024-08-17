@@ -29,17 +29,24 @@ class _StudentGroupsListState extends State<StudentGroupsList> {
                 CenterHeaderWithAction(
                     title: getConstant('Groups')
                 ),
+                const SizedBox(
+                  height: 24,
+                ),
                 Expanded(
                   child: !state.isLoading ? ListView(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16
+                    ),
                     children: [
                       ...List.generate(
                           state.servicesData?.category?.length ?? 0,
-                              (index) =>  SettingsInput(
+                              (index) =>  SettingsInputButton(
                               title: "${state.servicesData?.category![index].name}",
                               onPress: () async {
                                 state.openPage(
                                     SelectPackageScreen(
-                                        package: state.servicesData?.category?[index].services
+                                        key: ValueKey(state.servicesData),
+                                        index: index
                                     )
                                 );
                               }
@@ -47,14 +54,14 @@ class _StudentGroupsListState extends State<StudentGroupsList> {
                       ),
                       ...List.generate(
                           state.servicesData?.allService?.length ?? 0,
-                              (index) => SettingsInput(
+                              (index) => SettingsInputButton(
                               title: "${state.servicesData?.allService![index]?.name}",
                               onPress: () {
                                 state.openPage(
                                     SelectPackageScreen(
-                                        package: [
-                                          state.servicesData?.allService?[index]
-                                        ]
+                                      key: ValueKey(state.servicesData),
+                                      isAllService: true,
+                                      index: index
                                     )
                                 );
                               }

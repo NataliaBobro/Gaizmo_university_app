@@ -38,29 +38,52 @@ class _ChatListState extends State<ChatList> {
                       bottom: 8
                   ),
                   padding: const EdgeInsets.all(8.0),
-                  decoration: const BoxDecoration(color: Colors.white),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20)
+                  ),
                   child: Column(
                     children: [
                       Row(
                         children: [
                           ClipRRect(
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(20),
                             child: Column(
                               children: [
                                 if(user?.avatar != null) ...[
-                                  CachedNetworkImage(
-                                    imageUrl: '${user?.avatar}',
-                                    width: 60,
-                                    height: 60,
-                                    errorWidget: (context, error, stackTrace) =>
-                                    const SizedBox.shrink(),
-                                    fit: BoxFit.cover,
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          width: 1,
+                                          color: const Color(0xFF7D838A)
+                                      ),
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: AppColors.accentContainerSoft.withOpacity(.05),
+                                    ),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(20),
+                                      child: CachedNetworkImage(
+                                        imageUrl: '${user?.avatar}',
+                                        width: 60,
+                                        height: 65,
+                                        errorWidget: (context, error, stackTrace) =>
+                                        const SizedBox.shrink(),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
                                   )
                                 ] else ...[
                                   Container(
                                     width: 60,
-                                    height: 60,
-                                    color: AppColors.accentContainerSoft.withOpacity(.05),
+                                    height: 65,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        width: 1,
+                                        color: const Color(0xFF7D838A)
+                                      ),
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: AppColors.accentContainerSoft.withOpacity(.05),
+                                    ),
                                     child: Builder(
                                       builder: (BuildContext context) {
                                         List<String> nameParts = ('${user?.firstName ?? ''}'
@@ -89,7 +112,7 @@ class _ChatListState extends State<ChatList> {
                           const SizedBox(width: 16),
                           Expanded(
                             child: SizedBox(
-                              height: 60,
+                              height: 55,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

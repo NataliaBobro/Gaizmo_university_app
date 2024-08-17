@@ -88,25 +88,25 @@ class _TextWithTagsTitleState extends State<TextWithTagsTitle> {
   @override
   Widget build(BuildContext context) {
     return Html(
-      data: '${widget.text.trim().substring(0, 50)}...',
+      data: '${widget.text.trim().substring(0, 45)}...',
       style: {
         "em": Style(
           color: const Color(0xFFAEADAD),
-          fontSize: FontSize(12),
+          fontSize: FontSize(10),
           fontWeight: FontWeight.w400,
           margin: Margins.zero,
           padding: HtmlPaddings.zero,
         ),
         "body": Style(
           color: const Color(0xFFAEADAD),
-          fontSize: FontSize(12),
+          fontSize: FontSize(10),
           fontWeight: FontWeight.w400,
           margin: Margins.zero,
           padding: HtmlPaddings.zero,
         ),
         "p": Style(
           color: const Color(0xFFAEADAD),
-          fontSize: FontSize(12),
+          fontSize: FontSize(10),
           fontWeight: FontWeight.w400,
           margin: Margins.zero,
           padding: HtmlPaddings.zero,

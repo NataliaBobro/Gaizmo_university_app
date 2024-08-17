@@ -11,12 +11,14 @@ class AppButton extends StatefulWidget {
     required this.onPressed,
     this.horizontalPadding = 40.0,
     this.icon,
-    this.disabled = false
+    this.disabled = false,
+    this.buttonColor = AppColors.appButton
   }) : super(key: key);
 
   final Function onPressed;
   final String title;
   final String? icon;
+  final Color? buttonColor;
   final double horizontalPadding;
   final bool disabled;
 
@@ -45,7 +47,7 @@ class _AppButtonState extends State<AppButton> {
           decoration: BoxDecoration(
             color: widget.disabled ?
               AppColors.appButtonDisable :
-              AppColors.appButton,
+              widget.buttonColor,
             borderRadius: BorderRadius.circular(40)
           ),
           child: Row(

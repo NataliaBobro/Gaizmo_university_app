@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:european_university_app/app/ui/theme/app_colors.dart';
+import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
@@ -73,7 +74,7 @@ class _ChangeAvatarWidgetState extends State<ChangeAvatarWidget> {
           ),
           child: widget.avatar == null ? Center(
             child: Text(
-              '+Add',
+              getConstant('+Add'),
               style: TextStyles.s12w600.copyWith(
                   color: const Color(0xFFACACAC)
               ),
