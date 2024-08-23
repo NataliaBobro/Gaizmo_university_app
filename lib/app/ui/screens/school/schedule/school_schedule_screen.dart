@@ -403,7 +403,9 @@ class _LessonItemState extends State<LessonItem> {
                 padding: EdgeInsets.zero,
                 onPressed: () {
                   launchUrlParse(
-                      widget.lesson?.zoomMeeting?.startUrl
+                      widget.lesson?.classId == 'Zoom' ?
+                      widget.lesson?.zoomMeeting?.zoom :
+                      widget.lesson?.zoomMeeting?.meet
                   );
                 },
                 child: SvgPicture.asset(

@@ -90,12 +90,12 @@ Map<String, dynamic> _$ListDayToJson(ListDay instance) => <String, dynamic>{
     };
 
 ZoomMeeting _$ZoomMeetingFromJson(Map<String, dynamic> json) => ZoomMeeting(
-      startUrl: json['start_url'] as String?,
-      joinUrl: json['join_url'] as String?,
+      zoom: json['zoom'] as String?,
+      meet: json['meet'] as String?,
     );
 
 Map<String, dynamic> _$ZoomMeetingToJson(ZoomMeeting instance) =>
     <String, dynamic>{
-      'start_url': instance.startUrl,
-      'join_url': instance.joinUrl,
+      'zoom': instance.zoom,
+      'meet': instance.meet,
     };

@@ -93,12 +93,12 @@ class ListDay {
 
 @JsonSerializable(includeIfNull: true, fieldRename: FieldRename.snake)
 class ZoomMeeting {
-  String? startUrl;
-  String? joinUrl;
+  String? zoom;
+  String? meet;
 
   ZoomMeeting({
-    this.startUrl,
-    this.joinUrl,
+    this.zoom,
+    this.meet,
   });
 
   Map<String, dynamic> toJson() => _$ZoomMeetingToJson(this);
