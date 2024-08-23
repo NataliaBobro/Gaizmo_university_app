@@ -25,6 +25,7 @@ class Svgs {
   static const String heart = 'assets/vectors/heart.svg';
   static const String open = 'assets/vectors/open.svg';
   static const String zoom = 'assets/vectors/zoom.svg';
+  static const String meet = 'assets/vectors/meet.svg';
   static const String share = 'assets/vectors/share.svg';
   static const String next = 'assets/vectors/next.svg';
   static const String plus = 'assets/vectors/plus.svg';

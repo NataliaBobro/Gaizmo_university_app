@@ -154,8 +154,8 @@ class _LessonItemState extends State<LessonItem> {
                   );
                 },
                 child: SvgPicture.asset(
-                  Svgs.zoom,
-                  width: 65,
+                  widget.lesson?.classId == 'Zoom' ? Svgs.zoom : Svgs.meet,
+                  width: widget.lesson?.classId == 'Zoom' ? 65 : 45,
                 ),
               ),
             ),
