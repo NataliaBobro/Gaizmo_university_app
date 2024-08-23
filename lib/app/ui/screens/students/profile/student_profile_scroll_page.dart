@@ -91,7 +91,7 @@ class _StudentProfileScrollPageState extends State<StudentProfileScrollPage> {
         ),
         if(offset >= -(SizerUtil.width / 2)) ...[
           Positioned(
-            top: 330,
+            top: ((SizerUtil.height / 100) * 46) < 330 ? ((SizerUtil.height / 100) * 46) : 330,
             right: 0,
             left: 0,
             child:  IgnorePointer(

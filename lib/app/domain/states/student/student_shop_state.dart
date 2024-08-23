@@ -77,16 +77,18 @@ class StudentShopState with ChangeNotifier {
       print(e);
     }finally{
       _isLoading = false;
-      notifyListeners();
+     if(context.mounted){
+       notifyListeners();
+     }
     }
   }
 
-  Future<void> payProduct(int? productId, String? paymentType) async {
+  Future<void> payProduct(Products? product, String? paymentType) async {
     _isLoading = true;
     notifyListeners();
     try{
       if(paymentType == 'money'){
-        final result = await ShopService.fetchLiqPayCred(context, productId);
+        final result = await ShopService.fetchLiqPayCred(context, product?.id);
         if(result != null){
           if(result.cred == null){
             showMessage(
@@ -100,7 +102,7 @@ class StudentShopState with ChangeNotifier {
       }else{
         final result = await ShopService.payProductEtm(
             context,
-            productId
+            product?.id
         );
         if(result != null && result == true){
           openPayed();

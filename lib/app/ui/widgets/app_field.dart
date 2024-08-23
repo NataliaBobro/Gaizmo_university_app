@@ -57,6 +57,7 @@ class AppField extends StatelessWidget {
             hintStyle: TextStyles.s16w400.copyWith(
               color: Colors.black,
             ),
+            counterText: '',
             fillColor: multiLine != null ? Colors.white : Colors.transparent,
           ),
         ),

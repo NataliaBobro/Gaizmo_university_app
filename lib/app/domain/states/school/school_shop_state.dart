@@ -17,10 +17,10 @@ class SchoolShopState with ChangeNotifier {
   TextEditingController _productDescription = TextEditingController();
   String? _imageUrl;
   final MaskedTextController  _priceEtm = MaskedTextController(
-      mask: '0000'
+      mask: '000000'
   );
   final MaskedTextController  _priceMoney = MaskedTextController(
-      mask: '0000'
+      mask: '000000'
   );
   ValidateError? _validateError;
   File? _uploadsFile;

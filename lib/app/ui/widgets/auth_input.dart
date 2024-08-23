@@ -69,32 +69,36 @@ class _AuthInputState extends State<AuthInput> {
               color: const Color(0xFF848484)
           ),
         ),
-        TextField(
-          focusNode: widget.focusNode,
-          keyboardType: widget.keyboardType ?? TextInputType.text,
-          controller: widget.controller,
-          obscureText: widget.isPass,
-          style: TextStyles.s16w400.copyWith(
-            color: AppColors.appTitle,
-          ),
-          cursorColor: const Color(0xFF1167C3),
-          decoration: InputDecoration(
-            constraints: BoxConstraints(
-              maxWidth: widget.maxWidth ?? SizerUtil.width
-            ),
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 0,
-              vertical: 8,
-            ),
-            hintStyle: TextStyles.s16w400.copyWith(
+        AutofillGroup(
+          child: TextField(
+            focusNode: widget.focusNode,
+            keyboardType: widget.keyboardType ?? TextInputType.text,
+            controller: widget.controller,
+            obscureText: widget.isPass,
+            style: TextStyles.s16w400.copyWith(
               color: AppColors.appTitle,
             ),
-            enabledBorder: border,
-            border: border,
-            errorBorder: border,
-            focusedBorder: border,
-            hintText: widget.hintText,
-            fillColor: Colors.transparent,
+            cursorColor: const Color(0xFF1167C3),
+            autofillHints: widget.isPass ? [AutofillHints.password] : [AutofillHints.email],
+            textInputAction: TextInputAction.done,
+            decoration: InputDecoration(
+              constraints: BoxConstraints(
+                  maxWidth: widget.maxWidth ?? SizerUtil.width
+              ),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 0,
+                vertical: 8,
+              ),
+              hintStyle: TextStyles.s16w400.copyWith(
+                color: AppColors.appTitle,
+              ),
+              enabledBorder: border,
+              border: border,
+              errorBorder: border,
+              focusedBorder: border,
+              hintText: widget.hintText,
+              fillColor: Colors.transparent,
+            ),
           ),
         ),
         Container(

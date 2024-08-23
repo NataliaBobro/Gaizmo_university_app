@@ -215,7 +215,17 @@ class OpenedProduct extends StatefulWidget {
 }
 
 class _OpenedProductState extends State<OpenedProduct> {
-  String selectPaymentType = 'money';
+  String selectPaymentType = '';
+
+  @override
+  void initState() {
+    if((widget.item?.priceMoney ?? 0) > 0){
+      selectPaymentType = 'money';
+    }else{
+      selectPaymentType = 'etm';
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -327,14 +337,17 @@ class _OpenedProductState extends State<OpenedProduct> {
                             children: [
                               Row(
                                 children: [
-                                  Radio(
-                                      value: selectPaymentType == 'etm',
-                                      groupValue: true,
-                                      onChanged: (value) {
-                                        setState(() {
-                                          selectPaymentType = 'etm';
-                                        });
-                                      }
+                                  IgnorePointer(
+                                    ignoring: widget.item?.priceEtm == 0,
+                                    child: Radio(
+                                        value: selectPaymentType == 'etm',
+                                        groupValue: true,
+                                        onChanged: (value) {
+                                          setState(() {
+                                            selectPaymentType = 'etm';
+                                          });
+                                        }
+                                    ),
                                   ),
                                   Text(
                                       getConstant('EU')
@@ -343,14 +356,17 @@ class _OpenedProductState extends State<OpenedProduct> {
                               ),
                               Row(
                                 children: [
-                                  Radio(
-                                      value: selectPaymentType == 'money',
-                                      groupValue: true,
-                                      onChanged: (value) {
-                                        setState(() {
-                                          selectPaymentType = 'money';
-                                        });
-                                      }
+                                  IgnorePointer(
+                                    ignoring: widget.item?.priceMoney == 0,
+                                    child: Radio(
+                                        value: selectPaymentType == 'money',
+                                        groupValue: true,
+                                        onChanged: (value) {
+                                          setState(() {
+                                            selectPaymentType = 'money';
+                                          });
+                                        }
+                                    ),
                                   ),
                                   Text(
                                       getConstant('Money')

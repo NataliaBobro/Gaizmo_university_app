@@ -413,7 +413,7 @@ class AuthState with ChangeNotifier {
         if(_codeRegister.text.isEmpty){
           openConfirmCode();
         }else{
-          showMessage('Code invalid', color: AppColors.appButton);
+          showMessage(getConstant('Code invalid'), color: AppColors.appButton);
         }
       }
     } on DioError catch (e) {
@@ -460,7 +460,7 @@ class AuthState with ChangeNotifier {
         if(_codeRegister.text.isEmpty){
           openConfirmCode();
         }else{
-          showMessage('Code invalid', color: AppColors.appButton);
+          showMessage(getConstant('Code invalid'), color: AppColors.appButton);
         }
       }
     } on DioError catch (e) {
@@ -508,7 +508,7 @@ class AuthState with ChangeNotifier {
         if(_codeRegister.text.isEmpty){
           openConfirmCode();
         }else{
-          showMessage('Code invalid', color: AppColors.appButton);
+          showMessage(getConstant('Code invalid'), color: AppColors.appButton);
         }
       }
     } on DioError catch (e) {

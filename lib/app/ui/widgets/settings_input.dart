@@ -50,8 +50,8 @@ class _SettingsInputState extends State<SettingsInput> {
           ),
           if(widget.value != null) ...[
             Container(
-              constraints: const BoxConstraints(
-                maxWidth: 110
+              constraints: BoxConstraints(
+                maxWidth: SizerUtil.width - 250
               ),
               child: widget.value,
             ),

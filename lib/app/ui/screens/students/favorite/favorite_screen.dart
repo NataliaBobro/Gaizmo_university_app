@@ -60,14 +60,20 @@ class _FavoriteScreenState extends State<FavoriteScreen> with TickerProviderStat
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                CenterHeader(title: getConstant('Favorite_lessons')),
+                CenterHeader(
+                  title: getConstant('Favorite_lessons'),
+                  hasBorderRadius: false,
+                ),
                 Container(
                   height: 55,
                   alignment: Alignment.center,
                   width: double.infinity,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(20)
+                      borderRadius: BorderRadius.only(
+                        bottomRight: Radius.circular(20),
+                        bottomLeft: Radius.circular(20)
+                      )
                   ),
                   child: TabBar(
                     indicatorSize: TabBarIndicatorSize.label,

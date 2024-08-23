@@ -132,9 +132,9 @@ class _PersonalInfoStudentState extends State<PersonalInfoStudent> {
                               value: Text(
                                 about.text,
                                 maxLines: 1,
-                                style: TextStyles.s16w400.copyWith(
-                                    color: AppColors.fgDefault,
-                                    overflow: TextOverflow.ellipsis
+                                style: TextStyles.s14w400.copyWith(
+                                  color: const Color(0xFF242424),
+                                  overflow: TextOverflow.ellipsis
                                 ),
                               ),
                               title: getConstant('About_me'),

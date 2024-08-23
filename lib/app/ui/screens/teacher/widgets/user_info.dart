@@ -23,10 +23,7 @@ class _UserInfoState extends State<UserInfo> {
     }
 
     if(userData?.city != null){
-      userDesk = '$userDesk${userData?.city},';
-    }
-    if(userData?.country != null){
-      userDesk = '$userDesk ${userData?.country}';
+      userDesk = '$userDesk${userData?.city}';
     }
 
     return Container(

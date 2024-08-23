@@ -11,10 +11,12 @@ class CenterHeader extends StatelessWidget {
     Key? key,
     required this.title,
     this.action,
-    this.onBack
+    this.onBack,
+    this.hasBorderRadius = true
   }) : super(key: key);
 
   final String title;
+  final bool hasBorderRadius;
   final Widget? action;
   final Function? onBack;
 
@@ -24,12 +26,12 @@ class CenterHeader extends StatelessWidget {
       padding: const EdgeInsets.only(
           bottom: 8
       ),
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.only(
+          borderRadius: hasBorderRadius == true ? const BorderRadius.only(
               bottomLeft: Radius.circular(20),
               bottomRight: Radius.circular(20)
-          )
+          ) : null
       ),
       child: Stack(
         children: [

@@ -27,9 +27,6 @@ class _PayTabState extends State<PayTab> {
           height: 24,
         ),
         Accordion(
-            onDelete: (index) {
-              state.deleteFavorite(context, services[index]);
-            },
             isFullActionButton: true,
             paddingListTop: 0.0,
             disableScrolling: true,

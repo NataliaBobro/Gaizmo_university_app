@@ -101,7 +101,7 @@ class _StudentShopScreenState extends State<StudentShopScreen> {
                           hasEdit: false,
                           hasPay: true,
                           onPayProduct: (type) {
-                            state.payProduct(state.listProducts?.data[index].id, type).whenComplete(() {
+                            state.payProduct(state.listProducts?.data[index], type).whenComplete(() {
                               widget.onChangeTab();
                             });
                           },
