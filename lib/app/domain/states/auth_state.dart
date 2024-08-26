@@ -638,7 +638,7 @@ class AuthState with ChangeNotifier {
           _confirmPassword.text,
       );
       if(result == true){
-        showMessage('Success', color: Colors.green);
+        showMessage(getConstant('Success'), color: Colors.green);
         pageOpen(
           const AuthSignIn()
         );

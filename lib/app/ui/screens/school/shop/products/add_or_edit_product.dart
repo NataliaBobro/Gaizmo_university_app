@@ -46,14 +46,16 @@ class _AddOrEditProductState extends State<AddOrEditProduct> {
                             ),
                             AppField(
                                 label: getConstant('Product_name'),
-                                controller: state.productName
+                                controller: state.productName,
+                                error: state.validateError?.errors.name?.first,
                             ),
                             const SizedBox(
                               height: 24,
                             ),
                             AppField(
                                 label: getConstant('Product_description'),
-                                controller: state.productDescription
+                                controller: state.productDescription,
+                              error: state.validateError?.errors.desc?.first,
                             ),
                             const SizedBox(
                               height: 24,

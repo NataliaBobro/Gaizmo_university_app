@@ -198,6 +198,7 @@ Errors _$ErrorsFromJson(Map<String, dynamic> json) => Errors(
       siteAddress: (json['site_address'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
+      desc: (json['desc'] as List<dynamic>?)?.map((e) => e as String).toList(),
     )..privacyErrors =
         (json['privacy'] as List<dynamic>?)?.map((e) => e as String).toList();
 
@@ -236,6 +237,7 @@ Map<String, dynamic> _$ErrorsToJson(Errors instance) => <String, dynamic>{
       'confirm_password': instance.confirmPassword,
       'new_password': instance.newPassword,
       'about': instance.about,
+      'desc': instance.desc,
     };
 
 CountryList _$CountryListFromJson(Map<String, dynamic> json) => CountryList(

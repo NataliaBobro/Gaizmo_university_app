@@ -237,6 +237,9 @@ class Errors {
   @JsonKey(name: 'about')
   List<String>? about;
 
+  @JsonKey(name: 'desc')
+  List<String>? desc;
+
   Errors({
     this.userTypeErrors,
     this.firstNameErrors,
@@ -270,7 +273,8 @@ class Errors {
     this.newPassword,
     this.fullNameErrors,
     this.about,
-    this.siteAddress
+    this.siteAddress,
+    this.desc
   });
 
   factory Errors.fromJson(Map<String, dynamic> json) => _$ErrorsFromJson(json);

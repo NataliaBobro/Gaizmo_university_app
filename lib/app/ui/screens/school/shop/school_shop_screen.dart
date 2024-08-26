@@ -63,9 +63,12 @@ class _SchoolShopScreenState extends State<SchoolShopScreen> with TickerProvider
                       bottom: 24
                   ),
                   width: double.infinity,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(20)
+                      borderRadius: BorderRadius.only(
+                        bottomRight: Radius.circular(20),
+                        bottomLeft: Radius.circular(20)
+                      )
                   ),
                   child: TabBar(
                     indicatorSize: TabBarIndicatorSize.label,
