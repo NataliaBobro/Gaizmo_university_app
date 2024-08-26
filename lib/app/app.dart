@@ -238,7 +238,7 @@ class AppState extends ChangeNotifier {
     } on DioError catch (e) {
       showMessage(e.message.isEmpty ? e.toString() : e.message);
     } catch (e) {
-      showErrorSnackBar(title: 'Ошибка повторите попытку позже!');
+      showErrorSnackBar(title: 'Помилка, спробуйте пізніше!');
     }
   }
 
@@ -270,7 +270,7 @@ class AppState extends ChangeNotifier {
     } on DioError catch (e) {
       showMessage(e.message.isEmpty ? e.toString() : e.message);
     } catch (e) {
-      showErrorSnackBar(title: 'Ошибка повторите попытку позже!');
+      showErrorSnackBar(title: 'Помилка, спробуйте пізніше!');
     }
   }
 

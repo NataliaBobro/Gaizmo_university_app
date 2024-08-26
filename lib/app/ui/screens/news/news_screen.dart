@@ -197,6 +197,7 @@ class _NewsItemState extends State<NewsItem> {
           );
         },
         openBuilder: (BuildContext context, VoidCallback _) {
+
           return Scaffold(
             backgroundColor: Colors.white,
             body: SafeArea(
@@ -220,8 +221,8 @@ class _NewsItemState extends State<NewsItem> {
                                   children: [
                                     ClipRRect(
                                       borderRadius: BorderRadius.circular(8),
-                                      child: widget.item?.image != null ? CachedNetworkImage(
-                                          imageUrl: '${widget.item?.image}',
+                                      child: widget.item?.image != null || image != null ? CachedNetworkImage(
+                                          imageUrl:  '${image != null ? 'https://e-u.edu.ua/$image' : widget.item?.image}',
                                           width: double.infinity,
                                           errorWidget: (context, error, stackTrace) =>
                                           const SizedBox.shrink(),

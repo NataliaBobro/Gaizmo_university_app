@@ -1,8 +1,12 @@
 import 'package:european_university_app/app/domain/models/timesheet.dart';
 import 'package:european_university_app/app/domain/states/timesheet.dart';
+import 'package:european_university_app/app/ui/utils/get_constant.dart';
+import 'package:european_university_app/app/ui/widgets/empty_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../theme/text_styles.dart';
 
 
 class TimesheetTab extends StatefulWidget {
@@ -32,12 +36,37 @@ class _TimesheetTabState extends State<TimesheetTab> {
           ),
           const CupertinoActivityIndicator()
         ] else ...[
-          ...List.generate(
-              state.timesheetModel?.timesheet.length ?? 0,
-              (index) => TimesheetLessonItem(
-                item: state.timesheetModel?.timesheet[index]
-              )
-          )
+          if((state.timesheetModel?.timesheet.length ?? 0) > 0) ...[
+            ...List.generate(
+                state.timesheetModel?.timesheet.length ?? 0,
+                    (index) => TimesheetLessonItem(
+                    item: state.timesheetModel?.timesheet[index]
+                )
+            )
+          ]else ...[
+            const SizedBox(
+              height: 100,
+            ),
+            Column(
+              children: [
+                Text(
+                  getConstant('Timesheet'),
+                  style: TextStyles.s14w600.copyWith(
+                      color: const Color(0xFF242424)
+                  ),
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                Text(
+                  getConstant('Functionality in development'),
+                  style: TextStyles.s12w400.copyWith(
+                      color: const Color(0xFF242424)
+                  ),
+                ),
+              ],
+            )
+          ]
         ],
       ],
     );
