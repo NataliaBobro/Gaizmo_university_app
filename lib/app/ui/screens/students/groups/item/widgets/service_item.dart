@@ -15,6 +15,7 @@ import '../../../../../../domain/models/services.dart';
 import '../../../../../../domain/services/pay_service.dart';
 import '../../../../../../domain/states/student/favorite_state.dart';
 import '../../../../../theme/app_colors.dart';
+import '../../../../../utils/show_message.dart';
 import '../../../../../widgets/button_teacher_students.dart';
 import '../../../../../widgets/center_header.dart';
 import '../../../../../widgets/custom_expansion_panel.dart';
@@ -77,6 +78,10 @@ class _ServiceItemState extends State<ServiceItem> {
     );
     if(result != null && result['success'] == true){
       openPayed();
+    }else{
+      loading = false;
+      setState(() {});
+      showMessage('${result?['message']}', color: AppColors.appButton);
     }
   }
 

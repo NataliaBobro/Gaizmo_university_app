@@ -104,30 +104,62 @@ class _MyLessonsTabState extends State<MyLessonsTab> {
   }
 
   Future<void> showVisitsDialog(Lesson lesson, DateTime date) async {
-    await showPlatformDialog(
-      context: context,
-      builder: (context) => BasicDialogAlert(
-        content: Text(
-          getConstant('Are_you_sure_you_attended_this_lesson'),
-          style: TextStyles.s17w600,
-        ),
-        actions: <Widget>[
-          BasicDialogAction(
-            title: Text(getConstant('Yes')),
-            onPressed: () {
-              Navigator.pop(context);
-              visits(lesson, date);
-            },
-          ),
-          BasicDialogAction(
-            title: Text(getConstant('No')),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-        ],
-      ),
+    DateTime dateNow = DateTime.now();
+
+    TimeOfDay inputTime = TimeOfDay(
+      hour: int.parse("${lesson.startLesson?.split(":")[0]}"),
+      minute: int.parse("${lesson.startLesson?.split(":")[1]}"),
     );
+    DateTime parsedTime = DateTime(dateNow.year, dateNow.month, dateNow.day, inputTime.hour, inputTime.minute);
+    DateTime oneHourAgo = dateNow.subtract(const Duration(hours: 1));
+    DateTime threeHoursAhead = dateNow.add(const Duration(hours: 3));
+
+    bool isValid = parsedTime.isAfter(oneHourAgo) && parsedTime.isBefore(threeHoursAhead);
+
+    if(isValid){
+      await showPlatformDialog(
+        context: context,
+        builder: (context) => BasicDialogAlert(
+          content: Text(
+            getConstant('Are_you_sure_you_attended_this_lesson'),
+            style: TextStyles.s17w600,
+          ),
+          actions: <Widget>[
+            BasicDialogAction(
+              title: Text(getConstant('Yes')),
+              onPressed: () {
+                Navigator.pop(context);
+                visits(lesson, date);
+              },
+            ),
+            BasicDialogAction(
+              title: Text(getConstant('No')),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      );
+    }else{
+      await showPlatformDialog(
+        context: context,
+        builder: (context) => BasicDialogAlert(
+          content: Text(
+            getConstant('You cannot mark this lesson!'),
+            style: TextStyles.s17w600,
+          ),
+          actions: <Widget>[
+            BasicDialogAction(
+              title: Text(getConstant('Close')),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      );
+    }
   }
 
   Future<void> visits(Lesson lesson, DateTime date) async {
