@@ -1,3 +1,4 @@
+import 'package:european_university_app/app/domain/models/user.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'shop.g.dart';
@@ -25,6 +26,7 @@ class Products {
   String? image;
   String? status;
   String? createdAt;
+  UserData? user;
   String? deliveryStatus;
   int? orderId;
 
@@ -37,6 +39,7 @@ class Products {
     this.image,
     this.status,
     this.createdAt,
+    this.user,
     this.deliveryStatus,
     this.orderId,
   });

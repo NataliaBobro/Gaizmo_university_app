@@ -27,7 +27,6 @@ class _StudentProfileScrollPageState extends State<StudentProfileScrollPage> {
     pageController?.addListener(() {
       changeScroll();
     });
-    print((SizerUtil.width - 40) - (offset / 1.2));
     super.initState();
   }
 
@@ -89,7 +88,7 @@ class _StudentProfileScrollPageState extends State<StudentProfileScrollPage> {
             child: PassportView(),
           ),
         ),
-        if(offset >= -(SizerUtil.width / 2)) ...[
+        if(offsetScroll <= 70 && offset > -200) ...[
           Positioned(
             top: ((SizerUtil.height / 100) * 46) < 330 ? ((SizerUtil.height / 100) * 46) : 330,
             right: 0,

@@ -26,6 +26,9 @@ Products _$ProductsFromJson(Map<String, dynamic> json) => Products(
       image: json['image'] as String?,
       status: json['status'] as String?,
       createdAt: json['created_at'] as String?,
+      user: json['user'] == null
+          ? null
+          : UserData.fromJson(json['user'] as Map<String, dynamic>),
       deliveryStatus: json['delivery_status'] as String?,
       orderId: (json['order_id'] as num?)?.toInt(),
     );
@@ -39,6 +42,7 @@ Map<String, dynamic> _$ProductsToJson(Products instance) => <String, dynamic>{
       'image': instance.image,
       'status': instance.status,
       'created_at': instance.createdAt,
+      'user': instance.user,
       'delivery_status': instance.deliveryStatus,
       'order_id': instance.orderId,
     };

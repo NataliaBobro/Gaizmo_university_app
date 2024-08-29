@@ -308,6 +308,9 @@ class _OpenedProductState extends State<OpenedProduct> {
 
                         if(widget.hasDeliveryStatus) ...[
                           Text(
+                              '${widget.item?.user?.firstName ?? ""} ${widget.item?.user?.lastName ?? ""}'
+                          ),
+                          Text(
                               '${widget.item?.createdAt}'
                           ),
                           const SizedBox(
