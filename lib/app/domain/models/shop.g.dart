@@ -46,3 +46,29 @@ Map<String, dynamic> _$ProductsToJson(Products instance) => <String, dynamic>{
       'delivery_status': instance.deliveryStatus,
       'order_id': instance.orderId,
     };
+
+OrdersProduct _$OrdersProductFromJson(Map<String, dynamic> json) =>
+    OrdersProduct(
+      id: (json['id'] as num?)?.toInt(),
+      clientName: json['client_name'] as String?,
+      clientLastName: json['client_last_name'] as String?,
+      clientPhone: json['client_phone'] as String?,
+      clientEmail: json['client_email'] as String?,
+      deliveryCity: json['delivery_city'] as String?,
+      deliveryLocation: json['delivery_location'] as String?,
+      paymentType: json['payment_type'] as String?,
+      comment: json['comment'] as String?,
+    );
+
+Map<String, dynamic> _$OrdersProductToJson(OrdersProduct instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'client_name': instance.clientName,
+      'client_last_name': instance.clientLastName,
+      'client_phone': instance.clientPhone,
+      'client_email': instance.clientEmail,
+      'delivery_city': instance.deliveryCity,
+      'delivery_location': instance.deliveryLocation,
+      'payment_type': instance.paymentType,
+      'comment': instance.comment,
+    };

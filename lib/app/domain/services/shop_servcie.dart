@@ -162,12 +162,23 @@ class ShopService {
 
   static Future<CredWithProductOrder?> fetchLiqPayCred(
       context,
-      productId
+      productId,
+      OrdersProduct ordersProduct
       ) async {
     final token = getToken(context);
     if(token == null) return null;
-    final response = await ApiClient().dio.get(
+    final response = await ApiClient().dio.post(
       '/shop/products/$productId/fetch-school-cred',
+      data: {
+        "last_name": ordersProduct.clientLastName,
+        "name": ordersProduct.clientName,
+        "email": ordersProduct.clientEmail,
+        "phone": ordersProduct.clientPhone,
+        "delivery_city": ordersProduct.deliveryCity,
+        "delivery_location": ordersProduct.deliveryLocation,
+        "comment": ordersProduct.comment,
+        "payment_type": ordersProduct.paymentType,
+      },
       options: Options(
         headers: {'Authorization': 'Bearer $token'},
       ),
@@ -178,12 +189,23 @@ class ShopService {
 
   static Future<bool?> payProductEtm(
       context,
-      int? productId
+      int? productId,
+      OrdersProduct ordersProduct
       ) async {
     final token = getToken(context);
     if(token == null) return null;
     final response = await ApiClient().dio.post(
       '/shop/products/$productId/pay-etm',
+      data: {
+        "last_name": ordersProduct.clientLastName,
+        "name": ordersProduct.clientName,
+        "email": ordersProduct.clientEmail,
+        "phone": ordersProduct.clientPhone,
+        "delivery_city": ordersProduct.deliveryCity,
+        "delivery_location": ordersProduct.deliveryLocation,
+        "comment": ordersProduct.comment,
+        "payment_type": ordersProduct.paymentType,
+      },
       options: Options(
         headers: {'Authorization': 'Bearer $token'},
       ),

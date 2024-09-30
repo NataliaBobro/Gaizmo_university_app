@@ -332,54 +332,11 @@ class _OpenedProductState extends State<OpenedProduct> {
                         ],
 
                         if(widget.hasPay)...[
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Row(
-                                children: [
-                                  IgnorePointer(
-                                    ignoring: widget.item?.priceEtm == 0,
-                                    child: Radio(
-                                        value: selectPaymentType == 'etm',
-                                        groupValue: true,
-                                        onChanged: (value) {
-                                          setState(() {
-                                            selectPaymentType = 'etm';
-                                          });
-                                        }
-                                    ),
-                                  ),
-                                  Text(
-                                      getConstant('EU')
-                                  )
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  IgnorePointer(
-                                    ignoring: widget.item?.priceMoney == 0,
-                                    child: Radio(
-                                        value: selectPaymentType == 'money',
-                                        groupValue: true,
-                                        onChanged: (value) {
-                                          setState(() {
-                                            selectPaymentType = 'money';
-                                          });
-                                        }
-                                    ),
-                                  ),
-                                  Text(
-                                      getConstant('Money')
-                                  )
-                                ],
-                              ),
-                            ],
-                          ),
                           AppButton(
                               title: getConstant('Pay'),
                               onPressed: () {
                                 if(widget.onPayProduct != null){
-                                  widget.onPayProduct!(selectPaymentType);
+                                  widget.onPayProduct!();
                                 }
                               }
                           ),

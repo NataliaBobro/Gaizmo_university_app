@@ -49,3 +49,32 @@ class Products {
   factory Products.fromJson(Map<String, dynamic> json) => _$ProductsFromJson(json);
 }
 
+@JsonSerializable(includeIfNull: true, fieldRename: FieldRename.snake)
+class OrdersProduct {
+  int? id;
+  String? clientName;
+  String? clientLastName;
+  String? clientPhone;
+  String? clientEmail;
+  String? deliveryCity;
+  String? deliveryLocation;
+  String? paymentType;
+  String? comment;
+
+  OrdersProduct({
+    this.id,
+    this.clientName,
+    this.clientLastName,
+    this.clientPhone,
+    this.clientEmail,
+    this.deliveryCity,
+    this.deliveryLocation,
+    this.paymentType,
+    this.comment
+  });
+
+  Map<String, dynamic> toJson() => _$OrdersProductToJson(this);
+
+  factory OrdersProduct.fromJson(Map<String, dynamic> json) => _$OrdersProductFromJson(json);
+}
+

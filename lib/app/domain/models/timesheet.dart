@@ -24,13 +24,15 @@ class TimesheetItem {
   int? id;
   int? userId;
   int? lessonId;
-  int? rating;
+  String? serviceName;
+  double? rating;
   Lesson? lesson;
 
   TimesheetItem({
     this.id,
     this.userId,
     this.lessonId,
+    this.serviceName,
     this.rating,
     this.lesson
   });

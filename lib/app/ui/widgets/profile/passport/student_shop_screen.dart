@@ -1,9 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../../../domain/states/student/student_shop_state.dart';
 import '../../../utils/get_constant.dart';
 import '../../custom_scroll_physics.dart';
+import '../../products/confirm_order.dart';
 import '../../products/products_item_block.dart';
 import '../../sceleton_loaders.dart';
 
@@ -100,10 +103,8 @@ class _StudentShopScreenState extends State<StudentShopScreen> {
                           item: state.listProducts?.data[index],
                           hasEdit: false,
                           hasPay: true,
-                          onPayProduct: (type) {
-                            state.payProduct(state.listProducts?.data[index], type).whenComplete(() {
-                              widget.onChangeTab();
-                            });
+                          onPayProduct: () async {
+                            state.showConfirmOrder(state.listProducts?.data[index]);
                           },
                         )
                     ),

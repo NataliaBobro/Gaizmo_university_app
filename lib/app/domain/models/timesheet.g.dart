@@ -25,7 +25,8 @@ TimesheetItem _$TimesheetItemFromJson(Map<String, dynamic> json) =>
       id: (json['id'] as num?)?.toInt(),
       userId: (json['user_id'] as num?)?.toInt(),
       lessonId: (json['lesson_id'] as num?)?.toInt(),
-      rating: (json['rating'] as num?)?.toInt(),
+      serviceName: json['service_name'] as String?,
+      rating: (json['rating'] as num?)?.toDouble(),
       lesson: json['lesson'] == null
           ? null
           : Lesson.fromJson(json['lesson'] as Map<String, dynamic>),
@@ -36,6 +37,7 @@ Map<String, dynamic> _$TimesheetItemToJson(TimesheetItem instance) =>
       'id': instance.id,
       'user_id': instance.userId,
       'lesson_id': instance.lessonId,
+      'service_name': instance.serviceName,
       'rating': instance.rating,
       'lesson': instance.lesson,
     };

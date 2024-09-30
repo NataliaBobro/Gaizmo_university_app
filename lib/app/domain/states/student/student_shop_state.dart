@@ -8,8 +8,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:liqpay/liqpay.dart';
 import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import '../../../ui/utils/show_message.dart';
+import '../../../ui/widgets/products/confirm_order.dart';
 import '../../models/meta.dart';
 import '../../models/shop.dart';
 
@@ -83,12 +85,12 @@ class StudentShopState with ChangeNotifier {
     }
   }
 
-  Future<void> payProduct(Products? product, String? paymentType) async {
+  Future<void> payProduct(Products? product, OrdersProduct ordersProduct) async {
     _isLoading = true;
     notifyListeners();
     try{
-      if(paymentType == 'money'){
-        final result = await ShopService.fetchLiqPayCred(context, product?.id);
+      if(ordersProduct.paymentType == 'money'){
+        final result = await ShopService.fetchLiqPayCred(context, product?.id, ordersProduct);
         if(result != null){
           if(result.cred == null){
             showMessage(
@@ -102,7 +104,8 @@ class StudentShopState with ChangeNotifier {
       }else{
         final result = await ShopService.payProductEtm(
             context,
-            product?.id
+            product?.id,
+            ordersProduct
         );
         if(result != null && result == true){
           openPayed();
@@ -161,6 +164,31 @@ class StudentShopState with ChangeNotifier {
         openPayed();
       });
     }
+  }
+
+  Future<void> showConfirmOrder(Products? item) async {
+    if(item == null) return;
+
+    await showModalBottomSheet(
+      context: context,
+      enableDrag: true,
+      isScrollControlled: true,
+      isDismissible: true,
+      useRootNavigator: true,
+      barrierColor: Colors.transparent,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
+      ),
+      builder: (_) {
+        return ChangeNotifierProvider.value(
+            value: this,
+            child: SizedBox(
+              height: SizerUtil.height,
+              child: ConfirmOrder(product: item),
+            )
+        );
+      },
+    );
   }
 
   void openPayed(){

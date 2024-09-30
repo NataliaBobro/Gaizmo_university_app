@@ -1,7 +1,6 @@
 import 'package:european_university_app/app/domain/models/timesheet.dart';
 import 'package:european_university_app/app/domain/states/timesheet.dart';
 import 'package:european_university_app/app/ui/utils/get_constant.dart';
-import 'package:european_university_app/app/ui/widgets/empty_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -42,6 +41,12 @@ class _TimesheetTabState extends State<TimesheetTab> {
                     (index) => TimesheetLessonItem(
                     item: state.timesheetModel?.timesheet[index]
                 )
+            ),
+            TimesheetLessonItem(
+                item: TimesheetItem(
+                  rating: getAverageScore(state.timesheetModel?.timesheet),
+                  serviceName: getConstant('Average score')
+                )
             )
           ]else ...[
             const SizedBox(
@@ -71,6 +76,17 @@ class _TimesheetTabState extends State<TimesheetTab> {
       ],
     );
   }
+
+  double getAverageScore(List<TimesheetItem>? items) {
+    if(items == null) return 0;
+    double total = 0;
+    for(int a = 0; a < items.length; a++){
+      if(items[a].rating != null){
+        total = total + items[a].rating!;
+      }
+    }
+    return total / items.length;
+  }
 }
 
 class TimesheetLessonItem extends StatelessWidget {
@@ -94,7 +110,7 @@ class TimesheetLessonItem extends StatelessWidget {
         children: [
           Expanded(
             child: Text(
-                '${item?.lesson?.name}'
+                '${item?.serviceName}'
             ),
           ),
           Text(
