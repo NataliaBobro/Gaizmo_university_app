@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:european_university_app/app/ui/utils/get_token.dart';
 
 import '../../data/api_client.dart';
+import '../models/meta.dart';
 import '../models/user.dart';
 
 class UserService {
@@ -18,6 +19,19 @@ class UserService {
     );
     final data = response.data as Map<String, dynamic>;
     return UserData.fromJson(data['data']);
+  }
+
+  static Future<BalanceListData?> fetchUserBalanceList(context) async {
+    final token = getToken(context);
+    if(token == null) return null;
+    final response = await ApiClient().dio.get(
+      '/student/balance/list',
+      options: Options(
+        headers: {'Authorization': 'Bearer $token'},
+      ),
+    );
+    final data = response.data as Map<String, dynamic>;
+    return BalanceListData.fromJson(data);
   }
 
   static Future<bool?> changeLanguage(context, int id) async {

@@ -441,3 +441,31 @@ class LiqPayCred {
   factory LiqPayCred.fromJson(Map<String, dynamic> json) => _$LiqPayCredFromJson(json);
 }
 
+@JsonSerializable(includeIfNull: true, fieldRename: FieldRename.snake)
+class BalanceListData {
+  List<BalanceItemData> data;
+  bool success;
+
+  BalanceListData({
+    required this.data,
+    required this.success
+  });
+
+  Map<String, dynamic> toJson() => _$BalanceListDataToJson(this);
+  factory BalanceListData.fromJson(Map<String, dynamic> json) => _$BalanceListDataFromJson(json);
+}
+
+@JsonSerializable(includeIfNull: true, fieldRename: FieldRename.snake)
+class BalanceItemData {
+  String? value;
+  String? name;
+
+  BalanceItemData({
+    this.value,
+    this.name
+  });
+
+  Map<String, dynamic> toJson() => _$BalanceItemDataToJson(this);
+  factory BalanceItemData.fromJson(Map<String, dynamic> json) => _$BalanceItemDataFromJson(json);
+}
+

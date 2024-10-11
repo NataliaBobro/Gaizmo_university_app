@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:dio/dio.dart';
+import 'package:european_university_app/app/domain/services/pay_service.dart';
 import 'package:european_university_app/app/domain/services/user_service.dart';
 import 'package:european_university_app/app/domain/states/chats/chats_state.dart';
 import 'package:european_university_app/app/ui/utils/show_message.dart';
@@ -246,6 +247,20 @@ class AppState extends ChangeNotifier {
     } catch (e) {
       showErrorSnackBar(title: 'Помилка, спробуйте пізніше!');
     }
+  }
+
+  Future<BalanceListData?> fetchUserBalanceList() async {
+    try {
+      final result =  await UserService.fetchUserBalanceList(context);
+      if(result != null){
+        return result;
+      }
+    } on DioError catch (e) {
+      showMessage(e.message.isEmpty ? e.toString() : e.message);
+    } catch (e) {
+      showErrorSnackBar(title: 'Помилка, спробуйте пізніше!');
+    }
+    return null;
   }
 
   void pressHome() {

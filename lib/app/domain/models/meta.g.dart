@@ -377,3 +377,29 @@ Map<String, dynamic> _$LiqPayCredToJson(LiqPayCred instance) =>
       'public': instance.public,
       'secret': instance.secret,
     };
+
+BalanceListData _$BalanceListDataFromJson(Map<String, dynamic> json) =>
+    BalanceListData(
+      data: (json['data'] as List<dynamic>)
+          .map((e) => BalanceItemData.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      success: json['success'] as bool,
+    );
+
+Map<String, dynamic> _$BalanceListDataToJson(BalanceListData instance) =>
+    <String, dynamic>{
+      'data': instance.data,
+      'success': instance.success,
+    };
+
+BalanceItemData _$BalanceItemDataFromJson(Map<String, dynamic> json) =>
+    BalanceItemData(
+      value: json['value'] as String?,
+      name: json['name'] as String?,
+    );
+
+Map<String, dynamic> _$BalanceItemDataToJson(BalanceItemData instance) =>
+    <String, dynamic>{
+      'value': instance.value,
+      'name': instance.name,
+    };

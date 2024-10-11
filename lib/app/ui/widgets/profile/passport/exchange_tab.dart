@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:european_university_app/app/app.dart';
 import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:european_university_app/app/ui/widgets/auth_button.dart';
@@ -10,32 +11,114 @@ import 'package:sizer/sizer.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import '../../../../../resources/resources.dart';
 import '../../../../constatns.dart';
+import '../../../../domain/models/meta.dart';
+import '../../../../domain/services/user_service.dart';
 import '../../../theme/app_colors.dart';
 import '../../../theme/text_styles.dart';
+import '../../../utils/show_message.dart';
 import '../../cupertino_modal_appbar.dart';
 import '../../custom_scroll_physics.dart';
 import '../../dropdown/dropdown.dart';
+import '../../snackbars.dart';
 
 class ExchangeScreen extends StatelessWidget {
   const ExchangeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Payments(),
-        Expanded(
-          child: ListView(
-            padding: const EdgeInsets.symmetric(
-                horizontal: 24
-            ),
-            physics: const BottomBouncingScrollPhysics(),
-            children: const [
-
-            ],
-          ),
-        )
+    return ListView(
+      padding: const EdgeInsets.symmetric(
+          horizontal: 24
+      ),
+      physics: const BottomBouncingScrollPhysics(),
+      children: const [
+        Payments(),
+        SizedBox(
+          height: 24,
+        ),
+        BalanceList()
       ],
+    );
+  }
+}
+
+class BalanceList extends StatefulWidget {
+  const BalanceList({super.key});
+
+  @override
+  State<BalanceList> createState() => _BalanceListState();
+}
+
+class _BalanceListState extends State<BalanceList> {
+  BalanceListData? _balanceListData;
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    fetchUserBalanceList();
+    super.initState();
+  }
+
+  Future<void> fetchUserBalanceList() async {
+    try {
+      final result =  await UserService.fetchUserBalanceList(context);
+      if(result != null){
+        _balanceListData = result;
+      }
+    } on DioError catch (e) {
+      showMessage(e.message.isEmpty ? e.toString() : e.message);
+    } catch (e) {
+      showErrorSnackBar(title: getConstant('app_error'));
+    }finally{
+      _isLoading = false;
+      setState(() {});
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _isLoading ?
+      const CupertinoActivityIndicator() :
+      Column(
+        children: List.generate(
+            _balanceListData?.data.length ?? 0,
+            (index) => BalanceViewItem(
+              item: _balanceListData?.data[index]
+            )
+        ),
+      );
+  }
+}
+
+class BalanceViewItem extends StatelessWidget {
+  const BalanceViewItem({
+    super.key,
+    required this.item
+  });
+
+  final BalanceItemData? item;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 8),
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16)
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(
+                '${item?.name}'
+            ),
+          ),
+          Text(
+              '${item?.value}'
+          )
+        ],
+      ),
     );
   }
 }
@@ -59,9 +142,7 @@ class _PaymentsState extends State<Payments> {
         children: [
           Container(
             margin: const EdgeInsets.only(
-              top: 28,
-              right: 24,
-              left: 24
+              top: 28
             ),
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
