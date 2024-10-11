@@ -3,26 +3,26 @@ import 'package:european_university_app/app/app.dart';
 import 'package:european_university_app/app/domain/models/services.dart';
 import 'package:european_university_app/app/domain/models/user.dart';
 import 'package:european_university_app/app/domain/services/schedule_service.dart';
+import 'package:european_university_app/app/ui/theme/app_colors.dart';
 import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:european_university_app/app/ui/widgets/auth_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import '../../../../../../resources/resources.dart';
 import '../../../../theme/text_styles.dart';
-import '../../../../utils/url_launch.dart';
 import '../../../../widgets/center_header.dart';
 
 class PreviewListStudent extends StatelessWidget {
   const PreviewListStudent({
     Key? key,
     required this.users,
-    required this.serviceId
+    required this.serviceId,
+    required this.lessonId
   }) : super(key: key);
 
   final List<PayUsers>? users;
   final int? serviceId;
+  final int? lessonId;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,8 @@ class PreviewListStudent extends StatelessWidget {
             context,
             CupertinoPageRoute(
                 builder: (context) => ListStudents(
-                    serviceId: serviceId
+                    lessonId: lessonId,
+                    serviceId: serviceId,
                 )
             )
         );
@@ -99,9 +100,11 @@ class PreviewListStudent extends StatelessWidget {
 class ListStudents extends StatefulWidget {
   const ListStudents({
     Key? key,
+    required this.lessonId,
     required this.serviceId
   }) : super(key: key);
 
+  final int? lessonId;
   final int? serviceId;
 
   @override
@@ -119,7 +122,11 @@ class _ListStudentsState extends State<ListStudents> {
 
   Future<void> fetchUsers() async {
     try{
-      final result = await ScheduleService.fetchPayedUser(context, widget.serviceId);
+      final result = await ScheduleService.fetchPayedUser(
+          context,
+          widget.serviceId,
+          widget.lessonId
+      );
       if(result != null){
         _listUserData = result;
       }
@@ -128,6 +135,43 @@ class _ListStudentsState extends State<ListStudents> {
     }finally{
       setState(() {});
     }
+  }
+
+  Future<void> onCheckStudents() async {
+    List<int?> checkUsers = [];
+    for(var a = 0; a < (_listUserData?.users.length ?? 0); a++){
+      if((_listUserData?.users[a].user?.isVisitsCount ?? 0) >= 1){
+        checkUsers.add(
+            _listUserData?.users[a].user?.id
+        );
+      }
+    }
+    DateTime now = DateTime.now();
+
+    try{
+      final result = await ScheduleService.onCheckStudents(
+          context,
+          widget.lessonId,
+          checkUsers,
+          now
+      );
+      if(result != null){
+        updateUser();
+        close();
+      }
+    }catch(e){
+      print(e);
+    }finally{
+      setState(() {});
+    }
+  }
+
+  void updateUser() {
+    context.read<AppState>().getUser();
+  }
+
+  void close(){
+    Navigator.pop(context);
   }
 
   @override
@@ -158,7 +202,8 @@ class _ListStudentsState extends State<ListStudents> {
                               ...List.generate(
                                   _listUserData?.users.length ?? 0,
                                       (index) => PayUserItem(
-                                      user: _listUserData?.users[index].user
+                                      user: _listUserData?.users[index].user,
+                                      isTeacher: appState.userData?.type == 2
                                   )
                               )
                             ],
@@ -169,7 +214,7 @@ class _ListStudentsState extends State<ListStudents> {
                           AppButton(
                               title: getConstant('check_all_student'),
                               onPressed: () {
-
+                                onCheckStudents();
                               }
                           )
                         ],
@@ -187,13 +232,37 @@ class _ListStudentsState extends State<ListStudents> {
   }
 }
 
-class PayUserItem extends StatelessWidget {
+class PayUserItem extends StatefulWidget {
   const PayUserItem({
     Key? key,
-    required this.user
+    required this.user,
+    required this.isTeacher
   }) : super(key: key);
 
   final UserData? user;
+  final bool isTeacher;
+
+  @override
+  State<PayUserItem> createState() => _PayUserItemState();
+}
+
+class _PayUserItemState extends State<PayUserItem> {
+  bool check = false;
+
+  @override
+  void initState() {
+    if((widget.user?.isVisitsCount ?? 0) >= 1){
+      check = true;
+    }
+    super.initState();
+  }
+
+  void checkUser(){
+    setState(() {
+      check = !check;
+      widget.user?.isVisitsCount = check ? 1 : 0;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -204,57 +273,79 @@ class PayUserItem extends StatelessWidget {
       ),
       margin: const EdgeInsets.symmetric(
         horizontal: 16
+      ).copyWith(
+        bottom: 8
       ),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16)
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(100),
-                child: user?.avatar != null ?
-                CachedNetworkImage(
-                  imageUrl: '${user?.avatar}',
-                  width: 40,
-                  height: 40,
-                  errorWidget: (context, error, stackTrace) =>
-                  Container(
+      child: CupertinoButton(
+        minSize: 0.0,
+        padding: EdgeInsets.zero,
+        onPressed: () {
+          checkUser();
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(100),
+                  child: widget.user?.avatar != null ?
+                  CachedNetworkImage(
+                    imageUrl: '${widget.user?.avatar}',
                     width: 40,
                     height: 40,
-                    color: Colors.grey
+                    errorWidget: (context, error, stackTrace) =>
+                        Container(
+                            width: 40,
+                            height: 40,
+                            color: Colors.grey
+                        ),
+                    fit: BoxFit.cover,
+                  ) : Container(
+                    width: 40,
+                    height: 40,
+                    color: Colors.grey,
                   ),
-                  fit: BoxFit.cover,
-                ) : Container(
-                  width: 40,
-                  height: 40,
-                  color: Colors.white,
                 ),
-              ),
-              const SizedBox(
-                width: 16,
-              ),
-              Text(
-                '${user?.firstName} ${user?.lastName}',
-                style: TextStyles.s14w400.copyWith(
-                    color: const Color(0xFF242424)
+                const SizedBox(
+                  width: 16,
+                ),
+                Text(
+                  '${widget.user?.firstName} ${widget.user?.lastName}',
+                  style: TextStyles.s14w400.copyWith(
+                      color: const Color(0xFF242424)
+                  ),
+                )
+              ],
+            ),
+            if(widget.isTeacher) ...[
+              Container(
+                width: 24,
+                height: 24,
+                decoration: BoxDecoration(
+                    color: check ? AppColors.appButton : null,
+                    border: Border.all(
+                        width: 2,
+                        color: AppColors.appButton
+                    ),
+                    borderRadius: BorderRadius.circular(4)
+                ),
+                child: const Center(
+                  child: Icon(
+                    Icons.check,
+                    color: Colors.white,
+                    size: 16,
+                    weight: 700,
+                  ),
                 ),
               )
-            ],
-          ),
-          Container(
-            constraints: const BoxConstraints(
-              maxWidth: 110
-            ),
-            width: 110,
-            child: Container(
-
-            ),
-          )
-        ],
+            ]
+          ],
+        ),
       ),
     );
   }

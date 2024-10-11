@@ -1,4 +1,5 @@
 import 'package:european_university_app/app/domain/states/payment_state.dart';
+import 'package:european_university_app/app/ui/screens/school/profile/settings/school_reload_screen.dart';
 import 'package:european_university_app/app/ui/theme/text_styles.dart';
 import 'package:european_university_app/app/ui/utils/get_constant.dart';
 import 'package:european_university_app/app/ui/widgets/custom_scroll_physics.dart';
@@ -101,6 +102,17 @@ class _SettingsTabState extends State<SettingsTab> {
         SettingsInput(
             title: getConstant('Notifications'),
             onPress: () {}
+        ),
+        SettingsInput(
+            title: getConstant('reload'),
+            onPress: () async {
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const SchoolReloadScreen(),
+                ),
+              );
+            }
         ),
         SettingsInput(
             title: getConstant('Sign_out'),

@@ -142,17 +142,47 @@ class ScheduleService {
 
   static Future<ListPayUsers?> fetchPayedUser(
       context,
-      serviceId
+      serviceId,
+      lessonId,
       ) async {
     final token = getToken(context);
+    DateTime now = DateTime.now();
+
     if(token == null) return null;
     final response = await ApiClient().dio.get(
       '/student/lesson/pay-users/$serviceId',
+      queryParameters: {
+        'date': now.toString(),
+        'lesson_id': lessonId
+      },
       options: Options(
         headers: {'Authorization': 'Bearer $token'},
       ),
     );
     final data = response.data as Map<String, dynamic>;
     return ListPayUsers.fromJson(data);
+  }
+
+  static Future<bool?> onCheckStudents(
+      context,
+      lessonId,
+      List<int?> checkUsers,
+      DateTime date
+      ) async {
+    final token = getToken(context);
+    if(token == null) return null;
+    final response = await ApiClient().dio.post(
+      '/teacher/lesson/check-students',
+      data: {
+        'lesson_id': lessonId,
+        'users': checkUsers,
+        'date': date.toString()
+      },
+      options: Options(
+        headers: {'Authorization': 'Bearer $token'},
+      ),
+    );
+    final data = response.data as Map<String, dynamic>;
+    return data['success'];
   }
 }

@@ -128,6 +128,7 @@ class _LessonItemState extends State<LessonItem> {
             title: getConstant('Students'),
             content: PreviewListStudent(
                 serviceId: widget.lesson?.services?.first?.id,
+                lessonId: widget.lesson?.id,
                 users: widget.lesson?.services?.first?.payUsers
             ),
           ),

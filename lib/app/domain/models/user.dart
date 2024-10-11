@@ -61,6 +61,7 @@ class UserData {
   String? to;
   int? salary;
   int? parentCount;
+  int? isVisitsCount;
 
   UserData({
     required this.id,
@@ -88,6 +89,7 @@ class UserData {
     this.to,
     this.salary,
     this.parentCount,
+    this.isVisitsCount,
   });
 
   Map<String, dynamic> toJson() => _$UserDataToJson(this);

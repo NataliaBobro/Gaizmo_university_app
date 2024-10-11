@@ -1,7 +1,10 @@
+import 'dart:ui';
+
 import 'package:dio/dio.dart';
 import 'package:european_university_app/app/domain/services/user_service.dart';
 import 'package:european_university_app/app/domain/states/chats/chats_state.dart';
 import 'package:european_university_app/app/ui/utils/show_message.dart';
+import 'package:european_university_app/app/ui/widgets/modal/error_app_widget.dart';
 import 'package:european_university_app/app/ui/widgets/snackbars.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
@@ -42,6 +45,7 @@ class AppState extends ChangeNotifier {
   UserData? _userData;
   BuildContext context;
   ConstantsList? _constantsList;
+  bool hasErrorBg = false;
 
   AppState(this.context) {
     _isLoggedIn = token != null && token != '';
@@ -107,6 +111,7 @@ class AppState extends ChangeNotifier {
     try {
       final result = await MetaService.fetchConstant(languageId);
       if(result != null){
+        hasErrorBg = false;
         _constantsList = result;
         await Hive.box('constants').clear();
         for(var a = 0; a < (_constantsList?.data.length ?? 0); a++){
@@ -115,6 +120,7 @@ class AppState extends ChangeNotifier {
         }
       }
     } on DioError catch (e) {
+      hasErrorBg = true;
       if(context.mounted){
         if(Hive.box('settings').get('token', defaultValue: null) != null){
           onLogout();
@@ -318,7 +324,12 @@ class App extends StatelessWidget {
             builder: (context, child) {
               return MediaQuery(
                 data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-                child: child!,
+                child: Stack(
+                  children: [
+                    child!,
+                    ErrorAppWidget()
+                  ],
+                ),
               );
             },
           ),
