@@ -11,6 +11,7 @@ import 'package:flutter_dialogs/flutter_dialogs.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../../app.dart';
 import '../../../../domain/services/visits_lesson_service.dart';
 import '../../../../domain/states/teacher/teacher_schedule_state.dart';
 import '../../../theme/text_styles.dart';
@@ -106,8 +107,8 @@ class _TeacherScheduleScreenState extends State<TeacherScheduleScreen> {
                                       rightIcon: HeaderEtm(
                                           lessons: state.lessonsList!.lessons![index],
                                           visits: () {
-                                            DateTime now = DateTime.now();
-                                            showVisitsDialog(state.lessonsList!.lessons![index], now);
+                                            DateTime dateTime = DateTime.parse('${state.lessonsList?.lessons?[index].start}');
+                                            showVisitsDialog(state.lessonsList!.lessons![index], dateTime);
                                           }
                                       ),
                                       contentBorderWidth: 0,
@@ -296,13 +297,17 @@ class _TeacherScheduleScreenState extends State<TeacherScheduleScreen> {
       final result = await VisitsLessonService.visits(context, lesson.id, date);
       if(result == true){
         lesson.isVisitsExists = true;
-
+        updateUser();
       }
     }catch(e){
       print(e);
     }finally{
       setState(() {});
     }
+  }
+
+  void updateUser() {
+    context.read<AppState>().getUser();
   }
 
 }

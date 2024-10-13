@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 
 import '../../../../widgets/custom_scroll_physics.dart';
 import '../../../../widgets/info_value.dart';
-import '../../../../widgets/settings_input.dart';
 
 
 class PersonalInfoTab extends StatefulWidget {
@@ -51,27 +50,7 @@ class _PersonalInfoTabState extends State<PersonalInfoTab> {
             InfoValue(
                 title: getConstant('My_salary'),
                 value: "${state?.salary ?? 0} ${getConstant('per/hour')}"
-            ),
-            SettingsInput(
-                title: getConstant('News'),
-                onPress: () async {
-                  // await Navigator.push(
-                  //     context,
-                  //     CupertinoPageRoute(
-                  //         builder: (context) => ChangeNotifierProvider(
-                  //           create: (context) => StatisticsState(context) ,
-                  //           child: const StatisticsScreen(),
-                  //         )
-                  //     )
-                  // );
-                }
-            ),
-            SettingsInput(
-                title: getConstant('Uniform'),
-                onPress: () async {
-
-                }
-            ),
+            )
           ],
         )
       ],

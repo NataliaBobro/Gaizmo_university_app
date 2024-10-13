@@ -174,6 +174,13 @@ class _ListStudentsState extends State<ListStudents> {
     Navigator.pop(context);
   }
 
+  void selectAll(){
+    for(var a = 0; a < (_listUserData?.users.length  ?? 0); a++){
+      _listUserData?.users[a].user?.isVisitsCount = 1;
+    }
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     final appState = context.watch<AppState>();
@@ -186,7 +193,22 @@ class _ListStudentsState extends State<ListStudents> {
             child: Column(
               children: [
                 CenterHeader(
-                    title: getConstant('Students')
+                  title: getConstant('Students'),
+                  action: appState.userData?.type == 2 ? CupertinoButton(
+                    onPressed: () {
+                      selectAll();
+                    },
+                    minSize: 0.0,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16
+                    ),
+                    child: Text(
+                      getConstant('Select all'),
+                      style: TextStyles.s14w600.copyWith(
+                          color: Colors.black
+                      ),
+                    ),
+                  ) : null,
                 ),
                 Expanded(
                     child: Column(
@@ -202,8 +224,14 @@ class _ListStudentsState extends State<ListStudents> {
                               ...List.generate(
                                   _listUserData?.users.length ?? 0,
                                       (index) => PayUserItem(
+                                      key: ValueKey('${_listUserData?.users[index].user?.lastName}''${_listUserData?.users[index].user?.isVisitsCount}'),
                                       user: _listUserData?.users[index].user,
-                                      isTeacher: appState.userData?.type == 2
+                                      isTeacher: appState.userData?.type == 2,
+                                      checkUser: (value) {
+                                        setState(() {
+                                          _listUserData?.users[index].user?.isVisitsCount = value ? 1 : 0;
+                                        });
+                                      }
                                   )
                               )
                             ],
@@ -236,11 +264,13 @@ class PayUserItem extends StatefulWidget {
   const PayUserItem({
     Key? key,
     required this.user,
-    required this.isTeacher
+    required this.isTeacher,
+    required this.checkUser
   }) : super(key: key);
 
   final UserData? user;
   final bool isTeacher;
+  final Function checkUser;
 
   @override
   State<PayUserItem> createState() => _PayUserItemState();
@@ -255,13 +285,6 @@ class _PayUserItemState extends State<PayUserItem> {
       check = true;
     }
     super.initState();
-  }
-
-  void checkUser(){
-    setState(() {
-      check = !check;
-      widget.user?.isVisitsCount = check ? 1 : 0;
-    });
   }
 
   @override
@@ -284,7 +307,7 @@ class _PayUserItemState extends State<PayUserItem> {
         minSize: 0.0,
         padding: EdgeInsets.zero,
         onPressed: () {
-          checkUser();
+          widget.checkUser(!check);
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
