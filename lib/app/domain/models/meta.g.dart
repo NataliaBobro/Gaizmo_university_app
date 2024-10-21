@@ -199,8 +199,11 @@ Errors _$ErrorsFromJson(Map<String, dynamic> json) => Errors(
           ?.map((e) => e as String)
           .toList(),
       desc: (json['desc'] as List<dynamic>?)?.map((e) => e as String).toList(),
-    )..privacyErrors =
-        (json['privacy'] as List<dynamic>?)?.map((e) => e as String).toList();
+    )
+      ..privacyErrors =
+          (json['privacy'] as List<dynamic>?)?.map((e) => e as String).toList()
+      ..sheetId =
+          (json['sheetId'] as List<dynamic>?)?.map((e) => e as String).toList();
 
 Map<String, dynamic> _$ErrorsToJson(Errors instance) => <String, dynamic>{
       'user_type': instance.userTypeErrors,
@@ -226,6 +229,7 @@ Map<String, dynamic> _$ErrorsToJson(Errors instance) => <String, dynamic>{
       'street': instance.street,
       'house': instance.house,
       'name': instance.name,
+      'sheetId': instance.sheetId,
       'color': instance.color,
       'service': instance.service,
       'school_class': instance.schoolClass,

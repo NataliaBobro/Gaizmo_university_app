@@ -1,7 +1,7 @@
 name: european_university_app
 description: A new Flutter project.
 publish_to: 'none'
-version: 1.0.11+1
+version: 1.0.13+1
 
 environment:
   sdk: '>=3.3.1 <4.0.0'

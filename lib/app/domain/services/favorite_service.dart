@@ -77,4 +77,20 @@ class FavoriteService {
     return data['success'];
   }
 
+  static Future<bool?> deletePayed(
+      context,
+      int? serviceId
+      ) async {
+    final token = getToken(context);
+    if(token == null) return null;
+    final response = await ApiClient().dio.delete(
+      '/student/school/$serviceId/delete-service',
+      options: Options(
+        headers: {'Authorization': 'Bearer $token'},
+      ),
+    );
+    final data = response.data as Map<String, dynamic>;
+    return data['success'];
+  }
+
 }

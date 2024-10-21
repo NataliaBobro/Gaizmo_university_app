@@ -7,14 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../domain/services/app_ninjas_service.dart';
 import '../../../theme/text_styles.dart';
 import '../../../widgets/auth_title.dart';
 import '../../../widgets/center_header.dart';
 import '../../../widgets/custom_scroll_physics.dart';
 import '../../../widgets/select_date_input.dart';
 import '../../../widgets/select_input.dart';
-import '../../../widgets/select_input_search_field.dart';
 
 
 class AddStaffScreen extends StatefulWidget {
@@ -34,112 +32,14 @@ class _AddStaffScreenState extends State<AddStaffScreen> {
   final TextEditingController house = TextEditingController();
   final MaskedTextController salary = MaskedTextController(mask: '0000');
   final MaskedTextController phone = MaskedTextController(mask: '+00 (000) 000 00 00');
-  Map<String, dynamic>? country;
-  Map<String, dynamic>? city;
-  String? openField;
+  final TextEditingController country = TextEditingController();
+  final TextEditingController city = TextEditingController();
+
   DateTime? dateBirth;
   int gender = -1;
 
   bool loadingSearch = false;
-  List<dynamic>? countryList;
-  List<dynamic>? cityList;
 
-  Future<void> searchCountry(String? value) async {
-    if((value?.length ?? 0) < 2) return;
-    loadingSearch = true;
-    setState(() {});
-    try {
-      final result = await AppNinjasService.getCountry(value);
-      if(result != null){
-        countryList = result;
-      }
-    } catch (e) {
-      print(e);
-    } finally {
-      loadingSearch = false;
-      setState(() {});
-    }
-  }
-
-  Future<void> searchCity(String? value) async {
-    if((value?.length ?? 0) < 2) return;
-    loadingSearch = true;
-    setState(() {});
-    try {
-      final result = await AppNinjasService.getCity(value, country);
-      if(result != null){
-        cityList = result;
-      }
-    } catch (e) {
-      print(e);
-    } finally {
-      loadingSearch = false;
-      setState(() {});
-    }
-  }
-
-  List<Map<String, dynamic>>? countryListData() {
-    List<Map<String, dynamic>>? list = [];
-    for(var a = 0; a < (countryList?.length ?? 0); a++){
-      list.add({
-        'name': countryList![a]['name'],
-        'iso2': countryList![a]['iso2']
-      });
-    }
-    return list;
-  }
-
-  List<Map<String, dynamic>>? cityListData() {
-    List<Map<String, dynamic>>? list = [];
-    for(var a = 0; a < (cityList?.length ?? 0); a++){
-      list.add({
-        'name': cityList![a]['name']
-      });
-    }
-    return list;
-  }
-
-  final List<Map<String, dynamic>> listDefaultCountry = [
-    {
-      "id": "1",
-      "name": "Ukraine",
-      "iso2": "UA"
-    },
-    {
-      "id": "2",
-      "name": "Poland",
-      "iso2": "PL"
-    },
-    {
-      "id": "3",
-      "name": "Austria",
-      "iso2": "AT"
-    },
-    {
-      "id": "3",
-      "name": "Germany",
-      "iso2": "DE"
-    },
-  ];
-
-  void changeCountry(value) {
-    country = value;
-    setState(() {});
-  }
-
-  void changeCity(value) {
-    city = value;
-    setState(() {});
-  }
-
-  void changeOpen(value){
-    if(openField == value){
-      openField = null;
-    }else{
-      openField = value;
-    }
-    setState(() {});
-  }
 
   void changeDateBirth(DateTime? date) {
     dateBirth = date;
@@ -270,54 +170,23 @@ class _AddStaffScreenState extends State<AddStaffScreen> {
                     AppTitle(
                       title: getConstant('Adress'),
                     ),
-                    SelectInputSearchField(
-                      errors: state.validateError?.errors.country?.first,
-                      title: getConstant('Country'),
-                      titleStyle: TextStyles.s14w600.copyWith(
-                        color: const Color(0xFF242424)
-                      ),
-                      style: TextStyles.s14w400.copyWith(
-                          color: const Color(0xFF242424)
-                      ),
-                      items:  (countryListData()?.length ?? 0) > 0 ?
-                      countryListData() : listDefaultCountry,
-                      selected: country,
-                      onSelect: (value) {
-                        changeCountry(value);
-                        changeOpen(null);
-                      },
-                      onSearch: (value) {
-                        searchCountry(value);
-                      },
-                      changeOpen: () {
-                        changeOpen('country');
-                      },
-                      isOpen: openField == 'country',
-                      hintText: '',
+                    AppField(
+                      label: getConstant('Country'),
+                      controller: country,
+                      keyboardType: TextInputType.text,
+                      error: state.validateError?.errors.country?.first,
                     ),
-                    SelectInputSearchField(
-                      errors: state.validateError?.errors.city?.first,
-                      title: getConstant('City'),
-                      items: cityListData(),
-                      onSearch: (value) {
-                        searchCity(value);
-                      },
-                      titleStyle: TextStyles.s14w600.copyWith(
-                          color: const Color(0xFF242424)
-                      ),
-                      style: TextStyles.s14w400.copyWith(
-                          color: const Color(0xFF242424)
-                      ),
-                      selected: city,
-                      changeOpen: () {
-                        changeOpen('city');
-                      },
-                      isOpen: openField == 'city',
-                      onSelect: (index) {
-                        changeCity(index);
-                        changeOpen(null);
-                      },
-                      hintText: '',
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    AppField(
+                      label: getConstant('City'),
+                      controller: city,
+                      keyboardType: TextInputType.text,
+                      error: state.validateError?.errors.city?.first,
+                    ),
+                    const SizedBox(
+                      height: 24,
                     ),
                     AppField(
                       label: getConstant('Street'),
@@ -343,8 +212,8 @@ class _AddStaffScreenState extends State<AddStaffScreen> {
                             dateBirth,
                             phone.text,
                             email.text,
-                            country?['name'],
-                            city?['name'],
+                            country.text,
+                            city.text,
                             street.text,
                             house.text,
                             salary.text

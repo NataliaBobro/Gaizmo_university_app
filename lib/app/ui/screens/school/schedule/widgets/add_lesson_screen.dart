@@ -405,7 +405,7 @@ class _AddLessonScreenState extends State<AddLessonScreen> {
                 },
                 minSize: 0.0,
                 padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                child: Text('Done'),
+                child: Text(getConstant('Done')),
               ),
             )
           ],

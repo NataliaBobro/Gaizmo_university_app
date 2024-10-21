@@ -99,10 +99,10 @@ class _SettingsTabState extends State<SettingsTab> {
               );
             }
         ),
-        SettingsInput(
-            title: getConstant('Notifications'),
-            onPress: () {}
-        ),
+        // SettingsInput(
+        //     title: getConstant('Notifications'),
+        //     onPress: () {}
+        // ),
         SettingsInput(
             title: getConstant('reload'),
             onPress: () async {

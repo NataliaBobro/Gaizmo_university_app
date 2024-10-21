@@ -1,5 +1,4 @@
 import 'package:european_university_app/app/domain/states/school/school_schedule_state.dart';
-import 'package:european_university_app/app/ui/screens/school/schedule/filter/filter_class.dart';
 import 'package:european_university_app/app/ui/screens/school/schedule/filter/type_lesson.dart';
 import 'package:european_university_app/app/ui/theme/text_styles.dart';
 import 'package:european_university_app/app/ui/utils/get_constant.dart';
@@ -37,9 +36,11 @@ class _ScheduleFilterScreenState extends State<ScheduleFilterScreen> {
 
     String teachers = '';
     if(selectedTeacher.isNotEmpty){
+      print(selectedTeacher);
+      print(state.listTeacherData);
       for(var a = 0; a < selectedTeacher.length; a++){
-        final name = state.listTeacher.firstWhere((element) => element['id'] == selectedTeacher[a]);
-        teachers = '$teachers ${name['name']}';
+        final name = state.listTeacherData?.firstWhere((element) => element.id == selectedTeacher[a]);
+        teachers = '$teachers ${name?.firstName}';
       }
     }
     String selectedClass = '';

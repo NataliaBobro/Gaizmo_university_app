@@ -175,7 +175,7 @@ final loggedTeacherInMap = routemaster.RouteMap(
   onUnknownRoute: (_) => const routemaster.Redirect(_tabbar),
   routes: {
     _tabbar: (info) => routemaster.TabPage(
-          paths: const [_home, _teacherSchedule, _servicesTeacher, _myResults],
+          paths: const [_home, _teacherSchedule, _servicesTeacher, _myResults, _news, _chats],
           child: MultiProvider(
             providers: [
               ChangeNotifierProvider(
@@ -188,6 +188,8 @@ final loggedTeacherInMap = routemaster.RouteMap(
                 {'icon': Svgs.schedule, 'name': getConstant('Schedule')},
                 {'icon': Svgs.service, 'name': getConstant('Services')},
                 {'icon': Svgs.myRes, 'name': getConstant('Results')},
+                {'icon': Svgs.statistics, 'name': getConstant('News')},
+                {'icon': Svgs.chats, 'name': getConstant('Chats')},
               ]
             ),
           ),
@@ -211,6 +213,15 @@ final loggedTeacherInMap = routemaster.RouteMap(
       child: ChangeNotifierProvider(
         create: (context) => MyResultsState(context, true),
         child: const MyResultsScreen(),
+      ),
+    ),
+    _chats: (_) => const TransitionPage(
+      child: ChatsScreen(),
+    ),
+    _news: (_) => TransitionPage(
+      child: ChangeNotifierProvider(
+        create: (context) => NewsState(context),
+        child: const NewsScreen(),
       ),
     ),
   },

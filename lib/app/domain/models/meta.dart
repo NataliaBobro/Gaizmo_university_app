@@ -204,6 +204,9 @@ class Errors {
   @JsonKey(name: 'name')
   List<String>? name;
 
+  @JsonKey(name: 'sheetId')
+  List<String>? sheetId;
+
   @JsonKey(name: 'color')
   List<String>? color;
 

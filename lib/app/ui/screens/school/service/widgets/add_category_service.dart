@@ -51,7 +51,7 @@ class _AddCategoryServiceState extends State<AddCategoryService> {
           AppField(
             label: '${getConstant('Sheet_id')} *',
             controller: state.sheetId,
-            error: state.validateError?.errors.name?[0],
+            error: state.validateError?.errors.sheetId?[0],
           ),
           const SizedBox(
             height: 40,

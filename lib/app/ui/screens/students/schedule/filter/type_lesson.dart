@@ -98,11 +98,15 @@ class _TypeLessonState extends State<TypeLesson> {
                                         horizontal: 24,
                                         vertical: 18
                                     ),
-                                    child: Text(
-                                      service[index]['name'],
-                                      style: TextStyles.s14w400.copyWith(
-                                          color: const Color(0xFF242424)
-                                      ),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          service[index]['name'],
+                                          style: TextStyles.s14w400.copyWith(
+                                              color: const Color(0xFF242424)
+                                          ),
+                                        )
+                                      ],
                                     ),
                                     onPressed: () {
                                       changeFilter(service[index]);

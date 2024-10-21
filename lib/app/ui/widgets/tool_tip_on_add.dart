@@ -177,6 +177,9 @@ class _SelectSearchState extends State<SelectSearch> {
       width: double.infinity,
       child: Column(
         children: [
+          const SizedBox(
+            height: 16,
+          ),
           SearchField(
             onSearch: (value) {
               widget.onSearch!(value);

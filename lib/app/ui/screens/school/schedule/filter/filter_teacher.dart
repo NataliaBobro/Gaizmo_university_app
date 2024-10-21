@@ -53,7 +53,8 @@ class _FilterTeacherState extends State<FilterTeacher> {
   @override
   Widget build(BuildContext context) {
     final state = context.watch<SchoolScheduleState>();
-    final teachers = state.listTeacher;
+    final teachers = state.listTeacherData;
+    print(teachers);
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -90,9 +91,9 @@ class _FilterTeacherState extends State<FilterTeacher> {
                               height: 24,
                             ),
                             ...List.generate(
-                                teachers.length,
+                                teachers?.length ?? 0,
                                     (index) {
-                                  final hasSelected = selected.where((element) => element == teachers[index]['id']);
+                                  final hasSelected = selected.where((element) => element == teachers?[index].id);
                                   return Container(
                                     color: hasSelected.isNotEmpty ? Colors.white : null,
                                     child: CupertinoButton(
@@ -103,7 +104,7 @@ class _FilterTeacherState extends State<FilterTeacher> {
                                         child: Row(
                                           children: [
                                             Text(
-                                              teachers[index]['name'],
+                                              '${teachers?[index].firstName}',
                                               style: TextStyles.s14w400.copyWith(
                                                   color: const Color(0xFF242424)
                                               ),
@@ -111,7 +112,12 @@ class _FilterTeacherState extends State<FilterTeacher> {
                                           ],
                                         ),
                                         onPressed: () {
-                                          changeFilter(teachers[index]);
+                                          changeFilter(
+                                              {
+                                                'id': teachers?[index].id,
+                                                'name': teachers?[index].firstName
+                                              }
+                                          );
                                         }
                                     ),
                                   );

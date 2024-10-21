@@ -53,11 +53,22 @@ class FavoriteState with ChangeNotifier {
     }
   }
 
-  Future<void> deleteFavoriteConfirm(ServicesModel? service) async {
+  Future<void> deleteFavoriteConfirm(
+      ServicesModel? service,
+      {
+        bool isPayed = false
+      }) async {
     try{
-      final result = await FavoriteService.delete(context, service?.id);
-      if(result != null) {
-        _favoriteLessons?.services?.remove(service);
+      if(isPayed){
+        final result = await FavoriteService.deletePayed(context, service?.id);
+        if(result != null) {
+          _payLessons?.services?.remove(service);
+        }
+      }else{
+        final result = await FavoriteService.delete(context, service?.id);
+        if(result != null) {
+          _favoriteLessons?.services?.remove(service);
+        }
       }
     }catch(e){
       print(e);
@@ -66,7 +77,7 @@ class FavoriteState with ChangeNotifier {
     }
   }
 
-  void deleteFavorite(BuildContext context, ServicesModel? service) {
+  void deleteFavorite(BuildContext context, ServicesModel? service, bool isPayed) {
     showCupertinoDialog(
       context: context,
       builder: (BuildContext context) {
@@ -84,7 +95,7 @@ class FavoriteState with ChangeNotifier {
               isDestructiveAction: true,
               onPressed: () {
                 Navigator.of(context).pop();
-                deleteFavoriteConfirm(service);
+                deleteFavoriteConfirm(service, isPayed: isPayed);
               },
               child: Text(getConstant('Delete')),
             ),

@@ -31,7 +31,7 @@ class _FavoriteTabState extends State<FavoriteTab> {
         ),
         Accordion(
             onDelete: (index) {
-              state.deleteFavorite(context, services[index]);
+              state.deleteFavorite(context, services[index], false);
             },
             isFullActionButton: true,
             paddingListTop: 0.0,
