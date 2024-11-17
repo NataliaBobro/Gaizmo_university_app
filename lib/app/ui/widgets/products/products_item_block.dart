@@ -58,7 +58,7 @@ class _ProductItemBlockState extends State<ProductItemBlock> {
             ).copyWith(
                 bottom: 16
             ),
-            height: 170,
+            height: 185,
             child: Container(
               padding: const EdgeInsets.symmetric(
                   horizontal: 8,

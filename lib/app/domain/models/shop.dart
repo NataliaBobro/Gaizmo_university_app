@@ -28,6 +28,14 @@ class Products {
   String? createdAt;
   UserData? user;
   String? deliveryStatus;
+  String? paymentType;
+  String? clientName;
+  String? clientLastName;
+  String? clientEmail;
+  String? clientPhone;
+  String? deliveryCity;
+  String? deliveryLocation;
+  String? comment;
   int? orderId;
 
   Products({
@@ -42,6 +50,14 @@ class Products {
     this.user,
     this.deliveryStatus,
     this.orderId,
+    this.paymentType,
+    this.clientName,
+    this.clientLastName,
+    this.clientEmail,
+    this.clientPhone,
+    this.deliveryCity,
+    this.deliveryLocation,
+    this.comment,
   });
 
   Map<String, dynamic> toJson() => _$ProductsToJson(this);

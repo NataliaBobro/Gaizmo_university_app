@@ -307,15 +307,35 @@ class _OpenedProductState extends State<OpenedProduct> {
                         ),
 
                         if(widget.hasDeliveryStatus) ...[
-                          Text(
-                              '${widget.item?.user?.firstName ?? ""} ${widget.item?.user?.lastName ?? ""}'
+                          Container(
+                            padding: EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 2,
+                                  blurRadius: 5,
+                                  offset: Offset(0, 3),
+                                ),
+                              ],
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                buildRow('Client Name', widget.item?.clientName ?? ""),
+                                buildRow('Last Name', widget.item?.clientLastName ?? ""),
+                                buildRow('Email', widget.item?.clientEmail ?? ""),
+                                buildRow('Phone', widget.item?.clientPhone ?? ""),
+                                buildRow('Payment Type', widget.item?.paymentType ?? ""),
+                                buildRow('Delivery City', widget.item?.deliveryCity ?? ""),
+                                buildRow('Delivery Location', widget.item?.deliveryLocation ?? ""),
+                                buildRow('Comment', widget.item?.comment ?? ""),
+                                buildRow('Created At', widget.item?.createdAt ?? ""),
+                              ],
+                            ),
                           ),
-                          Text(
-                              '${widget.item?.createdAt}'
-                          ),
-                          const SizedBox(
-                            height: 40,
-                          )
                         ],
 
                         if(widget.hasPay)...[
@@ -374,6 +394,40 @@ class _OpenedProductState extends State<OpenedProduct> {
               ],
             ),
           )
+      ),
+    );
+  }
+
+  Widget buildRow(String title, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            getConstant(title),
+            style: TextStyles.s12w600.copyWith(
+              color: Colors.black87
+            ),
+          ),
+          Expanded(
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: Container(
+                constraints: BoxConstraints(
+                  maxWidth: SizerUtil.width - 150
+                ),
+                child: Text(
+                  value,
+                  style: TextStyles.s12w600.copyWith(
+                      color: Colors.black54
+                  ),
+                  textAlign: TextAlign.right
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

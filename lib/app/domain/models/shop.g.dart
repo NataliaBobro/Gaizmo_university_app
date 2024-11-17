@@ -31,6 +31,14 @@ Products _$ProductsFromJson(Map<String, dynamic> json) => Products(
           : UserData.fromJson(json['user'] as Map<String, dynamic>),
       deliveryStatus: json['delivery_status'] as String?,
       orderId: (json['order_id'] as num?)?.toInt(),
+      paymentType: json['payment_type'] as String?,
+      clientName: json['client_name'] as String?,
+      clientLastName: json['client_last_name'] as String?,
+      clientEmail: json['client_email'] as String?,
+      clientPhone: json['client_phone'] as String?,
+      deliveryCity: json['delivery_city'] as String?,
+      deliveryLocation: json['delivery_location'] as String?,
+      comment: json['comment'] as String?,
     );
 
 Map<String, dynamic> _$ProductsToJson(Products instance) => <String, dynamic>{
@@ -44,6 +52,14 @@ Map<String, dynamic> _$ProductsToJson(Products instance) => <String, dynamic>{
       'created_at': instance.createdAt,
       'user': instance.user,
       'delivery_status': instance.deliveryStatus,
+      'payment_type': instance.paymentType,
+      'client_name': instance.clientName,
+      'client_last_name': instance.clientLastName,
+      'client_email': instance.clientEmail,
+      'client_phone': instance.clientPhone,
+      'delivery_city': instance.deliveryCity,
+      'delivery_location': instance.deliveryLocation,
+      'comment': instance.comment,
       'order_id': instance.orderId,
     };
 
